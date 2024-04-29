@@ -1,0 +1,1286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="ViewSeafarerPageDef"
+                Package="com.rmi.tradecompapproval.view.viewbatchseafarer">
+  <parameters/>
+  <executables>
+        <variableIterator id="variables"/>
+        <iterator Binds="RmiSeafarerView1" RangeSize="25"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  id="viewSeafarerVO1Iterator"/>
+        <iterator Binds="RmiSeafarerDocsOcView1" RangeSize="25"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  id="viewSeafarerDocsOcVO1Iterator"/>
+        <iterator id="GetDocumentLinkRO1Iterator" Binds="GetDocumentLinkView1"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl" RangeSize="25"/>
+        <iterator Binds="RmiSeafarerDocsSqcView1" RangeSize="25"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  id="viewSeafarerDocsSqcVO1Iterator" ChangeEventPolicy="none"/>
+        <iterator Binds="RmiBatchView2" RangeSize="10" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  id="viewBatchVO2Iterator"/>
+        <iterator id="viewGradeOcLOV1Iterator" Binds="GradeOcView1"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  RangeSize="25" ChangeEventPolicy="none"/>
+        <iterator Binds="RmiSeafarerView2" RangeSize="25" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  id="viewSeafarerVO2Iterator"/>
+        <iterator Binds="SicdOrderErrorsView1" RangeSize="25" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  id="SicdOrderErrorsRO1Iterator"/>
+        <iterator Binds="RmiBatchDocumentsHistoryView1" RangeSize="25"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl" id="RmiBatchDocumentsHistoryView1Iterator"/>
+        <iterator Binds="MultipleHoldReasonsView1" RangeSize="25" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  id="MultipleHoldReasonsView1Iterator"/>
+    </executables>
+    <bindings>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="LastName">
+            <AttrNames>
+                <Item Value="LastName"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="IssueType">
+            <AttrNames>
+                <Item Value="IssueType3"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="FirstName">
+            <AttrNames>
+                <Item Value="FirstName"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="IssueTypeIdCard">
+            <AttrNames>
+                <Item Value="IssueTypeIdCard"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="BirthDate">
+            <AttrNames>
+                <Item Value="BirthDate"/>
+            </AttrNames>
+        </attributeValues>
+        <listOfValues IterBinding="viewSeafarerVO1Iterator" StaticList="false"
+                      Uses="LOV_transNationality" id="transNationality"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="BirthPlace">
+            <AttrNames>
+                <Item Value="BirthPlace"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="viewSeafarerVO1Iterator" id="Gender"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"
+              StaticList="true">
+            <AttrNames>
+                <Item Value="Gender"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Male"/>
+                <Item Value="Female"/>
+            </ValueList>
+        </list>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="PermanentAddress">
+            <AttrNames>
+                <Item Value="PermanentAddress"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="DistinguishingMarks">
+            <AttrNames>
+                <Item Value="DistinguishingMarks"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="Nationality">
+            <AttrNames>
+                <Item Value="Nationality"/>
+            </AttrNames>
+        </attributeValues>
+        <listOfValues IterBinding="viewSeafarerVO1Iterator" StaticList="false"
+                      Uses="LOV_tranResidenceCntry" id="tranResidenceCntry"/>
+        <listOfValues IterBinding="viewSeafarerVO1Iterator" StaticList="false"
+                      Uses="LOV_tranPassportCntry" id="tranPassportCntry"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="tranVesselNo">
+            <AttrNames>
+                <Item Value="tranVesselNo"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="tranVesselName">
+            <AttrNames>
+                <Item Value="tranVesselName"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="getlinkforTaskAssignmentpage"
+                      RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getlinkforTaskAssignmentpage"
+                      IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.getlinkforTaskAssignmentpage_RMITradeCompApprovalAMDataControl_dataProvider_getlinkforTaskAssignmentpage_result"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="PhotoEdocId">
+            <AttrNames>
+                <Item Value="PhotoEdocId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="IdentityDocEdocId">
+            <AttrNames>
+                <Item Value="IdentityDocEdocId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="PhysicalEdocId">
+            <AttrNames>
+                <Item Value="PhysicalEdocId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="SeaserviceTranscriptEdocId">
+            <AttrNames>
+                <Item Value="SeaserviceTranscriptEdocId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="AffidavitEdocId">
+            <AttrNames>
+                <Item Value="AffidavitEdocId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="SatEdocId">
+            <AttrNames>
+                <Item Value="SatEdocId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="ApplicationEdocId">
+            <AttrNames>
+                <Item Value="ApplicationEdocId"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="validateSeafarerFromProc" RequiresUpdateModel="true"
+                      Action="invokeMethod"
+                      MethodName="validateSeafarerFromProc"
+                      IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.validateSeafarerFromProc_RMITradeCompApprovalAMDataControl_dataProvider_validateSeafarerFromProc_result"/>
+        <methodAction id="filterValidateSeafarerVO" RequiresUpdateModel="true"
+                      Action="invokeMethod"
+                      MethodName="filterValidateSeafarerVO"
+                      IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.filterValidateSeafarerVO_RMITradeCompApprovalAMDataControl_dataProvider_filterValidateSeafarerVO_result"/>
+        <methodAction id="approveSeafarer" RequiresUpdateModel="true"
+                      Action="invokeMethod" MethodName="approveSeafarer"
+                      IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.approveSeafarer_RMITradeCompApprovalAMDataControl_dataProvider_approveSeafarer_result"/>
+        <tree IterBinding="viewSeafarerDocsSqcVO1Iterator"
+              id="viewSeafarerDocsSqcVO1" ChangeEventPolicy="none">
+            <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.RmiSeafarerDocsSqcView"
+                            Name="viewSeafarerDocsSqcVO10">
+                <AttrNames>
+                    <Item Value="CocCountry"/>
+                    <Item Value="CocExpirationDate"/>
+                    <Item Value="CocIdentifier"/>
+                    <Item Value="CocIssueDate"/>
+                    <Item Value="CraApprovedBy"/>
+                    <Item Value="CraApprovedDate"/>
+                    <Item Value="CraRequired"/>
+                    <Item Value="CraSentBy"/>
+                    <Item Value="CraSentDate"/>
+                    <Item Value="CreatedBy"/>
+                    <Item Value="CreationDate"/>
+                    <Item Value="DocIdentifier"/>
+                    <Item Value="DocOrder"/>
+                    <Item Value="DocumentApprovedBy"/>
+                    <Item Value="DocumentApprovedDate"/>
+                    <Item Value="DocumentId"/>
+                    <Item Value="EdocId"/>
+                    <Item Value="EsdiId"/>
+                    <Item Value="EsiId"/>
+                    <Item Value="GradeId"/>
+                    <Item Value="GradeType"/>
+                    <Item Value="SqcGradingComments"/>
+                    <Item Value="GradingInstructions"/>
+                    <Item Value="InventoryItemId"/>
+                    <Item Value="IssueType1"/>
+                    <Item Value="LastUpdateDate"/>
+                    <Item Value="LastUpdateLogin"/>
+                    <Item Value="LastUpdatedBy"/>
+                    <Item Value="Limitation"/>
+                    <Item Value="LineId"/>
+                    <Item Value="PreviousDocumentId"/>
+                    <Item Value="Restriction"/>
+                    <Item Value="SupportEdocId"/>
+                    <Item Value="VerificationBy"/>
+                    <Item Value="VerificationRequestDate"/>
+                    <Item Value="tranCountryNameSqc"/>
+                    <Item Value="tranGradeDescription"/>
+                    <Item Value="tranGradeCodeSqc"/>
+                    <Item Value="tranCOC"/>
+                    <Item Value="tranSupport"/>
+                    <Item Value="GradingStatus3" Binds="GradingStatus3"/>
+                    <Item Value="DataVerified1"/>
+                    <Item Value="TransPreviousSqc"/>
+                    <Item Value="DataVerifiedComntSqc"/>
+                    <Item Value="AddedByRole"/>
+                    <Item Value="TransDisableDeleteSqcLine"/>
+                    <Item Value="tranCountryNameSqc"/>
+                    <Item Value="TransSqcLimitation"/>
+                    <Item Value="TransCocSqcInputFile"/>
+                    <Item Value="ReplacementIssueTypeSqc"/>
+                    <Item Value="RestrictionNameSqc"/>
+                    <Item Value="SqcDocChargeable"/>
+                    <Item Value="LineProcessedSqc"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        
+    <methodAction id="filterSearchSeafarerVO" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterSearchSeafarerVO" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.filterSearchSeafarerVO_RMITradeCompApprovalAMDataControl_dataProvider_filterSearchSeafarerVO_result"/><list IterBinding="viewSeafarerVO1Iterator" id="PhotoGrdStatus"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"
+              StaticList="true">
+            <AttrNames>
+                <Item Value="PhotoGrdStatus"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Approve"/>
+                <Item Value="Hold"/>
+                <Item Value="Not Applicable"/>
+            </ValueList>
+        </list>
+        <list IterBinding="viewSeafarerVO1Iterator" id="SeaserviceGrdStatus"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"
+              StaticList="true">
+            <AttrNames>
+                <Item Value="SeaserviceGrdStatus"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Approve"/>
+                <Item Value="Hold"/>
+                <Item Value="Not Applicable"/>
+            </ValueList>
+        </list>
+        <list IterBinding="viewSeafarerVO1Iterator" id="PhysicalGrdStatus"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"
+              StaticList="true">
+            <AttrNames>
+                <Item Value="PhysicalGrdStatus"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Approve"/>
+                <Item Value="Hold"/>
+                <Item Value="Not Applicable"/>
+            </ValueList>
+        </list>
+        <list IterBinding="viewSeafarerVO1Iterator" id="IdentityDocGrdStatus"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"
+              StaticList="true">
+            <AttrNames>
+                <Item Value="IdentityDocGrdStatus"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Approve"/>
+                <Item Value="Hold"/>
+                <Item Value="Not Applicable"/>
+            </ValueList>
+        </list>
+        <list IterBinding="viewSeafarerVO1Iterator" id="BookGrdStatus"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"
+              StaticList="true" ChangeEventPolicy="none">
+            <AttrNames>
+                <Item Value="BookGrdStatus"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Approve"/>
+                <Item Value="Hold"/>
+                <Item Value="Cancel"/>
+                <Item Value="Not Applicable"/>
+            </ValueList>
+        </list>
+        <list IterBinding="viewSeafarerVO1Iterator" id="ApplicationGrdStatus"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"
+              StaticList="true">
+            <AttrNames>
+                <Item Value="ApplicationGrdStatus"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Approve"/>
+                <Item Value="Hold"/>
+                <Item Value="Not Applicable"/>
+            </ValueList>
+        </list>
+        <list IterBinding="viewSeafarerVO1Iterator" id="AffidavitGrdStatus"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"
+              StaticList="true">
+            <AttrNames>
+                <Item Value="AffidavitGrdStatus"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Approve"/>
+                <Item Value="Hold"/>
+                <Item Value="Not Applicable"/>
+            </ValueList>
+        </list>
+        <list IterBinding="viewSeafarerVO1Iterator" id="SatGrdStatus"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"
+              StaticList="true">
+            <AttrNames>
+                <Item Value="SatGrdStatus"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Approve"/>
+                <Item Value="Hold"/>
+                <Item Value="Not Applicable"/>
+            </ValueList>
+        </list>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="PhotoGrdComnt">
+            <AttrNames>
+                <Item Value="PhotoGrdComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="SeaserviceGrdComnt">
+            <AttrNames>
+                <Item Value="SeaserviceGrdComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="IdentityDocGrdComnt">
+            <AttrNames>
+                <Item Value="IdentityDocGrdComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="PhysicalGrdComnt">
+            <AttrNames>
+                <Item Value="PhysicalGrdComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="ApplicationGrdComnt">
+            <AttrNames>
+                <Item Value="ApplicationGrdComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="AffidavitGrdComnt">
+            <AttrNames>
+                <Item Value="AffidavitGrdComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="SatGrdComnt">
+            <AttrNames>
+                <Item Value="SatGrdComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="approveCRA" RequiresUpdateModel="true"
+                      Action="invokeMethod" MethodName="approveCRA"
+                      IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.approveCRA_RMITradeCompApprovalAMDataControl_dataProvider_approveCRA_result">
+            <NamedData NDName="docid" NDType="java.lang.String"/>
+            <NamedData NDName="esiID" NDType="java.lang.String"/>
+        </methodAction>
+        <list IterBinding="viewSeafarerVO1Iterator" id="ConGrdStatus"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"
+              StaticList="true">
+            <AttrNames>
+                <Item Value="ConGrdStatus"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Approve"/>
+                <Item Value="Hold"/>
+                <Item Value="Not Applicable"/>
+            </ValueList>
+        </list>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="ConGrdComnt">
+            <AttrNames>
+                <Item Value="ConGrdComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="processEVAL" RequiresUpdateModel="true"
+                      Action="invokeMethod" MethodName="processEVAL"
+                      IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.processEVAL_RMITradeCompApprovalAMDataControl_dataProvider_processEVAL_result"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="SeafarerId">
+            <AttrNames>
+                <Item Value="SeafarerId"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="sendmail" RequiresUpdateModel="true"
+                      Action="invokeMethod" MethodName="sendmail"
+                      IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.sendmail_RMITradeCompApprovalAMDataControl_dataProvider_sendmail_result"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="Status">
+            <AttrNames>
+                <Item Value="Status"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="SeafarerGrdStatus1">
+            <AttrNames>
+                <Item Value="SeafarerGrdStatus"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="processTC" RequiresUpdateModel="true"
+                      Action="invokeMethod" MethodName="processTC"
+                      IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.processTC_RMITradeCompApprovalAMDataControl_dataProvider_processTC_result"/>
+        <methodAction id="approveSeafarerByEval" RequiresUpdateModel="true"
+                      Action="invokeMethod" MethodName="approveSeafarerByEval"
+                      IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.approveSeafarerByEval_RMITradeCompApprovalAMDataControl_dataProvider_approveSeafarerByEval_result"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="InternalEdocId">
+            <AttrNames>
+                <Item Value="InternalEdocId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator"
+                         id="ConsentEdocId">
+            <AttrNames>
+                <Item Value="ConsentEdocId"/>
+            </AttrNames>
+        </attributeValues>
+        <list IterBinding="viewSeafarerDocsSqcVO1Iterator" id="GradingStatus3"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"
+              StaticList="true">
+            <AttrNames>
+                <Item Value="GradingStatus3"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Approve"/>
+                <Item Value="Hold"/>
+                <Item Value="Cancel"/>
+                <Item Value="Not Applicable"/>
+            </ValueList>
+        </list>
+        <methodAction id="callProcedure" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callProcedure"
+                      IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.callProcedure_RMITradeCompApprovalAMDataControl_dataProvider_callProcedure_result"/>
+        <methodAction id="getCurrentBatchName" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getCurrentBatchName" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.getCurrentBatchName_RMITradeCompApprovalAMDataControl_dataProvider_getCurrentBatchName_result"/>
+        <methodAction id="getCurrentWoNumber" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="getCurrentWoNumber" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.getCurrentWoNumber_RMITradeCompApprovalAMDataControl_dataProvider_getCurrentWoNumber_result"/>
+        <button IterBinding="viewSeafarerDocsOcVO1Iterator" id="SendForVerificationFlg" DTSupportsMRU="false"
+                StaticList="true">
+            <AttrNames>
+                <Item Value="SendForVerificationFlg"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <methodAction id="sendOcForVerification" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="sendOcForVerification" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.sendOcForVerification_RMITradeCompApprovalAMDataControl_dataProvider_sendOcForVerification_result"/>
+        <action id="Commit" DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="true"
+                Action="commitTransaction"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="EsiBatchId">
+            <AttrNames>
+                <Item Value="EsiBatchId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewBatchVO2Iterator" id="EsiBatchId1">
+            <AttrNames>
+                <Item Value="EsiBatchId"/>
+            </AttrNames>
+        </attributeValues>
+        <action IterBinding="viewSeafarerDocsOcVO1Iterator" id="CreateInsert"
+                InstanceName="RMITradeCompApprovalAppModuleDataControl.RmiSeafarerDocsOcView1"
+                DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+        <methodAction id="addOcLine" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addOcLine"
+                      IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.addOcLine_RMITradeCompApprovalAMDataControl_dataProvider_addOcLine_result"/>
+        <methodAction id="saveocline" RequiresUpdateModel="true" Action="invokeMethod" MethodName="saveocline"
+                      IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.saveocline_RMITradeCompApprovalAMDataControl_dataProvider_saveocline_result"/>
+        <tree IterBinding="viewSeafarerDocsOcVO1Iterator" id="viewSeafarerDocsOcVO1">
+            <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.RmiSeafarerDocsOcView"
+                            Name="viewSeafarerDocsOcVO10">
+                <AttrNames>
+                    <Item Value="CocExpirationDate"/>
+                    <Item Value="CocIdentifier"/>
+                    <Item Value="CocIssueDate"/>
+                    <Item Value="CraRequired"/>
+                    <Item Value="GradingStatus" Binds="GradingStatus"/>
+                    <Item Value="Limitation"/>
+                    <Item Value="tranCountryName"/>
+                    <Item Value="tranGradeCode"/>
+                    <Item Value="tranGradeName"/>
+                    <Item Value="tranRestrictionName"/>
+                    <Item Value="coc_status"/>
+                    <Item Value="cra_approve"/>
+                    <Item Value="SendForVerificationFlg"/>
+                    <Item Value="OcGradingComments"/>
+                    <Item Value="CraApprovedDate"/>
+                    <Item Value="AddedByRole"/>
+                    <Item Value="CocCountry"/>
+                    <Item Value="CraApprovedBy"/>
+                    <Item Value="CraSentBy"/>
+                    <Item Value="CraSentDate"/>
+                    <Item Value="CreatedBy"/>
+                    <Item Value="CreationDate"/>
+                    <Item Value="DocIdentifier"/>
+                    <Item Value="DocOrder"/>
+                    <Item Value="DocumentApprovedBy"/>
+                    <Item Value="DocumentApprovedDate"/>
+                    <Item Value="DocumentId"/>
+                    <Item Value="EdocId"/>
+                    <Item Value="EsdiId"/>
+                    <Item Value="EsiId"/>
+                    <Item Value="GradeId"/>
+                    <Item Value="GradeType"/>
+                    <Item Value="GradingInstructions"/>
+                    <Item Value="InventoryItemId"/>
+                    <Item Value="IssueType2"/>
+                    <Item Value="LastUpdateDate"/>
+                    <Item Value="LastUpdatedBy"/>
+                    <Item Value="LastUpdateLogin"/>
+                    <Item Value="LineId"/>
+                    <Item Value="PreviousDocumentId"/>
+                    <Item Value="Restriction"/>
+                    <Item Value="SupportEdocId"/>
+                    <Item Value="TransSendToOcVIsible"/>
+                    <Item Value="tranUrl"/>
+                    <Item Value="VerificationBy"/>
+                    <Item Value="VerificationRequestDate"/>
+                    <Item Value="DataVerified"/>
+                    <Item Value="TransPreviousOc"/>
+                    <Item Value="OcDocGrdHoldReason"/>
+                    <Item Value="DataVerifiedComntOc"/>
+                    <Item Value="CraApprovedFlag"/>
+                    <Item Value="TransCocOcInputFile"/>
+                    <Item Value="ReplacementIssueTypeOc"/>
+                    <Item Value="RestrictionNameOc"/>
+                    <Item Value="OcDocChargeable"/>
+                    <Item Value="tranDisableDeleteLine"/>
+                    <Item Value="LineProcessedOc"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <button IterBinding="viewSeafarerDocsOcVO1Iterator" id="CraRequired" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="CraRequired"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <listOfValues IterBinding="viewSeafarerDocsOcVO1Iterator" StaticList="false" Uses="LOV_tranGradeCode"
+                      id="tranGradeCode"/>
+        <listOfValues IterBinding="viewSeafarerDocsOcVO1Iterator" StaticList="false" Uses="LOV_tranCountryName"
+                      id="tranCountryName"/>
+        <listOfValues IterBinding="viewSeafarerDocsOcVO1Iterator" StaticList="false" Uses="LOV_tranRestrictionName"
+                      id="tranRestrictionName"/>
+        <attributeValues IterBinding="viewSeafarerVO2Iterator" id="SeafarerId1">
+            <AttrNames>
+                <Item Value="SeafarerId"/>
+            </AttrNames>
+        </attributeValues>
+        <listOfValues IterBinding="viewSeafarerDocsSqcVO1Iterator" StaticList="false" Uses="LOV_tranGradeCode"
+                      id="tranGradeCode1"/>
+        <methodAction id="validateApproveSeafarer" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="validateApproveSeafarer" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.validateApproveSeafarer_RMITradeCompApprovalAMDataControl_dataProvider_validateApproveSeafarer_result"/>
+        <methodAction id="validateHoldSeafarer" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="validateHoldSeafarer" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.validateHoldSeafarer_RMITradeCompApprovalAMDataControl_dataProvider_validateHoldSeafarer_result"/>
+        <list IterBinding="viewSeafarerDocsSqcVO1Iterator" StaticList="false" Uses="LOV_IssueType" id="IssueType1"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject" ChangeEventPolicy="none"/>
+        <list IterBinding="viewSeafarerDocsOcVO1Iterator" StaticList="false" Uses="LOV_IssueType" id="IssueType2"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <methodAction id="updateIssueType" RequiresUpdateModel="true" Action="invokeMethod" MethodName="updateIssueType"
+                      IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.updateIssueType_RMITradeCompApprovalAMDataControl_dataProvider_updateIssueType_result"/>
+        <methodAction id="approveOrder" RequiresUpdateModel="true" Action="invokeMethod" MethodName="approveOrder"
+                      IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.approveOrder_RMITradeCompApprovalAMDataControl_dataProvider_approveOrder_result"/>
+        <methodAction id="validateApproveOrder" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="validateApproveOrder" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.validateApproveOrder_RMITradeCompApprovalAMDataControl_dataProvider_validateApproveOrder_result"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_DataVerified" id="DataVerified3"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransVesselEngineType">
+            <AttrNames>
+                <Item Value="TransVesselEngineType"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransVesselGrossTons">
+            <AttrNames>
+                <Item Value="TransVesselGrossTons"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransVesselPropPower">
+            <AttrNames>
+                <Item Value="TransVesselPropPower"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransVesselRegDate">
+            <AttrNames>
+                <Item Value="TransVesselRegDate"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransVesselStatus">
+            <AttrNames>
+                <Item Value="TransVesselStatus"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransVesselType">
+            <AttrNames>
+                <Item Value="TransVesselType"/>
+            </AttrNames>
+        </attributeValues>
+        <listOfValues IterBinding="viewSeafarerDocsOcVO1Iterator" StaticList="false" Uses="LOV_TransPreviousOc"
+                      id="TransPreviousOc"/>
+        <listOfValues IterBinding="viewSeafarerDocsSqcVO1Iterator" StaticList="false" Uses="LOV_TransPreviousSqc"
+                      id="TransPreviousSqc"/>
+        <methodAction id="filterProcessBook" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="filterProcessBook" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.filterProcessBook_RMITradeCompApprovalAMDataControl_dataProvider_filterProcessBook_result"/>
+        <methodAction id="processOrder" RequiresUpdateModel="true" Action="invokeMethod" MethodName="processOrder"
+                      IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.processOrder_RMITradeCompApprovalAMDataControl_dataProvider_processOrder_result"/>
+        <listOfValues IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_TransPreviousBook"
+                      id="TransPreviousBook"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_IssueType" id="IssueType3"
+              DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <tree IterBinding="SicdOrderErrorsRO1Iterator" id="SicdOrderErrorsRO1">
+            <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.readonly.SicdOrderErrorsView"
+                            Name="SicdOrderErrorsRO10">
+                <AttrNames>
+                    <Item Value="GradeCode"/>
+                    <Item Value="Description"/>
+                    <Item Value="DocumentType"/>
+                    <Item Value="EndorsementNumber"/>
+                    <Item Value="EventName"/>
+                    <Item Value="EventError"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransVesselOfficialNumber">
+            <AttrNames>
+                <Item Value="TransVesselOfficialNumber"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="filterValidateSeafarerVoOnLoad" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="filterValidateSeafarerVoOnLoad" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.filterValidateSeafarerVoOnLoad_RMITradeCompApprovalAMDataControl_dataProvider_filterValidateSeafarerVoOnLoad_result">
+            <NamedData NDName="seafarerId" NDType="java.lang.Integer"/>
+        </methodAction>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_DataVerifiedInfo"
+              id="DataVerifiedInfo" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransIsPhotoHistoryAvailable">
+            <AttrNames>
+                <Item Value="TransIsPhotoHistoryAvailable"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransIsDocsHistoryAvailable">
+            <AttrNames>
+                <Item Value="TransIsDocsHistoryAvailable"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="EsiBatchId2">
+            <AttrNames>
+                <Item Value="EsiBatchId"/>
+            </AttrNames>
+        </attributeValues>
+        <tree IterBinding="RmiBatchDocumentsHistoryView1Iterator" id="RmiBatchDocumentsHistoryView1">
+            <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.readonly.RmiBatchDocumentsHistoryView"
+                            Name="RmiBatchDocumentsHistoryView10">
+                <AttrNames>
+                    <Item Value="DocType"/>
+                    <Item Value="EdocId"/>
+                    <Item Value="DocumentUploadedByName"/>
+                    <Item Value="DocumentUploadedDate"/>
+                    <Item Value="CreatedByName"/>
+                    <Item Value="CreationDate"/>
+                    <Item Value="DocLink"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <methodAction id="filterDocumentsHistory" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="filterDocumentsHistory" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.filterDocumentsHistory_RMITradeCompApprovalAppModuleDataControl_dataProvider_filterDocumentsHistory_result">
+            <NamedData NDName="docCode" NDType="java.lang.String"/>
+        </methodAction>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="BookGrdComnt">
+            <AttrNames>
+                <Item Value="BookGrdComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="SeafarerWfStatus">
+            <AttrNames>
+                <Item Value="SeafarerWfStatus"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransSeafarerStatus">
+            <AttrNames>
+                <Item Value="TransSeafarerStatus"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="refreshViews" RequiresUpdateModel="true" Action="invokeMethod" MethodName="refreshViews"
+                      IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.refreshViews_RMITradeCompApprovalAppModuleDataControl_dataProvider_refreshViews_result"/>
+        <methodAction id="genDataPrivacyConsent" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="genDataPrivacyConsent" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.genDataPrivacyConsent_RMITradeCompApprovalAppModuleDataControl_dataProvider_genDataPrivacyConsent_result"/>
+        <methodAction id="genMergedAllSupportingDocs" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="genMergedAllSupportingDocs" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.genMergedAllSupportingDocs_RMITradeCompApprovalAppModuleDataControl_dataProvider_genMergedAllSupportingDocs_result"/>
+        <tree IterBinding="viewSeafarerVO1Iterator" id="RmiSeafarerView1">
+            <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.RmiSeafarerView" Name="RmiSeafarerView10">
+                <AttrNames>
+                    <Item Value="FirstName"/>
+                    <Item Value="LastName"/>
+                    <Item Value="BirthDate"/>
+                    <Item Value="BirthPlace"/>
+                    <Item Value="DistinguishingMarks"/>
+                    <Item Value="Status"/>
+                    <Item Value="TransCraDoc"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <methodAction id="isSeafarerDisabled" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="isSeafarerDisabled" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.isSeafarerDisabled_RMITradeCompApprovalAppModuleDataControl_dataProvider_isSeafarerDisabled_result"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="AdditionalDocEdocId">
+            <AttrNames>
+                <Item Value="AdditionalDocEdocId"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="genAdditionalDocs" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="genAdditionalDocs" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.genAdditionalDocs_RMITradeCompApprovalAppModuleDataControl_dataProvider_genAdditionalDocs_result"/>
+        <methodAction id="sendDeficientDocumentNotification" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="sendDeficientDocumentNotification" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.sendDeficientDocumentNotification_RMITradeCompApprovalAppModuleDataControl_dataProvider_sendDeficientDocumentNotification_result"/>
+        <methodAction id="validateSeafarersDeficientDocument" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="validateSeafarersDeficientDocument" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.validateSeafarersDeficientDocument_RMITradeCompApprovalAppModuleDataControl_dataProvider_validateSeafarersDeficientDocument_result"/>
+        <methodAction id="validateSeafarerLegalReview" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="validateSeafarerLegalReview" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.validateSeafarerLegalReview_RMITradeCompApprovalAppModuleDataControl_dataProvider_validateSeafarerLegalReview_result"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="Notes">
+            <AttrNames>
+                <Item Value="Notes"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="validateLegalNotes" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="validateLegalNotes" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.validateLegalNotes_RMITradeCompApprovalAppModuleDataControl_dataProvider_validateLegalNotes_result"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_PhotoGrdHoldReason"
+              id="PhotoGrdHoldReason" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_SeaserviceGrdHoldReason"
+              id="SeaserviceGrdHoldReason" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_IdentityDocGrdHoldReason"
+              id="IdentityDocGrdHoldReason" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_PhysicalGrdHoldReason"
+              id="PhysicalGrdHoldReason" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_ApplicationGrdHoldReason"
+              id="ApplicationGrdHoldReason" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_AffidavitGrdHoldReason"
+              id="AffidavitGrdHoldReason" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_SatGrdHoldReason"
+              id="SatGrdHoldReason" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_ConGrdHoldReason"
+              id="ConGrdHoldReason" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerDocsSqcVO1Iterator" StaticList="false" Uses="LOV_SqcDocGrdHoldReason"
+              id="SqcDocGrdHoldReason" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerDocsOcVO1Iterator" StaticList="false" Uses="LOV_OcDocGrdHoldReason"
+              id="OcDocGrdHoldReason" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_BookGrdHoldReason"
+              id="BookGrdHoldReason" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerDocsOcVO1Iterator" id="GradingStatus" DTSupportsMRU="false"
+              SelectItemValueMode="ListObject" StaticList="true">
+            <AttrNames>
+                <Item Value="GradingStatus"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Approve"/>
+                <Item Value="Hold"/>
+                <Item Value="Cancel"/>
+                <Item Value="Not Applicable"/>
+            </ValueList>
+        </list>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_PhotoVerified" id="PhotoVerified"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_IdentityDocVerified"
+              id="IdentityDocVerified" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_PhysicalVerified"
+              id="PhysicalVerified" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_SeaserviceVerified"
+              id="SeaserviceVerified" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_ApplicationVerified"
+              id="ApplicationVerified" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_AffidavitVerified"
+              id="AffidavitVerified" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_SatVerified" id="SatVerified"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_ConVerified" id="ConVerified"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="PhotoVerifiedComnt">
+            <AttrNames>
+                <Item Value="PhotoVerifiedComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="AffidavitVerifiedComnt">
+            <AttrNames>
+                <Item Value="AffidavitVerifiedComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="ApplicationVerifiedComnt">
+            <AttrNames>
+                <Item Value="ApplicationVerifiedComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="ConVerifiedComnt">
+            <AttrNames>
+                <Item Value="ConVerifiedComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="IdentityDocVerifiedComnt">
+            <AttrNames>
+                <Item Value="IdentityDocVerifiedComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="PhysicalVerifiedComnt">
+            <AttrNames>
+                <Item Value="PhysicalVerifiedComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="SatVerifiedComnt">
+            <AttrNames>
+                <Item Value="SatVerifiedComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="SeaserviceVerifiedComnt">
+            <AttrNames>
+                <Item Value="SeaserviceVerifiedComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="DataVerifiedInfoComnt">
+            <AttrNames>
+                <Item Value="DataVerifiedInfoComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="sendDeficientDocumentNotificationQa" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="sendDeficientDocumentNotificationQa" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.sendDeficientDocumentNotificationQa_RMITradeCompApprovalAppModuleDataControl_dataProvider_sendDeficientDocumentNotificationQa_result"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="SeafarerVerified">
+            <AttrNames>
+                <Item Value="SeafarerVerified"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="validateVerifySeafarerData" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="validateVerifySeafarerData" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.validateVerifySeafarerData_RMITradeCompApprovalAppModuleDataControl_dataProvider_validateVerifySeafarerData_result"/>
+        <methodAction id="verifySeafarerData" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="verifySeafarerData" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.verifySeafarerData_RMITradeCompApprovalAppModuleDataControl_dataProvider_verifySeafarerData_result"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_BookVerified" id="BookVerified"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="BookVerifiedComnt">
+            <AttrNames>
+                <Item Value="BookVerifiedComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransCraDoc">
+            <AttrNames>
+                <Item Value="TransCraDoc"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerDocsOcVO1Iterator" id="CraApprovedFlag">
+            <AttrNames>
+                <Item Value="CraApprovedFlag"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="rejectCra" RequiresUpdateModel="true" Action="invokeMethod" MethodName="rejectCra"
+                      IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.rejectCra_RMITradeCompApprovalAppModuleDataControl_dataProvider_rejectCra_result"/>
+        <tree IterBinding="MultipleHoldReasonsView1Iterator" id="MultipleHoldReasonsView1">
+            <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.lovs.MultipleHoldReasonsView"
+                            Name="MultipleHoldReasonsView10">
+                <AttrNames>
+                    <Item Value="DisplayValue"/>
+                    <Item Value="TransSelectReason" Binds="TransSelectReason"/>
+                </AttrNames>
+            </nodeDefinition>
+        </tree>
+        <button IterBinding="MultipleHoldReasonsView1Iterator" id="TransSelectReason" DTSupportsMRU="false"
+                StaticList="true">
+            <AttrNames>
+                <Item Value="TransSelectReason"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <methodAction id="copySelectedReasons" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="copySelectedReasons" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.copySelectedReasons_RMITradeCompApprovalAppModuleDataControl_dataProvider_copySelectedReasons_result">
+            <NamedData NDName="copyFor" NDType="java.lang.String"/>
+        </methodAction>
+        <methodAction id="resetSelectedReasons" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="resetSelectedReasons" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.resetSelectedReasons_RMITradeCompApprovalAppModuleDataControl_dataProvider_resetSelectedReasons_result"/>
+        <attributeValues IterBinding="viewSeafarerDocsOcVO1Iterator" id="AddedByRole">
+            <AttrNames>
+                <Item Value="AddedByRole"/>
+            </AttrNames>
+        </attributeValues>
+        <action IterBinding="viewSeafarerDocsOcVO1Iterator" id="DeleteOc"
+                InstanceName="RMITradeCompApprovalAppModuleDataControl.RmiSeafarerDocsOcView1"
+                DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <attributeValues IterBinding="viewSeafarerDocsOcVO1Iterator" id="tranDisableDeleteLine">
+            <AttrNames>
+                <Item Value="tranDisableDeleteLine"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerDocsOcVO1Iterator" id="GradingStatus1">
+            <AttrNames>
+                <Item Value="GradingStatus"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="offValueChange" RequiresUpdateModel="true" Action="invokeMethod" MethodName="offValueChange"
+                      IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.offValueChange_RMITradeCompApprovalAppModuleDataControl_dataProvider_offValueChange_result">
+            <NamedData NDName="off" NDType="java.lang.Integer"/>
+        </methodAction>
+        <methodAction id="imoValueChange" RequiresUpdateModel="true" Action="invokeMethod" MethodName="imoValueChange"
+                      IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.imoValueChange_RMITradeCompApprovalAppModuleDataControl_dataProvider_imoValueChange_result">
+            <NamedData NDName="imo" NDType="java.lang.Integer"/>
+        </methodAction>
+        <methodAction id="validateSendAcknowledgement" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="validateSendAcknowledgement" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.validateSendAcknowledgement_RMITradeCompApprovalAppModuleDataControl_dataProvider_validateSendAcknowledgement_result"/>
+        <methodAction id="sendAcknowledgement" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="sendAcknowledgement" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.sendAcknowledgement_RMITradeCompApprovalAppModuleDataControl_dataProvider_sendAcknowledgement_result"/>
+        <action IterBinding="viewSeafarerVO1Iterator" id="Next"
+                InstanceName="RMITradeCompApprovalAppModuleDataControl.RmiSeafarerView1"
+                DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="true" Action="next"/>
+        <action IterBinding="viewSeafarerVO1Iterator" id="Previous"
+                InstanceName="RMITradeCompApprovalAppModuleDataControl.RmiSeafarerView1"
+                DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="true" Action="previous"/>
+        <methodAction id="validateExpDate" RequiresUpdateModel="true" Action="invokeMethod" MethodName="validateExpDate"
+                      IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.validateExpDate_RMITradeCompApprovalAppModuleDataControl_dataProvider_validateExpDate_result">
+            <NamedData NDName="endDate" NDType="oracle.jbo.domain.Date"/>
+        </methodAction>
+        <methodAction id="addSqcLine" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addSqcLine"
+                      IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.addSqcLine_RMITradeCompApprovalAppModuleDataControl_dataProvider_addSqcLine_result"/>
+        <methodAction id="saveSqcLine" RequiresUpdateModel="true" Action="invokeMethod" MethodName="saveSqcLine"
+                      IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.saveSqcLine_RMITradeCompApprovalAppModuleDataControl_dataProvider_saveSqcLine_result"/>
+        <action IterBinding="viewSeafarerDocsSqcVO1Iterator" id="DeleteSqc"
+                InstanceName="RMITradeCompApprovalAppModuleDataControl.RmiSeafarerDocsSqcView1"
+                DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="false"
+                Action="removeCurrentRow"/>
+        <attributeValues IterBinding="viewSeafarerDocsSqcVO1Iterator" id="TransDisableDeleteSqcLine">
+            <AttrNames>
+                <Item Value="TransDisableDeleteSqcLine"/>
+            </AttrNames>
+        </attributeValues>
+        <listOfValues IterBinding="viewSeafarerDocsSqcVO1Iterator" StaticList="false" Uses="LOV_tranCountryName"
+                      id="tranCountryNameSqc"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransBatchStatus">
+            <AttrNames>
+                <Item Value="TransBatchStatus"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransOcCorrected">
+            <AttrNames>
+                <Item Value="TransOcCorrected"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransSqcCorrected">
+            <AttrNames>
+                <Item Value="TransSqcCorrected"/>
+            </AttrNames>
+        </attributeValues>
+        <listOfValues IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_tranCity" id="tranCity1"/>
+        <methodAction id="updateSeafarerBasicInfo" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="updateSeafarerBasicInfo" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.updateSeafarerBasicInfo_RMITradeCompApprovalAppModuleDataControl_dataProvider_updateSeafarerBasicInfo_result"/>
+        <listOfValues IterBinding="viewSeafarerDocsSqcVO1Iterator" StaticList="false" Uses="LOV_TransSqcLimitation"
+                      id="TransSqcLimitation"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="ResidenceCountryCode">
+            <AttrNames>
+                <Item Value="ResidenceCountryCode"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="uploadRmiCocDocument" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="uploadRmiCocDocument" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.uploadRmiCocDocument_RMITradeCompApprovalAppModuleDataControl_dataProvider_uploadRmiCocDocument_result">
+            <NamedData NDName="param1" NDType="java.lang.String"/>
+            <NamedData NDName="param2" NDType="java.lang.String"/>
+            <NamedData NDName="param3" NDType="java.lang.String"/>
+            <NamedData NDName="fileName" NDType="java.lang.String"/>
+            <NamedData NDName="docType" NDType="java.lang.String"/>
+        </methodAction>
+        <methodAction id="createDocumentPreviewFolderWithPerms" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="createDocumentPreviewFolderWithPerms" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.createDocumentPreviewFolderWithPerms_RMITradeCompApprovalAppModuleDataControl_dataProvider_createDocumentPreviewFolderWithPerms_result">
+            <NamedData NDName="folderPath" NDType="java.lang.String"/>
+        </methodAction>
+        <methodAction id="updateApplicationStatus" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="updateApplicationStatus" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.updateApplicationStatus_RMITradeCompApprovalAppModuleDataControl_dataProvider_updateApplicationStatus_result"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_BookReplacementIssueType"
+              id="BookReplacementIssueType" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <methodAction id="updateVerificationStatus" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="updateVerificationStatus" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.updateVerificationStatus_RMITradeCompApprovalAppModuleDataControl_dataProvider_updateVerificationStatus_result"/>
+        <button IterBinding="viewSeafarerVO1Iterator" id="TransApproveAll" DTSupportsMRU="false" StaticList="true">
+            <AttrNames>
+                <Item Value="TransApproveAll"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Y"/>
+                <Item Value="N"/>
+            </ValueList>
+        </button>
+        <methodAction id="approveAllDocsCerts" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="approveAllDocsCerts" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.approveAllDocsCerts_RMITradeCompApprovalAppModuleDataControl_dataProvider_approveAllDocsCerts_result">
+            <NamedData NDName="value" NDType="java.lang.String"/>
+        </methodAction>
+        <methodAction id="verifyAllDocsCerts" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="verifyAllDocsCerts" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.verifyAllDocsCerts_RMITradeCompApprovalAppModuleDataControl_dataProvider_verifyAllDocsCerts_result">
+            <NamedData NDName="value" NDType="java.lang.String"/>
+        </methodAction>
+        <methodAction id="setGenericTcParameters" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="setGenericTcParameters" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.setGenericTcParameters_RMITradeCompApprovalAppModuleDataControl_dataProvider_setGenericTcParameters_result">
+            <NamedData NDName="calledFrom" NDType="java.lang.String"/>
+        </methodAction>
+        <list IterBinding="viewSeafarerVO1Iterator" id="IdCardGrdStatus" DTSupportsMRU="false"
+              SelectItemValueMode="ListObject" StaticList="true">
+            <AttrNames>
+                <Item Value="IdCardGrdStatus"/>
+            </AttrNames>
+            <ValueList>
+                <Item Value="Approve"/>
+                <Item Value="Hold"/>
+                <Item Value="Cancel"/>
+                <Item Value="Not Applicable"/>
+            </ValueList>
+        </list>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_IdCardVerified" id="IdCardVerified"
+              DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_IdCardGrdHoldReason"
+              id="IdCardGrdHoldReason" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="IdCardGrdCmnt">
+            <AttrNames>
+                <Item Value="IdCardGrdCmnt"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="IdCardVerifiedComnt">
+            <AttrNames>
+                <Item Value="IdCardVerifiedComnt"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="createNewBookLine" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="createNewBookLine" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.createNewBookLine_RMITradeCompApprovalAppModuleDataControl_dataProvider_createNewBookLine_result"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransVesselPropulsionCode">
+            <AttrNames>
+                <Item Value="TransVesselPropulsionCode"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransCompCode">
+            <AttrNames>
+                <Item Value="TransCompCode"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="updateIssueTypeManually" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="updateIssueTypeManually" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.updateIssueTypeManually_RMITradeCompApprovalAppModuleDataControl_dataProvider_updateIssueTypeManually_result">
+            <NamedData NDName="updateFor" NDType="java.lang.String"/>
+        </methodAction>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransTcStatus">
+            <AttrNames>
+                <Item Value="TransTcStatus"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransTcStatusDate">
+            <AttrNames>
+                <Item Value="TransTcStatusDate"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransUpdateSeafarerId">
+            <AttrNames>
+                <Item Value="TransUpdateSeafarerId"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="updateSeafarerId" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="updateSeafarerId" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.updateSeafarerId_RMITradeCompApprovalAppModuleDataControl_dataProvider_updateSeafarerId_result"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransColorCode">
+            <AttrNames>
+                <Item Value="TransColorCode"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransConcRequestId">
+            <AttrNames>
+                <Item Value="TransConcRequestId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="AckConcReqId">
+            <AttrNames>
+                <Item Value="AckConcReqId"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransAckColorCode">
+            <AttrNames>
+                <Item Value="TransAckColorCode"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="EsiId">
+            <AttrNames>
+                <Item Value="EsiId"/>
+            </AttrNames>
+        </attributeValues>
+        <listOfValues IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_TransPreviousIdCard"
+                      id="TransPreviousIdCard"/>
+        <list IterBinding="viewSeafarerVO1Iterator" StaticList="false" Uses="LOV_ReplacementIssueType"
+              id="ReplacementIssueType" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransUploadedDocsCorrected">
+            <AttrNames>
+                <Item Value="TransUploadedDocsCorrected"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerDocsOcVO1Iterator" id="TransSendToOcVIsible">
+            <AttrNames>
+                <Item Value="TransSendToOcVIsible"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="SeafarerVldtFlag">
+            <AttrNames>
+                <Item Value="SeafarerVldtFlag"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransSaveLineOc">
+            <AttrNames>
+                <Item Value="TransSaveLineOc"/>
+            </AttrNames>
+        </attributeValues>
+        <attributeValues IterBinding="viewSeafarerVO1Iterator" id="TransSaveLineSqc">
+            <AttrNames>
+                <Item Value="TransSaveLineSqc"/>
+            </AttrNames>
+        </attributeValues>
+        <methodAction id="validateUnverifySeafarerData" RequiresUpdateModel="true" Action="invokeMethod"
+                      MethodName="validateUnverifySeafarerData" IsViewObjectMethod="false"
+                      DataControl="RMITradeCompApprovalAppModuleDataControl"
+                      InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                      ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.validateUnverifySeafarerData_RMITradeCompApprovalAppModuleDataControl_dataProvider_validateUnverifySeafarerData_result"/>
+    </bindings>
+</pageDefinition>

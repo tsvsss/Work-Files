@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SeafarerListTaskFlow">
+    <default-activity>onLoadSeafarerList</default-activity>
+    <data-control-scope>
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__1">
+      <name>pEsiBatchId</name>
+      <value>#{pageFlowScope.pEsiBatchId}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <view id="SeafarerList">
+      <page>/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/SeafarerList.jsf</page>
+    </view>
+    <method-call id="onLoadSeafarerList">
+      <method>#{bindings.onLoadSeafarerList.execute}</method>
+      <outcome>
+        <fixed-outcome>onLoadSeafarerList</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>onLoadSeafarerList</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>onLoadSeafarerList</from-outcome>
+        <to-activity-id>SeafarerList</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

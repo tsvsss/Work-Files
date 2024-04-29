@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SeafarerShortTextView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  RowClass="com.rmi.tradecompapproval.adfbc.views.readonly.SeafarerShortTextViewRowImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.readonly.SeafarerShortTextView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pSeafarerId"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT      
+        FAD.SEQ_NUM "Seq Number",      
+        FDAT.USER_NAME "Data Type",      
+        FDCT.USER_NAME "Category User Name",      
+        FAD.ATTACHED_DOCUMENT_ID "Attached Document Id",      
+        FDET.USER_ENTITY_NAME "User Entity",      
+        FD.DOCUMENT_ID "Document Id",      
+        FAD.ENTITY_NAME "Entity Name",      
+        FD.MEDIA_ID "Media Id",      
+        FD.URL "Url",      
+        FDT.TITLE "Title",      
+        FDST.SHORT_TEXT "Attachment Text",    
+        FAD.PK1_VALUE "Seafarer Id"    
+FROM      
+        FND_DOCUMENT_DATATYPES FDAT,      
+        FND_DOCUMENT_ENTITIES_TL FDET,      
+        FND_DOCUMENTS_TL FDT,      
+        FND_DOCUMENTS FD,      
+        FND_DOCUMENT_CATEGORIES_TL FDCT,      
+        FND_ATTACHED_DOCUMENTS   FAD,      
+        FND_DOCUMENTS_SHORT_TEXT FDST      
+WHERE      
+        FD.DOCUMENT_ID          = FAD.DOCUMENT_ID      
+        AND FDT.DOCUMENT_ID     = FD.DOCUMENT_ID      
+        AND FDCT.CATEGORY_ID    = FD.CATEGORY_ID      
+        AND FD.DATATYPE_ID      = FDAT.DATATYPE_ID      
+        AND FAD.ENTITY_NAME     = FDET.DATA_OBJECT_CODE      
+        AND FDST.MEDIA_ID       = FD.MEDIA_ID      
+        AND FDAT.NAME           = 'SHORT_TEXT'      
+        AND FAD.PK1_VALUE       = :pSeafarerId]]></SQLQuery>
+  <ViewAttribute
+    Name="SeqNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName='"Seq Number"'
+    Expression='"Seq Number"'
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="DataType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="80"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"Data Type"'
+    Expression='"Data Type"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CategoryUserName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"Category User Name"'
+    Expression='"Category User Name"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="255"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AttachedDocumentId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName='"Attached Document Id"'
+    Expression='"Attached Document Id"'
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="UserEntity"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"User Entity"'
+    Expression='"User Entity"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DocumentId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName='"Document Id"'
+    Expression='"Document Id"'
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EntityName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="40"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"Entity Name"'
+    Expression='"Entity Name"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MediaId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName='"Media Id"'
+    Expression='"Media Id"'
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Url"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"Url"'
+    Expression='"Url"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Title"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="80"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"Title"'
+    Expression='"Title"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AttachmentText"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"Attachment Text"'
+    Expression='"Attachment Text"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SeafarerId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName='"Seafarer Id"'
+    Expression='"Seafarer Id"'
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="SeqNumber"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

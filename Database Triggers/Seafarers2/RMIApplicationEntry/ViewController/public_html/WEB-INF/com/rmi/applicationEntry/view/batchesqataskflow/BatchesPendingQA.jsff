@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" styleClass="AFStretchWidth">
+    <af:panelTabbed position="above" id="pt1">
+      <af:showDetailItem id="tab1" text="Orders Pending QA">
+        <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.BatchesPendingQaView.collectionModel}" var="row"
+                    rows="#{bindings.BatchesPendingQaView.rangeSize}"
+                    emptyText="#{bindings.BatchesPendingQaView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.BatchesPendingQaView.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.BatchesPendingQaView.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.BatchesPendingQaView.rangeSize}"
+                    filterModel="#{bindings.BatchesPendingQaViewQuery.queryDescriptor}"
+                    queryListener="#{bindings.BatchesPendingQaViewQuery.processQuery}" filterVisible="true"
+                    varStatus="vs" id="t1" columnStretching="column:c2" styleClass="AFStretchWidth"
+                    contentDelivery="immediate" autoHeightRows="14">
+            <af:column sortProperty="#{bindings.BatchesPendingQaView.hints.BatchName.name}" filterable="true"
+                       sortable="true" headerText="Batch Name" id="c2">
+              <af:outputText value="#{row.BatchName}"
+                             shortDesc="#{bindings.BatchesPendingQaView.hints.BatchName.tooltip}" id="ot2"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''};"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesPendingQaView.hints.BatchDate.name}" filterable="true"
+                       sortable="true" headerText="Batch Date" id="c1">
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.BatchesPendingQaViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                              id="id2">
+                  <af:convertDateTime pattern="#{bindings.BatchesPendingQaView.hints.BatchDate.format}"/>
+                </af:inputDate>
+              </f:facet>
+              <af:outputText value="#{row.BatchDate}"
+                             shortDesc="#{bindings.BatchesPendingQaView.hints.BatchDate.tooltip}" id="ot1"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''};text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesPendingQaView.hints.NoOfSeafarer.name}" filterable="true"
+                       sortable="true" headerText="Number of Seafarers" id="c3">
+              <af:outputText value="#{row.NoOfSeafarer}"
+                             shortDesc="#{bindings.BatchesPendingQaView.hints.NoOfSeafarer.tooltip}" id="ot3"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''};">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesPendingQaView.hints.NoOfSeafarer.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesPendingQaView.hints.Region.name}" filterable="true"
+                       sortable="true" headerText="Region" id="c4">
+              <af:outputText value="#{row.Region}" shortDesc="#{bindings.BatchesPendingQaView.hints.Region.tooltip}"
+                             id="ot4"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''};"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesPendingQaView.hints.WorkOrderNo.name}" filterable="true"
+                       sortable="true" headerText="Work Order Number" id="c5">
+              <af:outputText value="#{row.WorkOrderNo}"
+                             shortDesc="#{bindings.BatchesPendingQaView.hints.WorkOrderNo.tooltip}" id="ot5"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''};">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesPendingQaView.hints.WorkOrderNo.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesPendingQaView.hints.OrderType.name}" filterable="true"
+                       sortable="true" headerText="Order Type" id="c6">
+              <af:outputText value="#{row.OrderType}"
+                             shortDesc="#{bindings.BatchesPendingQaView.hints.OrderType.tooltip}" id="ot6"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''};"/>
+            </af:column>
+            <af:column headerText="Expedited Processing" id="c20">
+              <af:selectBooleanCheckbox value="#{row.bindings.ExpeditedProcessing.inputValue}"
+                                        label="#{row.bindings.ExpeditedProcessing.label}"
+                                        shortDesc="#{bindings.BatchesPendingQaView.hints.ExpeditedProcessing.tooltip}"
+                                        id="sbc1"/>
+            </af:column>
+            <af:column id="c10">
+              <af:button text="Assign" id="b1" actionListener="#{viewScope.BatchesQABean.assignQAButton}"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesPendingQaView.hints.CraCount.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.BatchesPendingQaView.hints.CraCount.label}" id="c7"
+                       visible="false">
+              <af:outputText value="#{row.CraCount}" shortDesc="#{bindings.BatchesPendingQaView.hints.CraCount.tooltip}"
+                             id="ot7">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesPendingQaView.hints.CraCount.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesPendingQaView.hints.CraSentCount.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.BatchesPendingQaView.hints.CraSentCount.label}" id="c8"
+                       visible="false">
+              <af:outputText value="#{row.CraSentCount}"
+                             shortDesc="#{bindings.BatchesPendingQaView.hints.CraSentCount.tooltip}" id="ot8">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesPendingQaView.hints.CraSentCount.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesPendingQaView.hints.tranFinalCra.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.BatchesPendingQaView.hints.tranFinalCra.label}" id="c9"
+                       visible="false">
+              <af:outputText value="#{row.tranFinalCra}"
+                             shortDesc="#{bindings.BatchesPendingQaView.hints.tranFinalCra.tooltip}" id="ot16">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesPendingQaView.hints.tranFinalCra.format}"/>
+              </af:outputText>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:showDetailItem>
+      <af:showDetailItem text="Resubmitted Orders" id="sdi1">
+        <af:panelCollection id="pc2" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.BatchesQaResubmittedView.collectionModel}" var="row"
+                    rows="#{bindings.BatchesQaResubmittedView.rangeSize}"
+                    emptyText="#{bindings.BatchesQaResubmittedView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.BatchesQaResubmittedView.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.BatchesQaResubmittedView.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.BatchesQaResubmittedView.rangeSize}"
+                    filterModel="#{bindings.BatchesQaResubmittedViewQuery.queryDescriptor}"
+                    queryListener="#{bindings.BatchesQaResubmittedViewQuery.processQuery}" filterVisible="true"
+                    varStatus="vs" id="t2" styleClass="AFStretchWidth" autoHeightRows="14" contentDelivery="immediate"
+                    columnStretching="column:c12">
+            <af:column sortProperty="#{bindings.BatchesQaResubmittedView.hints.BatchName.name}" filterable="true"
+                       sortable="true" headerText="Batch Name" id="c12">
+              <af:outputText value="#{row.BatchName}"
+                             shortDesc="#{bindings.BatchesQaResubmittedView.hints.BatchName.tooltip}" id="ot10"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''};"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesQaResubmittedView.hints.BatchDate.name}" filterable="true"
+                       sortable="true" headerText="Batch Submitted Date" id="c11">
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.BatchesQaResubmittedViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                              id="id1">
+                  <af:convertDateTime pattern="#{bindings.BatchesQaResubmittedView.hints.BatchDate.format}"/>
+                </af:inputDate>
+              </f:facet>
+              <af:outputText value="#{row.BatchDate}"
+                             shortDesc="#{bindings.BatchesQaResubmittedView.hints.BatchDate.tooltip}" id="ot9"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''}; text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesQaResubmittedView.hints.NoOfSeafarer.name}" filterable="true"
+                       sortable="true" headerText="Number Of Seafarers"
+                       id="c13">
+              <af:outputText value="#{row.NoOfSeafarer}"
+                             shortDesc="#{bindings.BatchesQaResubmittedView.hints.NoOfSeafarer.tooltip}" id="ot11"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''}; ">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesQaResubmittedView.hints.NoOfSeafarer.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesQaResubmittedView.hints.Region.name}" filterable="true"
+                       sortable="true" headerText="Region" id="c14">
+              <af:outputText value="#{row.Region}" shortDesc="#{bindings.BatchesQaResubmittedView.hints.Region.tooltip}"
+                             id="ot12"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''}; "/>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesQaResubmittedView.hints.WorkOrderNo.name}" filterable="true"
+                       sortable="true" headerText="Work Order Number"
+                       id="c15">
+              <af:outputText value="#{row.WorkOrderNo}"
+                             shortDesc="#{bindings.BatchesQaResubmittedView.hints.WorkOrderNo.tooltip}" id="ot13"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''}; ">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesQaResubmittedView.hints.WorkOrderNo.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesQaResubmittedView.hints.OrderType.name}" filterable="true"
+                       sortable="true" headerText="Order Type" id="c16">
+              <af:outputText value="#{row.OrderType}"
+                             shortDesc="#{bindings.BatchesQaResubmittedView.hints.OrderType.tooltip}" id="ot14"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''}; "/>
+            </af:column>
+            <af:column headerText="Expedited Processing" id="c18">
+              <af:selectBooleanCheckbox value="#{row.bindings.ExpeditedProcessing.inputValue}"
+                                        label="#{row.bindings.ExpeditedProcessing.label}"
+                                        shortDesc="#{bindings.BatchesQaResubmittedView.hints.ExpeditedProcessing.tooltip}"
+                                        id="sbc2" disabled="true"/>
+            </af:column>
+            <af:column id="c19">
+              <af:button text="Assign" id="b2" actionListener="#{viewScope.BatchesQABean.assignResubmittedButton}"/>
+            </af:column>
+            <af:column headerText="#{bindings.BatchesQaResubmittedView.hints.tranFinalCra.label}" id="c21"
+                       visible="false">
+              <af:outputText value="#{row.tranFinalCra}"
+                             shortDesc="#{bindings.BatchesQaResubmittedView.hints.tranFinalCra.tooltip}" id="ot17">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesQaResubmittedView.hints.tranFinalCra.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesQaResubmittedView.hints.CraCount.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.BatchesQaResubmittedView.hints.CraCount.label}" id="c17"
+                       visible="false">
+              <af:outputText value="#{row.CraCount}"
+                             shortDesc="#{bindings.BatchesQaResubmittedView.hints.CraCount.tooltip}" id="ot15">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesQaResubmittedView.hints.CraCount.format}"/>
+              </af:outputText>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:showDetailItem>
+    </af:panelTabbed>
+  </af:panelGroupLayout>
+</jsp:root>

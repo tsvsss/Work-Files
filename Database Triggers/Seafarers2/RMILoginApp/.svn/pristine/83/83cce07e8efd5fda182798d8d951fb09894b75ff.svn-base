@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="MenuSubMenuLogicalLink"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.login.adfbc.views.links.MenuSubMenuLogicalLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="UserMenuView"
+    Cardinality="1"
+    Source="true"
+    Owner="com.rmi.login.adfbc.views.readonly.UserMenuView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="UserMenuView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rmi.login.adfbc.views.readonly.UserMenuView.MenuTitle"/>
+      <Item Value="com.rmi.login.adfbc.views.readonly.UserMenuView.UserId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="UserSubMenuView"
+    Cardinality="-1"
+    Owner="com.rmi.login.adfbc.views.readonly.UserSubMenuView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="UserSubMenuView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rmi.login.adfbc.views.readonly.UserSubMenuView.MenuTitle"/>
+      <Item Value="com.rmi.login.adfbc.views.readonly.UserSubMenuView.UserId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

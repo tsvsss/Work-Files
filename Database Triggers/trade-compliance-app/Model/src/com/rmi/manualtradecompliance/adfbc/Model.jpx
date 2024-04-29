@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE JboProject SYSTEM "jbo_03_01.dtd">
+<!---->
+<JboProject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Model"
+  Version="12.1.3.10.47"
+  SeparateXMLFiles="true"
+  PackageName="com.rmi.manualtradecompliance.adfbc">
+  <DesignTime>
+    <Attr Name="_jprName" Value="../../../../../Model.jpr"/>
+    <Attr Name="_domainNames0" Value="com.rmi.manualtradecompliance.adfbc.entities.Xmltype1"/>
+    <Attr Name="_domainNames2" Value="com.rmi.manualtradecompliance.adfbc.entities.Xmltype2"/>
+    <Attr Name="_domainNames1" Value="com.rmi.manualtradecompliance.adfbc.entities.Xmltype3"/>
+    <Attr Name="_domainNames3" Value="com.rmi.manualtradecompliance.adfbc.entities.Xmltype"/>
+    <Attr Name="_appModuleNames0"
+      Value="com.rmi.manualtradecompliance.adfbc.services.RMIManualTradeComplianceAppModule"/>
+    <Attr Name="_jbo.TypeMapEntries" Value="OracleApps"/>
+    <Attr Name="_domainNames4" Value="com.rmi.manualtradecompliance.adfbc.views.Type"/>
+    <Attr Name="_NamedConnection" Value="IRIDEV"/>
+  </DesignTime>
+  <Containee
+    Name="entities"
+    PackageName="com.rmi.manualtradecompliance.adfbc.entities"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_DO" Value="true"/>
+      <Attr Name="_EO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="services"
+    PackageName="com.rmi.manualtradecompliance.adfbc.services"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_AM" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="links"
+    PackageName="com.rmi.manualtradecompliance.adfbc.views.links"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VL" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="lovs"
+    PackageName="com.rmi.manualtradecompliance.adfbc.views.lovs"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="views"
+    PackageName="com.rmi.manualtradecompliance.adfbc.views"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+      <Attr Name="_DO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <AppContainee
+    Name="ViewController"
+    FullName="oracle.apps.xwrl.view.ViewController"
+    ObjectType="JboProject"/>
+  <AppModuleUsage
+    Name="RMIManualTradeComplianceAppModule"
+    FullName="com.rmi.manualtradecompliance.adfbc.services.RMIManualTradeComplianceAppModule"
+    ConfigurationName="com.rmi.manualtradecompliance.adfbc.services.RMIManualTradeComplianceAppModuleShared"
+    SharedScope="1"/>
+</JboProject>

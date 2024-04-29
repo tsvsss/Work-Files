@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="SamplePageDef"
+                Package="Prototype">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="XwrlResponseEntityColumnsView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlResponseEntityColumnsView1Iterator"/>
+    <searchRegion Binds="XwrlResponseEntityColumnsView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="XwrlResponseEntityColumnsView1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="XwrlResponseEntityColumnsView1Iterator" id="XwrlResponseEntityColumnsView1">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.XwrlResponseEntityColumnsView"
+                      Name="XwrlResponseEntityColumnsView10">
+        <AttrNames>
+          <Item Value="Listentityname"/>
+          <Item Value="Listprimaryname"/>
+          <Item Value="Listnametype"/>
+          <Item Value="Listcountry"/>
+          <Item Value="Listcity"/>
+          <Item Value="Listoperatingcountries"/>
+          <Item Value="Listregistrationcountries"/>
+          <Item Value="Externalsources"/>
+          <Item Value="Cachedextsources"/>
+          <Item Value="Category"/>
+          <Item Value="Dnvesselindicator"/>
+          <Item Value="Dnvesselinfo"/>
+          <Item Value="Dnaddeddate"/>
+          <Item Value="Dnlastupdateddate"/>
+          <Item Value="Matchscore"/>
+          <Item Value="Alertid"/>
+          <Item Value="Casekey"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="Dnaddress"/>
+          <Item Value="Dnaddresscountrycode"/>
+          <Item Value="Dnallcountrycodes"/>
+          <Item Value="Dncity"/>
+          <Item Value="Dnentityname"/>
+          <Item Value="Dninactiveflag"/>
+          <Item Value="Dninactivesincedate"/>
+          <Item Value="Dnnametype"/>
+          <Item Value="Dnnamequality"/>
+          <Item Value="Dnoperatingcountrycodes"/>
+          <Item Value="Dnoriginalentityname"/>
+          <Item Value="Dnpepclassification"/>
+          <Item Value="Dnpostalcode"/>
+          <Item Value="Dnprimaryname"/>
+          <Item Value="Dnregistrationcountrycode"/>
+          <Item Value="Dnregistrationnumber"/>
+          <Item Value="Dnstate"/>
+          <Item Value="Id"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="Listid"/>
+          <Item Value="Listkey"/>
+          <Item Value="Listoriginalscriptname"/>
+          <Item Value="Listrecordorigin"/>
+          <Item Value="Listrecordtype"/>
+          <Item Value="Listsubkey"/>
+          <Item Value="Matchrule"/>
+          <Item Value="Rec"/>
+          <Item Value="RequestId"/>
+          <Item Value="Riskscore"/>
+          <Item Value="Riskscorepep"/>
+          <Item Value="XState"/>
+          <Item Value="LegalReview"/>
+          <Item Value="Stateattr"/>
+          <Item Value="OwsAlertState"/>
+          <Item Value="Samestate"/>
+          <Item Value="CreatedByAttr"/>
+          <Item Value="LastUpdatedByAttr"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

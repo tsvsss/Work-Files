@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="taskflow_Batch_CreateEdit">
+    <default-activity>init</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__4">
+      <name>param_batch_mode</name>
+      <value>#{pageFlowScope.param_batch_mode}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__5">
+      <name>param_batch_id</name>
+      <value>#{pageFlowScope.param_batch_id}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__13">
+      <name>param_user_id</name>
+      <value>#{pageFlowScope.param_user_id}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__25">
+      <name>param_calling_tf</name>
+      <value>#{pageFlowScope.param_calling_tf}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__26">
+      <name>param_rejected_tab</name>
+      <value>#{pageFlowScope.param_rejected_tab}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__27">
+      <name>RoleName</name>
+      <value>#{sessionScope.RoleName}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__2">
+      <managed-bean-name>BatchCreateEditBean</managed-bean-name>
+      <managed-bean-class>com.rmi.applicationEntry.view.batchcreateedittaskflow.BatchCreateEditBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <initializer>#{pageFlowScope.BatchCreateEditBean.batchTaskflowInitializer}</initializer>
+    <finalizer>#{pageFlowScope.BatchCreateEditBean.batchTaskflowFinalizer}</finalizer>
+    <exception-handler>exceptionHandler</exception-handler>
+    <view id="BatchCreateEditView">
+      <page>/WEB-INF/com/rmi/applicationEntry/view/batchcreateedittaskflow/BatchCreateEditView.jsff</page>
+    </view>
+    <router id="Create_Edit">
+      <case id="__6">
+        <expression>#{pageFlowScope.param_batch_mode == 'create'}</expression>
+        <outcome>create</outcome>
+      </case>
+      <case id="__7">
+        <expression>#{pageFlowScope.param_batch_mode == 'edit'}</expression>
+        <outcome>edit</outcome>
+      </case>
+      <case id="__22">
+        <expression>#{pageFlowScope.param_batch_mode == 'view'}</expression>
+        <outcome>view</outcome>
+      </case>
+      <default-outcome>create</default-outcome>
+    </router>
+    <method-call id="editBatch">
+      <method>#{bindings.editBatch.execute}</method>
+      <outcome>
+        <fixed-outcome>editBatch</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="taskFlowReturn">
+      <outcome>
+        <name>taskFlowReturn</name>
+      </outcome>
+    </task-flow-return>
+    <view id="seafarerAddEdit">
+      <page>/WEB-INF/com/rmi/applicationEntry/view/batchcreateedittaskflow/seafarerAddEdit.jsff</page>
+    </view>
+    <method-call id="createOrEditSeafarer">
+      <method>#{bindings.createOrEditSeafarer.execute}</method>
+      <outcome>
+        <fixed-outcome>createOrEditSeafarer</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="createNewBatch">
+      <method>#{bindings.createNewBatch.execute}</method>
+      <outcome>
+        <fixed-outcome>createNewBatch</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="init">
+      <method>#{pageFlowScope.BatchCreateEditBean.initMethod}</method>
+      <outcome>
+        <fixed-outcome>init</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="exceptionHandler">
+      <method>#{pageFlowScope.BatchCreateEditBean.batchTaskflowExceptionHandler}</method>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>Create_Edit</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>edit</from-outcome>
+        <to-activity-id>editBatch</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__14">
+        <from-outcome>create</from-outcome>
+        <to-activity-id>createNewBatch</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__17">
+        <from-outcome>view</from-outcome>
+        <to-activity-id>editBatch</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>editBatch</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>editBatch</from-outcome>
+        <to-activity-id>BatchCreateEditView</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__18">
+      <from-activity-id>BatchCreateEditView</from-activity-id>
+      <control-flow-case id="__19">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>taskFlowReturn</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome>seafarer</from-outcome>
+        <to-activity-id>createOrEditSeafarer</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__9">
+      <from-activity-id>seafarerAddEdit</from-activity-id>
+      <control-flow-case id="__12">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>BatchCreateEditView</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__20">
+      <from-activity-id>createOrEditSeafarer</from-activity-id>
+      <control-flow-case id="__21">
+        <from-outcome>createOrEditSeafarer</from-outcome>
+        <to-activity-id>seafarerAddEdit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__15">
+      <from-activity-id>createNewBatch</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome>createNewBatch</from-outcome>
+        <to-activity-id>BatchCreateEditView</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__23">
+      <from-activity-id>init</from-activity-id>
+      <control-flow-case id="__24">
+        <from-outcome>init</from-outcome>
+        <to-activity-id>Create_Edit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

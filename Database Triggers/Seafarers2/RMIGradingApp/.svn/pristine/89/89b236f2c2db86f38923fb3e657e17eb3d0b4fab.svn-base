@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="OrderLinesView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="com.rmi.tradecompapproval.adfbc.views.readonly.OrderLinesViewRowImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.readonly.OrderLinesView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="LovItemUomView1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.LovItemUomView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_TransItemUom"
+    ListVOName="LovItemUomView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransItemUom"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="UomCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="UomCode"/>
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT                       
+1 SL_NO,     
+HEADER_ID,                  
+LINE_ID,                   
+LINE_NUMBER,                
+SHIPMENT_NUMBER,                 
+INVENTORY_ITEM_ID,                       
+NVL(ORDERED_QUANTITY,0) ORDERED_QUANTITY,                    
+ORDER_QUANTITY_UOM,                       
+ORDERED_ITEM,                       
+SCHEDULE_ARRIVAL_DATE,                     
+TAX_VALUE,                     
+NVL(UNIT_SELLING_PRICE,0) UNIT_SELLING_PRICE,                     
+SALESREP_ID,                     
+AUTHORIZED_TO_SHIP_FLAG,                     
+ATTRIBUTE1,                     
+ATTRIBUTE2,                     
+ATTRIBUTE3,                     
+ATTRIBUTE4,                     
+ATTRIBUTE5,                     
+ATTRIBUTE6,                     
+ATTRIBUTE19,  
+CONTEXT,            
+FLOW_STATUS_CODE,         
+NVL((SELECT ATTRIBUTE1 FROM SICD_DOCUMENTS           
+     WHERE LINE_ID = OOLA.LINE_ID AND HEADER_ID = OOLA.HEADER_ID), 'N') DOC_PRINT_STATUS        
+FROM                       
+OE_ORDER_LINES_ALL OOLA       
+ORDER BY LINE_NUMBER]]></SQLQuery>
+  <ViewAttribute
+    Name="SlNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SL_NO"
+    Expression="SL_NO"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="HeaderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="HEADER_ID"
+    Expression="HEADER_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="LineId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="LINE_ID"
+    Expression="LINE_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="LineNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="LINE_NUMBER"
+    Expression="LINE_NUMBER"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="ShipmentNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SHIPMENT_NUMBER"
+    Expression="SHIPMENT_NUMBER"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="InventoryItemId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="INVENTORY_ITEM_ID"
+    Expression="INVENTORY_ITEM_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="OrderedQuantity"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="37"
+    Scale="4"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ORDERED_QUANTITY"
+    Expression="ORDERED_QUANTITY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="OrderQuantityUom"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="3"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ORDER_QUANTITY_UOM"
+    Expression="ORDER_QUANTITY_UOM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrderedItem"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ORDERED_ITEM"
+    Expression="ORDERED_ITEM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ScheduleArrivalDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="SCHEDULE_ARRIVAL_DATE"
+    Expression="SCHEDULE_ARRIVAL_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="TaxValue"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="37"
+    Scale="4"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="TAX_VALUE"
+    Expression="TAX_VALUE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="UnitSellingPrice"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="37"
+    Scale="4"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="UNIT_SELLING_PRICE"
+    Expression="UNIT_SELLING_PRICE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SalesrepId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SALESREP_ID"
+    Expression="SALESREP_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="AuthorizedToShipFlag"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="AUTHORIZED_TO_SHIP_FLAG"
+    Expression="AUTHORIZED_TO_SHIP_FLAG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Attribute1"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ATTRIBUTE1"
+    Expression="ATTRIBUTE1"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Attribute2"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ATTRIBUTE2"
+    Expression="ATTRIBUTE2"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Attribute3"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ATTRIBUTE3"
+    Expression="ATTRIBUTE3"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Attribute4"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ATTRIBUTE4"
+    Expression="ATTRIBUTE4"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Attribute5"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ATTRIBUTE5"
+    Expression="ATTRIBUTE5"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Attribute6"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ATTRIBUTE6"
+    Expression="ATTRIBUTE6"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Attribute19"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ATTRIBUTE19"
+    Expression="ATTRIBUTE19"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Context"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONTEXT"
+    Expression="CONTEXT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FlowStatusCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FLOW_STATUS_CODE"
+    Expression="FLOW_STATUS_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DocPrintStatus"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="150"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DOC_PRINT_STATUS"
+    Expression="DOC_PRINT_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="150"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransItemDescription"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransHoldFlag"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransExtendedPrice"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="37"
+    Scale="4"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TransLimitation"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2550"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransRestriction"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2550"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransOldDoc"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TransSeafarer"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransShipCharges"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="37"
+    Scale="4"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TransItemUom"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransItemUom">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.rmi.tradecompapproval.adfbc.views.readonly.OrderLinesView.TransItemUom_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <DISPLAYHEIGHT
+          Value="15"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SeafarerId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.Integer"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TransLineHold"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="HeaderId"/>
+    <Item Value="LineId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

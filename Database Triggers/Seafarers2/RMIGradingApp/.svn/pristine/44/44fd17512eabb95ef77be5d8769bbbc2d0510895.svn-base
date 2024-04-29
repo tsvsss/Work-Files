@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="SeafarerDataVerificationTF">
+    <default-activity>filterOrdersVerification</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__7">
+      <name>P_VIEW_QA</name>
+      <value>#{pageFlowScope.P_VIEW_QA}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>SeafarerDataVerificationBean</managed-bean-name>
+      <managed-bean-class>com.rmi.tradecompapproval.view.seafarerdataverification.SeafarerDataVerificationBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__6">
+      <managed-bean-name>viewSeafarerDetailsBean</managed-bean-name>
+      <managed-bean-class>com.iri.tradeCompApproval.bean.ViewSeafarerDetails</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="SeafarerDataVerificationPage">
+      <page>/WEB-INF/com/rmi/tradecompapproval/view/seafarerdataverification/SeafarerDataVerificationPage.jsff</page>
+    </view>
+    <method-call id="filterOrdersVerification">
+      <method>#{bindings.filterOrdersVerification.execute}</method>
+      <outcome>
+        <fixed-outcome>filterOrdersVerification</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="ViewSeafarer">
+      <page>/WEB-INF/com/rmi/tradecompapproval/view/viewbatchseafarer/ViewSeafarer.jsff</page>
+    </view>
+    <control-flow-rule id="__2">
+      <from-activity-id>filterOrdersVerification</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>filterOrdersVerification</from-outcome>
+        <to-activity-id>SeafarerDataVerificationPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>SeafarerDataVerificationPage</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>viewSeafarerDetails</from-outcome>
+        <to-activity-id>ViewSeafarer</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

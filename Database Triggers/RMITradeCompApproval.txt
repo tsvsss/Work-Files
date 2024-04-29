@@ -1,0 +1,123 @@
+Entity :RmiBatch
+|__Attribute :EsiBatchId
+|____Change Mandatory to:true
+|__Create Attribute for column: BATCH_ASSIGNED_TO_REGION
+|__Remove Key Constraint: ViewbatcheoPrimaryKey
+|__Create Key for Constraint: RMI_BATCH_IFACE_PK
+
+Entity :RmiSeafarerDocs
+|__Create Attribute for column: VERIFIED
+|__Create Attribute for column: VERIFICATION_EDOC_ID
+|__Create Attribute for column: GRADING_STATUS_OC
+|__Remove Key Constraint: ViewseafarerdocseoPrimaryKey
+|__Create Key for Constraint: RMI_SEAFARER_DOCS_IFACE_FK
+|__Create Entity Association
+|__Create Key for Constraint: RMI_SEAFARER_DOCS_IFACE_PK
+
+Entity :RmiSeafarers
+|__Set transient, as column missing for attribute ApplicationCorrectedFlag
+|__Create Attribute for column: DEFICIENT_ACK_FLAG
+|__Create Attribute for column: DEFICIENT_ACK_DATE
+|__Create Attribute for column: BOOK_CHARGEABLE
+|__Create Attribute for column: IDCARD_CHARGEABLE
+|__Remove Key Constraint: ViewseafarereoPrimaryKey
+|__Create Key for Constraint: RMI_SEAFARERS_IFACE_FK
+|__Create Entity Association
+|__Create Key for Constraint: RMI_SEAFARERS_IFACE_PK
+
+Entity :RmiWorkflow
+|__Attribute :EsiBatchId
+|____Change Column type to NUMBER
+|__Attribute :EsiWfId
+|____Change Column type to NUMBER
+|__Remove Key Constraint: SysC001258225
+|__Create Key for Constraint: SYS_C002107416
+
+Entity :SicdDocuments
+|__Attribute :LastUpdateDate
+|____Change Mandatory to:true
+|__Attribute :LastUpdatedBy
+|____Change Mandatory to:true
+|__Attribute :CreationDate
+|____Change Mandatory to:true
+|__Attribute :CreatedBy
+|____Change Mandatory to:true
+|__Attribute :Status
+|____Change Mandatory to:true
+|__Attribute :IssueDate
+|____Change Mandatory to:true
+|__Attribute :IssueType
+|____Change Mandatory to:true
+|__Attribute :DocumentType
+|____Change Mandatory to:true
+|__Attribute :SignatureId
+|____Change Mandatory to:true
+|__Attribute :SeafarerId
+|____Change Mandatory to:true
+|__Attribute :DocumentId
+|____Change Mandatory to:true
+|____Change Primary Key to:false
+|__Remove Key Constraint: SicddocumentseoPrimaryKey
+
+Entity :SicdResponsibilities
+|__Attribute :LastUpdateDate
+|____Change Mandatory to:true
+|__Attribute :LastUpdatedBy
+|____Change Mandatory to:true
+|__Attribute :CreationDate
+|____Change Mandatory to:true
+|__Attribute :CreatedBy
+|____Change Mandatory to:true
+|__Attribute :QualificationId
+|____Change Mandatory to:true
+|__Attribute :DocumentId
+|____Change Mandatory to:true
+|__Attribute :Limitations
+|____Change Mandatory to:true
+|__Attribute :ResponsibilityId
+|____Change Mandatory to:true
+|____Change Primary Key to:false
+|__Remove Key Constraint: SicdresponsibilitieseoPrimaryKey
+
+Entity :SicdRoles
+|__Attribute :LastUpdateDate
+|____Change Mandatory to:true
+|__Attribute :LastUpdatedBy
+|____Change Mandatory to:true
+|__Attribute :CreationDate
+|____Change Mandatory to:true
+|__Attribute :CreatedBy
+|____Change Mandatory to:true
+|__Attribute :PositionId
+|____Change Mandatory to:true
+|__Attribute :DocumentId
+|____Change Mandatory to:true
+|__Attribute :Limitations
+|____Change Mandatory to:true
+|__Attribute :RoleId
+|____Change Mandatory to:true
+|____Change Primary Key to:false
+|__Remove Key Constraint: SicdroleseoPrimaryKey
+
+Entity :SicdSeafarer
+|__Attribute :LastUpdateDate
+|____Change Mandatory to:true
+|__Attribute :LastUpdatedBy
+|____Change Mandatory to:true
+|__Attribute :CreationDate
+|____Change Mandatory to:true
+|__Attribute :CreatedBy
+|____Change Mandatory to:true
+|__Attribute :Status
+|____Change Mandatory to:true
+|__Attribute :Nationality
+|____Change Mandatory to:true
+|__Attribute :BirthDate
+|____Change Mandatory to:true
+|__Attribute :LastName
+|____Change Mandatory to:true
+|__Attribute :SeafarerId
+|____Change Mandatory to:true
+|____Change Primary Key to:false
+|__Remove Key Constraint: SicdseafarereoPrimaryKey
+

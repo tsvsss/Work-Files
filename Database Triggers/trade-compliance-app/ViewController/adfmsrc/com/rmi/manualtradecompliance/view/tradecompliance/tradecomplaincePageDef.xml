@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="tradecomplaincePageDef"
+                Package="com.rmi.manualtradecompliance.view.tradecompliance">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DualView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl" id="DualVO1Iterator"/>
+    <iterator Binds="WcScreeningRequestView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="WcScreeningRequestVO1Iterator"/>
+    <iterator Binds="MatchesView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="MatchesVO1Iterator"/>
+    <iterator Binds="PositiveMatchesView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="PositiveMatchesVO1Iterator"/>
+    <iterator Binds="PossibleMatchesView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="PossibleMatchesVO1Iterator"/>
+    <iterator Binds="FalseMatchesVO1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="FalseMatchesVO1Iterator"/>
+    <iterator Binds="StatusHistoryView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="StatusHistoryVO1Iterator"/>
+    <iterator Binds="SeafarerDocEdocIdsView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="SeafarerDocEdocIdsVO1Iterator"/>
+    <iterator Binds="WcContentView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="WcContentEOView1Iterator"/>
+    <iterator Binds="ScreeningRequestChangesView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="ScreeningRequestChangesVO1Iterator"/>
+    <iterator Binds="AliasView" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl" id="AliasVO1Iterator"/>
+    <iterator Binds="PrimaryNameView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="PrimaryNameVO1Iterator"/>
+    <iterator Binds="UnspecifiedMatchesView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="UnspecifiedMatchesVO1Iterator"/>
+    <iterator Binds="MatchesDisplayDataView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="MatchesDisplayDataRO1Iterator"/>
+    <iterator Binds="WcRequestDocumentsView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="WcRequestDocumentsVO1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="DualVO1Iterator" id="X">
+      <AttrNames>
+        <Item Value="X"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="WcScreeningRequestId">
+      <AttrNames>
+        <Item Value="WcScreeningRequestId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="NameScreened">
+      <AttrNames>
+        <Item Value="NameScreened"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="DateOfBirth">
+      <AttrNames>
+        <Item Value="DateOfBirth"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="Sex">
+      <AttrNames>
+        <Item Value="Sex"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="NameIdentifier">
+      <AttrNames>
+        <Item Value="NameIdentifier"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="PassportNumber">
+      <AttrNames>
+        <Item Value="PassportNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="XmlResponse">
+      <AttrNames>
+        <Item Value="XmlResponse"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="EntityType">
+      <AttrNames>
+        <Item Value="EntityType" />
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="PassportIssuingCountryCode">
+      <AttrNames>
+        <Item Value="PassportIssuingCountryCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="StatusDate">
+      <AttrNames>
+        <Item Value="StatusDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="Notes">
+      <AttrNames>
+        <Item Value="Notes"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="OfacListEdocId">
+      <AttrNames>
+        <Item Value="OfacListEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="CreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="LastUpdatedBy">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="LastUpdateDate">
+      <AttrNames>
+        <Item Value="LastUpdateDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="LastUpdateLogin">
+      <AttrNames>
+        <Item Value="LastUpdateLogin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="OfacListIsEntyOnList">
+      <AttrNames>
+        <Item Value="OfacListIsEntyOnList"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="CorpResidenceCountryCode">
+      <AttrNames>
+        <Item Value="CorpResidenceCountryCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="CitizenshipCountryCode">
+      <AttrNames>
+        <Item Value="CitizenshipCountryCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="AliasWcScreeningRequestId">
+      <AttrNames>
+        <Item Value="AliasWcScreeningRequestId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="SentToLegalDate">
+      <AttrNames>
+        <Item Value="SentToLegalDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="ResidenceCountryCode">
+      <AttrNames>
+        <Item Value="ResidenceCountryCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="NotifyUserUponApproval">
+      <AttrNames>
+        <Item Value="NotifyUserUponApproval"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="CityName">
+      <AttrNames>
+        <Item Value="CityName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="WcCityListId">
+      <AttrNames>
+        <Item Value="WcCityListId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="TypeId">
+      <AttrNames>
+        <Item Value="TypeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="ImoNumber">
+      <AttrNames>
+        <Item Value="ImoNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="SentToLegalBy">
+      <AttrNames>
+        <Item Value="SentToLegalBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="RequiresLegalApproval">
+      <AttrNames>
+        <Item Value="RequiresLegalApproval"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MatchesVO1Iterator" id="Matchescount">
+      <AttrNames>
+        <Item Value="Matchescount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PositiveMatchesVO1Iterator" id="Positivematches">
+      <AttrNames>
+        <Item Value="Positivematches"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="PossibleMatchesVO1Iterator" id="Possiblematches">
+      <AttrNames>
+        <Item Value="Possiblematches"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FalseMatchesVO1Iterator" id="Falsematches">
+      <AttrNames>
+        <Item Value="Falsematches"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="StatusHistoryVO1Iterator" id="StatusHistoryVO1">
+      <nodeDefinition DefName="com.rmi.manualtradecompliance.adfbc.views.StatusHistoryView" Name="StatusHistoryVO10">
+        <AttrNames>
+          <Item Value="WcRequestApprovalHistoryId"/>
+          <Item Value="WcScreeningRequestId"/>
+          <Item Value="Status"/>
+          <Item Value="StatusDate"/>
+          <Item Value="StatusUpdatedBy"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="TransStatusUpdatedByName"/>
+          <Item Value="TransLastUpdatedByName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SeafarerDocEdocIdsVO1Iterator" id="IdentityDocEdocId">
+      <AttrNames>
+        <Item Value="IdentityDocEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerDocEdocIdsVO1Iterator" id="SatEdocId">
+      <AttrNames>
+        <Item Value="SatEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerDocEdocIdsVO1Iterator" id="SeaserviceTranscriptEdocId">
+      <AttrNames>
+        <Item Value="SeaserviceTranscriptEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerDocEdocIdsVO1Iterator" id="PhysicalEdocId">
+      <AttrNames>
+        <Item Value="PhysicalEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerDocEdocIdsVO1Iterator" id="AffidavitEdocId">
+      <AttrNames>
+        <Item Value="AffidavitEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerDocEdocIdsVO1Iterator" id="PhotoEdocId">
+      <AttrNames>
+        <Item Value="PhotoEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="WcContentEOView1Iterator" id="WcContentEOView1">
+      <nodeDefinition DefName="com.rmi.manualtradecompliance.adfbc.views.WcContentView" Name="WcContentEOView10">
+        <AttrNames>
+          <Item Value="WcContentId"/>
+          <Item Value="WcMatchesId"/>
+          <Item Value="XmlResponse"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="Matchentityidentifier"/>
+          <Item Value="Matchidentifier"/>
+          <Item Value="Matchscore"/>
+          <Item Value="Matchstatus"/>
+          <Item Value="Matchtype"/>
+          <Item Value="Surname"/>
+          <Item Value="GivenName"/>
+          <Item Value="DateOfBirth"/>
+          <Item Value="DateOfDeath"/>
+          <Item Value="Sex"/>
+          <Item Value="Status"/>
+          <Item Value="PassportNumber"/>
+          <Item Value="WcContentNotes"/>
+          <Item Value="UserClearable"/>
+          <Item Value="WcScreeningRequestId"/>
+          <Item Value="NmName" Binds="NmName"/>
+          <Item Value="NmDobAge" Binds="NmDobAge"/>
+          <Item Value="NmSex" Binds="NmSex"/>
+          <Item Value="NmDead" Binds="NmDead"/>
+          <Item Value="NmVisual" Binds="NmVisual"/>
+          <Item Value="NmFatherName" Binds="NmFatherName"/>
+          <Item Value="NmImoNumber" Binds="NmImoNumber"/>
+          <Item Value="NmCnnm" Binds="NmCnnm"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="WcContentEOView1Iterator" id="NmCnnm" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NmCnnm"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="WcContentEOView1Iterator" id="NmImoNumber" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NmImoNumber"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="WcContentEOView1Iterator" id="NmFatherName" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NmFatherName"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="WcContentEOView1Iterator" id="NmVisual" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NmVisual"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="WcContentEOView1Iterator" id="NmDead" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NmDead"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="WcContentEOView1Iterator" id="NmSex" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NmSex"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="WcContentEOView1Iterator" id="NmDobAge" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NmDobAge"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="WcContentEOView1Iterator" id="NmName" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="NmName"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <list IterBinding="WcScreeningRequestVO1Iterator" id="EntityType1" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject" StaticList="true">
+      <AttrNames>
+        <Item Value="EntityType"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="VESSEL"/>
+        <Item Value="INDIVIDUAL"/>
+        <Item Value="ORGANISATION"/>
+      </ValueList>
+    </list>
+    <list IterBinding="WcScreeningRequestVO1Iterator" id="Sex1" DTSupportsMRU="false" SelectItemValueMode="ListObject"
+          StaticList="true">
+      <AttrNames>
+        <Item Value="Sex"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="MALE"/>
+        <Item Value="FEMALE"/>
+        <Item Value="UNKNOWN"/>
+        <Item Value="Unspecified"/>
+      </ValueList>
+    </list>
+    <list IterBinding="WcScreeningRequestVO1Iterator" StaticList="false" Uses="LOV_OfacListIsEntyOnList"
+          id="OfacListIsEntyOnList1" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <button IterBinding="WcScreeningRequestVO1Iterator" StaticList="false" Uses="LOV_NotifyUserUponApproval"
+            id="NotifyUserUponApproval1" DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="NotifyUserUponApproval"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <list IterBinding="WcScreeningRequestVO1Iterator" StaticList="false" Uses="LOV_NotifyUserUponApproval"
+          id="NotifyUserUponApproval2" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="WcScreeningRequestVO1Iterator" StaticList="false" Uses="LOV_RequiresLegalApproval"
+          id="RequiresLegalApproval1" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="WcScreeningRequestVO1Iterator" StaticList="false" Uses="LOV_Status" id="Status1"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="StatusUpdatedByName">
+      <AttrNames>
+        <Item Value="StatusUpdatedByName"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="RMIManualTradeComplianceAppModuleDataControl"/>
+    <tree IterBinding="ScreeningRequestChangesVO1Iterator" id="ScreeningRequestChangesVO1">
+      <nodeDefinition DefName="com.rmi.manualtradecompliance.adfbc.views.ScreeningRequestChangesView"
+                      Name="ScreeningRequestChangesVO10">
+        <AttrNames>
+          <Item Value="WcRequestChangeLogId"/>
+          <Item Value="WcScreeningRequestId"/>
+          <Item Value="ColumnName"/>
+          <Item Value="NewValue"/>
+          <Item Value="OldValue"/>
+          <Item Value="ChangeDate"/>
+          <Item Value="ChangedBy"/>
+          <Item Value="CHANGED_BY_NAME"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="AliasVO1Iterator" id="AliasVO1">
+      <nodeDefinition DefName="com.rmi.manualtradecompliance.adfbc.views.AliasView" Name="AliasVO10">
+        <AttrNames>
+          <Item Value="NameScreened"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="PrimaryNameVO1Iterator" id="Primaryname">
+      <AttrNames>
+        <Item Value="Primaryname"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="executeAllViewObjects" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="executeAllViewObjects" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.executeAllViewObjects_RMIManualTradeComplianceAppModuleDataControl_dataProvider_executeAllViewObjects_result"/>
+    <attributeValues IterBinding="UnspecifiedMatchesVO1Iterator" id="Unspecifiedmatches">
+      <AttrNames>
+        <Item Value="Unspecifiedmatches"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="WcScreeningRequestVO1Iterator" StaticList="false" Uses="LOV_TransResidenceCntry"
+                  id="TransResidenceCntry"/>
+    <listOfValues IterBinding="WcScreeningRequestVO1Iterator" StaticList="false" Uses="LOV_TransIdIssuingCntry"
+                  id="TransIdIssuingCntry"/>
+    <list IterBinding="WcScreeningRequestVO1Iterator" StaticList="false" Uses="LOV_TypeId" id="TypeId1"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <action id="Commit" DataControl="RMIManualTradeComplianceAppModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <methodAction id="genMergedSupportingDocs" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="genMergedSupportingDocs" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.genMergedSupportingDocs_RMIManualTradeComplianceAppModuleDataControl_dataProvider_genMergedSupportingDocs_result">
+      <NamedData NDName="seafarerId" NDType="java.lang.Integer"/>
+    </methodAction>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="TransPermanentAddres">
+      <AttrNames>
+        <Item Value="TransPermanentAddres"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="getMergedFileName" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getMergedFileName"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.getMergedFileName_RMIManualTradeComplianceAppModuleDataControl_dataProvider_getMergedFileName_result">
+      <NamedData NDName="seafarerId" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="fetchMatchesDisplayData" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="fetchMatchesDisplayData" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.fetchMatchesDisplayData_RMIManualTradeComplianceAppModuleDataControl_dataProvider_fetchMatchesDisplayData_result"/>
+    <tree IterBinding="MatchesDisplayDataRO1Iterator" id="MatchesDisplayDataRO1">
+      <nodeDefinition DefName="com.rmi.manualtradecompliance.adfbc.views.MatchesDisplayDataView"
+                      Name="MatchesDisplayDataRO10">
+        <AttrNames>
+          <Item Value="Heading"/>
+          <Item Value="DisplayData"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <listOfValues IterBinding="WcScreeningRequestVO1Iterator" StaticList="false" Uses="LOV_TransCityName"
+                  id="TransCityName"/>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="TransOnlineConsentStartDate">
+      <AttrNames>
+        <Item Value="TransOnlineConsentStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="TransOnlineConsentEndDate">
+      <AttrNames>
+        <Item Value="TransOnlineConsentEndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="TransUploadedConsentStartDate">
+      <AttrNames>
+        <Item Value="TransUploadedConsentStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="TransUploadedConsentEndDate">
+      <AttrNames>
+        <Item Value="TransUploadedConsentEndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="TransUploadedConsentEdocId">
+      <AttrNames>
+        <Item Value="TransUploadedConsentEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcScreeningRequestVO1Iterator" id="TransOnlineConfirmationNumber">
+      <AttrNames>
+        <Item Value="TransOnlineConfirmationNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="filterConsentDetails" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterConsentDetails" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.filterConsentDetails_RMIManualTradeComplianceAppModuleDataControl_dataProvider_filterConsentDetails_result"/>
+    <methodAction id="uploadDocument" RequiresUpdateModel="true" Action="invokeMethod" MethodName="uploadDocument"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.uploadDocument_RMIManualTradeComplianceAppModuleDataControl_dataProvider_uploadDocument_result">
+      <NamedData NDName="entityName" NDType="java.lang.String"/>
+      <NamedData NDName="fileName" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="WcRequestDocumentsVO1Iterator" id="WcRequestDocumentsVO1">
+      <nodeDefinition DefName="com.rmi.manualtradecompliance.adfbc.views.WcRequestDocumentsView"
+                      Name="WcRequestDocumentsVO10">
+        <AttrNames>
+          <Item Value="DocDescription"/>
+          <Item Value="EdocsId"/>
+          <Item Value="TransCreatedByName"/>
+          <Item Value="CreationDate"/>
+          <Item Value="TransUpdatedByName"/>
+          <Item Value="LastUpdateDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="WcRequestDocumentsVO1Iterator" id="AddAssocDoc"
+            InstanceName="RMIManualTradeComplianceAppModuleDataControl.WcRequestDocumentsView1"
+            DataControl="RMIManualTradeComplianceAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="WcRequestDocumentsVO1Iterator" id="DeleteAssocDoc"
+            InstanceName="RMIManualTradeComplianceAppModuleDataControl.WcRequestDocumentsView1"
+            DataControl="RMIManualTradeComplianceAppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues IterBinding="WcRequestDocumentsVO1Iterator" id="CreationDate1">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcRequestDocumentsVO1Iterator" id="LastUpdateDate1">
+      <AttrNames>
+        <Item Value="LastUpdateDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcRequestDocumentsVO1Iterator" id="TransCreatedByName">
+      <AttrNames>
+        <Item Value="TransCreatedByName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WcRequestDocumentsVO1Iterator" id="TransUpdatedByName">
+      <AttrNames>
+        <Item Value="TransUpdatedByName"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="getEdocFullURL" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getEdocFullURL"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.getEdocFullURL_RMIManualTradeComplianceAppModuleDataControl_dataProvider_getEdocFullURL_result">
+      <NamedData NDName="edocId" NDType="int"/>
+    </methodAction>
+    <methodAction id="synchronize" RequiresUpdateModel="true" Action="invokeMethod" MethodName="synchronize"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.synchronize_RMIManualTradeComplianceAppModuleDataControl_dataProvider_synchronize_result">
+      <NamedData NDName="wc_screening_request_id" NDType="int"/>
+    </methodAction>
+    <methodAction id="getEdocCategoryId" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getEdocCategoryId"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.getEdocCategoryId_RMIManualTradeComplianceAppModuleDataControl_dataProvider_getEdocCategoryId_result">
+      <NamedData NDName="edocId" NDType="int"/>
+    </methodAction>
+    <methodAction id="syncAlias" RequiresUpdateModel="true" Action="invokeMethod" MethodName="syncAlias"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.syncAlias_RMIManualTradeComplianceAppModuleDataControl_dataProvider_syncAlias_result">
+      <NamedData NDName="wc_screening_request_id" NDType="int"/>
+    </methodAction>
+    <methodAction id="getCrossReeferences" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getCrossReeferences" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.getCrossReeferences_RMIManualTradeComplianceAppModuleDataControl_dataProvider_getCrossReeferences_result">
+      <NamedData NDName="wc_screening_request_id" NDType="int"/>
+    </methodAction>
+    <methodAction id="getOFACSDNMatches" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getOFACSDNMatches"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.getOFACSDNMatches_RMIManualTradeComplianceAppModuleDataControl_dataProvider_getOFACSDNMatches_result">
+      <NamedData NDName="search_name" NDType="java.lang.String"/>
+      <NamedData NDName="entity_type" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="getOFACDocLink" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getOFACDocLink"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.getOFACDocLink_RMIManualTradeComplianceAppModuleDataControl_dataProvider_getOFACDocLink_result">
+      <NamedData NDName="ofac_list_edoc_id" NDType="int"/>
+      <NamedData NDName="iriHTMLUrlType" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="queryCrossReference" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="queryCrossReference" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.queryCrossReference_RMIManualTradeComplianceAppModuleDataControl_dataProvider_queryCrossReference_result">
+      <NamedData NDName="p_source_table" NDType="java.lang.String"/>
+      <NamedData NDName="p_source_column" NDType="java.lang.String"/>
+      <NamedData NDName="p_source_id" NDType="int"/>
+    </methodAction>
+    <methodAction id="createConsent" RequiresUpdateModel="true" Action="invokeMethod" MethodName="createConsent"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.createConsent_RMIManualTradeComplianceAppModuleDataControl_dataProvider_createConsent_result">
+      <NamedData NDName="consentEdocId" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

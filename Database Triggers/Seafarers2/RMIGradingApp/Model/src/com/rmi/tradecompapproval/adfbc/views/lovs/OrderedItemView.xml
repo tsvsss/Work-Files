@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="OrderedItemView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.lovs.OrderedItemView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT DISTINCT B.SEGMENT1||'.'||B.SEGMENT2||'.'||B.SEGMENT3||'.'||B.SEGMENT4 ITEM_CODE, B.DESCRIPTION 
+FROM OE_ORDER_LINES_ALL A,MTL_SYSTEM_ITEMS_B B 
+WHERE A.INVENTORY_ITEM_ID = B.INVENTORY_ITEM_ID 
+AND A.ORG_ID = B.ORGANIZATION_ID]]></SQLQuery>
+  <ViewAttribute
+    Name="ItemCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="163"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_CODE"
+    Expression="ITEM_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="163"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <DISPLAYHEIGHT
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Description"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DESCRIPTION"
+    Expression="DESCRIPTION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="60"/>
+        <DISPLAYHEIGHT
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="OrderedItemViewCriteria"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.OrderedItemView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="OrderedItemViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="OrderedItemViewCriteria_OrderedItemViewCriteria_row_0_Description"
+        ViewAttribute="Description"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Value=""
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="ItemCode"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

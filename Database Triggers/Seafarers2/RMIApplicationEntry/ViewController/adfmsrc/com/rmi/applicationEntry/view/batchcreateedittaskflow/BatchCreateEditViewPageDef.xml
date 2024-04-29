@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="BatchCreateEditViewPageDef"
+                Package="com.rmi.applicationEntry.view.batchcreateedittaskflow">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BatchIfaceView" RangeSize="10" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="BatchesVOIterator" ChangeEventPolicy="none"/>
+    <iterator Binds="WorkOrderDetailsView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="WorkOrderDetailsROIterator"/>
+    <iterator Binds="MultipleChoiceOrderingAgentEmailView" RangeSize="50"
+              DataControl="RMIApplicationEntryAppModuleDataControl" id="MultipleChoiceOrderingAgentEmailViewIterator"/>
+    <iterator Binds="ValidationMessageView" RangeSize="50" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="ValidationMessageViewIterator"/>
+    <iterator Binds="InvoiceAgentEmailIdView1" RangeSize="50" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="InvoiceAgentEmailIdView1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="BatchesVOIterator" id="BatchDate">
+      <AttrNames>
+        <Item Value="BatchDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BatchesVOIterator" id="BatchName">
+      <AttrNames>
+        <Item Value="BatchName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BatchesVOIterator" id="Notes">
+      <AttrNames>
+        <Item Value="Notes"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BatchesVOIterator" id="PurchaseOrderNumber">
+      <AttrNames>
+        <Item Value="PurchaseOrderNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BatchesVOIterator" id="VesselNames">
+      <AttrNames>
+        <Item Value="VesselNames"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="BatchesVOIterator" id="ExpeditedProcessing" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="ExpeditedProcessing"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <listOfValues IterBinding="BatchesVOIterator" StaticList="false" Uses="Billing_Customer"
+                  id="tranCustAccountBillToName"/>
+    <attributeValues IterBinding="BatchesVOIterator" id="BillToCustAccountId">
+      <AttrNames>
+        <Item Value="BillToCustAccountId"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="BatchesVOIterator" StaticList="false" Uses="Shipping_Customer"
+                  id="tranCustAccountShipToName"/>
+    <attributeValues IterBinding="BatchesVOIterator" id="ShipToCustAccountId">
+      <AttrNames>
+        <Item Value="ShipToCustAccountId"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" DataControl="RMIApplicationEntryAppModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <action id="Rollback" DataControl="RMIApplicationEntryAppModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <listOfValues IterBinding="BatchesVOIterator" StaticList="false" Uses="Ordering_Customer"
+                  id="tranCustAccountDeliverToName"/>
+    <methodAction id="assignTaskToOperator" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="assignTaskToOperator" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.assignTaskToOperator_RMIApplicationEntryAppModuleDataControl_dataProvider_assignTaskToOperator_result"/>
+    <attributeValues IterBinding="BatchesVOIterator" id="BatchStatus">
+      <AttrNames>
+        <Item Value="BatchStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="userHasOperator" RequiresUpdateModel="true" Action="invokeMethod" MethodName="userHasOperator"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.userHasOperator_RMIApplicationEntryAppModuleDataControl_dataProvider_userHasOperator_result">
+      <NamedData NDName="user_id" NDType="java.lang.Integer"/>
+    </methodAction>
+    <attributeValues IterBinding="WorkOrderDetailsROIterator" id="OrderNumber">
+      <AttrNames>
+        <Item Value="OrderNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BatchesVOIterator" id="OeHeaderId">
+      <AttrNames>
+        <Item Value="OeHeaderId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="checkSeafarerValidate" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="checkSeafarerValidate" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.checkSeafarerValidate_RMIApplicationEntryAppModuleDataControl_dataProvider_checkSeafarerValidate_result"/>
+    <methodAction id="saveBatch" RequiresUpdateModel="true" Action="invokeMethod" MethodName="saveBatch"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.saveBatch_RMIApplicationEntryAppModuleDataControl_dataProvider_saveBatch_result"/>
+    <methodAction id="callConcurrentProgramForTC" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callConcurrentProgramForTC" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.callConcurrentProgramForTC_RMIApplicationEntryAppModuleDataControl_dataProvider_callConcurrentProgramForTC_result"/>
+    <methodAction id="send_to_internal2" RequiresUpdateModel="true" Action="invokeMethod" MethodName="send_to_internal2"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.send_to_internal2_RMIApplicationEntryAppModuleDataControl_dataProvider_send_to_internal2_result"/>
+    <methodAction id="update_email_id" RequiresUpdateModel="true" Action="invokeMethod" MethodName="update_email_id"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.update_email_id_RMIApplicationEntryAppModuleDataControl_dataProvider_update_email_id_result">
+      <NamedData NDName="email" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="validateSeafarer" RequiresUpdateModel="true" Action="invokeMethod" MethodName="validateSeafarer"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.validateSeafarer_RMIApplicationEntryAppModuleDataControl_dataProvider_validateSeafarer_result">
+      <NamedData NDName="p_user_id" NDValue="#{pageFlowScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="submitBatchToAdmin" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="submitBatchToAdmin" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.submitBatchToAdmin_RMIApplicationEntryAppModuleDataControl_dataProvider_submitBatchToAdmin_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <listOfValues IterBinding="BatchesVOIterator" StaticList="false" Uses="LOV_tranDeliverToSuAddress"
+                  id="tranDeliverToSuAddress"/>
+    <listOfValues IterBinding="BatchesVOIterator" StaticList="false" Uses="LOV_tranBillToSuAddress"
+                  id="tranBillToSuAddress"/>
+    <listOfValues IterBinding="BatchesVOIterator" StaticList="false" Uses="LOV_tranShipToSuAddress"
+                  id="tranShipToSuAddress"/>
+    <attributeValues IterBinding="BatchesVOIterator" id="ShipToSiteUseId">
+      <AttrNames>
+        <Item Value="ShipToSiteUseId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BatchesVOIterator" id="BillToSiteUseId">
+      <AttrNames>
+        <Item Value="BillToSiteUseId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BatchesVOIterator" id="DeliverToSiteUseId">
+      <AttrNames>
+        <Item Value="DeliverToSiteUseId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="getLinkForConsent" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getLinkForConsent"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getLinkForConsent_RMIApplicationEntryAppModuleDataControl_dataProvider_getLinkForConsent_result">
+      <NamedData NDName="edoc_id" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="resubmit" RequiresUpdateModel="true" Action="invokeMethod" MethodName="resubmit"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.resubmit_RMIApplicationEntryAppModuleDataControl_dataProvider_resubmit_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="checkValidationBeforeSave" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="checkValidationBeforeSave" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.checkValidationBeforeSave_RMIApplicationEntryAppModuleDataControl_dataProvider_checkValidationBeforeSave_result"/>
+    <methodAction id="searchBatch" RequiresUpdateModel="true" Action="invokeMethod" MethodName="searchBatch"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.searchBatch_RMIApplicationEntryAppModuleDataControl_dataProvider_searchBatch_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <attributeValues IterBinding="BatchesVOIterator" id="DeliverToCustAccountId">
+      <AttrNames>
+        <Item Value="DeliverToCustAccountId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="updateIssueType" RequiresUpdateModel="true" Action="invokeMethod" MethodName="updateIssueType"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.updateIssueType_RMIApplicationEntryAppModuleDataControl_dataProvider_updateIssueType_result"/>
+    <methodAction id="filterOrderingAgentEmailId" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterOrderingAgentEmailId" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.filterOrderingAgentEmailId_RMIApplicationEntryAppModuleDataControl_dataProvider_filterOrderingAgentEmailId_result">
+      <NamedData NDName="partyName" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="createOrder" RequiresUpdateModel="true" Action="invokeMethod" MethodName="createOrder"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.createOrder_RMIApplicationEntryAppModuleDataControl_dataProvider_createOrder_result">
+      <NamedData NDName="p_user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <attributeValues IterBinding="BatchesVOIterator" id="tranEmailOrdering">
+      <AttrNames>
+        <Item Value="tranEmailOrdering"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="MultipleChoiceOrderingAgentEmailViewIterator" ListOperMode="multiSelect"
+          ListIter="MultipleChoiceOrderingAgentEmailViewIterator" id="MultipleChoiceOrderingAgentEmailView"
+          SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="CustContactPointId"/>
+      </AttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="EmailAddress"/>
+      </ListDisplayAttrNames>
+    </list>
+    <methodAction id="getEmailByContactId" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getEmailByContactId" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getEmailByContactId_RMIApplicationEntryAppModuleDataControl_dataProvider_getEmailByContactId_result">
+      <NamedData NDName="p_contact_id" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="getemaillist" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getemaillist"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getemaillist_RMIApplicationEntryAppModuleDataControl_dataProvider_getemaillist_result"/>
+    <methodAction id="purchaseNumberCheck" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="purchaseNumberCheck" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.purchaseNumberCheck_RMIApplicationEntryAppModuleDataControl_dataProvider_purchaseNumberCheck_result">
+      <NamedData NDName="purchaseOrderNumber" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="addValidationMessage" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="addValidationMessage" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.addValidationMessage_RMIApplicationEntryAppModuleDataControl_dataProvider_addValidationMessage_result">
+      <NamedData NDName="message" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="ValidationMessageViewIterator" id="ValidationMessageView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.ValidationMessageView"
+                      Name="ValidationMessageView0">
+        <AttrNames>
+          <Item Value="ErrorMessage"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="refreshBatchIfaceView" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="refreshBatchIfaceView" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.refreshBatchIfaceView_RMIApplicationEntryAppModuleDataControl_dataProvider_refreshBatchIfaceView_result"/>
+    <methodAction id="validateOcSQCGrade" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="validateOcSQCGrade" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.validateOcSQCGrade_RMIApplicationEntryAppModuleDataControl_dataProvider_validateOcSQCGrade_result"/>
+    <list IterBinding="InvoiceAgentEmailIdView1Iterator" ListOperMode="multiSelect"
+          ListIter="InvoiceAgentEmailIdView1Iterator" id="InvoiceAgentEmailIdView1" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="CustContactPointId"/>
+      </AttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="EmailAddress"/>
+      </ListDisplayAttrNames>
+    </list>
+    <methodAction id="updateInvoiceEmails" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="updateInvoiceEmails" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.updateInvoiceEmails_RMIApplicationEntryAppModuleDataControl_dataProvider_updateInvoiceEmails_result">
+      <NamedData NDName="email" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="getInvoiceAgentEmailList" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getInvoiceAgentEmailList" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getInvoiceAgentEmailList_RMIApplicationEntryAppModuleDataControl_dataProvider_getInvoiceAgentEmailList_result"/>
+    <methodAction id="filterInvoiceAgentEmailId" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterInvoiceAgentEmailId" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.filterInvoiceAgentEmailId_RMIApplicationEntryAppModuleDataControl_dataProvider_filterInvoiceAgentEmailId_result">
+      <NamedData NDName="partyName" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="validationOnBackButton" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="validationOnBackButton" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.validationOnBackButton_RMIApplicationEntryAppModuleDataControl_dataProvider_validationOnBackButton_result"/>
+    <methodAction id="updateInvoiceEmailFromTran" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="updateInvoiceEmailFromTran" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.updateInvoiceEmailFromTran_RMIApplicationEntryAppModuleDataControl_dataProvider_updateInvoiceEmailFromTran_result">
+      <NamedData NDName="emailid" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="BatchesVOIterator" id="tranInvoiceAgentEmailId">
+      <AttrNames>
+        <Item Value="tranInvoiceAgentEmailId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="getInvoiceAgentEmailID" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getInvoiceAgentEmailID" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getInvoiceAgentEmailID_RMIApplicationEntryAppModuleDataControl_dataProvider_getInvoiceAgentEmailID_result"/>
+    <methodAction id="checkForResubmit" RequiresUpdateModel="true" Action="invokeMethod" MethodName="checkForResubmit"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.checkForResubmit_RMIApplicationEntryAppModuleDataControl_dataProvider_checkForResubmit_result"/>
+    <methodAction id="batchCurrentRow" RequiresUpdateModel="true" Action="invokeMethod" MethodName="batchCurrentRow"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.batchCurrentRow_RMIApplicationEntryAppModuleDataControl_dataProvider_batchCurrentRow_result"/>
+    <methodAction id="callProcessOrderHeader" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callProcessOrderHeader" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.callProcessOrderHeader_RMIApplicationEntryAppModuleDataControl_dataProvider_callProcessOrderHeader_result"/>
+    <methodAction id="addCraForExternalBatch" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="addCraForExternalBatch" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.addCraForExternalBatch_RMIApplicationEntryAppModuleDataControl_dataProvider_addCraForExternalBatch_result"/>
+  </bindings>
+</pageDefinition>
+

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SeafarerListView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  RowClass="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarerListViewRowImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarerListView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pEsiBatchId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[select seafarer.first_name,seafarer.last_name,seafarer.birth_date,seafarer.birth_place,seafarer.seafarer_id,   
+(select country_name from sicd_countries where country_code =seafarer.PASSPORT_ISSUING_COUNTRY_CODE) passport_issuing_country,         
+(select country_name from sicd_countries where country_code =seafarer.NATIONALITY) RESIDENCE_COUNTRY,   
+decode(ISSUE_TYPE,'Current','Not Required',ISSUE_TYPE) ISSUE_TYPE,   
+(select count(*) from rmi_seafarer.rmi_seafarers_iface sea ,                    
+rmi_seafarer.rmi_seafarer_docs_iface docs                     
+where docs.esi_id = sea.esi_id and    
+sea.esi_id = seafarer.esi_id and   
+docs.cra_required = 'Y' and nvl(docs.cra_approved_flag,'NA') != 'N') cra_count,      
+(select count(*) from rmi_seafarer.rmi_seafarers_iface sea ,                       
+rmi_seafarer.rmi_seafarer_docs_iface docs                        
+where docs.esi_id = sea.esi_id and     
+sea.esi_id = seafarer.esi_id and   
+docs.cra_required = 'Y'                    
+and docs.cra_sent_date is null and nvl(docs.cra_approved_flag,'NA') != 'N') cra_sent_count,  
+seafarer.status  
+from rmi_seafarer.rmi_seafarers_iface seafarer where seafarer.esi_batch_id = :pEsiBatchId]]></SQLQuery>
+  <ViewAttribute
+    Name="FirstName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FIRST_NAME"
+    Expression="FIRST_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="60"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LAST_NAME"
+    Expression="LAST_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BirthDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="BIRTH_DATE"
+    Expression="BIRTH_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="BirthPlace"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="60"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BIRTH_PLACE"
+    Expression="BIRTH_PLACE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SeafarerId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SEAFARER_ID"
+    Expression="SEAFARER_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="PassportIssuingCountry"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="80"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PASSPORT_ISSUING_COUNTRY"
+    Expression="PASSPORT_ISSUING_COUNTRY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ResidenceCountry"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="80"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RESIDENCE_COUNTRY"
+    Expression="RESIDENCE_COUNTRY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IssueType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ISSUE_TYPE"
+    Expression="ISSUE_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CraCount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="CRA_COUNT"
+    Expression="CRA_COUNT"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="CraSentCount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="CRA_SENT_COUNT"
+    Expression="CRA_SENT_COUNT"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="Status"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STATUS"
+    Expression="STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranFinalCra"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.Integer"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

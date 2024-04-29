@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="EditSeafarerDocTF">
+    <default-activity>resetSearchEditSeafarers</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__5">
+      <managed-bean-name>editSeafarersBean</managed-bean-name>
+      <managed-bean-class>com.rmi.tradecompapproval.view.editseafarerdocs.EditSeafarersBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <exception-handler>exceptionHandler</exception-handler>
+    <view id="EditSeafarersPage">
+      <page>/WEB-INF/com/rmi/tradecompapproval/view/editseafarerdocs/EditSeafarersPage.jsff</page>
+    </view>
+    <task-flow-call id="EditDocumentsTaskflow">
+      <task-flow-reference>
+        <document>/WEB-INF/com/rmi/tradecompapproval/view/editseafarerdocs/EditDocumentsTaskflow.xml</document>
+        <id>EditDocumentsTaskflow</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <method-call id="exceptionHandler">
+      <method>#{pageFlowScope.editSeafarersBean.exceptionHandler}</method>
+    </method-call>
+    <method-call id="resetSearchEditSeafarers">
+      <method>#{bindings.resetSearchEditSeafarers.execute}</method>
+      <outcome>
+        <fixed-outcome>resetSearchEditSeafarers</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__3">
+      <from-activity-id>EditSeafarersPage</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>editDocuments</from-outcome>
+        <to-activity-id>EditDocumentsTaskflow</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__1">
+      <from-activity-id>resetSearchEditSeafarers</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>resetSearchEditSeafarers</from-outcome>
+        <to-activity-id>EditSeafarersPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

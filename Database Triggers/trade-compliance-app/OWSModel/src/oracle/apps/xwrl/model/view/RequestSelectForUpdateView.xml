@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RequestSelectForUpdateView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="oracle.apps.xwrl.model.view.RequestSelectForUpdateView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="p_id"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[select id, batch_id, case_id  
+from xwrl_requests  
+where id = :p_id for update]]></SQLQuery>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigInteger"
+    ColumnType="BIGINT"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="BatchId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="BATCH_ID"
+    Expression="BATCH_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CaseId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2700"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CASE_ID"
+    Expression="CASE_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2700"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="oracle.apps.xwrl.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="com.rmi.tradecompapproval.adfbc.services.RMITradeCompApprovalAppModule">
+      <AppModuleConfig DeployPlatform="LOCAL" name="RMITradeCompApprovalAMLocal" ApplicationName="com.rmi.tradecompapproval.adfbc.services.RMITradeCompApprovalAppModule" jbo.project="com.rmi.tradecompapproval.adfbc.Model">
+         <AM-Pooling jbo.doconnectionpooling="true"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="com.rmi.tradecompapproval.adfbc.services.RMITradeCompApprovalAppModule"/>
+         <Custom ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" ns0:JDBCDataSource="jdbc/apps_ds_seaf" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+      <AppModuleConfig jbo.project="com.rmi.tradecompapproval.adfbc.Model" ApplicationName="com.rmi.tradecompapproval.adfbc.services.RMITradeCompApprovalAppModule" DeployPlatform="LOCAL" name="RMITradeCompApprovalAMShared" java.naming.factory.initial="oracle.jbo.common.JboInitialContextFactory">
+         <AM-Pooling jbo.ampool.isuseexclusive="false" jbo.ampool.resetnontransactionalstate="false" jbo.ampool.dynamicjdbccredentials="false"/>
+         <Database jbo.locking.mode="optimistic" jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="com.rmi.tradecompapproval.adfbc.services.RMITradeCompApprovalAppModule"/>
+         <Custom ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" ns0:JDBCDataSource="jdbc/apps_ds_seaf jdbc/ebsIRIPRODDS" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

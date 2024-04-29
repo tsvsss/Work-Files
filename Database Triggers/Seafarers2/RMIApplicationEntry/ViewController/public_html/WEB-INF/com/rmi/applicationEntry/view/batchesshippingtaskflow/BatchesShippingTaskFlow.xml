@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="taskflow_batches_Shipping">
+    <default-activity>onLoadBatchPendingShipping</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__1">
+      <name>param_user_id</name>
+      <value>#{sessionScope.param_user_id}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <managed-bean id="__4">
+      <managed-bean-name>BatchesShippingBean</managed-bean-name>
+      <managed-bean-class>com.rmi.applicationEntry.view.batchesshippingtaskflow.BatchesShippingBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="BatchesPendingShipping">
+      <page>/WEB-INF/com/rmi/applicationEntry/view/batchesshippingtaskflow/BatchesPendingShipping.jsff</page>
+    </view>
+    <method-call id="onLoadBatchPendingShipping">
+      <method>#{bindings.onLoadBatchPendingShipping.execute}</method>
+      <outcome>
+        <fixed-outcome>onLoadBatchPendingShipping</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>onLoadBatchPendingShipping</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>onLoadBatchPendingShipping</from-outcome>
+        <to-activity-id>BatchesPendingShipping</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="12.1.3.10.8"
+                id="ViewBatchTCTaskFlow_ViewBatchTCTaskFlow_editBatchPageDef"
+                Package="com.rmi.tradecompapproval.view.viewbatchseafarer" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="editBatch" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="editBatch"
+                  IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.editBatch_RMITradeCompApprovalAMDataControl_dataProvider_editBatch_result">
+      <NamedData NDName="batch_id" NDValue="#{pageFlowScope.p_batch_id}"
+                 NDType="java.lang.Integer"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

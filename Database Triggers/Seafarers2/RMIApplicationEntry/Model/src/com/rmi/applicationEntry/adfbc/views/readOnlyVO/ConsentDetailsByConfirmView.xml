@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ConsentDetailsByConfirmView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.readOnlyVO.ConsentDetailsByConfirmView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pConsentNumber"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[select consent_id , confirmation_number,consent_date,consent_expire_date,consent_source,edoc_id ,marketing_communication, (trunc(consent_expire_date)-trunc(sysdate)) diff,  
+entity_type  
+from RMI_DATA_PRIVACY_CONSENT where confirmation_number = :pConsentNumber]]></SQLQuery>
+  <ViewAttribute
+    Name="ConsentId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="CONSENT_ID"
+    Expression="CONSENT_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ConfirmationNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONFIRMATION_NUMBER"
+    Expression="CONFIRMATION_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ConsentDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="CONSENT_DATE"
+    Expression="CONSENT_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="ConsentExpireDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="CONSENT_EXPIRE_DATE"
+    Expression="CONSENT_EXPIRE_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="ConsentSource"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONSENT_SOURCE"
+    Expression="CONSENT_SOURCE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EdocId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="EDOC_ID"
+    Expression="EDOC_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="MarketingCommunication"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="MARKETING_COMMUNICATION"
+    Expression="MARKETING_COMMUNICATION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Diff"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="DIFF"
+    Expression="DIFF"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EntityType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ENTITY_TYPE"
+    Expression="ENTITY_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

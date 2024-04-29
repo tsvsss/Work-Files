@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="RequestSubmitTaskFlow">
+    <default-activity>onLoadRequestSubmission</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__2">
+      <name>param_user_id</name>
+      <value>#{sessionScope.param_user_id}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__4">
+      <name>RequestId</name>
+      <value>#{pageFlowScope.RequestId}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>RequestSubmissionBean</managed-bean-name>
+      <managed-bean-class>com.rmi.applicationEntry.view.requestsubmittaskflow.RequestSubmissionBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="RequestSubmit">
+      <page>/WEB-INF/com/rmi/applicationEntry/view/requestsubmittaskflow/RequestSubmit.jsff</page>
+    </view>
+    <method-call id="onLoadRequestSubmission">
+      <method>#{bindings.onLoadRequestSubmission.execute}</method>
+      <outcome>
+        <fixed-outcome>onLoadRequestSubmission</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__5">
+      <from-activity-id>onLoadRequestSubmission</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>onLoadRequestSubmission</from-outcome>
+        <to-activity-id>RequestSubmit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

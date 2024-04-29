@@ -1,0 +1,339 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+  <af:panelStretchLayout id="psl1" topHeight="30px">
+    <f:facet name="bottom"/>
+    <f:facet name="center">
+      <af:panelGroupLayout id="pgl1" layout="vertical" styleClass="AFStretchWidth">
+          <af:resource type="javascript">
+            
+              function selectRows(event) {
+                
+              var checkbox=event.getSource(); 
+               
+              var checkboxLocator=checkbox.getProperty("checkboxLocator");
+              var tableLocator=checkbox.getProperty("tableLocator");
+               
+              var table=checkbox.findComponent(tableLocator);
+               
+              var nbRows=parseInt(table.getRows());
+              var tableAbsLocator=table.getAbsoluteLocator();
+               
+              while(nbRows--){
+                var rowCheckbox=AdfPage.PAGE.findComponentByAbsoluteLocator(tableAbsLocator+"["+nbRows+"]"+checkboxLocator);
+                if(checkbox.getValue()!=rowCheckbox.getValue()){
+                  rowCheckbox.setValue(checkbox.getValue());
+                }
+              }
+              
+              AdfCustomEvent.queue(checkbox, "checkRows", 
+               {
+                 checkBoxValue : checkbox.getValue()
+               }, false);
+                event.cancel();
+            }
+            
+        </af:resource>
+        <af:panelBox id="pb2" text="Orders" showHeader="always" showDisclosure="false">
+          <f:facet name="toolbar">
+            <af:toolbar id="t2" inlineStyle="padding:3px;">
+              <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
+                <af:dialog id="d5" type="yesNo"
+                           dialogListener="#{pageFlowScope.AssignBookNumberBean.sendToShippingCnfDL}"
+                           title="Confirmation" contentWidth="300">
+                  <f:facet name="buttonBar"/>
+                  <af:message id="m4" message="Are you sure you want to send this Order to Shipping ?"/>
+                </af:dialog>
+              </af:popup>
+              <af:popup childCreation="deferred" autoCancel="disabled" id="p2"
+                        binding="#{pageFlowScope.AssignBookNumberBean.cnfrmSendToShippingPopupBind}">
+                <af:dialog id="d6" type="none" closeIconVisible="false">
+                  <f:facet name="buttonBar">
+                    <af:button text="OK" id="b6" action="back"/>
+                  </f:facet>
+                  <af:message id="m5" message="Order sent to Shipping successfully."/>
+                </af:dialog>
+              </af:popup>
+              <af:popup childCreation="deferred" autoCancel="disabled" id="p3" contentDelivery="lazyUncached"
+                        binding="#{pageFlowScope.AssignBookNumberBean.printRequestSetPopupBind}">
+                <af:dialog id="d1" affirmativeTextAndAccessKey="Print" title="Print Request Sets"
+                           dialogListener="#{pageFlowScope.AssignBookNumberBean.printRequestSetsDL}">
+                  <f:facet name="buttonBar"/>
+                  <af:panelFormLayout id="pfl3" styleClass="panelFormLayoutClass" inlineStyle="padding:10px;">
+                    <af:selectOneChoice value="#{bindings.PrintRequestSet.inputValue}"
+                                        label="Print Request Sets" id="soc1"
+                                        styleClass="AFInputTextHead" autoSubmit="true"
+                                        contentStyle="width:350px !important;">
+                      <f:selectItems value="#{bindings.PrintRequestSet.items}" id="si1"/>
+                      <f:validator binding="#{bindings.PrintRequestSet.validator}"/>
+                    </af:selectOneChoice>
+                  </af:panelFormLayout>
+                </af:dialog>
+              </af:popup>
+              <af:button text="Print" id="b3" action="#{pageFlowScope.AssignBookNumberBean.validatePrintAction}"
+                         inlineStyle="margin-right:10px;"/>
+              <af:button text="View Request" id="b7" inlineStyle="margin-right:10px;"
+                         binding="#{pageFlowScope.AssignBookNumberBean.viewRequestButtonBind}"
+                         visible="#{pageFlowScope.P_REQUEST_NO ne null}" action="viewRequest" windowWidth="900">
+                <af:showPopupBehavior popupId="requestFormPopup"/>
+              </af:button>
+              <af:button text="Send To Shipping" id="b5"
+                         visible="#{pageFlowScope.Role_Name == 'PROCESSOR - II'}" inlineStyle="margin-right:10px;">
+                <af:showPopupBehavior popupId="p1"/>
+              </af:button>
+              <af:menuBar id="mb1" inlineStyle="margin-right:10px;">
+              <af:menu text="Actions" id="m2" disabled="#{bindings.EnterOrderHeaderRO1Iterator.estimatedRowCount eq 0}"
+                       partialTriggers="b1 b2"
+                       styleClass="#{(bindings.EnterOrderHeaderRO1Iterator.estimatedRowCount eq 0) ? 'dropDownMenuDisabled' : 'dropDownMenuEnabled'}">
+                <af:commandMenuItem text="Reset Order Print Status" id="cmi2"
+                                    action="#{pageFlowScope.AssignBookNumberBean.actionResetOrderPrintStatus}"/>
+                <af:commandMenuItem text="Reset Order Line Print Status" id="cmi3"
+                                    action="#{pageFlowScope.AssignBookNumberBean.actionResetOrderLinePrintStatus}"
+                                    disabled="#{bindings.EnterOrderLinesRO1Iterator.estimatedRowCount eq 0}"/>
+              </af:menu>
+            </af:menuBar>
+              <af:popup childCreation="deferred" autoCancel="disabled" id="requestFormPopup"
+                        contentDelivery="lazyUncached">
+                <af:dialog id="d2" type="ok" title="View Request" contentWidth="900">
+                  <af:panelGroupLayout id="pgl3" layout="vertical" styleClass="AFStretchWidth">
+                    <af:region value="#{bindings.RequestSubmitTaskFlow1.regionModel}" id="r1"/>
+                  </af:panelGroupLayout>
+                  <f:facet name="buttonBar"/>
+                </af:dialog>
+              </af:popup>
+              <af:button text="Back" id="b4" action="back"/>
+            </af:toolbar>
+          </f:facet>
+          <af:panelFormLayout id="pfl1" styleClass="AFStretchWidth panelFormLayoutClass"
+                              inlineStyle="padding:0px 10px 0px 10px;"
+                              maxColumns="3" rows="5" fieldWidth="200">
+            <af:inputText value="#{bindings.OrderNumber.inputValue}" label="Order Number" required="false"
+                          columns="#{bindings.OrderNumber.hints.displayWidth}"
+                          maximumLength="#{bindings.OrderNumber.hints.precision}" id="it1" autoSubmit="true"
+                          disabled="true" styleClass="AFInputTextHead">
+              <f:validator binding="#{bindings.OrderNumber.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.OrderNumber.format}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.OrderStatus.inputValue}" label="Order Status" required="false"
+                          columns="#{bindings.OrderStatus.hints.displayWidth}"
+                          maximumLength="#{bindings.OrderStatus.hints.precision}" id="it2" disabled="true"
+                          autoSubmit="true" styleClass="AFInputTextHead">
+              <f:validator binding="#{bindings.OrderStatus.validator}"/>
+            </af:inputText>
+            <af:inputDate value="#{bindings.OrderedDate.inputValue}" label="Order Date" required="false"
+                          columns="#{bindings.OrderedDate.hints.displayWidth}" id="id1" disabled="true"
+                          autoSubmit="true" styleClass="AFInputTextHead">
+              <f:validator binding="#{bindings.OrderedDate.validator}"/>
+              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+            </af:inputDate>
+            <af:inputText value="#{bindings.SalesOffice.inputValue}" label="Sales Office" required="false"
+                          columns="#{bindings.SalesOffice.hints.displayWidth}"
+                          maximumLength="#{bindings.SalesOffice.hints.precision}" id="it3" autoSubmit="true"
+                          disabled="true" styleClass="AFInputTextHead">
+              <f:validator binding="#{bindings.SalesOffice.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.TransAgentEmailId.inputValue}"
+                          label="Agent Email ID"
+                          required="false"
+                          columns="#{bindings.TransAgentEmailId.hints.displayWidth}"
+                          maximumLength="#{bindings.TransAgentEmailId.hints.precision}" id="it7" disabled="true"
+                          autoSubmit="true" styleClass="AFInputTextHead" rows="2">
+              <f:validator binding="#{bindings.TransAgentEmailId.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.Customer.inputValue}" label="Customer" required="false"
+                          columns="#{bindings.Customer.hints.displayWidth}"
+                          maximumLength="#{bindings.Customer.hints.precision}" id="it5" disabled="true"
+                          autoSubmit="true" styleClass="AFInputTextHead" contentStyle="white-space:normal;" rows="2">
+              <f:validator binding="#{bindings.Customer.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.UserName.inputValue}" label="User" required="false"
+                          columns="#{bindings.UserName.hints.displayWidth}"
+                          maximumLength="#{bindings.UserName.hints.precision}" id="it4" disabled="true"
+                          autoSubmit="true" styleClass="AFInputTextHead" rows="2" contentStyle="white-space:normal;">
+              <f:validator binding="#{bindings.UserName.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.TransInvoiceEmailId.inputValue}"
+                          label="Invoice Agent Email ID"
+                          required="false"
+                          columns="#{bindings.TransInvoiceEmailId.hints.displayWidth}"
+                          maximumLength="#{bindings.TransInvoiceEmailId.hints.precision}" id="it8"
+                          styleClass="AFInputTextHead" disabled="true" autoSubmit="true" rows="2">
+              <f:validator binding="#{bindings.TransInvoiceEmailId.validator}"/>
+            </af:inputText>
+            <af:spacer width="0" height="0" id="s1" visible="false"/>
+            <af:spacer width="0" height="0" id="s2" visible="true"/>
+            <af:panelLabelAndMessage label="Order Hold" id="plam1">
+              <af:panelGroupLayout id="pgl4" valign="middle" layout="horizontal">
+                <af:selectBooleanCheckbox value="#{bindings.OrderHoldFlag.inputValue}" id="sbc1" disabled="true"
+                                          autoSubmit="true" styleClass="AFInputTextHead" label="Order Hold"
+                                          simple="true"/>
+                <af:popup childCreation="deferred" autoCancel="disabled" id="orderHoldDetailsPopup"
+                          contentDelivery="lazyUncached"
+                          popupFetchListener="#{pageFlowScope.AssignBookNumberBean.searchAbnHoldDetailsPopupFetchListener}">
+                  <af:dialog id="d3" title="Order Hold Details" type="ok" contentWidth="720">
+                    <af:table value="#{bindings.OrderHoldDetailsView1.collectionModel}" var="row"
+                              rows="#{bindings.OrderHoldDetailsView1.rangeSize}"
+                              emptyText="#{bindings.OrderHoldDetailsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.OrderHoldDetailsView1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.OrderHoldDetailsView1.collectionModel.makeCurrent}"
+                              rowSelection="single" fetchSize="#{bindings.OrderHoldDetailsView1.rangeSize}" id="t3"
+                              styleClass="AFStretchWidth" columnStretching="column:c9" contentDelivery="immediate">
+                      <af:column headerText="Hold Name" id="c8" width="150">
+                        <af:outputText value="#{row.HoldName}"
+                                       shortDesc="#{bindings.OrderHoldDetailsView1.hints.HoldName.tooltip}" id="ot8"/>
+                      </af:column>
+                      <af:column headerText="Hold Date" id="c7">
+                        <af:outputText value="#{row.HoldDate}"
+                                       shortDesc="#{bindings.OrderHoldDetailsView1.hints.HoldDate.tooltip}" id="ot7">
+                          <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                        </af:outputText>
+                      </af:column>
+                      <af:column headerText="Hold Comments" id="c9"
+                                 inlineStyle="padding:3px; white-space: normal !important; -webkit-white-space: normal !important;"
+                                 width="250">
+                        <af:outputText value="#{row.HoldComment}"
+                                       shortDesc="#{bindings.OrderHoldDetailsView1.hints.HoldComment.tooltip}"
+                                       id="ot9"/>
+                      </af:column>
+                      <af:column headerText="Held By" id="c10" width="150">
+                        <af:outputText value="#{row.HeldBy}"
+                                       shortDesc="#{bindings.OrderHoldDetailsView1.hints.HeldBy.tooltip}" id="ot10"/>
+                      </af:column>
+                    </af:table>
+                    <f:facet name="buttonBar"/>
+                  </af:dialog>
+                </af:popup>
+                <af:link text="Details" id="l1" styleClass="AdditionalLink" inlineStyle="margin-left:50px !important;"
+                         immediate="true" partialTriggers="sbc1" visible="#{bindings.OrderHoldFlag.inputValue eq true}">
+                  <af:showPopupBehavior popupId="orderHoldDetailsPopup"/>
+                </af:link>
+              </af:panelGroupLayout>
+            </af:panelLabelAndMessage>
+            <af:inputText value="#{bindings.TransVesselName.inputValue}" label="Vessel Name(s)"
+                          required="false"
+                          columns="#{bindings.TransVesselName.hints.displayWidth}"
+                          maximumLength="#{bindings.TransVesselName.hints.precision}" id="it9" rows="2"
+                          styleClass="AFInputTextHead" autoSubmit="true" disabled="true">
+              <f:validator binding="#{bindings.TransVesselName.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.TransBatchNotes.inputValue}" label="Notes"
+                          required="false"
+                          columns="#{bindings.TransBatchNotes.hints.displayWidth}"
+                          maximumLength="#{bindings.TransBatchNotes.hints.precision}" id="it10"
+                          autoSubmit="true" rows="4"
+                          valueChangeListener="#{pageFlowScope.AssignBookNumberBean.updateBatchNotesVCL}"
+                          styleClass="AFInputTextHead">
+              <f:validator binding="#{bindings.TransBatchNotes.validator}"/>
+            </af:inputText>
+          </af:panelFormLayout>
+        </af:panelBox>
+        <af:panelBox text="Book Number" id="pb3" showHeader="always" showDisclosure="false">
+          <f:facet name="toolbar"/>
+          <af:panelFormLayout id="pfl2" styleClass="AFStretchWidth panelFormLayoutClass" inlineStyle="padding:10px;"
+                              maxColumns="3" rows="1" labelWidth="150">
+            <af:inputText value="#{bindings.Trans5Yr.inputValue}" label="5 Yr."
+                          required="false"
+                          columns="#{bindings.Trans5Yr.hints.displayWidth}"
+                          maximumLength="#{bindings.Trans5Yr.hints.precision}"
+                          shortDesc="#{bindings.Trans5Yr.hints.tooltip}" id="it6" autoSubmit="true"
+                          styleClass="AFInputTextHead" partialTriggers="b1 pgl2">
+              <f:validator binding="#{bindings.Trans5Yr.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.Trans5Yr.format}"/>
+            </af:inputText>
+            <af:panelGroupLayout id="pgl2" layout="horizontal">
+              <af:button text="Assign/Update Books" id="b1"
+                         actionListener="#{pageFlowScope.AssignBookNumberBean.assignBookAL}"
+                         disabled="#{bindings.ProcessBookDetailsRO1Iterator.estimatedRowCount le 0}"/>
+              <af:spacer width="20" height="10" id="s3"/>
+              <af:button text="Update Books" id="b2"
+                         actionListener="#{pageFlowScope.AssignBookNumberBean.updateBookAL}"
+                         disabled="#{bindings.ProcessBookDetailsRO1Iterator.estimatedRowCount le 0}" visible="false"/>
+            </af:panelGroupLayout>
+          </af:panelFormLayout>
+        </af:panelBox>
+        <af:panelBox text="Line Details" id="pb4" showHeader="always" showDisclosure="false">
+          <f:facet name="toolbar"/>
+          <af:table value="#{bindings.ProcessBookDetailsRO1.collectionModel}" var="row"
+                    rows="#{bindings.ProcessBookDetailsRO1.rangeSize}"
+                    emptyText="#{bindings.ProcessBookDetailsRO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.ProcessBookDetailsRO1.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.ProcessBookDetailsRO1.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.ProcessBookDetailsRO1.rangeSize}" id="t1"
+                    styleClass="AFStretchWidth" columnStretching="column:c6" autoHeightRows="3"
+                    contentDelivery="immediate">
+            <af:column id="c11" width="50" headerText="Select" align="center" displayIndex="-1">
+              <af:panelGroupLayout id="pgl6" halign="center" layout="vertical">
+                <af:selectBooleanCheckbox value="#{row.bindings.TransSelectBook.inputValue}"
+                                          label="#{row.bindings.TransSelectBook.label}"
+                                          shortDesc="#{bindings.ProcessBookDetailsRO1.hints.TransSelectBook.tooltip}"
+                                          id="sbc2" required="false" autoSubmit="true"/>
+              </af:panelGroupLayout>
+              <f:facet name="header">
+                <af:panelGroupLayout id="pgl5" halign="center" layout="vertical">
+                  <af:selectBooleanCheckbox id="sbc3" simple="true" shortDesc="Select All" autoSubmit="true"
+                                            binding="#{pageFlowScope.AssignBookNumberBean.selectAllCheckBoxBind}">
+                    <af:clientListener method="selectRows" type="valueChange"/>
+                    <af:clientAttribute name="tableLocator" value="::t1"/>
+                    <af:clientAttribute name="checkboxLocator" value=":sbc2"/>
+                    <af:serverListener type="checkRows"
+                                       method="#{pageFlowScope.AssignBookNumberBean.selectAllCheckRows}"/>
+                  </af:selectBooleanCheckbox>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:column>
+            <af:column headerText="Line Number" id="c1"
+                       sortProperty="#{bindings.ProcessBookDetailsRO1.hints.LineNumber.name}" sortable="true">
+              <af:outputText value="#{row.LineNumber}"
+                             shortDesc="#{bindings.ProcessBookDetailsRO1.hints.LineNumber.tooltip}" id="ot4">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.ProcessBookDetailsRO1.hints.LineNumber.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Ordered item" id="c2"
+                       sortProperty="#{bindings.ProcessBookDetailsRO1.hints.OrderedItem.name}" sortable="true"
+                       width="150">
+              <af:outputText value="#{row.OrderedItem}"
+                             shortDesc="#{bindings.ProcessBookDetailsRO1.hints.OrderedItem.tooltip}" id="ot1"/>
+            </af:column>
+            <af:column headerText="Book Number" id="c3"
+                       sortProperty="#{bindings.ProcessBookDetailsRO1.hints.Attribute10.name}" sortable="true">
+              <af:outputText value="#{row.Attribute10}"
+                             shortDesc="#{bindings.ProcessBookDetailsRO1.hints.Attribute10.tooltip}" id="ot5"/>
+            </af:column>
+            <af:column headerText="Seafarer ID" id="c4"
+                       sortProperty="#{bindings.ProcessBookDetailsRO1.hints.SeafarerId.name}" sortable="true">
+              <af:outputText value="#{row.SeafarerId}"
+                             shortDesc="#{bindings.ProcessBookDetailsRO1.hints.SeafarerId.tooltip}" id="ot6">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.ProcessBookDetailsRO1.hints.SeafarerId.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Surname" id="c6"
+                       sortProperty="#{bindings.ProcessBookDetailsRO1.hints.SeafarerLastName.name}" sortable="true">
+              <af:outputText value="#{row.SeafarerLastName}"
+                             shortDesc="#{bindings.ProcessBookDetailsRO1.hints.SeafarerLastName.tooltip}" id="ot2"/>
+            </af:column>
+            <af:column headerText="Given Name" id="c5"
+                       sortProperty="#{bindings.ProcessBookDetailsRO1.hints.SeafarerFirstName.name}" sortable="true"
+                       width="200">
+              <af:outputText value="#{row.SeafarerFirstName}"
+                             shortDesc="#{bindings.ProcessBookDetailsRO1.hints.SeafarerFirstName.tooltip}" id="ot3"/>
+            </af:column>
+          </af:table>
+        </af:panelBox>
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="start"/>
+    <f:facet name="end"/>
+    <f:facet name="top">
+      <af:panelGroupLayout id="pgl" layout="vertical" styleClass="AFStretchWidth">
+        <af:panelBox text="Assign Book Numbers" id="pb1" showDisclosure="false"
+                     inlineStyle="border:none; box-shadow:none;">
+          <f:facet name="toolbar"/>
+        </af:panelBox>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+</ui:composition>

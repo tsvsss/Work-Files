@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="AddressView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.lovs.AddressView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pOrgId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT       
+  HCSUA.SITE_USE_ID,       
+  HL.ADDRESS1          
+  || ','           
+  || HL.ADDRESS2           
+  || ','           
+  || HL.CITY           
+  || ','           
+  || HL.STATE           
+  || ','           
+  || HL.POSTAL_CODE           
+  || ','           
+  || HL.COUNTY ADDRESS           
+FROM           
+  HZ_LOCATIONS HL,           
+  HZ_CUST_ACCT_SITES_ALL HCASA,           
+  HZ_CUST_SITE_USES_ALL HCSUA,           
+  HZ_PARTY_SITES HPS           
+WHERE       
+HCSUA.SITE_USE_ID(+)        = :pOrgId       
+AND HCSUA.CUST_ACCT_SITE_ID = HCASA.CUST_ACCT_SITE_ID(+)           
+AND HCASA.PARTY_SITE_ID     = HPS.PARTY_SITE_ID(+)           
+AND HL.LOCATION_ID(+)       = HPS.LOCATION_ID]]></SQLQuery>
+  <ViewAttribute
+    Name="SiteUseId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SITE_USE_ID"
+    Expression="SITE_USE_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="Address"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="525"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ADDRESS"
+    Expression="ADDRESS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="525"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<!--T20200701.0024 - OWS - Open case notes page in new tab (IRI)-->
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Case Note" id="d1">
+    <af:form id="f1">
+            <af:pageTemplate viewId="/resources/templates/IRI_template.jsf" id="pt1">
+                <f:facet name="content">
+                    <af:panelGridLayout id="pgl1">
+                        <af:gridRow marginTop="5px" height="auto" id="gr1">
+                            <af:gridCell marginStart="5px" width="34%" id="gc1"/>
+                            <af:gridCell marginStart="5px" width="33%" id="gc2" halign="center">
+                                <af:messages id="m2"/>
+                            </af:gridCell>
+                            <af:gridCell marginStart="5px" width="33%" marginEnd="5px" id="gc3"/>
+                        </af:gridRow>
+                        <af:gridRow marginTop="5px" height="100%" marginBottom="5px" id="gr2">
+                            <af:gridCell marginStart="5px" columnSpan="4" marginEnd="5px" id="gc4" halign="stretch"
+                                         valign="stretch">
+                                <!--af:region value="#{bindings.Prototypetaskflowdefinition1.regionModel}"
+                                id="r1"  rendered="#{sessionScope.regionOWSRendered}"/-->
+								<af:region value="#{bindings.CaseNoteTaskflow1.regionModel}" id="r1"
+                                            rendered="#{sessionScope.regionOWSRendered}"/>
+                            </af:gridCell>
+                        </af:gridRow>
+                    </af:panelGridLayout>
+                </f:facet>
+                <f:attribute name="title" value="#{sessionScope.UserRespAndSessionInfo.pageTitle}"/>
+                <f:attribute name="dbName" value="#{sessionScope.UserRespAndSessionInfo.dbName}"/>
+                <f:attribute name="userName" value="#{sessionScope.UserRespAndSessionInfo.userName}"/>
+                <f:attribute name="responsibility" value="#{sessionScope.UserRespAndSessionInfo.responsibilityName}"/>
+                <f:attribute name="home" value="#{sessionScope.UserRespAndSessionInfo.home}"/>
+            </af:pageTemplate>
+        </af:form>
+        <!--af:form id="f1">
+            <af:pageTemplate viewId="/resources/templates/IRI_template.jsf" id="pt1">
+                <f:facet name="content">
+                    <af:region value="#{bindings.CaseNoteTaskflow1.regionModel}" id="r1"
+                    rendered="#{sessionScope.regionOWSRendered}"/>
+                </f:facet>
+                 <f:attribute name="title" value="#{sessionScope.UserRespAndSessionInfo.pageTitle}"/>
+                <f:attribute name="dbName" value="#{sessionScope.UserRespAndSessionInfo.dbName}"/>
+                <f:attribute name="userName" value="#{sessionScope.UserRespAndSessionInfo.userName}"/>
+                <f:attribute name="responsibility" value="#{sessionScope.UserRespAndSessionInfo.responsibilityName}"/>
+                <f:attribute name="home" value="#{sessionScope.UserRespAndSessionInfo.home}"/>
+            </af:pageTemplate>
+        </af:form-->
+    </af:document>
+</f:view>

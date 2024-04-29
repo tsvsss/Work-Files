@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adf-settings xmlns="http://xmlns.oracle.com/adf/settings">
+<adf-controller-config xmlns="http://xmlns.oracle.com/adf/controller/config">
+    <lifecycle>
+        <phase-listener>
+            <listener-id>PageVisitorID</listener-id>
+            <!--<class>com.rmi.manualtradecompliance.view.listeners.EbsMADFListener</class>-->
+            <class>com.rmi.manualtradecompliance.view.listeners.LocalMADFListener</class>
+        </phase-listener>
+    </lifecycle>
+</adf-controller-config>
+</adf-settings>

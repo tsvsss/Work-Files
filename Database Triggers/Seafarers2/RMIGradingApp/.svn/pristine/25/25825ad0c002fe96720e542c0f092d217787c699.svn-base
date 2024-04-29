@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ApplyHoldDualView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.ApplyHoldDualView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="HoldReasonView1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.HoldReasonView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ApplyHoldReasonView1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.ApplyHoldReasonView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_tranHoldReason"
+    ListVOName="ApplyHoldReasonView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="tranHoldReason"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="tranHoldComments"/>
+      <Item Value="tranHoldId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DisplayValue"/>
+      <Item Value="Description"/>
+      <Item Value="HoldId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[select 1 from dual]]></SQLQuery>
+  <ViewAttribute
+    Name="J1"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName='"1"'
+    Expression='"1"'
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="tranHoldReason"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_tranHoldReason">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranHoldComments"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="tranHoldId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

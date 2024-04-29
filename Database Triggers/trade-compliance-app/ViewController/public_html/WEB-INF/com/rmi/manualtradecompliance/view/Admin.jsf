@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Administration" id="d1">
+        <af:form id="f1">
+            <af:pageTemplate viewId="/resources/templates/IRI_template.jsf" id="pt1">
+                <f:facet name="content">
+                    <af:region value="#{bindings.AdministrationTF1.regionModel}" id="r1" rendered="#{sessionScope.UserRespAndSessionInfo.isGenericAdminOnly == 'Y'}"/>
+                     <af:panelGroupLayout halign="center" valign="middle" id="pgl3" rendered="#{!(sessionScope.UserRespAndSessionInfo.isGenericAdminOnly == 'Y')}"
+                        layout="vertical"> 
+                       <af:spacer height="100" id="s3" width="10"/>
+                        <af:outputText value="Access denied for #{sessionScope.UserRespAndSessionInfo.userName}. Please contact System administrator."  
+                                       inlineStyle="color:red;font-size:20px;" id="ot23"/>
+                    <af:spacer width="10" height="100" id="s4"/>
+                  </af:panelGroupLayout>
+                </f:facet>
+                <f:attribute name="title" value="#{sessionScope.UserRespAndSessionInfo.pageTitle} - Administration"/>
+                <f:attribute name="dbName" value="#{sessionScope.UserRespAndSessionInfo.dbName}"/>
+                <f:attribute name="userName" value="#{sessionScope.UserRespAndSessionInfo.userName}"/>
+                <f:attribute name="responsibility" value="#{sessionScope.UserRespAndSessionInfo.responsibilityName}"/>
+                <f:attribute name="home" value="#{sessionScope.UserRespAndSessionInfo.home}"/>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

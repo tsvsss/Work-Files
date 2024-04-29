@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8"
+                id="BatchesPendingTrackingNumberTaskFlow_BatchesPendingTrackingNumberTaskFlow_executePendingTrackingNumberOnLoadPageDef"
+                Package="com.rmi.applicationEntry.view.batchesshippingtaskflow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="executePendingTrackingNumberOnLoad" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="executePendingTrackingNumberOnLoad" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.executePendingTrackingNumberOnLoad_RMIApplicationEntryAppModuleDataControl_dataProvider_executePendingTrackingNumberOnLoad_result"/>
+  </bindings>
+</pageDefinition>

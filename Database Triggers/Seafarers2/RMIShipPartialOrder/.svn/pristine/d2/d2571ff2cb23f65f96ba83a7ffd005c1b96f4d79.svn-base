@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="GetSeafarerCountShippingView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.shippartialorder.adfbc.views.GetSeafarerCountShippingView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pHeaderId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[select distinct  sspv.seafarer_id 
+from SICD_SHIP_PARTIAL_VW sspv,   
+oe_order_lines_all oola,   
+rmi_batch_iface rbi,      
+rmi_seafarers_iface rsi      
+WHERE rsi.esi_batch_id = rbi.esi_batch_id      
+and rsi.seafarer_id = nvl(sspv.seafarer_id,rsi.seafarer_id)       
+and rbi.oe_header_id = oola.header_id   
+and oola.line_id = sspv.line_id   
+and rsi.seafarer_wf_status in ('Pending_Shipping', 'Closed')  
+and sspv.seafarer_id is not null 
+and sspv.HEADER_ID = :pHeaderId]]></SQLQuery>
+  <ViewAttribute
+    Name="SeafarerId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigInteger"
+    ColumnType="BIGINT"
+    AliasName="SEAFARER_ID"
+    Expression="SEAFARER_ID"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.shippartialorder.adfbc.ModelBundle"/>
+  </ResourceBundle>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="SeafarerId"/>
+  </AttrArray>
+</ViewObject>

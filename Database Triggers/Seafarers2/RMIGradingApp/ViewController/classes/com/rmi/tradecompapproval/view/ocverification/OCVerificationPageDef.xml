@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="OCVerificationPageDef"
+                Package="com.rmi.tradecompapproval.view.ocverification">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="OcVerificationOrdersView1" RangeSize="12" DataControl="RMITradeCompApprovalAppModuleDataControl"
+              id="ViewOcVerificationOrdersRO1Iterator"/>
+    <iterator Binds="DualView1" RangeSize="25" DataControl="RMITradeCompApprovalAppModuleDataControl" id="DualRO1Iterator"/>
+    <iterator Binds="OcWaitingResponseView1" RangeSize="25" DataControl="RMITradeCompApprovalAppModuleDataControl"
+              id="ViewOcWaitingResponseRO1Iterator"/>
+    <searchRegion Binds="ViewOcVerificationOrdersRO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="ViewOcVerificationOrdersRO1Query"/>
+    <searchRegion Binds="ViewOcWaitingResponseRO1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="ViewOcWaitingResponseRO1Query"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ViewOcVerificationOrdersRO1Iterator" id="ViewOcVerificationOrdersRO1">
+      <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.readonly.OcVerificationOrdersView"
+                      Name="ViewOcVerificationOrdersRO10">
+        <AttrNames>
+          <Item Value="SeafarerName"/>
+          <Item Value="OrderNumber"/>
+          <Item Value="GradeCode"/>
+          <Item Value="CountryName"/>
+          <Item Value="EndorsementNumber"/>
+          <Item Value="EndorsementIssueDate"/>
+          <Item Value="EndorsementExpirationDate"/>
+          <Item Value="VerificationMethod"/>
+          <Item Value="VerificationUrl"/>
+          <Item Value="VerificationReqd"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DualRO1Iterator" StaticList="false" Uses="LOV_TransViewOrders" id="TransViewOrders"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DualRO1Iterator" id="TransProcesingCenter">
+      <AttrNames>
+        <Item Value="TransProcesingCenter"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="filterOcVerification" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterOcVerification" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.filterOcVerification_RMITradeCompApprovalAMDataControl_dataProvider_filterOcVerification_result">
+      <NamedData NDName="filterType" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="ViewOcVerificationOrdersRO1Iterator" id="SeafarerName">
+      <AttrNames>
+        <Item Value="SeafarerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ViewOcVerificationOrdersRO1Iterator" id="EndorsementNumber">
+      <AttrNames>
+        <Item Value="EndorsementNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ViewOcVerificationOrdersRO1Iterator" id="VerificationUsername">
+      <AttrNames>
+        <Item Value="VerificationUsername"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ViewOcVerificationOrdersRO1Iterator" id="BirthDate">
+      <AttrNames>
+        <Item Value="BirthDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ViewOcVerificationOrdersRO1Iterator" id="TransLoginPassword">
+      <AttrNames>
+        <Item Value="TransLoginPassword"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ViewOcVerificationOrdersRO1Iterator" StaticList="false" Uses="LOV_TransCertVerification"
+          id="TransCertVerification" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DualRO1Iterator" id="TransMailFrom">
+      <AttrNames>
+        <Item Value="TransMailFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DualRO1Iterator" id="TransMailMessage">
+      <AttrNames>
+        <Item Value="TransMailMessage"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DualRO1Iterator" id="TransMailTo">
+      <AttrNames>
+        <Item Value="TransMailTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DualRO1Iterator" id="TransMailCc">
+      <AttrNames>
+        <Item Value="TransMailCc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DualRO1Iterator" id="TransMailAttachments">
+      <AttrNames>
+        <Item Value="TransMailAttachments"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DualRO1Iterator" id="TransMailSubject">
+      <AttrNames>
+        <Item Value="TransMailSubject"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="setEmailNotificationDetails" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="setEmailNotificationDetails" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.setEmailNotificationDetails_RMITradeCompApprovalAMDataControl_dataProvider_setEmailNotificationDetails_result"/>
+    <tree IterBinding="ViewOcWaitingResponseRO1Iterator" id="ViewOcWaitingResponseRO1">
+      <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.readonly.OcWaitingResponseView"
+                      Name="ViewOcWaitingResponseRO10">
+        <AttrNames>
+          <Item Value="SeafarerName"/>
+          <Item Value="OrderNumber"/>
+          <Item Value="GradeCode"/>
+          <Item Value="CountryName"/>
+          <Item Value="EndorsementNumber"/>
+          <Item Value="EndorsementIssueDate"/>
+          <Item Value="EndorsementExpirationDate"/>
+          <Item Value="VerificationUrl"/>
+          <Item Value="VerificationMethod"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="setEmailNotificationWaiting" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="setEmailNotificationWaiting" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.setEmailNotificationWaiting_RMITradeCompApprovalAMDataControl_dataProvider_setEmailNotificationWaiting_result"/>
+    <attributeValues IterBinding="ViewOcWaitingResponseRO1Iterator" id="SeafarerName1">
+      <AttrNames>
+        <Item Value="SeafarerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ViewOcWaitingResponseRO1Iterator" id="EndorsementNumber1">
+      <AttrNames>
+        <Item Value="EndorsementNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ViewOcWaitingResponseRO1Iterator" id="BirthDate1">
+      <AttrNames>
+        <Item Value="BirthDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ViewOcWaitingResponseRO1Iterator" StaticList="false" Uses="LOV_TransCertVerifyWaiting"
+          id="TransCertVerifyWaiting" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <methodAction id="getCocFileName" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getCocFileName"
+                  IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.getCocFileName_RMITradeCompApprovalAMDataControl_dataProvider_getCocFileName_result">
+      <NamedData NDName="colType" NDType="java.lang.String"/>
+      <NamedData NDName="docType" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="updateDocVerifiedStatus" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="updateDocVerifiedStatus" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.updateDocVerifiedStatus_RMITradeCompApprovalAMDataControl_dataProvider_updateDocVerifiedStatus_result">
+      <NamedData NDName="docType" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="sendEmailNotification" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="sendEmailNotification" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.sendEmailNotification_RMITradeCompApprovalAMDataControl_dataProvider_sendEmailNotification_result">
+      <NamedData NDName="docType" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="uploadDocument" RequiresUpdateModel="true" Action="invokeMethod" MethodName="uploadDocument"
+                  IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.uploadDocument_RMITradeCompApprovalAMDataControl_dataProvider_uploadDocument_result">
+      <NamedData NDName="param1" NDType="java.lang.String"/>
+      <NamedData NDName="param2" NDType="java.lang.String"/>
+      <NamedData NDName="param3" NDType="java.lang.String"/>
+      <NamedData NDName="fileName" NDType="java.lang.String"/>
+      <NamedData NDName="docType" NDType="java.lang.String"/>
+    </methodAction>
+    <list IterBinding="ViewOcVerificationOrdersRO1Iterator" StaticList="false" Uses="LOV_TransCancelCert"
+          id="TransCancelCert" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="ViewOcWaitingResponseRO1Iterator" StaticList="false" Uses="LOV_TransCancelCertWaiting"
+          id="TransCancelCertWaiting" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="ViewOcVerificationOrdersRO1Iterator" id="VerificationEdocId">
+      <AttrNames>
+        <Item Value="VerificationEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ViewOcWaitingResponseRO1Iterator" id="VerificationEdocId1">
+      <AttrNames>
+        <Item Value="VerificationEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="updateDocVerifiedStatusManually" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="updateDocVerifiedStatusManually" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.updateDocVerifiedStatusManually_RMITradeCompApprovalAMDataControl_dataProvider_updateDocVerifiedStatusManually_result">
+      <NamedData NDName="docType" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="fetchVerifyOnlineUrl" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="fetchVerifyOnlineUrl" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.fetchVerifyOnlineUrl_RMITradeCompApprovalAppModuleDataControl_dataProvider_fetchVerifyOnlineUrl_result">
+      <NamedData NDName="docType" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.BatchesPendingAsbView.collectionModel}" var="row"
+              rows="#{bindings.BatchesPendingAsbView.rangeSize}"
+              emptyText="#{bindings.BatchesPendingAsbView.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.BatchesPendingAsbView.collectionModel.selectedRow}"
+              selectionListener="#{bindings.BatchesPendingAsbView.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.BatchesPendingAsbView.rangeSize}"
+              filterModel="#{bindings.BatchesPendingAsbViewQuery.queryDescriptor}"
+              queryListener="#{bindings.BatchesPendingAsbViewQuery.processQuery}" filterVisible="true" varStatus="vs"
+              id="t1" contentDelivery="immediate" styleClass="AFStretchWidth" autoHeightRows="14"
+              columnStretching="column:c2" partialTriggers="b1">
+      <af:column sortProperty="#{bindings.BatchesPendingAsbView.hints.BatchName.name}" filterable="true" sortable="true"
+                 headerText="Batch Name" id="c2">
+        <af:outputText value="#{row.BatchName}" shortDesc="#{bindings.BatchesPendingAsbView.hints.BatchName.tooltip}"
+                       id="ot2" inlineStyle="color:#{row.CraCount == 0 ? '' : 'Green'};"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchesPendingAsbView.hints.BatchDate.name}" filterable="true" sortable="true"
+                 headerText="Batch Submitted Date" id="c1">
+        <f:facet name="filter">
+          <af:inputDate value="#{bindings.BatchesPendingAsbViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                        id="id1">
+            <af:convertDateTime pattern="#{bindings.BatchesPendingAsbView.hints.BatchDate.format}"/>
+          </af:inputDate>
+        </f:facet>
+        <af:outputText value="#{row.BatchDate}" shortDesc="#{bindings.BatchesPendingAsbView.hints.BatchDate.tooltip}"
+                       id="ot1" inlineStyle="color:#{row.CraCount == 0 ? '' : 'Green'};text-transform:uppercase; ">
+          <af:convertDateTime pattern="dd-MMM-yyyy"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchesPendingAsbView.hints.NoOfSeafarer.name}" filterable="true"
+                 sortable="true" headerText="Number Of Seafarers" id="c3">
+        <af:outputText value="#{row.NoOfSeafarer}"
+                       shortDesc="#{bindings.BatchesPendingAsbView.hints.NoOfSeafarer.tooltip}" id="ot3"
+                       inlineStyle="color:#{row.CraCount == 0 ? '' : 'Green'};">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BatchesPendingAsbView.hints.NoOfSeafarer.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchesPendingAsbView.hints.Region.name}" filterable="true" sortable="true"
+                 headerText="Region" id="c4">
+        <af:outputText value="#{row.Region}" shortDesc="#{bindings.BatchesPendingAsbView.hints.Region.tooltip}"
+                       id="ot4" inlineStyle="color:#{row.CraCount == 0 ? '' : 'Green'};"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchesPendingAsbView.hints.WorkOrderNo.name}" filterable="true"
+                 sortable="true" headerText="Work Order Number" id="c5">
+        <af:outputText value="#{row.WorkOrderNo}"
+                       shortDesc="#{bindings.BatchesPendingAsbView.hints.WorkOrderNo.tooltip}" id="ot5"
+                       inlineStyle="color:#{row.CraCount == 0 ? '' : 'Green'};">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BatchesPendingAsbView.hints.WorkOrderNo.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchesPendingAsbView.hints.OrderType.name}" filterable="true" sortable="true"
+                 headerText="Order Type" id="c6">
+        <af:outputText value="#{row.OrderType}" shortDesc="#{bindings.BatchesPendingAsbView.hints.OrderType.tooltip}"
+                       id="ot6" inlineStyle="color:#{row.CraCount == 0 ? '' : 'Green'};"/>
+      </af:column>
+      <af:column headerText="Expedited Processing" id="c7">
+        <af:selectBooleanCheckbox value="#{row.bindings.ExpeditedProcessing.inputValue}"
+                                  label="#{row.bindings.ExpeditedProcessing.label}"
+                                  shortDesc="#{bindings.BatchesPendingAsbView.hints.ExpeditedProcessing.tooltip}"
+                                  id="sbc1"/>
+      </af:column>
+      <af:column id="c9">
+        <af:button text="Assign" id="b1" actionListener="#{pageFlowScope.BatchesPendingAbnBean.assignBatch}"/>
+      </af:column>
+      <af:column sortProperty="#{bindings.BatchesPendingAsbView.hints.CraCount.name}" filterable="true" sortable="true"
+                 headerText="#{bindings.BatchesPendingAsbView.hints.CraCount.label}" id="c8" visible="false">
+        <af:outputText value="#{row.CraCount}" shortDesc="#{bindings.BatchesPendingAsbView.hints.CraCount.tooltip}"
+                       id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BatchesPendingAsbView.hints.CraCount.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

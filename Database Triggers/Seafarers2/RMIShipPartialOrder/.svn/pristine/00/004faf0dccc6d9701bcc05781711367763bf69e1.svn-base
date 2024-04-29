@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CustAccountBillToSuView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.shippartialorder.adfbc.views.lov.CustAccountBillToSuView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pCustAccountId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="pAddress"
+    Kind="viewcriteria"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.rmi.shippartialorder.adfbc.views.lov.CustAccountBillToSuView.pAddress_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT site.site_use_id su_id,    
+          loc.address1    
+       || ' '    
+       || loc.address2    
+       || ' '    
+       || loc.address3    
+       || ' '    
+       || loc.address4    
+       || ' '    
+       || DECODE (loc.city, NULL, NULL, loc.city || ', ')    
+       || DECODE (loc.state, NULL, loc.province || ', ', loc.state || ', ')    
+       || DECODE (loc.postal_code, NULL, NULL, loc.postal_code || ', ')    
+       || DECODE (loc.country, NULL, NULL, loc.country) address    
+  FROM (SELECT hca.cust_account_id, hca.cust_account_id rel_cust_id,    
+               hp_ship.party_name party_name, hp_ship.party_id    
+          FROM hz_parties hp_ship, hz_cust_accounts hca    
+         WHERE 1 = 1    
+           AND hca.account_name = 'SICD'    
+           AND hca.party_id = hp_ship.party_id    
+           ) cust_acct,    
+       hz_cust_acct_sites_all acct_site,    
+       hz_party_sites party_site,    
+       hz_locations loc,    
+       hz_cust_site_uses_all site    
+WHERE site.cust_acct_site_id = acct_site.cust_acct_site_id    
+   AND acct_site.party_site_id = party_site.party_site_id    
+   AND party_site.location_id = loc.location_id    
+   AND acct_site.cust_account_id = cust_acct.rel_cust_id    
+   AND site.site_use_code = 'BILL_TO'    
+   AND site.status = 'A'    
+   AND acct_site.status = 'A'    
+   AND cust_acct.cust_account_id = :pCustAccountId]]></SQLQuery>
+  <ViewAttribute
+    Name="SuId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="LONGINT"
+    AliasName="SU_ID"
+    Expression="SU_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="Address"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1210"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ADDRESS"
+    Expression="ADDRESS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1210"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="CustAccountBillToSuViewCriteria"
+    ViewObjectName="com.rmi.shippartialorder.adfbc.views.lov.CustAccountBillToSuView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="Never"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="false"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="CustAccountBillToSuViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="CustAccountBillToSuViewCriteria_CustAccountBillToSuViewCriteria_row_0_Address"
+        ViewAttribute="Address"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Value=":pAddress"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.shippartialorder.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

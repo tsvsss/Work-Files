@@ -1,0 +1,79 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<task-flow-registry xmlns="http://xmlns.oracle.com/adf/controller/rc">
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/MyTaskDeficientTaskFlow.xml" id="MyTaskDeficientTaskFlow" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="param_user_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/batchesmtctaskflow/BatchesMtcTaskFlow.xml" id="BatchesMtcTaskFlow" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="param_user_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/mastermytasktaskflow/MasterMyTaskTaskFlow.xml" id="taskflow_MasterMyTask" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="param_user_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/craprocessingtaskflow/CraProcessingTaskFlow.xml" id="taskflow_Cra_Processing" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="param_user_id"/>
+      <input-parameter name="param_batch_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/mytasktaskflow/MyTaskTaskFlow.xml" id="taskflow_myTasks" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="RoleName"/>
+      <input-parameter name="param_user_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/submittedbatchestaskflow/SubmittedBatchesTaskFlow.xml" id="taskflow_SubmittedBatches" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="param_user_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/SeafarerListTaskFlow.xml" id="SeafarerListTaskFlow" type="task-flow-definition" uses-page-fragments="false" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="pEsiBatchId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/batchestctaskflow/BatchesTcTaskFlow.xml" id="taskflow_batches_TC" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="param_user_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/SeafarerListTcTaskFlow.xml" id="SeafarerListTcTaskFlow" type="task-flow-definition" uses-page-fragments="false" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="pEsiBatchId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/requestsubmittaskflow/RequestSubmitTaskFlow.xml" id="RequestSubmitTaskFlow" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="param_user_id"/>
+      <input-parameter name="RequestId"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/batchesvaltaskflow/BatchesValTaskFlow.xml" id="taskflow_batches_VAL" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="param_user_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/DeficientOrdersTaskFlow.xml" id="DeficientOrdersTaskFlow" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="param_user_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/batchcreateedittaskflow/BatchCreateEditTaskFlow.xml" id="taskflow_Batch_CreateEdit" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="RoleName"/>
+      <input-parameter name="param_calling_tf"/>
+      <input-parameter name="param_rejected_tab"/>
+      <input-parameter name="param_user_id"/>
+      <input-parameter name="param_batch_id"/>
+      <input-parameter name="param_batch_mode"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/findseafarertaskflow/FindSeafarerTaskFlow.xml" id="FindSeafarerTaskFlow" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp"/>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/batchesqataskflow/BatchesQaTaskFlow.xml" id="taskflow_batches_QA" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="param_user_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/batchesabntaskflow/BatchesAbnTaskFlow.xml" id="taskflow_batches_ABN" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="param_user_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/taskassignmenttaskflow/TaskAssignmentTaskFlow.xml" id="taskflow_taskAssignment" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="param_user_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/BatchesTaskFlow.xml" id="taskflow_Batches" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="RoleName"/>
+      <input-parameter name="param_user_id"/>
+      <input-parameter name="param_batch_status"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/accountstatustaskflow/AccountStatusTaskFlow.xml" id="AccountStatusTaskFlow" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="param_user_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/queryordertaskflow/QueryOrderTaskFlow.xml" id="QueryOrderTaskFlow" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp"/>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/batchesshippingtaskflow/BatchesShippingTaskFlow.xml" id="taskflow_batches_Shipping" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="param_user_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/queryvesseltaskflow/QueryVesselDetailsTaskFlow.xml" id="QueryVesselDetailsTaskFlow" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/batchesuploaddocumenttaskflow/BatchesUploaddocumentTaskFlow.xml" id="taskflow_batches_uploadDocument" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="param_user_id"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/applicationEntry/view/batchesshippingtaskflow/BatchesPendingTrackingNumberTaskFlow.xml" id="BatchesPendingTrackingNumberTaskFlow" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="param_user_id"/>
+   </task-flow-descriptor>
+</task-flow-registry>

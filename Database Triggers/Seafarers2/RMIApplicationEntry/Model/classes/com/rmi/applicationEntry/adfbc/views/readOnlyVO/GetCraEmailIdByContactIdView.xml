@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="GetCraEmailIdByContactIdView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.readOnlyVO.GetCraEmailIdByContactIdView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pContactId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[SELECT email_cra.email_address cra_email_address,contact_id   
+   
+  FROM ar_contacts_v con,   
+   
+       (SELECT   phone_country_code country_code, phone_area_code area_code,   
+   
+                   phone_number, phone_extension extension, primary_flag,   
+   
+                   primary_by_purpose, status, orig_system_reference,   
+   
+                   contact_point_id phone_id,   
+   
+                   contact_point_id cust_contact_point_id, contact_point_type,   
+   
+                   owner_table_id, email_address, email_format,   
+   
+                   contact_point_purpose   
+   
+              FROM hz_contact_points   
+   
+             WHERE owner_table_name = 'HZ_PARTIES'   
+   
+               AND status = 'A'   
+   
+               AND contact_point_type = 'EMAIL'   
+   
+               AND contact_point_purpose = 'SICD_CRA_EMAIL'   
+   
+          ORDER BY primary_flag DESC) email_cra   
+   
+WHERE 1 = 1 AND email_cra.owner_table_id = con.rel_party_id   
+   
+and contact_id = :pContactId]]></SQLQuery>
+  <ViewAttribute
+    Name="CraEmailAddress"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CRA_EMAIL_ADDRESS"
+    Expression="CRA_EMAIL_ADDRESS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ContactId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="CONTACT_ID"
+    Expression="CONTACT_ID"
+    SQLType="INTEGER"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

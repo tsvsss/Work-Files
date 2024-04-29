@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="MyTaskDeficientTaskFlow">
+    <default-activity>onloadMyTaskDeficientOrder</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__1">
+      <name>param_user_id</name>
+      <value>#{sessionScope.param_user_id}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <managed-bean id="__4">
+      <managed-bean-name>MyTaskDeficientOrderBean</managed-bean-name>
+      <managed-bean-class>com.rmi.applicationEntry.view.batchestaskflow.MyTaskDeficientOrderBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__13">
+      <managed-bean-name>MyTaskDeficientRequestBean</managed-bean-name>
+      <managed-bean-class>com.rmi.applicationEntry.view.batchestaskflow.MyTaskDeficientRequestBean</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="MyTaskDeficientOrders">
+      <page>/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/MyTaskDeficientOrders.jsff</page>
+    </view>
+    <method-call id="onloadMyTaskDeficientOrder">
+      <method>#{bindings.onloadMyTaskDeficientOrder.execute}</method>
+      <outcome>
+        <fixed-outcome>onloadMyTaskDeficientOrder</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="taskflow_Batch_CreateEdit">
+      <task-flow-reference>
+        <document>/WEB-INF/com/rmi/applicationEntry/view/batchcreateedittaskflow/BatchCreateEditTaskFlow.xml</document>
+        <id>taskflow_Batch_CreateEdit</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>param_batch_id</name>
+        <value>#{data.com_rmi_applicationEntry_view_MyTaskDeficientOrdersPageDef.EsiBatchId.inputValue}</value>
+      </input-parameter>
+      <input-parameter id="__8">
+        <name>param_user_id</name>
+        <value>#{sessionScope.param_user_id}</value>
+      </input-parameter>
+      <input-parameter id="__9">
+        <name>param_rejected_tab</name>
+        <value>yes</value>
+      </input-parameter>
+      <input-parameter id="__10">
+        <name>param_batch_mode</name>
+        <value>edit</value>
+      </input-parameter>
+      <input-parameter id="__11">
+        <name>RoleName</name>
+        <value>#{sessionScope.RoleName}</value>
+      </input-parameter>
+      <input-parameter id="__12">
+        <name>param_calling_tf</name>
+        <value>new</value>
+      </input-parameter>
+    </task-flow-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>onloadMyTaskDeficientOrder</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>onloadMyTaskDeficientOrder</from-outcome>
+        <to-activity-id>MyTaskDeficientOrders</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>MyTaskDeficientOrders</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>editBatch</from-outcome>
+        <to-activity-id>taskflow_Batch_CreateEdit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

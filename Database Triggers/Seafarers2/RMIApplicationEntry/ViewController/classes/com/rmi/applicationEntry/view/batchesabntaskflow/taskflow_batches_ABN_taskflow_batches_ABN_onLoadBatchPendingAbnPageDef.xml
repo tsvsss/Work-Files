@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="taskflow_batches_ABN_taskflow_batches_ABN_onLoadBatchPendingAbnPageDef"
+                Package="com.rmi.applicationEntry.view.batchesabntaskflow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="onLoadBatchPendingAbn" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="onLoadBatchPendingAbn" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.onLoadBatchPendingAbn_RMIApplicationEntryAppModuleDataControl_dataProvider_onLoadBatchPendingAbn_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

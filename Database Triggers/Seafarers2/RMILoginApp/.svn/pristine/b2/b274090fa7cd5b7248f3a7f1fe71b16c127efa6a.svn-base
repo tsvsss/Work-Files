@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <af:panelGroupLayout id="pgl1" styleClass="AFStretchWidth"
+                       inlineStyle=" text-align:center !important; padding-top:15%;"
+                       valign="middle" layout="vertical">
+    <af:outputText value="Welcome, #{sessionScope.FirstName}" id="ot1"
+                   inlineStyle="font-size:35px;" rendered="false"/>
+  </af:panelGroupLayout>
+</ui:composition>

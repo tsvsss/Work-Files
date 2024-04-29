@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="EnterEntityRequestPageDef"
+                Package="oracle.apps.xwrl.view.pageDefs">
+  <parameters/>
+  <executables>
+  
+  <iterator Binds="XwrlAlertNotesView2" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlAlertNotesView2Iterator" />
+    <searchRegion Criteria="XwrlAlertNotesViewCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="XwrlAlertNotesView2Iterator" id="XwrlAlertNotesViewCriteriaQuery"/>
+    <iterator Binds="XwrlNoteTemplatesView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlNoteTemplatesView1Iterator"/>
+	 <iterator Binds="XwrlResponseEntityColumnsView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlResponseEntityColumnsView1Iterator"/>		  
+   <searchRegion Binds="XwrlResponseEntityColumnsView1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="XwrlResponseEntityColumnsView1Query"/>
+  
+    <iterator Binds="XwrlRequestsView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlRequestsView1Iterator"/>
+   
+    <iterator Binds="XwrlResponseRowsView2" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlResponseRowsView2Iterator"/>
+    <iterator Binds="CustClearEntityAlertView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="CustClearEntityAlertView1Iterator"/>
+    <iterator Binds="CustClearEntityAlertLOV1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="CustClearEntityAlertLov1Iterator"/>          
+    <variableIterator id="variables">
+      <variable Name="varSourceTable" Type="java.lang.String"/>
+      <variable Name="varSourceId" Type="java.lang.Integer"/>
+      <variable Name="varImoNumber" Type="java.math.BigDecimal"/>
+      <variable Name="varVesselIndicator" Type="java.lang.Boolean"/>
+      <variable Type="java.lang.Boolean" Name="selectionOverride"/>
+    </variableIterator>
+    <iterator Binds="CaseCountryLOV1" RangeSize="500" DataControl="AppModuleDataControl" id="CaseCountryLOV1Iterator"/>
+      <iterator Binds="CaseRestrictedCityLOV1" RangeSize="500" DataControl="AppModuleDataControl" id="CaseRestrictedCityLOV1Iterator"/>
+    <searchRegion Criteria="CaseRestrictedCityLOVCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" Binds="CaseRestrictedCityLOV1Iterator"
+                  id="CaseRestrictedCityLOVCriteriaQuery"/>
+    <iterator id="GetAliasNamesRVO1Iterator" Binds="GetAliasNamesRVO1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="XwrlCaseNotesView2Iterator" Binds="XwrlCaseNotesView2" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="XwrlCaseNotesView1Iterator" Binds="XwrlCaseNotesView1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="XwrlAlertNotesView1Iterator" Binds="XwrlAlertNotesView1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+    <iterator Binds="XwrlAlertNotesXrefView2" RangeSize="10" DataControl="AppModuleDataControl"
+              id="XwrlAlertNotesXrefView2Iterator"/>
+    <iterator Binds="XwrlAlertNotesExView1" RangeSize="10" DataControl="AppModuleDataControl"
+              id="XwrlAlertNotesExView1Iterator"/>
+    <iterator Binds="XwrlRequestApprovalHistView1" RangeSize="15" DataControl="AppModuleDataControl"
+              id="XwrlRequestApprovalHistView1Iterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="submit_ows_entity" RequiresUpdateModel="true" Action="invokeMethod" MethodName="submit_ows_entity"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.submit_ows_entity_AppModuleDataControl_dataProvider_submit_ows_entity_result">
+      <NamedData NDName="SourceTable" NDValue="#{bindings.varSourceTable}" NDType="java.lang.String"/>
+      <NamedData NDName="SourceId" NDValue="#{bindings.varSourceId}" NDType="java.lang.Integer"/>
+      <NamedData NDName="ImoNumber" NDValue="#{bindings.varImoNumber}" NDType="java.lang.Integer"/>
+      <NamedData NDName="VesselIndicator" NDValue="#{bindings.varVesselIndicator}" NDType="java.lang.String"/>           
+    </methodAction>
+    <attributeValues IterBinding="XwrlResponseEntityColumnsView1Iterator" id="Alertid">
+      <AttrNames>
+        <Item Value="Alertid"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="CustClearEntityAlertView1Iterator" StaticList="false" Uses="LOV_NoteAttr" id="NoteAttr"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="CustClearEntityAlertView1Iterator" id="NoteAttr1">
+      <AttrNames>
+        <Item Value="NoteAttr"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="varSourceTable1">
+      <AttrNames>
+        <Item Value="varSourceTable"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="varSourceId1">
+      <AttrNames>
+        <Item Value="varSourceId"/>
+      </AttrNames>
+    </attributeValues>
+     <attributeValues IterBinding="variables" id="varVesselInd1">
+      <AttrNames>
+        <Item Value="varVesselIndicator"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XwrlResponseRowsView2Iterator" id="XwrlResponseRowsView2">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.XwrlResponseRowsView" Name="XwrlResponseRowsView20">
+        <AttrNames>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="DetRow"/>
+          <Item Value="Display"/>
+          <Item Value="Id"/>
+          <Item Value="Key1"/>
+          <Item Value="Label"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="OwsId"/>
+          <Item Value="Path"/>
+          <Item Value="RecRow"/>
+          <Item Value="RequestId"/>
+          <Item Value="SortId"/>
+          <Item Value="Value"/>
+          <Item Value="CreatedByAttr"/>
+          <Item Value="LastUpdatedByAttr"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="XwrlResponseEntityColumnsView1Iterator" id="XwrlResponseEntityColumnsView1">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.XwrlResponseEntityColumnsView"
+                      Name="XwrlResponseEntityColumnsView10">
+        <AttrNames>
+          <Item Value="Listentityname"/>
+          <Item Value="Listprimaryname"/>
+          <Item Value="Listnametype"/>
+          <Item Value="Listcountry"/>
+          <Item Value="Listcity"/>
+          <Item Value="Listoperatingcountries"/>
+          <Item Value="Listregistrationcountries"/>
+          <Item Value="Externalsources"/>
+          <Item Value="Cachedextsources"/>
+          <Item Value="Category"/>
+          <Item Value="Dnvesselindicator"/>
+          <Item Value="Dnvesselinfo"/>
+          <Item Value="Dnaddeddate"/>
+          <Item Value="Dnlastupdateddate"/>
+          <Item Value="Matchscore"/>
+          <Item Value="Alertid"/>
+          <Item Value="Casekey"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="Dnaddress"/>
+          <Item Value="Dnaddresscountrycode"/>
+          <Item Value="Dnallcountrycodes"/>
+          <Item Value="Dncity"/>
+          <Item Value="Dnentityname"/>
+          <Item Value="Dninactiveflag"/>
+          <Item Value="Dninactivesincedate"/>
+          <Item Value="Dnnametype"/>
+          <Item Value="Dnnamequality"/>
+          <Item Value="Dnoperatingcountrycodes"/>
+          <Item Value="Dnoriginalentityname"/>
+          <Item Value="Dnpepclassification"/>
+          <Item Value="Dnpostalcode"/>
+          <Item Value="Dnprimaryname"/>
+          <Item Value="Dnregistrationcountrycode"/>
+          <Item Value="Dnregistrationnumber"/>
+          <Item Value="Dnstate"/>
+          <Item Value="Id"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="Listid"/>
+          <Item Value="Listkey"/>
+          <Item Value="Listoriginalscriptname"/>
+          <Item Value="Listrecordorigin"/>
+          <Item Value="Listrecordtype"/>
+          <Item Value="Listsubkey"/>
+          <Item Value="Matchrule"/>
+          <Item Value="Rec"/>
+          <Item Value="RequestId"/>
+          <Item Value="Riskscore"/>
+          <Item Value="Riskscorepep"/>
+          <Item Value="XState"/>
+          <Item Value="CreatedByAttr"/>
+          <Item Value="LastUpdatedByAttr"/>
+           <Item Value="LegalReview" Binds="LegalReview"/>
+          <Item Value="Stateattr"/>
+          <Item Value="OwsAlertState"/>
+          <Item Value="Samestate" Binds="Samestate"/>
+          <Item Value="Summary"/>
+          <Item Value="LegalReviewAttr"/>
+          <Item Value="CorporateReview" Binds="CorporateReview"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_CaseStateAttr" id="CaseStateAttr"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_CaseStatusAttr" id="CaseStatusAttr"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_CaseWorkFlowAttr" id="CaseWorkFlowAttr"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="CaseId">
+      <AttrNames>
+        <Item Value="CaseId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="varVesselIndicator1">
+      <AttrNames>
+        <Item Value="varVesselIndicator"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="selectionOverride1">
+      <AttrNames>
+        <Item Value="selectionOverride"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XwrlRequestsView1Iterator" id="XwrlRequestsView1">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.XwrlRequestsView" Name="XwrlRequestsView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ResubmitId"/>
+          <Item Value="SourceTable"/>
+          <Item Value="SourceId"/>
+          <Item Value="WcScreeningRequestId"/>
+          <Item Value="Server"/>
+          <Item Value="Path"/>
+          <Item Value="JobId"/>
+          <Item Value="Matches"/>
+          <Item Value="Status"/>
+          <Item Value="ErrorCode"/>
+          <Item Value="ErrorMessage"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="CaseState"/>
+          <Item Value="CaseStatus"/>
+          <Item Value="CaseWorkflow"/>
+          <Item Value="CaseId"/>
+          <Item Value="VesselIndicator"/>
+          <Item Value="NameScreened"/>
+          <Item Value="ImoNumber"/>
+          <Item Value="Department"/>
+          <Item Value="Office"/>
+          <Item Value="Priority"/>
+          <Item Value="RiskLevel"/>
+          <Item Value="DocumentType"/>
+          <Item Value="ClosedDate"/>
+          <Item Value="AssignedTo"/>
+          <Item Value="DateOfBirth"/>
+          <Item Value="CaseStateAttr"/>
+          <Item Value="CaseStatusAttr"/>
+          <Item Value="CaseWorkFlowAttr"/>
+          <Item Value="PriorityAttr"/>
+          <Item Value="RiskLevelAttr"/>
+          <Item Value="OfficeAttr"/>
+          <Item Value="DeptAttr"/>
+          <Item Value="RejectionAttr"/>
+          <Item Value="RistrictedCountryAttr"/>
+          <Item Value="DocTypeAttr"/>
+          <Item Value="AssignedToAttr"/>
+           <Item Value="CreatedByAttr"/>
+            <Item Value="LastUpdatedByAttr"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="ResubmitId">
+      <AttrNames>
+        <Item Value="ResubmitId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="SourceTable">
+      <AttrNames>
+        <Item Value="SourceTable"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="SourceId">
+      <AttrNames>
+        <Item Value="SourceId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="WcScreeningRequestId">
+      <AttrNames>
+        <Item Value="WcScreeningRequestId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="Server">
+      <AttrNames>
+        <Item Value="Server"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="Path">
+      <AttrNames>
+        <Item Value="Path"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="JobId">
+      <AttrNames>
+        <Item Value="JobId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="Matches">
+      <AttrNames>
+        <Item Value="Matches"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="ErrorCode">
+      <AttrNames>
+        <Item Value="ErrorCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="ErrorMessage">
+      <AttrNames>
+        <Item Value="ErrorMessage"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="LastUpdateDate">
+      <AttrNames>
+        <Item Value="LastUpdateDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="LastUpdatedBy">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="CreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="LastUpdateLogin">
+      <AttrNames>
+        <Item Value="LastUpdateLogin"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_CaseState" id="CaseState"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_CaseStatus" id="CaseStatus"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_CaseWorkflow" id="CaseWorkflow"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_VesselIndicator" id="VesselIndicator"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="NameScreened">
+      <AttrNames>
+        <Item Value="NameScreened"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="ImoNumber">
+      <AttrNames>
+        <Item Value="ImoNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_Priority" id="Priority"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_RiskLevel" id="RiskLevel"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="ClosedDate">
+      <AttrNames>
+        <Item Value="ClosedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="DateOfBirth">
+      <AttrNames>
+        <Item Value="DateOfBirth"/>
+      </AttrNames>
+    </attributeValues>
+    
+    
+    
+    
+     <attributeValues IterBinding="XwrlRequestsView1Iterator" id="CreatedByAttr">
+      <AttrNames>
+        <Item Value="CreatedByAttr"/>
+      </AttrNames>
+    </attributeValues>
+    
+     <attributeValues IterBinding="XwrlRequestsView1Iterator" id="LastUpdatedByAttr">
+      <AttrNames>
+        <Item Value="LastUpdatedByAttr"/>
+      </AttrNames>
+    </attributeValues>
+    
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_PriorityAttr" id="PriorityAttr"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_RiskLevelAttr" id="RiskLevelAttr"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <action id="Commit" DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" DataControl="AppModuleDataControl" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_Office" id="Office"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_Department" id="Department"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_RejectionReason" id="RejectionReason"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_CountryOfResidence"
+          id="CountryOfResidence1" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_CityOfResidenceId" id="CityOfResidenceId1"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="SubdivisionCityOfResidence">
+      <AttrNames>
+        <Item Value="SubdivisionCityOfResidence"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_DocumentType" id="DocumentType1"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_AssignedTo" id="AssignedTo1"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="variables" id="varImoNumber1">
+      <AttrNames>
+        <Item Value="varImoNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_OfficeAttr" id="OfficeAttr"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_DeptAttr" id="DeptAttr"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_RejectionAttr" id="RejectionAttr"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_AssignedToAttr" id="AssignedToAttr"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_DocTypeAttr" id="DocTypeAttr"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_RistrictedCountryAttr"
+          id="RistrictedCountryAttr" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    
+     <list IterBinding="variables" id="varCity" DTSupportsMRU="true" SelectItemValueMode="ListObject"
+          StaticList="false" ListIter="CaseRestrictedCityLOV1Iterator"
+          NullValueFlag="start">
+      <AttrNames>
+        <Item Value="ExecuteWithParams_varCity"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="WcCityListId"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="CityName"/>
+      </ListDisplayAttrNames>
+    </list>
+    
+    
+    <list IterBinding="variables" id="varRegistrationcountrycode" DTSupportsMRU="true"
+          SelectItemValueMode="ListObject" StaticList="false" ListIter="CaseCountryLOV1Iterator"
+          NullValueFlag="start">
+      <AttrNames>
+        <Item Value="ExecuteWithParams_varRegistrationcountrycode"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="CountryCode"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="CountryName"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list IterBinding="variables" id="varAddresscountrycode" DTSupportsMRU="true" SelectItemValueMode="ListObject"
+          StaticList="false" ListIter="CaseCountryLOV1Iterator"
+          NullValueFlag="start">
+      <AttrNames>
+        <Item Value="ExecuteWithParams_varAddresscountrycode"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="CountryCode"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="CountryName"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list IterBinding="variables" id="varOperatingcountrycodes" DTSupportsMRU="true" SelectItemValueMode="ListObject"
+          StaticList="false" ListIter="CaseCountryLOV1Iterator"
+          NullValueFlag="start">
+      <AttrNames>
+        <Item Value="ExecuteWithParams_varOperatingcountrycodes"/>
+      </AttrNames>
+      <ListAttrNames>
+        <Item Value="CountryCode"/>
+      </ListAttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="CountryName"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list IterBinding="CustClearEntityAlertView1Iterator" StaticList="false" Uses="LOV_CaseAlertStateAttr"
+          id="CaseAlertStateAttr" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction IterBinding="XwrlRequestsView1Iterator" id="restrictCity" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="restrictCity" IsViewObjectMethod="false"
+                  DataControl="AppModuleDataControl" InstanceName="bindings.XwrlRequestsView1Iterator.currentRow"
+                  IsLocalObjectReference="true"
+                  ReturnName="data.AppModuleDataControl.methodResults.restrictCity_restrictCity_restrictCity_result"/>
+       <methodAction IterBinding="XwrlRequestsView1Iterator" id="executeDocType" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="executeDocType" IsViewObjectMethod="false"
+                  DataControl="AppModuleDataControl" InstanceName="bindings.XwrlRequestsView1Iterator.currentRow"
+                  IsLocalObjectReference="true"
+                  ReturnName="data.AppModuleDataControl.methodResults.executeDocType_executeDocType_executeDocType_result">
+      <NamedData NDName="dept" NDType="java.lang.String"/>
+      <NamedData NDName="priority" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="RejectionReasonOthr">
+      <AttrNames>
+        <Item Value="RejectionReasonOthr"/>
+      </AttrNames>
+    </attributeValues>
+    
+     <attributeValues IterBinding="XwrlRequestsView1Iterator" id="AssignedTo">
+      <AttrNames>
+        <Item Value="AssignedTo"/>
+      </AttrNames>
+    </attributeValues>
+	
+	 <!--attributeValues IterBinding="XwrlRequestsView1Iterator" id="VersionId">
+      <AttrNames>
+        <Item Value="VersionId"/>
+      </AttrNames>
+    </attributeValues-->
+    
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_CountryOfRegistration"
+          id="CountryOfRegistration" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_CountryOfOperation"
+          id="CountryOfOperation" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+          <button IterBinding="XwrlResponseEntityColumnsView1Iterator" id="LegalReview" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="LegalReview"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="XwrlResponseEntityColumnsView1Iterator" id="CorporateReview" DTSupportsMRU="false"
+            StaticList="true">
+      <AttrNames>
+        <Item Value="CorporateReview"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_CreatedBy" id="CreatedBy1"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_LastUpdatedBy" id="LastUpdatedBy1"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+     <methodAction id="setLock" RequiresUpdateModel="true" Action="invokeMethod" MethodName="setLock"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.XwrlRequestsView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.setLock_AppModuleDataControl_XwrlRequestsView1_setLock_result"/>
+   <attributeValues IterBinding="XwrlRequestsView1Iterator" id="BatchId">
+      <AttrNames>
+        <Item Value="BatchId"/>
+      </AttrNames>
+    </attributeValues>
+    <!--button IterBinding="XwrlRequestsView1Iterator" id="WrkflowStatusLegalNtfd" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="WrkflowStatusLegalNtfd"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="WrkflowStatusLegalNtfdDt">
+      <AttrNames>
+        <Item Value="WrkflowStatusLegalNtfdDt"/>
+      </AttrNames>
+    </attributeValues-->
+	
+	
+	<tree IterBinding="XwrlAlertNotesView2Iterator" id="XwrlAlertNotesView2">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.XwrlAlertNotesView" Name="XwrlAlertNotesView20">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="RequestId"/>
+          <Item Value="AlertId"/>
+          <Item Value="LineNumber"/>
+          <Item Value="Note"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="Createdbyattr"/>
+          <Item Value="Lastupdatedbyattr"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XwrlAlertNotesView2Iterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <attributeValues IterBinding="XwrlAlertNotesView2Iterator" id="AId">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView2Iterator" id="RequestId">
+      <AttrNames>
+        <Item Value="RequestId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView2Iterator" id="AlertId">
+      <AttrNames>
+        <Item Value="AlertId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView2Iterator" id="LineNumber">
+      <AttrNames>
+        <Item Value="LineNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView2Iterator" id="Note">
+      <AttrNames>
+        <Item Value="Note"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView2Iterator" id="ALastUpdateDate">
+      <AttrNames>
+        <Item Value="LastUpdateDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView2Iterator" id="ALastUpdatedBy">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView2Iterator" id="ACreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView2Iterator" id="ACreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView2Iterator" id="ALastUpdateLogin">
+      <AttrNames>
+        <Item Value="LastUpdateLogin"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XwrlNoteTemplatesView1Iterator" id="XwrlNoteTemplatesView1">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.XwrlNoteTemplatesView" Name="XwrlNoteTemplatesView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="SortKey"/>
+          <Item Value="NoteType"/>
+          <Item Value="NoteCategory"/>
+          <Item Value="Note"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="LastUpdateLogin"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="setNoteTemplate" RequiresUpdateModel="true" Action="invokeMethod" MethodName="setNoteTemplate"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.setNoteTemplate_AppModuleDataControl_dataProvider_setNoteTemplate_result">
+      <NamedData NDName="noteType" NDValue="#{pageFlowScope.varNoteType}" NDType="java.lang.String"/>
+      <NamedData NDName="noteCategory" NDValue="#{pageFlowScope.varNoteCategory}" NDType="java.lang.String"/>
+    </methodAction>
+	
+<button IterBinding="XwrlResponseEntityColumnsView1Iterator" id="Samestate" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Samestate"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="Corpnumber">
+      <AttrNames>
+        <Item Value="Corpnumber"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_CountryOfAddress" id="CountryOfAddress"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_CountryOfNationality"
+          id="CountryOfNationality" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_CityOfResidence" id="CityOfResidence"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="PassportNumber">
+      <AttrNames>
+        <Item Value="PassportNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="Gender">
+      <AttrNames>
+        <Item Value="Gender"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_Doctype" id="Doctype"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="EsrUserId">
+      <AttrNames>
+        <Item Value="EsrUserId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="EsrUserEmailAddress">
+      <AttrNames>
+        <Item Value="EsrUserEmailAddress"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="PermanentAddress">
+      <AttrNames>
+        <Item Value="PermanentAddress"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XwrlAlertNotesXrefView2Iterator" id="XwrlAlertNotesXrefView2">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.XwrlAlertNotesXrefView" Name="XwrlAlertNotesXrefView20">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="AlertId"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="Createdbyattr"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="Lastupdatedbyattr"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="LineNumber"/>
+          <Item Value="Note"/>
+          <Item Value="RequestId"/>
+          <Item Value="Xrefalertid"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XwrlAlertNotesView2Iterator" id="CreateInsert"
+            InstanceName="AppModuleDataControl.XwrlAlertNotesView2" DataControl="AppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="XwrlAlertNotesXrefView2Iterator" id="Execute"
+            InstanceName="AppModuleDataControl.XwrlAlertNotesXrefView2" DataControl="AppModuleDataControl"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <tree IterBinding="XwrlRequestApprovalHistView1Iterator" id="XwrlRequestApprovalHistView1">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.XwrlRequestApprovalHistView"
+                      Name="XwrlRequestApprovalHistView10">
+        <AttrNames>
+          <Item Value="StatusDisp"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="BatchId"/>
+          <Item Value="LastUpdatedUser"/>
+          <Item Value="CreatedUser"/>
+          <Item Value="CreationDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="MasterId">
+      <AttrNames>
+        <Item Value="MasterId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="AliasId">
+      <AttrNames>
+        <Item Value="AliasId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="XrefId">
+      <AttrNames>
+        <Item Value="XrefId"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_CaseStateAttr"
+                  id="CaseStateAttr1"/>
+    <listOfValues IterBinding="XwrlRequestsView1Iterator" StaticList="false" Uses="LOV_CaseWorkFlowAttr"
+                  id="CaseWorkFlowAttr1"/>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="ProvisionalRequest">
+      <AttrNames>
+        <Item Value="ProvisionalRequest"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="AssignBookNumberTaskflow">
+    <default-activity>filterAssignBook</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__4">
+      <name>P_HEADER_ID</name>
+      <value>#{pageFlowScope.P_HEADER_ID}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <managed-bean id="__3">
+      <managed-bean-name>AssignBookNumberBean</managed-bean-name>
+      <managed-bean-class>com.rmi.tradecompapproval.view.assignbooknumber.AssignBookNumberBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="AssignBookNumberPage">
+      <page>/WEB-INF/com/rmi/tradecompapproval/view/assignbooknumber/AssignBookNumberPage.jsff</page>
+    </view>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <method-call id="filterAssignBook">
+      <method>#{bindings.filterAssignBook.execute}</method>
+      <outcome>
+        <fixed-outcome>filterAssignBook</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__5">
+      <from-activity-id>AssignBookNumberPage</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__1">
+      <from-activity-id>filterAssignBook</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>filterAssignBook</from-outcome>
+        <to-activity-id>AssignBookNumberPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

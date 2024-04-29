@@ -1,0 +1,528 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelHeader text="Individual Case" id="ph3">
+        <f:facet name="context">
+            <af:outputText value="#{bindings.CaseId.inputValue}" shortDesc="#{bindings.CaseId.hints.tooltip}" id="ot1"/>
+        </f:facet>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:spacer width="10" height="10" id="s9"/>
+        <af:panelTabbed position="above" id="pt1">
+            <af:showDetailItem id="tab2" text="Data Privacy Consent">
+                <af:region value="#{bindings.DataPrivacyConsentTaskFlow1.regionModel}" id="r1"/>
+            </af:showDetailItem>
+            <!-- T20201012.0026 - Linking E-Docs to Case Documents in OWS Statusboar... (IRI) -->
+            <af:showDetailItem text="IRI Edocs" id="sdi1"
+                               disclosureListener="#{viewScope.CaseDocumentsBean.iriEdocsLinkingDisclosureListener}">
+                <af:region value="#{bindings.IriEdocsTaskFlow1.regionModel}" id="r2" styleClass="AFStretchWidth"/>
+            </af:showDetailItem>
+            <af:showDetailItem id="tab1" text="Case Documents" disclosed="true"
+                               >
+                <af:panelSplitter id="ps1" splitterPosition="300" styleClass="CustomizedBorderSplitter">
+                    <f:facet name="first">
+                        <af:query id="qryId2" headerText="Search" disclosed="true"
+                                  value="#{bindings.XwrlCaseDocumentsSumViewCriteriaQuery.queryDescriptor}"
+                                  model="#{bindings.XwrlCaseDocumentsSumViewCriteriaQuery.queryModel}"
+                                  queryListener="#{bindings.XwrlCaseDocumentsSumViewCriteriaQuery.processQuery}"
+                                  queryOperationListener="#{bindings.XwrlCaseDocumentsSumViewCriteriaQuery.processQueryOperation}"
+                                  resultComponentId="::pc1:t3" saveQueryMode="hidden"
+                                  modeChangeVisible="false" styleClass="CustomQueryPanel"/>
+                    </f:facet>
+                    <f:facet name="second">
+                        <af:panelHeader text="Case Documents" id="ph2">
+                            <af:popup childCreation="deferred" autoCancel="disabled" id="p3"
+                                      contentDelivery="lazyUncached">
+                                <af:dialog id="d3" title="Delete" resize="on" contentWidth="300" contentHeight="50"
+                                           dialogListener="#{viewScope.CaseDocumentsBean.deleteDocumentDialogListener}">
+                                    <af:panelGridLayout id="pgl1" dimensionsFrom="auto">
+                                        <af:gridRow marginTop="5px" marginBottom="5px" id="gr1">
+                                            <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc1"
+                                                         valign="middle" halign="center">
+                                                <af:outputText value="Are you sure you want to delete this record?"
+                                                               id="ot22"/>
+                                            </af:gridCell>
+                                        </af:gridRow>
+                                    </af:panelGridLayout>
+                                    <f:facet name="buttonBar"/>
+                                </af:dialog>
+                            </af:popup>
+                            <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                                <af:table value="#{bindings.XwrlCaseDocumentsSumView1.collectionModel}" var="row"
+                                          rows="#{bindings.XwrlCaseDocumentsSumView1.rangeSize}"
+                                          emptyText="#{bindings.XwrlCaseDocumentsSumView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          rowBandingInterval="0" contentDelivery="immediate" autoHeightRows="25"
+                                          fetchSize="#{bindings.XwrlCaseDocumentsSumView1.rangeSize}" id="t3"
+                                          rowSelection="single"
+                                          selectedRowKeys="#{bindings.XwrlCaseDocumentsSumView1.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.XwrlCaseDocumentsSumView1.collectionModel.makeCurrent}"
+                                          partialTriggers=":::b5">
+                                    <af:column headerText="Id"
+                                               id="c7">
+                                        <af:outputText value="#{row.CaseDocId}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsSumView1.hints.CaseDocId.tooltip}"
+                                                       id="ot15">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.XwrlCaseDocumentsSumView1.hints.CaseDocId.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.XwrlCaseDocumentsSumView1.hints.DocumentType.label}"
+                                               id="c8" width="150">
+                                        <af:outputText value="#{row.DocumentType}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsSumView1.hints.DocumentType.tooltip}"
+                                                       id="ot18"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.XwrlCaseDocumentsSumView1.hints.FileName.label}"
+                                               id="c9" width="300">
+                                        <af:outputText value="#{row.FileName}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsSumView1.hints.FileName.tooltip}"
+                                                       id="ot17"/>
+                                    </af:column>
+                                    <!-- T20201119.0027 - Request for Additional Columns under CASE DOCS on the OWS side -->
+                                    <af:column id="c12" headerText="Submission Date" width="120">
+                                        <af:outputText value="#{row.CreationDate}" id="ot24"/>
+                                    </af:column>
+                                    <af:column id="c11" headerText="Created By">
+                                        <af:outputText value="#{row.CreatedByUser}" id="ot25"/>
+                                    </af:column>
+                                    <af:column id="c10" headerText="Document File">
+                                        <af:link text="Download" id="l1">
+                                            <f:attribute name="Id" value="#{row.CaseDocId}"/>
+                                            <af:fileDownloadActionListener method="#{viewScope.CaseDocumentsBean.downloadCaseDocsFileListener}"
+                                                                           filename="#{row.FileName}"/>
+                                        </af:link>
+                                    </af:column>
+                                </af:table>
+                                <af:table value="#{bindings.XwrlCaseDocumentsView1.collectionModel}" var="row"
+                                          rows="#{bindings.XwrlCaseDocumentsView1.rangeSize}" styleClass="customTable"
+                                          emptyText="#{bindings.XwrlCaseDocumentsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                          rowBandingInterval="0" contentDelivery="immediate" autoHeightRows="25"
+                                          selectedRowKeys="#{bindings.XwrlCaseDocumentsView1.collectionModel.selectedRow}"
+                                          selectionListener="#{bindings.XwrlCaseDocumentsView1.collectionModel.makeCurrent}"
+                                          rowSelection="single" fetchSize="#{bindings.XwrlCaseDocumentsView1.rangeSize}"
+                                          id="resId1" partialTriggers=":::b5 :::b1 :::b2 :::b4"
+                                          columnStretching="column:resId1c8n" rendered="false">
+                                    <af:column sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.Id.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.XwrlCaseDocumentsView1.hints.Id.label}"
+                                               id="resId1c1">
+                                        <af:outputText value="#{row.Id}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.Id.tooltip}"
+                                                       id="ot2">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.XwrlCaseDocumentsView1.hints.Id.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.DocumentType.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.XwrlCaseDocumentsView1.hints.DocumentType.label}"
+                                               id="resId1c7" visible="true" width="250">
+                                        <af:outputText value="#{row.DocumentType}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.DocumentType.tooltip}"
+                                                       id="ot8"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.RequestId.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.XwrlCaseDocumentsView1.hints.RequestId.label}"
+                                               id="resId1c2" visible="false">
+                                        <af:outputText value="#{row.RequestId}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.RequestId.tooltip}"
+                                                       id="ot3">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.XwrlCaseDocumentsView1.hints.RequestId.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.FileName.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.XwrlCaseDocumentsView1.hints.FileName.label}"
+                                               id="resId1c8n">
+                                        <af:outputText value="#{row.FileName}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.FileName.tooltip}"
+                                                       id="ot9"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.XwrlCaseDocumentsView1.hints.DocumentFile.label}"
+                                               id="c2" sortable="true"
+                                               sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.DocumentFile.name}">
+                                        <af:link shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.DocumentFile.tooltip}"
+                                                 id="ot20" text="Download">
+                                            <af:setPropertyListener type="action" to="#{pageFlowScope.iterBinding}"
+                                                                    from="#{'XwrlCaseDocumentsView1Iterator'}"/>
+                                            <af:fileDownloadActionListener filename="#{row.FileName}"
+                                                                           method="#{viewScope.CaseDocumentsBean.downloadFileListener}"/>
+                                        </af:link>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.CaseId.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.XwrlCaseDocumentsView1.hints.CaseId.label}"
+                                               id="resId1c3" visible="false">
+                                        <af:outputText value="#{row.CaseId}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.CaseId.tooltip}"
+                                                       id="ot4"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.EdocId.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.XwrlCaseDocumentsView1.hints.EdocId.label}"
+                                               id="resId1c4" visible="false">
+                                        <af:outputText value="#{row.EdocId}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.EdocId.tooltip}"
+                                                       id="ot5">
+                                            <af:convertNumber groupingUsed="false"
+                                                              pattern="#{bindings.XwrlCaseDocumentsView1.hints.EdocId.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.DocumentName.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.XwrlCaseDocumentsView1.hints.DocumentName.label}"
+                                               id="resId1c5" visible="false">
+                                        <af:outputText value="#{row.DocumentName}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.DocumentName.tooltip}"
+                                                       id="ot6"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.DocumentCategory.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.XwrlCaseDocumentsView1.hints.DocumentCategory.label}"
+                                               id="resId1c6" visible="false">
+                                        <af:outputText value="#{row.DocumentCategory}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.DocumentCategory.tooltip}"
+                                                       id="ot7"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.FilePath.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.XwrlCaseDocumentsView1.hints.FilePath.label}"
+                                               id="resId1c9" visible="false">
+                                        <af:outputText value="#{row.FilePath}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.FilePath.tooltip}"
+                                                       id="ot10"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.ContentType.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.XwrlCaseDocumentsView1.hints.ContentType.label}"
+                                               id="resId1c10" visible="false">
+                                        <af:outputText value="#{row.ContentType}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.ContentType.tooltip}"
+                                                       id="ot11"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.XwrlCaseDocumentsView1.hints.ImageFile.label}"
+                                               id="c1" sortable="true"
+                                               sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.ImageFile.name}"
+                                               width="100" rendered="false">
+                                        <af:link shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.ImageFile.tooltip}"
+                                                 id="ot19" text="Preview">
+                                            <af:clientListener method="showImage" type="action"/>
+                                            <af:clientAttribute value="/GenericTC/#{sessionScope.pFacesServlet}/showimageservlet?fileName=#{row.ImageFile}&amp;id=#{viewScope.CaseDocumentsBean.randomVal}"
+                                                                name="imageSrc"/>
+                                            <script xmlns="http://www.w3.org/1999/xhtml">
+                                              function showImage(event) {
+                                                  var link = event.getSource();
+                                                  popupWindow = window.open(link.getProperty("imageSrc"), 'Document', 'height=1000,width=900');
+                                              }
+                                            </script>
+                                        </af:link>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.XwrlCaseDocumentsView1.hints.ImageName.label}"
+                                               id="c3" sortable="true"
+                                               sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.ImageName.name}"
+                                               visible="false">
+                                        <af:outputText value="#{row.ImageName}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.ImageName.tooltip}"
+                                                       id="ot21"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.XwrlCaseDocumentsView1.hints.ImagePath.label}"
+                                               id="c4" sortable="true"
+                                               sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.ImagePath.name}"
+                                               visible="false">
+                                        <af:outputText value="#{row.ImagePath}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.ImagePath.tooltip}"
+                                                       id="ot23"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.UrlPath.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.XwrlCaseDocumentsView1.hints.UrlPath.label}"
+                                               id="resId1c11" visible="false">
+                                        <af:outputText value="#{row.UrlPath}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.UrlPath.tooltip}"
+                                                       id="ot12"/>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.Comment.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.XwrlCaseDocumentsView1.hints.Comment.label}"
+                                               id="resId1c12" visible="false">
+                                        <af:outputText value="#{row.Comment}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.Comment.tooltip}"
+                                                       id="ot13"/>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.XwrlCaseDocumentsView1.hints.CreatedByAttr.label}"
+                                               id="c5" sortable="true"
+                                               sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.CreatedByAttr.name}"
+                                               visible="false">
+                                        <af:selectOneChoice value="#{row.bindings.CreatedByAttr.inputValue}"
+                                                            label="#{row.bindings.CreatedByAttr.label}"
+                                                            required="#{bindings.XwrlCaseDocumentsView1.hints.CreatedByAttr.mandatory}"
+                                                            shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.CreatedByAttr.tooltip}"
+                                                            readOnly="true" id="soc1">
+                                            <f:selectItems value="#{row.bindings.CreatedByAttr.items}" id="si1"/>
+                                            <f:validator binding="#{row.bindings.CreatedByAttr.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.CreationDate.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.XwrlCaseDocumentsView1.hints.CreationDate.label}"
+                                               id="resId1c15" visible="false">
+                                        <af:outputText value="#{row.CreationDate}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.CreationDate.tooltip}"
+                                                       id="ot16">
+                                            <af:convertDateTime pattern="#{bindings.XwrlCaseDocumentsView1.hints.CreationDate.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                    <af:column headerText="#{bindings.XwrlCaseDocumentsView1.hints.LastUpdatedByAttr.label}"
+                                               id="c6" sortable="true"
+                                               sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.LastUpdatedByAttr.name}"
+                                               visible="false">
+                                        <af:selectOneChoice value="#{row.bindings.LastUpdatedByAttr.inputValue}"
+                                                            label="#{row.bindings.LastUpdatedByAttr.label}"
+                                                            required="#{bindings.XwrlCaseDocumentsView1.hints.LastUpdatedByAttr.mandatory}"
+                                                            shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.LastUpdatedByAttr.tooltip}"
+                                                            readOnly="true" id="soc2">
+                                            <f:selectItems value="#{row.bindings.LastUpdatedByAttr.items}" id="si2"/>
+                                            <f:validator binding="#{row.bindings.LastUpdatedByAttr.validator}"/>
+                                        </af:selectOneChoice>
+                                    </af:column>
+                                    <af:column sortProperty="#{bindings.XwrlCaseDocumentsView1.hints.LastUpdateDate.name}"
+                                               sortable="true"
+                                               headerText="#{bindings.XwrlCaseDocumentsView1.hints.LastUpdateDate.label}"
+                                               id="resId1c13" visible="false">
+                                        <af:outputText value="#{row.LastUpdateDate}"
+                                                       shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.LastUpdateDate.tooltip}"
+                                                       id="ot14">
+                                            <af:convertDateTime pattern="#{bindings.XwrlCaseDocumentsView1.hints.LastUpdateDate.format}"/>
+                                        </af:outputText>
+                                    </af:column>
+                                </af:table>
+                                <af:popup childCreation="deferred" autoCancel="disabled" id="p2"
+                                          contentDelivery="lazyUncached">
+                                    <af:dialog id="d1" contentWidth="500" contentHeight="500" resize="on"
+                                               dialogListener="#{viewScope.CaseDocumentsBean.editDialogListener}">
+                                        <f:facet name="buttonBar"/>
+                                        <af:panelHeader text="Case Document" id="ph4">
+                                            <f:facet name="context"/>
+                                            <f:facet name="menuBar"/>
+                                            <f:facet name="toolbar"/>
+                                            <f:facet name="legend"/>
+                                            <f:facet name="info"/>
+                                            <af:panelFormLayout id="pfl2">
+                                                <af:inputText value="#{bindings.Id.inputValue}"
+                                                              label="#{bindings.Id.hints.label}"
+                                                              required="#{bindings.Id.hints.mandatory}"
+                                                              columns="#{bindings.Id.hints.displayWidth}"
+                                                              maximumLength="#{bindings.Id.hints.precision}"
+                                                              shortDesc="#{bindings.Id.hints.tooltip}" id="it1"
+                                                              autoSubmit="true">
+                                                    <f:validator binding="#{bindings.Id.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.Id.format}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.RequestId.inputValue}"
+                                                              label="#{bindings.RequestId.hints.label}"
+                                                              required="#{bindings.RequestId.hints.mandatory}"
+                                                              columns="#{bindings.RequestId.hints.displayWidth}"
+                                                              maximumLength="#{bindings.RequestId.hints.precision}"
+                                                              shortDesc="#{bindings.RequestId.hints.tooltip}" id="it2"
+                                                              autoSubmit="true">
+                                                    <f:validator binding="#{bindings.RequestId.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.RequestId.format}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.CaseId1.inputValue}"
+                                                              label="#{bindings.CaseId1.hints.label}"
+                                                              required="#{bindings.CaseId1.hints.mandatory}"
+                                                              columns="#{bindings.CaseId1.hints.displayWidth}"
+                                                              maximumLength="#{bindings.CaseId1.hints.precision}"
+                                                              shortDesc="#{bindings.CaseId1.hints.tooltip}" id="it3"
+                                                              autoSubmit="true">
+                                                    <f:validator binding="#{bindings.CaseId1.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.EdocId.inputValue}"
+                                                              label="#{bindings.EdocId.hints.label}"
+                                                              required="#{bindings.EdocId.hints.mandatory}"
+                                                              columns="#{bindings.EdocId.hints.displayWidth}"
+                                                              maximumLength="#{bindings.EdocId.hints.precision}"
+                                                              shortDesc="#{bindings.EdocId.hints.tooltip}" id="it4"
+                                                              autoSubmit="true">
+                                                    <f:validator binding="#{bindings.EdocId.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.EdocId.format}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.DocumentName.inputValue}"
+                                                              label="#{bindings.DocumentName.hints.label}"
+                                                              required="#{bindings.DocumentName.hints.mandatory}"
+                                                              columns="#{bindings.DocumentName.hints.displayWidth}"
+                                                              maximumLength="#{bindings.DocumentName.hints.precision}"
+                                                              shortDesc="#{bindings.DocumentName.hints.tooltip}"
+                                                              id="it5" autoSubmit="true">
+                                                    <f:validator binding="#{bindings.DocumentName.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.DocumentCategory.inputValue}"
+                                                              label="#{bindings.DocumentCategory.hints.label}"
+                                                              required="#{bindings.DocumentCategory.hints.mandatory}"
+                                                              columns="#{bindings.DocumentCategory.hints.displayWidth}"
+                                                              maximumLength="#{bindings.DocumentCategory.hints.precision}"
+                                                              shortDesc="#{bindings.DocumentCategory.hints.tooltip}"
+                                                              id="it6" autoSubmit="true">
+                                                    <f:validator binding="#{bindings.DocumentCategory.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.DocumentType.inputValue}"
+                                                              label="#{bindings.DocumentType.hints.label}"
+                                                              required="#{bindings.DocumentType.hints.mandatory}"
+                                                              columns="#{bindings.DocumentType.hints.displayWidth}"
+                                                              maximumLength="#{bindings.DocumentType.hints.precision}"
+                                                              shortDesc="#{bindings.DocumentType.hints.tooltip}"
+                                                              id="it7" autoSubmit="true">
+                                                    <f:validator binding="#{bindings.DocumentType.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.FileName.inputValue}"
+                                                              label="#{bindings.FileName.hints.label}"
+                                                              required="#{bindings.FileName.hints.mandatory}"
+                                                              columns="#{bindings.FileName.hints.displayWidth}"
+                                                              maximumLength="#{bindings.FileName.hints.precision}"
+                                                              shortDesc="#{bindings.FileName.hints.tooltip}" id="it8"
+                                                              autoSubmit="true">
+                                                    <f:validator binding="#{bindings.FileName.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.FilePath.inputValue}"
+                                                              label="#{bindings.FilePath.hints.label}"
+                                                              required="#{bindings.FilePath.hints.mandatory}"
+                                                              columns="#{bindings.FilePath.hints.displayWidth}"
+                                                              maximumLength="#{bindings.FilePath.hints.precision}"
+                                                              shortDesc="#{bindings.FilePath.hints.tooltip}" id="it9"
+                                                              autoSubmit="true">
+                                                    <f:validator binding="#{bindings.FilePath.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.ContentType.inputValue}"
+                                                              label="#{bindings.ContentType.hints.label}"
+                                                              required="#{bindings.ContentType.hints.mandatory}"
+                                                              columns="#{bindings.ContentType.hints.displayWidth}"
+                                                              maximumLength="#{bindings.ContentType.hints.precision}"
+                                                              shortDesc="#{bindings.ContentType.hints.tooltip}"
+                                                              id="it10" autoSubmit="true">
+                                                    <f:validator binding="#{bindings.ContentType.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.UrlPath.inputValue}"
+                                                              label="#{bindings.UrlPath.hints.label}"
+                                                              required="#{bindings.UrlPath.hints.mandatory}"
+                                                              columns="#{bindings.UrlPath.hints.displayWidth}"
+                                                              maximumLength="#{bindings.UrlPath.hints.precision}"
+                                                              shortDesc="#{bindings.UrlPath.hints.tooltip}" id="it11"
+                                                              autoSubmit="true">
+                                                    <f:validator binding="#{bindings.UrlPath.validator}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.Comment.inputValue}"
+                                                              label="#{bindings.Comment.hints.label}"
+                                                              required="#{bindings.Comment.hints.mandatory}"
+                                                              columns="#{bindings.Comment.hints.displayWidth}"
+                                                              maximumLength="#{bindings.Comment.hints.precision}"
+                                                              shortDesc="#{bindings.Comment.hints.tooltip}" id="it12"
+                                                              autoSubmit="true">
+                                                    <f:validator binding="#{bindings.Comment.validator}"/>
+                                                </af:inputText>
+                                                <af:inputDate value="#{bindings.LastUpdateDate.inputValue}"
+                                                              label="#{bindings.LastUpdateDate.hints.label}"
+                                                              required="#{bindings.LastUpdateDate.hints.mandatory}"
+                                                              columns="#{bindings.LastUpdateDate.hints.displayWidth}"
+                                                              shortDesc="#{bindings.LastUpdateDate.hints.tooltip}"
+                                                              id="id1" autoSubmit="true">
+                                                    <f:validator binding="#{bindings.LastUpdateDate.validator}"/>
+                                                    <af:convertDateTime pattern="#{bindings.LastUpdateDate.format}"/>
+                                                </af:inputDate>
+                                                <af:inputText value="#{bindings.LastUpdatedBy.inputValue}"
+                                                              label="#{bindings.LastUpdatedBy.hints.label}"
+                                                              required="#{bindings.LastUpdatedBy.hints.mandatory}"
+                                                              columns="#{bindings.LastUpdatedBy.hints.displayWidth}"
+                                                              maximumLength="#{bindings.LastUpdatedBy.hints.precision}"
+                                                              shortDesc="#{bindings.LastUpdatedBy.hints.tooltip}"
+                                                              id="it13" autoSubmit="true">
+                                                    <f:validator binding="#{bindings.LastUpdatedBy.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.LastUpdatedBy.format}"/>
+                                                </af:inputText>
+                                                <af:inputDate value="#{bindings.CreationDate.inputValue}"
+                                                              label="#{bindings.CreationDate.hints.label}"
+                                                              required="#{bindings.CreationDate.hints.mandatory}"
+                                                              columns="#{bindings.CreationDate.hints.displayWidth}"
+                                                              shortDesc="#{bindings.CreationDate.hints.tooltip}"
+                                                              id="id2" autoSubmit="true">
+                                                    <f:validator binding="#{bindings.CreationDate.validator}"/>
+                                                    <af:convertDateTime pattern="#{bindings.CreationDate.format}"/>
+                                                </af:inputDate>
+                                                <af:inputText value="#{bindings.CreatedBy.inputValue}"
+                                                              label="#{bindings.CreatedBy.hints.label}"
+                                                              required="#{bindings.CreatedBy.hints.mandatory}"
+                                                              columns="#{bindings.CreatedBy.hints.displayWidth}"
+                                                              maximumLength="#{bindings.CreatedBy.hints.precision}"
+                                                              shortDesc="#{bindings.CreatedBy.hints.tooltip}" id="it14"
+                                                              autoSubmit="true">
+                                                    <f:validator binding="#{bindings.CreatedBy.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.CreatedBy.format}"/>
+                                                </af:inputText>
+                                                <af:inputText value="#{bindings.LastUpdateLogin.inputValue}"
+                                                              label="#{bindings.LastUpdateLogin.hints.label}"
+                                                              required="#{bindings.LastUpdateLogin.hints.mandatory}"
+                                                              columns="#{bindings.LastUpdateLogin.hints.displayWidth}"
+                                                              maximumLength="#{bindings.LastUpdateLogin.hints.precision}"
+                                                              shortDesc="#{bindings.LastUpdateLogin.hints.tooltip}"
+                                                              id="it15" autoSubmit="true">
+                                                    <f:validator binding="#{bindings.LastUpdateLogin.validator}"/>
+                                                    <af:convertNumber groupingUsed="false"
+                                                                      pattern="#{bindings.LastUpdateLogin.format}"/>
+                                                </af:inputText>
+                                            </af:panelFormLayout>
+                                        </af:panelHeader>
+                                    </af:dialog>
+                                </af:popup>
+                                <f:facet name="toolbar">
+                                    <af:toolbar id="t1"/>
+                                </f:facet>
+                            </af:panelCollection>
+                            <f:facet name="toolbar">
+                                <af:toolbar id="t2">
+                                    <af:panelGroupLayout id="pgl2" layout="horizontal">
+                                        <af:button text="Upload" id="b1" useWindow="true" windowHeight="700"
+                                                   windowWidth="1000" windowEmbedStyle="inlineDocument"
+                                                   windowModalityType="applicationModal"
+                                                   returnListener="#{pageFlowScope.UploadModel.uploadReturnListener}"
+                                                   action="#{pageFlowScope.UploadModel.uploadActionListener}">
+                                            <af:setPropertyListener type="action" from="#{'Individual Case'}"
+                                                                    to="#{pageFlowScope.panelHeader}"/>
+                                            <af:setPropertyListener type="action" from="#{bindings.CaseId1.inputValue}"
+                                                                    to="#{pageFlowScope.displayKey}"/>
+                                            <af:setPropertyListener from="#{bindings.XwrlCaseDocumentsView1Iterator.name}"
+                                                                    to="#{pageFlowScope.iterBinding}" type="action"/>
+                                            <af:setPropertyListener to="#{pageFlowScope.outputTextId}" type="action"
+                                                                    from="#{'aot1'}"/>
+                                        </af:button>
+                                        <af:button text="Edit" id="b2"
+                                                   actionListener="#{viewScope.CaseDocumentsBean.docShowPopup}"
+                                                   disabled="#{!bindings.Delete.enabled}" rendered="false"/>
+                                        <af:button text="Delete" id="b4"
+                                                   actionListener="#{viewScope.CaseDocumentsBean.deleteShowPopup}" partialTriggers="pc1:t3 pc1">
+                                            <af:setPropertyListener type="action" to="#{pageFlowScope.iterBinding}"
+                                                                    from="#{'XwrlCaseDocumentsView1Iterator'}"/>
+                                            <af:setPropertyListener type="action" from="#{'XwrlRequestsView1Iterator'}"
+                                                                    to="#{pageFlowScope.masterIter}"/>
+                                        </af:button>
+                                        <af:button actionListener="#{bindings.Execute1.execute}" text="Refresh"
+                                                   disabled="#{!bindings.Execute1.enabled}" id="b5"
+                                                   partialTriggers="pc1:t3"/>
+                                    </af:panelGroupLayout>
+                                </af:toolbar>
+                            </f:facet>
+                        </af:panelHeader>
+                    </f:facet>
+                </af:panelSplitter>
+            </af:showDetailItem>
+        </af:panelTabbed>
+    </af:panelHeader>
+</ui:composition>
+<!--<af:clientAttribute value="/TradeCompliance/faces/Preview.jsf?id=#{backingBeanScope.RequestBacking.randomVal}" name="imageSrc"/>-->

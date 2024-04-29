@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="WcScreeningRequestToDocumentsLogicalLink"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.manualtradecompliance.adfbc.views.links.WcScreeningRequestToDocumentsLogicalLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="WcScreeningRequestVO"
+    Cardinality="1"
+    Source="true"
+    Owner="com.rmi.manualtradecompliance.adfbc.views.WcScreeningRequestView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="WcScreeningRequestVO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rmi.manualtradecompliance.adfbc.views.WcScreeningRequestView.WcScreeningRequestId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="WcRequestDocumentsVO"
+    Cardinality="-1"
+    Owner="com.rmi.manualtradecompliance.adfbc.views.WcRequestDocumentsView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="WcRequestDocumentsVO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rmi.manualtradecompliance.adfbc.views.WcRequestDocumentsView.WcScreeningRequestId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.manualtradecompliance.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

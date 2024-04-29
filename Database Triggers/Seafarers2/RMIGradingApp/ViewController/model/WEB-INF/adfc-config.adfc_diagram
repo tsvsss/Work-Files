@@ -1,0 +1,35 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">EditDocument</property>
+      <property
+         name="page">/EditDocument.jsf</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>EditDocument&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">249.79883</property>
+      <property
+         name="x">207.68457</property>
+   </View>
+   <View
+      id="View5">
+      <property
+         name="activityId">GenericTC</property>
+      <property
+         name="page">/GenericTC.jsf</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>GenericTC&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">253.44824</property>
+      <property
+         name="x">329.5</property>
+   </View>
+</SDM>

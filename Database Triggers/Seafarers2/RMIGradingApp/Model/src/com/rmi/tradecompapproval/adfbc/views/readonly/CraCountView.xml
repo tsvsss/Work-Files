@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CraCountView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.readonly.CraCountView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pEsiId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pEsiBatchId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[select          
+cra_count cra_count         
+from          
+(          
+  select           
+  (case when 0 < (select count(*) from rmi_seafarer.rmi_seafarers_iface sub_sea,           
+                  rmi_seafarer.rmi_seafarer_docs_iface sub_docs           
+                  where sub_docs.esi_id = sub_sea.esi_id and sub_docs.cra_required = 'Y'  
+                  and nvl(sub_docs.grading_status,'Pending') not in ('Cancel','Rejected')    
+                  and nvl(sub_docs.cra_approved_flag, 'NA') <> 'N' and sub_docs.cra_sent_date is null       
+                  and sub_sea.esi_id = rsi.esi_id and sub_sea.esi_batch_id = rsi.esi_batch_id)          
+        then 'R'          
+        else 'G'          
+  end) cra_count             
+  from rmi_seafarer.rmi_seafarers_iface rsi ,                        
+  rmi_seafarer.rmi_seafarer_docs_iface rsdi                         
+  where rsdi.esi_id = rsi.esi_id              
+  and rsdi.cra_required = 'Y'  
+  and nvl(rsdi.grading_status,'Pending') not in ('Cancel','Rejected')  
+  and nvl(rsdi.cra_approved_flag, 'NA') <> 'N'       
+  and rsi.esi_id = :pEsiId            
+  and rsi.esi_batch_id = :pEsiBatchId          
+)          
+where rownum <= 1]]></SQLQuery>
+  <ViewAttribute
+    Name="CraCount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="CRA_COUNT"
+    Expression="CRA_COUNT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

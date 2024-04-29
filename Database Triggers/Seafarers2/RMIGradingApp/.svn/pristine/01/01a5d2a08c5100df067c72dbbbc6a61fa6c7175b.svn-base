@@ -1,0 +1,359 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1" startWidth="50px" endWidth="50px" topHeight="50px" bottomHeight="49px"
+                         styleClass="AFStretchWidth">
+    <f:facet name="bottom">
+      <!--<af:table value="#{bindings.SearchSeafarerView1.collectionModel}" var="row"
+                rows="#{bindings.SearchSeafarerView1.rangeSize}"
+                emptyText="#{bindings.SearchSeafarerView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0" selectedRowKeys="#{bindings.SearchSeafarerView1.collectionModel.selectedRow}"
+                selectionListener="#{bindings.SearchSeafarerView1.collectionModel.makeCurrent}" rowSelection="single"
+                fetchSize="#{bindings.SearchSeafarerView1.rangeSize}"
+                filterModel="#{bindings.SearchSeafarerRO1Query.queryDescriptor}"
+                queryListener="#{bindings.SearchSeafarerRO1Query.processQuery}" filterVisible="true" varStatus="vs"
+                id="t3">
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.SlNo.name}" filterable="true" sortable="true"
+                   headerText="#{bindings.SearchSeafarerView1.hints.SlNo.label}" id="c11">
+          <af:outputText value="#{row.SlNo}" shortDesc="#{bindings.SearchSeafarerView1.hints.SlNo.tooltip}" id="ot9">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.SearchSeafarerView1.hints.SlNo.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.QueryId.name}" filterable="true" sortable="true"
+                   headerText="#{bindings.SearchSeafarerView1.hints.QueryId.label}" id="c12">
+          <af:outputText value="#{row.QueryId}" shortDesc="#{bindings.SearchSeafarerView1.hints.QueryId.tooltip}"
+                         id="ot10">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.SearchSeafarerView1.hints.QueryId.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.Weight.name}" filterable="true" sortable="true"
+                   headerText="#{bindings.SearchSeafarerView1.hints.Weight.label}" id="c13">
+          <af:outputText value="#{row.Weight}" shortDesc="#{bindings.SearchSeafarerView1.hints.Weight.tooltip}"
+                         id="ot11">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.SearchSeafarerView1.hints.Weight.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.SeafarerId.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.SearchSeafarerView1.hints.SeafarerId.label}" id="c14">
+          <af:outputText value="#{row.SeafarerId}" shortDesc="#{bindings.SearchSeafarerView1.hints.SeafarerId.tooltip}"
+                         id="ot12">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.SearchSeafarerView1.hints.SeafarerId.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.LastName.name}" filterable="true" sortable="true"
+                   headerText="#{bindings.SearchSeafarerView1.hints.LastName.label}" id="c15">
+          <af:outputText value="#{row.LastName}" shortDesc="#{bindings.SearchSeafarerView1.hints.LastName.tooltip}"
+                         id="ot13"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.FirstName.name}" filterable="true" sortable="true"
+                   headerText="#{bindings.SearchSeafarerView1.hints.FirstName.label}" id="c16">
+          <af:outputText value="#{row.FirstName}" shortDesc="#{bindings.SearchSeafarerView1.hints.FirstName.tooltip}"
+                         id="ot14"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.BirthDate.name}" filterable="true" sortable="true"
+                   headerText="#{bindings.SearchSeafarerView1.hints.BirthDate.label}" id="c17">
+          <f:facet name="filter">
+            <af:inputDate value="#{bindings.SearchSeafarerRO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.BirthDate.value}"
+                          id="id3">
+              <af:convertDateTime pattern="#{bindings.SearchSeafarerView1.hints.BirthDate.format}"/>
+            </af:inputDate>
+          </f:facet>
+          <af:outputText value="#{row.BirthDate}" shortDesc="#{bindings.SearchSeafarerView1.hints.BirthDate.tooltip}"
+                         id="ot15">
+            <af:convertDateTime pattern="#{bindings.SearchSeafarerView1.hints.BirthDate.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.BirthPlace.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.SearchSeafarerView1.hints.BirthPlace.label}" id="c18">
+          <af:outputText value="#{row.BirthPlace}" shortDesc="#{bindings.SearchSeafarerView1.hints.BirthPlace.tooltip}"
+                         id="ot16"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.Citizenship.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.SearchSeafarerView1.hints.Citizenship.label}" id="c19">
+          <af:outputText value="#{row.Citizenship}"
+                         shortDesc="#{bindings.SearchSeafarerView1.hints.Citizenship.tooltip}" id="ot17"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.Nationality.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.SearchSeafarerView1.hints.Nationality.label}" id="c20">
+          <af:outputText value="#{row.Nationality}"
+                         shortDesc="#{bindings.SearchSeafarerView1.hints.Nationality.tooltip}" id="ot18"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.HairColor.name}" filterable="true" sortable="true"
+                   headerText="#{bindings.SearchSeafarerView1.hints.HairColor.label}" id="c21">
+          <af:outputText value="#{row.HairColor}" shortDesc="#{bindings.SearchSeafarerView1.hints.HairColor.tooltip}"
+                         id="ot19"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.EyeColor.name}" filterable="true" sortable="true"
+                   headerText="#{bindings.SearchSeafarerView1.hints.EyeColor.label}" id="c22">
+          <af:outputText value="#{row.EyeColor}" shortDesc="#{bindings.SearchSeafarerView1.hints.EyeColor.tooltip}"
+                         id="ot20"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.Gender.name}" filterable="true" sortable="true"
+                   headerText="#{bindings.SearchSeafarerView1.hints.Gender.label}" id="c23">
+          <af:outputText value="#{row.Gender}" shortDesc="#{bindings.SearchSeafarerView1.hints.Gender.tooltip}"
+                         id="ot21"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.HeightFt.name}" filterable="true" sortable="true"
+                   headerText="#{bindings.SearchSeafarerView1.hints.HeightFt.label}" id="c24">
+          <af:outputText value="#{row.HeightFt}" shortDesc="#{bindings.SearchSeafarerView1.hints.HeightFt.tooltip}"
+                         id="ot22">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.SearchSeafarerView1.hints.HeightFt.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.HeightIn.name}" filterable="true" sortable="true"
+                   headerText="#{bindings.SearchSeafarerView1.hints.HeightIn.label}" id="c25">
+          <af:outputText value="#{row.HeightIn}" shortDesc="#{bindings.SearchSeafarerView1.hints.HeightIn.tooltip}"
+                         id="ot23">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.SearchSeafarerView1.hints.HeightIn.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.WeightLb.name}" filterable="true" sortable="true"
+                   headerText="#{bindings.SearchSeafarerView1.hints.WeightLb.label}" id="c26">
+          <af:outputText value="#{row.WeightLb}" shortDesc="#{bindings.SearchSeafarerView1.hints.WeightLb.tooltip}"
+                         id="ot24">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.SearchSeafarerView1.hints.WeightLb.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.DistinguishingMarks.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.SearchSeafarerView1.hints.DistinguishingMarks.label}"
+                   id="c27">
+          <af:outputText value="#{row.DistinguishingMarks}"
+                         shortDesc="#{bindings.SearchSeafarerView1.hints.DistinguishingMarks.tooltip}" id="ot25"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.Notes.name}" filterable="true" sortable="true"
+                   headerText="#{bindings.SearchSeafarerView1.hints.Notes.label}" id="c28">
+          <af:outputText value="#{row.Notes}" shortDesc="#{bindings.SearchSeafarerView1.hints.Notes.tooltip}"
+                         id="ot26"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.Photo.name}" filterable="true" sortable="true"
+                   headerText="#{bindings.SearchSeafarerView1.hints.Photo.label}" id="c29">
+          <af:outputText value="#{row.Photo}" shortDesc="#{bindings.SearchSeafarerView1.hints.Photo.tooltip}"
+                         id="ot27"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.TransUseSelected.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.SearchSeafarerView1.hints.TransUseSelected.label}" id="c30">
+          <af:outputText value="#{row.TransUseSelected}"
+                         shortDesc="#{bindings.SearchSeafarerView1.hints.TransUseSelected.tooltip}" id="ot28"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchSeafarerView1.hints.TransPhotoLink.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.SearchSeafarerView1.hints.TransPhotoLink.label}" id="c31">
+          <af:outputText value="#{row.TransPhotoLink}"
+                         shortDesc="#{bindings.SearchSeafarerView1.hints.TransPhotoLink.tooltip}" id="ot29"/>
+        </af:column>
+      </af:table>-->
+    </f:facet>
+    <f:facet name="center">
+        <!--<af:resource type="javascript">
+            function searchSeafarer(event) {
+                if (event.getKeyCode() == AdfKeyStroke.ENTER_KEY) {
+                    var source = event.getSource();
+                    var myButton = source.findComponent("b4");
+                    var actionEvent = new AdfActionEvent(myButton);
+                    actionEvent.forceFullSubmit();
+                    actionEvent.noResponseExpected();
+                    actionEvent.queue();
+                }
+            }   
+        </af:resource>-->
+      <af:panelGroupLayout id="pgl1" layout="vertical" styleClass="AFStretchWidth">
+        <af:panelFormLayout id="pfl1" maxColumns="5" rows="1" styleClass="AFStretchWidth panelFormLayoutClass" inlineStyle="padding:10px;">
+          <af:inputText value="#{bindings.LastName.inputValue}" label="Surname" required="false"
+                        columns="#{bindings.LastName.hints.displayWidth}"
+                        maximumLength="#{bindings.LastName.hints.precision}" id="it2" disabled="true" autoSubmit="true"
+                        styleClass="AFInputTextTab">
+            <f:validator binding="#{bindings.LastName.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.FirstName.inputValue}" label="Given Name" required="false"
+                        columns="#{bindings.FirstName.hints.displayWidth}"
+                        maximumLength="#{bindings.FirstName.hints.precision}" id="it1" disabled="true" autoSubmit="true"
+                        styleClass="AFInputTextTab">
+            <f:validator binding="#{bindings.FirstName.validator}"/>
+          </af:inputText>
+          <af:inputDate value="#{bindings.BirthDate.inputValue}" label="Birth Date" required="false"
+                        columns="#{bindings.BirthDate.hints.displayWidth}" id="id2" autoSubmit="true" disabled="true"
+                        styleClass="AFInputTextTab" contentStyle="width:100px !important;">
+            <f:validator binding="#{bindings.BirthDate.validator}"/>
+            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+          </af:inputDate>
+          <af:inputListOfValues id="transNationalityId"
+                                popupTitle="Search and Select: #{bindings.transNationality.hints.label}"
+                                value="#{bindings.transNationality.inputValue}" label="Nationality"
+                                model="#{bindings.transNationality.listOfValuesModel}" required="false"
+                                columns="#{bindings.transNationality.hints.displayWidth}" disabled="true"
+                                autoSubmit="true" styleClass="AFInputTextTab">
+            <f:validator binding="#{bindings.transNationality.validator}"/>
+          </af:inputListOfValues>
+          <af:inputText value="#{bindings.BirthPlace.inputValue}" label="Birth Place"
+                        required="false"
+                        columns="#{bindings.BirthPlace.hints.displayWidth}"
+                        maximumLength="#{bindings.BirthPlace.hints.precision}" id="it3" disabled="true"
+                        autoSubmit="true" styleClass="AFInputTextTab" rows="2"
+                        contentStyle="white-space: normal !important; -webkit-white-space: normal !important;">
+            <f:validator binding="#{bindings.BirthPlace.validator}"/>
+          </af:inputText>
+        </af:panelFormLayout>
+        <af:panelBox text="Additional Filters" id="pb2" disclosed="false">
+          <f:facet name="toolbar"/>
+          <af:panelGroupLayout id="pgl3" styleClass="AFStretchWidth" layout="horizontal">
+            <af:panelFormLayout id="pfl3" styleClass="AFStretchWidth panelFormLayoutClass" rendered="false"/>
+            <af:panelFormLayout id="pfl2" styleClass="AFStretchWidth panelFormLayoutClass" labelAlignment="start"
+                                rows="1" maxColumns="8" fieldWidth="150">
+              <af:inputText value="#{bindings.TransSeafarerIdFilter.inputValue}"
+                            required="#{bindings.TransSeafarerIdFilter.hints.mandatory}"
+                            columns="#{bindings.TransSeafarerIdFilter.hints.displayWidth}"
+                            maximumLength="#{bindings.TransSeafarerIdFilter.hints.precision}" id="it4" simple="true"
+                            placeholder="Seafarer ID" autoSubmit="true"
+                            contentStyle="text-align:left; width:120px !important;">
+                <f:validator binding="#{bindings.TransSeafarerIdFilter.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.TransSeafarerIdFilter.format}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.TransLastNameFilter.inputValue}" simple="true"
+                            required="#{bindings.TransLastNameFilter.hints.mandatory}"
+                            columns="#{bindings.TransLastNameFilter.hints.displayWidth}"
+                            maximumLength="#{bindings.TransLastNameFilter.hints.precision}" id="it5"
+                            placeholder="Surname" autoSubmit="true" contentStyle="width:150px !important;">
+                <f:validator binding="#{bindings.TransLastNameFilter.validator}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.TransFirstNameFilter.inputValue}" simple="true"
+                            required="#{bindings.TransFirstNameFilter.hints.mandatory}"
+                            columns="#{bindings.TransFirstNameFilter.hints.displayWidth}"
+                            maximumLength="#{bindings.TransFirstNameFilter.hints.precision}" id="it6" autoSubmit="true"
+                            placeholder="Given Name" contentStyle="width:150px !important;">
+                <f:validator binding="#{bindings.TransFirstNameFilter.validator}"/>
+              </af:inputText>
+              <af:inputDate value="#{bindings.TransBirthDateFilter.inputValue}"
+                            required="false"
+                            columns="#{bindings.TransBirthDateFilter.hints.displayWidth}" id="id3"
+                            placeholder="Birth Date" autoSubmit="true" simple="true"
+                            contentStyle="width:120px !important;">
+                <f:validator binding="#{bindings.TransBirthDateFilter.validator}"/>
+                <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+              </af:inputDate>
+              <af:inputText value="#{bindings.TransCitizenshipFilter.inputValue}" simple="true"
+                            required="#{bindings.TransCitizenshipFilter.hints.mandatory}"
+                            columns="#{bindings.TransCitizenshipFilter.hints.displayWidth}"
+                            maximumLength="#{bindings.TransCitizenshipFilter.hints.precision}" id="it7"
+                            placeholder="Citizenship" autoSubmit="true" contentStyle="width:150px !important;">
+                <f:validator binding="#{bindings.TransCitizenshipFilter.validator}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.TransBirthPlaceFilter.inputValue}" simple="true"
+                            required="#{bindings.TransBirthPlaceFilter.hints.mandatory}"
+                            columns="#{bindings.TransBirthPlaceFilter.hints.displayWidth}"
+                            maximumLength="#{bindings.TransBirthPlaceFilter.hints.precision}" id="it8" autoSubmit="true"
+                            placeholder="Birth Place" contentStyle="width:150px !important;">
+                <f:validator binding="#{bindings.TransBirthPlaceFilter.validator}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.TransDistinguishingMarksFilter.inputValue}" simple="true"
+                            required="#{bindings.TransDistinguishingMarksFilter.hints.mandatory}"
+                            columns="#{bindings.TransDistinguishingMarksFilter.hints.displayWidth}"
+                            maximumLength="#{bindings.TransDistinguishingMarksFilter.hints.precision}" id="it9"
+                            placeholder="Distinguishing Marks" autoSubmit="true" contentStyle="width:120px !important;"
+                            rendered="false">
+                <f:validator binding="#{bindings.TransDistinguishingMarksFilter.validator}"/>
+              </af:inputText>
+              <af:panelGroupLayout id="pgl2" layout="horizontal">
+                <af:button text="Search" id="b4"
+                           actionListener="#{pageFlowScope.searchSeafarerBean.additionalFilterSearchAL}"/>
+                <af:spacer width="10" height="10" id="s3"/>
+                <af:button text="Reset" id="b5" immediate="true"
+                           actionListener="#{pageFlowScope.searchSeafarerBean.additionalFilterResetAL}">
+                  <af:resetActionListener/>
+                </af:button>
+              </af:panelGroupLayout>
+            </af:panelFormLayout>
+          </af:panelGroupLayout>
+        </af:panelBox>
+        <af:table value="#{bindings.SearchSeafarerRO1.collectionModel}" var="row"
+                  rows="#{bindings.SearchSeafarerRO1.rangeSize}"
+                  emptyText="#{bindings.SearchSeafarerRO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" selectedRowKeys="#{bindings.SearchSeafarerRO1.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.SearchSeafarerRO1.collectionModel.makeCurrent}" rowSelection="single"
+                  fetchSize="#{bindings.SearchSeafarerRO1.rangeSize}"
+                  filterModel="#{bindings.SearchSeafarerRO1Query.queryDescriptor}"
+                  queryListener="#{bindings.SearchSeafarerRO1Query.processQuery}" filterVisible="false" varStatus="vs"
+                  id="t1" styleClass="AFStretchWidth" inlineStyle="line-height:20px;" autoHeightRows="8"
+                  contentDelivery="immediate" columnStretching="last"
+                  binding="#{pageFlowScope.searchSeafarerBean.searchSeafarerTableBind}" partialTriggers="::b1 ::b2">
+          <af:column id="c9" align="center" width="50"
+                     sortProperty="#{bindings.SearchSeafarerRO1.hints.TransUseSelected.name}" filterable="false">
+            <af:selectBooleanCheckbox value="#{row.bindings.TransUseSelected.inputValue}"
+                                      label="#{row.bindings.TransUseSelected.label}"
+                                      shortDesc="#{bindings.SearchSeafarerRO1.hints.TransUseSelected.tooltip}" id="sbc1"
+                                      autoSubmit="true"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.SearchSeafarerRO1.hints.SeafarerId.name}" filterable="false"
+                     sortable="true" headerText="Seafarer ID" id="c1">
+            <af:outputText value="#{row.SeafarerId}" shortDesc="#{bindings.SearchSeafarerRO1.hints.SeafarerId.tooltip}"
+                           id="ot1">
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.SearchSeafarerRO1.hints.SeafarerId.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column sortProperty="#{bindings.SearchSeafarerRO1.hints.LastName.name}" sortable="true"
+                     headerText="Surname" id="c2" width="150">
+            <af:outputText value="#{row.LastName}" shortDesc="#{bindings.SearchSeafarerRO1.hints.LastName.tooltip}"
+                           id="ot2"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.SearchSeafarerRO1.hints.FirstName.name}" filterable="false" sortable="true"
+                     headerText="Given Name" id="c3" width="150">
+            <af:outputText value="#{row.FirstName}" shortDesc="#{bindings.SearchSeafarerRO1.hints.FirstName.tooltip}"
+                           id="ot3"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.SearchSeafarerRO1.hints.BirthDate.name}" sortable="true"
+                     headerText="Birth Date" id="c4" align="center">
+            <f:facet name="filter">
+              <af:inputDate value="#{bindings.SearchSeafarerRO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.BirthDate.value}"
+                            id="id1">
+                <af:convertDateTime pattern="#{bindings.SearchSeafarerRO1.hints.BirthDate.format}"/>
+              </af:inputDate>
+            </f:facet>
+            <af:outputText value="#{row.BirthDate}" shortDesc="#{bindings.SearchSeafarerRO1.hints.BirthDate.tooltip}"
+                           id="ot4">
+              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+            </af:outputText>
+          </af:column>
+          <af:column sortProperty="#{bindings.SearchSeafarerRO1.hints.Citizenship.name}"
+                     sortable="true" headerText="Citizenship" id="c5" width="150"
+                     inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;">
+            <af:outputText value="#{row.Citizenship}"
+                           shortDesc="#{bindings.SearchSeafarerRO1.hints.Citizenship.tooltip}" id="ot5"/>
+          </af:column>
+          <af:column id="c7" width="150" headerText="Birth Place"
+                     sortProperty="#{bindings.SearchSeafarerRO1.hints.BirthPlace.name}">
+            <af:outputText value="#{row.BirthPlace}" id="ot7"/>
+          </af:column>
+          <af:column id="c10" width="150" headerText="Distinguishing Marks"
+                     sortProperty="#{bindings.SearchSeafarerRO1.hints.DistinguishingMarks.name}" rendered="false">
+            <af:outputText value="#{row.DistinguishingMarks}" id="ot8"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.SearchSeafarerRO1.hints.TransPhotoLink.name}" sortable="false" id="c8"
+                     align="center" filterable="false" width="60">
+            <af:button text="Photo" id="b3" shortDesc="#{row.TransPhotoLink}" targetFrame="_blank"
+                       destination="/seaf/previewdocument?path=#{row.Photo}"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.SearchSeafarerRO1.hints.Notes.name}" sortable="true"
+                     headerText="Notes" id="c6"
+                     inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;">
+            <af:outputText value="#{row.Notes}" shortDesc="#{bindings.SearchSeafarerRO1.hints.Notes.tooltip}" id="ot6"/>
+          </af:column>
+        </af:table>
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="start"/>
+    <f:facet name="end"/>
+    <f:facet name="top">
+      <af:panelBox text="Search Seafarer Database" id="pb1" showHeader="always" showDisclosure="false"
+                   inlineStyle="border:none; box-shadow:none;">
+        <f:facet name="toolbar">
+          <af:toolbar id="t2" inlineStyle="width:500px;float:left;">
+            <af:button text="Use Selected Seafarer" id="b1"
+                       action="#{pageFlowScope.searchSeafarerBean.actionUseSeafarer}" immediate="true"/>
+            <af:spacer width="10" height="10" id="s2"/>
+            <af:button text="#{(pageFlowScope.P_UPDATE_SEAFARER eq 'Y') ? 'Back' : 'Cancel/Seafarer Not Found'}" id="b2"
+                       action="#{pageFlowScope.searchSeafarerBean.actionCancelSeafarerNotFound}" immediate="true"/>
+          </af:toolbar>
+        </f:facet>
+        <af:separator id="s1"/>
+      </af:panelBox>
+    </f:facet>
+  </af:panelStretchLayout>
+</jsp:root>

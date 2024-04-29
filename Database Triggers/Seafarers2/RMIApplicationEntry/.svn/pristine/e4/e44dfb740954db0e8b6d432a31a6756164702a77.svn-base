@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">SeafarerList</property>
+      <property
+         name="page">/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/SeafarerList.jsf</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>SeafarerList&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">186.94824</property>
+      <property
+         name="x">252.0</property>
+   </View>
+   <MethodCall
+      id="MethodCall3">
+      <property
+         name="activityId">onLoadSeafarerList</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>onLoadSeafarerList&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">223.14941</property>
+      <property
+         name="x">-37.628906</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="MethodCall3"
+      to="View2">
+      <property
+         name="fromOutcome">onLoadSeafarerList</property>
+      <property
+         name="sdm:polyPoints">R50,4.6478796,222.79883,209.72324,186.59766,L50</property>
+   </ControlFlowCase>
+</SDM>

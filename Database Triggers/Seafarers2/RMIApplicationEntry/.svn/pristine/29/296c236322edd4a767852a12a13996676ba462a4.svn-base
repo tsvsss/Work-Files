@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelBox text="Deficient Seafarer Applications" id="pb1" showDisclosure="false">
+    <f:facet name="toolbar"/>
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar">
+        <af:toolbar id="t2">
+          <af:button text="Refresh" id="b2" actionListener="#{pageFlowScope.DeficientOrdersBean.refreshButton}"/>
+        </af:toolbar>
+      </f:facet>
+      <f:facet name="statusbar"/>
+      <af:table value="#{bindings.BatchesRejectedView.collectionModel}" var="row"
+                rows="#{bindings.BatchesRejectedView.rangeSize}"
+                emptyText="#{bindings.BatchesRejectedView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0" selectedRowKeys="#{bindings.BatchesRejectedView.collectionModel.selectedRow}"
+                selectionListener="#{bindings.BatchesRejectedView.collectionModel.makeCurrent}" rowSelection="single"
+                fetchSize="#{bindings.BatchesRejectedView.rangeSize}"
+                filterModel="#{bindings.BatchesRejectedViewQuery.queryDescriptor}"
+                queryListener="#{bindings.BatchesRejectedViewQuery.processQuery}" filterVisible="true" varStatus="vs"
+                id="t1" columnStretching="column:c1" styleClass="AFStretchWidth" autoHeightRows="12"
+                contentDelivery="immediate" partialTriggers="b1 ::b2">
+        <af:column sortProperty="#{bindings.BatchesRejectedView.hints.BatchName.name}" filterable="true" sortable="true"
+                   headerText="Batch Name" id="c1">
+          <af:outputText value="#{row.BatchName}" shortDesc="#{bindings.BatchesRejectedView.hints.BatchName.tooltip}"
+                         id="ot1"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesRejectedView.hints.BatchDate.name}" filterable="true" sortable="true"
+                   headerText="Batch Date" id="c2">
+          <f:facet name="filter">
+            <af:inputDate value="#{bindings.BatchesRejectedViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                          id="id1">
+              <af:convertDateTime pattern="#{bindings.BatchesRejectedView.hints.BatchDate.format}"/>
+            </af:inputDate>
+          </f:facet>
+          <af:outputText value="#{row.BatchDate}" shortDesc="#{bindings.BatchesRejectedView.hints.BatchDate.tooltip}"
+                         id="ot2" inlineStyle="text-transform:uppercase;">
+            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesRejectedView.hints.PurchaseOrderNumber.name}" filterable="true"
+                   sortable="true" headerText="Purchase Order Number" id="c3">
+          <af:outputText value="#{row.PurchaseOrderNumber}"
+                         shortDesc="#{bindings.BatchesRejectedView.hints.PurchaseOrderNumber.tooltip}" id="ot3"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesRejectedView.hints.VesselNames.name}" filterable="true"
+                   sortable="true" headerText="Vessel Name(s)" id="c4">
+          <af:outputText value="#{row.VesselNames}"
+                         shortDesc="#{bindings.BatchesRejectedView.hints.VesselNames.tooltip}" id="ot4"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesRejectedView.hints.BatchSubmittedDate.name}" filterable="true"
+                   sortable="true" headerText="Batch Submitted Date" id="c5">
+          <f:facet name="filter">
+            <af:inputDate value="#{bindings.BatchesRejectedViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchSubmittedDate.value}"
+                          id="id2">
+              <af:convertDateTime pattern="#{bindings.BatchesRejectedView.hints.BatchSubmittedDate.format}"/>
+            </af:inputDate>
+          </f:facet>
+          <af:outputText value="#{row.BatchSubmittedDate}"
+                         shortDesc="#{bindings.BatchesRejectedView.hints.BatchSubmittedDate.tooltip}" id="ot5"
+                         inlineStyle="text-transform:uppercase;">
+            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesRejectedView.hints.NoOfSeafarer.name}" filterable="true"
+                   sortable="true" headerText="Number of Seafarers" id="c6">
+          <af:outputText value="#{row.NoOfSeafarer}"
+                         shortDesc="#{bindings.BatchesRejectedView.hints.NoOfSeafarer.tooltip}" id="ot6">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.BatchesRejectedView.hints.NoOfSeafarer.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesRejectedView.hints.WorkOrderNo.name}" filterable="true"
+                   sortable="true" headerText="Work Order Number" id="c7">
+          <af:outputText value="#{row.WorkOrderNo}"
+                         shortDesc="#{bindings.BatchesRejectedView.hints.WorkOrderNo.tooltip}" id="ot7">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.BatchesRejectedView.hints.WorkOrderNo.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column id="c8">
+          <af:button text="Assign" id="b1" actionListener="#{pageFlowScope.DeficientOrdersBean.assignBatch}"/>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+  </af:panelBox>
+</jsp:root>

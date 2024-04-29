@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VsslInspCommView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.readonly.VsslInspCommView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pCommId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[SELECT      
+ROWNUM SL_NO,      
+COMM_ID,    
+HEADER_ID,    
+SENT_TO,    
+CC,    
+REGARDING,    
+MESSAGE,    
+LAST_UPDATE_DATE,    
+LAST_UPDATED_BY,    
+CREATION_DATE,    
+CREATED_BY,    
+LAST_UPDATE_LOGIN,    
+VESSEL_PK,    
+EMAIL_FROM,    
+EMAIL_SENT_BY,    
+EMAIL_SENT_DATE    
+FROM APPS.VSSL_INSP_COMM         
+WHERE COMM_ID = :pCommId]]></SQLQuery>
+  <ViewAttribute
+    Name="SlNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SL_NO"
+    Expression="SL_NO"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="CommId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="COMM_ID"
+    Expression="COMM_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="HeaderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="HEADER_ID"
+    Expression="HEADER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SentTo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SENT_TO"
+    Expression="SENT_TO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Cc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CC"
+    Expression="CC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Regarding"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REGARDING"
+    Expression="REGARDING"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Message"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="MESSAGE"
+    Expression="MESSAGE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="LAST_UPDATE_DATE"
+    Expression="LAST_UPDATE_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    AliasName="LAST_UPDATED_BY"
+    Expression="LAST_UPDATED_BY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CreationDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CREATION_DATE"
+    Expression="CREATION_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    AliasName="CREATED_BY"
+    Expression="CREATED_BY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    AliasName="LAST_UPDATE_LOGIN"
+    Expression="LAST_UPDATE_LOGIN"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="VesselPk"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VESSEL_PK"
+    Expression="VESSEL_PK"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EmailFrom"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EMAIL_FROM"
+    Expression="EMAIL_FROM"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EmailSentBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="EMAIL_SENT_BY"
+    Expression="EMAIL_SENT_BY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EmailSentDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="EMAIL_SENT_DATE"
+    Expression="EMAIL_SENT_DATE"
+    SQLType="DATE"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="SlNo"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

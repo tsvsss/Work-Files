@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="UpdateParametersPageDef"
+                Package="Prototype">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="XwrlParametersView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlParametersView1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="XwrlParametersView1Iterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlParametersView1Iterator" id="Key1">
+      <AttrNames>
+        <Item Value="Key1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlParametersView1Iterator" id="ValueString">
+      <AttrNames>
+        <Item Value="ValueString"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlParametersView1Iterator" id="ValueDate">
+      <AttrNames>
+        <Item Value="ValueDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlParametersView1Iterator" id="ValueClob">
+      <AttrNames>
+        <Item Value="ValueClob"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <action IterBinding="XwrlParametersView1Iterator" id="Execute" RequiresUpdateModel="true" Action="iteratorExecute"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="getCustomerNameByCustAccIdView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.readOnlyVO.getCustomerNameByCustAccIdView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pCustAccountId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[SELECT distinct hca.cust_account_id   ,    
+       hp_ship.party_name party_name    
+  --hcs_bill.site_use_id bill_to_location       
+FROM   hz_cust_site_uses_all hcs_ship,       
+       hz_cust_acct_sites_all hca_ship,       
+       hz_party_sites hps_ship,       
+       hz_parties hp_ship,       
+       hz_locations hl_ship,       
+       hz_cust_accounts hca       
+WHERE 1 = 1       
+   AND hcs_ship.cust_acct_site_id = hca_ship.cust_acct_site_id       
+   AND hca_ship.party_site_id = hps_ship.party_site_id       
+   AND hps_ship.party_id = hp_ship.party_id       
+   AND hps_ship.location_id = hl_ship.location_id       
+   AND hca.cust_account_id = hca_ship.cust_account_id       
+   AND hcs_ship.site_use_code = 'BILL_TO'   
+   and hca.cust_account_id = :pCustAccountId]]></SQLQuery>
+  <ViewAttribute
+    Name="CustAccountId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="LONGINT"
+    AliasName="CUST_ACCOUNT_ID"
+    Expression="CUST_ACCOUNT_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="PartyName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="360"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_NAME"
+    Expression="PARTY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="360"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

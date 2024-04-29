@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="taskAssignmentPageDef"
+                Package="com.rmi.applicationEntry.view.taskassignmenttaskflow">
+  <parameters/>
+ <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="WorkFlowSubmittedBatchesView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="WorkFlowSubmittedBatchesVOIterator" ChangeEventPolicy="none"/>
+    <iterator Binds="WorkFlowAssignedToUsersView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="WorkFlowAssignedToUsersLOVIterator"/>
+    <iterator Binds="ViewOrdersView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="ViewOrdersROIterator"/>
+    <searchRegion Binds="WorkFlowSubmittedBatchesVOIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="WorkFlowSubmittedBatchesVO1Query"/>
+    <iterator Binds="RegionListForAssignView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="RegionListForAssignROIterator"/>
+    <iterator Binds="SeafarersDetailLinkView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="SeafarersDetailsRO1Iterator"/>
+    <iterator Binds="SeafarerOcDetailsLinkView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="SeafarerOcDetailsRO1Iterator"/>
+    <iterator Binds="SeafarerSqcDetailsLinkView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="SeafarerSqcDetailsRO2Iterator"/>
+  </executables>
+  <bindings>
+    <button IterBinding="WorkFlowSubmittedBatchesVOIterator" id="tranSelect" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="tranSelect"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="WorkFlowAssignedToUsersLOVIterator" id="WorkFlowAssignedToUsersLOV">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.lovs.WorkFlowAssignedToUsersView"
+                      Name="WorkFlowAssignedToUsersLOV0">
+        <AttrNames>
+          <Item Value="UserName"/>
+          <Item Value="selectUser"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="assigntask" RequiresUpdateModel="true" Action="invokeMethod" MethodName="assigntask"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.assigntask_RMIApplicationEntryAppModuleDataControl_dataProvider_assigntask_result">
+      <NamedData NDName="batch_id" NDType="java.lang.Integer"/>
+    </methodAction>
+    <button IterBinding="WorkFlowAssignedToUsersLOVIterator" id="selectUser" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="selectUser"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <methodAction id="assignTaskToUser" RequiresUpdateModel="true" Action="invokeMethod" MethodName="assignTaskToUser"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.assignTaskToUser_RMIApplicationEntryAppModuleDataControl_dataProvider_assignTaskToUser_result">
+      <NamedData NDName="user_id" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="refresh_workflow" RequiresUpdateModel="true" Action="invokeMethod" MethodName="refresh_workflow"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.refresh_workflow_RMIApplicationEntryAppModuleDataControl_dataProvider_refresh_workflow_result"/>
+    <list IterBinding="ViewOrdersROIterator" StaticList="false" Uses="LOV_ViewOrders" id="ViewOrders"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <methodAction id="filterTaskAssignment" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterTaskAssignment" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.filterTaskAssignment_RMIApplicationEntryAppModuleDataControl_dataProvider_filterTaskAssignment_result"/>
+    <attributeValues IterBinding="WorkFlowSubmittedBatchesVOIterator" id="EsiBatchId">
+      <AttrNames>
+        <Item Value="EsiBatchId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="WorkFlowAssignedToUsersLOVIterator" id="WorkFlowAssignedToUsersLOV1">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.lovs.WorkFlowAssignedToUsersView"
+                      Name="WorkFlowAssignedToUsersLOV10">
+        <AttrNames>
+          <Item Value="Name"/>
+          <Item Value="UserName"/>
+          <Item Value="UserId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="WorkFlowSubmittedBatchesVOIterator" id="WorkFlowSubmittedBatchesVO1" ChangeEventPolicy="none">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.WorkFlowSubmittedBatchesView"
+                      Name="WorkFlowSubmittedBatchesVO10">
+        <AttrNames>
+          <Item Value="BatchStatus"/>
+          <Item Value="BatchDate"/>
+          <Item Value="BatchName"/>
+          <Item Value="NoOfSeafarer"/>
+          <Item Value="Region"/>
+          <Item Value="WorkOrderNo"/>
+          <Item Value="tranSelect"/>
+          <Item Value="WorkflowStatus"/>
+          <Item Value="ReassignedRegion"/>
+          <Item Value="BaseRegion"/>
+          <Item Value="ExpeditedProcessingT" Binds="ExpeditedProcessingT"/>
+          <Item Value="finalCra"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="RegionListForAssignROIterator" id="RegionListForAssignRO">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.RegionListForAssignView"
+                      Name="RegionListForAssignRO0">
+        <AttrNames>
+          <Item Value="Name"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="assignBatchesToRegion" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="assignBatchesToRegion" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.assignBatchesToRegion_RMIApplicationEntryAppModuleDataControl_dataProvider_assignBatchesToRegion_result">
+      <NamedData NDName="regionId" NDType="java.lang.Integer"/>
+    </methodAction>
+    <attributeValues IterBinding="WorkFlowSubmittedBatchesVOIterator" id="BatchStatus">
+      <AttrNames>
+        <Item Value="BatchStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WorkFlowSubmittedBatchesVOIterator" id="BatchDate">
+      <AttrNames>
+        <Item Value="BatchDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WorkFlowSubmittedBatchesVOIterator" id="BatchName">
+      <AttrNames>
+        <Item Value="BatchName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WorkFlowSubmittedBatchesVOIterator" id="NoOfSeafarer">
+      <AttrNames>
+        <Item Value="NoOfSeafarer"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WorkFlowSubmittedBatchesVOIterator" id="Region">
+      <AttrNames>
+        <Item Value="Region"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WorkFlowSubmittedBatchesVOIterator" id="WorkOrderNo">
+      <AttrNames>
+        <Item Value="WorkOrderNo"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="SeafarersDetailsRO1Iterator" id="SeafarersDetailsRO1">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarersDetailsView"
+                      Name="SeafarersDetailsRO10">
+        <AttrNames>
+          <Item Value="LastName"/>
+          <Item Value="FirstName"/>
+          <Item Value="BirthDate"/>
+          <Item Value="BirthPlace"/>
+          <Item Value="PassportIssuingCountry"/>
+          <Item Value="ResidenceCountry"/>
+          <Item Value="IssueType"/>
+          <Item Value="IssueTypeIdCard"/>
+          <Item Value="Gender"/>
+          <Item Value="NationalityCountry"/>
+          <Item Value="VesselName"/>
+          <Item Value="WorkflowStatus"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="getlinkforTaskAssignmentpage" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getlinkforTaskAssignmentpage" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getlinkforTaskAssignmentpage_RMIApplicationEntryAppModuleDataControl_dataProvider_getlinkforTaskAssignmentpage_result">
+      <NamedData NDName="code" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="SeafarerOcDetailsRO1Iterator" id="SeafarerOcDetailsRO1">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarerOcDetailsView"
+                      Name="SeafarerOcDetailsRO10">
+        <AttrNames>
+          <Item Value="CocIdentifier"/>
+          <Item Value="CocCountry"/>
+          <Item Value="CocIssueDate"/>
+          <Item Value="CocExpirationDate"/>
+          <Item Value="GradeType"/>
+          <Item Value="Limitation"/>
+          <Item Value="CocDoc"/>
+          <Item Value="GradeId"/>
+          <Item Value="EdocId"/>
+          <Item Value="CraRequired" Binds="CraRequired"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="SeafarerSqcDetailsRO2Iterator" id="SeafarerSqcDetailsRO2">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarerSqcDetailsView"
+                      Name="SeafarerSqcDetailsRO20">
+        <AttrNames>
+          <Item Value="CocIdentifier"/>
+          <Item Value="CocCountry"/>
+          <Item Value="CocIssueDate"/>
+          <Item Value="CocExpirationDate"/>
+          <Item Value="GradeType"/>
+          <Item Value="Limitation"/>
+          <Item Value="CocDoc"/>
+          <Item Value="SupportDoc"/>
+          <Item Value="SupportEdocId"/>
+          <Item Value="GradeId"/>
+          <Item Value="EdocId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="getUsertypeForTaskAssignmentPage" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getUsertypeForTaskAssignmentPage" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getUsertypeForTaskAssignmentPage_RMIApplicationEntryAppModuleDataControl_dataProvider_getUsertypeForTaskAssignmentPage_result"/>
+    <attributeValues IterBinding="SeafarersDetailsRO1Iterator" id="tranConsentAckNo">
+      <AttrNames>
+        <Item Value="tranConsentAckNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarersDetailsRO1Iterator" id="trnConsentStartDate">
+      <AttrNames>
+        <Item Value="trnConsentStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarersDetailsRO1Iterator" id="tranConsentExpDate">
+      <AttrNames>
+        <Item Value="tranConsentExpDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarersDetailsRO1Iterator" id="ConsentEdocId">
+      <AttrNames>
+        <Item Value="ConsentEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="SeafarerOcDetailsRO1Iterator" id="CraRequired" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="CraRequired"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="selectAllonTaskAssignment" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="selectAllonTaskAssignment" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.selectAllonTaskAssignment_RMIApplicationEntryAppModuleDataControl_dataProvider_selectAllonTaskAssignment_result">
+      <NamedData NDName="check" NDType="java.lang.String"/>
+    </methodAction>
+    <button IterBinding="WorkFlowSubmittedBatchesVOIterator" id="ExpeditedProcessingT" DTSupportsMRU="false"
+            StaticList="true">
+      <AttrNames>
+        <Item Value="ExpeditedProcessingT"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <methodAction id="filterOnTaskAssignment" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterOnTaskAssignment" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.filterOnTaskAssignment_RMIApplicationEntryAppModuleDataControl_dataProvider_filterOnTaskAssignment_result">
+      <NamedData NDName="p_filter" NDType="java.lang.String"/>
+      <NamedData NDName="pUserId" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <attributeValues IterBinding="WorkFlowSubmittedBatchesVOIterator" id="PurchaseOrderNumber">
+      <AttrNames>
+        <Item Value="PurchaseOrderNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WorkFlowSubmittedBatchesVOIterator" id="BatchSubmittedDate">
+      <AttrNames>
+        <Item Value="BatchSubmittedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WorkFlowSubmittedBatchesVOIterator" id="OrderingCustomerName">
+      <AttrNames>
+        <Item Value="OrderingCustomerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WorkFlowSubmittedBatchesVOIterator" id="PayingCustomerName">
+      <AttrNames>
+        <Item Value="PayingCustomerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WorkFlowSubmittedBatchesVOIterator" id="ShippingCustomerName">
+      <AttrNames>
+        <Item Value="ShippingCustomerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WorkFlowSubmittedBatchesVOIterator" id="VesselNames">
+      <AttrNames>
+        <Item Value="VesselNames"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>
+

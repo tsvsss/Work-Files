@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" styleClass="AFStretchWidth">
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar">
+        <af:toolbar id="t2">
+          <af:button text="Refresh" id="b2" actionListener="#{viewScope.BatchesPendingUploadDocBean.refreshButton}"/>
+        </af:toolbar>
+      </f:facet>
+      <f:facet name="statusbar"/>
+      <af:table value="#{bindings.BatchesPendingUploadDocumentView.collectionModel}" var="row"
+                rows="#{bindings.BatchesPendingUploadDocumentView.rangeSize}"
+                emptyText="#{bindings.BatchesPendingUploadDocumentView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0"
+                selectedRowKeys="#{bindings.BatchesPendingUploadDocumentView.collectionModel.selectedRow}"
+                selectionListener="#{bindings.BatchesPendingUploadDocumentView.collectionModel.makeCurrent}"
+                rowSelection="single" fetchSize="#{bindings.BatchesPendingUploadDocumentView.rangeSize}"
+                filterModel="#{bindings.BatchesPendingUploadDocumentViewQuery.queryDescriptor}"
+                queryListener="#{bindings.BatchesPendingUploadDocumentViewQuery.processQuery}" filterVisible="true"
+                varStatus="vs" id="t1" styleClass="AFStretchWidth" autoHeightRows="14" contentDelivery="immediate"
+                partialTriggers="b1 ::b2" columnStretching="column:c2">
+        <af:column sortProperty="#{bindings.BatchesPendingUploadDocumentView.hints.BatchName.name}" filterable="true"
+                   sortable="true" headerText="Batch Name" id="c2">
+          <af:outputText value="#{row.BatchName}"
+                         shortDesc="#{bindings.BatchesPendingUploadDocumentView.hints.BatchName.tooltip}" id="ot2"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesPendingUploadDocumentView.hints.BatchDate.name}" filterable="true"
+                   sortable="true" headerText="Batch Date"
+                   id="c1">
+          <f:facet name="filter">
+            <af:inputDate value="#{bindings.BatchesPendingUploadDocumentViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                          id="id1">
+              <af:convertDateTime pattern="#{bindings.BatchesPendingUploadDocumentView.hints.BatchDate.format}"/>
+            </af:inputDate>
+          </f:facet>
+          <af:outputText value="#{row.BatchDate}"
+                         shortDesc="#{bindings.BatchesPendingUploadDocumentView.hints.BatchDate.tooltip}" id="ot1"
+                         inlineStyle="text-transform:uppercase;">
+            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesPendingUploadDocumentView.hints.NoOfSeafarer.name}" filterable="true"
+                   sortable="true" headerText="Number of Seafarers"
+                   id="c3">
+          <af:outputText value="#{row.NoOfSeafarer}"
+                         shortDesc="#{bindings.BatchesPendingUploadDocumentView.hints.NoOfSeafarer.tooltip}" id="ot3">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.BatchesPendingUploadDocumentView.hints.NoOfSeafarer.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesPendingUploadDocumentView.hints.Region.name}" filterable="true"
+                   sortable="true" headerText="Region" id="c4">
+          <af:outputText value="#{row.Region}"
+                         shortDesc="#{bindings.BatchesPendingUploadDocumentView.hints.Region.tooltip}" id="ot4"/>
+        </af:column>
+        <af:column id="c5">
+          <af:button text="Assign" id="b1"
+                     actionListener="#{viewScope.BatchesPendingUploadDocBean.assignButtonAction}"/>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+  </af:panelGroupLayout>
+</jsp:root>

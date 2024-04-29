@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="OcVerificationOrdersView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="com.rmi.tradecompapproval.adfbc.views.readonly.OcVerificationOrdersViewRowImpl"
+  PageIterMode="Full"
+  FetchMode="FETCH_AS_NEEDED"
+  Passivate="All">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.readonly.OcVerificationOrdersView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pSalesRepId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="pSeafarerId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <ViewAccessor
+    Name="CertVerificationStatusLOV1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.CertVerificationStatusView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CancelDocVerificationLOV1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.CancelDocVerificationView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_TransCertVerification"
+    ListVOName="CertVerificationStatusLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransCertVerification"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="VericationCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="VericationDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransCancelCert"
+    ListVOName="CancelDocVerificationLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransCancelCert"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="StatusId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="StatusDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT distinct seafarer_name seafarer_name, order_number, grade_code, country_name,                         
+         endorsement_number, endorsement_issue_date, VERIFICATION_REQD,      
+         endorsement_expiration_date, seafarer_id, header_id, grade_id,                         
+         document_id, endorsement_country, verified, verification_edoc_id,                         
+         verification_method, verification_url, verification_email,                         
+         verification_username, created_by, birth_date, VERIFICATION_PASSWORD          
+    FROM rmi_sicd_document_unverified_v                         
+   WHERE salesrep_id = (case when :pSalesRepId is not null                          
+                             then rmi_sicd_pub.get_user_salesrep_id(:pSalesRepId)                         
+                             else salesrep_id end)      
+    AND seafarer_id = :pSeafarerId       
+   ORDER BY header_id ASC]]></SQLQuery>
+  <ViewAttribute
+    Name="SeafarerName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="169"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SEAFARER_NAME"
+    Expression="SEAFARER_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="169"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrderNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ORDER_NUMBER"
+    Expression="ORDER_NUMBER"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="GradeCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GRADE_CODE"
+    Expression="GRADE_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountryName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="80"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COUNTRY_NAME"
+    Expression="COUNTRY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EndorsementNumber"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="60"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ENDORSEMENT_NUMBER"
+    Expression="ENDORSEMENT_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EndorsementIssueDate"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="ENDORSEMENT_ISSUE_DATE"
+    Expression="ENDORSEMENT_ISSUE_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="VerificationReqd"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VERIFICATION_REQD"
+    Expression="VERIFICATION_REQD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EndorsementExpirationDate"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="ENDORSEMENT_EXPIRATION_DATE"
+    Expression="ENDORSEMENT_EXPIRATION_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="SeafarerId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SEAFARER_ID"
+    Expression="SEAFARER_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="HeaderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="HEADER_ID"
+    Expression="HEADER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="GradeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="GRADE_ID"
+    Expression="GRADE_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="DocumentId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="DOCUMENT_ID"
+    Expression="DOCUMENT_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="EndorsementCountry"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ENDORSEMENT_COUNTRY"
+    Expression="ENDORSEMENT_COUNTRY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Verified"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VERIFIED"
+    Expression="VERIFIED"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VerificationEdocId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VERIFICATION_EDOC_ID"
+    Expression="VERIFICATION_EDOC_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="VerificationMethod"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VERIFICATION_METHOD"
+    Expression="VERIFICATION_METHOD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VerificationUrl"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VERIFICATION_URL"
+    Expression="VERIFICATION_URL"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VerificationEmail"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VERIFICATION_EMAIL"
+    Expression="VERIFICATION_EMAIL"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VerificationUsername"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VERIFICATION_USERNAME"
+    Expression="VERIFICATION_USERNAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="CREATED_BY"
+    Expression="CREATED_BY"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="BirthDate"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="BIRTH_DATE"
+    Expression="BIRTH_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="VerificationPassword"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VERIFICATION_PASSWORD"
+    Expression="VERIFICATION_PASSWORD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransLoginPassword"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransCertVerification"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransCertVerification">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransCancelCert"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransCancelCert">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="DocumentId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

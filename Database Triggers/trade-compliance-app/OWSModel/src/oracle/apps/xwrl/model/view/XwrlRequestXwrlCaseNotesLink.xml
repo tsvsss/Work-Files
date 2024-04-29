@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XwrlRequestXwrlCaseNotesLink"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  EntityAssociation="oracle.apps.xwrl.model.entity.XwrlRequestXwrlCaseNotesAssoc">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="oracle.apps.xwrl.model.view.XwrlRequestXwrlCaseNotesLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="XwrlRequestsView"
+    Cardinality="1"
+    Source="true"
+    Owner="oracle.apps.xwrl.model.view.XwrlRequestsView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XwrlRequestsView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="oracle.apps.xwrl.model.view.XwrlRequestsView.Id"/>
+      <Item Value="oracle.apps.xwrl.model.view.XwrlRequestsView.CaseId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="XwrlCaseNotesView1"
+    Cardinality="-1"
+    Owner="oracle.apps.xwrl.model.view.XwrlCaseNotesView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XwrlCaseNotesView1"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="oracle.apps.xwrl.model.view.XwrlCaseNotesView.RequestId"/>
+      <Item Value="oracle.apps.xwrl.model.view.XwrlCaseNotesView.CaseId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="oracle.apps.xwrl.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

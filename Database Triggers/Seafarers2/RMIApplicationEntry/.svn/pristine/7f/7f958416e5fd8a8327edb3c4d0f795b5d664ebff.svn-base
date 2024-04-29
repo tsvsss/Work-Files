@@ -1,0 +1,475 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+  <af:panelGroupLayout id="pgl10" layout="scroll">
+    <af:panelBox text="Batch Create/Edit" id="pb3" showDisclosure="false">
+      <af:resource type="javascript">
+      function toUpperCase(evt)
+      {
+      var _filterField = evt.getCurrentTarget();
+      var _value = _filterField.getSubmittedValue();
+      _filterField.setValue(_value.toUpperCase());
+      }
+    
+    </af:resource>
+      <f:facet name="toolbar"/>
+      <af:panelGroupLayout id="pgl1">
+        <af:panelBox id="pb4" showDisclosure="false">
+          <f:facet name="toolbar"/>
+          <af:panelFormLayout id="pfl2" rows="3" maxColumns="2" styleClass="AFStretchWidth panelFormLayoutClass"
+                              labelWidth="170">
+            <f:facet name="footer"/>
+            <af:inputText value="#{bindings.BatchName.inputValue}" label="Batch Name"
+                          columns="#{bindings.BatchName.hints.displayWidth}"
+                          maximumLength="#{bindings.BatchName.hints.precision}"
+                          shortDesc="#{bindings.BatchName.hints.tooltip}" id="it1" autoSubmit="true"
+                          readOnly="#{pageFlowScope.param_batch_mode == 'view'}"
+                          disabled="#{bindings.BatchStatus.inputValue == 'Accepted by the Operator' or pageFlowScope.param_rejected_tab == 'yes'}"
+                          validator="#{pageFlowScope.BatchCreateEditBean.batchNameValidator}"
+                          contentStyle="width:180px;" binding="#{pageFlowScope.BatchCreateEditBean.batchNameBind}"
+                          styleClass="UpperCaseText RequiredField" showRequired="false">
+              <f:validator binding="#{bindings.BatchName.validator}"/>
+              <af:clientListener type="valueChange" method="toUpperCase"/>
+            </af:inputText>
+            <af:inputDate value="#{bindings.BatchDate.inputValue}" label="Batch Date"
+                          required="#{bindings.BatchDate.hints.mandatory}"
+                          columns="#{bindings.BatchDate.hints.displayWidth}"
+                          shortDesc="#{bindings.BatchDate.hints.tooltip}" id="id1" disabled="true"
+                          contentStyle="text-transform:uppercase; border:none !important; line-height: 30px !important;">
+              <f:validator binding="#{bindings.BatchDate.validator}"/>
+              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+            </af:inputDate>
+            <af:inputText value="#{bindings.PurchaseOrderNumber.inputValue}" label="Purchase Order Number"
+                          required="#{bindings.PurchaseOrderNumber.hints.mandatory}"
+                          columns="#{bindings.PurchaseOrderNumber.hints.displayWidth}"
+                          maximumLength="#{bindings.PurchaseOrderNumber.hints.precision}"
+                          shortDesc="#{bindings.PurchaseOrderNumber.hints.tooltip}" id="it4"
+                          readOnly="#{pageFlowScope.param_batch_mode == 'view'}"
+                          disabled="#{bindings.BatchStatus.inputValue == 'Accepted by the Operator' or pageFlowScope.param_rejected_tab == 'yes'}"
+                          contentStyle="width:180px;" styleClass="UpperCaseText" autoSubmit="true">
+              <f:validator binding="#{bindings.PurchaseOrderNumber.validator}"/>
+              <af:clientListener type="valueChange" method="toUpperCase"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.OrderNumber.inputValue}" label="Work Order Number"
+                          required="#{bindings.OrderNumber.hints.mandatory}" readOnly="true"
+                          columns="#{bindings.OrderNumber.hints.displayWidth}"
+                          maximumLength="#{bindings.OrderNumber.hints.precision}"
+                          shortDesc="#{bindings.OrderNumber.hints.tooltip}" id="it10" partialTriggers="b4"
+                          contentStyle="border:none !important; line-height: 30px !important;">
+              <f:validator binding="#{bindings.OrderNumber.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.OrderNumber.format}"/>
+            </af:inputText>
+            <af:panelLabelAndMessage label="Agent Email ID" id="plam5" styleClass="RequiredField"
+                                     visible="#{pageFlowScope.user_type == 'Internal'}"
+                                     partialTriggers="tranCustAccountDeliverToNameId pfl6 pb7 pgl2">
+              <af:panelGroupLayout id="pgl9" layout="vertical">
+                <af:inputText value="#{bindings.tranEmailOrdering.inputValue}" label="Agent Email ID"
+                              required="#{bindings.tranEmailOrdering.hints.mandatory}"
+                              columns="#{bindings.tranEmailOrdering.hints.displayWidth}"
+                              maximumLength="#{bindings.tranEmailOrdering.hints.precision}" id="it11"
+                              contentStyle="width:280px;"
+                              disabled="#{bindings.BatchStatus.inputValue == 'Accepted by the Operator' or pageFlowScope.param_rejected_tab == 'yes'}"
+                              partialTriggers="tranCustAccountDeliverToNameId" autoSubmit="true"
+                              valueChangeListener="#{pageFlowScope.BatchCreateEditBean.orderingAgentValueChangeListener}"
+                              binding="#{pageFlowScope.BatchCreateEditBean.agentEmailIdInputTextBind}"
+                              styleClass="RequiredField"
+                              visible="#{bindings.DeliverToCustAccountId.inputValue == 40392161}"
+                              simple="true">
+                  <f:validator binding="#{bindings.tranEmailOrdering.validator}"/>
+                </af:inputText>
+                <af:selectManyChoice value="#{pageFlowScope.BatchCreateEditBean.mulipleEmails}" label="Agent Email ID"
+                                     id="smc1" autoSubmit="true"
+                                     partialTriggers="tranCustAccountDeliverToNameId pfl6 pb7 pgl2"
+                                     disabled="#{bindings.BatchStatus.inputValue == 'Accepted by the Operator' or pageFlowScope.param_rejected_tab == 'yes'}"
+                                     binding="#{pageFlowScope.BatchCreateEditBean.agentEmailIdManyChoiceBind}"
+                                     contentStyle="width:280px;" styleClass="RequiredField"
+                                     simple="true" visible="#{bindings.DeliverToCustAccountId.inputValue != 40392161}">
+                  <f:selectItems value="#{bindings.MultipleChoiceOrderingAgentEmailView.items}" id="si1"/>
+                  <f:validator binding="#{bindings.MultipleChoiceOrderingAgentEmailView.validator}"/>
+                </af:selectManyChoice>
+              </af:panelGroupLayout>
+            </af:panelLabelAndMessage>
+            <af:panelLabelAndMessage label="Invoice Agent Email ID" id="plam6" styleClass="RequiredField">
+              <af:panelGroupLayout id="pgl11" layout="vertical">
+                <af:selectManyChoice value="#{pageFlowScope.BatchCreateEditBean.invoiceAgentEmails}"
+                                     label="Invoice Agent Email ID" id="smc2" contentStyle="width:280px;"
+                                     autoSubmit="true"
+                                     partialTriggers="pgl2 pb7 pfl6 tranCustAccountBillToNameId tranCustAccountDeliverToNameId"
+                                     binding="#{pageFlowScope.BatchCreateEditBean.invoiceAgentEmailIdManyChoiceBind}"
+                                     styleClass="RequiredField"
+                                     disabled="#{bindings.BatchStatus.inputValue == 'Accepted by the Operator' or pageFlowScope.param_rejected_tab == 'yes'}"
+                                     simple="true" visible="#{bindings.BillToCustAccountId.inputValue != 40392161}">
+                  <f:selectItems value="#{bindings.InvoiceAgentEmailIdView1.items}" id="si3"/>
+                  <f:validator binding="#{bindings.InvoiceAgentEmailIdView1.validator}"/>
+                </af:selectManyChoice>
+                <af:inputText value="#{bindings.tranInvoiceAgentEmailId.inputValue}"
+                              label="#{bindings.tranInvoiceAgentEmailId.hints.label}"
+                              required="#{bindings.tranInvoiceAgentEmailId.hints.mandatory}"
+                              columns="#{bindings.tranInvoiceAgentEmailId.hints.displayWidth}"
+                              maximumLength="#{bindings.tranInvoiceAgentEmailId.hints.precision}"
+                              shortDesc="#{bindings.tranInvoiceAgentEmailId.hints.tooltip}" id="it12" simple="true"
+                              contentStyle="width:280px;" styleClass="RequiredField"
+                              visible="#{bindings.BillToCustAccountId.inputValue == 40392161}"
+                              binding="#{pageFlowScope.BatchCreateEditBean.tranInvoiceAgentTextBoxBind}"
+                              partialTriggers="pgl2 pb7 pfl6 tranCustAccountBillToNameId tranCustAccountDeliverToNameId"
+                              autoSubmit="true"
+                              disabled="#{bindings.BatchStatus.inputValue == 'Accepted by the Operator' or pageFlowScope.param_rejected_tab == 'yes'}">
+                  <f:validator binding="#{bindings.tranInvoiceAgentEmailId.validator}"/>
+                </af:inputText>
+              </af:panelGroupLayout>
+            </af:panelLabelAndMessage>
+          </af:panelFormLayout>
+        </af:panelBox>
+        <af:panelBox id="pb5" showDisclosure="false" inlineStyle="margin-top:10px;">
+          <f:facet name="toolbar"/>
+          <af:panelFormLayout id="pfl3" styleClass="panelFormLayoutClass" labelWidth="150">
+            <!--<f:facet name="footer"/>-->
+            <af:selectBooleanCheckbox value="#{bindings.ExpeditedProcessing.inputValue}" label=" Expedited Processing"
+                                      shortDesc="#{bindings.ExpeditedProcessing.hints.tooltip}" id="sbc1"
+                                      text="(additional charges apply)"
+                                      contentStyle="margin-top: 10px !important;"
+                                      valueChangeListener="#{pageFlowScope.BatchCreateEditBean.expeditedValueChangeListener}"
+                                      autoSubmit="true"/>
+          </af:panelFormLayout>
+        </af:panelBox>
+        <af:panelGroupLayout id="pgl2" layout="vertical" styleClass="AFStretchWidth" inlineStyle="margin-top:12px;">
+          <af:panelBox text="Ordering/Paying/Shipping Information" id="pb7" showDisclosure="false">
+            <!--<f:facet name="toolbar"/>-->
+            <af:panelFormLayout id="pfl6" styleClass="panelFormLayoutClass" rows="5" labelWidth="150" fieldWidth="350"
+                                binding="#{pageFlowScope.BatchCreateEditBean.addressFieldForm}">
+              <f:facet name="footer"/>
+              <af:inputListOfValues id="tranCustAccountDeliverToNameId" popupTitle="Search and Select: Ordering Agent"
+                                    value="#{bindings.tranCustAccountDeliverToName.inputValue}" label="Ordering Agent"
+                                    model="#{bindings.tranCustAccountDeliverToName.listOfValuesModel}"
+                                    columns="#{bindings.tranCustAccountDeliverToName.hints.displayWidth}"
+                                    shortDesc="#{bindings.tranCustAccountDeliverToName.hints.tooltip}"
+                                    readOnly="#{pageFlowScope.param_batch_mode == 'view'}"
+                                    disabled="#{bindings.BatchStatus.inputValue == 'Accepted by the Operator' or pageFlowScope.param_rejected_tab == 'yes'}"
+                                    autoSubmit="true" contentStyle="width:300px;"
+                                    valueChangeListener="#{pageFlowScope.BatchCreateEditBean.deliverToLovValueChangeListener}"
+                                    showRequired="false" styleClass="RequiredField">
+                <f:validator binding="#{bindings.tranCustAccountDeliverToName.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.tranCustAccountDeliverToName.suggestedItems}"/>
+              </af:inputListOfValues>
+              <af:panelLabelAndMessage label=" Ordering Location" id="plam2" showRequired="false"
+                                       styleClass="RequiredField">
+                <af:panelGroupLayout id="pgl4" layout="vertical">
+                  <af:inputListOfValues id="tranDeliverToSuAddressId" popupTitle="Search and Select: Ordering Location"
+                                        value="#{bindings.tranDeliverToSuAddress.inputValue}"
+                                        label="Ordering Location"
+                                        model="#{bindings.tranDeliverToSuAddress.listOfValuesModel}"
+                                        columns="#{bindings.tranDeliverToSuAddress.hints.displayWidth}"
+                                        shortDesc="#{bindings.tranDeliverToSuAddress.hints.tooltip}" simple="true"
+                                        contentStyle="width:300px;" partialTriggers="tranCustAccountDeliverToNameId"
+                                        disabled="#{bindings.BatchStatus.inputValue == 'Accepted by the Operator' or pageFlowScope.param_rejected_tab == 'yes'}">
+                    <f:validator binding="#{bindings.tranDeliverToSuAddress.validator}"/>
+                  </af:inputListOfValues>
+                  <af:inputText value="#{bindings.DeliverToSiteUseId.inputValue}"
+                                label="#{bindings.DeliverToSiteUseId.hints.label}"
+                                required="#{bindings.DeliverToSiteUseId.hints.mandatory}"
+                                columns="#{bindings.DeliverToSiteUseId.hints.displayWidth}"
+                                maximumLength="#{bindings.DeliverToSiteUseId.hints.precision}"
+                                shortDesc="#{bindings.DeliverToSiteUseId.hints.tooltip}" id="it9" simple="true"
+                                partialTriggers="tranDeliverToSuAddressId" visible="false">
+                    <f:validator binding="#{bindings.DeliverToSiteUseId.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.DeliverToSiteUseId.format}"/>
+                  </af:inputText>
+                </af:panelGroupLayout>
+              </af:panelLabelAndMessage>
+              <af:inputListOfValues id="tranCustAccountBillToNameId" popupTitle="Search and Select: Paying Customer"
+                                    value="#{bindings.tranCustAccountBillToName.inputValue}" label="Paying Customer"
+                                    model="#{bindings.tranCustAccountBillToName.listOfValuesModel}"
+                                    columns="#{bindings.tranCustAccountBillToName.hints.displayWidth}"
+                                    shortDesc="#{bindings.tranCustAccountBillToName.hints.tooltip}" autoSubmit="true"
+                                    readOnly="#{pageFlowScope.param_batch_mode == 'view'}"
+                                    disabled="#{bindings.BatchStatus.inputValue == 'Accepted by the Operator' or pageFlowScope.param_rejected_tab == 'yes'}"
+                                    contentStyle="width:300px;"
+                                    valueChangeListener="#{pageFlowScope.BatchCreateEditBean.billToLovValueChangeListener}"
+                                    partialTriggers="tranCustAccountDeliverToNameId" showRequired="false"
+                                    styleClass="RequiredField">
+                <f:validator binding="#{bindings.tranCustAccountBillToName.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.tranCustAccountBillToName.suggestedItems}"/>
+              </af:inputListOfValues>
+              <af:panelLabelAndMessage label="Paying Location" id="plam3" showRequired="false"
+                                       styleClass="RequiredField">
+                <af:panelGroupLayout id="pgl5" layout="vertical">
+                  <af:inputListOfValues id="tranBillToSuAddressId" popupTitle="Search and Select: Paying Location"
+                                        value="#{bindings.tranBillToSuAddress.inputValue}"
+                                        label="Paying Location"
+                                        model="#{bindings.tranBillToSuAddress.listOfValuesModel}"
+                                        columns="#{bindings.tranBillToSuAddress.hints.displayWidth}"
+                                        shortDesc="#{bindings.tranBillToSuAddress.hints.tooltip}" simple="true"
+                                        contentStyle="width:300px;"
+                                        partialTriggers="tranCustAccountBillToNameId tranCustAccountDeliverToNameId"
+                                        disabled="#{bindings.BatchStatus.inputValue == 'Accepted by the Operator' or pageFlowScope.param_rejected_tab == 'yes'}">
+                    <f:validator binding="#{bindings.tranBillToSuAddress.validator}"/>
+                  </af:inputListOfValues>
+                  <af:inputText value="#{bindings.BillToSiteUseId.inputValue}"
+                                label="#{bindings.BillToSiteUseId.hints.label}"
+                                required="#{bindings.BillToSiteUseId.hints.mandatory}"
+                                columns="#{bindings.BillToSiteUseId.hints.displayWidth}"
+                                maximumLength="#{bindings.BillToSiteUseId.hints.precision}"
+                                shortDesc="#{bindings.BillToSiteUseId.hints.tooltip}" id="it8" simple="true"
+                                partialTriggers="tranBillToSuAddressId" visible="false">
+                    <f:validator binding="#{bindings.BillToSiteUseId.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.BillToSiteUseId.format}"/>
+                  </af:inputText>
+                </af:panelGroupLayout>
+              </af:panelLabelAndMessage>
+              <af:inputText value="#{bindings.BillToCustAccountId.inputValue}"
+                            label="#{bindings.BillToCustAccountId.hints.label}"
+                            required="#{bindings.BillToCustAccountId.hints.mandatory}"
+                            columns="#{bindings.BillToCustAccountId.hints.displayWidth}"
+                            maximumLength="#{bindings.BillToCustAccountId.hints.precision}"
+                            shortDesc="#{bindings.BillToCustAccountId.hints.tooltip}" id="it2"
+                            partialTriggers="tranCustAccountBillToNameId" visible="false" autoSubmit="true">
+                <f:validator binding="#{bindings.BillToCustAccountId.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.BillToCustAccountId.format}"/>
+              </af:inputText>
+              <af:inputListOfValues id="tranCustAccountShipToNameId" popupTitle="Search and Select: Ship Documents"
+                                    value="#{bindings.tranCustAccountShipToName.inputValue}" label="Ship Documents"
+                                    model="#{bindings.tranCustAccountShipToName.listOfValuesModel}"
+                                    columns="#{bindings.tranCustAccountShipToName.hints.displayWidth}"
+                                    shortDesc="#{bindings.tranCustAccountShipToName.hints.tooltip}" autoSubmit="true"
+                                    readOnly="#{pageFlowScope.param_batch_mode == 'view'}"
+                                    disabled="#{bindings.BatchStatus.inputValue == 'Accepted by the Operator' or pageFlowScope.param_rejected_tab == 'yes'}"
+                                    contentStyle="width:300px;"
+                                    valueChangeListener="#{pageFlowScope.BatchCreateEditBean.shipToLovValueChangeListener}"
+                                    partialTriggers="tranCustAccountDeliverToNameId" showRequired="false"
+                                    styleClass="RequiredField">
+                <f:validator binding="#{bindings.tranCustAccountShipToName.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.tranCustAccountShipToName.suggestedItems}"/>
+              </af:inputListOfValues>
+              <af:inputText value="#{bindings.ShipToCustAccountId.inputValue}"
+                            label="#{bindings.ShipToCustAccountId.hints.label}"
+                            required="#{bindings.ShipToCustAccountId.hints.mandatory}"
+                            columns="#{bindings.ShipToCustAccountId.hints.displayWidth}"
+                            maximumLength="#{bindings.ShipToCustAccountId.hints.precision}"
+                            shortDesc="#{bindings.ShipToCustAccountId.hints.tooltip}" id="it7"
+                            partialTriggers="tranCustAccountShipToNameId" visible="false" autoSubmit="true">
+                <f:validator binding="#{bindings.ShipToCustAccountId.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.ShipToCustAccountId.format}"/>
+              </af:inputText>
+              <af:panelLabelAndMessage label="Ship Location" id="plam4" showRequired="false" styleClass="RequiredField">
+                <af:panelGroupLayout id="pgl6" layout="vertical">
+                  <af:inputListOfValues id="tranShipToSuAddressId" popupTitle="Search and Select: Ship Location"
+                                        value="#{bindings.tranShipToSuAddress.inputValue}"
+                                        label="Ship Location"
+                                        model="#{bindings.tranShipToSuAddress.listOfValuesModel}"
+                                        columns="#{bindings.tranShipToSuAddress.hints.displayWidth}"
+                                        shortDesc="#{bindings.tranShipToSuAddress.hints.tooltip}" simple="true"
+                                        contentStyle="width:300px;"
+                                        partialTriggers="tranCustAccountShipToNameId tranCustAccountDeliverToNameId"
+                                        disabled="#{bindings.BatchStatus.inputValue == 'Accepted by the Operator' or pageFlowScope.param_rejected_tab == 'yes'}">
+                    <f:validator binding="#{bindings.tranShipToSuAddress.validator}"/>
+                  </af:inputListOfValues>
+                  <af:inputText value="#{bindings.ShipToSiteUseId.inputValue}"
+                                label="#{bindings.ShipToSiteUseId.hints.label}"
+                                required="#{bindings.ShipToSiteUseId.hints.mandatory}"
+                                columns="#{bindings.ShipToSiteUseId.hints.displayWidth}"
+                                maximumLength="#{bindings.ShipToSiteUseId.hints.precision}"
+                                shortDesc="#{bindings.ShipToSiteUseId.hints.tooltip}" id="it6" simple="true"
+                                partialTriggers="tranShipToSuAddressId" visible="false">
+                    <f:validator binding="#{bindings.ShipToSiteUseId.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.ShipToSiteUseId.format}"/>
+                  </af:inputText>
+                </af:panelGroupLayout>
+              </af:panelLabelAndMessage>
+              <af:inputText value="#{bindings.VesselNames.inputValue}" label="Vessel Name(s)" columns="49"
+                            maximumLength="#{bindings.VesselNames.hints.precision}"
+                            shortDesc="#{bindings.VesselNames.hints.tooltip}" id="it5"
+                            readOnly="#{pageFlowScope.param_batch_mode == 'view'}"
+                            disabled="#{bindings.BatchStatus.inputValue == 'Accepted by the Operator' or pageFlowScope.param_rejected_tab == 'yes'}"
+                            contentStyle="width:300px;" styleClass="UpperCaseText RequiredField" autoSubmit="true">
+                <f:validator binding="#{bindings.VesselNames.validator}"/>
+                <af:clientListener method="toUpperCase" type="valueChange"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.Notes.inputValue}" label="Notes"
+                            required="#{bindings.Notes.hints.mandatory}" columns="50"
+                            maximumLength="#{bindings.Notes.hints.precision}"
+                            shortDesc="#{bindings.Notes.hints.tooltip}" id="it3" rows="4"
+                            readOnly="#{pageFlowScope.param_batch_mode == 'view'}"
+                            contentStyle="width:300px;" styleClass="UpperCaseText" spellCheck="off">
+                <f:validator binding="#{bindings.Notes.validator}"/>
+                <af:clientListener method="toUpperCase" type="valueChange"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.DeliverToCustAccountId.inputValue}"
+                            label="#{bindings.DeliverToCustAccountId.hints.label}"
+                            required="#{bindings.DeliverToCustAccountId.hints.mandatory}"
+                            columns="#{bindings.DeliverToCustAccountId.hints.displayWidth}"
+                            maximumLength="#{bindings.DeliverToCustAccountId.hints.precision}"
+                            shortDesc="#{bindings.DeliverToCustAccountId.hints.tooltip}" id="it14" visible="false"
+                            partialTriggers="tranCustAccountDeliverToNameId" autoSubmit="true">
+                <f:validator binding="#{bindings.DeliverToCustAccountId.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.DeliverToCustAccountId.format}"/>
+              </af:inputText>
+            </af:panelFormLayout>
+          </af:panelBox>
+          <!--<af:panelBox text="Paying By Information" id="pb1" showDisclosure="false">
+          -->
+          <!--<f:facet name="toolbar"/>-->
+          <!--
+          <af:panelFormLayout id="pfl1" styleClass="panelFormLayoutClass" rows="1">
+          <f:facet name="footer"/>
+            
+            
+          </af:panelFormLayout>
+        </af:panelBox>-->
+          <!--<af:panelBox text="Shipping By Information" id="pb2" showDisclosure="false">
+          <f:facet name="toolbar"/>
+          <af:panelFormLayout id="pfl4" styleClass="panelFormLayoutClass" rows="3">
+            <f:facet name="footer"/>
+            
+            
+          </af:panelFormLayout>
+        </af:panelBox>-->
+        </af:panelGroupLayout>
+        <!--<af:panelBox id="pb6" showDisclosure="false">
+        <f:facet name="toolbar"/>-->
+        <af:panelFormLayout id="pfl5" inlineStyle="margin-top:12px;">
+          <f:facet name="footer">
+            <af:toolbar id="t1">
+              <af:button text="Save" id="b2"
+                         actionListener="#{pageFlowScope.BatchCreateEditBean.saveButtonActionListener}"
+                         disabled="#{pageFlowScope.param_batch_mode == 'view'}"/>
+              <af:button text="Back" id="b1" action="#{pageFlowScope.BatchCreateEditBean.backButtonAction}"
+                         immediate="true" inlineStyle="margin-left:8px;"/>
+              <af:button text="Add/Edit Seafarers" id="b3" action="seafarer"
+                         visible="#{bindings.BatchStatus.inputValue == 'Pending' or bindings.BatchStatus.inputValue == 'Pending_upload_document' or pageFlowScope.param_rejected_tab == 'yes'}"
+                         partialTriggers="b2" inlineStyle="margin-left:8px;"/>
+              <af:button text="Validate Seafarer Information" id="b6"
+                         actionListener="#{pageFlowScope.BatchCreateEditBean.validateSeafarerButton}"
+                         visible="#{bindings.BatchStatus.inputValue == 'Pending' and pageFlowScope.user_type == 'External' and  pageFlowScope.master == 'No' or bindings.BatchStatus.inputValue == 'Accepted by the Operator' or bindings.BatchStatus.inputValue == 'Pending_upload_document'}"
+                         partialTriggers="b2" inlineStyle="margin-left:8px;"/>
+              <af:button text="Submit" id="b4" actionListener="#{pageFlowScope.BatchCreateEditBean.submitButton}"
+                         disabled="#{pageFlowScope.param_batch_mode == 'view' or bindings.BatchStatus.inputValue == 'Not Accepted by the Operator' or bindings.OrderNumber.inputValue != null}"
+                         visible="#{bindings.BatchStatus.inputValue == 'Pending' and pageFlowScope.user_type == 'External' and  pageFlowScope.master == 'No' or bindings.BatchStatus.inputValue == 'Accepted by the Operator' or bindings.BatchStatus.inputValue == 'Pending_upload_document'}"
+                         useWindow="true" partialTriggers="b2" inlineStyle="margin-left:8px;"/>
+              <af:button text="Send to Internal Agent - II" id="b7"
+                         visible="#{pageFlowScope.user_type == 'Internal' and bindings.BatchStatus.inputValue == 'Pending'}"
+                         partialTriggers="b2" inlineStyle="margin-left:8px;"
+                         actionListener="#{pageFlowScope.BatchCreateEditBean.sendToInternalAgentButton}"/>
+              <af:button text="Resubmit" id="b10" visible="#{pageFlowScope.param_rejected_tab == 'yes'}"
+                         inlineStyle="margin-left:8px;">
+                <af:showPopupBehavior popupId="p6" triggerType="action"/>
+              </af:button>
+              <af:popup childCreation="deferred" autoCancel="disabled" id="unsavedWarningPopupBatchPage" contentDelivery="lazyUncached"
+                binding="#{pageFlowScope.BatchCreateEditBean.unsavedWarningPopupBindBatchPage}">
+                <af:dialog id="d17" type="none">
+                  <f:facet name="buttonBar">
+                    <af:toolbar id="t21" inlineStyle="float:right;">
+                      <af:button text="Yes" id="b43"
+                                 action="#{pageFlowScope.BatchCreateEditBean.unsavedWarningYesActionBatchPage}"/>
+                      <af:spacer width="10" height="10" id="s18"/>
+                      <af:button text="No" id="b44"
+                                 action="#{pageFlowScope.BatchCreateEditBean.unsavedWarningNoActionBatchPage}"/>
+                    </af:toolbar>
+                  </f:facet>
+                  <af:message id="m1" messageType="confirmation"
+                              message="This page contains unsaved data. Clicking on 'Yes' will lose any unsaved data. Do you still want to continue ?"/>
+                </af:dialog>
+              </af:popup>
+              <af:popup childCreation="deferred" autoCancel="disabled" id="p6"
+                        binding="#{pageFlowScope.BatchCreateEditBean.resubmitConfirmPopup}">
+                <af:dialog id="d6" type="none"
+                           dialogListener="#{pageFlowScope.BatchCreateEditBean.resubmitConfirmationDialogListener}">
+                  <f:facet name="buttonBar">
+                    <af:toolbar id="t2" inlineStyle="margin-left:200px;">
+                      <af:button text="Yes" id="b11" action="back"
+                                 actionListener="#{pageFlowScope.BatchCreateEditBean.yesButtonOnConfirmationPopup}"/>
+                      <af:button text="No" id="b12"
+                                 actionListener="#{pageFlowScope.BatchCreateEditBean.noButtonOnResubmitConfirmation}"/>
+                    </af:toolbar>
+                  </f:facet>
+                  <af:outputText value="Are you sure you want to resubmit the batch?" id="ot7"/>
+                </af:dialog>
+              </af:popup>
+              <af:popup childCreation="deferred" autoCancel="disabled" id="p5"
+                        binding="#{pageFlowScope.BatchCreateEditBean.internalAgentCoonfirmationPopup}">
+                <af:dialog id="d5" type="yesNo"
+                           dialogListener="#{pageFlowScope.BatchCreateEditBean.internalAgentConfirmDialogListener}">
+                  <f:facet name="buttonBar"/>
+                  <af:outputText value="Are you sure you want to submit the Batch to Internal Agent -II for upload?"
+                                 id="ot6"/>
+                </af:dialog>
+              </af:popup>
+            </af:toolbar>
+          </f:facet>
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p3"
+                    binding="#{pageFlowScope.BatchCreateEditBean.submitMessagePopup}">
+            <af:dialog id="d3" type="none" contentWidth="280">
+              <f:facet name="buttonBar">
+                <af:button text="OK" id="b9" action="back"/>
+              </f:facet>
+              <af:outputText value="Batch has been successfully submitted." id="ot4" inlineStyle="font-size:small;"/>
+            </af:dialog>
+          </af:popup>
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p2"
+                    binding="#{pageFlowScope.BatchCreateEditBean.sendToInternalPopup}">
+            <af:dialog id="d2" type="none" closeIconVisible="false" contentWidth="700">
+              <f:facet name="buttonBar">
+                <af:button text="OK" id="b8" action="back"/>
+              </f:facet>
+              <af:outputText value="Batch has been sent to ‘Orders Pending Upload’ Queue for Internal Agent – II to scan/upload the required documents."
+                             id="ot2" inlineStyle="font-size:small;"/>
+            </af:dialog>
+          </af:popup>
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p1" contentDelivery="lazyUncached"
+                    binding="#{pageFlowScope.BatchCreateEditBean.validationMessagePopup}">
+            <af:dialog id="d1" type="ok">
+              <f:facet name="buttonBar"/>
+              <af:iterator id="i1" value="#{pageFlowScope.BatchCreateEditBean.message}" var="item">
+                <af:panelGroupLayout id="pgl3" layout="vertical">
+                  <af:outputText value="{item.value}" id="ot3"/>
+                </af:panelGroupLayout>
+              </af:iterator>
+            </af:dialog>
+          </af:popup>
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p7" contentDelivery="lazyUncached"
+                    binding="#{pageFlowScope.BatchCreateEditBean.messageValidatePopup}">
+            <af:dialog id="d7" type="ok" title="Error" titleIconSource="#{resource['images:reddot.png']}">
+              <f:facet name="buttonBar"/>
+              <af:panelGroupLayout id="pgl7" layout="vertical">
+                <af:iterator id="i2" value="#{bindings.ValidationMessageView.collectionModel}" var="row">
+                  <af:panelGroupLayout id="pgl8" layout="vertical">
+                    <af:spacer width="10" height="10" id="s1"/>
+                    <af:outputText value="#{row.ErrorMessage}" id="ot8"
+                                   inlineStyle="margin-top:10px; font-weight:bold;"/>
+                  </af:panelGroupLayout>
+                </af:iterator>
+              </af:panelGroupLayout>
+              <af:table value="#{bindings.ValidationMessageView.collectionModel}" var="row"
+                        rows="#{bindings.ValidationMessageView.rangeSize}"
+                        emptyText="#{bindings.ValidationMessageView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        rowBandingInterval="0"
+                        selectedRowKeys="#{bindings.ValidationMessageView.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.ValidationMessageView.collectionModel.makeCurrent}"
+                        rowSelection="single" fetchSize="#{bindings.ValidationMessageView.rangeSize}" id="t3"
+                        contentDelivery="immediate" visible="false">
+                <af:column headerText="#{bindings.ValidationMessageView.hints.ErrorMessage.label}" id="c1">
+                  <af:outputText value="#{row.ErrorMessage}"
+                                 shortDesc="#{bindings.ValidationMessageView.hints.ErrorMessage.tooltip}" id="ot9"/>
+                </af:column>
+              </af:table>
+            </af:dialog>
+          </af:popup>
+          <af:panelLabelAndMessage label="#{bindings.OeHeaderId.hints.label}" id="plam1" visible="false">
+            <af:outputText value="#{bindings.OeHeaderId.inputValue}" shortDesc="#{bindings.OeHeaderId.hints.tooltip}"
+                           id="ot1">
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.OeHeaderId.format}"/>
+            </af:outputText>
+          </af:panelLabelAndMessage>
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p4"
+                    binding="#{pageFlowScope.BatchCreateEditBean.resubmitPopupBind}">
+            <af:dialog id="d4" type="none" closeIconVisible="false">
+              <f:facet name="buttonBar">
+                <af:button text="OK" id="b5" action="#{pageFlowScope.BatchCreateEditBean.okButtonOnResubmitButton}"/>
+              </f:facet>
+              <af:outputText value="Batch has been successfully Resubmitted." id="ot5"/>
+            </af:dialog>
+          </af:popup>
+        </af:panelFormLayout>
+      </af:panelGroupLayout>
+    </af:panelBox>
+  </af:panelGroupLayout>
+</jsp:root>

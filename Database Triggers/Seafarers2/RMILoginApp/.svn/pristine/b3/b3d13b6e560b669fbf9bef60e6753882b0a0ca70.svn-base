@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<af:pageTemplateDef xmlns:af="http://xmlns.oracle.com/adf/faces/rich" var="attrs" definition="private"
+                    xmlns:afc="http://xmlns.oracle.com/adf/faces/rich/component">
+    <af:xmlContent>
+        <afc:component>
+            <afc:description/>
+            <afc:display-name>RmiTemplate</afc:display-name>
+            <afc:facet>
+                <afc:facet-name>content</afc:facet-name>
+            </afc:facet>
+        </afc:component>
+    </af:xmlContent>
+    <af:resource type="css" source="http://fonts.googleapis.com/css?family=Lato:300,400,700|Open+Sans:300,400,700"/>
+    <af:resource type="css" source="/skins/rmi/bootstrap.css"/>
+    <af:resource type="css" source="/skins/rmi/main.css"/>
+    <div id="tDv1" class="wrapper"
+         style='background-image:url("images/bg.jpg"); background-repeat:no-repeat; src:url("images/bg.jpg");'>
+        <div id="tDv2" class="container xwidth">
+            <style>
+                .xwidth {
+                    max-width: 99%;
+                }
+            </style>
+            <div id="tDv3" class="top row d-flex align-items-center justify-content-between pt-5 pb-5">
+                <div id="tDv4" class="col-auto">
+                    <div id="tDv5" class="logo d-flex align-items-center ">
+                        <div id="tDv6" class="glyph">
+                            <img src="images/IRI-Logo Mark-White.png" alt="glyph"/>
+                                 
+                        </div>
+                        <div id="tDv7" class="text">
+                            <h1>INTERNATIONAL REGISTRIES,INC.</h1>
+                        </div>
+                    </div>
+                </div>
+                <div id="tDv8" class="col-auto">
+                    <a href="https://www.register-iri.com" class="btn btn-lg btn-secondary">RETURN TO IRI</a>
+                </div>
+            </div>
+            <div id="tDv9" class="center">
+                <div id="tDv10">
+                    <div id="tDv11" class="">
+                        <h3>
+                            <af:outputText id="pt_ot1" value=""/>
+                        </h3>
+                    </div>
+                </div>
+                <div id="tDv12">
+                    <div id="tDv13">
+                        <af:panelGridLayout id="pt_pgl1" dimensionsFrom="auto">
+                            <af:gridRow id="pt_gr1" height="570px">
+                                <!--<af:gridCell width="1%" id="pt_gc1" valign="stretch" halign="stretch"/>-->
+                                <af:gridCell width="98%" id="pt_gc2" valign="stretch" halign="stretch">
+                                    <af:facetRef facetName="content"/>
+                                </af:gridCell>
+                                <!--<af:gridCell width="1%" id="pt_gc3" valign="stretch" halign="stretch"/>-->
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                    </div>
+                </div>
+            </div>
+            <div id="tDv14" class="footer">
+                <div id="tDv15" class="row d-flex align-items-center justify-content-between pt-5 pb-5">
+                    <div id="tDv16" class="col-auto">© 2021 INTERNATIONAL REGISTRIES</div>
+                    <div id="tDv17" class="col-auto">
+                        <ul class="footer-menu d-flex align-items-center">
+                            <li>
+                                <a href="http://www.register-iri.com/index.cfm?action=sitemap">SITEMAP</a>
+                            </li>
+                            <li>
+                                <a href="http://www.register-iri.com/index.cfm?action=privacy" target="_blank">PRIVACY</a>
+                            </li>
+                            <li>
+                                <a href="https://www.register-iri.com/terms-conditions/" target="_blank">TERMS &amp;
+                                                                                                         CONDITIONS</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <af:resource type="javascript" source="http://code.jquery.com/jquery-3.3.1.slim.min.js"/>
+    <af:resource type="javascript" source="http://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"/>
+</af:pageTemplateDef>

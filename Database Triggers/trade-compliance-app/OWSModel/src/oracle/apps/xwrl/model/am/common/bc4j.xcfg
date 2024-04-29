@@ -1,0 +1,37 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="oracle.apps.xwrl.model.am.AppModule" default="DevDS">
+      <AppModuleConfig DeployPlatform="LOCAL" JDBCName="IRIDEV" name="AppModuleLocal" ApplicationName="oracle.apps.xwrl.model.am.AppModule" jbo.project="oracle.apps.xwrl.model.Model" java.naming.factory.initial="oracle.jbo.common.JboInitialContextFactory">
+         <Database jbo.locking.mode="optimistic" jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="oracle.apps.xwrl.model.am.AppModule"/>
+         <Custom ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+      <AppModuleConfig jbo.project="oracle.apps.xwrl.model.Model" ApplicationName="oracle.apps.xwrl.model.am.AppModule" DeployPlatform="LOCAL" name="AppModuleShared" JDBCName="IRIDEV" java.naming.factory.initial="oracle.jbo.common.JboInitialContextFactory">
+         <AM-Pooling jbo.ampool.isuseexclusive="false" jbo.ampool.resetnontransactionalstate="false" jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.maxpoolsize="1"/>
+         <Database jbo.locking.mode="optimistic" jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="oracle.apps.xwrl.model.am.AppModule"/>
+         <Custom ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+      <AppModuleConfig jbo.project="oracle.apps.xwrl.model.Model" ApplicationName="oracle.apps.xwrl.model.am.AppModule" DeployPlatform="LOCAL" name="ProdDS" java.naming.factory.initial="oracle.jbo.common.JboInitialContextFactory">
+         <AM-Pooling jbo.ampool.minavailablesize="85" jbo.doconnectionpooling="true" jbo.ampool.maxavailablesize="120" jbo.ampool.timetolive="-1" jbo.recyclethreshold="120" jbo.ampool.initpoolsize="85"/>
+         <Database jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="oracle.apps.xwrl.model.am.AppModule"/>
+         <Custom ns0:JDBCDataSource="jdbc/ebsIRIPRODDS" ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+      <AppModuleConfig jbo.project="oracle.apps.xwrl.model.Model" ApplicationName="oracle.apps.xwrl.model.am.AppModule" DeployPlatform="LOCAL" name="DevDS" java.naming.factory.initial="oracle.jbo.common.JboInitialContextFactory">
+         <AM-Pooling jbo.ampool.minavailablesize="85" jbo.doconnectionpooling="true" jbo.ampool.maxavailablesize="120" jbo.ampool.timetolive="-1" jbo.recyclethreshold="120" jbo.ampool.initpoolsize="85"/>
+         <Database jbo.locking.mode="optimistic"/>
+         <Security AppModuleJndiName="oracle.apps.xwrl.model.am.AppModule"/>
+         <Custom ns0:JDBCDataSource="jdbc/DevDS" ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+      <AppModuleConfig jbo.project="oracle.apps.xwrl.model.Model" ApplicationName="oracle.apps.xwrl.model.am.AppModule" DeployPlatform="LOCAL" name="DRDS">
+         <AM-Pooling jbo.ampool.minavailablesize="85" jbo.ampool.maxavailablesize="120" jbo.ampool.timetolive="-1" jbo.recyclethreshold="120" jbo.ampool.initpoolsize="85"/>
+         <Security AppModuleJndiName="oracle.apps.xwrl.model.am.AppModule"/>
+         <Custom ns0:JDBCDataSource="jdbc/DRDS" ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+      <AppModuleConfig DeployPlatform="LOCAL" name="ADGDS" ApplicationName="oracle.apps.xwrl.model.am.AppModule" jbo.project="oracle.apps.xwrl.model.Model">
+         <Security AppModuleJndiName="oracle.apps.xwrl.model.am.AppModule"/>
+         <Custom ns0:JDBCDataSource="jdbc/ADGDS" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

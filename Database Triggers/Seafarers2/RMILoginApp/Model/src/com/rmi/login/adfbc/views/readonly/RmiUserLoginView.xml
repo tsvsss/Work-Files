@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RmiUserLoginView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.login.adfbc.views.readonly.RmiUserLoginView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pUserName"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT    
+    RMI_SEAFARER_RMI_USER.USER_ID USER_ID,    
+    RMI_SEAFARER_RMI_USER.USER_NAME USER_NAME,    
+    RMI_SEAFARER_RMI_USER.DEFAULT_DATE_FORMAT DEFAULT_DATE_FORMAT,    
+    RMI_SEAFARER_RMI_USER.CREATED_BY CREATED_BY,    
+    RMI_SEAFARER_RMI_USER.CREATION_DATE CREATION_DATE,    
+    RMI_SEAFARER_RMI_USER.LAST_UPDATED_BY LAST_UPDATED_BY,    
+    RMI_SEAFARER_RMI_USER.LAST_UPDATE_DATE LAST_UPDATE_DATE,    
+    RMI_SEAFARER_RMI_USER.LAST_UPDATE_LOGIN LAST_UPDATE_LOGIN,    
+    RMI_SEAFARER_RMI_USER.PASSWORD PASSWORD,    
+    RMI_SEAFARER_RMI_USER.LOCKOUT_TIME LOCKOUT_TIME,    
+    RMI_SEAFARER_RMI_USER.LOCKOUT LOCKOUT,    
+    RMI_SEAFARER_RMI_USER.RESET_PASSWORD RESET_PASSWORD,    
+    RMI_SEAFARER_RMI_USER.USER_AGREEMENT_ACCEPT USER_AGREEMENT_ACCEPT,    
+    RMI_SEAFARER_RMI_USER.FIRST_NAME FIRST_NAME,    
+    RMI_SEAFARER_RMI_USER.LAST_NAME LAST_NAME,    
+    RMI_SEAFARER_RMI_USER.EMAIL_ID EMAIL_ID,    
+    RMI_SEAFARER_RMI_USER.CONTACT CONTACT,    
+    RMI_SEAFARER_RMI_USER.USER_TYPE USER_TYPE,    
+    RMI_SEAFARER_RMI_USER.STATUS STATUS,    
+    RMI_SEAFARER_RMI_USER.ADDRESS ADDRESS,    
+    RMI_SEAFARER_RMI_USER.DEFAULT_PROCESSING_OFFICE DEFAULT_PROCESSING_OFFICE,    
+    RMI_SEAFARER_RMI_USER.MASTER_OPERATOR MASTER_OPERATOR,    
+    RMI_SEAFARER_RMI_USER.OPERATOR_FLAG OPERATOR_FLAG,    
+    RMI_SEAFARER_RMI_USER.APPROVAL_DATE APPROVAL_DATE,    
+    RMI_SEAFARER_RMI_USER.EXPIRATION_DATE EXPIRATION_DATE,    
+    RMI_SEAFARER_RMI_USER.EMAIL_CC EMAIL_CC,    
+    RMI_SEAFARER_RMI_USER.EMAIL_BCC EMAIL_BCC,    
+    RMI_SEAFARER_RMI_USER.INACTIVE_DATE INACTIVE_DATE,    
+    RMI_SEAFARER_RMI_USER.APPS_CONTACT_ID APPS_CONTACT_ID,    
+    RMI_SEAFARER_RMI_USER.VIEW_ORDERS VIEW_ORDERS,    
+    RMI_SEAFARER_RMI_USER.FND_USER_ID FND_USER_ID,  
+    RMI_SEAFARER_RMI_USER.PASSWORD_UPDATION_DATE PASSWORD_UPDATION_DATE   
+FROM    
+    RMI_SEAFARER.RMI_USER RMI_SEAFARER_RMI_USER    
+WHERE    
+    RMI_SEAFARER_RMI_USER.USER_NAME=:pUserName]]></SQLQuery>
+  <ViewAttribute
+    Name="UserId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="USER_ID"
+    Expression="USER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="UserName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="USER_NAME"
+    Expression="USER_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DefaultDateFormat"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEFAULT_DATE_FORMAT"
+    Expression="DEFAULT_DATE_FORMAT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CREATED_BY"
+    Expression="CREATED_BY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CreationDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CREATION_DATE"
+    Expression="CREATION_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="LAST_UPDATED_BY"
+    Expression="LAST_UPDATED_BY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="LAST_UPDATE_DATE"
+    Expression="LAST_UPDATE_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="LAST_UPDATE_LOGIN"
+    Expression="LAST_UPDATE_LOGIN"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Password"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PASSWORD"
+    Expression="PASSWORD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LockoutTime"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="LOCKOUT_TIME"
+    Expression="LOCKOUT_TIME"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="Lockout"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LOCKOUT"
+    Expression="LOCKOUT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ResetPassword"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RESET_PASSWORD"
+    Expression="RESET_PASSWORD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="UserAgreementAccept"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="USER_AGREEMENT_ACCEPT"
+    Expression="USER_AGREEMENT_ACCEPT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FirstName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FIRST_NAME"
+    Expression="FIRST_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LAST_NAME"
+    Expression="LAST_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EmailId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EMAIL_ID"
+    Expression="EMAIL_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Contact"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CONTACT"
+    Expression="CONTACT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="UserType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="USER_TYPE"
+    Expression="USER_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Status"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STATUS"
+    Expression="STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Address"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ADDRESS"
+    Expression="ADDRESS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DefaultProcessingOffice"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEFAULT_PROCESSING_OFFICE"
+    Expression="DEFAULT_PROCESSING_OFFICE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MasterOperator"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="MASTER_OPERATOR"
+    Expression="MASTER_OPERATOR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OperatorFlag"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="OPERATOR_FLAG"
+    Expression="OPERATOR_FLAG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ApprovalDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="APPROVAL_DATE"
+    Expression="APPROVAL_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="ExpirationDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="EXPIRATION_DATE"
+    Expression="EXPIRATION_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="EmailCc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EMAIL_CC"
+    Expression="EMAIL_CC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EmailBcc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EMAIL_BCC"
+    Expression="EMAIL_BCC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InactiveDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="INACTIVE_DATE"
+    Expression="INACTIVE_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="AppsContactId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="APPS_CONTACT_ID"
+    Expression="APPS_CONTACT_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ViewOrders"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ORDERS"
+    Expression="VIEW_ORDERS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FndUserId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    AliasName="FND_USER_ID"
+    Expression="FND_USER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PasswordUpdationDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="PASSWORD_UPDATION_DATE"
+    Expression="PASSWORD_UPDATION_DATE"
+    SQLType="DATE"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="UserId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

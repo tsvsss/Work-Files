@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RMISubmitRequestDualView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  RowClass="com.rmi.applicationEntry.adfbc.views.readOnlyVO.RMISubmitRequestDualViewRowImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.readOnlyVO.RMISubmitRequestDualView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="RMIRequestView"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.RMIRequestView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="OrdersForRequestsView1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.OrdersForRequestsView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="OrderLinesForRequestsView1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.OrderLinesForRequestsView"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pHeaderId">
+        <TransientExpression
+          trustMode="untrusted"><![CDATA[HeaderId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="RequestListView1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.RequestListView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="RegionListForAssignView1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.RegionListForAssignView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="BatchNamesView1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.BatchNamesView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="GroupNamesView1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.GroupNamesView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ActionListView1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.ActionListView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="OrderByListView1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.OrderByListView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="PrinterListView1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.PrinterListView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="YesNoValueSetView1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.YesNoValueSetView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_SelectRequest"
+    ListVOName="RequestListView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0"
+    ComboRowCountHint="10">
+    <AttrArray Name="AttrNames">
+      <Item Value="SelectRequest"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ProgramShortName"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Name"/>
+      <Item Value="ShortName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="RequestListViewCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_OrderNumber"
+    ListVOName="OrdersForRequestsView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="OrderNumber"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="HeaderId"/>
+      <Item Value="batchId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="OrderNumber"/>
+      <Item Value="HeaderId"/>
+      <Item Value="EsiBatchId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="OrderNumber"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="OrdersForRequestsViewCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_LineId"
+    ListVOName="OrderLinesForRequestsView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="LineId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LineId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LineNumber"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_SalesOffice"
+    ListVOName="RegionListForAssignView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="SalesOffice"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="SalesrepId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_BatchName"
+    ListVOName="BatchNamesView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="BatchName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="batchId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="BatchName"/>
+      <Item Value="EsiBatchId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="BatchName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="BatchNamesViewCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_GroupName"
+    ListVOName="GroupNamesView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="GroupName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="GroupName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="GroupName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ActionName"
+    ListVOName="ActionListView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ActionName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Action"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Action"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_OrderBy"
+    ListVOName="OrderByListView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="OrderBy"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Meaning"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PrinterName"
+    ListVOName="PrinterListView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PrinterName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="PrinterName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="PrinterName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="PrinterListViewCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_IncludeAllSeafarer"
+    ListVOName="YesNoValueSetView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="IncludeAllSeafarer"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FlexValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FlexValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[select 1 submitrequest from dual]]></SQLQuery>
+  <ViewAttribute
+    Name="Submitrequest"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SUBMITREQUEST"
+    Expression="SUBMITREQUEST"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="SelectRequest"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_SelectRequest">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrderNumber"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_OrderNumber">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HeaderId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="LineId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"
+    LOVName="LOV_LineId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProgramShortName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="batchId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.Integer"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="FromDate"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="VIEW_ATTR"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="ToDate"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="VIEW_ATTR"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="SalesOffice"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.Integer"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"
+    LOVName="LOV_SalesOffice">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BatchName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_BatchName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GroupName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_GroupName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ActionName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_ActionName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrderBy"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_OrderBy">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PrinterName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_PrinterName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NumberOfCopies"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="IncludeAllSeafarer"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_IncludeAllSeafarer">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SeafarerId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="EditSeafarersPagePageDef"
+                Package="com.rmi.tradecompapproval.view.editseafarerdocs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="EditSeafarersView1" RangeSize="25" DataControl="RMITradeCompApprovalAppModuleDataControl"
+              id="EditSeafarersVO1Iterator"/>
+    <iterator Binds="DualEditSeafarersView1" RangeSize="25" DataControl="RMITradeCompApprovalAppModuleDataControl"
+              id="DualEditSeafarersRO1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="EditSeafarersVO1Iterator" id="EditSeafarersVO1">
+      <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.EditSeafarersView" Name="EditSeafarersVO10">
+        <AttrNames>
+          <Item Value="SeafarerId"/>
+          <Item Value="LastName"/>
+          <Item Value="FirstName"/>
+          <Item Value="MiddleInitial"/>
+          <Item Value="BirthDate"/>
+          <Item Value="BirthPlace"/>
+          <Item Value="TransNationality"/>
+          <Item Value="Gender"/>
+          <Item Value="Status"/>
+          <Item Value="DistinguishingMarks"/>
+          <Item Value="Photo"/>
+          <Item Value="checkRowStatus"/>
+          <Item Value="TransShortText"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="DualEditSeafarersRO1Iterator" id="TransFirstName">
+      <AttrNames>
+        <Item Value="TransFirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DualEditSeafarersRO1Iterator" id="TransLastName">
+      <AttrNames>
+        <Item Value="TransLastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DualEditSeafarersRO1Iterator" id="TransSeafarerId">
+      <AttrNames>
+        <Item Value="TransSeafarerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DualEditSeafarersRO1Iterator" id="TransBirthDate">
+      <AttrNames>
+        <Item Value="TransBirthDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="searchEditSeafarers" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="searchEditSeafarers" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.searchEditSeafarers_RMITradeCompApprovalAMDataControl_dataProvider_searchEditSeafarers_result"/>
+    <methodAction id="resetSearchEditSeafarers" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="resetSearchEditSeafarers" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.resetSearchEditSeafarers_RMITradeCompApprovalAMDataControl_dataProvider_resetSearchEditSeafarers_result"/>
+    <action id="Commit" DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <action id="Rollback" DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <action IterBinding="EditSeafarersVO1Iterator" id="CreateSeafarer"
+            InstanceName="RMITradeCompApprovalAppModuleDataControl.EditSeafarersView1"
+            DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <listOfValues IterBinding="EditSeafarersVO1Iterator" StaticList="false" Uses="LOV_TransNationality"
+                  id="TransNationality"/>
+    <methodAction id="uploadPhoto" RequiresUpdateModel="true" Action="invokeMethod" MethodName="uploadPhoto"
+                  IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.uploadPhoto_RMITradeCompApprovalAppModuleDataControl_dataProvider_uploadPhoto_result">
+      <NamedData NDName="param1" NDType="java.lang.String"/>
+      <NamedData NDName="param2" NDType="java.lang.String"/>
+      <NamedData NDName="param3" NDType="java.lang.String"/>
+      <NamedData NDName="fileName" NDType="java.lang.String"/>
+      <NamedData NDName="rejected" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="createBatchVetting" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createBatchVetting" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.createBatchVetting_RMITradeCompApprovalAppModuleDataControl_dataProvider_createBatchVetting_result">
+      <NamedData NDName="seafarerId" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="fetchSelectedSeafarerStatus" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="fetchSelectedSeafarerStatus" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.fetchSelectedSeafarerStatus_RMITradeCompApprovalAppModuleDataControl_dataProvider_fetchSelectedSeafarerStatus_result"/>
+    <methodAction id="updateSeafarerDocStatus" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="updateSeafarerDocStatus" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.updateSeafarerDocStatus_RMITradeCompApprovalAppModuleDataControl_dataProvider_updateSeafarerDocStatus_result">
+      <NamedData NDName="seafarerStatus" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="filterSeafarerShortText" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterSeafarerShortText" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.filterSeafarerShortText_RMITradeCompApprovalAppModuleDataControl_dataProvider_filterSeafarerShortText_result"/>
+    <methodAction id="updateSeafarerShortText" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="updateSeafarerShortText" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.updateSeafarerShortText_RMITradeCompApprovalAppModuleDataControl_dataProvider_updateSeafarerShortText_result"/>
+    <methodAction id="updateSeafarerPhoto" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="updateSeafarerPhoto" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.updateSeafarerPhoto_RMITradeCompApprovalAppModuleDataControl_dataProvider_updateSeafarerPhoto_result">
+      <NamedData NDName="edocId" NDType="java.lang.Integer"/>
+      <NamedData NDName="seafarerId" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="createDocumentPreviewFolderWithPerms" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createDocumentPreviewFolderWithPerms" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.createDocumentPreviewFolderWithPerms_RMITradeCompApprovalAppModuleDataControl_dataProvider_createDocumentPreviewFolderWithPerms_result">
+      <NamedData NDName="folderPath" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

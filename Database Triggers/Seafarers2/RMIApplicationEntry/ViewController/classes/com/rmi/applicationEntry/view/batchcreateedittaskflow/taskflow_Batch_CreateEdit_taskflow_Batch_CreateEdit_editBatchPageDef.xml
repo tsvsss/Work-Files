@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="taskflow_Batch_CreateEdit_taskflow_Batch_CreateEdit_editBatchPageDef"
+                Package="com.rmi.applicationEntry.view.batchcreateedittaskflow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="editBatch" RequiresUpdateModel="true" Action="invokeMethod" MethodName="editBatch"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.editBatch_RMIApplicationEntryAppModuleDataControl_dataProvider_editBatch_result">
+      <NamedData NDName="batchId" NDValue="#{pageFlowScope.param_batch_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SeafarerOrderHistoryDetailsView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  FetchMode="FETCH_AS_NEEDED"
+  FetchSize="26">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarerOrderHistoryDetailsView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pSeafarer_id"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pLastName"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pBirthDate"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <SQLQuery><![CDATA[select ord.seafarer_id,ord.header_id,ord.order_number,ord.customer_number,ord.customer_name,ord.ordered_date,ord.booked_flag,ord.open_flag,ord.note,  
+ord.first_name||' '||ord.last_name seafarer_name,bt.esi_batch_id,bt.batch_name,bt.purchase_order_number,bt.expedited_processing, 
+(select decode(seafarer_wf_status,'Pending_TC','Pending Validation','Pending_VAL','Pending Evaluation',            
+'Pending_QA','Pending QA','Pending_Shipping','Pending Shipping','Closed','Closed','Pending_ABN','Pending Assign Book Number','Rejected','Sent for correction','Unverified','Sent for correction','Pending_MTC','Pending Trade Compliance','Submitted') from rmi_seafarer.rmi_seafarers_iface where seafarer_id = ord.seafarer_id and esi_batch_id = bt.esi_batch_id) application_status 
+from rmi_sicd_order_history_vw ord,rmi_seafarer.rmi_batch_iface bt where ord.seafarer_id = nvl(:pSeafarer_id,ord.seafarer_id)  
+and upper(ord.last_name) = nvl(upper(:pLastName),ord.last_name)   
+and trunc(ord.birth_date) = trunc(nvl(to_date(:pBirthDate),ord.birth_date))  
+and (:pSeafarer_id is not null or :pLastName is not null or :pBirthDate is not null)  
+and ord.header_id = bt.oe_header_id(+)]]></SQLQuery>
+  <ViewAttribute
+    Name="SeafarerId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="BIGINT"
+    AliasName="SEAFARER_ID"
+    Expression="SEAFARER_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="HeaderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="HEADER_ID"
+    Expression="HEADER_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="OrderNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ORDER_NUMBER"
+    Expression="ORDER_NUMBER"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="CustomerNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUSTOMER_NUMBER"
+    Expression="CUSTOMER_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CustomerName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="360"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUSTOMER_NAME"
+    Expression="CUSTOMER_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="360"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrderedDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="ORDERED_DATE"
+    Expression="ORDERED_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="BookedFlag"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="3"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BOOKED_FLAG"
+    Expression="BOOKED_FLAG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OpenFlag"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="3"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="OPEN_FLAG"
+    Expression="OPEN_FLAG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Note"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="13"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NOTE"
+    Expression="NOTE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="13"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SeafarerName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="121"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SEAFARER_NAME"
+    Expression="SEAFARER_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="121"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EsiBatchId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ESI_BATCH_ID"
+    Expression="ESI_BATCH_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="BatchName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BATCH_NAME"
+    Expression="BATCH_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PurchaseOrderNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PURCHASE_ORDER_NUMBER"
+    Expression="PURCHASE_ORDER_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ExpeditedProcessing"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EXPEDITED_PROCESSING"
+    Expression="EXPEDITED_PROCESSING"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ApplicationStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="26"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="APPLICATION_STATUS"
+    Expression="APPLICATION_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="26"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

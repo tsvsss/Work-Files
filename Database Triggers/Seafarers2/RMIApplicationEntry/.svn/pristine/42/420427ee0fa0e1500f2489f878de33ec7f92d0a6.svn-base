@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="DeficientOrdersTaskFlow">
+    <default-activity>onloadDeficientOrder</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__2">
+      <name>param_user_id</name>
+      <value>#{sessionScope.param_user_id}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>DeficientOrdersBean</managed-bean-name>
+      <managed-bean-class>com.rmi.applicationEntry.view.batchesTaskFlows.DeficientOrdersBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="DeficientOrders">
+      <page>/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/DeficientOrders.jsff</page>
+    </view>
+    <method-call id="onloadDeficientOrder">
+      <method>#{bindings.onloadDeficientOrder.execute}</method>
+      <outcome>
+        <fixed-outcome>onloadDeficientOrder</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__3">
+      <from-activity-id>onloadDeficientOrder</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>onloadDeficientOrder</from-outcome>
+        <to-activity-id>DeficientOrders</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

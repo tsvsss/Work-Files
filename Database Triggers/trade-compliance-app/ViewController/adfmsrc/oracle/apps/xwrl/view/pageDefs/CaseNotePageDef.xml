@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="CaseNotePageDef"
+                Package="oracle.apps.xwrl.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="CaseNoteTaskflow1" taskFlowId="/WEB-INF/CaseNote-Taskflow.xml#CaseNote-Taskflow" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <iterator id="XwrlRequestsView1Iterator" Binds="XwrlRequestsView1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings/>
+</pageDefinition>

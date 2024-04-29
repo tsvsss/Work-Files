@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.1.3.10.47" id="DataBindings_RMIApplicationEntry"
+             SeparateXMLFiles="false" Package="com.rmi.applicationEntry.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+   
+    
+    <page path="/untitled1.jspx" usageId="com_rmi_applicationEntry_view_untitled1PageDef"/>
+  
+   
+  
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/BatchesTaskFlow.xml#taskflow_Batches@init"
+          usageId="com_rmi_applicationEntry_view_taskflow_Batches_taskflow_Batches_initPageDef1"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/BatchesTaskFlow.xml#taskflow_Batches@searchBatch"
+          usageId="com_rmi_applicationEntry_view_taskflow_Batches_taskflow_Batches_searchBatchPageDef1"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/Batches.jsff"
+          usageId="com_rmi_applicationEntry_view_BatchesPageDef1"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchcreateedittaskflow/BatchCreateEditTaskFlow.xml#taskflow_Batch_CreateEdit@init"
+          usageId="com_rmi_applicationEntry_view_taskflow_Batch_CreateEdit_taskflow_Batch_CreateEdit_initPageDef1"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchcreateedittaskflow/BatchCreateEditTaskFlow.xml#taskflow_Batch_CreateEdit@editBatch"
+          usageId="com_rmi_applicationEntry_view_taskflow_Batch_CreateEdit_taskflow_Batch_CreateEdit_editBatchPageDef1"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchcreateedittaskflow/BatchCreateEditTaskFlow.xml#taskflow_Batch_CreateEdit@createNewBatch"
+          usageId="com_rmi_applicationEntry_view_taskflow_Batch_CreateEdit_taskflow_Batch_CreateEdit_createNewBatchPageDef1"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchcreateedittaskflow/BatchCreateEditTaskFlow.xml#taskflow_Batch_CreateEdit@createOrEditSeafarer"
+          usageId="com_rmi_applicationEntry_view_taskflow_Batch_CreateEdit_taskflow_Batch_CreateEdit_createOrEditSeafarerPageDef1"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchcreateedittaskflow/BatchCreateEditView.jsff"
+          usageId="com_rmi_applicationEntry_view_BatchCreateEditViewPageDef1"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchcreateedittaskflow/seafarerAddEdit.jsff"
+          usageId="com_rmi_applicationEntry_view_seafarerAddEditPageDef1"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchesabntaskflow/BatchesAbnTaskFlow.xml#taskflow_batches_ABN@onLoadBatchPendingAbn"
+          usageId="com_rmi_applicationEntry_view_taskflow_batches_ABN_taskflow_batches_ABN_onLoadBatchPendingAbnPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchesabntaskflow/BatchesPendingABN.jsff"
+          usageId="com_rmi_applicationEntry_view_BatchesPendingABNPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchesqataskflow/BatchesQaTaskFlow.xml#taskflow_batches_QA@onLoadBatchPendingQA"
+          usageId="com_rmi_applicationEntry_view_BatchesQaTaskFlow_taskflow_batches_QA_onLoadBatchPendingQAPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchesqataskflow/BatchesPendingQA.jsff"
+          usageId="com_rmi_applicationEntry_view_BatchesPendingQAPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchesshippingtaskflow/BatchesShippingTaskFlow.xml#taskflow_batches_Shipping@onLoadBatchPendingShipping"
+          usageId="com_rmi_applicationEntry_view_BatchesShippingTaskFlow_taskflow_batches_Shipping_onLoadBatchPendingShippingPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchesshippingtaskflow/BatchesPendingShipping.jsff"
+          usageId="com_rmi_applicationEntry_view_BatchesPendingShippingPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchestctaskflow/BatchesTcTaskFlow.xml#taskflow_batches_TC@onLoadBatchPendingTC"
+          usageId="com_rmi_applicationEntry_view_BatchesTcTaskFlow_taskflow_batches_TC_onLoadBatchPendingTCPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchestctaskflow/BatchesPendingTC.jsff"
+          usageId="com_rmi_applicationEntry_view_BatchesPendingTCPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchesuploaddocumenttaskflow/BatchesUploaddocumentTaskFlow.xml#taskflow_batches_uploadDocument@onLoadBatchPendingUploadDocument"
+          usageId="com_rmi_applicationEntry_view_BatchesUploaddocumentTaskFlow_taskflow_batches_uploadDocument_onLoadBatchPendingUploadDocumentPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchesuploaddocumenttaskflow/BatchesPendingUploadDocument.jsff"
+          usageId="com_rmi_applicationEntry_view_BatchesPendingUploadDocumentPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchesvaltaskflow/BatchesValTaskFlow.xml#taskflow_batches_VAL@onLoadBatchPendingEVAL"
+          usageId="com_rmi_applicationEntry_view_BatchesValTaskFlow_taskflow_batches_VAL_onLoadBatchPendingEVALPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchesvaltaskflow/BatchesPendingEVAL.jsff"
+          usageId="com_rmi_applicationEntry_view_BatchesPendingEVALPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/craprocessingtaskflow/CRAProcessing.jsff"
+          usageId="com_rmi_applicationEntry_view_CRAProcessingPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/mytasktaskflow/MyTaskTaskFlow.xml#taskflow_myTasks@onLoadMytask1"
+          usageId="com_rmi_applicationEntry_view_MyTaskTaskFlow_taskflow_myTasks_onLoadMytask1PageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/mytasktaskflow/myTasks.jsff"
+          usageId="com_rmi_applicationEntry_view_myTasksPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/mytasktaskflow/MyTaskTaskFlow.xml#taskflow_myTasks@ini"
+          usageId="com_rmi_applicationEntry_view_MyTaskTaskFlow_taskflow_myTasks_iniPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/submittedbatchestaskflow/submittedBatches.jsff"
+          usageId="com_rmi_applicationEntry_view_submittedBatchesPageDef"/>
+    <page path="/untitled2.jspx" usageId="com_rmi_applicationEntry_view_untitled2PageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/findseafarertaskflow/FindSeafarer.jsff"
+          usageId="com_rmi_applicationEntry_view_FindSeafarerPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/findseafarertaskflow/FindSeafarerTaskFlow.xml#FindSeafarerTaskFlow@findSeafarerReset"
+          usageId="com_rmi_applicationEntry_view_FindSeafarerTaskFlow_FindSeafarerTaskFlow_findSeafarerResetPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchesmtctaskflow/BatchesMtcTaskFlow.xml#BatchesMtcTaskFlow@onLoadBatchPendingMTC"
+          usageId="com_rmi_applicationEntry_view_BatchesMtcTaskFlow_BatchesMtcTaskFlow_onLoadBatchPendingMTCPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchesmtctaskflow/BatchesPendingMtc.jsff"
+          usageId="com_rmi_applicationEntry_view_BatchesPendingMtcPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/craprocessingtaskflow/CraProcessingTaskFlow.xml#taskflow_Cra_Processing@onLoadCraProcessing"
+          usageId="com_rmi_applicationEntry_view_CraProcessingTaskFlow_taskflow_Cra_Processing_onLoadCraProcessingPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/accountstatustaskflow/AccountStatus.jsff"
+          usageId="com_rmi_applicationEntry_view_AccountStatusPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/accountstatustaskflow/AccountStatusTaskFlow.xml#AccountStatusTaskFlow@onLoadAccountStatus"
+          usageId="com_rmi_applicationEntry_view_AccountStatusTaskFlow_AccountStatusTaskFlow_onLoadAccountStatusPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/queryordertaskflow/QueryOrder.jsff"
+          usageId="com_rmi_applicationEntry_view_QueryOrderPageDef"/>
+    <page path="/untitled3.jspx" usageId="com_rmi_applicationEntry_view_untitled3PageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchesabntaskflow/BatchesPendingAssignBook.jsff"
+          usageId="com_rmi_applicationEntry_view_BatchesPendingAssignBookPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/SeafarerList.jsf"
+          usageId="com_rmi_applicationEntry_view_SeafarerListPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/SeafarerListTaskFlow.xml#SeafarerListTaskFlow@onLoadSeafarerList"
+          usageId="com_rmi_applicationEntry_view_SeafarerListTaskFlow_SeafarerListTaskFlow_onLoadSeafarerListPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/queryordertaskflow/QueryOrderTaskFlow.xml#QueryOrderTaskFlow@resetQueryOrderDetails"
+          usageId="com_rmi_applicationEntry_view_QueryOrderTaskFlow_QueryOrderTaskFlow_resetQueryOrderDetailsPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/SeafarerListTc.jsf"
+          usageId="com_rmi_applicationEntry_view_SeafarerListTcPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/SeafarerListTcTaskFlow.xml#SeafarerListTcTaskFlow@onLoadSeafarerListTc"
+          usageId="com_rmi_applicationEntry_view_SeafarerListTcTaskFlow_SeafarerListTcTaskFlow_onLoadSeafarerListTcPageDef"/>
+    <page path="/untitled4.jspx" usageId="com_rmi_applicationEntry_view_untitled4PageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchesshippingtaskflow/BatchesPendingTracking.jsff"
+          usageId="com_rmi_applicationEntry_view_BatchesPendingTrackingPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchesshippingtaskflow/BatchesPendingTrackingNumberTaskFlow.xml#BatchesPendingTrackingNumberTaskFlow@executePendingTrackingNumberOnLoad"
+          usageId="com_rmi_applicationEntry_view_BatchesPendingTrackingNumberTaskFlow_BatchesPendingTrackingNumberTaskFlow_executePendingTrackingNumberOnLoadPageDef"/>
+    <page path="/TC.jsf" usageId="com_rmi_applicationEntry_view_TCPageDef"/>
+    <page path="/UserTaskAssignment.jspx" usageId="com_rmi_applicationEntry_view_UserTaskAssignmentPageDef"/>
+    <page path="/CraProcessing.jspx" usageId="com_rmi_applicationEntry_view_CraProcessingPageDef"/>
+    <page path="/MyTask.jspx" usageId="com_rmi_applicationEntry_view_MyTaskPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/requestsubmittaskflow/RequestSubmit.jsff"
+          usageId="com_rmi_applicationEntry_view_RequestSubmitPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/requestsubmittaskflow/RequestSubmitTaskFlow.xml#RequestSubmitTaskFlow@onLoadRequestSubmission"
+          usageId="com_rmi_applicationEntry_view_RequestSubmitTaskFlow_RequestSubmitTaskFlow_onLoadRequestSubmissionPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/taskassignmenttaskflow/taskAssignment.jsff"
+          usageId="com_rmi_applicationEntry_view_taskAssignmentPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/taskassignmenttaskflow/TaskAssignmentTaskFlow.xml#taskflow_taskAssignment@onLoadTaskAssignmentpage"
+          usageId="com_rmi_applicationEntry_view_TaskAssignmentTaskFlow_taskflow_taskAssignment_onLoadTaskAssignmentpagePageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/mastermytasktaskflow/MasterMyTask.jsff"
+          usageId="com_rmi_applicationEntry_view_MasterMyTaskPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/mastermytasktaskflow/MasterMyTaskTaskFlow.xml#taskflow_MasterMyTask@onLoadMasterMytask"
+          usageId="com_rmi_applicationEntry_view_MasterMyTaskTaskFlow_taskflow_MasterMyTask_onLoadMasterMytaskPageDef"/>
+    <page path="/TaskAssignment.jsf" usageId="com_rmi_applicationEntry_view_TaskAssignmentPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/queryvesseltaskflow/QueryVesselDetailPage.jsff"
+          usageId="com_rmi_applicationEntry_view_QueryVesselDetailPagePageDef"/>
+    <page path="/untitled1.jsf" usageId="com_rmi_applicationEntry_view_untitled1PageDef1"/>
+    <page path="/Vessel.jsf" usageId="com_rmi_applicationEntry_view_VesselPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/submittedbatchestaskflow/SubmittedBatchesTaskFlow.xml#taskflow_SubmittedBatches@searchBatchInternal"
+          usageId="com_rmi_applicationEntry_view_SubmittedBatchesTaskFlow_taskflow_SubmittedBatches_searchBatchInternalPageDef"/>
+    <page path="/previewdocumentservlet"
+          usageId="com_rmi_applicationEntry_view_BatchCreateEditViewPageDef1"/>
+    <page path="/RequestSubmission.jsf" usageId="com_rmi_applicationEntry_view_RequestSubmissionPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/DeficientOrders.jsff"
+          usageId="com_rmi_applicationEntry_view_DeficientOrdersPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/DeficientOrdersTaskFlow.xml#DeficientOrdersTaskFlow@onloadDeficientOrder"
+          usageId="com_rmi_applicationEntry_view_DeficientOrdersTaskFlow_DeficientOrdersTaskFlow_onloadDeficientOrderPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/MyTaskDeficientOrders.jsff"
+          usageId="com_rmi_applicationEntry_view_MyTaskDeficientOrdersPageDef"/>
+    <page path="/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/MyTaskDeficientTaskFlow.xml#MyTaskDeficientTaskFlow@onloadMyTaskDeficientOrder"
+          usageId="com_rmi_applicationEntry_view_MyTaskDeficientTaskFlow_MyTaskDeficientTaskFlow_onloadMyTaskDeficientOrderPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+   
+    <page id="com_rmi_applicationEntry_view_untitled1PageDef"
+          path="com.rmi.applicationEntry.view.pageDefs.untitled1PageDef"/>
+  
+    <page id="com_rmi_applicationEntry_view_taskflow_Batches_taskflow_Batches_initPageDef1"
+          path="com.rmi.applicationEntry.view.batchestaskflow.taskflow_Batches_taskflow_Batches_initPageDef"/>
+    <page id="com_rmi_applicationEntry_view_taskflow_Batches_taskflow_Batches_searchBatchPageDef1"
+          path="com.rmi.applicationEntry.view.batchestaskflow.taskflow_Batches_taskflow_Batches_searchBatchPageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesPageDef1"
+          path="com.rmi.applicationEntry.view.batchestaskflow.BatchesPageDef"/>
+    <page id="com_rmi_applicationEntry_view_taskflow_Batch_CreateEdit_taskflow_Batch_CreateEdit_initPageDef1"
+          path="com.rmi.applicationEntry.view.batchcreateedittaskflow.taskflow_Batch_CreateEdit_taskflow_Batch_CreateEdit_initPageDef"/>
+    <page id="com_rmi_applicationEntry_view_taskflow_Batch_CreateEdit_taskflow_Batch_CreateEdit_editBatchPageDef1"
+          path="com.rmi.applicationEntry.view.batchcreateedittaskflow.taskflow_Batch_CreateEdit_taskflow_Batch_CreateEdit_editBatchPageDef"/>
+    <page id="com_rmi_applicationEntry_view_taskflow_Batch_CreateEdit_taskflow_Batch_CreateEdit_createNewBatchPageDef1"
+          path="com.rmi.applicationEntry.view.batchcreateedittaskflow.taskflow_Batch_CreateEdit_taskflow_Batch_CreateEdit_createNewBatchPageDef"/>
+    <page id="com_rmi_applicationEntry_view_taskflow_Batch_CreateEdit_taskflow_Batch_CreateEdit_createOrEditSeafarerPageDef1"
+          path="com.rmi.applicationEntry.view.batchcreateedittaskflow.taskflow_Batch_CreateEdit_taskflow_Batch_CreateEdit_createOrEditSeafarerPageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchCreateEditViewPageDef1"
+          path="com.rmi.applicationEntry.view.batchcreateedittaskflow.BatchCreateEditViewPageDef"/>
+    <page id="com_rmi_applicationEntry_view_seafarerAddEditPageDef1"
+          path="com.rmi.applicationEntry.view.batchcreateedittaskflow.seafarerAddEditPageDef"/>
+    <page id="com_rmi_applicationEntry_view_taskflow_batches_ABN_taskflow_batches_ABN_onLoadBatchPendingAbnPageDef"
+          path="com.rmi.applicationEntry.view.batchesabntaskflow.taskflow_batches_ABN_taskflow_batches_ABN_onLoadBatchPendingAbnPageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesPendingABNPageDef"
+          path="com.rmi.applicationEntry.view.batchesabntaskflow.BatchesPendingABNPageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesQaTaskFlow_taskflow_batches_QA_onLoadBatchPendingQAPageDef"
+          path="com.rmi.applicationEntry.view.batchesqataskflow.BatchesQaTaskFlow_taskflow_batches_QA_onLoadBatchPendingQAPageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesPendingQAPageDef"
+          path="com.rmi.applicationEntry.view.batchesqataskflow.BatchesPendingQAPageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesShippingTaskFlow_taskflow_batches_Shipping_onLoadBatchPendingShippingPageDef"
+          path="com.rmi.applicationEntry.view.batchesshippingtaskflow.BatchesShippingTaskFlow_taskflow_batches_Shipping_onLoadBatchPendingShippingPageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesPendingShippingPageDef"
+          path="com.rmi.applicationEntry.view.batchesshippingtaskflow.BatchesPendingShippingPageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesTcTaskFlow_taskflow_batches_TC_onLoadBatchPendingTCPageDef"
+          path="com.rmi.applicationEntry.view.batchestctaskflow.BatchesTcTaskFlow_taskflow_batches_TC_onLoadBatchPendingTCPageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesPendingTCPageDef"
+          path="com.rmi.applicationEntry.view.batchestctaskflow.BatchesPendingTCPageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesUploaddocumentTaskFlow_taskflow_batches_uploadDocument_onLoadBatchPendingUploadDocumentPageDef"
+          path="com.rmi.applicationEntry.view.batchesuploaddocumenttaskflow.BatchesUploaddocumentTaskFlow_taskflow_batches_uploadDocument_onLoadBatchPendingUploadDocumentPageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesPendingUploadDocumentPageDef"
+          path="com.rmi.applicationEntry.view.batchesuploaddocumenttaskflow.BatchesPendingUploadDocumentPageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesValTaskFlow_taskflow_batches_VAL_onLoadBatchPendingEVALPageDef"
+          path="com.rmi.applicationEntry.view.batchesvaltaskflow.BatchesValTaskFlow_taskflow_batches_VAL_onLoadBatchPendingEVALPageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesPendingEVALPageDef"
+          path="com.rmi.applicationEntry.view.batchesvaltaskflow.BatchesPendingEVALPageDef"/>
+    <page id="com_rmi_applicationEntry_view_CRAProcessingPageDef"
+          path="com.rmi.applicationEntry.view.craprocessingtaskflow.CRAProcessingPageDef"/>
+    <page id="com_rmi_applicationEntry_view_MyTaskTaskFlow_taskflow_myTasks_onLoadMytask1PageDef"
+          path="com.rmi.applicationEntry.view.mytasktaskflow.MyTaskTaskFlow_taskflow_myTasks_onLoadMytask1PageDef"/>
+    <page id="com_rmi_applicationEntry_view_myTasksPageDef"
+          path="com.rmi.applicationEntry.view.mytasktaskflow.myTasksPageDef"/>
+    <page id="com_rmi_applicationEntry_view_MyTaskTaskFlow_taskflow_myTasks_iniPageDef"
+          path="com.rmi.applicationEntry.view.mytasktaskflow.MyTaskTaskFlow_taskflow_myTasks_iniPageDef"/>
+    <page id="com_rmi_applicationEntry_view_submittedBatchesPageDef"
+          path="com.rmi.applicationEntry.view.submittedbatchestaskflow.submittedBatchesPageDef"/>
+    <page id="com_rmi_applicationEntry_view_untitled2PageDef"
+          path="com.rmi.applicationEntry.view.pageDefs.untitled2PageDef"/>
+    <page id="com_rmi_applicationEntry_view_FindSeafarerPageDef"
+          path="com.rmi.applicationEntry.view.findseafarertaskflow.FindSeafarerPageDef"/>
+    <page id="com_rmi_applicationEntry_view_FindSeafarerTaskFlow_FindSeafarerTaskFlow_findSeafarerResetPageDef"
+          path="com.rmi.applicationEntry.view.findseafarertaskflow.FindSeafarerTaskFlow_FindSeafarerTaskFlow_findSeafarerResetPageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesMtcTaskFlow_BatchesMtcTaskFlow_onLoadBatchPendingMTCPageDef"
+          path="com.rmi.applicationEntry.view.batchesmtctaskflow.BatchesMtcTaskFlow_BatchesMtcTaskFlow_onLoadBatchPendingMTCPageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesPendingMtcPageDef"
+          path="com.rmi.applicationEntry.view.batchesmtctaskflow.BatchesPendingMtcPageDef"/>
+    <page id="com_rmi_applicationEntry_view_CraProcessingTaskFlow_taskflow_Cra_Processing_onLoadCraProcessingPageDef"
+          path="com.rmi.applicationEntry.view.craprocessingtaskflow.CraProcessingTaskFlow_taskflow_Cra_Processing_onLoadCraProcessingPageDef"/>
+    <page id="com_rmi_applicationEntry_view_AccountStatusPageDef"
+          path="com.rmi.applicationEntry.view.accountstatustaskflow.AccountStatusPageDef"/>
+    <page id="com_rmi_applicationEntry_view_AccountStatusTaskFlow_AccountStatusTaskFlow_onLoadAccountStatusPageDef"
+          path="com.rmi.applicationEntry.view.accountstatustaskflow.AccountStatusTaskFlow_AccountStatusTaskFlow_onLoadAccountStatusPageDef"/>
+    <page id="com_rmi_applicationEntry_view_QueryOrderPageDef"
+          path="com.rmi.applicationEntry.view.queryordertaskflow.QueryOrderPageDef"/>
+    <page id="com_rmi_applicationEntry_view_untitled3PageDef"
+          path="com.rmi.applicationEntry.view.pageDefs.untitled3PageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesPendingAssignBookPageDef"
+          path="com.rmi.applicationEntry.view.batchesabntaskflow.BatchesPendingAssignBookPageDef"/>
+    <page id="com_rmi_applicationEntry_view_SeafarerListPageDef"
+          path="com.rmi.applicationEntry.view.batchestaskflow.SeafarerListPageDef"/>
+    <page id="com_rmi_applicationEntry_view_SeafarerListTaskFlow_SeafarerListTaskFlow_onLoadSeafarerListPageDef"
+          path="com.rmi.applicationEntry.view.batchestaskflow.SeafarerListTaskFlow_SeafarerListTaskFlow_onLoadSeafarerListPageDef"/>
+    <page id="com_rmi_applicationEntry_view_QueryOrderTaskFlow_QueryOrderTaskFlow_resetQueryOrderDetailsPageDef"
+          path="com.rmi.applicationEntry.view.queryordertaskflow.QueryOrderTaskFlow_QueryOrderTaskFlow_resetQueryOrderDetailsPageDef"/>
+    <page id="com_rmi_applicationEntry_view_SeafarerListTcPageDef"
+          path="com.rmi.applicationEntry.view.batchestaskflow.SeafarerListTcPageDef"/>
+    <page id="com_rmi_applicationEntry_view_SeafarerListTcTaskFlow_SeafarerListTcTaskFlow_onLoadSeafarerListTcPageDef"
+          path="com.rmi.applicationEntry.view.batchestaskflow.SeafarerListTcTaskFlow_SeafarerListTcTaskFlow_onLoadSeafarerListTcPageDef"/>
+    <page id="com_rmi_applicationEntry_view_untitled4PageDef"
+          path="com.rmi.applicationEntry.view.pageDefs.untitled4PageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesPendingTrackingPageDef"
+          path="com.rmi.applicationEntry.view.batchesshippingtaskflow.BatchesPendingTrackingPageDef"/>
+    <page id="com_rmi_applicationEntry_view_BatchesPendingTrackingNumberTaskFlow_BatchesPendingTrackingNumberTaskFlow_executePendingTrackingNumberOnLoadPageDef"
+          path="com.rmi.applicationEntry.view.batchesshippingtaskflow.BatchesPendingTrackingNumberTaskFlow_BatchesPendingTrackingNumberTaskFlow_executePendingTrackingNumberOnLoadPageDef"/>
+    <page id="com_rmi_applicationEntry_view_TCPageDef" path="com.rmi.applicationEntry.view.pageDefs.TCPageDef"/>
+    <page id="com_rmi_applicationEntry_view_UserTaskAssignmentPageDef"
+          path="com.rmi.applicationEntry.view.pageDefs.UserTaskAssignmentPageDef"/>
+    <page id="com_rmi_applicationEntry_view_CraProcessingPageDef"
+          path="com.rmi.applicationEntry.view.pageDefs.CraProcessingPageDef"/>
+    <page id="com_rmi_applicationEntry_view_MyTaskPageDef" path="com.rmi.applicationEntry.view.pageDefs.MyTaskPageDef"/>
+    <page id="com_rmi_applicationEntry_view_RequestSubmitPageDef"
+          path="com.rmi.applicationEntry.view.requestsubmittaskflow.RequestSubmitPageDef"/>
+    <page id="com_rmi_applicationEntry_view_RequestSubmitTaskFlow_RequestSubmitTaskFlow_onLoadRequestSubmissionPageDef"
+          path="com.rmi.applicationEntry.view.requestsubmittaskflow.RequestSubmitTaskFlow_RequestSubmitTaskFlow_onLoadRequestSubmissionPageDef"/>
+    <page id="com_rmi_applicationEntry_view_taskAssignmentPageDef"
+          path="com.rmi.applicationEntry.view.taskassignmenttaskflow.taskAssignmentPageDef"/>
+    <page id="com_rmi_applicationEntry_view_TaskAssignmentTaskFlow_taskflow_taskAssignment_onLoadTaskAssignmentpagePageDef"
+          path="com.rmi.applicationEntry.view.taskassignmenttaskflow.TaskAssignmentTaskFlow_taskflow_taskAssignment_onLoadTaskAssignmentpagePageDef"/>
+    <page id="com_rmi_applicationEntry_view_MasterMyTaskPageDef"
+          path="com.rmi.applicationEntry.view.mastermytasktaskflow.MasterMyTaskPageDef"/>
+    <page id="com_rmi_applicationEntry_view_MasterMyTaskTaskFlow_taskflow_MasterMyTask_onLoadMasterMytaskPageDef"
+          path="com.rmi.applicationEntry.view.mastermytasktaskflow.MasterMyTaskTaskFlow_taskflow_MasterMyTask_onLoadMasterMytaskPageDef"/>
+    <page id="com_rmi_applicationEntry_view_TaskAssignmentPageDef"
+          path="com.rmi.applicationEntry.view.pageDefs.TaskAssignmentPageDef"/>
+    <page id="com_rmi_applicationEntry_view_QueryVesselDetailPagePageDef"
+          path="com.rmi.applicationEntry.view.queryvesseltaskflow.QueryVesselDetailPagePageDef"/>
+    <page id="com_rmi_applicationEntry_view_untitled1PageDef1"
+          path="com.rmi.applicationEntry.view.pageDefs.untitled1PageDef1"/>
+    <page id="com_rmi_applicationEntry_view_VesselPageDef" path="com.rmi.applicationEntry.view.pageDefs.VesselPageDef"/>
+    <page id="com_rmi_applicationEntry_view_SubmittedBatchesTaskFlow_taskflow_SubmittedBatches_searchBatchInternalPageDef"
+          path="com.rmi.applicationEntry.view.submittedbatchestaskflow.SubmittedBatchesTaskFlow_taskflow_SubmittedBatches_searchBatchInternalPageDef"/>
+    <page id="com_rmi_applicationEntry_view_RequestSubmissionPageDef"
+          path="com.rmi.applicationEntry.view.pageDefs.RequestSubmissionPageDef"/>
+    <page id="com_rmi_applicationEntry_view_DeficientOrdersPageDef"
+          path="com.rmi.applicationEntry.view.batchestaskflow.DeficientOrdersPageDef"/>
+    <page id="com_rmi_applicationEntry_view_DeficientOrdersTaskFlow_DeficientOrdersTaskFlow_onloadDeficientOrderPageDef"
+          path="com.rmi.applicationEntry.view.batchestaskflow.DeficientOrdersTaskFlow_DeficientOrdersTaskFlow_onloadDeficientOrderPageDef"/>
+    <page id="com_rmi_applicationEntry_view_MyTaskDeficientOrdersPageDef"
+          path="com.rmi.applicationEntry.view.batchestaskflow.MyTaskDeficientOrdersPageDef"/>
+    <page id="com_rmi_applicationEntry_view_MyTaskDeficientTaskFlow_MyTaskDeficientTaskFlow_onloadMyTaskDeficientOrderPageDef"
+          path="com.rmi.applicationEntry.view.batchestaskflow.MyTaskDeficientTaskFlow_MyTaskDeficientTaskFlow_onloadMyTaskDeficientOrderPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="RMIApplicationEntryAppModuleDataControl" Package="com.rmi.applicationEntry.adfbc.services"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="RMIApplicationEntryAMLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

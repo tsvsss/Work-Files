@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.1.3.10.8" id="DataBindings_RMIGradingApp"
+             SeparateXMLFiles="false" Package="com.rmi.tradecompapproval.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/enterorders/EnterOrdersPage.jsff"
+          usageId="com_rmi_tradecompapproval_view_EnterOrdersPagePageDef"/>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/assignbooknumber/AssignBookNumberPage.jsff"
+          usageId="com_rmi_tradecompapproval_view_AssignBookNumberPagePageDef"/>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/editseafarerdocs/EditDocumentsPage.jsff"
+          usageId="com_rmi_tradecompapproval_view_EditDocumentsPagePageDef"/>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/editseafarerdocs/EditSeafarersPage.jsff"
+          usageId="com_rmi_tradecompapproval_view_EditSeafarersPagePageDef"/>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/ocverification/OCVerification.jsff"
+          usageId="com_rmi_tradecompapproval_view_OCVerificationPageDef"/>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/seafarerdataverification/SeafarerDataVerificationPage.jsff"
+          usageId="com_rmi_tradecompapproval_view_SeafarerDataVerificationPagePageDef"/>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/validateseafarer/SearchSeafarer.jsff"
+          usageId="com_rmi_tradecompapproval_view_SearchSeafarerPageDef"/>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/validateseafarer/ValidateSeafarer.jsff"
+          usageId="com_rmi_tradecompapproval_view_ValidateSeafarerPageDef"/>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/viewbatchseafarer/ViewBatchTC.jsff"
+          usageId="com_rmi_tradecompapproval_view_ViewBatchTCPageDef"/>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/viewbatchseafarer/ViewSeafarer.jsff"
+          usageId="com_rmi_tradecompapproval_view_ViewSeafarerPageDef"/>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/assignbooknumber/AssignBookNumberTaskflow.xml#AssignBookNumberTaskflow@filterAssignBook"
+          usageId="com_rmi_tradecompapproval_view_AssignBookNumberTaskflow_AssignBookNumberTaskflow_filterAssignBookPageDef"/>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/editseafarerdocs/EditDocumentsTaskflow.xml#EditDocumentsTaskflow@filterEditDocumentsVO"
+          usageId="com_rmi_tradecompapproval_view_EditDocumentsTaskflow_EditDocumentsTaskflow_filterEditDocumentsVOPageDef"/>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/seafarerdataverification/SeafarerDataVerificationTF.xml#SeafarerDataVerificationTF@filterOrdersVerification"
+          usageId="com_rmi_tradecompapproval_view_SeafarerDataVerificationTF_SeafarerDataVerificationTF_filterOrdersVerificationPageDef"/>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/viewbatchseafarer/ViewBatchTCTaskFlow.xml#ViewBatchTCTaskFlow@editBatch"
+          usageId="com_rmi_tradecompapproval_view_ViewBatchTCTaskFlow_ViewBatchTCTaskFlow_editBatchPageDef"/>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/viewbatchseafarer/ViewBatchTCTaskFlow.xml#ViewBatchTCTaskFlow@filterOcVerification"
+          usageId="com_rmi_tradecompapproval_view_ViewBatchTCTaskFlow_ViewBatchTCTaskFlow_filterOcVerificationPageDef"/>
+    <page path="/untitled1.jsf" usageId="com_rmi_tradecompapproval_view_untitled1PageDef"/>
+    <page path="/EnterOrders.jsf" usageId="com_rmi_tradecompapproval_view_EnterOrdersPageDef"/>
+    <page path="/EditDocument.jsf" usageId="com_rmi_tradecompapproval_view_EditDocumentPageDef"/>
+    <page path="/EditSeafarers.jsf" usageId="com_rmi_tradecompapproval_view_EditSeafarersPageDef"/>
+    <page path="/AssignBookNumber.jsf" usageId="com_rmi_tradecompapproval_view_AssignBookNumberPageDef"/>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/enterorders/EnterOrdersTaskflow.xml#EnterOrdersTaskflow@resetOrderFilter"
+          usageId="com_rmi_tradecompapproval_view_EnterOrdersTaskflow_EnterOrdersTaskflow_resetOrderFilterPageDef"/>
+    <page path="/TC_EditDocuments.jsf" usageId="com_rmi_tradecompapproval_view_TCPageDef"/>
+    <page path="/GenericTC.jsf" usageId="com_rmi_tradecompapproval_view_TC_GradingPageDef"/>
+    <page path="/WEB-INF/com/rmi/tradecompapproval/view/editseafarerdocs/EditSeafarerDocTF.xml#EditSeafarerDocTF@resetSearchEditSeafarers"
+          usageId="com_rmi_tradecompapproval_view_EditSeafarerDocTF_EditSeafarerDocTF_resetSearchEditSeafarersPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="com_rmi_tradecompapproval_view_EnterOrdersPagePageDef"
+          path="com.rmi.tradecompapproval.view.enterorders.EnterOrdersPagePageDef"/>
+    <page id="com_rmi_tradecompapproval_view_SearchOrderPageDef"
+          path="com.rmi.tradecompapproval.view.pageDefs.SearchOrderPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_AssignBookNumberPagePageDef"
+          path="com.rmi.tradecompapproval.view.assignbooknumber.AssignBookNumberPagePageDef"/>
+    <page id="com_rmi_tradecompapproval_view_EditDocumentsPagePageDef"
+          path="com.rmi.tradecompapproval.view.editseafarerdocs.EditDocumentsPagePageDef"/>
+    <page id="com_rmi_tradecompapproval_view_EditSeafarersPagePageDef"
+          path="com.rmi.tradecompapproval.view.editseafarerdocs.EditSeafarersPagePageDef"/>
+    <page id="com_rmi_tradecompapproval_view_OCVerificationPageDef"
+          path="com.rmi.tradecompapproval.view.ocverification.OCVerificationPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_SeafarerDataVerificationPagePageDef"
+          path="com.rmi.tradecompapproval.view.seafarerdataverification.SeafarerDataVerificationPagePageDef"/>
+    <page id="com_rmi_tradecompapproval_view_SearchSeafarerPageDef"
+          path="com.rmi.tradecompapproval.view.validateseafarer.SearchSeafarerPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_ValidateSeafarerPageDef"
+          path="com.rmi.tradecompapproval.view.validateseafarer.ValidateSeafarerPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_ViewBatchTCPageDef"
+          path="com.rmi.tradecompapproval.view.viewbatchseafarer.ViewBatchTCPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_ViewSeafarerPageDef"
+          path="com.rmi.tradecompapproval.view.viewbatchseafarer.ViewSeafarerPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_AssignBookNumberTaskflow_AssignBookNumberTaskflow_filterAssignBookPageDef"
+          path="com.rmi.tradecompapproval.view.assignbooknumber.AssignBookNumberTaskflow_AssignBookNumberTaskflow_filterAssignBookPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_EditDocumentsTaskflow_EditDocumentsTaskflow_filterEditDocumentsVOPageDef"
+          path="com.rmi.tradecompapproval.view.editseafarerdocs.EditDocumentsTaskflow_EditDocumentsTaskflow_filterEditDocumentsVOPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_SeafarerDataVerificationTF_SeafarerDataVerificationTF_filterOrdersVerificationPageDef"
+          path="com.rmi.tradecompapproval.view.seafarerdataverification.SeafarerDataVerificationTF_SeafarerDataVerificationTF_filterOrdersVerificationPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_ViewBatchTCTaskFlow_ViewBatchTCTaskFlow_editBatchPageDef"
+          path="com.rmi.tradecompapproval.view.viewbatchseafarer.ViewBatchTCTaskFlow_ViewBatchTCTaskFlow_editBatchPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_ViewBatchTCTaskFlow_ViewBatchTCTaskFlow_filterOcVerificationPageDef"
+          path="com.rmi.tradecompapproval.view.viewbatchseafarer.ViewBatchTCTaskFlow_ViewBatchTCTaskFlow_filterOcVerificationPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_untitled1PageDef"
+          path="com.rmi.tradecompapproval.view.pageDefs.untitled1PageDef"/>
+    <page id="com_rmi_tradecompapproval_view_EditDocumentsPageDef"
+          path="com.rmi.tradecompapproval.view.pageDefs.EditDocumentsPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_AssignBookNumbersPageDef"
+          path="com.rmi.tradecompapproval.view.pageDefs.AssignBookNumbersPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_EnterOrdersPageDef"
+          path="com.rmi.tradecompapproval.view.pageDefs.EnterOrdersPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_EditDocumentPageDef"
+          path="com.rmi.tradecompapproval.view.pageDefs.EditDocumentPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_EditSeafarersPageDef"
+          path="com.rmi.tradecompapproval.view.pageDefs.EditSeafarersPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_AssignBookNumberPageDef"
+          path="com.rmi.tradecompapproval.view.pageDefs.AssignBookNumberPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_EnterOrdersTaskflow_EnterOrdersTaskflow_resetOrderFilterPageDef"
+          path="com.rmi.tradecompapproval.view.enterorders.EnterOrdersTaskflow_EnterOrdersTaskflow_resetOrderFilterPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_TCPageDef" path="com.rmi.tradecompapproval.view.pageDefs.TCPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_TC_GradingPageDef"
+          path="com.rmi.tradecompapproval.view.pageDefs.TC_GradingPageDef"/>
+    <page id="com_rmi_tradecompapproval_view_EditSeafarerDocTF_EditSeafarerDocTF_resetSearchEditSeafarersPageDef"
+          path="com.rmi.tradecompapproval.view.editseafarerdocs.EditSeafarerDocTF_EditSeafarerDocTF_resetSearchEditSeafarersPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="RMITradeCompApprovalAppModuleDataControl"
+                     Package="com.rmi.tradecompapproval.adfbc.services"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="RMITradeCompApprovalAMLocal"
+                     syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

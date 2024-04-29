@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="EditSeafarersView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="com.rmi.tradecompapproval.adfbc.views.EditSeafarersViewRowImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.EditSeafarersView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pSeafarerId"
+    Kind="where"
+    Type="java.math.BigDecimal">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="pFirstName"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="pLastName"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="pNationality"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="pBirthDate"
+    Kind="where"
+    Type="oracle.jbo.domain.Timestamp">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <ViewAccessor
+    Name="countriesLOV1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.CountriesView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="SeafarerStatusLOV1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.SeafarerStatusView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="GenderLOV1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.GenderView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_TransNationality"
+    ListVOName="countriesLOV1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransNationality"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Nationality"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CountryName"/>
+      <Item Value="CountryCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CountryName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="countriesLOVCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Status"
+    ListVOName="SeafarerStatusLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Status"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="StatusCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="StatusDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Gender"
+    ListVOName="GenderLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Gender"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="GenderCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="GenderDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT SicdSeafarerEO.ATTRIBUTE1,                      
+       SicdSeafarerEO.ATTRIBUTE10,                      
+       SicdSeafarerEO.ATTRIBUTE11,                      
+       SicdSeafarerEO.ATTRIBUTE12,                      
+       SicdSeafarerEO.ATTRIBUTE13,                      
+       SicdSeafarerEO.ATTRIBUTE14,                      
+       SicdSeafarerEO.ATTRIBUTE15,                      
+       SicdSeafarerEO.ATTRIBUTE2,                      
+       SicdSeafarerEO.ATTRIBUTE3,                      
+       SicdSeafarerEO.ATTRIBUTE4,                      
+       SicdSeafarerEO.ATTRIBUTE5,                      
+       SicdSeafarerEO.ATTRIBUTE6,                      
+       SicdSeafarerEO.ATTRIBUTE7,                      
+       SicdSeafarerEO.ATTRIBUTE8,                      
+       SicdSeafarerEO.ATTRIBUTE9,                      
+       SicdSeafarerEO.ATTRIBUTE_CATEGORY,                      
+       SicdSeafarerEO.BIRTH_DATE,                      
+       SicdSeafarerEO.BIRTH_PLACE,                      
+       SicdSeafarerEO.CREATED_BY,                      
+       SicdSeafarerEO.CREATION_DATE,                      
+       SicdSeafarerEO.DATA_VERIFIED_BY,                      
+       SicdSeafarerEO.DATA_VERIFIED_DATE,                      
+       SicdSeafarerEO.DISTINGUISHING_MARKS,                      
+       SicdSeafarerEO.EYE_COLOR,                      
+       SicdSeafarerEO.FIRST_NAME,                      
+       SicdSeafarerEO.GENDER,                      
+       SicdSeafarerEO.HAIR_COLOR,                      
+       SicdSeafarerEO.HEIGHT_FT,                      
+       SicdSeafarerEO.HEIGHT_IN,                      
+       SicdSeafarerEO.LAST_NAME,                      
+       SicdSeafarerEO.LAST_UPDATE_DATE,                      
+       SicdSeafarerEO.LAST_UPDATE_LOGIN,                      
+       SicdSeafarerEO.LAST_UPDATED_BY,                      
+       SicdSeafarerEO.MIDDLE_INITIAL,                      
+       SicdSeafarerEO.NATIONALITY,                      
+       SicdSeafarerEO.NOTES,                      
+       SicdSeafarerEO.SEAFARER_ID,                      
+       SicdSeafarerEO.STATUS,                      
+       SicdSeafarerEO.WEIGHT_LB,                      
+--       (SELECT disk_path                         
+--        FROM iri_edocs                         
+--        WHERE IDENTIFIER         = TO_CHAR (seafarer_id)                         
+--        AND marked_for_deletion IS NULL                         
+--        AND category_id          = 450                         
+--        AND SEQUENCE             =                         
+--          (SELECT MAX (SEQUENCE)                         
+--          FROM iri_edocs                         
+--          WHERE IDENTIFIER         = TO_CHAR (seafarer_id)                         
+--          AND marked_for_deletion IS NULL                         
+--          AND category_id          = 450                         
+--          )                         
+--        AND rownum<=1                         
+--       ) PHOTO,   
+--       sicd_img.get_photo_file_path(seafarer_id) photo_path,  
+       iri_html.get_base_path('SICD_PHOTOS')||seafarer_id|| '.jpeg' PHOTO  
+FROM  SICD_SEAFARERS SicdSeafarerEO                     
+WHERE (SEAFARER_ID = :pSeafarerId  
+or UPPER(NVL(FIRST_NAME,'NULL')) = UPPER(:pFirstName)                 
+or UPPER(NVL(LAST_NAME,'NULL')) = UPPER(:pLastName)                 
+or UPPER(NVL(NATIONALITY,'NULL')) = UPPER(:pNationality)                      
+or NVL(BIRTH_DATE,sysdate) = :pBirthDate)  
+  
+/*or UPPER(NVL(FIRST_NAME,'NULL')) = UPPER(NVL(:pFirstName, NVL(FIRST_NAME,'NULL')))                 
+--or UPPER(NVL(LAST_NAME,'NULL')) = UPPER(NVL(:pLastName, NVL(LAST_NAME,'NULL')))                 
+--or UPPER(NVL(NATIONALITY,'NULL')) = UPPER(NVL(:pNationality, NVL(NATIONALITY,'NULL')))                      
+--or NVL(BIRTH_DATE,sysdate) = NVL(:pBirthDate, NVL(BIRTH_DATE,sysdate)) */  
+  
+and ATTRIBUTE15 IS NULL ORDER BY LAST_NAME,FIRST_NAME]]></SQLQuery>
+  <EntityUsage
+    Name="SicdSeafarerEO"
+    Entity="com.rmi.tradecompapproval.adfbc.entities.SicdSeafarer"/>
+  <ViewAttribute
+    Name="Attribute1"
+    PrecisionRule="true"
+    EntityAttrName="Attribute1"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="ATTRIBUTE1"/>
+  <ViewAttribute
+    Name="Attribute10"
+    PrecisionRule="true"
+    EntityAttrName="Attribute10"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="ATTRIBUTE10"/>
+  <ViewAttribute
+    Name="Attribute11"
+    PrecisionRule="true"
+    EntityAttrName="Attribute11"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="ATTRIBUTE11"/>
+  <ViewAttribute
+    Name="Attribute12"
+    PrecisionRule="true"
+    EntityAttrName="Attribute12"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="ATTRIBUTE12"/>
+  <ViewAttribute
+    Name="Attribute13"
+    PrecisionRule="true"
+    EntityAttrName="Attribute13"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="ATTRIBUTE13"/>
+  <ViewAttribute
+    Name="Attribute14"
+    PrecisionRule="true"
+    EntityAttrName="Attribute14"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="ATTRIBUTE14"/>
+  <ViewAttribute
+    Name="Attribute15"
+    PrecisionRule="true"
+    EntityAttrName="Attribute15"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="ATTRIBUTE15"/>
+  <ViewAttribute
+    Name="Attribute2"
+    PrecisionRule="true"
+    EntityAttrName="Attribute2"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="ATTRIBUTE2"/>
+  <ViewAttribute
+    Name="Attribute3"
+    PrecisionRule="true"
+    EntityAttrName="Attribute3"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="ATTRIBUTE3"/>
+  <ViewAttribute
+    Name="Attribute4"
+    PrecisionRule="true"
+    EntityAttrName="Attribute4"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="ATTRIBUTE4"/>
+  <ViewAttribute
+    Name="Attribute5"
+    PrecisionRule="true"
+    EntityAttrName="Attribute5"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="ATTRIBUTE5"/>
+  <ViewAttribute
+    Name="Attribute6"
+    PrecisionRule="true"
+    EntityAttrName="Attribute6"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="ATTRIBUTE6"/>
+  <ViewAttribute
+    Name="Attribute7"
+    PrecisionRule="true"
+    EntityAttrName="Attribute7"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="ATTRIBUTE7"/>
+  <ViewAttribute
+    Name="Attribute8"
+    PrecisionRule="true"
+    EntityAttrName="Attribute8"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="ATTRIBUTE8"/>
+  <ViewAttribute
+    Name="Attribute9"
+    PrecisionRule="true"
+    EntityAttrName="Attribute9"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="ATTRIBUTE9"/>
+  <ViewAttribute
+    Name="AttributeCategory"
+    PrecisionRule="true"
+    EntityAttrName="AttributeCategory"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="ATTRIBUTE_CATEGORY"/>
+  <ViewAttribute
+    Name="BirthDate"
+    PrecisionRule="true"
+    EntityAttrName="BirthDate"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="BIRTH_DATE"/>
+  <ViewAttribute
+    Name="BirthPlace"
+    PrecisionRule="true"
+    EntityAttrName="BirthPlace"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="BIRTH_PLACE"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="CREATION_DATE"/>
+  <ViewAttribute
+    Name="DataVerifiedBy"
+    PrecisionRule="true"
+    EntityAttrName="DataVerifiedBy"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="DATA_VERIFIED_BY"/>
+  <ViewAttribute
+    Name="DataVerifiedDate"
+    PrecisionRule="true"
+    EntityAttrName="DataVerifiedDate"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="DATA_VERIFIED_DATE"/>
+  <ViewAttribute
+    Name="DistinguishingMarks"
+    PrecisionRule="true"
+    EntityAttrName="DistinguishingMarks"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="DISTINGUISHING_MARKS"/>
+  <ViewAttribute
+    Name="EyeColor"
+    PrecisionRule="true"
+    EntityAttrName="EyeColor"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="EYE_COLOR"/>
+  <ViewAttribute
+    Name="FirstName"
+    PrecisionRule="true"
+    EntityAttrName="FirstName"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="FIRST_NAME"/>
+  <ViewAttribute
+    Name="Gender"
+    PrecisionRule="true"
+    EntityAttrName="Gender"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="GENDER"
+    LOVName="LOV_Gender">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HairColor"
+    PrecisionRule="true"
+    EntityAttrName="HairColor"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="HAIR_COLOR"/>
+  <ViewAttribute
+    Name="HeightFt"
+    PrecisionRule="true"
+    EntityAttrName="HeightFt"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="HEIGHT_FT"/>
+  <ViewAttribute
+    Name="HeightIn"
+    PrecisionRule="true"
+    EntityAttrName="HeightIn"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="HEIGHT_IN"/>
+  <ViewAttribute
+    Name="LastName"
+    PrecisionRule="true"
+    EntityAttrName="LastName"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="LAST_NAME"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="LAST_UPDATE_DATE"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateLogin"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="LAST_UPDATE_LOGIN"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="MiddleInitial"
+    PrecisionRule="true"
+    EntityAttrName="MiddleInitial"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="MIDDLE_INITIAL"/>
+  <ViewAttribute
+    Name="Nationality"
+    PrecisionRule="true"
+    EntityAttrName="Nationality"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="NATIONALITY"/>
+  <ViewAttribute
+    Name="Notes"
+    PrecisionRule="true"
+    EntityAttrName="Notes"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="NOTES"/>
+  <ViewAttribute
+    Name="SeafarerId"
+    PrecisionRule="true"
+    EntityAttrName="SeafarerId"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="SEAFARER_ID"/>
+  <ViewAttribute
+    Name="Status"
+    PrecisionRule="true"
+    EntityAttrName="Status"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="STATUS"
+    LOVName="LOV_Status">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="WeightLb"
+    PrecisionRule="true"
+    EntityAttrName="WeightLb"
+    EntityUsage="SicdSeafarerEO"
+    AliasName="WEIGHT_LB"/>
+  <ViewAttribute
+    Name="Photo"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PHOTO"
+    Expression="PHOTO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransNationality"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransNationality">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="checkRowStatus"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TransShortText"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransMediaId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

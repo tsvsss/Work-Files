@@ -1,0 +1,397 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Individual Alert" id="ph3">
+    <f:facet name="context">
+      <af:outputText value="#{bindings.Alertid.inputValue}" shortDesc="#{bindings.Alertid.hints.tooltip}" id="ot1"/>
+    </f:facet>
+    <f:facet name="menuBar"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelSplitter id="ps1" splitterPosition="300">
+      <f:facet name="first">
+        <af:panelHeader text="Search" id="ph1">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:query id="qryId1" headerText="Search" disclosed="true"
+                    value="#{bindings.XwrlAlertDocumentsViewCriteriaQuery.queryDescriptor}"
+                    model="#{bindings.XwrlAlertDocumentsViewCriteriaQuery.queryModel}"
+                    queryListener="#{bindings.XwrlAlertDocumentsViewCriteriaQuery.processQuery}"
+                    queryOperationListener="#{bindings.XwrlAlertDocumentsViewCriteriaQuery.processQueryOperation}"
+                    resultComponentId="::pc1:resId1" displayMode="compact" saveQueryMode="hidden"
+                    modeChangeVisible="false"/>
+        </af:panelHeader>
+      </f:facet>
+      <f:facet name="second">
+        <af:panelHeader text="Alert Documents" id="ph2">
+          <af:panelCollection id="pc1">
+            <af:table value="#{bindings.XwrlAlertDocumentsView1.collectionModel}" var="row"
+                      rows="#{bindings.XwrlAlertDocumentsView1.rangeSize}"
+                      emptyText="#{bindings.XwrlAlertDocumentsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.XwrlAlertDocumentsView1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.XwrlAlertDocumentsView1.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.XwrlAlertDocumentsView1.rangeSize}" id="resId1"
+                      partialTriggers="::b1 ::b2 ::b4 ::b5" columnStretching="column:resId1c8n">
+              <af:column sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.Id.name}" sortable="true"
+                         headerText="#{bindings.XwrlAlertDocumentsView1.hints.Id.label}" id="resId1c1">
+                <af:outputText value="#{row.Id}" shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.Id.tooltip}"
+                               id="ot2">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.XwrlAlertDocumentsView1.hints.Id.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.RequestId.name}" sortable="true"
+                         headerText="#{bindings.XwrlAlertDocumentsView1.hints.RequestId.label}" id="resId1c2"
+                         visible="false">
+                <af:outputText value="#{row.RequestId}"
+                               shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.RequestId.tooltip}" id="ot3">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.XwrlAlertDocumentsView1.hints.RequestId.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.AlertId.name}" sortable="true"
+                         headerText="#{bindings.XwrlAlertDocumentsView1.hints.AlertId.label}" id="resId1c3"
+                         visible="false">
+                <af:outputText value="#{row.AlertId}"
+                               shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.AlertId.tooltip}" id="ot4"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.EdocId.name}" sortable="true"
+                         headerText="#{bindings.XwrlAlertDocumentsView1.hints.EdocId.label}" id="resId1c4"
+                         visible="false">
+                <af:outputText value="#{row.EdocId}"
+                               shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.EdocId.tooltip}" id="ot5">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.XwrlAlertDocumentsView1.hints.EdocId.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.DocumentName.name}" sortable="true"
+                         headerText="#{bindings.XwrlAlertDocumentsView1.hints.DocumentName.label}" id="resId1c5"
+                         visible="false">
+                <af:outputText value="#{row.DocumentName}"
+                               shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.DocumentName.tooltip}" id="ot6"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.DocumentCategory.name}" sortable="true"
+                         headerText="#{bindings.XwrlAlertDocumentsView1.hints.DocumentCategory.label}" id="resId1c6"
+                         visible="false">
+                <af:outputText value="#{row.DocumentCategory}"
+                               shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.DocumentCategory.tooltip}" id="ot7"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.DocumentType.name}" sortable="true"
+                         headerText="#{bindings.XwrlAlertDocumentsView1.hints.DocumentType.label}" id="resId1c7"
+                         visible="false">
+                <af:outputText value="#{row.DocumentType}"
+                               shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.DocumentType.tooltip}" id="ot8"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.FileName.name}" sortable="true"
+                         headerText="#{bindings.XwrlAlertDocumentsView1.hints.FileName.label}" id="resId1c8n">
+                <af:outputText value="#{row.FileName}"
+                               shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.FileName.tooltip}" id="ot9"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.FilePath.name}" sortable="true"
+                         headerText="#{bindings.XwrlAlertDocumentsView1.hints.FilePath.label}" id="resId1c9"
+                         visible="false">
+                <af:outputText value="#{row.FilePath}"
+                               shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.FilePath.tooltip}" id="ot10"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.ContentType.name}" sortable="true"
+                         headerText="#{bindings.XwrlAlertDocumentsView1.hints.ContentType.label}" id="resId1c10"
+                         visible="false">
+                <af:outputText value="#{row.ContentType}"
+                               shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.ContentType.tooltip}" id="ot11"/>
+              </af:column>
+              <af:column headerText="#{bindings.XwrlAlertDocumentsView1.hints.ImageFile.label}" id="c1" sortable="true"
+                         sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.ImageFile.name}">
+                <af:link shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.ImageFile.tooltip}" id="ot19"
+                         text="Preview">
+                        <af:clientListener method="showImage" type="action"/>
+                        <af:clientAttribute value="/GenericTC/#{sessionScope.pFacesServlet}/showimageservlet?fileName=#{row.ImageFile}&amp;id=#{backingBeanScope.RequestBacking.randomVal}" name="imageSrc"/>
+                        <!--<af:clientAttribute value="/TradeCompliance/faces/Preview.jsf?id=#{backingBeanScope.RequestBacking.randomVal}" name="imageSrc"/>-->
+                          <script>
+                            function showImage(event)
+                            {        
+                              var link = event.getSource();
+                              popupWindow = window.open(link.getProperty("imageSrc"), 'Document', 'height=1000,width=900');
+                            }
+                          </script>        
+              </af:link>
+              </af:column>
+              <af:column headerText="#{bindings.XwrlAlertDocumentsView1.hints.ImageName.label}" id="c3" sortable="true"
+                         sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.ImageName.name}" visible="false">
+                <af:outputText value="#{row.ImageName}"
+                               shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.ImageName.tooltip}" id="ot21"/>
+              </af:column>
+              <af:column headerText="#{bindings.XwrlAlertDocumentsView1.hints.ImagePath.label}" id="c4" sortable="true"
+                         sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.ImagePath.name}" visible="false">
+                <af:outputText value="#{row.ImagePath}"
+                               shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.ImagePath.tooltip}" id="ot23"/>
+              </af:column>
+              <af:column headerText="#{bindings.XwrlAlertDocumentsView1.hints.DocumentFile.label}" id="c2"
+                         sortable="true" sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.DocumentFile.name}">
+                <af:link shortDesc="#{bindings.XwrlCaseDocumentsView1.hints.ImageFile.tooltip}" id="ot20"
+                         text="Download" disabled="#{row.FileName == null}">
+                  <af:setPropertyListener type="action" to="#{pageFlowScope.iterBinding}"
+                                          from="#{'XwrlAlertDocumentsView1Iterator'}"/>
+                  <af:fileDownloadActionListener filename="#{row.FileName}"
+                                                 method="#{backingBeanScope.RequestBacking.downloadFileListener}"/>
+                </af:link>
+              </af:column>
+              <af:column sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.UrlPath.name}" sortable="true"
+                         headerText="#{bindings.XwrlAlertDocumentsView1.hints.UrlPath.label}" id="resId1c11"
+                         visible="false">
+                <af:outputText value="#{row.UrlPath}"
+                               shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.UrlPath.tooltip}" id="ot12"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.Comment.name}" sortable="true"
+                         headerText="#{bindings.XwrlAlertDocumentsView1.hints.Comment.label}" id="resId1c12"
+                         visible="false">
+                <af:outputText value="#{row.Comment}"
+                               shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.Comment.tooltip}" id="ot13"/>
+              </af:column>
+              <af:column headerText="#{bindings.XwrlAlertDocumentsView1.hints.CreatedByAttr.label}" id="c5"
+                         sortable="true" sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.CreatedByAttr.name}"
+                         visible="false">
+                <af:selectOneChoice value="#{row.bindings.CreatedByAttr.inputValue}"
+                                    label="#{row.bindings.CreatedByAttr.label}"
+                                    required="#{bindings.XwrlAlertDocumentsView1.hints.CreatedByAttr.mandatory}"
+                                    shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.CreatedByAttr.tooltip}"
+                                    readOnly="true" id="soc1">
+                  <f:selectItems value="#{row.bindings.CreatedByAttr.items}" id="si1"/>
+                  <f:validator binding="#{row.bindings.CreatedByAttr.validator}"/>
+                </af:selectOneChoice>
+              </af:column>
+              <af:column sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.CreationDate.name}" sortable="true"
+                         headerText="#{bindings.XwrlAlertDocumentsView1.hints.CreationDate.label}" id="resId1c15"
+                         visible="false">
+                <af:outputText value="#{row.CreationDate}"
+                               shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.CreationDate.tooltip}" id="ot16">
+                  <af:convertDateTime pattern="#{bindings.XwrlAlertDocumentsView1.hints.CreationDate.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="#{bindings.XwrlAlertDocumentsView1.hints.LastUpdatedByAttr.label}" id="c6"
+                         sortable="true"
+                         sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.LastUpdatedByAttr.name}"
+                         visible="false">
+                <af:selectOneChoice value="#{row.bindings.LastUpdatedByAttr.inputValue}"
+                                    label="#{row.bindings.LastUpdatedByAttr.label}"
+                                    required="#{bindings.XwrlAlertDocumentsView1.hints.LastUpdatedByAttr.mandatory}"
+                                    shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.LastUpdatedByAttr.tooltip}"
+                                    readOnly="true" id="soc2">
+                  <f:selectItems value="#{row.bindings.LastUpdatedByAttr.items}" id="si2"/>
+                  <f:validator binding="#{row.bindings.LastUpdatedByAttr.validator}"/>
+                </af:selectOneChoice>
+              </af:column>
+              <af:column sortProperty="#{bindings.XwrlAlertDocumentsView1.hints.LastUpdateDate.name}" sortable="true"
+                         headerText="#{bindings.XwrlAlertDocumentsView1.hints.LastUpdateDate.label}" id="resId1c13"
+                         visible="false">
+                <af:outputText value="#{row.LastUpdateDate}"
+                               shortDesc="#{bindings.XwrlAlertDocumentsView1.hints.LastUpdateDate.tooltip}" id="ot14">
+                  <af:convertDateTime pattern="#{bindings.XwrlAlertDocumentsView1.hints.LastUpdateDate.format}"/>
+                </af:outputText>
+              </af:column>
+            </af:table>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="p2" contentDelivery="lazyUncached">
+              <af:dialog id="d1" contentWidth="500" contentHeight="500" resize="on"
+                         dialogListener="#{backingBeanScope.RequestBacking.editDialogListener}">
+                <f:facet name="buttonBar"/>
+                <af:panelHeader text="Alert Document" id="ph4">
+                  <f:facet name="context"/>
+                  <f:facet name="menuBar"/>
+                  <f:facet name="toolbar"/>
+                  <f:facet name="legend"/>
+                  <f:facet name="info"/>
+                  <af:panelFormLayout id="pfl2">
+                    <af:inputText value="#{bindings.Id.inputValue}" label="#{bindings.Id.hints.label}"
+                                  required="#{bindings.Id.hints.mandatory}" columns="#{bindings.Id.hints.displayWidth}"
+                                  maximumLength="#{bindings.Id.hints.precision}"
+                                  shortDesc="#{bindings.Id.hints.tooltip}" id="it1" autoSubmit="true">
+                      <f:validator binding="#{bindings.Id.validator}"/>
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.Id.format}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.RequestId.inputValue}" label="#{bindings.RequestId.hints.label}"
+                                  required="#{bindings.RequestId.hints.mandatory}"
+                                  columns="#{bindings.RequestId.hints.displayWidth}"
+                                  maximumLength="#{bindings.RequestId.hints.precision}"
+                                  shortDesc="#{bindings.RequestId.hints.tooltip}" id="it2" autoSubmit="true">
+                      <f:validator binding="#{bindings.RequestId.validator}"/>
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.RequestId.format}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.AlertId.inputValue}" label="#{bindings.AlertId.hints.label}"
+                                  required="#{bindings.AlertId.hints.mandatory}"
+                                  columns="#{bindings.AlertId.hints.displayWidth}"
+                                  maximumLength="#{bindings.AlertId.hints.precision}"
+                                  shortDesc="#{bindings.AlertId.hints.tooltip}" id="it3" autoSubmit="true">
+                      <f:validator binding="#{bindings.AlertId.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.EdocId.inputValue}" label="#{bindings.EdocId.hints.label}"
+                                  required="#{bindings.EdocId.hints.mandatory}"
+                                  columns="#{bindings.EdocId.hints.displayWidth}"
+                                  maximumLength="#{bindings.EdocId.hints.precision}"
+                                  shortDesc="#{bindings.EdocId.hints.tooltip}" id="it4" autoSubmit="true">
+                      <f:validator binding="#{bindings.EdocId.validator}"/>
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.EdocId.format}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.DocumentName.inputValue}"
+                                  label="#{bindings.DocumentName.hints.label}"
+                                  required="#{bindings.DocumentName.hints.mandatory}"
+                                  columns="#{bindings.DocumentName.hints.displayWidth}"
+                                  maximumLength="#{bindings.DocumentName.hints.precision}"
+                                  shortDesc="#{bindings.DocumentName.hints.tooltip}" id="it5" autoSubmit="true">
+                      <f:validator binding="#{bindings.DocumentName.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.DocumentCategory.inputValue}"
+                                  label="#{bindings.DocumentCategory.hints.label}"
+                                  required="#{bindings.DocumentCategory.hints.mandatory}"
+                                  columns="#{bindings.DocumentCategory.hints.displayWidth}"
+                                  maximumLength="#{bindings.DocumentCategory.hints.precision}"
+                                  shortDesc="#{bindings.DocumentCategory.hints.tooltip}" id="it6" autoSubmit="true">
+                      <f:validator binding="#{bindings.DocumentCategory.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.DocumentType.inputValue}"
+                                  label="#{bindings.DocumentType.hints.label}"
+                                  required="#{bindings.DocumentType.hints.mandatory}"
+                                  columns="#{bindings.DocumentType.hints.displayWidth}"
+                                  maximumLength="#{bindings.DocumentType.hints.precision}"
+                                  shortDesc="#{bindings.DocumentType.hints.tooltip}" id="it7" autoSubmit="true">
+                      <f:validator binding="#{bindings.DocumentType.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.FileName.inputValue}" label="#{bindings.FileName.hints.label}"
+                                  required="#{bindings.FileName.hints.mandatory}"
+                                  columns="#{bindings.FileName.hints.displayWidth}"
+                                  maximumLength="#{bindings.FileName.hints.precision}"
+                                  shortDesc="#{bindings.FileName.hints.tooltip}" id="it8" autoSubmit="true">
+                      <f:validator binding="#{bindings.FileName.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.FilePath.inputValue}" label="#{bindings.FilePath.hints.label}"
+                                  required="#{bindings.FilePath.hints.mandatory}"
+                                  columns="#{bindings.FilePath.hints.displayWidth}"
+                                  maximumLength="#{bindings.FilePath.hints.precision}"
+                                  shortDesc="#{bindings.FilePath.hints.tooltip}" id="it9" autoSubmit="true">
+                      <f:validator binding="#{bindings.FilePath.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.ContentType.inputValue}" label="#{bindings.ContentType.hints.label}"
+                                  required="#{bindings.ContentType.hints.mandatory}"
+                                  columns="#{bindings.ContentType.hints.displayWidth}"
+                                  maximumLength="#{bindings.ContentType.hints.precision}"
+                                  shortDesc="#{bindings.ContentType.hints.tooltip}" id="it10" autoSubmit="true">
+                      <f:validator binding="#{bindings.ContentType.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.UrlPath.inputValue}" label="#{bindings.UrlPath.hints.label}"
+                                  required="#{bindings.UrlPath.hints.mandatory}"
+                                  columns="#{bindings.UrlPath.hints.displayWidth}"
+                                  maximumLength="#{bindings.UrlPath.hints.precision}"
+                                  shortDesc="#{bindings.UrlPath.hints.tooltip}" id="it11" autoSubmit="true">
+                      <f:validator binding="#{bindings.UrlPath.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.Comment.inputValue}" label="#{bindings.Comment.hints.label}"
+                                  required="#{bindings.Comment.hints.mandatory}"
+                                  columns="#{bindings.Comment.hints.displayWidth}"
+                                  maximumLength="#{bindings.Comment.hints.precision}"
+                                  shortDesc="#{bindings.Comment.hints.tooltip}" id="it12" autoSubmit="true">
+                      <f:validator binding="#{bindings.Comment.validator}"/>
+                    </af:inputText>
+                    <af:inputDate value="#{bindings.LastUpdateDate.inputValue}"
+                                  label="#{bindings.LastUpdateDate.hints.label}"
+                                  required="#{bindings.LastUpdateDate.hints.mandatory}"
+                                  columns="#{bindings.LastUpdateDate.hints.displayWidth}"
+                                  shortDesc="#{bindings.LastUpdateDate.hints.tooltip}" id="id1" autoSubmit="true">
+                      <f:validator binding="#{bindings.LastUpdateDate.validator}"/>
+                      <af:convertDateTime pattern="#{bindings.LastUpdateDate.format}"/>
+                    </af:inputDate>
+                    <af:inputText value="#{bindings.LastUpdatedBy.inputValue}"
+                                  label="#{bindings.LastUpdatedBy.hints.label}"
+                                  required="#{bindings.LastUpdatedBy.hints.mandatory}"
+                                  columns="#{bindings.LastUpdatedBy.hints.displayWidth}"
+                                  maximumLength="#{bindings.LastUpdatedBy.hints.precision}"
+                                  shortDesc="#{bindings.LastUpdatedBy.hints.tooltip}" id="it13" autoSubmit="true">
+                      <f:validator binding="#{bindings.LastUpdatedBy.validator}"/>
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.LastUpdatedBy.format}"/>
+                    </af:inputText>
+                    <af:inputDate value="#{bindings.CreationDate.inputValue}"
+                                  label="#{bindings.CreationDate.hints.label}"
+                                  required="#{bindings.CreationDate.hints.mandatory}"
+                                  columns="#{bindings.CreationDate.hints.displayWidth}"
+                                  shortDesc="#{bindings.CreationDate.hints.tooltip}" id="id2" autoSubmit="true">
+                      <f:validator binding="#{bindings.CreationDate.validator}"/>
+                      <af:convertDateTime pattern="#{bindings.CreationDate.format}"/>
+                    </af:inputDate>
+                    <af:inputText value="#{bindings.CreatedBy.inputValue}" label="#{bindings.CreatedBy.hints.label}"
+                                  required="#{bindings.CreatedBy.hints.mandatory}"
+                                  columns="#{bindings.CreatedBy.hints.displayWidth}"
+                                  maximumLength="#{bindings.CreatedBy.hints.precision}"
+                                  shortDesc="#{bindings.CreatedBy.hints.tooltip}" id="it14" autoSubmit="true">
+                      <f:validator binding="#{bindings.CreatedBy.validator}"/>
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.CreatedBy.format}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.LastUpdateLogin.inputValue}"
+                                  label="#{bindings.LastUpdateLogin.hints.label}"
+                                  required="#{bindings.LastUpdateLogin.hints.mandatory}"
+                                  columns="#{bindings.LastUpdateLogin.hints.displayWidth}"
+                                  maximumLength="#{bindings.LastUpdateLogin.hints.precision}"
+                                  shortDesc="#{bindings.LastUpdateLogin.hints.tooltip}" id="it15" autoSubmit="true">
+                      <f:validator binding="#{bindings.LastUpdateLogin.validator}"/>
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.LastUpdateLogin.format}"/>
+                    </af:inputText>
+                  </af:panelFormLayout>
+                </af:panelHeader>
+              </af:dialog>
+            </af:popup>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="p3" contentDelivery="lazyUncached">
+              <af:dialog id="d3" title="Delete" resize="on" contentWidth="300" contentHeight="50"
+                         dialogListener="#{backingBeanScope.RequestBacking.deleteDocumentDialogListener}">
+                <af:panelGridLayout id="pgl1" dimensionsFrom="auto">
+                  <af:gridRow marginTop="5px" marginBottom="5px" id="gr1">
+                    <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="gc1" valign="middle"
+                                 halign="center">
+                      <af:outputText value="Are you sure you want to delete this record?" id="ot22"/>
+                    </af:gridCell>
+                  </af:gridRow>
+                </af:panelGridLayout>
+                <f:facet name="buttonBar"/>
+              </af:dialog>
+            </af:popup>
+            <f:facet name="menus"/>
+            <f:facet name="toolbar">
+              <af:toolbar id="t1">
+                <af:button text="Upload" id="b2" action="goUpload" useWindow="true" windowHeight="700"
+                           windowWidth="1000" windowEmbedStyle="inlineDocument" windowModalityType="applicationModal"
+                           actionListener="#{pageFlowScope.UploadModel.uploadActionListener}"
+                           returnListener="#{pageFlowScope.UploadModel.uploadReturnListener}">
+                  <af:setPropertyListener type="action" from="#{'Individual Alert'}" to="#{pageFlowScope.panelHeader}"/>
+                  <af:setPropertyListener type="action" from="#{bindings.Alertid.inputValue}" to="#{pageFlowScope.displayKey}"/>
+                  <af:setPropertyListener type="action" from="#{bindings.XwrlAlertDocumentsView1Iterator.name}"
+                                          to="#{pageFlowScope.iterBinding}"/>
+                    <af:setPropertyListener to="#{pageFlowScope.outputTextId}" type="action" from="#{'aot4'}"/>                                                                                    
+                </af:button>
+                <af:button text="Edit" id="b3" actionListener="#{backingBeanScope.RequestBacking.docShowPopup}"
+                           disabled="#{!bindings.Delete.enabled}" rendered="false"/>
+                <af:button text="Delete" id="b4" actionListener="#{backingBeanScope.RequestBacking.deleteShowPopup}"
+                           disabled="#{!bindings.Delete.enabled}">
+                  <af:setPropertyListener type="action" to="#{pageFlowScope.iterBinding}"
+                                          from="#{'XwrlAlertDocumentsView1Iterator'}"/>
+                  <af:setPropertyListener type="action" from="#{'XwrlRequestsView1Iterator'}"
+                                          to="#{pageFlowScope.masterIter}"/>                                          
+                </af:button>
+                <af:button actionListener="#{bindings.Execute.execute}" text="Refresh"
+                           disabled="#{!bindings.Execute.enabled}" id="b5"/>
+              </af:toolbar>
+            </f:facet>
+            <f:facet name="statusbar"/>
+          </af:panelCollection>
+          <f:facet name="context">
+            <af:toolbar id="t2"/>
+          </f:facet>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar">
+            <af:button text="Return" id="b1" action="goIndividualRequest"/>
+          </f:facet>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+        </af:panelHeader>
+      </f:facet>
+    </af:panelSplitter>
+  </af:panelHeader>
+</ui:composition>

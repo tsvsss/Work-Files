@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="vettingTF_vettingTF_initializeViewContextAGetDataPageDef"
+                Package="com.rmi.manualtradecompliance.view.vetting" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="initializeViewContextAGetData" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="initializeViewContextAGetData" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.initializeViewContextAGetData_RMIManualTradeComplianceAppModuleDataControl_dataProvider_initializeViewContextAGetData_result">
+      <NamedData NDName="filter" NDValue="#{' end_date is null'}" NDType="java.lang.String"/>
+      <NamedData NDName="sortByColumnName" NDValue="#{'none'}" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

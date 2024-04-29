@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="vettingTF_vettingTF_callXwrlPartyMasterPageDef"
+                Package="com.rmi.manualtradecompliance.view.vetting" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="callXwrlPartyMaster" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callXwrlPartyMaster" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.callXwrlPartyMaster_RMIManualTradeComplianceAppModuleDataControl_dataProvider_callXwrlPartyMaster_result"/>
+  </bindings>
+</pageDefinition>

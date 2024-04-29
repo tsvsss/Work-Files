@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="ReviewIndividualResponsPageDef"
+                Package="oracle.apps.xwrl.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="XwrlRequestsView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlRequestsView1Iterator"/>
+    <iterator Binds="XwrlResponseIndColumnsView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlResponseIndColumnsView1Iterator"/>
+    <iterator Binds="XwrlResponseRowsView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlResponseRowsView1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="ResubmitId">
+      <AttrNames>
+        <Item Value="ResubmitId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="SourceTable">
+      <AttrNames>
+        <Item Value="SourceTable"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="SourceId">
+      <AttrNames>
+        <Item Value="SourceId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="WcScreeningRequestId">
+      <AttrNames>
+        <Item Value="WcScreeningRequestId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="Server">
+      <AttrNames>
+        <Item Value="Server"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="Path">
+      <AttrNames>
+        <Item Value="Path"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="SoapQuery">
+      <AttrNames>
+        <Item Value="SoapQuery"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="Request">
+      <AttrNames>
+        <Item Value="Request"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="Response">
+      <AttrNames>
+        <Item Value="Response"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="JobId">
+      <AttrNames>
+        <Item Value="JobId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="Matches">
+      <AttrNames>
+        <Item Value="Matches"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="ErrorCode">
+      <AttrNames>
+        <Item Value="ErrorCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="ErrorMessage">
+      <AttrNames>
+        <Item Value="ErrorMessage"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="LastUpdateDate">
+      <AttrNames>
+        <Item Value="LastUpdateDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="LastUpdatedBy">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="CreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="LastUpdateLogin">
+      <AttrNames>
+        <Item Value="LastUpdateLogin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="NameScreened">
+      <AttrNames>
+        <Item Value="NameScreened"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="DateOfBirth">
+      <AttrNames>
+        <Item Value="DateOfBirth"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="TcMatches">
+      <AttrNames>
+        <Item Value="TcMatches"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XwrlResponseIndColumnsView1Iterator" id="XwrlResponseIndColumnsView1">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.XwrlResponseIndColumnsView"
+                      Name="XwrlResponseIndColumnsView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="RequestId"/>
+          <Item Value="Rec"/>
+          <Item Value="Listkey"/>
+          <Item Value="Listsubkey"/>
+          <Item Value="Listrecordtype"/>
+          <Item Value="Listrecordorigin"/>
+          <Item Value="Listid"/>
+          <Item Value="Listgivennames"/>
+          <Item Value="Listfamilyname"/>
+          <Item Value="Listfullname"/>
+          <Item Value="Listnametype"/>
+          <Item Value="Listprimaryname"/>
+          <Item Value="Listoriginalscriptname"/>
+          <Item Value="Listdob"/>
+          <Item Value="Listcity"/>
+          <Item Value="Listcountry"/>
+          <Item Value="Listcountryofbirth"/>
+          <Item Value="Listnationality"/>
+          <Item Value="Matchrule"/>
+          <Item Value="Matchscore"/>
+          <Item Value="Casekey"/>
+          <Item Value="Alertid"/>
+          <Item Value="Riskscore"/>
+          <Item Value="Riskscorepep"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="LastUpdateLogin"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="XwrlResponseRowsView1Iterator" id="XwrlResponseRowsView1">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.XwrlResponseRowsView" Name="XwrlResponseRowsView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="RequestId"/>
+          <Item Value="Path"/>
+          <Item Value="OwsId"/>
+          <Item Value="RecRow"/>
+          <Item Value="DetRow"/>
+          <Item Value="Key1"/>
+          <Item Value="Value"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="LastUpdateLogin"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="EnterOrderLinesLogicalLink"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.links.EnterOrderLinesLogicalLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="EnterOrderHeaderRO"
+    Cardinality="1"
+    Source="true"
+    Owner="com.rmi.tradecompapproval.adfbc.views.readonly.OrderHeaderView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="EnterOrderHeaderRO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rmi.tradecompapproval.adfbc.views.readonly.OrderHeaderView.HeaderId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="EnterOrderLinesRO"
+    Cardinality="-1"
+    Owner="com.rmi.tradecompapproval.adfbc.views.readonly.OrderLinesView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="EnterOrderLinesRO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rmi.tradecompapproval.adfbc.views.readonly.OrderLinesView.HeaderId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

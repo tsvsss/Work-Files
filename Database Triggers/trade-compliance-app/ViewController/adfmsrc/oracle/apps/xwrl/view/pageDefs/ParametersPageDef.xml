@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="ParametersPageDef"
+                Package="oracle.apps.xwrl.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="XwrlParametersView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlParametersView1Iterator"/>
+    <searchRegion Criteria="XwrlParametersViewCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="XwrlParametersView1Iterator" id="XwrlParametersViewCriteriaQuery"/>
+  </executables>
+  <bindings>
+    
+    <tree IterBinding="XwrlParametersView1Iterator" id="XwrlParametersView11">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.XwrlParametersView" Name="XwrlParametersView110">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Key1"/>
+          <Item Value="ValueString"/>
+          <Item Value="ValueDate"/>
+          <Item Value="ValueClob"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="Valxml"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XwrlParametersView1Iterator" id="Execute" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <methodAction id="clearVC" RequiresUpdateModel="true" Action="invokeMethod" MethodName="clearVC"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.XwrlParametersView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.clearVC_AppModuleDataControl_XwrlParametersView1_clearVC_result"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="Prototype-task-flow-definition">
+   
+    <default-activity>storeDCFrameNameListener</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__47">
+      <name>requestId</name>
+      <value>#{pageFlowScope.requestId}</value>
+      <required/>
+    </input-parameter-definition>
+    <input-parameter-definition id="__54">
+      <name>sourceTable</name>
+      <value>#{pageFlowScope.psourceTable}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__57">
+      <name>sourceId</name>
+      <value>#{pageFlowScope.psourceId}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__46">
+      <name>requestType</name>
+      <value>#{pageFlowScope.requestType}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__58">
+      <name>userId</name>
+      <value>#{pageFlowScope.userId}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__59">
+      <name>admin</name>
+      <value>#{pageFlowScope.admin}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__60">
+      <name>readOnly</name>
+      <value>#{pageFlowScope.readOnly}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__61">
+      <name>superUser</name>
+      <value>#{pageFlowScope.superUser}</value>
+    </input-parameter-definition>
+    <input-parameter-definition id="__31">
+      <name>recordLockUser</name>
+      <value>#{pageFlowScope.recordLockUser}</value>
+    </input-parameter-definition>
+    <managed-bean id="__37">
+      <managed-bean-name>UploadModel</managed-bean-name>
+      <managed-bean-class>oracle.apps.xwrl.beans.upload.UploadModel</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__38">
+      <managed-bean-name>UploadActiveDataModel</managed-bean-name>
+      <managed-bean-class>oracle.apps.xwrl.beans.upload.UploadActiveDataModel</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__53">
+      <managed-bean-name>InitialiseRequest</managed-bean-name>
+      <managed-bean-class>oracle.apps.xwrl.beans.backing.InitialiseRequest</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__20">
+      <managed-bean-name>CaseNotesBean</managed-bean-name>
+      <managed-bean-class>oracle.apps.xwrl.beans.backing.CaseNotes</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__33">
+      <managed-bean-name>CaseDocumentsBean</managed-bean-name>
+      <managed-bean-class>oracle.apps.xwrl.beans.backing.CaseDocuments</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <initializer>#{viewScope.InitialiseRequest.onload}</initializer>
+    <view id="ReviewIndividualResponse">
+      <page>/Prototype/ReviewIndividualResponse.jsff</page>
+    </view>
+    <view id="ReviewEntityResponse">
+      <page>/Prototype/ReviewEntityResponse.jsff</page>
+    </view>
+    <router id="RouteRequest">
+      <case id="__4">
+        <expression>#{pageFlowScope.requestType eq 'INDIVIDUAL'}</expression>
+        <outcome>EnterIndividual</outcome>
+      </case>
+      <case id="__5">
+        <expression>#{pageFlowScope.requestType eq 'ENTITY'}</expression>
+        <outcome>EnterEntity</outcome>
+      </case>
+      <default-outcome>EnterIndividual</default-outcome>
+    </router>
+    <view id="EnterIndividualRequest">
+      <page>/Prototype/EnterIndividualRequest.jsff</page>
+    </view>
+    <view id="EnterEntityRequest">
+      <page>/Prototype/EnterEntityRequest.jsff</page>
+    </view>
+    <method-call id="executeRequestView">
+      <method>#{bindings.executeRequestView.execute}</method>
+      <outcome>
+        <fixed-outcome>executeRequestView</fixed-outcome>
+      </outcome>
+    </method-call>
+    <router id="routeIndividualNote">
+      <case id="__24">
+        <expression>#{pageFlowScope.noteType eq 'CASE'}</expression>
+        <outcome>goIndividualCaseNote</outcome>
+      </case>
+      <case id="__25">
+        <expression>#{pageFlowScope.noteType eq 'ALERT'}</expression>
+        <outcome>goIndividualAlertNote</outcome>
+      </case>
+      <default-outcome>goIndividualCaseNote</default-outcome>
+    </router>
+    <router id="routeEntityNote">
+      <case id="__26">
+        <expression>#{pageFlowScope.noteType eq 'CASE'}</expression>
+        <outcome>goEntityCaseNote</outcome>
+      </case>
+      <case id="__27">
+        <expression>#{pageFlowScope.noteType eq 'ALERT'}</expression>
+        <outcome>goEntityAlertNote</outcome>
+      </case>
+      <default-outcome>goEntityCaseNote</default-outcome>
+    </router>
+    <view id="EnterEntityAlertNote">
+      <page>/Prototype/EnterEntityAlertNote.jsff</page>
+    </view>
+    <view id="EnterEntityCaseNote">
+      <page>/Prototype/EnterEntityCaseNote.jsff</page>
+    </view>
+    <view id="EnterIndividualAlertNote">
+      <page>/Prototype/EnterIndividualAlertNote.jsff</page>
+    </view>
+    <view id="EnterIndividualCaseNote">
+      <page>/Prototype/EnterIndividualCaseNote.jsff</page>
+    </view>
+    <view id="UploadIndividualAlertDocument">
+      <page>/Prototype/UploadIndividualAlertDocument.jsff</page>
+    </view>
+    <view id="UploadIndividualCaseDocument">
+      <page>/Prototype/UploadIndividualCaseDocument.jsff</page>
+    </view>
+    <view id="UploadEntityCaseDocument">
+      <page>/Prototype/UploadEntityCaseDocument.jsff</page>
+    </view>
+    <view id="UploadEntityAlertDocument">
+      <page>/Prototype/UploadEntityAlertDocument.jsff</page>
+    </view>
+    <router id="routeEntityDocument">
+      <case id="__43">
+        <expression>#{pageFlowScope.docType eq 'CASE'}</expression>
+        <outcome>goEntityCaseDoc</outcome>
+      </case>
+      <case id="__44">
+        <expression>#{pageFlowScope.docType eq 'ALERT'}</expression>
+        <outcome>goEntityAlertDoc</outcome>
+      </case>
+      <default-outcome>goEntityCaseDoc</default-outcome>
+    </router>
+    <router id="routeIndividualDocument">
+      <case id="__41">
+        <expression>#{pageFlowScope.docType eq 'CASE'}</expression>
+        <outcome>goIndividualCaseDoc</outcome>
+      </case>
+      <case id="__42">
+        <expression>#{pageFlowScope.docType eq 'ALERT'}</expression>
+        <outcome>goIndividualAlertDoc</outcome>
+      </case>
+      <default-outcome>goIndividualCaseDoc</default-outcome>
+    </router>
+    <task-flow-call id="Upload-task-flow-definition">
+      <task-flow-reference>
+        <document>/WEB-INF/Upload-task-flow-definition.xml</document>
+        <id>Upload-task-flow-definition</id>
+      </task-flow-reference>
+      <input-parameter id="__49">
+        <name>paramPanelHeader</name>
+        <value>#{pageFlowScope.paneHeader}</value>
+      </input-parameter>
+      <input-parameter id="__50">
+        <name>paramDisplayKey</name>
+        <value>#{pageFlowScope.displayKey}</value>
+      </input-parameter>
+      <input-parameter id="__55">
+        <name>pageFlowId</name>
+        <value>#{pageFlowScope.pageFlowId}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <method-call id="storeDCFrameNameListener">
+      <method>#{bindings.storeDCFrameNameListener.execute}</method>
+      <outcome>
+        <fixed-outcome>storeDCFrameNameListener</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="OwsStatusboardTaskFlow">
+      <task-flow-reference>
+        <document>/WEB-INF/OwsStatusboardTaskFlow.xml</document>
+        <id>OwsStatusboardTaskFlow</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>RouteRequest</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>EnterIndividual</from-outcome>
+        <to-activity-id>EnterIndividualRequest</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__3">
+        <from-outcome>EnterEntity</from-outcome>
+        <to-activity-id>EnterEntityRequest</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__8">
+      <from-activity-id>ReviewEntityResponse</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome>EntityReturn</from-outcome>
+        <to-activity-id>EnterEntityRequest</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>ReviewIndividualResponse</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>IndividualReturn</from-outcome>
+        <to-activity-id>EnterIndividualRequest</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__19">
+      <from-activity-id>executeRequestView</from-activity-id>
+      <control-flow-case id="__48">
+        <from-outcome>executeRequestView</from-outcome>
+        <to-activity-id>storeDCFrameNameListener</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>EnterEntityRequest</from-activity-id>
+      <control-flow-case id="__13">
+        <from-outcome>EntNote</from-outcome>
+        <to-activity-id>routeEntityNote</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__39">
+        <from-outcome>entityDocument</from-outcome>
+        <to-activity-id>routeEntityDocument</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__14">
+      <from-activity-id>EnterIndividualRequest</from-activity-id>
+      <control-flow-case id="__15">
+        <from-outcome>IndNote</from-outcome>
+        <to-activity-id>routeIndividualNote</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__40">
+        <from-outcome>individualDocument</from-outcome>
+        <to-activity-id>routeIndividualDocument</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__16">
+      <from-activity-id>routeIndividualNote</from-activity-id>
+      <control-flow-case id="__18">
+        <from-outcome>goIndividualCaseNote</from-outcome>
+        <to-activity-id>EnterIndividualCaseNote</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__28">
+        <from-outcome>goIndividualAlertNote</from-outcome>
+        <to-activity-id>EnterIndividualAlertNote</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__21">
+      <from-activity-id>routeEntityNote</from-activity-id>
+      <control-flow-case id="__22">
+        <from-outcome>goEntityAlertNote</from-outcome>
+        <to-activity-id>EnterEntityAlertNote</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__23">
+        <from-outcome>goEntityCaseNote</from-outcome>
+        <to-activity-id>EnterEntityCaseNote</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__17">
+      <from-activity-id>routeIndividualDocument</from-activity-id>
+      <control-flow-case id="__29">
+        <from-outcome>goIndividualCaseDoc</from-outcome>
+        <to-activity-id>UploadIndividualCaseDocument</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__30">
+        <from-outcome>goIndividualAlertDoc</from-outcome>
+        <to-activity-id>UploadIndividualAlertDocument</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__35">
+      <from-activity-id>routeEntityDocument</from-activity-id>
+      <control-flow-case id="__36">
+        <from-outcome>goEntityCaseDoc</from-outcome>
+        <to-activity-id>UploadEntityCaseDocument</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__45">
+        <from-outcome>goEntityAlertDoc</from-outcome>
+        <to-activity-id>UploadEntityAlertDocument</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__51">
+      <from-activity-id>storeDCFrameNameListener</from-activity-id>
+      <control-flow-case id="__56">
+        <from-outcome>storeDCFrameNameListener</from-outcome>
+        <to-activity-id>RouteRequest</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>*</from-activity-id>
+      <control-flow-case id="__34">
+        <from-outcome>stb</from-outcome>
+        <to-activity-id>OwsStatusboardTaskFlow</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__12">
+        <from-outcome>reqVw</from-outcome>
+        <to-activity-id>storeDCFrameNameListener</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__62">
+      <from-activity-id>UploadIndividualCaseDocument</from-activity-id>
+      <control-flow-case id="__63">
+        <from-outcome>UploadInd</from-outcome>
+        <to-activity-id>Upload-task-flow-definition</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__65">
+      <from-activity-id>UploadEntityCaseDocument</from-activity-id>
+      <control-flow-case id="__66">
+        <from-outcome>UploadEnt</from-outcome>
+        <to-activity-id>Upload-task-flow-definition</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,2916 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XwrlRequestsView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  FetchMode="FETCH_AS_NEEDED"
+  Passivate="All"
+  FetchSize="1000"
+  ComponentClass="oracle.apps.xwrl.model.view.XwrlRequestsViewImpl"
+  ComponentInterface="oracle.apps.xwrl.model.view.common.XwrlRequestsView"
+  ClientProxyName="oracle.apps.xwrl.model.view.client.XwrlRequestsViewClient"
+  RowClass="oracle.apps.xwrl.model.view.XwrlRequestsViewRowImpl"
+  MaxFetchSize="1000"
+  RangeSize="25">
+ 
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|Coll|VarAccess"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="varRequestId"
+    Kind="viewcriteria"
+    Type="java.math.BigDecimal">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.varRequestId_LABEL"/>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="varScreeningRequestId"
+    Kind="viewcriteria"
+    Type="java.math.BigDecimal">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.varScreeningRequestId_LABEL"/>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="varStatus"
+    Kind="viewcriteria"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.varStatus_LABEL"/>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="varNameScreened"
+    Kind="viewcriteria"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="10"/>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.varNameScreened_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="varId"
+    Kind="viewcriteria"
+    Type="java.math.BigDecimal"/>
+  <Variable
+    Name="pBatchId"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pStatus"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <ViewAccessor
+    Name="CaseStateLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.CaseStateLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CaseStatusLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.CaseStatusLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CaseWorkflowLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.CaseWorkflowLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="YesNullLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.YesNullLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="PriorityLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.PriorityLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="RiskLevelLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.RiskLevelLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="OfficeLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.OfficeLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CaseDepartmentsLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.CaseDepartmentsLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="RejectionLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.RejectionLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CaseAssignmentLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.CaseAssignmentLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CaseDocumentsLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.CaseDocumentsLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CaseTypeLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.CaseTypeLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CaseRestrictedCountryLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.CaseRestrictedCountryLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CaseRestrictedCityLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.CaseRestrictedCityLOV"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="CaseRestrictedCityLOVCriteria"
+      FullName="oracle.apps.xwrl.model.lov.CaseRestrictedCityLOV.CaseRestrictedCityLOVCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="varCountryCode">
+        <TransientExpression
+          trustMode="untrusted"><![CDATA[CountryOfResidence]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="FndUsersAllLov1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.FndUsersAllLov"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="GetCaseDocumentsLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.GetCaseDocumentsLOV"
+    RowLevelBinds="true">
+    
+  </ViewAccessor>
+  <ViewAccessor
+    Name="IDTypesLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.IDTypesLOV"
+    RowLevelBinds="true"/>
+  <!--ViewAccessor
+    Name="CaseCountryLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.CaseCountryLOV"
+    RowLevelBinds="true"/-->
+  <ListBinding
+    Name="LOV_CaseState"
+    ListVOName="CaseStateLOV1"
+    ListRangeSize="25"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CaseState"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CaseStatus"
+    ListVOName="CaseStatusLOV1"
+    ListRangeSize="25"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CaseStatus"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CaseWorkflow"
+    ListVOName="CaseWorkflowLOV1"
+    ListRangeSize="25"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CaseWorkflow"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CaseStateAttr"
+    ListVOName="CaseStateLOV1"
+    ListRangeSize="25"
+    NullValueFlag="none"
+    MRUCount="0"
+    ComboRowCountHint="10">
+    <AttrArray Name="AttrNames">
+      <Item Value="CaseStateAttr"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="CaseState"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionvalue"/>
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CaseStatusAttr"
+    ListVOName="CaseStatusLOV1"
+    ListRangeSize="25"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CaseStatusAttr"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="CaseStatus"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionvalue"/>
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+   <ListBinding
+    Name="LOV_CaseWorkFlowAttr"
+    ListVOName="CaseWorkflowLOV1"
+    ListRangeSize="25"
+    NullValueFlag="none"
+    MRUCount="0"
+    ComboRowCountHint="10">
+    <AttrArray Name="AttrNames">
+      <Item Value="CaseWorkFlowAttr"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="CaseWorkflow"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionvalue"/>
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding> 
+  <ListBinding
+    Name="LOV_VesselIndicator"
+    ListVOName="YesNullLOV1"
+    ListRangeSize="10"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="VesselIndicator"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Id"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Priority"
+    ListVOName="PriorityLOV1"
+    ListRangeSize="10"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Priority"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_RiskLevel"
+    ListVOName="RiskLevelLOV1"
+    ListRangeSize="10"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="RiskLevel"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PriorityAttr"
+    ListVOName="PriorityLOV1"
+    ListRangeSize="10"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PriorityAttr"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Priority"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionvalue"/>
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_RiskLevelAttr"
+    ListVOName="RiskLevelLOV1"
+    ListRangeSize="10"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="RiskLevelAttr"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="RiskLevel"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionvalue"/>
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Office"
+    ListVOName="OfficeLOV1"
+    ListRangeSize="50"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Office"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_OfficeAttr"
+    ListVOName="OfficeLOV1"
+    ListRangeSize="50"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="OfficeAttr"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Office"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionvalue"/>
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Department"
+    ListVOName="CaseDepartmentsLOV1"
+    ListRangeSize="50"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Department"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_DeptAttr"
+    ListVOName="CaseDepartmentsLOV1"
+    ListRangeSize="50"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DeptAttr"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Department"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionvalue"/>
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_RejectionReason"
+    ListVOName="RejectionLOV1"
+    ListRangeSize="50"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="RejectionReason"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_RejectionAttr"
+    ListVOName="RejectionLOV1"
+    ListRangeSize="50"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="RejectionAttr"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="RejectionReason"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionvalue"/>
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_AssignedTo"
+    ListVOName="CaseAssignmentLOV1"
+    ListRangeSize="100"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="AssignedTo"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="UserId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_AssignedToAttr"
+    ListVOName="CaseAssignmentLOV1"
+    ListRangeSize="100"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="AssignedToAttr"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="AssignedTo"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Description"/>
+      <Item Value="UserId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_DocumentType"
+    ListVOName="CaseDocumentsLOV1"
+    ListRangeSize="100"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DocumentType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_DocTypeAttr"
+    ListVOName="CaseDocumentsLOV1"
+    ListRangeSize="100"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DocTypeAttr"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="DocumentType"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionvalue"/>
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CaseTypeAttr"
+    ListVOName="CaseTypeLOV1"
+    ListRangeSize="50"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CaseTypeAttr"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Path"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionvalue"/>
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Path"
+    ListVOName="CaseTypeLOV1"
+    ListRangeSize="50"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Path"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CityOfResidence"
+    ListVOName="CaseRestrictedCityLOV1"
+    ListRangeSize="50"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CityOfResidence"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="SubdivisionCityOfResidence"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="WcCityListId"/>
+      <Item Value="Subdivision"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CityName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CountryOfResidence"
+    ListVOName="CaseRestrictedCountryLOV1"
+    ListRangeSize="500"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CountryOfResidence"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_LastUpdatedBy"
+    ListVOName="FndUsersAllLov1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="LastUpdatedBy"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="UserId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_RistrictedCountryAttr"
+    ListVOName="CaseRestrictedCountryLOV1"
+    ListRangeSize="500"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="RistrictedCountryAttr"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="CountryOfResidence"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionvalue"/>
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CountryOfAddress"
+    ListVOName="CaseRestrictedCountryLOV1"
+    ListRangeSize="500"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CountryOfAddress"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CreatedBy"
+    ListVOName="FndUsersAllLov1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CreatedBy"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="UserId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CountryOfBirth"
+    ListVOName="CaseRestrictedCountryLOV1"
+    ListRangeSize="500"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CountryOfBirth"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CountryOfNationality"
+    ListVOName="CaseRestrictedCountryLOV1"
+    ListRangeSize="500"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CountryOfNationality"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CountryOfOperation"
+    ListVOName="CaseRestrictedCountryLOV1"
+    ListRangeSize="500"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CountryOfOperation"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CountryOfRegistration"
+    ListVOName="CaseRestrictedCountryLOV1"
+    ListRangeSize="500"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CountryOfRegistration"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CityOfResidenceId"
+    ListVOName="CaseRestrictedCityLOV1"
+    ListRangeSize="500"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CityOfResidenceId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="SubdivisionCityOfResidence"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="WcCityListId"/>
+      <Item Value="Subdivision"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CityName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Doctype"
+    ListVOName="GetCaseDocumentsLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Doctype"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Optionkey"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Optionvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_IDType"
+    ListVOName="IDTypesLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="IDType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="TypeId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="TypeDescription"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_SentToLegalBy"
+    ListVOName="FndUsersAllLov1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="SentToLegalBy"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="UserId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <!--T20200629.0034 - OWS TC - Display ESR User Details in Statusboard (IRI): added ESR_USER_ID and ESR_USER_EMAIL_ADDRESS -->
+  <!-- T20200730.0021 - OWS - Display Legal Review & Possible Alert Counts... (IRI): added Possiblecnt and LegalReviewcnt -->
+  <!-- T20211216.0022 - TC 2.0 Ukraine/Russia - not working like it is supposed to: Fin number logic updated -->
+  <SQLQuery><![CDATA[SELECT XwrlRequests.ID,      
+XwrlRequests.master_id,  
+XwrlRequests.alias_id,  
+XwrlRequests.xref_id, 
+       XwrlRequests.RESUBMIT_ID,           
+       XwrlRequests.SOURCE_TABLE,           
+       XwrlRequests.SOURCE_ID,           
+       XwrlRequests.WC_SCREENING_REQUEST_ID,           
+       XwrlRequests.SERVER,           
+       XwrlRequests.JOB_ID,           
+       XwrlRequests.STATUS,           
+       XwrlRequests.ERROR_CODE,           
+       XwrlRequests.ERROR_MESSAGE,           
+       XwrlRequests.CASE_ID,           
+       XwrlRequests.NAME_SCREENED,           
+       XwrlRequests.DATE_OF_BIRTH,           
+       XwrlRequests.IMO_NUMBER,           
+       XwrlRequests.VESSEL_INDICATOR,           
+       XwrlRequests.PATH,           
+       XwrlRequests.CASE_STATE,           
+       XwrlRequests.CASE_WORKFLOW,           
+       XwrlRequests.CASE_STATUS,           
+       XwrlRequests.PRIORITY,           
+       XwrlRequests.RISK_LEVEL,           
+       XwrlRequests.REJECTION_REASON,           
+       XwrlRequests.MATCHES,           
+       XwrlRequests.DEPARTMENT,           
+       XwrlRequests.OFFICE,           
+       XwrlRequests.DOCUMENT_TYPE,           
+       XwrlRequests.DOCUMENT_TYPE As DocType,  
+       XwrlRequests.ASSIGNED_TO,           
+       XwrlRequests.COUNTRY_OF_RESIDENCE,           
+       XwrlRequests.CITY_OF_RESIDENCE,           
+       XwrlRequests.SUBDIVISION_CITY_OF_RESIDENCE,           
+       XwrlRequests.CLOSED_DATE,           
+       XwrlRequests.LAST_UPDATE_DATE,           
+       XwrlRequests.LAST_UPDATED_BY,           
+       XwrlRequests.CREATION_DATE,           
+       XwrlRequests.CREATED_BY,           
+       XwrlRequests.LAST_UPDATE_LOGIN,           
+       XwrlRequests.BATCH_ID,           
+       XwrlRequests.COUNTRY_OF_ADDRESS,           
+       XwrlRequests.COUNTRY_OF_NATIONALITY,           
+       XwrlRequests.COUNTRY_OF_OPERATION,           
+       XwrlRequests.COUNTRY_OF_BIRTH,           
+       XwrlRequests.COUNTRY_OF_REGISTRATION,             
+       XwrlRequests.CITY_OF_RESIDENCE_ID,         
+       XwrlRequests.REJECTION_REASON_OTHR,        
+      -- XwrlRequests.VERSION_ID,      
+       decode(XwrlRequests.path,'INDIVIDUAL',(SELECT COUNT(*)       
+                                     FROM Xwrl_Response_Ind_Columns IC       
+                                     WHERE IC.REQUEST_ID = XwrlRequests.ID       
+                                     AND IC.X_STATE LIKE '%Open%'),       
+                                 'ENTITY', (SELECT COUNT(*)        
+                                     FROM Xwrl_Response_ENTITY_Columns EC        
+                                     WHERE EC.REQUEST_ID = XwrlRequests.ID       
+                                     AND EC.X_STATE LIKE '%Open%')) as Opencnt,
+    decode(XwrlRequests.path,'INDIVIDUAL',(SELECT COUNT(*)       
+                                     FROM Xwrl_Response_Ind_Columns IC       
+                                     WHERE IC.REQUEST_ID = XwrlRequests.ID       
+                                     AND IC.X_STATE LIKE '%Possible%'),       
+                                 'ENTITY', (SELECT COUNT(*)        
+                                     FROM Xwrl_Response_ENTITY_Columns EC        
+                                     WHERE EC.REQUEST_ID = XwrlRequests.ID       
+                                     AND EC.X_STATE LIKE '%Possible%')) as Possiblecnt,
+    decode(XwrlRequests.path,'INDIVIDUAL',(SELECT COUNT(*)       
+                                     FROM Xwrl_Response_Ind_Columns IC       
+                                     WHERE IC.REQUEST_ID = XwrlRequests.ID       
+                                     AND IC.LEGAL_REVIEW = 'Y'),       
+                                 'ENTITY', (SELECT COUNT(*)        
+                                     FROM Xwrl_Response_ENTITY_Columns EC        
+                                     WHERE EC.REQUEST_ID = XwrlRequests.ID       
+                                     AND EC.LEGAL_REVIEW = 'Y')) as LegalReviewcnt,
+       NVL(XwrlRequests.DEPARTMENT_EXT,(SELECT VALUE_STRING               
+                                        FROM XWRL_PARAMETERS              
+                                        WHERE ID = 'CASE_DEPARTMENTS'        
+                                        AND DISPLAY_FLAG = 'Y'      
+                                        AND KEY = XwrlRequests.DEPARTMENT)) as DepartmentExt                                    
+      ,XwrlRequests.sent_to_legal_date  
+      ,XwrlRequests.ADDRESS_CONFIRMATION_DATE
+      ,XwrlRequests.sent_to_legal_by    
+      ,(case XwrlRequests.SOURCE_TABLE 
+        when 'SICD_SEAFARERS' then RMI_OWS_COMMON_UTIL.ACTUAL_FIN(XwrlRequests.SOURCE_ID)
+        else null 
+        end)	  as FinNumber 
+      ,(case XwrlRequests.SOURCE_TABLE  
+      when 'CORP_MAIN' then RMI_OWS_COMMON_UTIL.GET_CORP_NUMBER(XwrlRequests.SOURCE_ID) 
+      else '' 
+      end) as CorpNumber,  
+      (select ESR_REQUEST_USER_DETAILS_ID from ESR_REQUEST_USER_DETAILS  
+		where ESR_REQUEST_USER_DETAILS_ID=SOURCE_ID and department='CORP' and document_type='ESR') as ESR_USER_ID, 
+	  (select email_address from ESR_REQUEST_USER_DETAILS  
+		where ESR_REQUEST_USER_DETAILS_ID=SOURCE_ID and department='CORP' and document_type='ESR') as ESR_USER_EMAIL_ADDRESS,
+        
+        (select ERB_REQUEST_USER_DETAILS_ID from RMI_ERB_REQUEST_USER_DETAILS  
+		where ERB_REQUEST_USER_DETAILS_ID=SOURCE_ID and department='VESDOC' and document_type='ERB') as ERB_USER_ID, 
+	  (select CONTACT_EMAIL from RMI_ERB_REQUEST_USER_DETAILS  
+		where ERB_REQUEST_USER_DETAILS_ID=SOURCE_ID and department='VESDOC' and document_type='ERB') as ERB_USER_EMAIL_ADDRESS
+	 
+     -- ,XwrlRequests.WRKFLOW_STATUS_LEGAL_NTFD      
+     -- ,XwrlRequests.WRKFLOW_STATUS_LEGAL_NTFD_DT      
+      ,XwrlRequests.GENDER     
+      ,XwrlRequests.PASSPORT_NUMBER
+      ,(select permanent_address from xwrl_party_master
+where id = RMI_OWS_COMMON_UTIL.get_master_id(master_id, alias_id, xref_id)) as PERMANENT_ADDRESS
+,decode(XwrlRequests.provisional_request,'Y','Yes','N','No') as PROVISIONAL_REQUEST
+FROM  XWRL_REQUESTS XwrlRequests         
+order by XwrlRequests.BATCH_ID desc,XwrlRequests.CREATION_DATE desc]]></SQLQuery>
+  <EntityUsage
+    Name="XwrlRequests"
+    Entity="oracle.apps.xwrl.model.entity.XwrlRequests"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="XwrlRequests"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="MasterId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="MASTER_ID"
+    Expression="MASTER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="AliasId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ALIAS_ID"
+    Expression="ALIAS_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="XrefId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="XREF_ID"
+    Expression="XREF_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ResubmitId"
+    PrecisionRule="true"
+    EntityAttrName="ResubmitId"
+    EntityUsage="XwrlRequests"
+    AliasName="RESUBMIT_ID"/>
+  <ViewAttribute
+    Name="SourceTable"
+    PrecisionRule="true"
+    EntityAttrName="SourceTable"
+    EntityUsage="XwrlRequests"
+    AliasName="SOURCE_TABLE"/>
+  <ViewAttribute
+    Name="SourceId"
+    PrecisionRule="true"
+    EntityAttrName="SourceId"
+    EntityUsage="XwrlRequests"
+    AliasName="SOURCE_ID"/>
+  <ViewAttribute
+    Name="WcScreeningRequestId"
+    PrecisionRule="true"
+    EntityAttrName="WcScreeningRequestId"
+    EntityUsage="XwrlRequests"
+    AliasName="WC_SCREENING_REQUEST_ID"/>
+  <ViewAttribute
+    Name="Server"
+    PrecisionRule="true"
+    EntityAttrName="Server"
+    EntityUsage="XwrlRequests"
+    AliasName="SERVER"/>
+  <ViewAttribute
+    Name="JobId"
+    PrecisionRule="true"
+    EntityAttrName="JobId"
+    EntityUsage="XwrlRequests"
+    AliasName="JOB_ID"/>
+  <ViewAttribute
+    Name="Status"
+    PrecisionRule="true"
+    EntityAttrName="Status"
+    EntityUsage="XwrlRequests"
+    AliasName="STATUS"/>
+  <ViewAttribute
+    Name="ErrorCode"
+    PrecisionRule="true"
+    EntityAttrName="ErrorCode"
+    EntityUsage="XwrlRequests"
+    AliasName="ERROR_CODE"/>
+  <ViewAttribute
+    Name="ErrorMessage"
+    PrecisionRule="true"
+    EntityAttrName="ErrorMessage"
+    EntityUsage="XwrlRequests"
+    AliasName="ERROR_MESSAGE"/>
+  <ViewAttribute
+    Name="CaseId"
+    PrecisionRule="true"
+    EntityAttrName="CaseId"
+    EntityUsage="XwrlRequests"
+    AliasName="CASE_ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.CaseId_LABEL"/>
+        <DISPLAYWIDTH
+          Value="26"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NameScreened"
+    PrecisionRule="true"
+    EntityAttrName="NameScreened"
+    EntityUsage="XwrlRequests"
+    AliasName="NAME_SCREENED">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.NameScreened_LABEL"/>
+        <DISPLAYWIDTH
+          Value="26"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DateOfBirth"
+    PrecisionRule="true"
+    EntityAttrName="DateOfBirth"
+    EntityUsage="XwrlRequests"
+    AliasName="DATE_OF_BIRTH">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.DateOfBirth_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ImoNumber"
+    PrecisionRule="true"
+    EntityAttrName="ImoNumber"
+    EntityUsage="XwrlRequests"
+    AliasName="IMO_NUMBER">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.ImoNumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VesselIndicator"
+    PrecisionRule="true"
+    EntityAttrName="VesselIndicator"
+    EntityUsage="XwrlRequests"
+    AliasName="VESSEL_INDICATOR"
+    LOVName="LOV_VesselIndicator">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.VesselIndicator_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Path"
+    PrecisionRule="true"
+    EntityAttrName="Path"
+    EntityUsage="XwrlRequests"
+    AliasName="PATH"
+    LOVName="LOV_Path">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.Path_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseState"
+    PrecisionRule="true"
+    EntityAttrName="CaseState"
+    EntityUsage="XwrlRequests"
+    AliasName="CASE_STATE"
+    LOVName="LOV_CaseState">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.CaseState_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseWorkflow"
+    PrecisionRule="true"
+    EntityAttrName="CaseWorkflow"
+    EntityUsage="XwrlRequests"
+    AliasName="CASE_WORKFLOW"
+    LOVName="LOV_CaseWorkflow">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.CaseWorkflow_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseStatus"
+    PrecisionRule="true"
+    EntityAttrName="CaseStatus"
+    EntityUsage="XwrlRequests"
+    AliasName="CASE_STATUS"
+    LOVName="LOV_CaseStatus">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.CaseStatus_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Priority"
+    PrecisionRule="true"
+    EntityAttrName="Priority"
+    EntityUsage="XwrlRequests"
+    AliasName="PRIORITY"
+    LOVName="LOV_Priority">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.Priority_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RiskLevel"
+    PrecisionRule="true"
+    EntityAttrName="RiskLevel"
+    EntityUsage="XwrlRequests"
+    AliasName="RISK_LEVEL"
+    LOVName="LOV_RiskLevel">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.RiskLevel_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RejectionReason"
+    PrecisionRule="true"
+    EntityAttrName="RejectionReason"
+    EntityUsage="XwrlRequests"
+    AliasName="REJECTION_REASON"
+    LOVName="LOV_RejectionReason">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.RejectionReason_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Matches"
+    PrecisionRule="true"
+    EntityAttrName="Matches"
+    EntityUsage="XwrlRequests"
+    AliasName="MATCHES">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.Matches_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Department"
+    PrecisionRule="true"
+    EntityAttrName="Department"
+    EntityUsage="XwrlRequests"
+    AliasName="DEPARTMENT"
+    LOVName="LOV_Department">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.Department_LABEL"/>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Office"
+    PrecisionRule="true"
+    EntityAttrName="Office"
+    EntityUsage="XwrlRequests"
+    AliasName="OFFICE"
+    LOVName="LOV_Office">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.Office_LABEL"/>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DocumentType"
+    PrecisionRule="true"
+    EntityAttrName="DocumentType"
+    EntityUsage="XwrlRequests"
+    AliasName="DOCUMENT_TYPE"
+    LOVName="LOV_DocumentType">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.DocumentType_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Doctype"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="TYPE"
+    AliasName="DOCTYPE"
+    Expression="DOCTYPE"
+    SQLType="VARCHAR"
+    LOVName="LOV_Doctype">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.Doctype_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+        <DISPLAYWIDTH
+          Value="26"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AssignedTo"
+    PrecisionRule="true"
+    EntityAttrName="AssignedTo"
+    EntityUsage="XwrlRequests"
+    AliasName="ASSIGNED_TO"
+    LOVName="LOV_AssignedTo">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.AssignedTo_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountryOfResidence"
+    PrecisionRule="true"
+    EntityAttrName="CountryOfResidence"
+    EntityUsage="XwrlRequests"
+    AliasName="COUNTRY_OF_RESIDENCE"
+    LOVName="LOV_CountryOfResidence">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+ 	<AUTOSUBMIT
+          Value="true"/>
+        <LABEL
+          ResId="CountryOfResidence_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+ 
+  <ViewAttribute
+    Name="CityOfResidence"
+    PrecisionRule="true"
+    EntityAttrName="CityOfResidence"
+    EntityUsage="XwrlRequests"
+    AliasName="CITY_OF_RESIDENCE"
+    LOVName="LOV_CityOfResidence">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <AUTOSUBMIT
+          Value="true"/>
+        <CONTROLTYPE
+          Value="choice"/>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.CityOfResidence_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+    <Dependencies>
+      <Item
+        Value="CountryOfResidence"/>
+    </Dependencies>
+  </ViewAttribute>
+   <ViewAttribute
+    Name="SubdivisionCityOfResidence"
+    PrecisionRule="true"
+    EntityAttrName="SubdivisionCityOfResidence"
+    EntityUsage="XwrlRequests"
+    AliasName="SUBDIVISION_CITY_OF_RESIDENCE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.SubdivisionCityOfResidence_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ClosedDate"
+    PrecisionRule="true"
+    EntityAttrName="ClosedDate"
+    EntityUsage="XwrlRequests"
+    AliasName="CLOSED_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.ClosedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="XwrlRequests"
+    AliasName="LAST_UPDATE_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.LastUpdateDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="XwrlRequests"
+    AliasName="LAST_UPDATED_BY"
+    LOVName="LOV_LastUpdatedBy">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.LastUpdatedBy_LABEL"/>
+        <DISPLAYWIDTH
+          Value="26"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="XwrlRequests"
+    AliasName="CREATION_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.CreationDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="XwrlRequests"
+    AliasName="CREATED_BY"
+    LOVName="LOV_CreatedBy">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.CreatedBy_LABEL"/>
+        <DISPLAYWIDTH
+          Value="26"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateLogin"
+    EntityUsage="XwrlRequests"
+    AliasName="LAST_UPDATE_LOGIN"/>
+  <ViewAttribute
+    Name="BatchId"
+    PrecisionRule="true"
+    EntityAttrName="BatchId"
+    EntityUsage="XwrlRequests"
+    AliasName="BATCH_ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.BatchId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountryOfAddress"
+    PrecisionRule="true"
+    EntityAttrName="CountryOfAddress"
+    EntityUsage="XwrlRequests"
+    AliasName="COUNTRY_OF_ADDRESS"
+    LOVName="LOV_CountryOfAddress">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <LABEL
+          ResId="CountryOfAddress_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountryOfNationality"
+    PrecisionRule="true"
+    EntityAttrName="CountryOfNationality"
+    EntityUsage="XwrlRequests"
+    AliasName="COUNTRY_OF_NATIONALITY"
+    LOVName="LOV_CountryOfNationality">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <LABEL
+          ResId="CountryOfNationality_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountryOfOperation"
+    PrecisionRule="true"
+    EntityAttrName="CountryOfOperation"
+    EntityUsage="XwrlRequests"
+    AliasName="COUNTRY_OF_OPERATION"
+    LOVName="LOV_CountryOfOperation">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.CountryOfOperation_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountryOfBirth"
+    PrecisionRule="true"
+    EntityAttrName="CountryOfBirth"
+    EntityUsage="XwrlRequests"
+    AliasName="COUNTRY_OF_BIRTH"
+    LOVName="LOV_CountryOfBirth">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.CountryOfBirth_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountryOfRegistration"
+    PrecisionRule="true"
+    EntityAttrName="CountryOfRegistration"
+    EntityUsage="XwrlRequests"
+    AliasName="COUNTRY_OF_REGISTRATION"
+    LOVName="LOV_CountryOfRegistration">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.CountryOfRegistration_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CityOfResidenceId"
+    PrecisionRule="true"
+    EntityAttrName="CityOfResidenceId"
+    EntityUsage="XwrlRequests"
+    AliasName="CITY_OF_RESIDENCE_ID"
+    LOVName="LOV_CityOfResidenceId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.CityOfResidenceId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RejectionReasonOthr"
+    PrecisionRule="true"
+    EntityAttrName="RejectionReasonOthr"
+    EntityUsage="XwrlRequests"
+    AliasName="REJECTION_REASON_OTHR">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <!--ViewAttribute
+    Name="VersionId"
+    PrecisionRule="true"
+    EntityAttrName="VersionId"
+    EntityUsage="XwrlRequests"
+    AliasName="VERSION_ID"/-->
+    <ViewAttribute
+    Name="Opencnt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="OPENCNT"
+    Expression="OPENCNT"
+    SQLType="NUMERIC"/>
+    <!-- T20200730.0021 - OWS - Display Legal Review & Possible Alert Counts... (IRI) -->
+<ViewAttribute
+    Name="Possiblecnt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="POSSIBLECNT"
+    Expression="POSSIBLECNT"
+    SQLType="NUMERIC"/>
+<ViewAttribute
+    Name="LegalReviewcnt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="LEGALREVIEWCNT"
+    Expression="LEGALREVIEWCNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Departmentext"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="300"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEPARTMENTEXT"
+    Expression="DEPARTMENTEXT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="300"/>
+    </DesignTime>
+  </ViewAttribute>
+  
+  <ViewAttribute
+    Name="SentToLegalDate"
+    PrecisionRule="true"
+    EntityAttrName="SentToLegalDate"
+    EntityUsage="XwrlRequests"
+    AliasName="SENT_TO_LEGAL_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMAT
+          ResId="SentToLegalDate_FMT_FORMAT"/>
+        <FMT_FORMATTER
+          ResId="SentToLegalDate_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+    <!-- T20200715.0011 - OWS TC: Add Address Confirmation Date field in Req... (IRI) -->
+    <ViewAttribute
+    Name="AddressConfirmationDate"
+    PrecisionRule="true"
+    EntityAttrName="AddressConfirmationDate"
+    EntityUsage="XwrlRequests"
+    AliasName="ADDRESS_CONFIRMATION_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.AddressConfirmationDate_LABEL"/>
+        <FMT_FORMAT
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.AddressConfirmationDate_FMT_FORMAT"/>
+        <FMT_FORMATTER
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.AddressConfirmationDate_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SentToLegalBy"
+    PrecisionRule="true"
+    EntityAttrName="SentToLegalBy"
+    EntityUsage="XwrlRequests"
+    AliasName="SENT_TO_LEGAL_BY"/>
+  <ViewAttribute
+    Name="Finnumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="FINNUMBER"
+    Expression="FINNUMBER"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.Finnumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  
+  <ViewAttribute
+    Name="Corpnumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="TYPE"
+    AliasName="CORPNUMBER"
+    Expression="CORPNUMBER"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.Corpnumber_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  
+  <!--T20200629.0034 - OWS TC - Display ESR User Details in Statusboard (IRI)-->
+  
+  <ViewAttribute
+    Name="EsrUserId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="TYPE"
+    AliasName="ESR_USER_ID"
+    Expression="ESR_USER_ID"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.EsrUserId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EsrUserEmailAddress"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="TYPE"
+    AliasName="ESR_USER_EMAIL_ADDRESS"
+    Expression="ESR_USER_EMAIL_ADDRESS"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.EsrUserEmailAddress_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ErbUserId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="TYPE"
+    AliasName="ERB_USER_ID"
+    Expression="ERB_USER_ID"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.ErbUserId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ErbUserEmailAddress"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="TYPE"
+    AliasName="ERB_USER_EMAIL_ADDRESS"
+    Expression="ERB_USER_EMAIL_ADDRESS"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.ErbUserEmailAddress_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  
+  <!--ViewAttribute
+    Name="WrkflowStatusLegalNtfdDt"
+    PrecisionRule="true"
+    EntityAttrName="WrkflowStatusLegalNtfdDt"
+    EntityUsage="XwrlRequests"
+    AliasName="WRKFLOW_STATUS_LEGAL_NTFD_DT"/>
+  <ViewAttribute
+    Name="WrkflowStatusLegalNtfd"
+    PrecisionRule="true"
+    EntityAttrName="WrkflowStatusLegalNtfd"
+    EntityUsage="XwrlRequests"
+    AliasName="WRKFLOW_STATUS_LEGAL_NTFD"/-->
+  <ViewAttribute
+    Name="Gender"
+    PrecisionRule="true"
+    EntityAttrName="Gender"
+    EntityUsage="XwrlRequests"
+    AliasName="GENDER"/>
+  <ViewAttribute
+    Name="PassportNumber"
+    PrecisionRule="true"
+    EntityAttrName="PassportNumber"
+    EntityUsage="XwrlRequests"
+    AliasName="PASSPORT_NUMBER"/>
+	<!--  T20200715.0025 - OWS Trade Compliance - Ukraine/Russia Address (IRI) -->
+  <ViewAttribute
+    Name="PermanentAddress"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PERMANENT_ADDRESS"
+    Expression="PERMANENT_ADDRESS"
+    SQLType="VARCHAR"
+    IsQueriable="false">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.PermanentAddress_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProvisionalRequest"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PROVISIONAL_REQUEST"
+    Expression="PROVISIONAL_REQUEST"
+    SQLType="VARCHAR"
+    IsQueriable="false">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.ProvisionalRequest_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>      
+  <ViewAttribute
+    Name="CaseStateAttr"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_CaseStateAttr">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.CaseStateAttr_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseWorkFlowAttr"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_CaseWorkFlowAttr">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.CaseWorkFlowAttr_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>  
+  <ViewAttribute
+    Name="CaseStatusAttr"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_CaseStatusAttr">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.CaseStatusAttr_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PriorityAttr"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_PriorityAttr">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.PriorityAttr_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseTypeAttr"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_CaseTypeAttr">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.CaseTypeAttr_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IDType"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_IDType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="XwrlRequestsViewCriteria"
+    ViewObjectName="oracle.apps.xwrl.model.view.XwrlRequestsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="XwrlRequestsViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="XwrlRequestsViewCriteria_XwrlRequestsViewCriteria_row_0_Id"
+        ViewAttribute="Id"
+        Operator="="
+        Conjunction="AND"
+        Value=":varRequestId"
+        Required="Optional"
+        IsBindVarValue="true"/>
+      <ViewCriteriaItem
+        Name="XwrlRequestsViewCriteria_XwrlRequestsViewCriteria_row_0_WcScreeningRequestId"
+        ViewAttribute="WcScreeningRequestId"
+        Operator="="
+        Conjunction="AND"
+        Value=":varScreeningRequestId"
+        Required="Optional"
+        IsBindVarValue="true"/>
+      <ViewCriteriaItem
+        Name="XwrlRequestsViewCriteria_XwrlRequestsViewCriteria_row_0_Status"
+        ViewAttribute="Status"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Value=":varStatus"
+        Required="Optional"
+        IsBindVarValue="true"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="RequestIdCriteria"
+    ViewObjectName="oracle.apps.xwrl.model.view.XwrlRequestsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="false"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="XwrlRequestsViewCriteria1_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Id"
+        ViewAttribute="Id"
+        Operator="="
+        Conjunction="AND"
+        Value=":varId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="NameScreened"
+        ViewAttribute="NameScreened"
+        Operator="="
+        Conjunction="AND"
+        Value=":varNameScreened"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="StatusboardCriteria"
+    ViewObjectName="oracle.apps.xwrl.model.view.XwrlRequestsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="StatusboardCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="CaseId"
+        ViewAttribute="CaseId"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="NameScreened"
+        ViewAttribute="NameScreened"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Path"
+        ViewAttribute="Path"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="CaseState"
+        ViewAttribute="CaseState"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="AllowMultipleValues"
+              Value="true"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="CaseWorkflow"
+        ViewAttribute="CaseWorkflow"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="AllowMultipleValues"
+              Value="true"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="CaseStatus"
+        ViewAttribute="CaseStatus"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"
+        Value=":pStatus"
+        IsBindVarValue="true"/>
+      <ViewCriteriaItem
+        Name="Priority"
+        ViewAttribute="Priority"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <!--T20200619.0028 - OWS Statusboard MultiSelect values for Priority and Department (IRI)-->
+            <Property
+              Name="AllowMultipleValues"
+              Value="true"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="RiskLevel"
+        ViewAttribute="RiskLevel"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="AllowMultipleValues"
+              Value="true"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="RejectionReason"
+        ViewAttribute="RejectionReason"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="AllowMultipleValues"
+              Value="true"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="Department"
+        ViewAttribute="Department"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <!--T20200619.0028 - OWS Statusboard MultiSelect values for Priority and Department (IRI)-->
+            <Property
+              Name="AllowMultipleValues"
+              Value="true"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="Office"
+        ViewAttribute="Office"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="AllowMultipleValues"
+              Value="true"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="Doctype"
+        ViewAttribute="Doctype"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="StatusboardCriteria_StatusboardCriteria_row_0_AssignedTo"
+        ViewAttribute="AssignedTo"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="AllowMultipleValues"
+              Value="true"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="LastUpdatedBy"
+        ViewAttribute="LastUpdatedBy"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional">
+        <Properties>
+          <SchemaBasedProperties>
+            <DISPLAYWIDTH
+              Value="25"/>
+          </SchemaBasedProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="CreatedBy"
+        ViewAttribute="CreatedBy"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional">
+        <Properties>
+          <SchemaBasedProperties>
+            <DISPLAYWIDTH
+              Value="25"/>
+          </SchemaBasedProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="BatchId"
+        ViewAttribute="BatchId"
+        Operator="="
+        Conjunction="AND"
+        Value=":pBatchId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <!--ViewCriteriaItem
+        Name="CountryOfAddress"
+        ViewAttribute="CountryOfAddress"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="CountryOfNationality"
+        ViewAttribute="CountryOfNationality"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="CountryOfBirth"
+        ViewAttribute="CountryOfBirth"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="CountryOfOperation"
+        ViewAttribute="CountryOfOperation"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="CountryOfRegistration"
+        ViewAttribute="CountryOfRegistration"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/-->
+      <ViewCriteriaItem
+        Name="Finnumber"
+        ViewAttribute="Finnumber"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="EsrUserId"
+        ViewAttribute="EsrUserId"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Corpnumber"
+        ViewAttribute="Corpnumber"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="ErbUserId"
+        ViewAttribute="ErbUserId"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <!--T20200629.0034 - OWS TC - Display ESR User Details in Statusboard (IRI)-->
+      <ViewCriteriaItem
+        Name="EsrUserEmailAddress"
+        ViewAttribute="EsrUserEmailAddress"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="ErbUserEmailAddress"
+        ViewAttribute="ErbUserEmailAddress"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewAttribute
+    Name="RiskLevelAttr"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_RiskLevelAttr">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.RiskLevelAttr_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RejectionAttr"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_RejectionAttr">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.RejectionAttr_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OfficeAttr"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_OfficeAttr">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.OfficeAttr_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DeptAttr"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_DeptAttr">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.DeptAttr_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedByAttr"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.CreatedByAttr_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdatedByAttr"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.LastUpdatedByAttr_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DocTypeAttr"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_DocTypeAttr">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.DocTypeAttr_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RistrictedCountryAttr"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_RistrictedCountryAttr">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.RistrictedCountryAttr_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AssignedToAttr"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_AssignedToAttr">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.XwrlRequestsView.AssignedToAttr_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewLinkAccessor
+    Name="XwrlRequestEntityColumnsView"
+    ViewLink="oracle.apps.xwrl.model.view.XwrlRequestEntityColFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="XwrlResponseIndColumnsView"
+    ViewLink="oracle.apps.xwrl.model.view.XwrlResponseIndColumnsFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="XwrlAlertNotesView"
+    ViewLink="oracle.apps.xwrl.model.view.XwrlRequestAlertNotesLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="XwrlCaseNotesView1"
+    ViewLink="oracle.apps.xwrl.model.view.XwrlRequestXwrlCaseNotesLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="XwrlCaseNotesView"
+    ViewLink="oracle.apps.xwrl.model.view.XwrlRequestCaseNotesLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="XwrlResponseRowsView"
+    ViewLink="oracle.apps.xwrl.model.view.XwrlResponseRowsFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="XwrlCaseDocumentsView"
+    ViewLink="oracle.apps.xwrl.model.view.XwrlRequestEntityCaseDocsLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ClientInterface
+    Name="__clientInterface">
+    <Method
+      Name="getvarId"
+      MethodName="getvarId">
+      <Return
+        Name="_return_type_"
+        Type="java.math.BigDecimal"/>
+    </Method>
+    <Method
+      Name="getvarNameScreened"
+      MethodName="getvarNameScreened">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="getvarRequestId"
+      MethodName="getvarRequestId">
+      <Return
+        Name="_return_type_"
+        Type="java.math.BigDecimal"/>
+    </Method>
+    <Method
+      Name="getvarScreeningRequestId"
+      MethodName="getvarScreeningRequestId">
+      <Return
+        Name="_return_type_"
+        Type="java.math.BigDecimal"/>
+    </Method>
+    <Method
+      Name="getvarStatus"
+      MethodName="getvarStatus">
+      <Return
+        Name="_return_type_"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="setvarId"
+      MethodName="setvarId">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="value"
+        Type="java.math.BigDecimal"/>
+    </Method>
+    <Method
+      Name="setvarNameScreened"
+      MethodName="setvarNameScreened">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="value"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="setvarRequestId"
+      MethodName="setvarRequestId">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="value"
+        Type="java.math.BigDecimal"/>
+    </Method>
+    <Method
+      Name="setvarScreeningRequestId"
+      MethodName="setvarScreeningRequestId">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="value"
+        Type="java.math.BigDecimal"/>
+    </Method>
+    <Method
+      Name="setvarStatus"
+      MethodName="setvarStatus">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+      <Parameter
+        Name="value"
+        Type="java.lang.String"/>
+    </Method>
+    <Method
+      Name="setLock"
+      MethodName="setLock">
+      <Return
+        Name="_return_type_"
+        Type="void"/>
+    </Method>
+  </ClientInterface>
+  <ViewLinkAccessor
+    Name="WcMatchesView"
+    ViewLink="oracle.apps.xwrl.model.view.CustMatchRequestLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="XwrlRequestIndColumnsView"
+    ViewLink="oracle.apps.xwrl.model.view.XwrlRequestIndColumnsFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="XwrlRequestRowsView"
+    ViewLink="oracle.apps.xwrl.model.view.XwrlRequestRowsFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="XwrlResponseEntityColumnsView"
+    ViewLink="oracle.apps.xwrl.model.view.XwrlResponseEntityColFk1Link"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="WcContentView"
+    ViewLink="oracle.apps.xwrl.model.view.CustContentRequestLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="XwrlCaseDocumentsView1"
+    ViewLink="oracle.apps.xwrl.model.view.XwrlRequestXwrlCaseDocsLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <!--<ViewCriteria
+    Name="CustomizedCriteria"
+    ViewObjectName="oracle.apps.xwrl.model.view.XwrlRequestsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="StatusboardCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="CaseState"
+        ViewAttribute="CaseState"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="AllowMultipleValues"
+              Value="true"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="CaseWorkflow"
+        ViewAttribute="CaseWorkflow"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="AllowMultipleValues"
+              Value="true"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+     <ViewCriteriaItem
+        Name="CaseStatus"
+        ViewAttribute="CaseStatus"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"
+        Value="O"/>
+      <ViewCriteriaItem
+        Name="Priority"
+        ViewAttribute="Priority"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="AllowMultipleValues"
+              Value="true"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+     
+      <ViewCriteriaItem
+        Name="Department"
+        ViewAttribute="Department"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="AllowMultipleValues"
+              Value="true"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+      <ViewCriteriaItem
+        Name="Office"
+        ViewAttribute="Office"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional">
+        <Properties>
+          <CustomProperties>
+            <Property
+              Name="AllowMultipleValues"
+              Value="true"/>
+          </CustomProperties>
+        </Properties>
+      </ViewCriteriaItem>
+    </ViewCriteriaRow>
+  </ViewCriteria>-->
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="oracle.apps.xwrl.model.ModelBundle"/>
+  </ResourceBundle>
+  <RowFinders>
+    <AttrValueRowFinder
+      Name="RequestIdFinder">
+      <ViewCriteriaUsage
+        Name="RequestIdCriteria"
+        FullName="oracle.apps.xwrl.model.view.XwrlRequestsView.RequestIdCriteria"/>
+      <VarAttributeMap>
+        <VariableAttributeMapping
+          Variable="varId"
+          Attribute="Id"/>
+      </VarAttributeMap>
+    </AttrValueRowFinder>
+  </RowFinders>
+</ViewObject>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="StatusView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.lovs.StatusView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT 'Pending' STATUS_CODE,        
+'Pending' STATUS_DESC        
+FROM DUAL        
+UNION ALL        
+SELECT 'Active' STATUS_CODE,        
+'Active' STATUS_DESC        
+FROM DUAL       
+UNION ALL        
+SELECT 'Canceled' STATUS_CODE,        
+'Canceled' STATUS_DESC        
+FROM DUAL       
+UNION ALL        
+SELECT 'Expired' STATUS_CODE,        
+'Expired' STATUS_DESC        
+FROM DUAL         
+UNION ALL        
+SELECT 'Hold' STATUS_CODE,        
+'Hold' STATUS_DESC        
+FROM DUAL      
+UNION ALL        
+SELECT 'Rejected' STATUS_CODE,        
+'Rejected' STATUS_DESC        
+FROM DUAL       
+UNION ALL        
+SELECT 'Renewed' STATUS_CODE,        
+'Renewed' STATUS_DESC        
+FROM DUAL       
+UNION ALL        
+SELECT 'Replaced' STATUS_CODE,        
+'Replaced' STATUS_DESC        
+FROM DUAL       
+UNION ALL        
+SELECT 'Revoked' STATUS_CODE,        
+'Revoked' STATUS_DESC        
+FROM DUAL       
+UNION ALL        
+SELECT 'Suspended' STATUS_CODE,        
+'Suspended' STATUS_DESC        
+FROM DUAL       
+UNION ALL        
+SELECT 'Void' STATUS_CODE,        
+'Void' STATUS_DESC        
+FROM DUAL       
+UNION ALL        
+SELECT 'Warning' STATUS_CODE,        
+'Warning' STATUS_DESC        
+FROM DUAL]]></SQLQuery>
+  <ViewAttribute
+    Name="StatusCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STATUS_CODE"
+    Expression="STATUS_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="StatusDesc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="7"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STATUS_DESC"
+    Expression="STATUS_DESC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="StatusCode"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

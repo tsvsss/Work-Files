@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BatchWorkOrderLogicalLink"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.links.BatchWorkOrderLogicalLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="BatchesVO"
+    Cardinality="1"
+    Source="true"
+    Owner="com.rmi.applicationEntry.adfbc.views.BatchIfaceView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="BatchesVO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rmi.applicationEntry.adfbc.views.BatchIfaceView.OeHeaderId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="WorkOrderDetailsRO"
+    Cardinality="-1"
+    Owner="com.rmi.applicationEntry.adfbc.views.readOnlyVO.WorkOrderDetailsView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="WorkOrderDetailsRO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rmi.applicationEntry.adfbc.views.readOnlyVO.WorkOrderDetailsView.HeaderId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

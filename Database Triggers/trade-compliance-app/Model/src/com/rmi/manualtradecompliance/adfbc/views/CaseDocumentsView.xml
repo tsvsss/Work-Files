@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CaseDocumentsView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.manualtradecompliance.adfbc.views.CaseDocumentsView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pMasterId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pAliasId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pXrefId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[select            
+cdv.BATCH_ID,             
+cdv.CREATED_BY_USER,             
+cdv.UPDATED_BY_USER,             
+cdv.MASTER_ID,             
+cdv.ALIAS_ID,             
+cdv.XREF_ID,             
+cdv.ID,             
+cdv.REQUEST_ID,             
+cdv.CASE_ID,             
+cdv.DOCUMENT_TYPE,             
+cdv.FILE_NAME,             
+cdv.LAST_UPDATE_DATE,             
+cdv.LAST_UPDATED_BY,             
+cdv.CREATION_DATE,             
+cdv.CREATED_BY,             
+cdv.LAST_UPDATE_LOGIN,             
+cdv.ORIG_MASTER_ID,     
+(SELECT base_url FROM iri_edocs_params WHERE system_code = 'WORLD_CHECK') base_url,            
+xd.document_file DISK_PATH 
+from XWRL_CASE_DOCUMENTS_SUM_V cdv,            
+xwrl_case_documents xd            
+where             
+xd.id = cdv.id            
+and cdv.ORIG_MASTER_ID = rmi_ows_common_util.get_master_id(:pMasterId, :pAliasId, :pXrefId)]]></SQLQuery>
+  <ViewAttribute
+    Name="BatchId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="BIGINT"
+    AliasName="BATCH_ID"
+    Expression="BATCH_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="CreatedByUser"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CREATED_BY_USER"
+    Expression="CREATED_BY_USER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="UpdatedByUser"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UPDATED_BY_USER"
+    Expression="UPDATED_BY_USER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MasterId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="MASTER_ID"
+    Expression="MASTER_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="AliasId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ALIAS_ID"
+    Expression="ALIAS_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="XrefId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="XREF_ID"
+    Expression="XREF_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="RequestId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="REQUEST_ID"
+    Expression="REQUEST_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="CaseId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CASE_ID"
+    Expression="CASE_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DocumentType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DOCUMENT_TYPE"
+    Expression="DOCUMENT_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FileName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FILE_NAME"
+    Expression="FILE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="LAST_UPDATE_DATE"
+    Expression="LAST_UPDATE_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    AliasName="LAST_UPDATED_BY"
+    Expression="LAST_UPDATED_BY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CreationDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CREATION_DATE"
+    Expression="CREATION_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    AliasName="CREATED_BY"
+    Expression="CREATED_BY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    AliasName="LAST_UPDATE_LOGIN"
+    Expression="LAST_UPDATE_LOGIN"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="OrigMasterId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ORIG_MASTER_ID"
+    Expression="ORIG_MASTER_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="BaseUrl"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BASE_URL"
+    Expression="BASE_URL"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DiskPath"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DISK_PATH"
+    Expression="DISK_PATH"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.manualtradecompliance.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

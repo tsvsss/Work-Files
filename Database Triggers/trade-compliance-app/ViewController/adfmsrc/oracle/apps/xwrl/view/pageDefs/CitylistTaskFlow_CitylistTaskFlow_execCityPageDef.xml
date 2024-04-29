@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8"
+                id="CitylistTaskFlow_CitylistTaskFlow_execCityPageDef" Package="oracle.apps.xwrl.view.pageDefs"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="execCity" RequiresUpdateModel="true" Action="invokeMethod" MethodName="execCity"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.execCity_AppModuleDataControl_dataProvider_execCity_result"/>
+  </bindings>
+</pageDefinition>

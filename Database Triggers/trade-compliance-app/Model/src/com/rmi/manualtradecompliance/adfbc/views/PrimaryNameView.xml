@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PrimaryNameView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.manualtradecompliance.adfbc.views.PrimaryNameView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pWcScreeningBV"
+    Kind="where"
+    Type="java.lang.Integer">
+    <TransientExpression
+      trustMode="untrusted"
+      Name="expression"><![CDATA[adf.context.sessionScope.wcScreeningRequestId]]></TransientExpression>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT    
+    
+r.NAME_SCREENED, r.ALIAS_WC_SCREENING_REQUEST_ID ,r.NAME_SCREENED as PrimaryName    
+    
+FROM WC_SCREENING_REQUEST r,WC_SCREENING_REQUEST_V v   
+WHERE r.WC_SCREENING_REQUEST_ID = v.ALIAS_WC_SCREENING_REQUEST_ID and r.WC_SCREENING_REQUEST_ID=:pWcScreeningBV]]></SQLQuery>
+  <ViewAttribute
+    Name="NameScreened"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NAME_SCREENED"
+    Expression="NAME_SCREENED"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="300"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AliasWcScreeningRequestId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ALIAS_WC_SCREENING_REQUEST_ID"
+    Expression="ALIAS_WC_SCREENING_REQUEST_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Primaryname"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="300"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PRIMARYNAME"
+    Expression="PRIMARYNAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="300"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.manualtradecompliance.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

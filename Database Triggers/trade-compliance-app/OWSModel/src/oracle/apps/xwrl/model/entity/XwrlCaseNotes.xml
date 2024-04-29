@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XwrlCaseNotes"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="XWRL_CASE_NOTES"
+  AliasName="XwrlCaseNotes"
+  BindingStyle="OracleName"
+  RowClass="oracle.apps.xwrl.model.entity.XwrlCaseNotesImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|DML"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="Id"
+    IsNotNull="true"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="XWRL_CASE_NOTES"
+    PrimaryKey="true"/>
+  <Attribute
+    Name="RequestId"
+    IsNotNull="true"
+    ColumnName="REQUEST_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="XWRL_CASE_NOTES"/>
+  <Attribute
+    Name="CaseId"
+    IsUnique="true"
+    IsNotNull="true"
+    Precision="50"
+    ColumnName="CASE_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XWRL_CASE_NOTES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LineNumber"
+    IsUnique="true"
+    IsNotNull="true"
+    ColumnName="LINE_NUMBER"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="XWRL_CASE_NOTES"/>
+  <Attribute
+    Name="Note"
+    IsNotNull="true"
+    Precision="4000"
+    ColumnName="NOTE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XWRL_CASE_NOTES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdateDate"
+    ColumnName="LAST_UPDATE_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="XWRL_CASE_NOTES">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="oracle.apps.xwrl.model.entity.XwrlCaseNotes.LastUpdateDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="oracle.apps.xwrl.model.entity.XwrlCaseNotes.LastUpdateDate_FMT_FORMAT"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="LastUpdatedBy"
+    Precision="15"
+    Scale="0"
+    ColumnName="LAST_UPDATED_BY"
+    SQLType="NUMERIC"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    TableName="XWRL_CASE_NOTES"/>
+  <Attribute
+    Name="CreationDate"
+    ColumnName="CREATION_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="XWRL_CASE_NOTES">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMAT
+          ResId="oracle.apps.xwrl.model.entity.XwrlCaseNotes.CreationDate_FMT_FORMAT"/>
+        <FMT_FORMATTER
+          ResId="oracle.apps.xwrl.model.entity.XwrlCaseNotes.CreationDate_FMT_FORMATTER"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    Precision="15"
+    Scale="0"
+    ColumnName="CREATED_BY"
+    SQLType="NUMERIC"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    TableName="XWRL_CASE_NOTES"/>
+  <Attribute
+    Name="LastUpdateLogin"
+    Precision="15"
+    Scale="0"
+    ColumnName="LAST_UPDATE_LOGIN"
+    SQLType="NUMERIC"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    TableName="XWRL_CASE_NOTES"/>
+  <AccessorAttribute
+    Name="XwrlRequests"
+    Association="oracle.apps.xwrl.model.entity.XwrlRequestIndivdiualCaseNotesAssoc"
+    AssociationEnd="oracle.apps.xwrl.model.entity.XwrlRequestIndivdiualCaseNotesAssoc.XwrlRequests"
+    AssociationOtherEnd="oracle.apps.xwrl.model.entity.XwrlRequestIndivdiualCaseNotesAssoc.XwrlCaseNotes"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="XwrlRequests1"
+    Association="oracle.apps.xwrl.model.entity.XwrRequestIndividualCaseNotesAssoc"
+    AssociationEnd="oracle.apps.xwrl.model.entity.XwrRequestIndividualCaseNotesAssoc.XwrlRequests"
+    AssociationOtherEnd="oracle.apps.xwrl.model.entity.XwrRequestIndividualCaseNotesAssoc.XwrlCaseNotes"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="XwrlRequests2"
+    Association="oracle.apps.xwrl.model.entity.XwrlRequestEntityCaseNotesAssoc"
+    AssociationEnd="oracle.apps.xwrl.model.entity.XwrlRequestEntityCaseNotesAssoc.XwrlRequests"
+    AssociationOtherEnd="oracle.apps.xwrl.model.entity.XwrlRequestEntityCaseNotesAssoc.XwrlCaseNotes"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="XwrlRequests3"
+    Association="oracle.apps.xwrl.model.entity.XwrlRequestXwrlCaseNotesAssoc"
+    AssociationEnd="oracle.apps.xwrl.model.entity.XwrlRequestXwrlCaseNotesAssoc.XwrlRequests3"
+    AssociationOtherEnd="oracle.apps.xwrl.model.entity.XwrlRequestXwrlCaseNotesAssoc.XwrlCaseNotes1"
+    Type="oracle.jbo.server.EntityImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="XwrlCaseNotesPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="XWRL_CASE_NOTES_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="oracle.apps.xwrl.model.entity.XwrlCaseNotes.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="XwrlCaseNotesUk">
+    <DesignTime>
+      <Attr Name="_isUnique" Value="true"/>
+      <Attr Name="_DBObjectName" Value="XWRL_CASE_NOTES_UK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="oracle.apps.xwrl.model.entity.XwrlCaseNotes.CaseId"/>
+      <Item Value="oracle.apps.xwrl.model.entity.XwrlCaseNotes.LineNumber"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_XwrlCaseNotes">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="XWRL_REQUESTS_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_XWRL_CASE_NOTES"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="oracle.apps.xwrl.model.entity.XwrlCaseNotes.RequestId"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="oracle.apps.xwrl.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

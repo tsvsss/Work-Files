@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="untitled3PageDef"
+                Package="com.rmi.applicationEntry.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="taskflow_Batches1"
+              taskFlowId="/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/BatchesTaskFlow.xml#taskflow_Batches"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="param_user_id" value="10245"/>
+        <parameter id="param_batch_status" value="Pending"/>
+        <parameter id="RoleName" value="INTERNAL AGENT"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings/>
+</pageDefinition>

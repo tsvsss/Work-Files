@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="UserTaskAssignmentPageDef"
+                Package="com.rmi.applicationEntry.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="taskflow_MasterMyTask1"
+              taskFlowId="/WEB-INF/com/rmi/applicationEntry/view/mastermytasktaskflow/MasterMyTaskTaskFlow.xml#taskflow_MasterMyTask"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="param_user_id" value="8330"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings/>
+</pageDefinition>

@@ -1,0 +1,49 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View3">
+      <property
+         name="activityId">DeficientOrders</property>
+      <property
+         name="page">/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/DeficientOrders.jsff</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>DeficientOrders&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">192.24707</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">336.0</property>
+   </View>
+   <MethodCall
+      id="MethodCall3">
+      <property
+         name="activityId">onloadDeficientOrder</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>onloadDeficientOrder&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">207.14941</property>
+      <property
+         name="x">126.77832</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="MethodCall3"
+      to="View3">
+      <property
+         name="fromOutcome">onloadDeficientOrder</property>
+      <property
+         name="sdm:polyPoints">R50,167.77832,206.79883,295.0,191.89648,L50</property>
+   </ControlFlowCase>
+</SDM>

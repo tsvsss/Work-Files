@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BC4JConfig version="11.1" xmlns="http://xmlns.oracle.com/bc4j/configuration">
+   <AppModuleConfigBag ApplicationName="com.rmi.applicationEntry.adfbc.services.RMIApplicationEntryAppModule">
+      <AppModuleConfig DeployPlatform="LOCAL" name="RMIApplicationEntryAMLocal" ApplicationName="com.rmi.applicationEntry.adfbc.services.RMIApplicationEntryAppModule" jbo.project="com.rmi.applicationEntry.adfbc.Model">
+         <AM-Pooling jbo.dofailover="true" jbo.doconnectionpooling="true"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="com.rmi.applicationEntry.adfbc.services.RMIApplicationEntryAppModule"/>
+         <Custom ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" ns0:JDBCDataSource="jdbc/apps_ds_seaf" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+      <AppModuleConfig jbo.project="com.rmi.applicationEntry.adfbc.Model" ApplicationName="com.rmi.applicationEntry.adfbc.services.RMIApplicationEntryAppModule" DeployPlatform="LOCAL" name="RMIApplicationEntryAMShared">
+         <AM-Pooling jbo.ampool.dynamicjdbccredentials="false" jbo.ampool.resetnontransactionalstate="false" jbo.ampool.isuseexclusive="false"/>
+         <Database jbo.TypeMapEntries="OracleApps"/>
+         <Security AppModuleJndiName="com.rmi.applicationEntry.adfbc.services.RMIApplicationEntryAppModule"/>
+         <Custom ns0:JDBCDataSource="jdbc/IRIDR" ns0:ns0="http://xmlns.oracle.com/bc4j/configuration" xmlns:ns0="http://xmlns.oracle.com/bc4j/configuration"/>
+      </AppModuleConfig>
+   </AppModuleConfigBag>
+</BC4JConfig>

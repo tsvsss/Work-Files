@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:spacer width="10" height="100" id="s1"/>
+  <af:panelGroupLayout id="pgl1" halign="center" layout="vertical">
+    <af:outputText value="Please contact your System Administrator." id="ot1" inlineStyle="color:red;font-size:20px;"/>
+    <af:spacer width="10" height="10" id="s4"/>
+    <af:outputText value="OR" id="ot2"/>
+    <af:spacer width="10" height="10" id="s3"/>
+    <af:link text="Quick Access" id="l1" partialSubmit="true" action="quick"/>
+  </af:panelGroupLayout>
+  <af:spacer width="10" height="100" id="s2"/>
+</ui:composition>

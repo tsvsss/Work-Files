@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="BatchesPendingMtcPageDef"
+                Package="com.rmi.applicationEntry.view.batchesmtctaskflow">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BatchesPendingMtcView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="BatchesPendingMtcViewIterator"/>
+    <searchRegion Binds="BatchesPendingMtcViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="BatchesPendingMtcViewQuery"/>
+    <iterator Binds="BatchesMtcRejectedView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="BatchesMtcRejectedViewIterator"/>
+    <searchRegion Binds="BatchesMtcRejectedViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="BatchesMtcRejectedViewQuery"/>
+    <iterator Binds="BatchesPendingMtcLegalView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="BatchesPendingMtcLegalViewIterator"/>
+    <searchRegion Binds="BatchesPendingMtcLegalViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="BatchesPendingMtcLegalViewQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="BatchesPendingMtcViewIterator" id="BatchesPendingMtcView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.BatchesPendingMtcView"
+                      Name="BatchesPendingMtcView0">
+        <AttrNames>
+          <Item Value="BatchDate"/>
+          <Item Value="BatchName"/>
+          <Item Value="NoOfSeafarer"/>
+          <Item Value="Region"/>
+          <Item Value="WorkOrderNo"/>
+          <Item Value="OrderType"/>
+          <Item Value="CraCount"/>
+          <Item Value="finalCra"/>
+          <Item Value="ExpeditedProcessing" Binds="ExpeditedProcessing"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="assignTaskToUserMTC" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="assignTaskToUserMTC" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.assignTaskToUserMTC_RMIApplicationEntryAppModuleDataControl_dataProvider_assignTaskToUserMTC_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <tree IterBinding="BatchesMtcRejectedViewIterator" id="BatchesMtcRejectedView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.BatchesMtcRejectedView"
+                      Name="BatchesMtcRejectedView0">
+        <AttrNames>
+          <Item Value="BatchDate"/>
+          <Item Value="BatchName"/>
+          <Item Value="NoOfSeafarer"/>
+          <Item Value="Region"/>
+          <Item Value="WorkOrderNo"/>
+          <Item Value="tranFinalCra"/>
+          <Item Value="ExpeditedProcessing" Binds="ExpeditedProcessing1"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="assignTaskToUserMTCRejected" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="assignTaskToUserMTCRejected" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.assignTaskToUserMTCRejected_RMIApplicationEntryAppModuleDataControl_dataProvider_assignTaskToUserMTCRejected_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <tree IterBinding="BatchesPendingMtcLegalViewIterator" id="BatchesPendingMtcLegalView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.BatchesPendingMtcLegalView"
+                      Name="BatchesPendingMtcLegalView0">
+        <AttrNames>
+          <Item Value="BatchDate"/>
+          <Item Value="BatchName"/>
+          <Item Value="NoOfSeafarer"/>
+          <Item Value="Region"/>
+          <Item Value="WorkOrderNo"/>
+          <Item Value="OrderType"/>
+          <Item Value="tranFinalCra"/>
+          <Item Value="ExpeditedProcessing" Binds="ExpeditedProcessing2"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="assignTaskToUserMTCLegal" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="assignTaskToUserMTCLegal" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.assignTaskToUserMTCLegal_RMIApplicationEntryAppModuleDataControl_dataProvider_assignTaskToUserMTCLegal_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <attributeValues IterBinding="BatchesPendingMtcViewIterator" id="EsiBatchId">
+      <AttrNames>
+        <Item Value="EsiBatchId"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="BatchesPendingMtcViewIterator" id="ExpeditedProcessing" DTSupportsMRU="false"
+            StaticList="true">
+      <AttrNames>
+        <Item Value="ExpeditedProcessing"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="BatchesMtcRejectedViewIterator" id="ExpeditedProcessing1" DTSupportsMRU="false"
+            StaticList="true">
+      <AttrNames>
+        <Item Value="ExpeditedProcessing"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="BatchesPendingMtcLegalViewIterator" id="ExpeditedProcessing2" DTSupportsMRU="false"
+            StaticList="true">
+      <AttrNames>
+        <Item Value="ExpeditedProcessing"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+  </bindings>
+</pageDefinition>

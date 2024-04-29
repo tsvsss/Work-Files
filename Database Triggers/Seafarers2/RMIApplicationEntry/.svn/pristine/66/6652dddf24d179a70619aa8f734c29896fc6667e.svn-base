@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1">
+      <property
+         name="y">266.5</property>
+      <property
+         name="x">108.05957</property>
+   </OverallProperties>
+   <MethodCall
+      id="MethodCall2">
+      <property
+         name="activityId">onLoadBatchPendingAbn</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>onLoadBatchPendingAbn&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">98.79883</property>
+      <property
+         name="x">108.05957</property>
+   </MethodCall>
+   <View
+      id="View3">
+      <property
+         name="activityId">BatchesPendingABN</property>
+      <property
+         name="page">/WEB-INF/com/rmi/applicationEntry/view/batchesabntaskflow/BatchesPendingABN.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>BatchesPendingABN&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">91.149414</property>
+      <property
+         name="x">312.15527</property>
+      <property
+         name="pageFragment">true</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="MethodCall2"
+      to="View5">
+      <property
+         name="fromOutcome">onLoadBatchPendingAbn</property>
+      <property
+         name="tosrcid">__4</property>
+      <property
+         name="fromsrcid">__3</property>
+      <property
+         name="sdm:polyPoints">B50,108.05957,152.44824,170.0,237.89648,L50</property>
+   </ControlFlowCase>
+   <View
+      id="View5">
+      <property
+         name="activityId">BatchesPendingAssignBook</property>
+      <property
+         name="page">/WEB-INF/com/rmi/applicationEntry/view/batchesabntaskflow/BatchesPendingAssignBook.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>BatchesPendingAssignBook&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">238.24707</property>
+      <property
+         name="x">211.0</property>
+      <property
+         name="pageFragment">true</property>
+   </View>
+</SDM>

@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="vettingPageDef"
+                Package="com.rmi.manualtradecompliance.view.vetting">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DualCreateVettingView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="DualCreateVettingVO1Iterator"  ChangeEventPolicy="none"/>
+    <iterator Binds="ViewHistoryOwsView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="ViewHistoryOwsView1Iterator"/>
+    <iterator Binds="CrossReferencesOwsView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="CrossReferencesOwsView1Iterator"/>
+    <iterator Binds="TcReferencesView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="TcReferencesView1Iterator" ChangeEventPolicy="none"/>
+    <iterator Binds="CaseNotesView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="CaseNotesView1Iterator"/>
+    <iterator Binds="CaseDocumentsView1" RangeSize="25" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="CaseDocumentsView1Iterator"/>
+    <iterator id="LovAliasNameScreenedView1Iterator" Binds="LovAliasNameScreenedView1"
+              DataControl="RMIManualTradeComplianceAppModuleDataControl" RangeSize="10"/>
+    <iterator Binds="CaseWorkflowLOV1" RangeSize="25" DataControl="AppModuleDataControl" id="CaseWorkflowLOV1Iterator"/>
+    <iterator id="LovVettingsNameScreenedView1Iterator" Binds="LovVettingsNameScreenedView1"
+              DataControl="RMIManualTradeComplianceAppModuleDataControl" RangeSize="10"/>
+    <iterator id="GetConsentDetailsByConfNumberView1Iterator" Binds="GetConsentDetailsByConfNumberView1"
+              DataControl="RMIManualTradeComplianceAppModuleDataControl" RangeSize="25"/>
+    <iterator id="LovVettingsNameScreenedRestrictedView1Iterator" Binds="LovVettingsNameScreenedRestrictedView1"
+              DataControl="RMIManualTradeComplianceAppModuleDataControl" RangeSize="25"/>
+    <iterator id="GetIsOfacABlockedFlagsView1Iterator" Binds="GetIsOfacABlockedFlagsView1"
+              DataControl="RMIManualTradeComplianceAppModuleDataControl" RangeSize="25"/>
+    <iterator id="RmiGenericColumnsOrderView1Iterator" Binds="RmiGenericColumnsOrderView1"
+              DataControl="RMIManualTradeComplianceAppModuleDataControl" RangeSize="25"/>
+    <iterator id="LovVettingsNameScreenedUpdateView1Iterator" Binds="LovVettingsNameScreenedUpdateView1"
+              DataControl="RMIManualTradeComplianceAppModuleDataControl" RangeSize="25"/>
+    <iterator id="LovAliasNameScreenedUpdateView1Iterator" Binds="LovAliasNameScreenedUpdateView1"
+              DataControl="RMIManualTradeComplianceAppModuleDataControl" RangeSize="25"/>
+    <iterator id="AliasNameDuplicateCheckView1Iterator" Binds="AliasNameDuplicateCheckView1"
+              DataControl="RMIManualTradeComplianceAppModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <listOfValues IterBinding="DualCreateVettingVO1Iterator" StaticList="false" Uses="LOV_TransPassIssuCntryName"
+                  id="TransPassIssuCntryName"/>
+    <listOfValues IterBinding="DualCreateVettingVO1Iterator" StaticList="false" Uses="LOV_TransCtznshpCntryName"
+                  id="TransCtznshpCntryName"/>
+    <listOfValues IterBinding="DualCreateVettingVO1Iterator" StaticList="false" Uses="LOV_TransResdnceCntryName"
+                  id="TransResdnceCntryName"/>
+    <list IterBinding="DualCreateVettingVO1Iterator" StaticList="false" Uses="LOV_TransEntityType"
+          id="TransEntityType" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DualCreateVettingVO1Iterator" id="TransDateOfBirth">
+      <AttrNames>
+        <Item Value="TransDateOfBirth"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="DualCreateVettingVO1Iterator" StaticList="false" Uses="LOV_TransIdType" id="TransIdType"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DualCreateVettingVO1Iterator" id="TransIdNumber">
+      <AttrNames>
+        <Item Value="TransIdNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="createVetting" RequiresUpdateModel="true" Action="invokeMethod" MethodName="createVetting"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.createVetting_RMIManualTradeComplianceAppModuleDataControl_dataProvider_createVetting_result"/>
+    <methodAction id="validateCreateVetting" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="validateCreateVetting" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.validateCreateVetting_RMIManualTradeComplianceAppModuleDataControl_dataProvider_validateCreateVetting_result"/>
+    <methodAction id="fetchVettingMatches" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="fetchVettingMatches" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.fetchVettingMatches_RMIManualTradeComplianceAppModuleDataControl_dataProvider_fetchVettingMatches_result"/>
+    <methodAction id="useExistingVetting" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="useExistingVetting" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.useExistingVetting_RMIManualTradeComplianceAppModuleDataControl_dataProvider_useExistingVetting_result"/>
+    <methodAction id="createNewVetting" RequiresUpdateModel="true" Action="invokeMethod" MethodName="createNewVetting"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.createNewVetting_RMIManualTradeComplianceAppModuleDataControl_dataProvider_createNewVetting_result"/>
+    <listOfValues IterBinding="DualCreateVettingVO1Iterator" StaticList="false" Uses="LOV_TransCityName"
+                  id="TransCityName"/>
+    <methodAction id="getEdocFullURL" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getEdocFullURL"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.getEdocFullURL_RMIManualTradeComplianceAppModuleDataControl_dataProvider_getEdocFullURL_result">
+      <NamedData NDName="edocId" NDType="int"/>
+    </methodAction>
+    <methodAction id="synchronize" RequiresUpdateModel="true" Action="invokeMethod" MethodName="synchronize"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.synchronize_RMIManualTradeComplianceAppModuleDataControl_dataProvider_synchronize_result">
+      <NamedData NDName="wc_screening_request_id" NDType="int"/>
+    </methodAction>
+    <methodAction id="getEdocCategoryId" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getEdocCategoryId"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.getEdocCategoryId_RMIManualTradeComplianceAppModuleDataControl_dataProvider_getEdocCategoryId_result">
+      <NamedData NDName="edocId" NDType="int"/>
+    </methodAction>
+    <methodAction id="syncAlias" RequiresUpdateModel="true" Action="invokeMethod" MethodName="syncAlias"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.syncAlias_RMIManualTradeComplianceAppModuleDataControl_dataProvider_syncAlias_result">
+      <NamedData NDName="wc_screening_request_id" NDType="int"/>
+    </methodAction>
+    <methodAction id="getCrossReeferences" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getCrossReeferences" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.getCrossReeferences_RMIManualTradeComplianceAppModuleDataControl_dataProvider_getCrossReeferences_result">
+      <NamedData NDName="wc_screening_request_id" NDType="int"/>
+    </methodAction>
+    <methodAction id="getOFACSDNMatches" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getOFACSDNMatches"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.getOFACSDNMatches_RMIManualTradeComplianceAppModuleDataControl_dataProvider_getOFACSDNMatches_result">
+      <NamedData NDName="search_name" NDType="java.lang.String"/>
+      <NamedData NDName="entity_type" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="getOFACDocLink" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getOFACDocLink"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.getOFACDocLink_RMIManualTradeComplianceAppModuleDataControl_dataProvider_getOFACDocLink_result">
+      <NamedData NDName="ofac_list_edoc_id" NDType="int"/>
+      <NamedData NDName="iriHTMLUrlType" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="queryCrossReference" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="queryCrossReference" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.queryCrossReference_RMIManualTradeComplianceAppModuleDataControl_dataProvider_queryCrossReference_result">
+      <NamedData NDName="p_source_table" NDType="java.lang.String"/>
+      <NamedData NDName="p_source_column" NDType="java.lang.String"/>
+      <NamedData NDName="p_source_id" NDType="int"/>
+    </methodAction>
+    <methodAction id="callRunTc" RequiresUpdateModel="true" Action="invokeMethod" MethodName="callRunTc"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.callRunTc_RMIManualTradeComplianceAppModuleDataControl_dataProvider_callRunTc_result">
+      <NamedData NDName="affidavitFlag" NDType="java.lang.String"/>
+      <NamedData NDName="documentType" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="ViewHistoryOwsView1Iterator" id="ViewHistoryOwsView1">
+      <nodeDefinition DefName="com.rmi.manualtradecompliance.adfbc.views.ViewHistoryOwsView"
+                      Name="ViewHistoryOwsView10">
+        <AttrNames>
+          <Item Value="StatusDisp"/>
+          <Item Value="UserName"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="BatchId"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <listOfValues IterBinding="DualCreateVettingVO1Iterator" StaticList="false" Uses="LOV_TransNameScreened"
+                  id="TransNameScreened1"/>
+    <methodAction id="createAliasVetting" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createAliasVetting" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.createAliasVetting_RMIManualTradeComplianceAppModuleDataControl_dataProvider_createAliasVetting_result"/>
+    <attributeValues IterBinding="DualCreateVettingVO1Iterator" id="TransOnlineConfirmationNumber">
+      <AttrNames>
+        <Item Value="TransOnlineConfirmationNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DualCreateVettingVO1Iterator" id="TransOnlineConsentStartDate">
+      <AttrNames>
+        <Item Value="TransOnlineConsentStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DualCreateVettingVO1Iterator" id="TransOnlineConsentEndDate">
+      <AttrNames>
+        <Item Value="TransOnlineConsentEndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DualCreateVettingVO1Iterator" id="TransUploadedConsentStartDate">
+      <AttrNames>
+        <Item Value="TransUploadedConsentStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DualCreateVettingVO1Iterator" id="TransUploadedConsentEndDate">
+      <AttrNames>
+        <Item Value="TransUploadedConsentEndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DualCreateVettingVO1Iterator" id="TransUploadedConsentEdocId">
+      <AttrNames>
+        <Item Value="TransUploadedConsentEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="uploadDocument" RequiresUpdateModel="true" Action="invokeMethod" MethodName="uploadDocument"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.uploadDocument_RMIManualTradeComplianceAppModuleDataControl_dataProvider_uploadDocument_result">
+      <NamedData NDName="entityName" NDType="java.lang.String"/>
+      <NamedData NDName="fileName" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="createConsentVetting" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createConsentVetting" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.createConsentVetting_RMIManualTradeComplianceAppModuleDataControl_dataProvider_createConsentVetting_result">
+      <NamedData NDName="masterId" NDType="java.lang.Integer"/>
+      <NamedData NDName="aliasId" NDType="java.lang.Integer"/>
+      <NamedData NDName="xrefId" NDType="java.lang.Integer"/>
+      <NamedData NDName="consentEdocId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="filterConsentDetailsVetting" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterConsentDetailsVetting" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.filterConsentDetailsVetting_RMIManualTradeComplianceAppModuleDataControl_dataProvider_filterConsentDetailsVetting_result">
+      <NamedData NDName="masterId" NDType="java.lang.Number"/>
+    </methodAction>
+    <tree IterBinding="CrossReferencesOwsView1Iterator" id="CrossReferencesOwsView1">
+      <nodeDefinition DefName="com.rmi.manualtradecompliance.adfbc.views.CrossReferencesOwsView"
+                      Name="CrossReferencesOwsView10">
+        <AttrNames>
+          <Item Value="ReferenceDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <list IterBinding="DualCreateVettingVO1Iterator" StaticList="false" Uses="LOV_TransOperationType"
+          id="TransOperationType" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <tree IterBinding="TcReferencesView1Iterator" id="TcReferencesView1" ChangeEventPolicy="none">
+      <nodeDefinition DefName="com.rmi.manualtradecompliance.adfbc.views.TcReferencesView" Name="TcReferencesView10">
+        <AttrNames>
+          <Item Value="TcExcluded" Binds="TcExcluded"/>
+          <Item Value="NameScreened"/>
+          <Item Value="Alias"/>
+          <Item Value="Consent"/>
+          <Item Value="Status"/>
+          <Item Value="ExpDate"/>
+          <Item Value="StatusDate"/>
+          <Item Value="StatusUpdatedBy"/>
+          <Item Value="StartDate"/>
+          <Item Value="EndDate"/>
+          <Item Value="EntityType"/>
+          <Item Value="ResidenceCountry"/>
+          <Item Value="ResidenceCity"/>
+          <Item Value="BatchId"/>
+          <Item Value="Office"/>
+          <Item Value="CaseStatus"/>
+          <Item Value="RequestStatus"/>
+          <Item Value="RequestId"/>
+          <Item Value="AliasId"/>
+          <Item Value="MasterId"/>
+          <Item Value="XrefId"/>
+          <Item Value="ReqPhase"/>
+          <Item Value="ReqStatus"/>
+          <Item Value="ConcRequestId"/>
+          <Item Value="ColorCode"/>
+          <Item Value="AffidavitFlag"/>
+          <Item Value="KnownPartyFlag"/>
+          <Item Value="Id"/>
+          <Item Value="ResidenceCountryCode"/>
+          <Item Value="ResidenceCityId"/>
+          <Item Value="Identifier"/>
+          <Item Value="DocumentType"/>
+          <Item Value="IndentBy"/>
+          <Item Value="Cursor"/>
+          <Item Value="EastAsianOriginName"/>
+          <Item Value="PrimaryMasterId"/>
+          <Item Value="SelectRow" Binds="SelectRow"/>
+          <Item Value="ProvisionalRequest"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="TcReferencesView1Iterator" id="TcExcluded" DTSupportsMRU="false" StaticList="true"
+            ChangeEventPolicy="none">
+      <AttrNames>
+        <Item Value="TcExcluded"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="selectMultipleVettings" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="selectMultipleVettings" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.selectMultipleVettings_RMIManualTradeComplianceAppModuleDataControl_dataProvider_selectMultipleVettings_result">
+      <NamedData NDName="tcExcluded" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="getAttributeValue" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getAttributeValue"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.getAttributeValue_RMIManualTradeComplianceAppModuleDataControl_dataProvider_getAttributeValue_result">
+      <NamedData NDName="attrName" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="resetDualVettingRow" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="resetDualVettingRow" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.resetDualVettingRow_RMIManualTradeComplianceAppModuleDataControl_dataProvider_resetDualVettingRow_result"/>
+    <tree IterBinding="CaseNotesView1Iterator" id="CaseNotesView1">
+      <nodeDefinition DefName="com.rmi.manualtradecompliance.adfbc.views.CaseNotesView" Name="CaseNotesView10">
+        <AttrNames>
+          <Item Value="BatchId"/>
+          <Item Value="CreatedByUser"/>
+          <Item Value="UpdatedByUser"/>
+          <Item Value="RequestId"/>
+          <Item Value="LineNumber"/>
+          <Item Value="Note"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="CreationDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="CaseDocumentsView1Iterator" id="CaseDocumentsView1">
+      <nodeDefinition DefName="com.rmi.manualtradecompliance.adfbc.views.CaseDocumentsView" Name="CaseDocumentsView10">
+        <AttrNames>
+          <Item Value="BatchId"/>
+          <Item Value="CreatedByUser"/>
+          <Item Value="UpdatedByUser"/>
+          <Item Value="RequestId"/>
+          <Item Value="DocumentType"/>
+          <Item Value="FileName"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="CreationDate"/>
+          <Item Value="DiskPath"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <listOfValues IterBinding="DualCreateVettingVO1Iterator" StaticList="false" Uses="LOV_TransAliasNameScreened"
+                  id="TransAliasNameScreened1"/>
+    <attributeValues IterBinding="DualCreateVettingVO1Iterator" id="TransNameScreenedUpdatable">
+      <AttrNames>
+        <Item Value="TransNameScreenedUpdatable"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DualCreateVettingVO1Iterator" id="TransNameScreenedUpdatable1">
+      <AttrNames>
+        <Item Value="TransNameScreenedUpdatable"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="DualCreateVettingVO1Iterator" StaticList="false" Uses="LOV_TransUpdateCountryName"
+                  id="TransUpdateCountryName"/>
+    <methodAction id="updateCountryCity" RequiresUpdateModel="true" Action="invokeMethod" MethodName="updateCountryCity"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.updateCountryCity_RMIManualTradeComplianceAppModuleDataControl_dataProvider_updateCountryCity_result">
+      <NamedData NDName="masterId" NDType="java.lang.Integer"/>
+      <NamedData NDName="aliasId" NDType="java.lang.Integer"/>
+      <NamedData NDName="xrefId" NDType="java.lang.Integer"/>
+    </methodAction>
+    <listOfValues IterBinding="DualCreateVettingVO1Iterator" StaticList="false" Uses="LOV_TransUpdateCityName"
+                  id="TransUpdateCityName"/>
+    <list IterBinding="DualCreateVettingVO1Iterator" StaticList="false" Uses="LOV_TransGender" id="TransGender"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="DualCreateVettingVO1Iterator" id="TransSeafarerId">
+      <AttrNames>
+        <Item Value="TransSeafarerId"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="DualCreateVettingVO1Iterator" id="TransMarketingCommFlag" DTSupportsMRU="false"
+            StaticList="true">
+      <AttrNames>
+        <Item Value="TransMarketingCommFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="DualCreateVettingVO1Iterator" id="TransIMONumber">
+      <AttrNames>
+        <Item Value="TransIMONumber"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="uploadAffidavit" RequiresUpdateModel="true" Action="invokeMethod" MethodName="uploadAffidavit"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.uploadAffidavit_RMIManualTradeComplianceAppModuleDataControl_dataProvider_uploadAffidavit_result">
+      <NamedData NDName="fileName" NDType="java.lang.String"/>
+      <NamedData NDName="category" NDType="java.lang.String"/>
+      <NamedData NDName="action" NDType="java.lang.String"/>
+      <NamedData NDName="startDate" NDType="java.lang.String"/>
+      <NamedData NDName="endDate" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="DualCreateVettingVO1Iterator" id="TransConsentEntityType">
+      <AttrNames>
+        <Item Value="TransConsentEntityType"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="DualCreateVettingVO1Iterator" id="TransLegacyVettingFlag" DTSupportsMRU="false"
+            StaticList="true">
+      <AttrNames>
+        <Item Value="TransLegacyVettingFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Yes"/>
+        <Item Value="No"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="DualCreateVettingVO1Iterator" id="TransRelationshipType">
+      <AttrNames>
+        <Item Value="TransRelationshipType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="DualCreateVettingVO1Iterator" id="TransResdnceCntryCode">
+      <AttrNames>
+        <Item Value="TransResdnceCntryCode"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="CaseWorkflowLOV1Iterator" ListOperMode="navigation" ListIter="CaseWorkflowLOV1Iterator"
+          id="CaseWorkflowLOV1" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Optionvalue"/>
+      </AttrNames>
+    </list>
+    <listOfValues Uses="LOV_ResidenceCountry" StaticList="false" IterBinding="TcReferencesView1Iterator"
+                  id="ResidenceCountry"/>
+    <listOfValues Uses="LOV_ResidenceCity" StaticList="false" IterBinding="TcReferencesView1Iterator"
+                  id="ResidenceCity"/>
+    <methodAction id="updateCountryCity1" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="updateCountryCity" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.updateCountryCity1_RMIManualTradeComplianceAppModuleDataControl_dataProvider_updateCountryCity_result">
+      <NamedData NDName="type" NDType="java.lang.String"/>
+      <NamedData NDName="country" NDType="java.lang.String"/>
+      <NamedData NDName="city" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="LovVettingsNameScreenedView1Iterator" id="LovVettingsNameScreenedView1">
+      <nodeDefinition DefName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovVettingsNameScreenedView"
+                      Name="LovVettingsNameScreenedView10">
+        <AttrNames>
+          <Item Value="FullName"/>
+          <Item Value="Identifier"/>
+          <Item Value="SourceTable"/>
+          <Item Value="SourceId"/>
+          <Item Value="EntityType"/>
+          <Item Value="Dob"/>
+          <Item Value="PassportNumber"/>
+          <Item Value="TcBatch"/>
+          <Item Value="TcBatchCreationDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="LovAliasNameScreenedView1Iterator" id="LovAliasNameScreenedView1">
+      <nodeDefinition DefName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovAliasNameScreenedView"
+                      Name="LovAliasNameScreenedView10">
+        <AttrNames>
+          <Item Value="FullName"/>
+          <Item Value="Identifier"/>
+          <Item Value="SourceId"/>
+          <Item Value="SourceTable"/>
+          <Item Value="EntityType"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="updateEndDate" RequiresUpdateModel="true" Action="invokeMethod" MethodName="updateEndDate"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.updateEndDate_RMIManualTradeComplianceAppModuleDataControl_dataProvider_updateEndDate_result">
+      <NamedData NDName="endDate" NDType="java.util.Date"/>
+      <NamedData NDName="masterId" NDType="java.lang.Integer"/>
+      <NamedData NDName="aliasId" NDType="java.lang.Integer"/>
+      <NamedData NDName="xrefId" NDType="java.lang.Integer"/>
+      <NamedData NDName="cursor" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="updateOnlineConsent" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="updateOnlineConsent" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.updateOnlineConsent_RMIManualTradeComplianceAppModuleDataControl_dataProvider_updateOnlineConsent_result">
+      <NamedData NDName="sourceId" NDType="java.lang.String"/>
+      <NamedData NDName="consentId" NDType="java.lang.String"/>
+      <NamedData NDName="masterId" NDType="java.lang.String"/>
+      <NamedData NDName="aliasId" NDType="java.lang.String"/>
+      <NamedData NDName="xrefId" NDType="java.lang.String"/>
+    </methodAction>
+    <button IterBinding="DualCreateVettingVO1Iterator" id="TransEastAsianOriginName" DTSupportsMRU="false"
+            StaticList="true">
+      <AttrNames>
+        <Item Value="TransEastAsianOriginName"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="logGenericTC" RequiresUpdateModel="true" Action="invokeMethod" MethodName="logGenericTC"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.logGenericTC_RMIManualTradeComplianceAppModuleDataControl_dataProvider_logGenericTC_result">
+      <NamedData NDName="type" NDType="java.lang.String"/>
+      <NamedData NDName="title" NDType="java.lang.String"/>
+      <NamedData NDName="message" NDType="java.lang.String"/>
+      <NamedData NDName="className" NDType="java.lang.String"/>
+      <NamedData NDName="methodName" NDType="java.lang.String"/>
+      <NamedData NDName="detailedMessage" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="RmiGenericColumnsOrderView1Iterator" id="RmiGenericColumnsOrderView1">
+      <nodeDefinition DefName="com.rmi.manualtradecompliance.adfbc.views.RmiGenericColumnsOrderView"
+                      Name="RmiGenericColumnsOrderView10">
+        <AttrNames>
+          <Item Value="ColumnsOrder"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="Id"/>
+          <Item Value="IsDefault"/>
+          <Item Value="OrderName"/>
+          <Item Value="UserId"/>
+          <Item Value="IsDeleted"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" DataControl="RMIManualTradeComplianceAppModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+	<methodAction id="saveVettingCheckBoxSelections" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="saveVettingCheckBoxSelections" IsViewObjectMethod="false"
+                  DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.saveVettingCheckBoxSelections_RMIManualTradeComplianceAppModuleDataControl_dataProvider_saveVettingCheckBoxSelections_result"/>
+    <button IterBinding="TcReferencesView1Iterator" id="SelectRow" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="SelectRow"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+  </bindings>
+</pageDefinition>

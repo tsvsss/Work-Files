@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="taskflow_Batch_CreateEdit_taskflow_Batch_CreateEdit_createOrEditSeafarerPageDef"
+                Package="com.rmi.applicationEntry.view.batchcreateedittaskflow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="createOrEditSeafarer" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="createOrEditSeafarer" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.createOrEditSeafarer_RMIApplicationEntryAppModuleDataControl_dataProvider_createOrEditSeafarer_result"/>
+  </bindings>
+</pageDefinition>

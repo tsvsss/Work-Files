@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CertificateTypeView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.lovs.CertificateTypeView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT 'OC' CERTIFICATE_CODE, 
+'Officer Certificate' CERTIFICATE_TYPE 
+FROM DUAL 
+UNION ALL 
+SELECT 'CRA' CERTIFICATE_CODE, 
+'Certificate of Receipt of Application' CERTIFICATE_TYPE 
+FROM DUAL 
+UNION ALL 
+SELECT 'UA' CERTIFICATE_CODE, 
+'Urgent Authorization' CERTIFICATE_TYPE 
+FROM DUAL]]></SQLQuery>
+  <ViewAttribute
+    Name="CertificateCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CERTIFICATE_CODE"
+    Expression="CERTIFICATE_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CertificateType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="37"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CERTIFICATE_TYPE"
+    Expression="CERTIFICATE_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="37"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="CertificateCode"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

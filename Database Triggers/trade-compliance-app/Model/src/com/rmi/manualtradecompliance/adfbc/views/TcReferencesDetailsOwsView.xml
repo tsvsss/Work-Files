@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TcReferencesDetailsOwsView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.manualtradecompliance.adfbc.views.TcReferencesDetailsOwsView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pSeafarerId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <TransientExpression
+      trustMode="untrusted"
+      Name="expression"><![CDATA[adf.context.pageFlowScope.P_SOURCE_ID]]></TransientExpression>
+  </Variable>
+  <Variable
+    Name="pMasterId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pNameScreened"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pAliasId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pXrefId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pXwrlRequestId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pRequestId"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pSourceTable"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      trustMode="untrusted"
+      Name="expression"><![CDATA[adf.context.pageFlowScope.P_SOURCE_TABLE]]></TransientExpression>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT rmi_ows_common_util.case_wf_status (a.case_workflow) tc_status,   
+    RMI_GENERIC_TC.request_status(:pRequestId) request_status,   
+    id xwrl_requset_id,   
+  to_char(a.last_update_date,'dd-Mon-yyyy') tc_status_date,       
+  get_username_propername (a.last_updated_by) tc_status_updated_by,       
+  to_char(a.expiration_date,'dd-Mon-yyyy') expiration_date,            
+  RMI_GENERIC_TC.consent_available(:pSourceTable,:pSeafarerId,             
+	:pMasterId,:pAliasId, :pXrefId, :pXwrlRequestId , :pNameScreened) consent_received,     
+  b.description      
+FROM xwrl_requests a,     
+vssl_offices b     
+WHERE 1 = 1     
+AND b.code(+) = a.office     
+AND source_table LIKE :pSourceTable || '%'       
+AND source_id       = :pSeafarerId       
+AND case_state NOT IN ('D', 'E')       
+  --     AND xwrl_utils.cleanse_name (name_screened) = xwrl_utils.cleanse_name (:vetted_entities.full_name)       
+AND master_id           = :pMasterId       
+AND NVL (alias_id, -99) = NVL (:pAliasId, -99)       
+AND NVL (xref_id,  -99) = NVL (:pXrefId, -99)       
+ORDER BY ID DESC]]></SQLQuery>
+  <ViewAttribute
+    Name="TcStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TC_STATUS"
+    Expression="TC_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RequestStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REQUEST_STATUS"
+    Expression="REQUEST_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="XwrlRequsetId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="XWRL_REQUSET_ID"
+    Expression="XWRL_REQUSET_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TcStatusDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="11"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TC_STATUS_DATE"
+    Expression="TC_STATUS_DATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="11"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TcStatusUpdatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TC_STATUS_UPDATED_BY"
+    Expression="TC_STATUS_UPDATED_BY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ExpirationDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="11"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EXPIRATION_DATE"
+    Expression="EXPIRATION_DATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="11"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ConsentReceived"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONSENT_RECEIVED"
+    Expression="CONSENT_RECEIVED"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Description"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DESCRIPTION"
+    Expression="DESCRIPTION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.manualtradecompliance.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="OcDetailsLimitationsLovView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.lovs.OcDetailsLimitationsLovView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT LMTN.LIMITATION_NAME LIMITATION_NAME, 
+       LMTN.LIMITATION_SEQUENCE LIMITATION_SEQUENCE, 
+       LMTN.LIMITATION_ID 
+FROM SICD_LIMITATIONS LMTN 
+WHERE LMTN.STATUS = 'Active' 
+ORDER BY LIMITATION_SEQUENCE]]></SQLQuery>
+  <ViewAttribute
+    Name="LimitationName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="250"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LIMITATION_NAME"
+    Expression="LIMITATION_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <LABEL
+          ResId="com.rmi.tradecompapproval.adfbc.views.lovs.OcDetailsLimitationsLovView.LimitationName_LABEL"/>
+        <LABEL_PLURAL
+          ResId="com.rmi.tradecompapproval.adfbc.views.lovs.OcDetailsLimitationsLovView.LimitationName_LABEL_PLURAL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LimitationSequence"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="LIMITATION_SEQUENCE"
+    Expression="LIMITATION_SEQUENCE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="LimitationId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="LIMITATION_ID"
+    Expression="LIMITATION_ID"
+    SQLType="NUMERIC"/>
+  <ViewCriteria
+    Name="OcDetailsLimitationsLOVCriteria"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.OcDetailsLimitationsLovView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="OcDetailsLimitationsLOVCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="LimitationName"
+        ViewAttribute="LimitationName"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="LimitationId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">SeafarerListTc</property>
+      <property
+         name="page">/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/SeafarerListTc.jsf</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>SeafarerListTc&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">128.5459</property>
+      <property
+         name="x">391.0</property>
+   </View>
+   <MethodCall
+      id="MethodCall3">
+      <property
+         name="activityId">onLoadSeafarerListTc</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>onLoadSeafarerListTc&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">217.14941</property>
+      <property
+         name="x">169.03613</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="MethodCall3"
+      to="View2">
+      <property
+         name="fromOutcome">onLoadSeafarerListTc</property>
+      <property
+         name="sdm:polyPoints">R50,210.03613,216.79883,350.0,128.19531,L50</property>
+   </ControlFlowCase>
+</SDM>

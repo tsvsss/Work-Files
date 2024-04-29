@@ -1,0 +1,991 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DualCreateVettingView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="com.rmi.manualtradecompliance.adfbc.views.DualCreateVettingViewRowImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.manualtradecompliance.adfbc.views.DualCreateVettingView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="LovEntityTypeVO1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovEntityTypeView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="LovGenderVO1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovGenderView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="LovIdTypeVO1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovIdTypeView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="LovCountriesVO1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovCountriesView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CityNameByIdRO1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.CityNameByIdView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="LovCityNameVO1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovCityNameView"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pCountryCode">
+        <TransientExpression><![CDATA[TransResdnceCntryCode]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="LovVettingsNameScreenedView1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovVettingsNameScreenedView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="LovOperationTypeVew1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovOperationTypeVew"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="LovAliasNameScreenedView1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovAliasNameScreenedView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="LovCityNameView1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovCityNameView"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pCountryCode">
+        <TransientExpression><![CDATA[TransUpdateCountryCode]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_TransEntityType"
+    ListVOName="LovEntityTypeVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransEntityType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransGender"
+    ListVOName="LovGenderVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransGender"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransIdType"
+    ListVOName="LovIdTypeVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransIdType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="TypeDesc"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="TypeDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransPassIssuCntryName"
+    ListVOName="LovCountriesVO1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransPassIssuCntryName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="TransPassIssuCntryCode"/>
+      <Item Value="TransPassIssuCntryCode1"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CountryName"/>
+      <Item Value="CountryCode"/>
+      <Item Value="CountryCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CountryName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="LovCountriesVOCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransCtznshpCntryName"
+    ListVOName="LovCountriesVO1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransCtznshpCntryName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="TransCtznshpCntryCode"/>
+      <Item Value="TransCtznshpCntryCode1"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CountryName"/>
+      <Item Value="CountryCode"/>
+      <Item Value="CountryCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CountryName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="LovCountriesVOCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransResdnceCntryName"
+    ListVOName="LovCountriesVO1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransResdnceCntryName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="TransResdnceCntryCode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CountryName"/>
+      <Item Value="CountryCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CountryName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="LovCountriesVOCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransCityName"
+    ListVOName="LovCityNameVO1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransCityName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="TransCityId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CityName"/>
+      <Item Value="WcCityListId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CityName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="LovCityNameViewCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransNameScreened"
+    ListVOName="LovVettingsNameScreenedView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0"
+    ComboRowCountHint="10">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransNameScreened"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="TransDateOfBirth"/>
+      <Item Value="TransCityId"/>
+      <Item Value="TransCtznshpCntryCode"/>
+      <Item Value="TransIdType"/>
+      <Item Value="TransIdNumber"/>
+      <Item Value="TransGender"/>
+      <Item Value="TransPassIssuCntryCode"/>
+      <Item Value="TransResdnceCntryCode"/>
+      <Item Value="TransEntityType"/>
+      <Item Value="TransNameScreenedUpdatable"/>
+      <Item Value="TransId"/>
+      <Item Value="TransSeafarerId"/>
+      <Item Value="TransResdnceCntryName"/>
+      <Item Value="TransLegacyVettingFlag"/>
+      <Item Value="TransRelationshipType"/>
+      <Item Value="TransSourceId"/>
+      <Item Value="TransSourceTable"/>
+      <Item Value="TransSourceTableColumn"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FullName"/>
+      <Item Value="Dob"/>
+      <Item Value="CityOfResidenceId"/>
+      <Item Value="CitizenshipCountryCode"/>
+      <Item Value="IdType"/>
+      <Item Value="PassportNumber"/>
+      <Item Value="Sex"/>
+      <Item Value="PassportIssuingCountryCode"/>
+      <Item Value="CountryOfResidenceCode"/>
+      <Item Value="EntityType"/>
+      <Item Value="FullName"/>
+      <Item Value="Id"/>
+      <Item Value="Identifier"/>
+      <Item Value="CountryOfResidenceName"/>
+      <Item Value="LegacyVettingFlag"/>
+      <Item Value="RelationshipType"/>
+      <Item Value="SourceId"/>
+      <Item Value="SourceTable"/>
+      <Item Value="SourceTableColumn"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FullName"/>
+      <Item Value="Identifier"/>
+      <Item Value="SourceTable"/>
+      <Item Value="EntityType"/>
+      <Item Value="Dob"/>
+      <Item Value="PassportNumber"/>
+      <Item Value="TcBatch"/>
+      <Item Value="TcBatchUpdateDate"/>
+      <Item Value="SourceId"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="LovVettingsNameScreenedViewCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransOperationType"
+    ListVOName="LovOperationTypeVew1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransOperationType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransAliasNameScreened"
+    ListVOName="LovAliasNameScreenedView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransAliasNameScreened"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="TransDateOfBirth"/>
+      <Item Value="TransCityId"/>
+      <Item Value="TransCtznshpCntryCode"/>
+      <Item Value="TransIdType"/>
+      <Item Value="TransIdNumber"/>
+      <Item Value="TransGender"/>
+      <Item Value="TransPassIssuCntryCode"/>
+      <Item Value="TransResdnceCntryCode"/>
+      <Item Value="TransEntityType"/>
+      <Item Value="TransNameScreenedUpdatable"/>
+      <Item Value="TransId"/>
+      <Item Value="TransSeafarerId"/>
+      <Item Value="TransResdnceCntryName"/>
+      <Item Value="TransRelationshipType"/>
+      <Item Value="TransSourceId"/>
+      <Item Value="TransSourceTable"/>
+      <Item Value="TransSourceTableColumn"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FullName"/>
+      <Item Value="Dob"/>
+      <Item Value="CityOfResidenceId"/>
+      <Item Value="CitizenshipCountryCode"/>
+      <Item Value="IdType"/>
+      <Item Value="PassportNumber"/>
+      <Item Value="Sex"/>
+      <Item Value="PassportIssuingCountryCode"/>
+      <Item Value="CountryOfResidenceCode"/>
+      <Item Value="EntityType"/>
+      <Item Value="FullName"/>
+      <Item Value="Id"/>
+      <Item Value="Identifier"/>
+      <Item Value="CountryOfResidenceName"/>
+      <Item Value="RelationshipType"/>
+      <Item Value="SourceId"/>
+      <Item Value="SourceTable"/>
+      <Item Value="SourceTableColumn"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FullName"/>
+      <Item Value="Identifier"/>
+      <Item Value="Dob"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="LovAliasNameScreenedViewCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransUpdateCountryName"
+    ListVOName="LovCountriesVO1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransUpdateCountryName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="TransUpdateCountryCode"/>
+      <Item Value="TransUpdateCountryIsoAlphaCode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CountryName"/>
+      <Item Value="CountryCode"/>
+      <Item Value="IsoAlpha2Code"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CountryName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="LovCountriesVOCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransUpdateCityName"
+    ListVOName="LovCityNameView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransUpdateCityName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="TransUpdateCityId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CityName"/>
+      <Item Value="WcCityListId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CityName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <SQLQuery><![CDATA[Select '1' from dual]]></SQLQuery>
+  <ViewAttribute
+    Name="Selectobjects0"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SELECTOBJECTS0"
+    Expression="SELECTOBJECTS0"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransNameScreened"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransNameScreened"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransNameScreened">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransEntityType"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransEntityType"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransEntityType"
+    DefaultValue="INDIVIDUAL">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransGender"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransGender"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransGender">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransDateOfBirth"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="VARCHAR2"
+    AliasName="TransDateOfBirth"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="TransIdType"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="NUMBER"
+    AliasName="TransIdType"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransIdType">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <DISPLAYHEIGHT
+          Value="15"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransIdNumber"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransIdNumber"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransPassIssuCntryCode"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransPassIssuCntryCode"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransPassIssuCntryName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransPassIssuCntryName"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransPassIssuCntryName">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <DISPLAYHEIGHT
+          Value="15"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransCtznshpCntryCode"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransCtznshpCntryCode"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransCtznshpCntryName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransCtznshpCntryName"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransCtznshpCntryName">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <DISPLAYHEIGHT
+          Value="15"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransResdnceCntryCode"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransResdnceCntryCode"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransResdnceCntryName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransResdnceCntryName"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransResdnceCntryName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <DISPLAYHEIGHT
+          Value="15"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransCityName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransCityName"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransCityName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransCityId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.Integer"
+    ColumnType="VARCHAR2"
+    AliasName="TransCityId"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TransOnlineConfirmationNumber"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransOnlineConfirmationNumber"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransOnlineConsentStartDate"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    AliasName="TransOnlineConsentStartDate"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="TransOnlineConsentEndDate"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    AliasName="TransOnlineConsentEndDate"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="TransUploadedConsentStartDate"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    AliasName="TransUploadedConsentStartDate"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="TransUploadedConsentEndDate"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    AliasName="TransUploadedConsentEndDate"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="TransUploadedConsentEdocId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="TransUploadedConsentEdocId"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TransOperationType"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransOperationType"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransOperationType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransAliasNameScreened"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransAliasNameScreened"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransAliasNameScreened">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransNameScreenedUpdatable"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransNameScreenedUpdatable"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransUpdateCountryName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransUpdateCountryName"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransUpdateCountryName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransUpdateCountryIsoAlphaCode"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransUpdateCountryIsoAlphaCode"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransUpdateCountryCode"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransUpdateCountryCode"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransUpdateCityName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransUpdateCityName"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransUpdateCityName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransUpdateCityId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="TransUpdateCityId"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TransId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="TransId"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TransSeafarerId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="INTEGER"
+    AliasName="TransSeafarerId"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransConsentEntityType"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransConsentEntityType"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransMarketingCommFlag"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransMarketingCommFlag"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransIMONumber"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransIMONumber"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransLegacyVettingFlag"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TransLegacyVettingFlag"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransRelationshipType"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransSourceId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransSourceTable"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransSourceTableColumn"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransOnlineConfirmationNumberVerify"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransOnlineConsentId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.math.BigDecimal"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TransOnlineUploadedConsentEdocId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransEastAsianOriginName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransPassIssuCntryCode1"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransCtznshpCntryCode1"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Selectobjects0"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.manualtradecompliance.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

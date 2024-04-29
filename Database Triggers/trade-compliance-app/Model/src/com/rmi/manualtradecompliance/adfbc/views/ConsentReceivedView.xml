@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ConsentReceivedView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.manualtradecompliance.adfbc.views.ConsentReceivedView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pWcScreenReqId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <TransientExpression
+      trustMode="untrusted"
+      Name="expression"><![CDATA[adf.context.sessionScope.wcScreeningRequestId]]></TransientExpression>
+  </Variable>
+  <Variable
+    Name="pSourceTable"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      trustMode="untrusted"
+      Name="expression"><![CDATA[adf.context.pageFlowScope.P_SOURCE_TABLE]]></TransientExpression>
+  </Variable>
+  <Variable
+    Name="pSourceTableColumn"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      trustMode="untrusted"
+      Name="expression"><![CDATA[adf.context.pageFlowScope.P_SOURCE_TABLE_COLUMN]]></TransientExpression>
+  </Variable>
+  <Variable
+    Name="pEntityType"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      trustMode="untrusted"
+      Name="expression"><![CDATA[adf.context.pageFlowScope.ENTITY_TYPE]]></TransientExpression>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT 'Y' CONSENT_RECEIVED         
+FROM worldcheck_external_xref xr,         
+  wc_screening_request r,         
+  RMI_DATA_PRIVACY_CONSENT d         
+WHERE r.wc_screening_request_id = xr.wc_screening_request_id         
+AND source_table                = :pSourceTable         
+AND source_table_column         = :pSourceTableColumn       
+AND d.entity_id                 = source_table_id         
+AND d.entity_type               = :pEntityType         
+AND XR.WC_SCREENING_REQUEST_ID  = :pWcScreenReqId 
+ORDER BY d.consent_id DESC]]></SQLQuery>
+  <ViewAttribute
+    Name="ConsentReceived"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONSENT_RECEIVED"
+    Expression="CONSENT_RECEIVED"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.manualtradecompliance.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

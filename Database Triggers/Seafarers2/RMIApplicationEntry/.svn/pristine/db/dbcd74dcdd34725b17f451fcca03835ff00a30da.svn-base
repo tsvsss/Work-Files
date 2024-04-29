@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+    <f:facet name="menus"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="statusbar"/>
+    <af:table value="#{bindings.BatchesPendingAsbRO.collectionModel}" var="row"
+              rows="#{bindings.BatchesPendingAsbRO.rangeSize}"
+              emptyText="#{bindings.BatchesPendingAsbRO.viewable ? 'No data to display.' : 'Access Denied.'}"
+              rowBandingInterval="0" selectedRowKeys="#{bindings.BatchesPendingAsbRO.collectionModel.selectedRow}"
+              selectionListener="#{bindings.BatchesPendingAsbRO.collectionModel.makeCurrent}" rowSelection="single"
+              fetchSize="#{bindings.BatchesPendingAsbRO.rangeSize}" id="t1" styleClass="AFStretchWidth"
+              columnStretching="column:c3" autoHeightRows="10" partialTriggers="b1" contentDelivery="immediate">
+      <af:column headerText="Batch Name" id="c3">
+        <af:outputText value="#{row.BatchName}" shortDesc="#{bindings.BatchesPendingAsbRO.hints.BatchName.tooltip}"
+                       id="ot3" inlineStyle="color:#{row.CraCount == 0 ? '' : 'Green'}; "/>
+      </af:column>
+      <af:column headerText="Batch Status" id="c1" visible="false">
+        <af:outputText value="#{row.BatchStatus}" shortDesc="#{bindings.BatchesPendingAsbRO.hints.BatchStatus.tooltip}"
+                       id="ot1" inlineStyle="color:#{row.CraCount == 0 ? '' : 'Green'}; "/>
+      </af:column>
+      <af:column headerText="Batch Submitted Date" id="c2">
+        <af:outputText value="#{row.BatchDate}" shortDesc="#{bindings.BatchesPendingAsbRO.hints.BatchDate.tooltip}"
+                       id="ot2" inlineStyle="color:#{row.CraCount == 0 ? '' : 'Green'};text-transform:uppercase; ">
+          <af:convertDateTime pattern="dd-MMM-yyyy"/>
+        </af:outputText>
+      </af:column>
+      <af:column headerText="Number Of Seafarers" id="c4">
+        <af:outputText value="#{row.NoOfSeafarer}"
+                       shortDesc="#{bindings.BatchesPendingAsbRO.hints.NoOfSeafarer.tooltip}" id="ot4"
+                       inlineStyle="color:#{row.CraCount == 0 ? '' : 'Green'}; ">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BatchesPendingAsbRO.hints.NoOfSeafarer.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column headerText="Region" id="c7">
+        <af:outputText value="#{row.Region}" shortDesc="#{bindings.BatchesPendingAsbRO.hints.Region.tooltip}" id="ot7"
+                       inlineStyle="color:#{row.CraCount == 0 ? '' : 'Green'}; "/>
+      </af:column>
+      <af:column headerText="Work Order Number" id="c5">
+        <af:outputText value="#{row.WorkOrderNo}" shortDesc="#{bindings.BatchesPendingAsbRO.hints.WorkOrderNo.tooltip}"
+                       id="ot5" inlineStyle="color:#{row.CraCount == 0 ? '' : 'Green'}; ">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BatchesPendingAsbRO.hints.WorkOrderNo.format}"/>
+        </af:outputText>
+      </af:column>
+      <af:column headerText="Order Type" id="c6">
+        <af:outputText value="#{row.OrderType}" shortDesc="#{bindings.BatchesPendingAsbRO.hints.OrderType.tooltip}"
+                       id="ot6" inlineStyle="color:#{row.CraCount == 0 ? '' : 'Green'}; "/>
+      </af:column>
+      <af:column headerText="Expedited Processing" id="c8">
+        <af:selectBooleanCheckbox value="#{row.bindings.ExpeditedProcessing.inputValue}"
+                                  label="#{row.bindings.ExpeditedProcessing.label}"
+                                  shortDesc="#{bindings.BatchesPendingAsbRO.hints.ExpeditedProcessing.tooltip}"
+                                  id="sbc1" disabled="true"/>
+      </af:column>
+      <af:column id="c9">
+        <af:button text="Assign" id="b1" actionListener="#{pageFlowScope.BatchesPendingAbnBean.assignBatch}"/>
+      </af:column>
+      <af:column headerText="#{bindings.BatchesPendingAsbRO.hints.CraCount.label}" id="c10" visible="false">
+        <af:outputText value="#{row.CraCount}" shortDesc="#{bindings.BatchesPendingAsbRO.hints.CraCount.tooltip}"
+                       id="ot8">
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.BatchesPendingAsbRO.hints.CraCount.format}"/>
+        </af:outputText>
+      </af:column>
+    </af:table>
+  </af:panelCollection>
+</jsp:root>

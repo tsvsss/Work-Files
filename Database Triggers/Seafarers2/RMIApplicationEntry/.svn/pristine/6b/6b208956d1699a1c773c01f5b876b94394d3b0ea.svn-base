@@ -1,0 +1,471 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelBox text="Query Order Details" id="pb1" showDisclosure="false">
+    <f:facet name="toolbar"/>
+    <af:panelFormLayout id="pfl1" rows="1" styleClass="panelFormLayoutClass" inlineStyle="margin-top:15px;">
+      <f:facet name="footer"/>
+      <af:inputText label="Order Number" id="it1" autoSubmit="true"
+                    binding="#{pageFlowScope.QueryOrderBean.orderNumberBinding}" partialTriggers="b2"/>
+      <af:panelGroupLayout id="pgl1" layout="horizontal" valign="middle">
+        <af:button text="Search" id="b1" actionListener="#{pageFlowScope.QueryOrderBean.searchMethod}"/>
+        <af:button text="Reset" id="b2" inlineStyle="margin-left:10px;"
+                   actionListener="#{pageFlowScope.QueryOrderBean.resetButton}"/>
+      </af:panelGroupLayout>
+    </af:panelFormLayout>
+    <af:separator id="s1" inlineStyle="margin-top:5px;"/>
+    <af:panelFormLayout id="pfl3" rows="1" maxColumns="5" styleClass="panelFormLayoutClass"
+                        inlineStyle="margin-top:10px;" fieldWidth="150" partialTriggers="b1 b2">
+      <f:facet name="footer"/>
+      <af:inputText value="#{bindings.OrderStatus.inputValue}" label="Order Status"
+                    required="#{bindings.OrderStatus.hints.mandatory}"
+                    columns="#{bindings.OrderStatus.hints.displayWidth}"
+                    maximumLength="#{bindings.OrderStatus.hints.precision}"
+                    shortDesc="#{bindings.OrderStatus.hints.tooltip}" id="it3" disabled="true"
+                    contentStyle="width:100px;">
+        <f:validator binding="#{bindings.OrderStatus.validator}"/>
+      </af:inputText>
+      <af:inputDate value="#{bindings.OrderDate.inputValue}" label="Order Date"
+                    required="#{bindings.OrderDate.hints.mandatory}" columns="#{bindings.OrderDate.hints.displayWidth}"
+                    shortDesc="#{bindings.OrderDate.hints.tooltip}" id="id1" disabled="true"
+                    contentStyle="width:100px;text-transform:uppercase;">
+        <f:validator binding="#{bindings.OrderDate.validator}"/>
+        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+      </af:inputDate>
+      <af:panelLabelAndMessage label="Order Hold" id="plam1">
+        <af:panelGroupLayout id="pgl2" valign="middle" layout="horizontal">
+          <af:selectBooleanCheckbox value="#{bindings.OrderHold.inputValue}" label="Order Hold"
+                                    shortDesc="#{bindings.OrderHold.hints.tooltip}" id="sbc1" disabled="true"
+                                    autoSubmit="true" simple="true"/>
+          <af:popup childCreation="deferred" autoCancel="disabled" id="orderHoldDetailsPopup">
+            <af:dialog id="d1" type="ok" title="Order Hold Details" contentWidth="720">
+              <f:facet name="buttonBar"/>
+              <af:table value="#{bindings.QueryOrderHoldsView1.collectionModel}" var="row"
+                        rows="#{bindings.QueryOrderHoldsView1.rangeSize}"
+                        emptyText="#{bindings.QueryOrderHoldsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        rowBandingInterval="0"
+                        selectedRowKeys="#{bindings.QueryOrderHoldsView1.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.QueryOrderHoldsView1.collectionModel.makeCurrent}"
+                        rowSelection="single" fetchSize="#{bindings.QueryOrderHoldsView1.rangeSize}" id="t6"
+                        columnStretching="column:c49" styleClass="AFStretchWidth" contentDelivery="immediate">
+                <af:column headerText="Hold Name" id="c48" width="150">
+                  <af:outputText value="#{row.HoldName}"
+                                 shortDesc="#{bindings.QueryOrderHoldsView1.hints.HoldName.tooltip}" id="ot45"/>
+                </af:column>
+                <af:column headerText="Hold Date" id="c47">
+                  <af:outputText value="#{row.HoldDate}"
+                                 shortDesc="#{bindings.QueryOrderHoldsView1.hints.HoldDate.tooltip}" id="ot44">
+                    <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                  </af:outputText>
+                </af:column>
+                <af:column headerText="Hold Date" id="c49" width="250"
+                           inlineStyle="padding:3px; white-space: normal !important; -webkit-white-space: normal !important;">
+                  <af:outputText value="#{row.HoldComment}"
+                                 shortDesc="#{bindings.QueryOrderHoldsView1.hints.HoldComment.tooltip}" id="ot46"/>
+                </af:column>
+                <af:column headerText="Held By" id="c50" width="150">
+                  <af:outputText value="#{row.HeldBy}" shortDesc="#{bindings.QueryOrderHoldsView1.hints.HeldBy.tooltip}"
+                                 id="ot47"/>
+                </af:column>
+              </af:table>
+            </af:dialog>
+          </af:popup>
+          <af:link text="Details" id="l1" styleClass="AdditionalLink" inlineStyle="margin-left:30px !important;"
+                   immediate="true" partialTriggers="sbc1" visible="#{bindings.OrderHold.inputValue eq true}">
+            <af:showPopupBehavior popupId="orderHoldDetailsPopup"/>
+          </af:link>
+        </af:panelGroupLayout>
+      </af:panelLabelAndMessage>
+      <af:inputText value="#{bindings.OrderTotal.inputValue}" label="Order Total"
+                    required="#{bindings.OrderTotal.hints.mandatory}"
+                    columns="#{bindings.OrderTotal.hints.displayWidth}"
+                    maximumLength="#{bindings.OrderTotal.hints.precision}"
+                    shortDesc="#{bindings.OrderTotal.hints.tooltip}" id="it4" disabled="true"
+                    contentStyle="width:100px;">
+        <f:validator binding="#{bindings.OrderTotal.validator}"/>
+        <af:convertNumber groupingUsed="false" pattern="#{bindings.OrderTotal.format}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.OrderSource.inputValue}" label="Order Source"
+                    required="#{bindings.OrderSource.hints.mandatory}"
+                    columns="#{bindings.OrderSource.hints.displayWidth}"
+                    maximumLength="#{bindings.OrderSource.hints.precision}"
+                    shortDesc="#{bindings.OrderSource.hints.tooltip}" id="it13" disabled="true">
+        <f:validator binding="#{bindings.OrderSource.validator}"/>
+      </af:inputText>
+    </af:panelFormLayout>
+    <af:separator id="s2" inlineStyle="margin-top:5px;"/>
+    <af:panelBox text="Customer" id="pb2" showDisclosure="false" inlineStyle="margin-top:10px;">
+      <f:facet name="toolbar"/>
+      <af:panelFormLayout id="pfl2" partialTriggers="b1 b2" rows="3" labelWidth="200" styleClass="panelFormLayoutClass">
+        <af:inputText value="#{bindings.OrderByAcct.inputValue}" label="Order By Account"
+                      required="#{bindings.OrderByAcct.hints.mandatory}"
+                      columns="#{bindings.OrderByAcct.hints.displayWidth}"
+                      maximumLength="#{bindings.OrderByAcct.hints.precision}"
+                      shortDesc="#{bindings.OrderByAcct.hints.tooltip}" id="it5" contentStyle="width:80px;"
+                      disabled="true">
+          <f:validator binding="#{bindings.OrderByAcct.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.BillToAcct.inputValue}" label="Bill To Account"
+                      required="#{bindings.BillToAcct.hints.mandatory}"
+                      columns="#{bindings.BillToAcct.hints.displayWidth}"
+                      maximumLength="#{bindings.BillToAcct.hints.precision}"
+                      shortDesc="#{bindings.BillToAcct.hints.tooltip}" id="it7" contentStyle="width:80px;"
+                      disabled="true">
+          <f:validator binding="#{bindings.BillToAcct.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.ShipToAcct.inputValue}" label="Ship To Account"
+                      required="#{bindings.ShipToAcct.hints.mandatory}"
+                      columns="#{bindings.ShipToAcct.hints.displayWidth}"
+                      maximumLength="#{bindings.ShipToAcct.hints.precision}"
+                      shortDesc="#{bindings.ShipToAcct.hints.tooltip}" id="it9" contentStyle="width:80px;"
+                      disabled="true">
+          <f:validator binding="#{bindings.ShipToAcct.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.OrderByCust.inputValue}" label="Order By Customer"
+                      required="#{bindings.OrderByCust.hints.mandatory}"
+                      columns="#{bindings.OrderByCust.hints.displayWidth}"
+                      maximumLength="#{bindings.OrderByCust.hints.precision}"
+                      shortDesc="#{bindings.OrderByCust.hints.tooltip}" id="it6" contentStyle="width:350px;"
+                      disabled="true">
+          <f:validator binding="#{bindings.OrderByCust.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.BillToCust.inputValue}" label="Bill To Customer"
+                      required="#{bindings.BillToCust.hints.mandatory}"
+                      columns="#{bindings.BillToCust.hints.displayWidth}"
+                      maximumLength="#{bindings.BillToCust.hints.precision}"
+                      shortDesc="#{bindings.BillToCust.hints.tooltip}" id="it8" contentStyle="width:350px;"
+                      disabled="true">
+          <f:validator binding="#{bindings.BillToCust.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.ShipToCust.inputValue}" label="Ship To Customer"
+                      required="#{bindings.ShipToCust.hints.mandatory}"
+                      columns="#{bindings.ShipToCust.hints.displayWidth}"
+                      maximumLength="#{bindings.ShipToCust.hints.precision}"
+                      shortDesc="#{bindings.ShipToCust.hints.tooltip}" id="it10" contentStyle="width:350px;"
+                      disabled="true">
+          <f:validator binding="#{bindings.ShipToCust.validator}"/>
+        </af:inputText>
+      </af:panelFormLayout>
+    </af:panelBox>
+    <af:panelTabbed position="above" id="pt1">
+      <af:showDetailItem id="tab1" text="Line Stations">
+        <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.QuerOrderLineStationsView.collectionModel}" var="row"
+                    rows="#{bindings.QuerOrderLineStationsView.rangeSize}"
+                    emptyText="#{bindings.QuerOrderLineStationsView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.QuerOrderLineStationsView.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.QuerOrderLineStationsView.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.QuerOrderLineStationsView.rangeSize}" id="t1"
+                    styleClass="AFStretchWidth" autoHeightRows="5" contentDelivery="immediate"
+                    columnStretching="column:c2" partialTriggers=":::b1 :::b2">
+            <af:column sortProperty="#{bindings.QuerOrderLineStationsView.hints.SeafarerId.name}" sortable="true"
+                       headerText="Seafarer ID" id="c3">
+              <af:outputText value="#{row.SeafarerId}"
+                             shortDesc="#{bindings.QuerOrderLineStationsView.hints.SeafarerId.tooltip}" id="ot3"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.QuerOrderLineStationsView.hints.LastName.name}" sortable="true"
+                       headerText="Last Name" id="c4" width="150">
+              <af:outputText value="#{row.LastName}"
+                             shortDesc="#{bindings.QuerOrderLineStationsView.hints.LastName.tooltip}" id="ot4"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.QuerOrderLineStationsView.hints.FirstName.name}" sortable="true"
+                       headerText="First Name" id="c5" width="150">
+              <af:outputText value="#{row.FirstName}"
+                             shortDesc="#{bindings.QuerOrderLineStationsView.hints.FirstName.tooltip}" id="ot5"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.QuerOrderLineStationsView.hints.LineItem.name}" sortable="true"
+                       headerText="Line Item" id="c2" width="150">
+              <af:outputText value="#{row.LineItem}"
+                             shortDesc="#{bindings.QuerOrderLineStationsView.hints.LineItem.tooltip}" id="ot2"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.QuerOrderLineStationsView.hints.LineNumber.name}" sortable="true"
+                       headerText="Line Number" id="c1">
+              <af:outputText value="#{row.LineNumber}"
+                             shortDesc="#{bindings.QuerOrderLineStationsView.hints.LineNumber.tooltip}" id="ot1">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.QuerOrderLineStationsView.hints.LineNumber.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Application Status" id="c42" width="130">
+              <af:outputText value="#{row.Status}"
+                             shortDesc="#{bindings.QuerOrderLineStationsView.hints.Status.tooltip}" id="ot39"/>
+            </af:column>
+            <af:column headerText="Cancelled" id="c6" width="65">
+              <af:selectBooleanCheckbox value="#{row.bindings.Cancelled.inputValue}"
+                                        label="#{row.bindings.Cancelled.label}"
+                                        shortDesc="#{bindings.QuerOrderLineStationsView.hints.Cancelled.tooltip}"
+                                        id="sbc2"/>
+            </af:column>
+            <af:column headerText="Hold" id="c7" width="50">
+              <af:selectBooleanCheckbox value="#{row.bindings.Hold.inputValue}" label="#{row.bindings.Hold.label}"
+                                        shortDesc="#{bindings.QuerOrderLineStationsView.hints.Hold.tooltip}" id="sbc3"/>
+            </af:column>
+            <af:column headerText="Shipped" id="c8" width="60">
+              <af:selectBooleanCheckbox value="#{row.bindings.Shipped.inputValue}" label="#{row.bindings.Shipped.label}"
+                                        shortDesc="#{bindings.QuerOrderLineStationsView.hints.Shipped.tooltip}"
+                                        id="sbc4"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:showDetailItem>
+      <af:showDetailItem text="Line Shipments" id="sdi1">
+        <af:panelCollection id="pc2" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.QueryOrderLineShipmentsView.collectionModel}" var="row"
+                    rows="#{bindings.QueryOrderLineShipmentsView.rangeSize}"
+                    emptyText="#{bindings.QueryOrderLineShipmentsView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.QueryOrderLineShipmentsView.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.QueryOrderLineShipmentsView.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.QueryOrderLineShipmentsView.rangeSize}" id="t2"
+                    styleClass="AFStretchWidth" autoHeightRows="5" contentDelivery="immediate"
+                    columnStretching="column:c10" partialTriggers=":::b1 :::b2">
+            <af:column headerText="Seafarer ID" id="c11">
+              <af:outputText value="#{row.SeafarerId}"
+                             shortDesc="#{bindings.QueryOrderLineShipmentsView.hints.SeafarerId.tooltip}" id="ot8"/>
+            </af:column>
+            <af:column headerText="Last Name" id="c12" width="130">
+              <af:outputText value="#{row.LastName}"
+                             shortDesc="#{bindings.QueryOrderLineShipmentsView.hints.LastName.tooltip}" id="ot9"/>
+            </af:column>
+            <af:column headerText="First Name" id="c13" width="130">
+              <af:outputText value="#{row.FirstName}"
+                             shortDesc="#{bindings.QueryOrderLineShipmentsView.hints.FirstName.tooltip}" id="ot10"/>
+            </af:column>
+            <af:column headerText="Line Item" id="c10">
+              <af:outputText value="#{row.LineItem}"
+                             shortDesc="#{bindings.QueryOrderLineShipmentsView.hints.LineItem.tooltip}" id="ot7"/>
+            </af:column>
+            <af:column headerText="Line Number" id="c9">
+              <af:outputText value="#{row.LineNumber}"
+                             shortDesc="#{bindings.QueryOrderLineShipmentsView.hints.LineNumber.tooltip}" id="ot6">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.QueryOrderLineShipmentsView.hints.LineNumber.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Ship Date" id="c16">
+              <af:outputText value="#{row.ShipDate}"
+                             shortDesc="#{bindings.QueryOrderLineShipmentsView.hints.ShipDate.tooltip}" id="ot13"
+                             inlineStyle="text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Tracking Number" id="c14">
+              <af:outputText value="#{row.TrackingNumber}"
+                             shortDesc="#{bindings.QueryOrderLineShipmentsView.hints.TrackingNumber.tooltip}"
+                             id="ot11"/>
+            </af:column>
+            <af:column headerText="Ship Method" id="c15">
+              <af:outputText value="#{row.ShipMethod}"
+                             shortDesc="#{bindings.QueryOrderLineShipmentsView.hints.ShipMethod.tooltip}" id="ot12"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:showDetailItem>
+      <af:showDetailItem text="Line Cancellations" id="sdi2">
+        <af:panelCollection id="pc3" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.QueryOrderLineCancellationsView.collectionModel}" var="row"
+                    rows="#{bindings.QueryOrderLineCancellationsView.rangeSize}"
+                    emptyText="#{bindings.QueryOrderLineCancellationsView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.QueryOrderLineCancellationsView.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.QueryOrderLineCancellationsView.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.QueryOrderLineCancellationsView.rangeSize}" id="t3"
+                    columnStretching="column:c24" styleClass="AFStretchWidth" autoHeightRows="5"
+                    contentDelivery="immediate" partialTriggers=":::b1 :::b2">
+            <af:column headerText="Seafarer ID" id="c19">
+              <af:outputText value="#{row.SeafarerId}"
+                             shortDesc="#{bindings.QueryOrderLineCancellationsView.hints.SeafarerId.tooltip}"
+                             id="ot16"/>
+            </af:column>
+            <af:column headerText="Last Name" id="c20" width="150">
+              <af:outputText value="#{row.LastName}"
+                             shortDesc="#{bindings.QueryOrderLineCancellationsView.hints.LastName.tooltip}" id="ot17"/>
+            </af:column>
+            <af:column headerText="First Name" id="c21" width="150">
+              <af:outputText value="#{row.FirstName}"
+                             shortDesc="#{bindings.QueryOrderLineCancellationsView.hints.FirstName.tooltip}" id="ot18"/>
+            </af:column>
+            <af:column headerText="Line Item" id="c18">
+              <af:outputText value="#{row.LineItem}"
+                             shortDesc="#{bindings.QueryOrderLineCancellationsView.hints.LineItem.tooltip}" id="ot15"/>
+            </af:column>
+            <af:column headerText="Line Number" id="c17">
+              <af:outputText value="#{row.LineNumber}"
+                             shortDesc="#{bindings.QueryOrderLineCancellationsView.hints.LineNumber.tooltip}" id="ot14">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.QueryOrderLineCancellationsView.hints.LineNumber.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Cancelled Code" id="c22" width="150">
+              <af:outputText value="#{row.CancelledCode}"
+                             shortDesc="#{bindings.QueryOrderLineCancellationsView.hints.CancelledCode.tooltip}"
+                             id="ot19"/>
+            </af:column>
+            <af:column headerText="Cancelled Date" id="c23">
+              <af:outputText value="#{row.CancelledDate}"
+                             shortDesc="#{bindings.QueryOrderLineCancellationsView.hints.CancelledDate.tooltip}"
+                             id="ot20" inlineStyle="text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Cancelled Comments" id="c24" width="200">
+              <af:outputText value="#{row.CancelledComments}"
+                             shortDesc="#{bindings.QueryOrderLineCancellationsView.hints.CancelledComments.tooltip}"
+                             id="ot21"
+                             inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:showDetailItem>
+      <af:showDetailItem text="Line Holds" id="sdi3">
+        <af:panelCollection id="pc4" styleClass="AFStretchWidth" inlineStyle="height:200px !important;">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.QueryOrderLineHoldsView.collectionModel}" var="row"
+                    rows="#{bindings.QueryOrderLineHoldsView.rangeSize}"
+                    emptyText="#{bindings.QueryOrderLineHoldsView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.QueryOrderLineHoldsView.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.QueryOrderLineHoldsView.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.QueryOrderLineHoldsView.rangeSize}" id="t4"
+                    styleClass="AFStretchWidth" autoHeightRows="-1" contentDelivery="immediate"
+                    columnStretching="column:c35" partialTriggers=":::b1 :::b2" scrollPolicy="scroll"
+                    inlineStyle="height:175px !important;">
+            <af:column headerText="Seafarer ID" id="c27">
+              <af:outputText value="#{row.SeafarerId}"
+                             shortDesc="#{bindings.QueryOrderLineHoldsView.hints.SeafarerId.tooltip}" id="ot24">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.QueryOrderLineHoldsView.hints.SeafarerId.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Last Name" id="c28" width="150">
+              <af:outputText value="#{row.LastName}"
+                             shortDesc="#{bindings.QueryOrderLineHoldsView.hints.LastName.tooltip}" id="ot25"/>
+            </af:column>
+            <af:column headerText="First Name" id="c29" width="150">
+              <af:outputText value="#{row.FirstName}"
+                             shortDesc="#{bindings.QueryOrderLineHoldsView.hints.FirstName.tooltip}" id="ot26"/>
+            </af:column>
+            <af:column headerText="Line Item" id="c26">
+              <af:outputText value="#{row.LineItem}"
+                             shortDesc="#{bindings.QueryOrderLineHoldsView.hints.LineItem.tooltip}" id="ot23"/>
+            </af:column>
+            <af:column headerText="Line Number" id="c25">
+              <af:outputText value="#{row.LineNumber}"
+                             shortDesc="#{bindings.QueryOrderLineHoldsView.hints.LineNumber.tooltip}" id="ot22">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.QueryOrderLineHoldsView.hints.LineNumber.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Hold Name" id="c31" width="150">
+              <af:outputText value="#{row.HoldName}"
+                             shortDesc="#{bindings.QueryOrderLineHoldsView.hints.HoldName.tooltip}" id="ot28"
+                             inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;"/>
+            </af:column>
+            <af:column headerText="Hold Date" id="c30">
+              <af:outputText value="#{row.HoldDate}"
+                             shortDesc="#{bindings.QueryOrderLineHoldsView.hints.HoldDate.tooltip}" id="ot27"
+                             inlineStyle="text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column id="c45" headerText="Held By" width="120">
+              <af:outputText value="#{row.HeldBy}" id="ot42"/>
+            </af:column>
+            <af:column headerText="Hold Comment" id="c32" width="200">
+              <af:outputText value="#{row.HoldComment}"
+                             shortDesc="#{bindings.QueryOrderLineHoldsView.hints.HoldComment.tooltip}" id="ot29"
+                             inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;"/>
+            </af:column>
+            <af:column headerText="Release Name" id="c34" width="150">
+              <af:outputText value="#{row.ReleaseName}"
+                             shortDesc="#{bindings.QueryOrderLineHoldsView.hints.ReleaseName.tooltip}" id="ot31"
+                             inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;"/>
+            </af:column>
+            <af:column headerText="Release Date" id="c33">
+              <af:outputText value="#{row.ReleaseDate}"
+                             shortDesc="#{bindings.QueryOrderLineHoldsView.hints.ReleaseDate.tooltip}" id="ot30"
+                             inlineStyle="text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column id="c46" headerText="Released By" width="120">
+              <af:outputText value="#{row.ReleasedBy}" id="ot43"/>
+            </af:column>
+            <af:column headerText="Release Comment" id="c35" width="200">
+              <af:outputText value="#{row.ReleaseComment}"
+                             shortDesc="#{bindings.QueryOrderLineHoldsView.hints.ReleaseComment.tooltip}" id="ot32"
+                             inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:showDetailItem>
+      <af:showDetailItem text="Order Holds" id="sdi4">
+        <af:panelCollection id="pc5" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.QueryOrderHoldsView.collectionModel}" var="row"
+                    rows="#{bindings.QueryOrderHoldsView.rangeSize}"
+                    emptyText="#{bindings.QueryOrderHoldsView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0" selectedRowKeys="#{bindings.QueryOrderHoldsView.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.QueryOrderHoldsView.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.QueryOrderHoldsView.rangeSize}" id="t5"
+                    columnStretching="column:c38" styleClass="AFStretchWidth" autoHeightRows="5"
+                    contentDelivery="immediate" partialTriggers=":::b1 :::b2">
+            <af:column headerText="Hold Name" id="c37" width="150">
+              <af:outputText value="#{row.HoldName}" shortDesc="#{bindings.QueryOrderHoldsView.hints.HoldName.tooltip}"
+                             id="ot34"
+                             inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;"/>
+            </af:column>
+            <af:column headerText="Hold Date" id="c36">
+              <af:outputText value="#{row.HoldDate}" shortDesc="#{bindings.QueryOrderHoldsView.hints.HoldDate.tooltip}"
+                             id="ot33" inlineStyle="text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column id="c43" headerText="Held By" width="120">
+              <af:outputText value="#{row.HeldBy}" id="ot40"/>
+            </af:column>
+            <af:column headerText="Hold Comment" id="c38" width="200">
+              <af:outputText value="#{row.HoldComment}"
+                             shortDesc="#{bindings.QueryOrderHoldsView.hints.HoldComment.tooltip}" id="ot35"
+                             inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;"/>
+            </af:column>
+            <af:column headerText="Release Name" id="c40" width="150">
+              <af:outputText value="#{row.ReleaseName}"
+                             shortDesc="#{bindings.QueryOrderHoldsView.hints.ReleaseName.tooltip}" id="ot37"
+                             inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;"/>
+            </af:column>
+            <af:column headerText="Release Date" id="c39">
+              <af:outputText value="#{row.ReleaseDate}"
+                             shortDesc="#{bindings.QueryOrderHoldsView.hints.ReleaseDate.tooltip}" id="ot36"
+                             inlineStyle="text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column id="c44" headerText="Released By" width="120">
+              <af:outputText value="#{row.ReleasedBy}" id="ot41"/>
+            </af:column>
+            <af:column headerText="Release Comment" id="c41" width="200">
+              <af:outputText value="#{row.ReleaseComment}"
+                             shortDesc="#{bindings.QueryOrderHoldsView.hints.ReleaseComment.tooltip}" id="ot38"
+                             inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:showDetailItem>
+    </af:panelTabbed>
+  </af:panelBox>
+</jsp:root>

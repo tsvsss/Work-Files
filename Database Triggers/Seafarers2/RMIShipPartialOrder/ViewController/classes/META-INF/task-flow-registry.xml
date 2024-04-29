@@ -1,0 +1,9 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<task-flow-registry xmlns="http://xmlns.oracle.com/adf/controller/rc">
+   <task-flow-descriptor path="WEB-INF/com/rmi/shippartialorder/view/shipordertaskflow/shipOrderTF.xml" id="shipOrderTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="p_batch_id"/>
+      <input-parameter name="param_user_id"/>
+      <input-parameter name="OrderNumber"/>
+      <input-parameter name="p_header_id"/>
+   </task-flow-descriptor>
+</task-flow-registry>

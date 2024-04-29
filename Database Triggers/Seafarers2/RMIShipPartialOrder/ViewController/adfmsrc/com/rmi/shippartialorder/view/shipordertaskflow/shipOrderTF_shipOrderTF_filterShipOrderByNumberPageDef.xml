@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="shipOrderTF_shipOrderTF_filterShipOrderByNumberPageDef"
+                Package="com.rmi.shippartialorder.view.shipordertaskflow" SkipValidation="true">
+  <parameters/>
+   <executables/>
+  <bindings>
+    <methodAction id="filterShipOrderByNumber" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterShipOrderByNumber" IsViewObjectMethod="false"
+                  DataControl="ShipPartialOrderAppModuleDataControl"
+                  InstanceName="data.ShipPartialOrderAppModuleDataControl.dataProvider"
+                  ReturnName="data.ShipPartialOrderAppModuleDataControl.methodResults.filterShipOrderByNumber_ShipPartialOrderAppModuleDataControl_dataProvider_filterShipOrderByNumber_result"/>
+  </bindings>
+</pageDefinition>

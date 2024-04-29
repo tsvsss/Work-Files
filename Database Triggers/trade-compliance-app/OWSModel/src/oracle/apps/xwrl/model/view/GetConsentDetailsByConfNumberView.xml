@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="GetConsentDetailsByConfNumberView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="oracle.apps.xwrl.model.view.GetConsentDetailsByConfNumberView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="p_conf_number"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[select TRUNC(consent_date) consent_date,TRUNC(consent_expire_date) consent_expire_date,consent_id from RMI_DATA_PRIVACY_CONSENT  
+where confirmation_number = :p_conf_number]]></SQLQuery>
+  <ViewAttribute
+    Name="ConsentDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CONSENT_DATE"
+    Expression="CONSENT_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="ConsentExpireDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CONSENT_EXPIRE_DATE"
+    Expression="CONSENT_EXPIRE_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="ConsentId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CONSENT_ID"
+    Expression="CONSENT_ID"
+    SQLType="NUMERIC"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="ConsentId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="oracle.apps.xwrl.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

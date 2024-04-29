@@ -1,0 +1,30 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<task-flow-registry xmlns="http://xmlns.oracle.com/adf/controller/rc">
+   <task-flow-descriptor path="WEB-INF/com/rmi/tradecompapproval/view/editseafarerdocs/EditDocumentsTaskflow.xml" id="EditDocumentsTaskflow" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="P_ESI_BATCH_ID"/>
+      <input-parameter name="P_SEAFARER_ID"/>
+      <input-parameter name="P_CALLED_FROM_TF"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/tradecompapproval/view/viewbatchseafarer/ViewBatchTCTaskFlow.xml" id="ViewBatchTCTaskFlow" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="p_batch_id"/>
+      <input-parameter name="p_calling_tf"/>
+      <input-parameter name="p_user_id"/>
+      <input-parameter name="P_ESI_ID"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/tradecompapproval/view/assignbooknumber/AssignBookNumberTaskflow.xml" id="AssignBookNumberTaskflow" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="P_HEADER_ID"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/tradecompapproval/view/validateseafarer/ValidateSeafarerTF.xml" id="ValidateSeafarerTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp">
+      <input-parameter name="P_UPDATE_SEAFARER"/>
+      <input-parameter name="P_SEAFARER_ID"/>
+      <input-parameter name="P_CALLED_FROM_TF"/>
+      <input-parameter name="P_CONTROL_FLOW"/>
+      <input-parameter name="P_ESI_ID"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="WEB-INF/com/rmi/tradecompapproval/view/seafarerdataverification/SeafarerDataVerificationTF.xml" id="SeafarerDataVerificationTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets">
+      <input-parameter name="P_VIEW_QA"/>
+   </task-flow-descriptor>
+   <task-flow-descriptor path="META-INF/adfc-config.xml" id="" type="" uses-page-fragments="false" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/com/rmi/tradecompapproval/view/editseafarerdocs/EditSeafarerDocTF.xml" id="EditSeafarerDocTF" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="facelets"/>
+   <task-flow-descriptor path="WEB-INF/com/rmi/tradecompapproval/view/enterorders/EnterOrdersTaskflow.xml" id="EnterOrdersTaskflow" type="task-flow-definition" uses-page-fragments="true" library-internal="false" remote-invocable="false" train="false" critical="false" page-type="jsp"/>
+</task-flow-registry>

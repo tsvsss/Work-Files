@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="BatchesMtcTaskFlow">
+    <default-activity>onLoadBatchPendingMTC</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__3">
+      <name>param_user_id</name>
+      <value>#{sessionScope.param_user_id}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <managed-bean id="__4">
+      <managed-bean-name>BatchesMtcBean</managed-bean-name>
+      <managed-bean-class>com.rmi.applicationEntry.view.batchesmtctaskflow.BatchesMtcBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="BatchesPendingMtc">
+      <page>/WEB-INF/com/rmi/applicationEntry/view/batchesmtctaskflow/BatchesPendingMtc.jsff</page>
+    </view>
+    <method-call id="onLoadBatchPendingMTC">
+      <method>#{bindings.onLoadBatchPendingMTC.execute}</method>
+      <outcome>
+        <fixed-outcome>onLoadBatchPendingMTC</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="SeafarerListTaskFlow">
+      <task-flow-reference>
+        <document>/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/SeafarerListTaskFlow.xml</document>
+        <id>SeafarerListTaskFlow</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>pEsiBatchId</name>
+        <value>#{data.com_rmi_applicationEntry_view_BatchesPendingMtcPageDef.EsiBatchId.inputValue}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <task-flow-call id="SeafarerListTcTaskFlow">
+      <task-flow-reference>
+        <document>/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/SeafarerListTcTaskFlow.xml</document>
+        <id>SeafarerListTcTaskFlow</id>
+      </task-flow-reference>
+      <input-parameter id="__9">
+        <name>pEsiBatchId</name>
+        <value>#{data.com_rmi_applicationEntry_view_BatchesPendingMtcPageDef.EsiBatchId.inputValue}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>onLoadBatchPendingMTC</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>onLoadBatchPendingMTC</from-outcome>
+        <to-activity-id>BatchesPendingMtc</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>BatchesPendingMtc</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>seafarerList</from-outcome>
+        <to-activity-id>SeafarerListTaskFlow</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__8">
+        <from-outcome>seafarerlisttc</from-outcome>
+        <to-activity-id>SeafarerListTcTaskFlow</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

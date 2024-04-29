@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="taskflow_MasterMyTask">
+    <default-activity>onLoadMasterMytask</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__1">
+      <name>param_user_id</name>
+      <value>#{sessionScope.param_user_id}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <managed-bean id="__4">
+      <managed-bean-name>MasterMyTaskBean</managed-bean-name>
+      <managed-bean-class>com.rmi.applicationEntry.view.mastermytasktaskflow.MasterMyTaskBean</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <view id="MasterMyTask">
+      <page>/WEB-INF/com/rmi/applicationEntry/view/mastermytasktaskflow/MasterMyTask.jsff</page>
+    </view>
+    <method-call id="onLoadMasterMytask">
+      <method>#{bindings.onLoadMasterMytask.execute}</method>
+      <outcome>
+        <fixed-outcome>onLoadMasterMytask</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="SeafarerListTaskFlow">
+      <task-flow-reference>
+        <document>/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/SeafarerListTaskFlow.xml</document>
+        <id>SeafarerListTaskFlow</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>pEsiBatchId</name>
+        <value>#{data.com_rmi_applicationEntry_view_MasterMyTaskPageDef.EsiBatchId.inputValue}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>onLoadMasterMytask</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>onLoadMasterMytask</from-outcome>
+        <to-activity-id>MasterMyTask</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>MasterMyTask</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>seafarerList</from-outcome>
+        <to-activity-id>SeafarerListTaskFlow</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

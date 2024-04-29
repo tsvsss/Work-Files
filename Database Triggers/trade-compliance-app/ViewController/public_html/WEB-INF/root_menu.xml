@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<menu xmlns="http://myfaces.apache.org/trinidad/menu">
+  <itemNode id="itemNode_Admin" label="Administration" action="adfMenu_Admin" focusViewId="/Admin"
+            rendered='#{sessionScope.UserRespAndSessionInfo.isGenericAdminOnly == "Y"}'/>
+  <itemNode id="itemNode_Submit" label="Statusboard" action="adfMenu_Statusboard" focusViewId="/Submit"/>
+  <itemNode id="itemNode_Statusboard" label="label_Statusboard" action="adfMenu_Statusboard"
+            focusViewId="/Statusboard" rendered="false"/>
+  <itemNode id="itemNode_Request" label="label_Request" action="adfMenu_Request" focusViewId="/Request" rendered="false"/>
+  <itemNode id="itemNode_UploadDocument" label="label_UploadDocument" action="adfMenu_UploadDocument"
+            focusViewId="/UploadDocument" rendered="false"/>
+  <itemNode id="itemNode_Error" label="label_Error" action="adfMenu_Error" focusViewId="/Error" rendered="false"/>
+  <itemNode id="itemNode_CaseNote" label="label_CaseNote" action="adfMenu_CaseNote" focusViewId="/CaseNote" rendered="false"/>
+</menu>

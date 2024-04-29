@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="MasterMyTaskPageDef"
+                Package="com.rmi.applicationEntry.view.mastermytasktaskflow">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="MyTaskMasterView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="MyTasksROIterator"/>
+    <iterator Binds="UserListForAdminView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="UserListForAdminROIterator"/>
+    <iterator Binds="UserReassignmentSeafarerDetailsView1" RangeSize="25"
+              DataControl="RMIApplicationEntryAppModuleDataControl" id="UserReassignmentSeafarerDetailsView1Iterator"/>
+    <searchRegion Binds="MyTasksROIterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="MyTaskMasterViewQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="returnTaskToAdmin" RequiresUpdateModel="true" Action="invokeMethod" MethodName="returnTaskToAdmin"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.returnTaskToAdmin_RMIApplicationEntryAppModuleDataControl_dataProvider_returnTaskToAdmin_result"/>
+    <methodAction id="submitBatchToAdmin" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="submitBatchToAdmin" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.submitBatchToAdmin_RMIApplicationEntryAppModuleDataControl_dataProvider_submitBatchToAdmin_result"/>
+    <methodAction id="returnBatchToAgent" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="returnBatchToAgent" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.returnBatchToAgent_RMIApplicationEntryAppModuleDataControl_dataProvider_returnBatchToAgent_result"/>
+    <attributeValues IterBinding="MyTasksROIterator" id="EsiBatchId">
+      <AttrNames>
+        <Item Value="EsiBatchId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="sendMailToAgent" RequiresUpdateModel="true" Action="invokeMethod" MethodName="sendMailToAgent"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.sendMailToAgent_RMIApplicationEntryAppModuleDataControl_dataProvider_sendMailToAgent_result">
+      <NamedData NDName="text" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="acceptBatchByOperator" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="acceptBatchByOperator" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.acceptBatchByOperator_RMIApplicationEntryAppModuleDataControl_dataProvider_acceptBatchByOperator_result"/>
+    <list IterBinding="UserListForAdminROIterator" StaticList="false" Uses="LOV_UserList" id="UserList"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <methodAction id="searchMasterMyTask" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="searchMasterMyTask" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.searchMasterMyTask_RMIApplicationEntryAppModuleDataControl_dataProvider_searchMasterMyTask_result"/>
+    <methodAction id="returnMasterTaskToAdmin" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="returnMasterTaskToAdmin" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.returnMasterTaskToAdmin_RMIApplicationEntryAppModuleDataControl_dataProvider_returnMasterTaskToAdmin_result"/>
+    <attributeValues IterBinding="MyTasksROIterator" id="BatchDate">
+      <AttrNames>
+        <Item Value="BatchDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MyTasksROIterator" id="BatchName">
+      <AttrNames>
+        <Item Value="BatchName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MyTasksROIterator" id="PurchaseOrderNumber">
+      <AttrNames>
+        <Item Value="PurchaseOrderNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MyTasksROIterator" id="BatchSubmittedDate">
+      <AttrNames>
+        <Item Value="BatchSubmittedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MyTasksROIterator" id="VesselNames">
+      <AttrNames>
+        <Item Value="VesselNames"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MyTasksROIterator" id="OrderingCustomerName">
+      <AttrNames>
+        <Item Value="OrderingCustomerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MyTasksROIterator" id="PayingCustomerName">
+      <AttrNames>
+        <Item Value="PayingCustomerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MyTasksROIterator" id="ShippingCustomerName">
+      <AttrNames>
+        <Item Value="ShippingCustomerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MyTasksROIterator" id="NoOfSeafarer">
+      <AttrNames>
+        <Item Value="NoOfSeafarer"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MyTasksROIterator" id="Region">
+      <AttrNames>
+        <Item Value="Region"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="MyTasksROIterator" id="WorkOrderNo">
+      <AttrNames>
+        <Item Value="WorkOrderNo"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="UserReassignmentSeafarerDetailsView1Iterator" id="UserReassignmentSeafarerDetailsView1">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.UserReassignmentSeafarerDetailsView"
+                      Name="UserReassignmentSeafarerDetailsView10">
+        <AttrNames>
+          <Item Value="LastName"/>
+          <Item Value="FirstName"/>
+          <Item Value="BirthDate"/>
+          <Item Value="BirthPlace"/>
+          <Item Value="Gender"/>
+          <Item Value="PassportIssuingCountry"/>
+          <Item Value="ResidenceCountry"/>
+          <Item Value="NationalityCountry"/>
+          <Item Value="VesselName"/>
+          <Item Value="IssueType"/>
+          <Item Value="IssueTypeIdCard"/>
+          <Item Value="WorkflowStatus"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="MyTasksROIterator" id="ExpeditedProcessing" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="ExpeditedProcessing"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="MyTasksROIterator" id="MyTaskMasterView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.MyTaskMasterView"
+                      Name="MyTaskMasterView0">
+        <AttrNames>
+          <Item Value="BatchDate"/>
+          <Item Value="BatchName"/>
+          <Item Value="NoOfSeafarer"/>
+          <Item Value="Region"/>
+          <Item Value="OrderSource"/>
+          <Item Value="WorkOrderNo"/>
+          <Item Value="WfStatus"/>
+          <Item Value="WorkflowStatus"/>
+          <Item Value="UserAssigned"/>
+          <Item Value="finalCra"/>
+          <Item Value="ExpeditedProcessing" Binds="ExpeditedProcessing"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

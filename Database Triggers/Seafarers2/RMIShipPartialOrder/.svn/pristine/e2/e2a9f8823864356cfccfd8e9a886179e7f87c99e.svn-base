@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DeliverToCustAccountView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.shippartialorder.adfbc.views.lov.DeliverToCustAccountView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pUserId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+<SchemaBasedProperties>
+<DISPLAYHINT
+Value="Hide"/>
+</SchemaBasedProperties>
+</Properties>
+</Variable>
+  <Variable
+    Name="pPartyName"
+    Kind="viewcriteria"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.rmi.shippartialorder.adfbc.views.lov.DeliverToCustAccountView.pPartyName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT b.cust_account_id, party_name, party_name||'('||b.account_number||')' Party_name_account ,b.account_number          
+  FROM hz_parties a,            
+       hz_cust_accounts b,            
+       rmi_seafarer.rmi_user su,            
+       rmi_seafarer.rmi_user_order_agent_map ua            
+ WHERE a.party_id = b.party_id            
+   AND b.cust_account_id = ua.ordering_agent_account_id            
+   AND b.cust_account_id = ua.ordering_agent_account_id            
+   AND ua.user_id = su.user_id(+)            
+   AND b.status = 'A'            
+   AND ua.user_id = :pUserId             
+   AND b.account_name = 'SICD'            
+   AND 'External' = (SELECT user_type            
+                       FROM rmi_seafarer.rmi_user            
+                      WHERE user_id = :pUserId)            
+UNION             
+SELECT hca.cust_account_id, hp_ship.party_name party_name,party_name||'('||hca.account_number||')' , hca.account_number            
+  FROM hz_parties hp_ship, hz_cust_accounts hca            
+ WHERE 1 = 1            
+   AND hca.account_name = 'SICD'            
+   AND hca.party_id = hp_ship.party_id            
+   AND 'Internal' = (SELECT user_type            
+                       FROM rmi_seafarer.rmi_user            
+                      WHERE user_id = :pUserId)         
+                      order by party_name]]></SQLQuery>
+  <ViewAttribute
+    Name="CustAccountId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Long"
+    ColumnType="LONGINT"
+    AliasName="CUST_ACCOUNT_ID"
+    Expression="CUST_ACCOUNT_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="16"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartyName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="360"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_NAME"
+    Expression="PARTY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="360"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartyNameAccount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="392"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_NAME_ACCOUNT"
+    Expression="PARTY_NAME_ACCOUNT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="392"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AccountNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACCOUNT_NUMBER"
+    Expression="ACCOUNT_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="DeliverToCustAccountViewCriteria"
+    ViewObjectName="com.rmi.shippartialorder.adfbc.views.lov.DeliverToCustAccountView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="Never"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="false"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="DeliverToCustAccountViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="PartyNameAccount"
+        ViewAttribute="PartyNameAccount"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Value=":pPartyName"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.shippartialorder.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

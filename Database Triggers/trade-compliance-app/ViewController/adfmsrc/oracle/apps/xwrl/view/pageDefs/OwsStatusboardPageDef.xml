@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="OwsStatusboardPageDef"
+                Package="oracle.apps.xwrl.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="XwrlRequestsView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlRequestsView1Iterator"/>
+    <searchRegion Criteria="StatusboardCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="XwrlRequestsView1Iterator" id="StatusboardCriteriaQuery"/>
+    <iterator Binds="CaseStateLOV1" RangeSize="25" DataControl="AppModuleDataControl" id="CaseStateLOV1Iterator"/>
+    <iterator Binds="CaseWorkflowLOV1" RangeSize="25" DataControl="AppModuleDataControl" id="CaseWorkflowLOV1Iterator"/>
+    <iterator Binds="PriorityLOV1" RangeSize="25" DataControl="AppModuleDataControl" id="PriorityLOV1Iterator"/>
+    <iterator Binds="CaseDepartmentsLOV1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="CaseDepartmentsLOV1Iterator"/>
+    <iterator Binds="OfficeLOV1" RangeSize="25" DataControl="AppModuleDataControl" id="OfficeLOV1Iterator"/>
+    <iterator Binds="CaseStatusLOV1" RangeSize="25" DataControl="AppModuleDataControl" id="CaseStatusLOV1Iterator"/>
+    <iterator Binds="GetCaseDocumentsLOV1" RangeSize="-1" DataControl="AppModuleDataControl"
+              id="GetCaseDocumentsLOV1Iterator"/>
+    <iterator Binds="CaseTypeLOV1" RangeSize="25" DataControl="AppModuleDataControl" id="CaseTypeLOV1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="DateOfBirth">
+      <AttrNames>
+        <Item Value="DateOfBirth"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="Sex">
+      <AttrNames>
+        <Item Value="Sex"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="PassportNumber">
+      <AttrNames>
+        <Item Value="PassportNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="EntityType">
+      <AttrNames>
+        <Item Value="EntityType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="PassportIssuingCountryCode">
+      <AttrNames>
+        <Item Value="PassportIssuingCountryCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="CorpResidenceCountryCode">
+      <AttrNames>
+        <Item Value="CorpResidenceCountryCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="CitizenshipCountryCode">
+      <AttrNames>
+        <Item Value="CitizenshipCountryCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="StatusUpdatedBy">
+      <AttrNames>
+        <Item Value="StatusUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="StatusDate">
+      <AttrNames>
+        <Item Value="StatusDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="Notes">
+      <AttrNames>
+        <Item Value="Notes"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="NameIdentifier">
+      <AttrNames>
+        <Item Value="NameIdentifier"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="OfacListIsEntyOnList">
+      <AttrNames>
+        <Item Value="OfacListIsEntyOnList"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="OfacListEdocId">
+      <AttrNames>
+        <Item Value="OfacListEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="AliasWcScreeningRequestId">
+      <AttrNames>
+        <Item Value="AliasWcScreeningRequestId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="CreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="WcLastUpdatedBy">
+      <AttrNames>
+        <Item Value="WcLastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="LastUpdateDate">
+      <AttrNames>
+        <Item Value="LastUpdateDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="LastUpdateLogin">
+      <AttrNames>
+        <Item Value="LastUpdateLogin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="ResidenceCountryCode">
+      <AttrNames>
+        <Item Value="ResidenceCountryCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="NotifyUserUponApproval">
+      <AttrNames>
+        <Item Value="NotifyUserUponApproval"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="TypeId">
+      <AttrNames>
+        <Item Value="TypeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="WcCityListId">
+      <AttrNames>
+        <Item Value="WcCityListId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="CityName">
+      <AttrNames>
+        <Item Value="CityName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="ImoNumber">
+      <AttrNames>
+        <Item Value="ImoNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="SentToLegalBy">
+      <AttrNames>
+        <Item Value="SentToLegalBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="ScreeningRequestViewIterator" id="RequiresLegalApproval">
+      <AttrNames>
+        <Item Value="RequiresLegalApproval"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XwrlRequestsView1Iterator" id="XwrlRequestsView1">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.XwrlRequestsView" Name="XwrlRequestsView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ResubmitId"/>
+          <Item Value="SourceTable"/>
+          <Item Value="SourceId"/>
+          <Item Value="WcScreeningRequestId"/>
+          <Item Value="Server"/>
+          <Item Value="Path"/>
+          <Item Value="JobId"/>
+          <Item Value="Matches"/>
+          <Item Value="Status"/>
+          <Item Value="ErrorCode"/>
+          <Item Value="ErrorMessage"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="CaseId"/>
+          <Item Value="NameScreened"/>
+          <Item Value="DateOfBirth"/>
+          <Item Value="ImoNumber"/>
+          <Item Value="VesselIndicator"/>
+          <Item Value="Department"/>
+          <Item Value="Office"/>
+          <Item Value="CaseState"/>
+          <Item Value="CaseStatus"/>
+          <Item Value="CaseWorkflow"/>
+          <Item Value="Priority"/>
+          <Item Value="RiskLevel"/>
+          <Item Value="DocumentType"/>
+          <Item Value="ClosedDate"/>
+          <Item Value="AssignedTo"/>
+          <Item Value="PriorityAttr"/>
+          <Item Value="RiskLevelAttr"/>
+          <Item Value="CountryOfResidence"/>
+          <Item Value="CityOfResidenceId"/>
+          <Item Value="SubdivisionCityOfResidence"/>
+          <Item Value="OfficeAttr"/>
+          <Item Value="DeptAttr"/>
+          <Item Value="CaseStateAttr"/>
+          <Item Value="CaseStatusAttr"/>
+          <Item Value="CaseWorkFlowAttr"/>
+          <Item Value="RejectionReason"/>
+          <Item Value="RejectionAttr"/>
+          <Item Value="DocTypeAttr"/>
+          <Item Value="AssignedToAttr"/>
+          <Item Value="RistrictedCountryAttr"/>
+          <Item Value="CreatedByAttr"/>
+          <Item Value="LastUpdatedByAttr"/>
+          <Item Value="CountryOfAddress"/>
+          <Item Value="CountryOfNationality"/>
+          <Item Value="CountryOfBirth"/>
+          <Item Value="CountryOfRegistration"/>
+          <Item Value="CountryOfOperation"/>
+          <Item Value="BatchId"/>
+          <Item Value="Opencnt"/>
+          <Item Value="Departmentext"/>
+          <Item Value="SentToLegalBy"/>
+          <Item Value="SentToLegalDate"/>
+          <Item Value="Finnumber"/>
+          <Item Value="Gender"/>
+          <Item Value="PassportNumber"/>
+          <Item Value="Corpnumber"/>
+          <Item Value="Doctype"/>
+          <Item Value="EsrUserEmailAddress"/>
+          <Item Value="EsrUserId"/>
+          <Item Value="ErbUserEmailAddress"/>
+          <Item Value="ErbUserId"/>
+          <Item Value="PermanentAddress"/>
+          <Item Value="LegalReviewcnt"/>
+          <Item Value="Possiblecnt"/>
+          <Item Value="ProvisionalRequest"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XwrlRequestsView1Iterator" id="Execute" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <list IterBinding="CaseStateLOV1Iterator" ListOperMode="multiSelect" ListIter="CaseStateLOV1Iterator"
+          id="CaseStateLOV1" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Optionkey"/>
+      </AttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Optionvalue"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list IterBinding="CaseWorkflowLOV1Iterator" ListOperMode="multiSelect" ListIter="CaseWorkflowLOV1Iterator"
+          id="CaseWorkflowLOV1" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Optionkey"/>
+      </AttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Optionvalue"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list IterBinding="PriorityLOV1Iterator" ListOperMode="multiSelect" ListIter="PriorityLOV1Iterator"
+          id="PriorityLOV1" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Optionkey"/>
+      </AttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Optionvalue"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list IterBinding="CaseDepartmentsLOV1Iterator" ListOperMode="multiSelect" ListIter="CaseDepartmentsLOV1Iterator"
+          id="CaseDepartmentsLOV1" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Optionkey"/>
+      </AttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Optionvalue"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list IterBinding="OfficeLOV1Iterator" ListOperMode="multiSelect" ListIter="OfficeLOV1Iterator" id="OfficeLOV1"
+          SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Optionkey"/>
+      </AttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Optionvalue"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list IterBinding="CaseStatusLOV1Iterator" ListOperMode="navigation" ListIter="CaseStatusLOV1Iterator"
+          id="CaseStatusLOV1" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Optionvalue"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="GetCaseDocumentsLOV1Iterator" ListOperMode="multiSelect" ListIter="GetCaseDocumentsLOV1Iterator"
+          id="GetCaseDocumentsLOV1" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Optionkey"/>
+      </AttrNames>
+      <ListDisplayAttrNames>
+        <Item Value="Optionvalue"/>
+      </ListDisplayAttrNames>
+    </list>
+    <list IterBinding="CaseTypeLOV1Iterator" ListOperMode="navigation" ListIter="CaseTypeLOV1Iterator"
+          id="CaseTypeLOV1" DTSupportsMRU="true" SelectItemValueMode="ListObject">
+      <AttrNames>
+        <Item Value="Optionvalue"/>
+      </AttrNames>
+    </list>
+    <action id="Commit" DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+  </bindings>
+</pageDefinition>

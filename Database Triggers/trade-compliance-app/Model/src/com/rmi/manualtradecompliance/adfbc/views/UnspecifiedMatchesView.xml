@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="UnspecifiedMatchesView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.manualtradecompliance.adfbc.views.UnspecifiedMatchesView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pWcScreeningBV"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+    <TransientExpression
+      trustMode="untrusted"
+      Name="expression"><![CDATA[adf.context.sessionScope.wcScreeningRequestId]]></TransientExpression>
+  </Variable>
+  <!-- T20211207.0025 - Legacy Vettings - Error Message -->
+  <SQLQuery><![CDATA[select count(*) as UNSPECIFIEDMATCHES from WC_CONTENT_V     
+where MATCHSTATUS NOT IN ('POSSIBLE','POSITIVE','NEGATIVE') AND     
+WC_MATCHES_ID in (SELECT WC_MATCHES_ID FROM WC_MATCHES     
+            WHERE WC_SCREENING_REQUEST_ID=:pWcScreeningBV)]]></SQLQuery>
+  <ViewAttribute
+    Name="Unspecifiedmatches"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="UNSPECIFIEDMATCHES"
+    Expression="UNSPECIFIEDMATCHES"
+    SQLType="INTEGER"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Unspecifiedmatches"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.manualtradecompliance.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

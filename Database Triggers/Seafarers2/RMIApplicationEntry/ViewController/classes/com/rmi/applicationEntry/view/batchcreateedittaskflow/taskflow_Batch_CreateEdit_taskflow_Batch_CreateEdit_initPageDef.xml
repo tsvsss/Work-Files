@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="taskflow_Batch_CreateEdit_taskflow_Batch_CreateEdit_initPageDef"
+                Package="com.rmi.applicationEntry.view.batchcreateedittaskflow" SkipValidation="true">
+  <parameters/>
+   <executables>
+    <variableIterator id="variables"/>
+  </executables>
+  <bindings>
+    <methodAction id="userHasOperator" RequiresUpdateModel="true" Action="invokeMethod" MethodName="userHasOperator"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.userHasOperator_RMIApplicationEntryAppModuleDataControl_dataProvider_userHasOperator_result">
+      <NamedData NDName="user_id" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="getUserType" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getUserType"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getUserType_RMIApplicationEntryAppModuleDataControl_dataProvider_getUserType_result">
+      <NamedData NDName="user_id" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="getUserTypeForApplicationSource" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getUserTypeForApplicationSource" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getUserTypeForApplicationSource_RMIApplicationEntryAppModuleDataControl_dataProvider_getUserTypeForApplicationSource_result">
+      <NamedData NDName="user_id" NDValue="" NDType="java.lang.Integer"/>
+      <NamedData NDName="batch_mode" NDValue="#{pageFlowScope.param_batch_mode}" NDType="java.lang.String"/>
+      <NamedData NDName="batch_id" NDValue="#{pageFlowScope.param_batch_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

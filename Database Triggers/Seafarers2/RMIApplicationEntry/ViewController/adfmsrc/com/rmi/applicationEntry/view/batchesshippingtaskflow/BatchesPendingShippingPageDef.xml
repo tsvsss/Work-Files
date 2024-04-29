@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="BatchesPendingShippingPageDef"
+                Package="com.rmi.applicationEntry.view.batchesshippingtaskflow">
+  <parameters/>
+ <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BatchesPendingShippingView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="BatchesPendingShippingViewIterator"/>
+    <searchRegion Binds="BatchesPendingShippingViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="BatchesPendingShippingViewQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="assignTaskToUserShipping" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="assignTaskToUserShipping" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.assignTaskToUserShipping_RMIApplicationEntryAppModuleDataControl_dataProvider_assignTaskToUserShipping_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <tree IterBinding="BatchesPendingShippingViewIterator" id="BatchesPendingShippingView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.BatchesPendingShippingView"
+                      Name="BatchesPendingShippingView0">
+        <AttrNames>
+          <Item Value="BatchDate"/>
+          <Item Value="BatchName"/>
+          <Item Value="NoOfSeafarer"/>
+          <Item Value="Region"/>
+          <Item Value="WorkOrderNo"/>
+          <Item Value="OrderType"/>
+          <Item Value="CraCount"/>
+          <Item Value="ExpeditedProcessing" Binds="ExpeditedProcessing"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="BatchesPendingShippingViewIterator" id="ExpeditedProcessing" DTSupportsMRU="false"
+            StaticList="true">
+      <AttrNames>
+        <Item Value="ExpeditedProcessing"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+  </bindings>
+</pageDefinition>
+

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BatchSeafarerLogicalLink"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.links.BatchSeafarerLogicalLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="viewBatchVO"
+    Cardinality="1"
+    Source="true"
+    Owner="com.rmi.tradecompapproval.adfbc.views.RmiBatchView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="viewBatchVO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="com.rmi.tradecompapproval.adfbc.views.RmiBatchView.EsiBatchId"/>
+    </AttrArray>
+    <AttrArray Name="UnboundAttributes">
+      <Item Value="EsiBatchId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="viewSeafarerVO"
+    Cardinality="-1"
+    Owner="com.rmi.tradecompapproval.adfbc.views.RmiSeafarerView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="viewSeafarerVO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="com.rmi.tradecompapproval.adfbc.views.RmiSeafarerView.EsiBatchId"/>
+    </AttrArray>
+    <AttrArray Name="UnboundAttributes">
+      <Item Value="EsiBatchId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

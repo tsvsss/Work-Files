@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CustNameByIdView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  FetchMode="FETCH_AS_NEEDED">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.shippartialorder.adfbc.views.CustNameByIdView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pCustAccountId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[SELECT hca.cust_account_id, hp_ship.party_name party_name ,party_name||'('||hca.account_number||')' Party_name_account        
+  FROM hz_parties hp_ship, hz_cust_accounts hca        
+ WHERE 1 = 1        
+   AND hca.account_name = 'SICD'        
+   AND hca.party_id = hp_ship.party_id    
+   and hca.cust_account_id = :pCustAccountId]]></SQLQuery>
+  <ViewAttribute
+    Name="CustAccountId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="LONGINT"
+    AliasName="CUST_ACCOUNT_ID"
+    Expression="CUST_ACCOUNT_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="PartyName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="360"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_NAME"
+    Expression="PARTY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="360"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartyNameAccount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="392"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_NAME_ACCOUNT"
+    Expression="PARTY_NAME_ACCOUNT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="392"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="CustAccountId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.shippartialorder.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

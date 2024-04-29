@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SqcDetailsFunctionsLovView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.lovs.SqcDetailsFunctionsLovView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pFunctionName"
+    Kind="viewcriteria"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.rmi.tradecompapproval.adfbc.views.lovs.SqcDetailsFunctionsLovView.pFunctionName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT QLFC.QUALIFICATION_ID QUALIFICATION_ID,     
+       L_FNCT.FUNCTION_SEQUENCE L_FNCT_FUNCTION_SEQUENCE,     
+       L_GRDE.GRADE_CODE L_GRDE_GRADE_CODE,     
+       L_FNCT.FUNCTION_NAME L_FNCT_FUNCTION_NAME,     
+       QLFC.QUALIFICATION_LEVEL QUALIFICATION_LEVEL,     
+       L_LMTN.LIMITATION_NAME L_LMTN_LIMITATION_NAME,     
+       L_FNCT.STATUS L_FNCT_STATUS,     
+       L_FNCT.FUNCTION_ID     
+FROM SICD_QUALIFICATIONS QLFC,     
+     SICD_GRADES L_GRDE,     
+     SICD_FUNCTIONS L_FNCT,     
+     SICD_LIMITATIONS L_LMTN     
+WHERE QLFC.GRADE_ID = L_GRDE.GRADE_ID AND     
+      QLFC.FUNCTION_ID = L_FNCT.FUNCTION_ID AND     
+      QLFC.LIMITATION_ID = L_LMTN.LIMITATION_ID AND     
+     /* CG$LOVI_WC_START LOV_QUALIFICATIONS1 210 */     
+      (QLFC.grade_id IN (SELECT UNIQUE p.grade_id FROM SICD_POSITIONS p ,SICD_CAPACITIES c      
+                          WHERE p.capacity_id = c.capacity_id AND c.capacity_type = 'SQC'))     
+      /* CG$LOVI_WC_END LOV_QUALIFICATIONS1 210 */     
+ORDER BY L_FNCT_FUNCTION_SEQUENCE]]></SQLQuery>
+  <ViewAttribute
+    Name="QualificationId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="QUALIFICATION_ID"
+    Expression="QUALIFICATION_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="LFnctFunctionSequence"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="L_FNCT_FUNCTION_SEQUENCE"
+    Expression="L_FNCT_FUNCTION_SEQUENCE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="LGrdeGradeCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="L_GRDE_GRADE_CODE"
+    Expression="L_GRDE_GRADE_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LFnctFunctionName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="250"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="L_FNCT_FUNCTION_NAME"
+    Expression="L_FNCT_FUNCTION_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="QualificationLevel"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="QUALIFICATION_LEVEL"
+    Expression="QUALIFICATION_LEVEL"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="15"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LLmtnLimitationName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="L_LMTN_LIMITATION_NAME"
+    Expression="L_LMTN_LIMITATION_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LFnctStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="L_FNCT_STATUS"
+    Expression="L_FNCT_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FunctionId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="FUNCTION_ID"
+    Expression="FUNCTION_ID"
+    SQLType="NUMERIC"/>
+  <ViewCriteria
+    Name="SqcDetailsFunctionsLovViewCriteria"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.SqcDetailsFunctionsLovView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="Never"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="false"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+  </ViewCriteria>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

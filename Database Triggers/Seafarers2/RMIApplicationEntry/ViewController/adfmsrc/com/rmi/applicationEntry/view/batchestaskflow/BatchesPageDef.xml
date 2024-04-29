@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="BatchesPageDef"
+                Package="com.rmi.applicationEntry.view.batchestaskflow">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BatchesView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="BatchesROIterator"/>
+    <iterator Binds="PendingBatchesView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="PendingBatchesROIterator" ChangeEventPolicy="none"/>
+    <searchRegion Binds="PendingBatchesROIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="PendingBatchesROQuery"/>
+    <iterator Binds="SubmittedBatchesView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="SubmittedBatchesROIterator" ChangeEventPolicy="none"/>
+    <searchRegion Binds="SubmittedBatchesROIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="SubmittedBatchesROQuery"/>
+    <iterator Binds="SeafarersDetailsView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="SeafarersDetailsROIterator"/>
+    <iterator Binds="SeafarerOcDetailsView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="SeafarerOcDetailsROIterator"/>
+    <iterator Binds="SeafarerSqcDocumentDetailsView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="SeafarerSqcDetailsROIterator"/>
+    <iterator Binds="BatchesRejectedView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="BatchesRejectedROIterator"/>
+    <searchRegion Binds="BatchesRejectedROIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="BatchesRejectedROQuery"/>
+    <iterator Binds="AccountStatusView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="AccountStatusViewIterator"/>
+   <iterator Binds="CraMailDualView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="CraMailDualViewIterator"/>
+    <searchRegion Binds="AccountStatusViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="AccountStatusViewQuery"/>
+    <iterator Binds="SubmittedBatchesForAccountStatusView" RangeSize="25"
+              DataControl="RMIApplicationEntryAppModuleDataControl" id="SubmittedBatchesForAccountStatusViewIterator"/>
+    <iterator Binds="SeafarersDetailsAccountStatusView" RangeSize="25"
+              DataControl="RMIApplicationEntryAppModuleDataControl" id="SeafarersDetailsAccountStatusViewIterator"/>
+    <iterator id="SeafarerOcDetailsAccountViewIterator" Binds="SeafarerOcDetailsAccountView"
+              DataControl="RMIApplicationEntryAppModuleDataControl" RangeSize="25"/>
+    <iterator id="SeafarerSqcDetailsAccountViewIterator" Binds="SeafarerSqcDetailsAccountView"
+              DataControl="RMIApplicationEntryAppModuleDataControl" RangeSize="25"/>
+    <iterator Binds="OrderHoldView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="OrderHoldViewIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="deleteBatch" RequiresUpdateModel="true" Action="invokeMethod" MethodName="deleteBatch"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.deleteBatch_RMIApplicationEntryAppModuleDataControl_dataProvider_deleteBatch_result">
+      <NamedData NDName="batchId" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="refreshBatchesVo" RequiresUpdateModel="true" Action="invokeMethod" MethodName="refreshBatchesVo"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.refreshBatchesVo_RMIApplicationEntryAppModuleDataControl_dataProvider_refreshBatchesVo_result"/>
+    <methodAction id="onLoadBatchesVO" RequiresUpdateModel="true" Action="invokeMethod" MethodName="onLoadBatchesVO"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.onLoadBatchesVO_RMIApplicationEntryAppModuleDataControl_dataProvider_onLoadBatchesVO_result">
+      <NamedData NDName="user_id" NDValue="#{pageFlowScope.param_user_id}" NDType="java.lang.Integer"/>
+      <NamedData NDName="batch_status" NDValue="#{pageFlowScope.param_batch_status}" NDType="java.lang.String"/>
+    </methodAction>
+    <button IterBinding="BatchesROIterator" id="tranSelect" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="tranSelect"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="sendmail" RequiresUpdateModel="true" Action="invokeMethod" MethodName="sendmail"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.sendmail_RMIApplicationEntryAppModuleDataControl_dataProvider_sendmail_result"/>
+    <tree IterBinding="PendingBatchesROIterator" id="PendingBatchesRO">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.PendingBatchesView"
+                      Name="PendingBatchesRO0">
+        <AttrNames>
+          <Item Value="BatchName"/>
+          <Item Value="BatchDate"/>
+          <Item Value="BatchStatus"/>
+          <Item Value="PurchaseOrderNumber"/>
+          <Item Value="VesselNames"/>
+          <Item Value="NoOfSeafarer"/>
+          <Item Value="tranDelete" Binds="tranDelete"/>
+          <Item Value="ExpeditedProcessingPending" Binds="ExpeditedProcessingPending"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="PendingBatchesROIterator" id="tranDelete" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="tranDelete"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="PendingBatchesROIterator" id="EsiBatchId1">
+      <AttrNames>
+        <Item Value="EsiBatchId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="SubmittedBatchesROIterator" id="SubmittedBatchesRO" ChangeEventPolicy="none">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SubmittedBatchesView"
+                      Name="SubmittedBatchesRO0">
+        <AttrNames>
+          <Item Value="BatchName"/>
+          <Item Value="BatchDate"/>
+          <Item Value="BatchStatus"/>
+          <Item Value="PurchaseOrderNumber"/>
+          <Item Value="VesselNames"/>
+          <Item Value="BatchSubmittedDate"/>
+          <Item Value="NoOfSeafarer"/>
+          <Item Value="WorkOrderNo"/>
+          <Item Value="WorkflowStatus"/>
+          <Item Value="ExpeditedProcessingSubmit" Binds="ExpeditedProcessingSubmit"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SubmittedBatchesROIterator" id="BatchName1">
+      <AttrNames>
+        <Item Value="BatchName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesROIterator" id="BatchDate1">
+      <AttrNames>
+        <Item Value="BatchDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesROIterator" id="PurchaseOrderNumber1">
+      <AttrNames>
+        <Item Value="PurchaseOrderNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesROIterator" id="VesselNames">
+      <AttrNames>
+        <Item Value="VesselNames"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesROIterator" id="BatchSubmittedDate1">
+      <AttrNames>
+        <Item Value="BatchSubmittedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesROIterator" id="NoOfSeafarer1">
+      <AttrNames>
+        <Item Value="NoOfSeafarer"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesROIterator" id="WorkOrderNo1">
+      <AttrNames>
+        <Item Value="WorkOrderNo"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="SeafarersDetailsROIterator" id="SeafarersDetailsRO">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarersDetailsView"
+                      Name="SeafarersDetailsRO0">
+        <AttrNames>
+          <Item Value="LastName"/>
+          <Item Value="FirstName"/>
+          <Item Value="BirthDate"/>
+          <Item Value="BirthPlace"/>
+          <Item Value="Gender"/>
+          <Item Value="PassportIssuingCountry"/>
+          <Item Value="ResidenceCountry"/>
+          <Item Value="IssueType"/>
+          <Item Value="IssueTypeIdCard"/>
+          <Item Value="WorkflowStatus"/>
+          <Item Value="NationalityCountry"/>
+          <Item Value="VesselName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="getlinkforBatchespage" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getlinkforBatchespage" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getlinkforBatchespage_RMIApplicationEntryAppModuleDataControl_dataProvider_getlinkforBatchespage_result">
+      <NamedData NDName="code" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="SeafarerOcDetailsROIterator" id="SeafarerOcDetailsRO">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarerOcDetailsView"
+                      Name="SeafarerOcDetailsRO0">
+        <AttrNames>
+          <Item Value="GradeId"/>
+          <Item Value="CocCountry"/>
+          <Item Value="CocIssueDate"/>
+          <Item Value="CocExpirationDate"/>
+          <Item Value="Limitation"/>
+          <Item Value="CocDoc"/>
+          <Item Value="EdocId"/>
+          <Item Value="CraRequired" Binds="CraRequired"/>
+          <Item Value="GradeCode"/>
+          <Item Value="RestrictionName"/>
+          <Item Value="CocIdentifier"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="SeafarerSqcDetailsROIterator" id="SeafarerSqcDetailsRO">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarerSqcDetailsView"
+                      Name="SeafarerSqcDetailsRO0">
+        <AttrNames>
+          <Item Value="GradeId"/>
+          <Item Value="CocCountry"/>
+          <Item Value="CocIssueDate"/>
+          <Item Value="CocExpirationDate"/>
+          <Item Value="CocDoc"/>
+          <Item Value="SupportDoc"/>
+          <Item Value="EdocId"/>
+          <Item Value="SupportEdocId"/>
+          <Item Value="GradeCode"/>
+          <Item Value="CocIdentifier"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="getUsertypeForBatchesPage" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getUsertypeForBatchesPage" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getUsertypeForBatchesPage_RMIApplicationEntryAppModuleDataControl_dataProvider_getUsertypeForBatchesPage_result"/>
+    <attributeValues IterBinding="SeafarersDetailsROIterator" id="ConsentEdocId">
+      <AttrNames>
+        <Item Value="ConsentEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarersDetailsROIterator" id="tranConsentAckNo">
+      <AttrNames>
+        <Item Value="tranConsentAckNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarersDetailsROIterator" id="trnConsentStartDate">
+      <AttrNames>
+        <Item Value="trnConsentStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarersDetailsROIterator" id="tranConsentExpDate">
+      <AttrNames>
+        <Item Value="tranConsentExpDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="BatchesRejectedROIterator" id="BatchesRejectedRO">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.BatchesRejectedView"
+                      Name="BatchesRejectedRO0">
+        <AttrNames>
+          <Item Value="BatchName"/>
+          <Item Value="BatchDate"/>
+          <Item Value="BatchStatus"/>
+          <Item Value="PurchaseOrderNumber"/>
+          <Item Value="VesselNames"/>
+          <Item Value="BatchSubmittedDate"/>
+          <Item Value="NoOfSeafarer"/>
+          <Item Value="WorkOrderNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SubmittedBatchesROIterator" id="WorkflowStatus">
+      <AttrNames>
+        <Item Value="WorkflowStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="searchBatch" RequiresUpdateModel="true" Action="invokeMethod" MethodName="searchBatch"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.searchBatch_RMIApplicationEntryAppModuleDataControl_dataProvider_searchBatch_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <button IterBinding="SeafarerOcDetailsAccountViewIterator" id="CraRequired" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="CraRequired"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="AccountStatusViewIterator" id="AccountStatusView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.AccountStatusView"
+                      Name="AccountStatusView0">
+        <AttrNames>
+          <Item Value="TrxNumber"/>
+          <Item Value="TrxDate"/>
+          <Item Value="AmountDueOriginal"/>
+          <Item Value="AmountDueRemaining"/>
+          <Item Value="WorkOrder"/>
+          <Item Value="PurchaseOrder"/>
+          <Item Value="InvoiceSent"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="email_invoice" RequiresUpdateModel="true" Action="invokeMethod" MethodName="email_invoice"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.email_invoice_RMIApplicationEntryAppModuleDataControl_dataProvider_email_invoice_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="filterSubmittedbatchesForPopup" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterSubmittedbatchesForPopup" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.filterSubmittedbatchesForPopup_RMIApplicationEntryAppModuleDataControl_dataProvider_filterSubmittedbatchesForPopup_result"/>
+    <methodAction id="resetSubmittedBatches" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="resetSubmittedBatches" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.resetSubmittedBatches_RMIApplicationEntryAppModuleDataControl_dataProvider_resetSubmittedBatches_result"/>
+    <attributeValues IterBinding="SeafarersDetailsROIterator" id="IssueType">
+      <AttrNames>
+        <Item Value="IssueType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarersDetailsROIterator" id="IssueTypeIdCard">
+      <AttrNames>
+        <Item Value="IssueTypeIdCard"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="PendingBatchesROIterator" id="ExpeditedProcessingPending" DTSupportsMRU="false"
+            StaticList="true">
+      <AttrNames>
+        <Item Value="ExpeditedProcessingPending"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <button IterBinding="SubmittedBatchesROIterator" id="ExpeditedProcessingSubmit" DTSupportsMRU="false"
+            StaticList="true">
+      <AttrNames>
+        <Item Value="ExpeditedProcessingSubmit"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="SeafarersDetailsROIterator" id="AffidavitEdocId">
+      <AttrNames>
+        <Item Value="AffidavitEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarersDetailsROIterator" id="AdditionalDocEdocId">
+      <AttrNames>
+        <Item Value="AdditionalDocEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesROIterator" id="OrderingCustomerName">
+      <AttrNames>
+        <Item Value="OrderingCustomerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesROIterator" id="PayingCustomerName">
+      <AttrNames>
+        <Item Value="PayingCustomerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesROIterator" id="ShippingCustomerName">
+      <AttrNames>
+        <Item Value="ShippingCustomerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CraMailDualViewIterator" id="TransInvoiceNumber">
+      <AttrNames>
+        <Item Value="TransInvoiceNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CraMailDualViewIterator" id="TransInvoiceDate">
+      <AttrNames>
+        <Item Value="TransInvoiceDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CraMailDualViewIterator" id="TransWorkOrderNumber">
+      <AttrNames>
+        <Item Value="TransWorkOrderNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="validateSearchInvoice" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="validateSearchInvoice" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.validateSearchInvoice_RMIApplicationEntryAppModuleDataControl_dataProvider_validateSearchInvoice_result"/>
+    <methodAction id="searchInvoice" RequiresUpdateModel="true" Action="invokeMethod" MethodName="searchInvoice"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.searchInvoice_RMIApplicationEntryAppModuleDataControl_dataProvider_searchInvoice_result"/>
+    <methodAction id="getAccountStatusFilteredRows" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getAccountStatusFilteredRows" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getAccountStatusFilteredRows_RMIApplicationEntryAppModuleDataControl_dataProvider_getAccountStatusFilteredRows_result"/>
+    <attributeValues IterBinding="CraMailDualViewIterator" id="TransInvoiceDateTo">
+      <AttrNames>
+        <Item Value="TransInvoiceDateTo"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="viewInvoice" RequiresUpdateModel="true" Action="invokeMethod" MethodName="viewInvoice"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.viewInvoice_RMIApplicationEntryAppModuleDataControl_dataProvider_viewInvoice_result"/>
+    <attributeValues IterBinding="SubmittedBatchesForAccountStatusViewIterator" id="BatchName">
+      <AttrNames>
+        <Item Value="BatchName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesForAccountStatusViewIterator" id="BatchDate">
+      <AttrNames>
+        <Item Value="BatchDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesForAccountStatusViewIterator" id="PurchaseOrderNumber">
+      <AttrNames>
+        <Item Value="PurchaseOrderNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesForAccountStatusViewIterator" id="VesselNames1">
+      <AttrNames>
+        <Item Value="VesselNames"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesForAccountStatusViewIterator" id="BatchSubmittedDate">
+      <AttrNames>
+        <Item Value="BatchSubmittedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesForAccountStatusViewIterator" id="NoOfSeafarer">
+      <AttrNames>
+        <Item Value="NoOfSeafarer"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesForAccountStatusViewIterator" id="WorkOrderNo">
+      <AttrNames>
+        <Item Value="WorkOrderNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesForAccountStatusViewIterator" id="WorkflowStatus1">
+      <AttrNames>
+        <Item Value="WorkflowStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesForAccountStatusViewIterator" id="OrderingCustomerName1">
+      <AttrNames>
+        <Item Value="OrderingCustomerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesForAccountStatusViewIterator" id="PayingCustomerName1">
+      <AttrNames>
+        <Item Value="PayingCustomerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SubmittedBatchesForAccountStatusViewIterator" id="ShippingCustomerName1">
+      <AttrNames>
+        <Item Value="ShippingCustomerName"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="SeafarersDetailsAccountStatusViewIterator" id="SeafarersDetailsAccountStatusView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarersDetailsView"
+                      Name="SeafarersDetailsAccountStatusView0">
+        <AttrNames>
+          <Item Value="LastName"/>
+          <Item Value="FirstName"/>
+          <Item Value="BirthDate"/>
+          <Item Value="BirthPlace"/>
+          <Item Value="Nationality"/>
+          <Item Value="Gender"/>
+          <Item Value="IssueType"/>
+          <Item Value="PassportIssuingCountry"/>
+          <Item Value="ResidenceCountry"/>
+          <Item Value="IssueTypeIdCard"/>
+          <Item Value="WorkflowStatus"/>
+          <Item Value="NationalityCountry"/>
+          <Item Value="VesselName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="getlinkforBatchesAccountpage" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getlinkforBatchesAccountpage" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getlinkforBatchesAccountpage_RMIApplicationEntryAppModuleDataControl_dataProvider_getlinkforBatchesAccountpage_result">
+      <NamedData NDName="code" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="getUsertypeForBatchesAccountPage" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getUsertypeForBatchesAccountPage" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getUsertypeForBatchesAccountPage_RMIApplicationEntryAppModuleDataControl_dataProvider_getUsertypeForBatchesAccountPage_result"/>
+    <tree IterBinding="SeafarerOcDetailsAccountViewIterator" id="SeafarerOcDetailsAccountView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarerOcDetailsView"
+                      Name="SeafarerOcDetailsAccountView0">
+        <AttrNames>
+          <Item Value="EsdiId"/>
+          <Item Value="CocCountry"/>
+          <Item Value="CocDoc"/>
+          <Item Value="CocExpirationDate"/>
+          <Item Value="CocIdentifier"/>
+          <Item Value="CocIssueDate"/>
+          <Item Value="CraRequired"/>
+          <Item Value="EdocId"/>
+          <Item Value="EsiId"/>
+          <Item Value="GradeCode"/>
+          <Item Value="GradeId"/>
+          <Item Value="GradeType"/>
+          <Item Value="Limitation"/>
+          <Item Value="RestrictionName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="SeafarerSqcDetailsAccountViewIterator" id="SeafarerSqcDetailsAccountView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarerSqcDetailsView"
+                      Name="SeafarerSqcDetailsAccountView0">
+        <AttrNames>
+          <Item Value="EsdiId"/>
+          <Item Value="CocCountry"/>
+          <Item Value="CocDoc"/>
+          <Item Value="CocExpirationDate"/>
+          <Item Value="CocIdentifier"/>
+          <Item Value="CocIssueDate"/>
+          <Item Value="EdocId"/>
+          <Item Value="EsiId"/>
+          <Item Value="GradeCode"/>
+          <Item Value="GradeId"/>
+          <Item Value="GradeType"/>
+          <Item Value="Limitation"/>
+          <Item Value="SupportDoc"/>
+          <Item Value="SupportEdocId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="SubmittedBatchesROIterator" id="OrderHold" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="OrderHold"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="OrderHoldViewIterator" id="OrderHoldView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.OrderHoldView" Name="OrderHoldView0">
+        <AttrNames>
+          <Item Value="HoldDate"/>
+          <Item Value="HoldName"/>
+          <Item Value="HoldComment"/>
+          <Item Value="HeldBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="filterOrderHold" RequiresUpdateModel="true" Action="invokeMethod" MethodName="filterOrderHold"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.filterOrderHold_RMIApplicationEntryAppModuleDataControl_dataProvider_filterOrderHold_result"/>
+  </bindings>
+</pageDefinition>
+

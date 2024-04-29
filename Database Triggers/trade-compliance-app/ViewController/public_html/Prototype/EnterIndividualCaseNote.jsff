@@ -1,0 +1,343 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Individual Case" id="iamph">
+    <f:facet name="context">
+      <af:outputText value="#{bindings.CaseId1.inputValue}" shortDesc="#{bindings.CaseId1.hints.tooltip}" id="ot11"/>
+    </f:facet>
+    <f:facet name="menuBar"/>
+    <f:facet name="toolbar"/>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelSplitter id="ps1" splitterPosition="300" styleClass="CustomizedBorderSplitter">
+      <f:facet name="first">
+        <af:query id="qryId1" headerText="Search" disclosed="true"
+                  value="#{bindings.XwrlCaseNotesSumViewCriteriaQuery.queryDescriptor}"
+                  model="#{bindings.XwrlCaseNotesSumViewCriteriaQuery.queryModel}"
+                  queryListener="#{bindings.XwrlCaseNotesSumViewCriteriaQuery.processQuery}"
+                  queryOperationListener="#{bindings.XwrlCaseNotesSumViewCriteriaQuery.processQueryOperation}" saveQueryMode="hidden" modeChangeVisible="false"
+                  resultComponentId="::iaspc1:t2" styleClass="CustomQueryPanel"/>
+      </f:facet>
+      <f:facet name="second">
+        <af:panelHeader text="Case Notes" id="iasph"
+                        binding="#{viewScope.CaseNotesBean.caseNotesPanelHeaderObj}">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar">
+            <af:button text="Return" id="b3" action="goIndividualRequest" rendered="false"/>
+          </f:facet>
+          <f:facet name="legend"/> 
+          <f:facet name="info"/>
+          <af:panelCollection id="iaspc1"   styleClass="AFStretchWidth" >
+            <f:facet name="menus"/>
+            <f:facet name="toolbar">
+              <af:toolbar id="t1" partialTriggers="t2 iad3">
+                <af:button text="Add" id="iabadd" actionListener="#{viewScope.CaseNotesBean.editShowPopup}"
+                           partialTriggers="iad1"/>
+                <af:button text="Edit" id="iabedt" actionListener="#{viewScope.CaseNotesBean.editShowPopup}" 
+                            partialTriggers="t2 iad3"
+                                disabled="true"/>
+                <af:button actionListener="#{viewScope.CaseNotesBean.deleteShowPopup}" text="Delete"
+                            partialTriggers="t2"
+                           disabled="#{pageFlowScope.superUser=='N' || bindings.XwrlCaseNotesSumView1.estimatedRowCount == 0}" id="iabdel"/>
+                <af:button actionListener="#{bindings.Execute1.execute}" text="Refresh" id="iabrf"
+                           partialTriggers="t2"/>
+                <af:button actionListener="#{bindings.Commit.execute}" text="Commit"
+                           disabled="#{!bindings.Commit.enabled}" id="iabcm" rendered="false"/>
+                <af:button actionListener="#{bindings.Rollback.execute}" text="Rollback"
+                           disabled="#{!bindings.Rollback.enabled}" immediate="true" id="iabrb" rendered="false">
+                  <af:resetActionListener/>
+                </af:button>
+              </af:toolbar>
+            </f:facet>
+            <af:table value="#{bindings.XwrlCaseNotesSumView1.collectionModel}" var="row"
+                      rows="#{bindings.XwrlCaseNotesSumView1.rangeSize}"
+                      emptyText="#{bindings.XwrlCaseNotesSumView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0" autoHeightRows="25" 
+                      styleClass="AFStretchWidth"
+                      selectionListener="#{viewScope.CaseNotesBean.caseNoteSelList}"
+                      rowSelection="single" fetchSize="#{bindings.XwrlCaseNotesSumView1.rangeSize}" id="t2"
+                      columnStretching="column:c3"  partialTriggers="::iabrf"
+                      >
+              <af:column headerText="#{bindings.XwrlCaseNotesSumView1.hints.Id.label}" id="c1" sortable="true"
+                         sortProperty="#{bindings.XwrlCaseNotesSumView1.hints.Id.name}">
+                <af:outputText value="#{row.Id}" shortDesc="#{bindings.XwrlCaseNotesSumView1.hints.Id.tooltip}"
+                               id="ot4">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.XwrlCaseNotesSumView1.hints.Id.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="#{bindings.XwrlCaseNotesSumView1.hints.LineNumber.label}" id="c2" sortable="true"
+                         sortProperty="#{bindings.XwrlCaseNotesSumView1.hints.LineNumber.name}">
+                <af:outputText value="#{row.LineNumber}"
+                               shortDesc="#{bindings.XwrlCaseNotesSumView1.hints.LineNumber.tooltip}" id="ot5">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.XwrlCaseNotesSumView1.hints.LineNumber.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="#{bindings.XwrlCaseNotesSumView1.hints.Note.label}" id="c3" sortable="true"
+                         sortProperty="#{bindings.XwrlCaseNotesSumView1.hints.Note.name}">
+                <af:outputText value="#{row.Note}" shortDesc="#{bindings.XwrlCaseNotesSumView1.hints.Note.tooltip}"
+                               id="ot6" styleClass="PreWrap"/>
+              </af:column>
+              <af:column headerText="#{bindings.XwrlCaseNotesSumView1.hints.CreatedByUser.label}" id="c4"
+                         sortable="true" sortProperty="#{bindings.XwrlCaseNotesSumView1.hints.CreatedByUser.name}">
+                <af:outputText value="#{row.CreatedByUser}"
+                               shortDesc="#{bindings.XwrlCaseNotesSumView1.hints.CreatedByUser.tooltip}" id="ot7"/>
+              </af:column>
+              <af:column headerText="#{bindings.XwrlCaseNotesSumView1.hints.UpdatedByUser.label}" id="c5"
+                         sortable="true" sortProperty="#{bindings.XwrlCaseNotesSumView1.hints.UpdatedByUser.name}">
+                <af:outputText value="#{row.UpdatedByUser}"
+                               shortDesc="#{bindings.XwrlCaseNotesSumView1.hints.UpdatedByUser.tooltip}" id="ot8"/>
+              </af:column>
+              <!-- T20200904.0012 - Date Added to Case Notes (IRI) -->
+              <af:column headerText="#{bindings.XwrlCaseNotesSumView1.hints.CreationDate.label}" id="c6"
+                         sortable="true" sortProperty="#{bindings.XwrlCaseNotesSumView1.hints.CreationDate.name}">
+                <af:outputText value="#{row.CreationDate}"
+                               shortDesc="#{bindings.XwrlCaseNotesSumView1.hints.CreationDate.tooltip}" id="ot9">
+                  <af:convertDateTime pattern="#{bindings.XwrlCaseNotesSumView1.hints.CreationDate.format}"/>
+                </af:outputText>
+              </af:column>
+            </af:table>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="iap1" contentDelivery="lazyUncached"
+                      popupFetchListener="#{viewScope.CaseNotesBean.editPopFetchListener}"
+                      popupCanceledListener="#{viewScope.CaseNotesBean.editPopupCancelListener}">
+              <af:dialog id="iad1" resize="on" contentWidth="500" contentHeight="500"
+                         dialogListener="#{viewScope.CaseNotesBean.editDialogListener}">
+                <f:facet name="buttonBar"/>
+                <af:panelHeader text="Case Note" id="iaph4">
+                  <f:facet name="context"/>
+                  <f:facet name="menuBar"/>
+                  <f:facet name="toolbar">
+                    <af:button text="Template" id="iab7"
+                               actionListener="#{viewScope.CaseNotesBean.templateShowPopup}" immediate="true">
+                      <af:setPropertyListener from="#{'CASE'}" to="#{pageFlowScope.varNoteType}" type="action"/>
+                      <af:setPropertyListener from="#{'INDIVIDUAL'}" to="#{pageFlowScope.varNoteCategory}" type="action"/>
+                    </af:button>
+                  </f:facet>
+                  <f:facet name="legend"/>
+                  <f:facet name="info"/>
+                  <af:panelFormLayout id="iapfl1">
+                    <af:inputText value="#{bindings.Id.inputValue}" label="#{bindings.Id.hints.label}"
+                                  required="#{bindings.Id.hints.mandatory}" columns="#{bindings.Id.hints.displayWidth}"
+                                  maximumLength="#{bindings.Id.hints.precision}"
+                                  shortDesc="#{bindings.Id.hints.tooltip}" id="it1" visible="false">
+                      <f:validator binding="#{bindings.Id.validator}"/>
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.Id.format}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.RequestId.inputValue}" label="#{bindings.RequestId.hints.label}"
+                                  required="#{bindings.RequestId.hints.mandatory}"
+                                  columns="#{bindings.RequestId.hints.displayWidth}"
+                                  maximumLength="#{bindings.RequestId.hints.precision}"
+                                  shortDesc="#{bindings.RequestId.hints.tooltip}" id="iait2" visible="false">
+                      <f:validator binding="#{bindings.RequestId.validator}"/>
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.RequestId.format}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.CaseId.inputValue}" label="#{bindings.CaseId.hints.label}"
+                                  required="#{bindings.CaseId.hints.mandatory}"
+                                  columns="#{bindings.CaseId.hints.displayWidth}"
+                                  maximumLength="#{bindings.CaseId.hints.precision}"
+                                  shortDesc="#{bindings.CaseId.hints.tooltip}" id="iait3" readOnly="true">
+                      <f:validator binding="#{bindings.CaseId.validator}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.LineNumber.inputValue}" label="#{bindings.LineNumber.hints.label}"
+                                  required="#{bindings.LineNumber.hints.mandatory}"
+                                  columns="#{bindings.LineNumber.hints.displayWidth}"
+                                  readOnly="true"
+                                  maximumLength="#{bindings.LineNumber.hints.precision}"
+                                  shortDesc="#{bindings.LineNumber.hints.tooltip}" id="iait4">
+                      <f:validator binding="#{bindings.LineNumber.validator}"/>
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.LineNumber.format}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.Note.inputValue}" label="#{bindings.Note.hints.label}"
+                                  required="#{bindings.Note.hints.mandatory}"
+                                  columns="#{bindings.Note.hints.displayWidth}"
+                                  maximumLength="#{bindings.Note.hints.precision}"
+                                  shortDesc="#{bindings.Note.hints.tooltip}" id="iait5" rows="20"
+                                  contentStyle="width: 375px;">
+                      <f:validator binding="#{bindings.Note.validator}"/>
+                    </af:inputText>
+                    <af:inputDate value="#{bindings.LastUpdateDate.inputValue}"
+                                  label="#{bindings.LastUpdateDate.hints.label}"
+                                  required="#{bindings.LastUpdateDate.hints.mandatory}"
+                                  columns="#{bindings.LastUpdateDate.hints.displayWidth}"
+                                  shortDesc="#{bindings.LastUpdateDate.hints.tooltip}" id="iaid1" visible="false">
+                      <f:validator binding="#{bindings.LastUpdateDate.validator}"/>
+                      <af:convertDateTime pattern="#{bindings.LastUpdateDate.format}"/>
+                    </af:inputDate>
+                    <af:inputText value="#{bindings.LastUpdatedBy.inputValue}"
+                                  label="#{bindings.LastUpdatedBy.hints.label}"
+                                  required="#{bindings.LastUpdatedBy.hints.mandatory}"
+                                  columns="#{bindings.LastUpdatedBy.hints.displayWidth}"
+                                  maximumLength="#{bindings.LastUpdatedBy.hints.precision}"
+                                  shortDesc="#{bindings.LastUpdatedBy.hints.tooltip}" id="iait6" visible="false">
+                      <f:validator binding="#{bindings.LastUpdatedBy.validator}"/>
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.LastUpdatedBy.format}"/>
+                    </af:inputText>
+                    <af:inputDate value="#{bindings.CreationDate.inputValue}"
+                                  label="#{bindings.CreationDate.hints.label}"
+                                  required="#{bindings.CreationDate.hints.mandatory}"
+                                  columns="#{bindings.CreationDate.hints.displayWidth}"
+                                  shortDesc="#{bindings.CreationDate.hints.tooltip}" id="iaid2" visible="false">
+                      <f:validator binding="#{bindings.CreationDate.validator}"/>
+                      <af:convertDateTime pattern="#{bindings.CreationDate.format}"/>
+                    </af:inputDate>
+                    <af:inputText value="#{bindings.CreatedBy.inputValue}" label="#{bindings.CreatedBy.hints.label}"
+                                  required="#{bindings.CreatedBy.hints.mandatory}"
+                                  columns="#{bindings.CreatedBy.hints.displayWidth}"
+                                  maximumLength="#{bindings.CreatedBy.hints.precision}"
+                                  shortDesc="#{bindings.CreatedBy.hints.tooltip}" id="iait7" visible="false">
+                      <f:validator binding="#{bindings.CreatedBy.validator}"/>
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.CreatedBy.format}"/>
+                    </af:inputText>
+                    <af:inputText value="#{bindings.LastUpdateLogin.inputValue}"
+                                  label="#{bindings.LastUpdateLogin.hints.label}"
+                                  required="#{bindings.LastUpdateLogin.hints.mandatory}"
+                                  columns="#{bindings.LastUpdateLogin.hints.displayWidth}"
+                                  maximumLength="#{bindings.LastUpdateLogin.hints.precision}"
+                                  shortDesc="#{bindings.LastUpdateLogin.hints.tooltip}" id="iait8" visible="false">
+                      <f:validator binding="#{bindings.LastUpdateLogin.validator}"/>
+                      <af:convertNumber groupingUsed="false" pattern="#{bindings.LastUpdateLogin.format}"/>
+                    </af:inputText>
+                    <f:facet name="footer">
+                      <af:popup childCreation="deferred" autoCancel="disabled" id="iap2"
+                                contentDelivery="lazyUncached">
+                        <af:dialog id="d2" contentWidth="800" contentHeight="400"
+                                   dialogListener="#{viewScope.CaseNotesBean.templateDialogListener}"
+                                   title="Templates" resize="on" stretchChildren="first">
+                          <f:facet name="buttonBar"/>
+                          <af:panelCollection id="iapc2">
+                            <f:facet name="menus"/>
+                            <f:facet name="toolbar"/>
+                            <f:facet name="statusbar"/>
+                            <af:table value="#{bindings.XwrlNoteTemplatesView1.collectionModel}" var="row"
+                                      rows="#{bindings.XwrlNoteTemplatesView1.rangeSize}"
+                                      emptyText="#{bindings.XwrlNoteTemplatesView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                      rowBandingInterval="0"  contentDelivery="lazy"
+                                      selectedRowKeys="#{bindings.XwrlNoteTemplatesView1.collectionModel.selectedRow}"
+                                      selectionListener="#{bindings.XwrlNoteTemplatesView1.collectionModel.makeCurrent}"
+                                      rowSelection="single" fetchSize="#{bindings.XwrlNoteTemplatesView1.rangeSize}"
+                                      id="iantt2" columnStretching="column:c5n">
+                              <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.Id.name}" sortable="true"
+                                         headerText="#{bindings.XwrlNoteTemplatesView1.hints.Id.label}" id="iantc1"
+                                         visible="false">
+                                <af:outputText value="#{row.Id}"
+                                               shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.Id.tooltip}" id="iantot12">
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.XwrlNoteTemplatesView1.hints.Id.format}"/>
+                                </af:outputText>
+                              </af:column>
+                              <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.SortKey.name}"
+                                         sortable="true"
+                                         headerText="#{bindings.XwrlNoteTemplatesView1.hints.SortKey.label}" id="iantc2"
+                                         width="50">
+                                <af:outputText value="#{row.SortKey}"
+                                               shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.SortKey.tooltip}"
+                                               id="iantot13">
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.XwrlNoteTemplatesView1.hints.SortKey.format}"/>
+                                </af:outputText>
+                              </af:column>
+                              <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.NoteType.name}"
+                                         sortable="true"
+                                         headerText="#{bindings.XwrlNoteTemplatesView1.hints.NoteType.label}" id="iantc3">
+                                <af:outputText value="#{row.NoteType}"
+                                               shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.NoteType.tooltip}"
+                                               id="iantot14"/>
+                              </af:column>
+                              <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.NoteCategory.name}"
+                                         sortable="true"
+                                         headerText="#{bindings.XwrlNoteTemplatesView1.hints.NoteCategory.label}"
+                                         id="iantc4">
+                                <af:outputText value="#{row.NoteCategory}"
+                                               shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.NoteCategory.tooltip}"
+                                               id="iantot15"/>
+                              </af:column>
+                              <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.Note.name}"
+                                         sortable="true"
+                                         headerText="#{bindings.XwrlNoteTemplatesView1.hints.Note.label}" id="iantc5n">
+                                <af:outputText value="#{row.Note}"
+                                               shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.Note.tooltip}"
+                                               id="iantot16"/>
+                              </af:column>
+                              <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdateDate.name}"
+                                         sortable="true"
+                                         headerText="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdateDate.label}"
+                                         id="iantc6" visible="false">
+                                <af:outputText value="#{row.LastUpdateDate}"
+                                               shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdateDate.tooltip}"
+                                               id="iantot17">
+                                  <af:convertDateTime pattern="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdateDate.format}"/>
+                                </af:outputText>
+                              </af:column>
+                              <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdatedBy.name}"
+                                         sortable="true"
+                                         headerText="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdatedBy.label}"
+                                         id="iantc7" visible="false">
+                                <af:outputText value="#{row.LastUpdatedBy}"
+                                               shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdatedBy.tooltip}"
+                                               id="iantot18">
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdatedBy.format}"/>
+                                </af:outputText>
+                              </af:column>
+                              <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.CreationDate.name}"
+                                         sortable="true"
+                                         headerText="#{bindings.XwrlNoteTemplatesView1.hints.CreationDate.label}"
+                                         id="iantc8" visible="false">
+                                <af:outputText value="#{row.CreationDate}"
+                                               shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.CreationDate.tooltip}"
+                                               id="iantot19">
+                                  <af:convertDateTime pattern="#{bindings.XwrlNoteTemplatesView1.hints.CreationDate.format}"/>
+                                </af:outputText>
+                              </af:column>
+                              <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.CreatedBy.name}"
+                                         sortable="true"
+                                         headerText="#{bindings.XwrlNoteTemplatesView1.hints.CreatedBy.label}" id="iantc9"
+                                         visible="false">
+                                <af:outputText value="#{row.CreatedBy}"
+                                               shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.CreatedBy.tooltip}"
+                                               id="iantot20">
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.XwrlNoteTemplatesView1.hints.CreatedBy.format}"/>
+                                </af:outputText>
+                              </af:column>
+                              <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdateLogin.name}"
+                                         sortable="true"
+                                         headerText="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdateLogin.label}"
+                                         id="iantc10" visible="false">
+                                <af:outputText value="#{row.LastUpdateLogin}"
+                                               shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdateLogin.tooltip}"
+                                               id="iantot21">
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdateLogin.format}"/>
+                                </af:outputText>
+                              </af:column>
+                            </af:table>
+                          </af:panelCollection>
+                        </af:dialog>
+                      </af:popup>
+                    </f:facet>
+                  </af:panelFormLayout>
+                </af:panelHeader>
+              </af:dialog>
+            </af:popup>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="iap3" contentDelivery="lazyUncached">
+              <af:dialog id="iad3" title="Delete" resize="on" contentWidth="300" contentHeight="50"
+                         dialogListener="#{viewScope.CaseNotesBean.deleteDialogListener}">
+                <af:panelGridLayout id="iapgl1" dimensionsFrom="auto">
+                  <af:gridRow marginTop="5px" marginBottom="5px" id="iagr1">
+                    <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="iagc1" valign="middle"
+                                 halign="center">
+                      <af:outputText value="Are you sure you want to delete this record?" id="iaot22"/>
+                    </af:gridCell>
+                  </af:gridRow>
+                </af:panelGridLayout>
+                <f:facet name="buttonBar"/>
+              </af:dialog>
+            </af:popup>            
+          </af:panelCollection>
+        </af:panelHeader>
+      </f:facet>
+    </af:panelSplitter>
+  </af:panelHeader>
+</ui:composition>

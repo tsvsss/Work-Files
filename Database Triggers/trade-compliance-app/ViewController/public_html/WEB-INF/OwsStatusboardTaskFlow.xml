@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="OwsStatusboardTaskFlow">
+    <default-activity>executeStatusboard</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__5">
+      <managed-bean-name>OwsStatusboard</managed-bean-name>
+      <managed-bean-class>oracle.apps.xwrl.beans.backing.OwsStatusboard</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__8">
+      <managed-bean-name>InitStatusboard</managed-bean-name>
+      <managed-bean-class>oracle.apps.xwrl.beans.backing.InitialiseStatusboard</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__3">
+      <managed-bean-name>StatusboardBean</managed-bean-name>
+      <managed-bean-class>oracle.apps.xwrl.beans.backing.Statusboard</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <initializer>#{backingBeanScope.InitStatusboard.onload}</initializer>
+    <view id="OwsStatusboard">
+      <page>/Prototype/OwsStatusboard.jsff</page>
+    </view>
+    <task-flow-call id="Prototype-task-flow-definition">
+      <task-flow-reference>
+        <document>/WEB-INF/Prototype-task-flow-definition.xml</document>
+        <id>Prototype-task-flow-definition</id>
+      </task-flow-reference>
+      <input-parameter id="__4">
+        <name>sourceId</name>
+        <value></value>
+      </input-parameter>
+      <input-parameter id="__9">
+        <name>requestType</name>
+        <value></value>
+      </input-parameter>
+      <input-parameter id="__10">
+        <name>userId</name>
+        <value></value>
+      </input-parameter>
+      <input-parameter id="__11">
+        <name>admin</name>
+        <value></value>
+      </input-parameter>
+      <input-parameter id="__12">
+        <name>readOnly</name>
+        <value></value>
+      </input-parameter>
+      <input-parameter id="__13">
+        <name>superUser</name>
+        <value></value>
+      </input-parameter>
+      <input-parameter id="__14">
+        <name>requestId</name>
+        <value></value>
+      </input-parameter>
+      <input-parameter id="__15">
+        <name>sourceTable</name>
+        <value></value>
+      </input-parameter>
+      <input-parameter id="__16">
+        <name>recordLockUser</name>
+        <value></value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="executeStatusboard">
+      <method>#{bindings.executeStatusboard.execute}</method>
+      <outcome>
+        <fixed-outcome>executeStatusboard</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>OwsStatusboard</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>prototype</from-outcome>
+        <to-activity-id>Prototype-task-flow-definition</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>executeStatusboard</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>executeStatusboard</from-outcome>
+        <to-activity-id>OwsStatusboard</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

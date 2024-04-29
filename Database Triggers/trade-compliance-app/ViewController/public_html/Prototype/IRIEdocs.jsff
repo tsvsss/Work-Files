@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+<!-- T20201012.0026 - Linking E-Docs to Case Documents in OWS Statusboar... (IRI) -->
+  <af:panelSplitter id="ps1" splitterPosition="320" styleClass="CustomizedBorderSplitter">
+    <f:facet name="first">
+      <af:query id="qryId1" headerText="Search" disclosed="true"
+                value="#{bindings.SearchIriEdocsForCaseDocumentsCriteriaQuery.queryDescriptor}"
+                model="#{bindings.SearchIriEdocsForCaseDocumentsCriteriaQuery.queryModel}"
+                queryListener="#{bindings.SearchIriEdocsForCaseDocumentsCriteriaQuery.processQuery}"
+                queryOperationListener="#{bindings.SearchIriEdocsForCaseDocumentsCriteriaQuery.processQueryOperation}"
+                saveQueryMode="hidden" modeChangeVisible="false" resultComponentId="::pc1:edocst1"
+                styleClass="CustomQueryPanel"/>
+    </f:facet>
+    <f:facet name="second">
+      <af:panelHeader text="IRI Edocs" id="ph1" styleClass="AFStretchWidth">
+        <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar">
+            <af:toolbar id="t1">
+              <af:button text="Add to Case Documents" id="b1"
+                         actionListener="#{viewScope.CaseDocumentsBean.iriEdocsToCaseDocumentsActionListener}"/>
+            </af:toolbar>
+          </f:facet>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.IriEdocsForCaseDocumentsRVO1.collectionModel}" var="row"
+                    rows="#{bindings.IriEdocsForCaseDocumentsRVO1.rangeSize}"
+                    emptyText="#{bindings.IriEdocsForCaseDocumentsRVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    rowSelection="multiple" fetchSize="#{bindings.IriEdocsForCaseDocumentsRVO1.rangeSize}"
+                    id="edocst1" columnStretching="column:c2">
+            <af:column headerText="#{bindings.IriEdocsForCaseDocumentsRVO1.hints.Id.label}" id="c1" width="80">
+              <af:outputText value="#{row.Id}" shortDesc="#{bindings.IriEdocsForCaseDocumentsRVO1.hints.Id.tooltip}"
+                             id="ot1">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.IriEdocsForCaseDocumentsRVO1.hints.Id.format}"/>
+              </af:outputText>
+            </af:column>
+            <!-- T20201221.0044 - OWS - IRI Edocs -->
+            <af:column headerText="#{bindings.IriEdocsForCaseDocumentsRVO1.hints.FileName.label}" id="c2" width="200">
+              <af:outputText value="#{row.FileName}"
+                             shortDesc="#{bindings.IriEdocsForCaseDocumentsRVO1.hints.FileName.tooltip}" id="ot2"/>
+            </af:column>
+            <af:column headerText="#{bindings.IriEdocsForCaseDocumentsRVO1.hints.Category.label}" id="c4">
+              <af:outputText value="#{row.Category}"
+                             shortDesc="#{bindings.IriEdocsForCaseDocumentsRVO1.hints.Category.tooltip}" id="ot4"/>
+            </af:column>
+            <af:column headerText="#{bindings.IriEdocsForCaseDocumentsRVO1.hints.DocumentType.label}" id="c5">
+              <af:outputText value="#{row.DocumentType}"
+                             shortDesc="#{bindings.IriEdocsForCaseDocumentsRVO1.hints.DocumentType.tooltip}" id="ot5"/>
+            </af:column>
+            <!-- T20201221.0044 - OWS - IRI Edocs -->
+            <af:column headerText="#{bindings.IriEdocsForCaseDocumentsRVO1.hints.Description.label}" id="c7"
+                       width="200">
+              <af:outputText value="#{row.Description}"
+                             shortDesc="#{bindings.IriEdocsForCaseDocumentsRVO1.hints.Description.tooltip}" id="ot7"/>
+            </af:column>
+            <af:column headerText="#{bindings.IriEdocsForCaseDocumentsRVO1.hints.CreationDate.label}" id="c3"
+                       width="130">
+              <af:outputText value="#{row.CreationDate}"
+                             shortDesc="#{bindings.IriEdocsForCaseDocumentsRVO1.hints.CreationDate.tooltip}" id="ot3">
+                <af:convertDateTime pattern="#{bindings.IriEdocsForCaseDocumentsRVO1.hints.CreationDate.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column id="c6" headerText="Document File">
+              <af:link text="Download" id="l1" partialSubmit="true">
+                <f:attribute name="diskPath" value="#{row.DiskPath}"/>
+                <af:fileDownloadActionListener filename="#{row.FileName}"
+                                               method="#{viewScope.CaseDocumentsBean.downloadIRIEdocsFileListener}"/>
+              </af:link>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:panelHeader>
+    </f:facet>
+  </af:panelSplitter>
+</ui:composition>

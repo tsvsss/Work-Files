@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="ViewBatchTCPageDef"
+                Package="com.rmi.tradecompapproval.view.viewbatchseafarer">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="RmiBatchView2" RangeSize="25"
+              DataControl="RMITradeCompApprovalAppModuleDataControl"
+              id="viewBatchVO2Iterator"/>
+    <iterator Binds="WorkOrderDetailsView2" RangeSize="25"
+              DataControl="RMITradeCompApprovalAppModuleDataControl"
+              id="WorkOrderDetailsRO2Iterator"/>
+    <iterator id="SeafarerTCstatus1Iterator" Binds="SeafarerTCstatusView1"
+              DataControl="RMITradeCompApprovalAppModuleDataControl" RangeSize="25"/>
+    <iterator Binds="OrderHoldDetailsView1" RangeSize="25" DataControl="RMITradeCompApprovalAppModuleDataControl"
+              id="OrderHoldDetailsView1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="viewBatchVO2Iterator" id="BatchName">
+      <AttrNames>
+        <Item Value="BatchName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="viewBatchVO2Iterator" id="BatchDate">
+      <AttrNames>
+        <Item Value="BatchDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="viewBatchVO2Iterator"
+                     id="PurchaseOrderNumber">
+      <AttrNames>
+        <Item Value="PurchaseOrderNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="WorkOrderDetailsRO2Iterator" id="OrderNumber">
+      <AttrNames>
+        <Item Value="OrderNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="viewBatchVO2Iterator" id="ExpeditedProcessing"
+            DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="ExpeditedProcessing"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <listOfValues IterBinding="viewBatchVO2Iterator" StaticList="false"
+                  Uses="LOV_tranCustAccountBillToName"
+                  id="tranCustAccountBillToName"/>
+    <attributeValues IterBinding="viewBatchVO2Iterator"
+                     id="BillToCustAccountId">
+      <AttrNames>
+        <Item Value="BillToCustAccountId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="viewBatchVO2Iterator"
+                     id="tranBillToSuAddress">
+      <AttrNames>
+        <Item Value="tranBillToSuAddress"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="viewBatchVO2Iterator" StaticList="false"
+                  Uses="LOV_tranCustAccountShipToName"
+                  id="tranCustAccountShipToName"/>
+    <attributeValues IterBinding="viewBatchVO2Iterator"
+                     id="tranShipToSuAddress">
+      <AttrNames>
+        <Item Value="tranShipToSuAddress"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="viewBatchVO2Iterator" StaticList="false"
+                  Uses="LOV_tranCustAccountDeliverToName"
+                  id="tranCustAccountDeliverToName"/>
+    <attributeValues IterBinding="viewBatchVO2Iterator"
+                     id="tranDeliverToSuAddress">
+      <AttrNames>
+        <Item Value="tranDeliverToSuAddress"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="viewBatchVO2Iterator" id="VesselNames">
+      <AttrNames>
+        <Item Value="VesselNames"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="viewBatchVO2Iterator" id="Notes">
+      <AttrNames>
+        <Item Value="Notes"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="viewBatchVO2Iterator" StaticList="false"
+                  Uses="LOV_BillToSiteUseId" id="BillToSiteUseId"/>
+    <listOfValues IterBinding="viewBatchVO2Iterator" StaticList="false"
+                  Uses="LOV_ShipToSiteUseId" id="ShipToSiteUseId"/>
+    <listOfValues IterBinding="viewBatchVO2Iterator" StaticList="false"
+                  Uses="LOV_DeliverToSiteUseId" id="DeliverToSiteUseId"/>
+    <methodAction id="editBatch" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="editBatch"
+                  IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.editBatch_RMITradeCompApprovalAMDataControl_dataProvider_editBatch_result"/>
+    <methodAction id="processTC" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="processTC"
+                  IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.processTC_RMITradeCompApprovalAMDataControl_dataProvider_processTC_result"/>
+    <methodAction id="callProcedure" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="callProcedure"
+                  IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.callProcedure_RMITradeCompApprovalAMDataControl_dataProvider_callProcedure_result"/>
+    <methodAction id="cancelbatch" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="cancelbatch"
+                  IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.cancelbatch_RMITradeCompApprovalAMDataControl_dataProvider_cancelbatch_result"/>
+    <action id="Commit" DataControl="RMITradeCompApprovalAppModuleDataControl"
+            RequiresUpdateModel="true" Action="commitTransaction"/>
+    <methodAction id="filterBatchSeafarersDetails" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterBatchSeafarersDetails" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.filterBatchSeafarersDetails_RMITradeCompApprovalAMDataControl_dataProvider_filterBatchSeafarersDetails_result"/>
+    <attributeValues IterBinding="viewBatchVO2Iterator" id="OeHeaderId">
+      <AttrNames>
+        <Item Value="OeHeaderId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="checkSendToAssignBook" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="checkSendToAssignBook" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.checkSendToAssignBook_RMITradeCompApprovalAMDataControl_dataProvider_checkSendToAssignBook_result"/>
+    <methodAction id="checkSendToEval" RequiresUpdateModel="true" Action="invokeMethod" MethodName="checkSendToEval"
+                  IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.checkSendToEval_RMITradeCompApprovalAMDataControl_dataProvider_checkSendToEval_result"/>
+    <methodAction id="checkSendToQa" RequiresUpdateModel="true" Action="invokeMethod" MethodName="checkSendToQa"
+                  IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.checkSendToQa_RMITradeCompApprovalAMDataControl_dataProvider_checkSendToQa_result"/>
+    <methodAction id="processEVAL" RequiresUpdateModel="true" Action="invokeMethod" MethodName="processEVAL"
+                  IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.processEVAL_RMITradeCompApprovalAppModuleDataControl_dataProvider_processEVAL_result">
+      <NamedData NDName="retVal" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="sendToAssignBookNumber" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="sendToAssignBookNumber" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.sendToAssignBookNumber_RMITradeCompApprovalAppModuleDataControl_dataProvider_sendToAssignBookNumber_result">
+      <NamedData NDName="retVal" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="sentToEval" RequiresUpdateModel="true" Action="invokeMethod" MethodName="sentToEval"
+                  IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.sentToEval_RMITradeCompApprovalAppModuleDataControl_dataProvider_sentToEval_result">
+      <NamedData NDName="retVal" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="sendToShipping" RequiresUpdateModel="true" Action="invokeMethod" MethodName="sendToShipping"
+                  IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.sendToShipping_RMITradeCompApprovalAppModuleDataControl_dataProvider_sendToShipping_result">
+      <NamedData NDName="retVal" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="sentToTcProcessor" RequiresUpdateModel="true" Action="invokeMethod" MethodName="sentToTcProcessor"
+                  IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.sentToTcProcessor_RMITradeCompApprovalAppModuleDataControl_dataProvider_sentToTcProcessor_result">
+      <NamedData NDName="retVal" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="checkSendToMtc" RequiresUpdateModel="true" Action="invokeMethod" MethodName="checkSendToMtc"
+                  IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.checkSendToMtc_RMITradeCompApprovalAppModuleDataControl_dataProvider_checkSendToMtc_result"/>
+    <methodAction id="processOrder" RequiresUpdateModel="true" Action="invokeMethod" MethodName="processOrder"
+                  IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.processOrder_RMITradeCompApprovalAppModuleDataControl_dataProvider_processOrder_result"/>
+    <listOfValues IterBinding="viewBatchVO2Iterator" StaticList="false" Uses="LOV_tranDeliverToSuAddress"
+                  id="tranDeliverToSuAddress1"/>
+    <listOfValues IterBinding="viewBatchVO2Iterator" StaticList="false" Uses="LOV_tranBillToSuAddress"
+                  id="tranBillToSuAddress1"/>
+    <listOfValues IterBinding="viewBatchVO2Iterator" StaticList="false" Uses="LOV_tranShipToSuAddress"
+                  id="tranShipToSuAddress1"/>
+    <methodAction id="callProcessOrderHeader" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="callProcessOrderHeader" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.callProcessOrderHeader_RMITradeCompApprovalAppModuleDataControl_dataProvider_callProcessOrderHeader_result"/>
+    <methodAction id="fetchOrderHoldDetails" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="fetchOrderHoldDetails" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.fetchOrderHoldDetails_RMITradeCompApprovalAppModuleDataControl_dataProvider_fetchOrderHoldDetails_result"/>
+    <button IterBinding="viewBatchVO2Iterator" id="TransOrderHold" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="TransOrderHold"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="OrderHoldDetailsView1Iterator" id="OrderHoldDetailsView1">
+      <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.readonly.OrderHoldDetailsView"
+                      Name="OrderHoldDetailsView10">
+        <AttrNames>
+          <Item Value="HoldDate"/>
+          <Item Value="HoldName"/>
+          <Item Value="HoldComment"/>
+          <Item Value="HeldBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

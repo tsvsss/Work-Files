@@ -1,0 +1,56 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1">
+      <property
+         name="y">266.5</property>
+      <property
+         name="x">120.73633</property>
+   </OverallProperties>
+   <View
+      id="View2">
+      <property
+         name="activityId">BatchesPendingShipping</property>
+      <property
+         name="page">/WEB-INF/com/rmi/applicationEntry/view/batchesshippingtaskflow/BatchesPendingShipping.jsff</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>BatchesPendingShipping&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">91.149414</property>
+      <property
+         name="x">348.5244</property>
+      <property
+         name="pageFragment">true</property>
+   </View>
+   <MethodCall
+      id="MethodCall3">
+      <property
+         name="activityId">onLoadBatchPendingShipping</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>onLoadBatchPendingShipping&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">98.79883</property>
+      <property
+         name="x">120.73633</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="MethodCall3"
+      to="View2">
+      <property
+         name="fromOutcome">onLoadBatchPendingShipping</property>
+      <property
+         name="tosrcid">__3</property>
+      <property
+         name="fromsrcid">__2</property>
+      <property
+         name="sdm:polyPoints">R50,161.73633,98.44824,307.5244,90.79883,L50</property>
+   </ControlFlowCase>
+</SDM>

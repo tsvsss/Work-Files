@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SearchSeafarerView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.readonly.SearchSeafarerView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pQueryId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT                               
+ROWNUM SL_NO,                               
+QUERY_ID,                               
+WEIGHT,                               
+SEAFARER_ID,                               
+LAST_NAME,                               
+FIRST_NAME,                               
+BIRTH_DATE,       
+TO_CHAR(BIRTH_DATE,'yyyy/MM/dd') BIRTH_DATE_CHAR,      
+BIRTH_PLACE,                               
+CITIZENSHIP,                               
+NATIONALITY,                               
+HAIR_COLOR,                               
+EYE_COLOR,                               
+GENDER,                               
+HEIGHT_FT,                               
+HEIGHT_IN,                               
+WEIGHT_LB,                               
+DISTINGUISHING_MARKS,                              
+NOTES,                  
+(iri_html.get_base_path('SICD_PHOTOS')||SEAFARER_ID|| '.jpeg') PHOTO                            
+FROM APPS.RMI_SEAFARER_SEARCH_V                                  
+WHERE QUERY_ID = :pQueryId                     
+ORDER BY WEIGHT DESC]]></SQLQuery>
+  <ViewAttribute
+    Name="SlNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SL_NO"
+    Expression="SL_NO"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="QueryId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="QUERY_ID"
+    Expression="QUERY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Weight"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="WEIGHT"
+    Expression="WEIGHT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SeafarerId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SEAFARER_ID"
+    Expression="SEAFARER_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="LastName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="60"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LAST_NAME"
+    Expression="LAST_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FirstName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="60"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FIRST_NAME"
+    Expression="FIRST_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BirthDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="BIRTH_DATE"
+    Expression="BIRTH_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="BirthDateChar"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="11"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BIRTH_DATE_CHAR"
+    Expression="BIRTH_DATE_CHAR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="11"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BirthPlace"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="60"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BIRTH_PLACE"
+    Expression="BIRTH_PLACE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Citizenship"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="80"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CITIZENSHIP"
+    Expression="CITIZENSHIP"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Nationality"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NATIONALITY"
+    Expression="NATIONALITY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HairColor"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="HAIR_COLOR"
+    Expression="HAIR_COLOR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EyeColor"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EYE_COLOR"
+    Expression="EYE_COLOR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Gender"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="GENDER"
+    Expression="GENDER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HeightFt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="HEIGHT_FT"
+    Expression="HEIGHT_FT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="HeightIn"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="HEIGHT_IN"
+    Expression="HEIGHT_IN"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="WeightLb"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="WEIGHT_LB"
+    Expression="WEIGHT_LB"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="DistinguishingMarks"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="250"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DISTINGUISHING_MARKS"
+    Expression="DISTINGUISHING_MARKS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="250"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Notes"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="155"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NOTES"
+    Expression="NOTES"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="155"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Photo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PHOTO"
+    Expression="PHOTO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransUseSelected"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransPhotoLink"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="SlNo"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

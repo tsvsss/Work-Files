@@ -1,0 +1,261 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Login - INTERNATIONAL REGISTRIES,INC." id="d1">
+        <af:messages id="m4"/>
+        <af:resource type="javascript">
+            function loginSubmit(event) {
+                if (event.getKeyCode() == AdfKeyStroke.ENTER_KEY) {
+                    var source = event.getSource();
+                    var myButton = source.findComponent("b1");
+                    var actionEvent = new AdfActionEvent(myButton);
+                    actionEvent.forceFullSubmit();
+                    actionEvent.noResponseExpected();
+                    actionEvent.queue();
+                }
+            }   
+        </af:resource>
+        <af:resource type="javascript">
+            function externalLogin(event) {
+                if (event.getKeyCode() == AdfKeyStroke.ENTER_KEY) {
+                    var source = event.getSource();
+                    var myButton = source.findComponent("b5");
+                    var actionEvent = new AdfActionEvent(myButton);
+                    actionEvent.forceFullSubmit();
+                    actionEvent.noResponseExpected();
+                    actionEvent.queue();
+                }
+            }   
+        </af:resource>
+        <af:form id="f1" usesUpload="true">
+            <af:pageTemplate viewId="/WEB-INF/com/rmi/login/view/pagetemplates/RmiTemplate.jsf" id="pt1">
+                <f:facet name="content">
+                    <af:panelStretchLayout id="psl1" topHeight="91px" bottomHeight="90px" inlineStyle="height:538px;">
+                        <f:facet name="center">
+                            <af:panelGroupLayout id="pgl3" styleClass="AFStretchWidth" layout="vertical">
+                                <af:panelGroupLayout id="pgl6" layout="vertical" halign="center"
+                                                     inlineStyle="margin-top:50px; ">
+                                    <af:panelBox text="Sign In" id="pb1" showDisclosure="false"
+                                                 inlineStyle="background-color:#EEEEEE;width:500px;height:250px">
+                                        <af:panelGroupLayout id="pgl2"
+                                                             inlineStyle="background-color:#EEEEEE; width:490px; height:225px;"
+                                                             layout="vertical" halign="center">
+                                            <af:spacer height="20" width="400" id="s100"/>
+                                            <af:panelGroupLayout id="pgl171" layout="vertical" halign="center">
+                                                <af:inputText id="it1" placeholder="User Name"
+                                                              value="#{viewScope.loginBean.userName}"
+                                                              styleClass="sfxInputLoginLbl sfxInputLoginTxt"
+                                                              readOnly="false" label=" " autoSubmit="true"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer height="10" width="20" id="s1"/>
+                                            <af:panelGroupLayout id="pgl16" layout="vertical" halign="center">
+                                                <af:inputText id="it2" secret="true" readOnly="false"
+                                                              styleClass="sfxInputLoginLbl sfxInputLoginTxt"
+                                                              placeholder="Password" value="#{viewScope.loginBean.password}"
+                                                              label=" " autoSubmit="true">
+                                                    <af:clientListener method="loginSubmit" type="keyPress"/>
+                                                </af:inputText>
+                                            </af:panelGroupLayout>
+                                            <af:spacer height="10" width="20" id="s2"/>
+                                            <af:panelGroupLayout id="pgl1" layout="horizontal" halign="center">
+                                                <af:button text="Login" id="b1" styleClass="rmi-button"
+                                                           action="#{viewScope.loginBean.doLogin}" partialSubmit="true"/>
+                                                <af:spacer width="6" height="30" id="s5"/>
+                                                <af:button text="Reset" id="b2" styleClass="rmi-button"
+                                                           actionListener="#{viewScope.loginBean.reset}"/>
+                                            </af:panelGroupLayout>
+                                            <af:spacer height="10" width="20" id="s53"/>
+                                            <af:link id="l2" text="Forgot password" styleClass="rmi-link"
+                                                     actionListener="#{viewScope.loginBean.forgotPassword}" partialSubmit="true"/>
+                                        </af:panelGroupLayout>
+                                        <af:panelGroupLayout id="pgl9" layout="horizontal" halign="center">
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p17"
+                                                      binding="#{viewScope.loginBean.authenticationpasswrdpopup}"
+                                                      contentDelivery="lazyUncached"
+                                                      popupCanceledListener="#{viewScope.loginBean.otpPopupCanceledListener}">
+                                                <af:dialog id="d47" type="none" title=" ">
+                                                    <af:panelBox text="One Time Password (OTP)" id="pb27"
+                                                                 showDisclosure="false"
+                                                                 inlineStyle="background-color:#EEEEEE; width:450px;"
+                                                                 contentStyle="padding:10px 0px 10px 0px;">
+                                                        <af:panelGroupLayout id="pgl13" layout="horizontal">
+                                                            <af:inputText placeholder="One Time Password (OTP)" id="it3"
+                                                                          rendered="true"
+                                                                          binding="#{viewScope.loginBean.authenication}" label=" "
+                                                                          contentStyle="width:200px !important;"/>
+                                                            <af:panelGroupLayout id="pgl12" layout="horizontal">
+                                                                <af:spacer height="30" width="70" id="s3"/>
+                                                                <af:button text="Submit" id="b6"
+                                                                           action="#{viewScope.loginBean.externalAgentLoginAction}"/>
+                                                                <af:spacer width="10" height="10" id="s13"/>
+                                                                <af:button text="Resend" id="b7"
+                                                                           actionListener="#{viewScope.loginBean.resendOtpAL}"/>
+                                                            </af:panelGroupLayout>
+                                                        </af:panelGroupLayout>
+                                                        <af:panelGroupLayout id="pgl14" layout="horizontal"
+                                                                             inlineStyle="margin-top:5px;"
+                                                                             visible="#{pageFlowScope.OTP_EXPIRED eq 'Y'}"
+                                                                             partialTriggers="pgl13 pgl12 b6 b7">
+                                                            <af:message id="m5"
+                                                                        message="The entered OTP has expired. Please resend and try again."
+                                                                        partialTriggers="pgl13 pgl12 b6 b7"
+                                                                        inlineStyle="color:red; font-style:italic;"/>
+                                                        </af:panelGroupLayout>
+                                                        <af:panelGroupLayout id="pgl15" layout="horizontal"
+                                                                             inlineStyle="margin-top:5px;"
+                                                                             visible="#{pageFlowScope.OTP_INVALID eq 'Y'}"
+                                                                             partialTriggers="pgl13 pgl12 b6 b7">
+                                                            <af:message id="m6"
+                                                                        message="Please enter valid password sent on registered email."
+                                                                        partialTriggers="pgl13 pgl12 b6 b7"
+                                                                        inlineStyle="color:red; font-style:italic;"/>
+                                                        </af:panelGroupLayout>
+                                                        <af:panelGroupLayout id="pgl11" layout="horizontal"
+                                                                             inlineStyle="margin-top:5px;">
+                                                            <af:poll id="p5" interval="1000"
+                                                                         pollListener="#{viewScope.loginBean.refreshOtpEndTimePollListener}"
+                                                                     binding="#{viewScope.loginBean.otpTimerPollBinding}"/>
+                                                            <af:message id="m3"
+                                                                        message="You will receive an OTP via email valid for the next ">
+                                                            </af:message>
+                                                            <af:spacer width="5" id="s14"/>
+                                                            <af:outputText value="#{bindings.TimeLeft.inputValue}"
+                                                                           shortDesc="#{bindings.TimeLeft.hints.tooltip}"
+                                                                           id="ot4"
+                                                                           inlineStyle="font-weight:bold; color:red !important;"/>
+                                                            <af:spacer width="5" id="s15"/>
+                                                            <af:outputText value="min(s)" id="ot5"/>
+                                                            <af:outputText value="#{viewScope.loginBean.otpEndTime}" id="ot3"
+                                                                           inlineStyle="text-transform:uppercase; padding-left:3px;"
+                                                                           visible="false">
+                                                                <af:convertDateTime pattern="dd-MMM-yyyy hh:mm:ss a"/>
+                                                            </af:outputText>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelBox>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                                      binding="#{viewScope.loginBean.passwrdpopup}"
+                                                      contentDelivery="lazyUncached">
+                                                <af:dialog id="d4" type="none" title=" ">
+                                                    <af:panelBox text="Please reset your password" id="pb2"
+                                                                 showDisclosure="false"
+                                                                 inlineStyle="  background-color:#EEEEEE;width:250px;height:170px">
+                                                        <af:inputText id="it10" placeholder="Old Password"
+                                                                      readOnly="false"
+                                                                      binding="#{viewScope.loginBean.oldpassword}" label=" "
+                                                                      secret="true"/>
+                                                        <af:spacer height="20" id="s11"/>
+                                                        <af:spacer height="10" id="s22"/>
+                                                        <af:panelGroupLayout id="pgl10" layout="horizontal">
+                                                            <af:inputText placeholder="New Password" id="it32"
+                                                                          binding="#{viewScope.loginBean.newpassword}"
+                                                                          autoSubmit="true"
+                                                                          validator="#{viewScope.loginBean.newpasswordValidator}"
+                                                                          label=" " secret="true"/>
+                                                            <af:spacer width="5" height="10" id="s12"/>
+                                                            <af:icon name="info" id="i1"
+                                                                     shortDesc="Password must be of minimum 6 characters and maximum 20. Must contain one digit, one special character, one lowercase character and one uppercase character">
+                                                                <af:showPopupBehavior popupId="p4" triggerType="click"/>
+                                                            </af:icon>
+                                                        </af:panelGroupLayout>
+                                                        <af:spacer height="10" id="s27"/>
+                                                        <af:inputText placeholder="Confirm Password" id="it37"
+                                                                      secret="true" autoSubmit="true"
+                                                                      binding="#{viewScope.loginBean.confirmpassword}"
+                                                                      validator="#{viewScope.loginBean.confirmpasswordValidator}"
+                                                                      label=" "></af:inputText>
+                                                        <af:spacer height="10" id="s4"/>
+                                                        <af:popup childCreation="deferred" autoCancel="disabled"
+                                                                  id="p4">
+                                                            <af:dialog id="d5" type="ok" title="Password Validation"
+                                                                       contentWidth="350">
+                                                                <f:facet name="buttonBar"/>
+                                                                <af:message id="m1"
+                                                                            message="Password must be of minimum 6 characters and maximum 20. Must contain one digit, one special character, one lowercase character and one uppercase character"
+                                                                            messageType="info"
+                                                                            inlineStyle="font-weight:bold !important;"/>
+                                                            </af:dialog>
+                                                        </af:popup>
+                                                        <af:panelGroupLayout id="pgl7" layout="horizontal"
+                                                                             halign="right">
+                                                            <af:button text="Reset" id="b3"
+                                                                       actionListener="#{viewScope.loginBean.changePassword}"/>
+                                                            <f:facet name="separator"/>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelBox>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p2"
+                                                      binding="#{viewScope.loginBean.forgotpasswordpopup}"
+                                                      contentDelivery="lazyUncached"
+                                                      popupFetchListener="#{viewScope.loginBean.forgotPasswordPopupFetchListener}">
+                                                <af:dialog id="d2" type="none" title=" ">
+                                                    <af:panelBox text="Please confirm details to reset your password"
+                                                                 id="pb3" showDisclosure="false"
+                                                                 inlineStyle="background-color:#EEEEEE; width:325px;">
+                                                        <af:inputText id="it4" placeholder="Registered Email ID"
+                                                                      readOnly="false" binding="#{viewScope.loginBean.regemailid}"
+                                                                      label=" "
+                                                                      contentStyle="margin:10px 0px 5px 0px; padding:3px; width:275px !important; font-size:13px !important;"/>
+                                                        <af:spacer height="5" id="s6"/>
+                                                        <af:panelGroupLayout id="pgl8" layout="horizontal"
+                                                                             halign="center"
+                                                                             styleClass="AFStretchWidth"
+                                                                             inlineStyle="text-align:center;"
+                                                                             visible="false">
+                                                            <af:outputText value="OR" id="ot2"/>
+                                                        </af:panelGroupLayout>
+                                                        <af:spacer height="5" id="s7" visible="false"/>
+                                                        <af:inputText placeholder="Registered Mobile Number" id="it5"
+                                                                      binding="#{viewScope.loginBean.regmobileno}" label="  "
+                                                                      contentStyle="margin:5px 0px 5px 0px; padding:3px; width:275px !important; font-size:13px !important;"
+                                                                      visible="false"/>
+                                                        <af:spacer height="10" id="s8" visible="false"/>
+                                                        <af:button text="Submit" id="b4"
+                                                                   actionListener="#{viewScope.loginBean.confirmForgPassword}"
+                                                                   inlineStyle="margin:0px 0px 10px 5px;"/>
+                                                    </af:panelBox>
+                                                </af:dialog>
+                                            </af:popup>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p3"
+                                                      binding="#{viewScope.loginBean.onetimepasswordpopup}"
+                                                      contentDelivery="lazyUncached">
+                                                <af:dialog id="d3" type="none" title="  ">
+                                                    <af:panelBox text="Please confirm OTP received by email." id="pb4"
+                                                                 showDisclosure="false"
+                                                                 inlineStyle="  background-color:#EEEEEE;width:250px;">
+                                                        <af:inputText id="it6" placeholder="One Time Password"
+                                                                      readOnly="false" binding="#{viewScope.loginBean.otpemail}"
+                                                                      label="  " autoSubmit="true">
+                                                            <af:clientListener method="externalLogin" type="keyPress"/>
+                                                        </af:inputText>
+                                                        <af:spacer height="20" id="s9"/>
+                                                        <af:spacer height="10" id="s10"/>
+                                                        <af:panelGroupLayout id="pgl4" layout="horizontal"
+                                                                             halign="right">
+                                                            <af:button text="Submit" id="b5"
+                                                                       actionListener="#{viewScope.loginBean.confirmonetimePassword}"/>
+                                                        </af:panelGroupLayout>
+                                                    </af:panelBox>
+                                                </af:dialog>
+                                            </af:popup>
+                                        </af:panelGroupLayout>
+                                    </af:panelBox>
+                                </af:panelGroupLayout>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="top"></f:facet>
+                        <f:facet name="bottom">
+                            <af:panelGroupLayout id="pgl5" styleClass="AFStretchWidth" layout="vertical"/>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                </f:facet>
+            </af:pageTemplate>
+            <af:message id="m2"/>
+        </af:form>
+        <f:facet name="metaContainer">
+            <af:outputText value="&lt;link rel='SHORTCUT ICON' href='#{facesContext.externalContext.requestContextPath}/images/favicon.ico'/>" id="ot1" escape="false"/>
+        </f:facet>
+    </af:document>
+</f:view>

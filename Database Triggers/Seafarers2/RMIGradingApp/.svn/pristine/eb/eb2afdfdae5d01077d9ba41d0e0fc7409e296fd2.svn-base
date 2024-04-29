@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="EditDocumentsTaskflow">
+    <default-activity>filterEditDocumentsVO</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__6">
+      <name>P_CALLED_FROM_TF</name>
+      <value>#{pageFlowScope.P_CALLED_FROM_TF}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__7">
+      <name>P_SEAFARER_ID</name>
+      <value>#{pageFlowScope.P_SEAFARER_ID}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__8">
+      <name>P_ESI_BATCH_ID</name>
+      <value>#{pageFlowScope.P_ESI_BATCH_ID}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>ValidateSeafarerBean</managed-bean-name>
+      <managed-bean-class>com.rmi.tradecompapproval.view.validateseafarer.ValidateSeafarerBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <exception-handler>exceptionHandler</exception-handler>
+    <view id="EditDocumentsPage">
+      <page>/WEB-INF/com/rmi/tradecompapproval/view/editseafarerdocs/EditDocumentsPage.jsff</page>
+    </view>
+    <method-call id="filterEditDocumentsVO">
+      <method>#{bindings.filterEditDocumentsVO.execute}</method>
+      <outcome>
+        <fixed-outcome>filterEditDocumentsVO</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <method-call id="exceptionHandler">
+      <method>#{pageFlowScope.ValidateSeafarerBean.exceptionHandler}</method>
+    </method-call>
+    <task-flow-call id="vettingTF">
+      <task-flow-reference>
+        <document>/WEB-INF/com/rmi/manualtradecompliance/view/vetting/vettingTF.xml</document>
+        <id>vettingTF</id>
+      </task-flow-reference>
+      <input-parameter id="__10">
+        <name>P_SEAFARER_ID</name>
+        <value>#{data.com_rmi_tradecompapproval_view_EditDocumentsPagePageDef.SeafarerId.inputValue}</value>
+      </input-parameter>
+      <input-parameter id="__11">
+        <name>P_SOURCE_TABLE</name>
+        <value>SICD_SEAFARERS</value>
+      </input-parameter>
+      <input-parameter id="__12">
+        <name>P_SOURCE_TABLE_COLUMN</name>
+        <value>SEAFARER_ID</value>
+      </input-parameter>
+      <input-parameter id="__13">
+        <name>P_SHOW_BACK_BUTTON</name>
+        <value>true</value>
+      </input-parameter>
+      <input-parameter id="__14">
+        <name>P_SOURCE_ID</name>
+        <value>#{data.com_rmi_tradecompapproval_view_EditDocumentsPagePageDef.SeafarerId.inputValue}</value>
+      </input-parameter>
+      <input-parameter id="__15">
+        <name>P_ESI_BATCH_ID</name>
+        <value>#{pageFlowScope.P_ESI_BATCH_ID}</value>
+      </input-parameter>
+      <input-parameter id="__16">
+        <name>P_OWS_REGION_RENDERED</name>
+        <value>#{sessionScope.UserId ne null}</value>
+      </input-parameter>
+      <input-parameter id="__17">
+        <name>P_FACES_SERVLET</name>
+        <value>seaf</value>
+      </input-parameter>
+      <input-parameter id="__18">
+        <name>P_SOURCE_TYPE</name>
+        <value>INDIVIDUAL</value>
+      </input-parameter>
+    </task-flow-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>filterEditDocumentsVO</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>filterEditDocumentsVO</from-outcome>
+        <to-activity-id>EditDocumentsPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__4">
+      <from-activity-id>EditDocumentsPage</from-activity-id>
+      <control-flow-case id="__5">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__9">
+        <from-outcome>tradeCompliance</from-outcome>
+        <to-activity-id>vettingTF</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

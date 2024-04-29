@@ -1,0 +1,1289 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl6" layout="scroll" styleClass="AFStretchWidth">
+    <af:panelGroupLayout id="pgl1" layout="vertical" styleClass="AFStretchWidth">
+      <af:panelBox text="#{(pageFlowScope.P_CALLED_FROM_TF eq 'VS') ? 'Validate Seafarer' : 'Edit Documents'}" id="pb1" showHeader="always" showDisclosure="false"
+                   styleClass="AFStretchWidth" inlineStyle="border:none; box-shadow:none;">
+        <af:separator id="s1" inlineStyle="margin:0px;"/>
+        <af:panelFormLayout id="pfl1" maxColumns="3" rows="3" styleClass="AFStretchWidth panelFormLayoutClass"
+                            inlineStyle="padding:10px;">
+          <af:inputText value="#{bindings.SeafarerId.inputValue}" label="Seafarer ID" required="false"
+                        columns="#{bindings.SeafarerId.hints.displayWidth}"
+                        maximumLength="#{bindings.SeafarerId.hints.precision}"
+                        shortDesc="#{bindings.SeafarerId.hints.tooltip}" id="it6" disabled="true" autoSubmit="true"
+                        styleClass="AFInputTextHead">
+            <f:validator binding="#{bindings.SeafarerId.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.SeafarerId.format}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.MiddleInitial.inputValue}" label="Middle Initial" required="false"
+                        columns="#{bindings.MiddleInitial.hints.displayWidth}"
+                        maximumLength="#{bindings.MiddleInitial.hints.precision}"
+                        shortDesc="#{bindings.MiddleInitial.hints.tooltip}" id="it5" disabled="true" autoSubmit="true"
+                        styleClass="AFInputTextHead">
+            <f:validator binding="#{bindings.MiddleInitial.validator}"/>
+          </af:inputText>
+          <af:inputListOfValues id="transCountryNameId"
+                                popupTitle="Search and Select: Nationality"
+                                value="#{bindings.TransCountryName.inputValue}" label="Nationality"
+                                model="#{bindings.TransCountryName.listOfValuesModel}" required="false"
+                                columns="#{bindings.TransCountryName.hints.displayWidth}"
+                                shortDesc="#{bindings.TransCountryName.hints.tooltip}" disabled="true" autoSubmit="true"
+                                styleClass="AFInputTextHead">
+            <f:validator binding="#{bindings.TransCountryName.validator}"/>
+            <af:autoSuggestBehavior suggestedItems="#{bindings.TransCountryName.suggestedItems}"/>
+          </af:inputListOfValues>
+          <af:inputText value="#{bindings.LastName.inputValue}" label="Surname" required="false"
+                        columns="#{bindings.LastName.hints.displayWidth}"
+                        maximumLength="#{bindings.LastName.hints.precision}"
+                        shortDesc="#{bindings.LastName.hints.tooltip}" id="it4" disabled="true" autoSubmit="true"
+                        styleClass="AFInputTextHead">
+            <f:validator binding="#{bindings.LastName.validator}"/>
+          </af:inputText>
+          <af:inputDate value="#{bindings.BirthDate.inputValue}" label="Birth Date" required="false"
+                        columns="#{bindings.BirthDate.hints.displayWidth}"
+                        shortDesc="#{bindings.BirthDate.hints.tooltip}" id="id1" disabled="true" autoSubmit="true"
+                        styleClass="AFInputTextHead">
+            <f:validator binding="#{bindings.BirthDate.validator}"/>
+            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+          </af:inputDate>
+          <af:inputText value="#{bindings.Gender.inputValue}" label="Gender" required="false"
+                        columns="#{bindings.Gender.hints.displayWidth}"
+                        maximumLength="#{bindings.Gender.hints.precision}" shortDesc="#{bindings.Gender.hints.tooltip}"
+                        id="it3" disabled="true" autoSubmit="true" styleClass="AFInputTextHead">
+            <f:validator binding="#{bindings.Gender.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.FirstName.inputValue}" label="Given Name" required="false"
+                        columns="#{bindings.FirstName.hints.displayWidth}"
+                        maximumLength="#{bindings.FirstName.hints.precision}"
+                        shortDesc="#{bindings.FirstName.hints.tooltip}" id="it2" disabled="true" autoSubmit="true"
+                        styleClass="AFInputTextHead">
+            <f:validator binding="#{bindings.FirstName.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.BirthPlace.inputValue}" label="Birth Place" required="false"
+                        columns="#{bindings.BirthPlace.hints.displayWidth}"
+                        maximumLength="#{bindings.BirthPlace.hints.precision}"
+                        shortDesc="#{bindings.BirthPlace.hints.tooltip}" id="it1" disabled="true" autoSubmit="true"
+                        styleClass="AFInputTextHead">
+            <f:validator binding="#{bindings.BirthPlace.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.Status.inputValue}" label="Status" required="false"
+                        columns="#{bindings.Status.hints.displayWidth}"
+                        maximumLength="#{bindings.Status.hints.precision}" shortDesc="#{bindings.Status.hints.tooltip}"
+                        id="it7" disabled="true" autoSubmit="true" styleClass="AFInputTextHead">
+            <f:validator binding="#{bindings.Status.validator}"/>
+          </af:inputText>
+        </af:panelFormLayout>
+        <af:separator id="s7"/>
+        <af:panelBox id="pb10" showHeader="never" showDisclosure="false" inlineStyle="border:none; box-shadow:none;"
+                     styleClass="AFStretchWidth">
+          <f:facet name="toolbar"/>
+          <af:panelTabbed position="above" id="pt1" dimensionsFrom="disclosedChild">
+            <af:showDetailItem id="tab1" text="Officer Certificates"
+                               binding="#{pageFlowScope.ValidateSeafarerBean.ocTabBinding}">
+              <af:panelBox id="pb3" text="Officer Certificates" showDisclosure="false"
+                           inlineStyle="border:none; box-shadow:none;" styleClass="AFStretchWidth">
+                <f:facet name="toolbar">
+                  <af:panelGroupLayout id="pgl9" layout="horizontal" halign="right" styleClass="AFStretchWidth">
+                    <af:toolbar id="t11" inlineStyle="padding:5px; float:left !important;">
+                      <af:button text="Add" id="b4"
+                                 actionListener="#{pageFlowScope.ValidateSeafarerBean.actionListenerAddOc}"/>
+                    </af:toolbar>
+                    <af:toolbar id="t17" inlineStyle="padding:5px; float:right !important;">
+                      <af:button text="Delete" id="b7"
+                                 actionListener="#{pageFlowScope.ValidateSeafarerBean.actionListenerDeleteOc}"
+                                 immediate="true"
+                                 disabled="#{bindings.OfficerCertificatesVO1Iterator.estimatedRowCount eq 0}"
+                                 partialTriggers="pc1:t1 pc1">
+                        <af:resetActionListener/>
+                      </af:button>
+                    </af:toolbar>
+                  </af:panelGroupLayout>
+                </f:facet>
+                <af:panelFormLayout id="pfl2" maxColumns="3" rows="5" styleClass="AFStretchWidth panelFormLayoutClass"
+                                    inlineStyle="padding:10px;" labelAlignment="start">
+                  <af:inputText value="#{bindings.CertificateNumber.inputValue}" label="Certificate Number "
+                                required="false" columns="#{bindings.CertificateNumber.hints.displayWidth}"
+                                maximumLength="#{bindings.CertificateNumber.hints.precision}" id="it8" autoSubmit="true"
+                                styleClass="AFInputTextTab RequiredField" disabled="true">
+                    <f:validator binding="#{bindings.CertificateNumber.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.CertificateNumber.format}"/>
+                  </af:inputText>
+                  <af:selectOneChoice value="#{bindings.CertificateType.inputValue}" label="Certificate Type"
+                                      required="false"
+                                      shortDesc="#{bindings.CertificateType.hints.tooltip}" id="soc1" autoSubmit="true"
+                                      styleClass="AFInputTextTab RequiredField">
+                    <f:selectItems value="#{bindings.CertificateType.items}" id="si1"/>
+                    <f:validator binding="#{bindings.CertificateType.validator}"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{bindings.TransOCWorkOrderNo.inputValue}" label="Order Number"
+                                columns="#{bindings.TransOCWorkOrderNo.hints.displayWidth}"
+                                maximumLength="#{bindings.TransOCWorkOrderNo.hints.precision}"
+                                shortDesc="#{bindings.TransOCWorkOrderNo.hints.tooltip}" id="it10" autoSubmit="true"
+                                disabled="true" required="false" styleClass="AFInputTextTab">
+                    <f:validator binding="#{bindings.TransOCWorkOrderNo.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.TransOCWorkOrderNo.format}"/>
+                  </af:inputText>
+                  <af:selectOneChoice value="#{bindings.IssueType.inputValue}" label="Issue Type"
+                                      required="false"
+                                      shortDesc="#{bindings.IssueType.hints.tooltip}" id="soc2" autoSubmit="true"
+                                      styleClass="AFInputTextTab RequiredField">
+                    <f:selectItems value="#{bindings.IssueType.items}" id="si2"/>
+                    <f:validator binding="#{bindings.IssueType.validator}"/>
+                  </af:selectOneChoice>
+                  <af:inputListOfValues id="transPreviousOCId"
+                                        popupTitle="Search and Select: Previous OC"
+                                        value="#{bindings.TransPreviousOC.inputValue}" label="Previous OC"
+                                        model="#{bindings.TransPreviousOC.listOfValuesModel}" required="false"
+                                        columns="#{bindings.TransPreviousOC.hints.displayWidth}"
+                                        shortDesc="#{bindings.TransPreviousOC.hints.tooltip}" autoSubmit="true"
+                                        styleClass="AFInputTextTab">
+                    <f:validator binding="#{bindings.TransPreviousOC.validator}"/>
+                    <af:autoSuggestBehavior suggestedItems="#{bindings.TransPreviousOC.suggestedItems}"/>
+                  </af:inputListOfValues>
+                  <af:inputListOfValues id="transGradeId"
+                                        popupTitle="Search and Select: Grade"
+                                        value="#{bindings.TransGrade.inputValue}" label="Grade"
+                                        model="#{bindings.TransGrade.listOfValuesModel}" required="false"
+                                        columns="#{bindings.TransGrade.hints.displayWidth}"
+                                        shortDesc="#{bindings.TransGrade.hints.tooltip}" autoSubmit="true"
+                                        styleClass="AFInputTextTab RequiredField">
+                    <f:validator binding="#{bindings.TransGrade.validator}"/>
+                    <af:autoSuggestBehavior suggestedItems="#{bindings.TransGrade.suggestedItems}"/>
+                  </af:inputListOfValues>
+                  <af:inputDate value="#{bindings.IssueDate.inputValue}" label="Issue Date"
+                                required="false"
+                                columns="#{bindings.IssueDate.hints.displayWidth}"
+                                shortDesc="#{bindings.IssueDate.hints.tooltip}" id="id5" autoSubmit="true"
+                                styleClass="AFInputTextTab RequiredField">
+                    <f:validator binding="#{bindings.IssueDate.validator}"/>
+                    <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                  </af:inputDate>
+                  <af:inputDate value="#{bindings.ExpirationDate.inputValue}" label="Expiration Date" required="false"
+                                columns="#{bindings.ExpirationDate.hints.displayWidth}"
+                                shortDesc="#{bindings.ExpirationDate.hints.tooltip}" id="id4" autoSubmit="true"
+                                styleClass="AFInputTextTab" partialTriggers="id5 soc1">
+                    <f:validator binding="#{bindings.ExpirationDate.validator}"/>
+                    <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                  </af:inputDate>
+                  <af:inputText value="#{bindings.ExamYear.inputValue}" label="Exam Year" required="false"
+                                columns="#{bindings.ExamYear.hints.displayWidth}"
+                                maximumLength="#{bindings.ExamYear.hints.precision}"
+                                shortDesc="#{bindings.ExamYear.hints.tooltip}" id="it12" autoSubmit="true"
+                                styleClass="AFInputTextTab">
+                    <f:validator binding="#{bindings.ExamYear.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.ExamYear.format}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.EndorsementNumber.inputValue}" label="Endorsement Number"
+                                required="false" columns="#{bindings.EndorsementNumber.hints.displayWidth}"
+                                maximumLength="#{bindings.EndorsementNumber.hints.precision}"
+                                shortDesc="#{bindings.EndorsementNumber.hints.tooltip}" id="it9" autoSubmit="true"
+                                styleClass="AFInputTextTab">
+                    <f:validator binding="#{bindings.EndorsementNumber.validator}"/>
+                  </af:inputText>
+                  <af:inputListOfValues id="transCountryName1Id"
+                                        popupTitle="Search and Select: Endorsement Country"
+                                        value="#{bindings.TransCountryName1.inputValue}" label="Endorsement Country"
+                                        model="#{bindings.TransCountryName1.listOfValuesModel}" required="false"
+                                        columns="#{bindings.TransCountryName1.hints.displayWidth}"
+                                        shortDesc="#{bindings.TransCountryName1.hints.tooltip}" autoSubmit="true"
+                                        styleClass="AFInputTextTab">
+                    <f:validator binding="#{bindings.TransCountryName1.validator}"/>
+                    <af:autoSuggestBehavior suggestedItems="#{bindings.TransCountryName1.suggestedItems}"/>
+                  </af:inputListOfValues>
+                  <af:inputDate value="#{bindings.EndorsementIssueDate.inputValue}" label="Endorsement Issue Date"
+                                required="false" columns="#{bindings.EndorsementIssueDate.hints.displayWidth}"
+                                shortDesc="#{bindings.EndorsementIssueDate.hints.tooltip}" id="id3" autoSubmit="true"
+                                styleClass="AFInputTextTab RequiredField">
+                    <f:validator binding="#{bindings.EndorsementIssueDate.validator}"/>
+                    <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                  </af:inputDate>
+                  <af:inputDate value="#{bindings.EndorsementExpirationDate.inputValue}"
+                                label="Endorsement Expiration Date" required="false"
+                                columns="#{bindings.EndorsementExpirationDate.hints.displayWidth}"
+                                shortDesc="#{bindings.EndorsementExpirationDate.hints.tooltip}" id="id2"
+                                autoSubmit="true" styleClass="AFInputTextTab RequiredField">
+                    <f:validator binding="#{bindings.EndorsementExpirationDate.validator}"/>
+                    <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                  </af:inputDate>
+                  <af:inputText value="#{bindings.ExamNumber.inputValue}" label="Exam Number" required="false"
+                                columns="#{bindings.ExamNumber.hints.displayWidth}"
+                                maximumLength="#{bindings.ExamNumber.hints.precision}"
+                                shortDesc="#{bindings.ExamNumber.hints.tooltip}" id="it11" autoSubmit="true"
+                                styleClass="AFInputTextTab">
+                    <f:validator binding="#{bindings.ExamNumber.validator}"/>
+                  </af:inputText>
+                  <af:selectOneChoice value="#{bindings.Status1.inputValue}" label="Status"
+                                      required="false"
+                                      shortDesc="#{bindings.Status1.hints.tooltip}" id="soc3" autoSubmit="true"
+                                      styleClass="AFInputTextTab RequiredField">
+                    <f:selectItems value="#{bindings.Status1.items}" id="si3"/>
+                    <f:validator binding="#{bindings.Status1.validator}"/>
+                  </af:selectOneChoice>
+                </af:panelFormLayout>
+                <af:separator id="s8" inlineStyle="margin:5px;"/>
+                <af:panelCollection id="pc1" styleClass="AFStretchWidth"
+                                    featuresOff="columnsMenuItem formatMenu freeze freezeMenuItem freezeToolbarItem reorderColumnsMenuItem resizeColumnsMenuItem scrollToFirstMenuItem scrollToLastMenuItem showAsTopMenuItem showAsTopToolbarItem sortMenuItem statusBar viewMenu wrap wrapMenuItem wrapToolbarItem"
+                                    partialTriggers="::b7 ::t11">
+                  <f:facet name="menus"/>
+                  <f:facet name="toolbar"/>
+                  <f:facet name="statusbar"/>
+                  <af:table value="#{bindings.OfficerCertificatesVO1.collectionModel}" var="row"
+                            rows="#{bindings.OfficerCertificatesVO1.rangeSize}"
+                            emptyText="#{bindings.OfficerCertificatesVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            rowBandingInterval="0"
+                            selectedRowKeys="#{bindings.OfficerCertificatesVO1.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.OfficerCertificatesVO1.collectionModel.makeCurrent}"
+                            rowSelection="single" fetchSize="#{bindings.OfficerCertificatesVO1.rangeSize}" id="t1"
+                            styleClass="AFStretchWidth" inlineStyle="line-height:20px;" contentDelivery="immediate"
+                            autoHeightRows="5" partialTriggers=":::t11 :::b7 :::b1">
+                    <af:column sortProperty="#{bindings.OfficerCertificatesVO1.hints.CertificateNumber.name}"
+                               sortable="true" headerText="Certificate Number" id="c1" displayIndex="1">
+                      <af:outputText value="#{row.CertificateNumber}"
+                                     shortDesc="#{bindings.OfficerCertificatesVO1.hints.CertificateNumber.tooltip}"
+                                     id="ot1">
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.OfficerCertificatesVO1.hints.CertificateNumber.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.OfficerCertificatesVO1.hints.CertificateType.name}"
+                               sortable="true" headerText="Certificate Type" id="c2">
+                      <af:selectOneChoice value="#{row.bindings.CertificateType.inputValue}"
+                                          label="#{row.bindings.CertificateType.label}"
+                                          required="#{bindings.OfficerCertificatesVO1.hints.CertificateType.mandatory}"
+                                          shortDesc="#{bindings.OfficerCertificatesVO1.hints.CertificateType.tooltip}"
+                                          readOnly="true" id="soc4"
+                                          contentStyle="white-space: normal !important; -webkit-white-space: normal !important;">
+                        <f:selectItems value="#{row.bindings.CertificateType.items}" id="si4"/>
+                        <f:validator binding="#{row.bindings.CertificateType.validator}"/>
+                      </af:selectOneChoice>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.OfficerCertificatesVO1.hints.TransOCWorkOrderNo.name}"
+                               sortable="true" headerText="Order Number" id="c6">
+                      <af:outputText value="#{row.TransOCWorkOrderNo}"
+                                     shortDesc="#{bindings.OfficerCertificatesVO1.hints.TransOCWorkOrderNo.tooltip}"
+                                     id="ot5">
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.OfficerCertificatesVO1.hints.EsdiId.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.OfficerCertificatesVO1.hints.IssueType.name}" sortable="true"
+                               headerText="Issue Type" id="c11">
+                      <af:selectOneChoice value="#{row.bindings.IssueType.inputValue}"
+                                          label="#{row.bindings.IssueType.label}"
+                                          required="#{bindings.OfficerCertificatesVO1.hints.IssueType.mandatory}"
+                                          shortDesc="#{bindings.OfficerCertificatesVO1.hints.IssueType.tooltip}"
+                                          readOnly="true" id="soc5">
+                        <f:selectItems value="#{row.bindings.IssueType.items}" id="si5"/>
+                        <f:validator binding="#{row.bindings.IssueType.validator}"/>
+                      </af:selectOneChoice>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.OfficerCertificatesVO1.hints.TransPreviousOC.name}"
+                               sortable="true" headerText="Previous OC" id="c15">
+                      <af:outputText value="#{row.TransPreviousOC}"
+                                     shortDesc="#{bindings.OfficerCertificatesVO1.hints.TransPreviousOC.tooltip}"
+                                     id="ot12"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.OfficerCertificatesVO1.hints.TransGrade.name}" sortable="true"
+                               headerText="Grade" id="c14">
+                      <af:panelGroupLayout id="pgl10" layout="horizontal">
+                        <af:outputText value="#{row.TransGrade}"
+                                       shortDesc="#{bindings.OfficerCertificatesVO1.hints.TransGrade.tooltip}"
+                                       id="ot11"/>
+                        <af:outputText value="#{row.TransOcAllGrades}" id="ot16" visible="#{row.TransGrade eq null}"
+                                       partialTriggers="ot11"/>
+                      </af:panelGroupLayout>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.OfficerCertificatesVO1.hints.IssueDate.name}" sortable="true"
+                               headerText="Issue Date" id="c10">
+                      <af:outputText value="#{row.IssueDate}"
+                                     shortDesc="#{bindings.OfficerCertificatesVO1.hints.IssueDate.tooltip}" id="ot9">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.OfficerCertificatesVO1.hints.ExpirationDate.name}"
+                               sortable="true" headerText="Expiration Date" id="c9">
+                      <af:outputText value="#{row.ExpirationDate}"
+                                     shortDesc="#{bindings.OfficerCertificatesVO1.hints.ExpirationDate.tooltip}"
+                                     id="ot8">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.OfficerCertificatesVO1.hints.Status.name}" sortable="true"
+                               headerText="#{bindings.OfficerCertificatesVO1.hints.Status.label}" id="c12">
+                      <af:selectOneChoice value="#{row.bindings.Status.inputValue}" label="#{row.bindings.Status.label}"
+                                          required="#{bindings.OfficerCertificatesVO1.hints.Status.mandatory}"
+                                          shortDesc="#{bindings.OfficerCertificatesVO1.hints.Status.tooltip}"
+                                          readOnly="true" id="soc6">
+                        <f:selectItems value="#{row.bindings.Status.items}" id="si6"/>
+                        <f:validator binding="#{row.bindings.Status.validator}"/>
+                      </af:selectOneChoice>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.OfficerCertificatesVO1.hints.EndorsementNumber.name}"
+                               sortable="true" headerText="Endorsement Number" id="c5">
+                      <af:outputText value="#{row.EndorsementNumber}"
+                                     shortDesc="#{bindings.OfficerCertificatesVO1.hints.EndorsementNumber.tooltip}"
+                                     id="ot4"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.OfficerCertificatesVO1.hints.TransCountryName.name}"
+                               sortable="true" headerText="Endorsement Country" id="c13">
+                      <af:outputText value="#{row.TransCountryName}"
+                                     shortDesc="#{bindings.OfficerCertificatesVO1.hints.TransCountryName.tooltip}"
+                                     id="ot10"
+                                     inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.OfficerCertificatesVO1.hints.EndorsementIssueDate.name}"
+                               sortable="true" headerText="Endorsement Issue Date" id="c4">
+                      <af:outputText value="#{row.EndorsementIssueDate}"
+                                     shortDesc="#{bindings.OfficerCertificatesVO1.hints.EndorsementIssueDate.tooltip}"
+                                     id="ot3">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.OfficerCertificatesVO1.hints.EndorsementExpirationDate.name}"
+                               sortable="true" headerText="Endorsement Expiration Date" id="c3">
+                      <af:outputText value="#{row.EndorsementExpirationDate}"
+                                     shortDesc="#{bindings.OfficerCertificatesVO1.hints.EndorsementExpirationDate.tooltip}"
+                                     id="ot2">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.OfficerCertificatesVO1.hints.ExamNumber.name}" sortable="true"
+                               headerText="Exam Number" id="c7">
+                      <af:outputText value="#{row.ExamNumber}"
+                                     shortDesc="#{bindings.OfficerCertificatesVO1.hints.ExamNumber.tooltip}" id="ot6"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.OfficerCertificatesVO1.hints.ExamYear.name}" sortable="true"
+                               headerText="Exam Year" id="c8">
+                      <af:outputText value="#{row.ExamYear}"
+                                     shortDesc="#{bindings.OfficerCertificatesVO1.hints.ExamYear.tooltip}" id="ot7">
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.OfficerCertificatesVO1.hints.ExamYear.format}"/>
+                      </af:outputText>
+                    </af:column>
+                  </af:table>
+                </af:panelCollection>
+              </af:panelBox>
+            </af:showDetailItem>
+            <af:showDetailItem id="tab2" text="OC Details"
+                               disclosureListener="#{pageFlowScope.ValidateSeafarerBean.ocDetailsTabDisclosureListener}">
+              <af:panelFormLayout id="pfl3" maxColumns="3" rows="1" styleClass="AFStretchWidth"
+                                  inlineStyle="padding:5px;" labelWidth="150">
+                <af:spacer width="10" height="10" id="s10"/>
+                <af:inputText value="#{bindings.CertificateNumber.inputValue}" label="Certificate Number"
+                              required="#{bindings.CertificateNumber.hints.mandatory}"
+                              columns="#{bindings.CertificateNumber.hints.displayWidth}"
+                              maximumLength="#{bindings.CertificateNumber.hints.precision}"
+                              shortDesc="#{bindings.CertificateNumber.hints.tooltip}" id="it13"
+                              contentStyle="width:200px; padding:3px;" disabled="true" autoSubmit="true">
+                  <f:validator binding="#{bindings.CertificateNumber.validator}"/>
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.CertificateNumber.format}"/>
+                </af:inputText>
+                <af:spacer width="10" height="10" id="s11"/>
+              </af:panelFormLayout>
+              <af:separator id="s12" inlineStyle="margin:0px;"/>
+              <af:panelDashboard id="pd1" columns="2" dimensionsFrom="children" styleClass="AFStretchWidth"
+                                 rowHeight="300px">
+                <af:panelBox text="Capacities" id="pb4" showDisclosure="false" showHeader="always">
+                  <af:panelGroupLayout id="pgl2" layout="vertical" styleClass="AFStretchWidth"
+                                       inlineStyle="padding:10px;">
+                    <af:panelFormLayout id="pfl4" inlineStyle="padding:5px;" labelWidth="200" rendered="false">
+                      <af:inputText value="#{bindings.TransCapacityDesc.inputValue}" label="Capacities"
+                                    required="#{bindings.TransCapacityDesc.hints.mandatory}"
+                                    columns="#{bindings.TransCapacityDesc.hints.displayWidth}"
+                                    maximumLength="#{bindings.TransCapacityDesc.hints.precision}"
+                                    shortDesc="#{bindings.TransCapacityDesc.hints.tooltip}" id="it14"
+                                    contentStyle="width:200px; padding:3px;" disabled="true" rendered="false">
+                        <f:validator binding="#{bindings.TransCapacityDesc.validator}"/>
+                      </af:inputText>
+                      <af:spacer width="10" height="5" id="s24"/>
+                      <af:inputListOfValues id="transLimitationDescId"
+                                            popupTitle="Search and Select: #{bindings.TransLimitationDesc.hints.label}"
+                                            value="#{bindings.TransLimitationDesc.inputValue}" label="Limitations"
+                                            model="#{bindings.TransLimitationDesc.listOfValuesModel}"
+                                            required="#{bindings.TransLimitationDesc.hints.mandatory}"
+                                            columns="#{bindings.TransLimitationDesc.hints.displayWidth}"
+                                            shortDesc="#{bindings.TransLimitationDesc.hints.tooltip}" autoSubmit="true"
+                                            contentStyle="width:200px; padding:3px;">
+                        <f:validator binding="#{bindings.TransLimitationDesc.validator}"/>
+                        <af:autoSuggestBehavior suggestedItems="#{bindings.TransLimitationDesc.suggestedItems}"/>
+                      </af:inputListOfValues>
+                    </af:panelFormLayout>
+                    <af:table value="#{bindings.OcDetailsCapacitiesVO11.collectionModel}" var="row"
+                              rows="#{bindings.OcDetailsCapacitiesVO11.rangeSize}"
+                              emptyText="#{bindings.OcDetailsCapacitiesVO11.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.OcDetailsCapacitiesVO11.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.OcDetailsCapacitiesVO11.collectionModel.makeCurrent}"
+                              rowSelection="single" fetchSize="#{bindings.OcDetailsCapacitiesVO11.rangeSize}" id="t10"
+                              inlineStyle="line-height:18px;" contentDelivery="immediate" autoHeightRows="6"
+                              styleClass="AFStretchWidth" columnStretching="last" partialTriggers="::b11 ::b12">
+                      <af:column headerText="Capacity"
+                                 id="c29" width="300">
+                        <af:inputListOfValues id="transCapacityDescId"
+                                              popupTitle="Search and Select: Capacity"
+                                              value="#{row.bindings.TransCapacityDesc.inputValue}"
+                                              model="#{row.bindings.TransCapacityDesc.listOfValuesModel}"
+                                              required="true"
+                                              columns="#{bindings.OcDetailsCapacitiesVO11.hints.TransCapacityDesc.displayWidth}"
+                                              shortDesc="#{bindings.OcDetailsCapacitiesVO11.hints.TransCapacityDesc.tooltip}"
+                                              autoSubmit="true"
+                                              valueChangeListener="#{pageFlowScope.ValidateSeafarerBean.ocCapacityVCL}"
+                                              binding="#{pageFlowScope.ValidateSeafarerBean.ocCapacityBinding}"
+                                              autoComplete="on">
+                          <f:validator binding="#{row.bindings.TransCapacityDesc.validator}"/>
+                          <af:autoSuggestBehavior suggestedItems="#{bindings.TransCapacityDesc.suggestedItems}"/>
+                        </af:inputListOfValues>
+                      </af:column>
+                      <af:column sortProperty="#{bindings.OcDetailsCapacitiesVO11.hints.TransLimitationDesc.name}"
+                                 sortable="true"
+                                 headerText="Limitations" id="c47" width="200">
+                        <af:panelGroupLayout id="pgl7" layout="horizontal">
+                          <af:inputText value="#{row.bindings.Limitations.inputValue}"
+                                        label="#{bindings.OcDetailsCapacitiesVO11.hints.Limitations.label}"
+                                        required="false"
+                                        columns="#{bindings.OcDetailsCapacitiesVO11.hints.Limitations.displayWidth}"
+                                        maximumLength="#{bindings.OcDetailsCapacitiesVO11.hints.Limitations.precision}"
+                                        id="it27" autoSubmit="true"
+                                        contentStyle="width:180px;" partialTriggers="transLimitationDescId2">
+                            <f:validator binding="#{row.bindings.Limitations.validator}"/>
+                            <af:autoSuggestBehavior suggestedItems="#{bindings.TransLimitationDesc.suggestedItems}"/>
+                          </af:inputText>
+                          <af:inputListOfValues id="transLimitationDescId2" popupTitle="Search and Select: Limitations"
+                                                value="#{row.bindings.TransLimitationDesc.inputValue}"
+                                                model="#{row.bindings.TransLimitationDesc.listOfValuesModel}"
+                                                columns="#{bindings.OcDetailsCapacitiesVO11.hints.TransLimitationDesc.displayWidth}"
+                                                contentStyle="width:0px; border:none; padding:0px;" autoSubmit="true"
+                                                autoComplete="on" simple="true"
+                                                labelStyle="width:0px; border:none; padding:0px;"
+                                                inlineStyle="width:0px; border:none; padding:0px;" required="false">
+                            <f:validator binding="#{row.bindings.TransLimitationDesc.validator}"/>
+                          </af:inputListOfValues>
+                        </af:panelGroupLayout>
+                      </af:column>
+                    </af:table>
+                    <af:panelCollection id="pc2" styleClass="AFStretchWidth"
+                                        featuresOff="columnsMenuItem formatMenu freeze freezeMenuItem freezeToolbarItem reorderColumnsMenuItem resizeColumnsMenuItem scrollToFirstMenuItem scrollToLastMenuItem showAsTopMenuItem showAsTopToolbarItem sortMenuItem statusBar viewMenu wrap wrapMenuItem wrapToolbarItem"
+                                        rendered="false">
+                      <f:facet name="menus"/>
+                      <f:facet name="toolbar"/>
+                      <f:facet name="statusbar"/>
+                      <af:table value="#{bindings.OcDetailsCapacitiesVO1.collectionModel}" var="row"
+                                rows="#{bindings.OcDetailsCapacitiesVO1.rangeSize}"
+                                emptyText="#{bindings.OcDetailsCapacitiesVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                rowBandingInterval="0"
+                                selectedRowKeys="#{bindings.OcDetailsCapacitiesVO1.collectionModel.selectedRow}"
+                                selectionListener="#{bindings.OcDetailsCapacitiesVO1.collectionModel.makeCurrent}"
+                                rowSelection="single" fetchSize="#{bindings.OcDetailsCapacitiesVO1.rangeSize}" id="t3"
+                                columnStretching="last" styleClass="AFStretchWidth" inlineStyle="line-height:20px;"
+                                autoHeightRows="5" contentDelivery="immediate">
+                        <af:column sortProperty="#{bindings.OcDetailsCapacitiesVO1.hints.TransCapacityDesc.name}"
+                                   sortable="true" headerText="Capacities" id="c16" width="300">
+                          <af:outputText value="#{row.TransCapacityDesc}"
+                                         shortDesc="#{bindings.OcDetailsCapacitiesVO1.hints.TransCapacityDesc.tooltip}"
+                                         id="ot13"/>
+                        </af:column>
+                        <af:column sortProperty="#{bindings.OcDetailsCapacitiesVO1.hints.TransLimitationDesc.name}"
+                                   sortable="true" headerText="Limitations" id="c17">
+                          <af:outputText value="#{row.TransLimitationDesc}"
+                                         shortDesc="#{bindings.OcDetailsCapacitiesVO1.hints.TransLimitationDesc.tooltip}"
+                                         id="ot14"/>
+                        </af:column>
+                      </af:table>
+                    </af:panelCollection>
+                  </af:panelGroupLayout>
+                  <f:facet name="toolbar">
+                    <af:toolbar id="t13">
+                      <af:button text="Add" id="b11"
+                                 action="#{pageFlowScope.ValidateSeafarerBean.actionAddOcCapacity}"/>
+                      <af:button text="Delete" id="b12" inlineStyle="margin-left:5px;"
+                                 actionListener="#{pageFlowScope.ValidateSeafarerBean.deleteOcCapacityAL}"
+                                 immediate="true"
+                                 disabled="#{bindings.OcDetailsCapacitiesVO1Iterator.estimatedRowCount eq 0}"
+                                 partialTriggers="t10">
+                        <af:resetActionListener/>
+                      </af:button>
+                    </af:toolbar>
+                  </f:facet>
+                </af:panelBox>
+                <af:panelBox text="Functions" id="pb6" showDisclosure="false">
+                  <af:panelGroupLayout id="pgl3" layout="vertical" styleClass="AFStretchWidth"
+                                       inlineStyle="padding:10px;">
+                    <af:panelFormLayout id="pfl5" maxColumns="2" rows="2" styleClass="AFStretchWidth"
+                                        inlineStyle="padding:5px;" labelWidth="80" rendered="false">
+                      <af:inputText value="#{bindings.TransFunctionName.inputValue}" label="Functions"
+                                    required="#{bindings.TransFunctionName.hints.mandatory}"
+                                    columns="#{bindings.TransFunctionName.hints.displayWidth}"
+                                    maximumLength="#{bindings.TransFunctionName.hints.precision}"
+                                    shortDesc="#{bindings.TransFunctionName.hints.tooltip}" id="it16"
+                                    contentStyle="width:150px; padding:3px;" disabled="true" autoSubmit="false" rows="2"
+                                    rendered="false">
+                        <f:validator binding="#{bindings.TransFunctionName.validator}"/>
+                      </af:inputText>
+                      <af:spacer width="10" height="0" id="s14"/>
+                      <af:inputText value="#{bindings.TransLevel.inputValue}" label="Level"
+                                    required="#{bindings.TransLevel.hints.mandatory}"
+                                    columns="#{bindings.TransLevel.hints.displayWidth}"
+                                    maximumLength="#{bindings.TransLevel.hints.precision}"
+                                    shortDesc="#{bindings.TransLevel.hints.tooltip}" id="it15"
+                                    contentStyle="width:150px; padding:3px;" autoSubmit="true" disabled="true">
+                        <f:validator binding="#{bindings.TransLevel.validator}"/>
+                      </af:inputText>
+                      <af:inputListOfValues id="transLimitationsNameId"
+                                            popupTitle="Search and Select: #{bindings.TransLimitationsName.hints.label}"
+                                            value="#{bindings.TransLimitationsName.inputValue}" label="Limitations"
+                                            model="#{bindings.TransLimitationsName.listOfValuesModel}"
+                                            required="#{bindings.TransLimitationsName.hints.mandatory}"
+                                            columns="#{bindings.TransLimitationsName.hints.displayWidth}"
+                                            shortDesc="#{bindings.TransLimitationsName.hints.tooltip}"
+                                            contentStyle="width:150px; padding:3px;">
+                        <f:validator binding="#{bindings.TransLimitationsName.validator}"/>
+                        <af:autoSuggestBehavior suggestedItems="#{bindings.TransLimitationsName.suggestedItems}"/>
+                      </af:inputListOfValues>
+                    </af:panelFormLayout>
+                    <af:table value="#{bindings.OcDetailsFunctionsVO1.collectionModel}" var="row"
+                              rows="#{bindings.OcDetailsFunctionsVO1.rangeSize}"
+                              emptyText="#{bindings.OcDetailsFunctionsVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.OcDetailsFunctionsVO1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.OcDetailsFunctionsVO1.collectionModel.makeCurrent}"
+                              rowSelection="single" fetchSize="#{bindings.OcDetailsFunctionsVO1.rangeSize}" id="t4"
+                              styleClass="AFStretchWidth" inlineStyle="line-height:18px;" autoHeightRows="6"
+                              contentDelivery="immediate" columnStretching="last" partialTriggers="::b13 ::b14 ::tab2">
+                      <af:column headerText="Function" id="c20" width="200">
+                        <af:inputListOfValues id="transFunctionNameId"
+                                              popupTitle="Search and Select: Function"
+                                              value="#{row.bindings.TransFunctionName.inputValue}"
+                                              model="#{row.bindings.TransFunctionName.listOfValuesModel}"
+                                              required="true"
+                                              columns="#{bindings.OcDetailsFunctionsVO1.hints.TransFunctionName.displayWidth}"
+                                              autoSubmit="true" autoComplete="on"
+                                              valueChangeListener="#{pageFlowScope.ValidateSeafarerBean.ocFunctionVCL}"
+                                              binding="#{pageFlowScope.ValidateSeafarerBean.ocFunctionBinding}">
+                          <f:validator binding="#{row.bindings.TransFunctionName.validator}"/>
+                          <af:autoSuggestBehavior suggestedItems="#{bindings.TransFunctionName.suggestedItems}"/>
+                        </af:inputListOfValues>
+                      </af:column>
+                      <af:column sortProperty="#{bindings.OcDetailsFunctionsVO1.hints.TransLevel.name}" sortable="true"
+                                 headerText="Level" id="c19" width="120">
+                        <af:inputText value="#{row.bindings.TransLevel.inputValue}"
+                                      label="#{bindings.OcDetailsFunctionsVO1.hints.TransLevel.label}" required="false"
+                                      columns="#{bindings.OcDetailsFunctionsVO1.hints.TransLevel.displayWidth}"
+                                      maximumLength="#{bindings.OcDetailsFunctionsVO1.hints.TransLevel.precision}"
+                                      shortDesc="#{bindings.OcDetailsFunctionsVO1.hints.TransLevel.tooltip}" id="it28"
+                                      autoSubmit="true" readOnly="true" partialTriggers="transFunctionNameId">
+                          <f:validator binding="#{row.bindings.TransLevel.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column sortProperty="#{bindings.OcDetailsFunctionsVO1.hints.TransLimitationsName.name}"
+                                 sortable="true"
+                                 headerText="Limitations" id="c18" width="200">
+                        <af:panelGroupLayout id="pgl8" layout="horizontal">
+                          <af:inputText value="#{row.bindings.Limitations.inputValue}"
+                                        label="#{bindings.OcDetailsFunctionsVO1.hints.Limitations.label}"
+                                        required="false"
+                                        columns="#{bindings.OcDetailsFunctionsVO1.hints.Limitations.displayWidth}"
+                                        maximumLength="#{bindings.OcDetailsFunctionsVO1.hints.Limitations.precision}"
+                                        id="it29" autoSubmit="true"
+                                        contentStyle="width:180px;"
+                                        partialTriggers="transFunctionNameId transLimitationsNameId2">
+                            <f:validator binding="#{row.bindings.Limitations.validator}"/>
+                            <af:autoSuggestBehavior suggestedItems="#{bindings.TransLimitationsName.suggestedItems}"/>
+                          </af:inputText>
+                          <af:inputListOfValues id="transLimitationsNameId2" popupTitle="Search and Select: Limitations"
+                                                value="#{row.bindings.TransLimitationsName.inputValue}"
+                                                model="#{row.bindings.TransLimitationsName.listOfValuesModel}"
+                                                required="false"
+                                                columns="#{bindings.OcDetailsFunctionsVO1.hints.TransLimitationsName.displayWidth}"
+                                                contentStyle="width:0px; border:none; padding:0px;" autoSubmit="true"
+                                                autoComplete="on" partialTriggers="transFunctionNameId" simple="true"
+                                                labelStyle="width:0px; border:none; padding:0px;"
+                                                inlineStyle="width:0px; border:none; padding:0px;">
+                            <f:validator binding="#{row.bindings.TransLimitationsName.validator}"/>
+                          </af:inputListOfValues>
+                        </af:panelGroupLayout>
+                      </af:column>
+                    </af:table>
+                  </af:panelGroupLayout>
+                  <f:facet name="toolbar">
+                    <af:toolbar id="t14">
+                      <af:button text="Add" id="b13"
+                                 action="#{pageFlowScope.ValidateSeafarerBean.actionAddOcFunction}"/>
+                      <af:button text="Delete" id="b14" inlineStyle="margin-left:5px;" immediate="true"
+                                 actionListener="#{pageFlowScope.ValidateSeafarerBean.deleteOcFunctionAL}"
+                                 disabled="#{bindings.OcDetailsFunctionsVO1Iterator.estimatedRowCount eq 0}"
+                                 partialTriggers="t4">
+                        <af:resetActionListener/>
+                      </af:button>
+                    </af:toolbar>
+                  </f:facet>
+                </af:panelBox>
+              </af:panelDashboard>
+            </af:showDetailItem>
+            <af:showDetailItem id="tab3" text="Books" binding="#{pageFlowScope.ValidateSeafarerBean.bookTabBinding}">
+              <af:panelBox text="Books" id="pb5" showDisclosure="false" styleClass="AFStretchWidth"
+                           inlineStyle="border:none; box-shadow:none;">
+                <f:facet name="toolbar">
+                  <af:toolbar id="t2" inlineStyle="padding:5px;">
+                    <af:button text="Add" id="b5"
+                               actionListener="#{pageFlowScope.ValidateSeafarerBean.actionListenerAddBooks}"/>
+                    <af:spacer width="5" height="10" id="s32"/>
+                    <af:button text="Delete" id="b8"
+                               actionListener="#{pageFlowScope.ValidateSeafarerBean.actionListenerDeleteBooks}"
+                               immediate="true">
+                      <af:resetActionListener/>
+                    </af:button>
+                  </af:toolbar>
+                </f:facet>
+                <af:panelFormLayout id="pfl6" maxColumns="3" rows="3" styleClass="AFStretchWidth panelFormLayoutClass"
+                                    inlineStyle="padding:10px;" labelWidth="130">
+                  <af:inputText value="#{bindings.BookNumber.inputValue}" label="Book Number" required="false"
+                                columns="#{bindings.BookNumber.hints.displayWidth}"
+                                maximumLength="#{bindings.BookNumber.hints.precision}"
+                                shortDesc="#{bindings.BookNumber.hints.tooltip}" id="it17" autoSubmit="true"
+                                styleClass="AFInputTextTab RequiredField">
+                    <f:validator binding="#{bindings.BookNumber.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.BookNumber.format}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.TransBooksWorkOrderNo.inputValue}" label="Order Number"
+                                required="#{bindings.TransBooksWorkOrderNo.hints.mandatory}"
+                                columns="#{bindings.TransBooksWorkOrderNo.hints.displayWidth}"
+                                maximumLength="#{bindings.TransBooksWorkOrderNo.hints.precision}"
+                                shortDesc="#{bindings.TransBooksWorkOrderNo.hints.tooltip}" id="it21" autoSubmit="true"
+                                disabled="true" styleClass="AFInputTextTab">
+                    <f:validator binding="#{bindings.TransBooksWorkOrderNo.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.TransBooksWorkOrderNo.format}"/>
+                  </af:inputText>
+                  <af:selectOneChoice value="#{bindings.IssueType1.inputValue}" label="Issue Type"
+                                      required="false"
+                                      shortDesc="#{bindings.IssueType1.hints.tooltip}" id="soc8" autoSubmit="true"
+                                      styleClass="AFInputTextTab RequiredField">
+                    <f:selectItems value="#{bindings.IssueType1.items}" id="si8"/>
+                    <f:validator binding="#{bindings.IssueType1.validator}"/>
+                  </af:selectOneChoice>
+                  <af:inputListOfValues id="transPreviousBooksId"
+                                        popupTitle="Search and Select: Previous Books"
+                                        value="#{bindings.TransPreviousBooks.inputValue}" label="Previous Books"
+                                        model="#{bindings.TransPreviousBooks.listOfValuesModel}" required="false"
+                                        columns="#{bindings.TransPreviousBooks.hints.displayWidth}"
+                                        shortDesc="#{bindings.TransPreviousBooks.hints.tooltip}" autoSubmit="true"
+                                        styleClass="AFInputTextTab">
+                    <f:validator binding="#{bindings.TransPreviousBooks.validator}"/>
+                    <af:autoSuggestBehavior suggestedItems="#{bindings.TransPreviousBooks.suggestedItems}"/>
+                  </af:inputListOfValues>
+                  <af:selectOneChoice value="#{bindings.BookType.inputValue}" label="Book Type" required="false"
+                                      shortDesc="#{bindings.BookType.hints.tooltip}" id="soc7" autoSubmit="true"
+                                      styleClass="AFInputTextTab">
+                    <f:selectItems value="#{bindings.BookType.items}" id="si7"/>
+                    <f:validator binding="#{bindings.BookType.validator}"/>
+                  </af:selectOneChoice>
+                  <af:inputDate value="#{bindings.IssueDate1.inputValue}" label="Issue Date"
+                                required="false"
+                                columns="#{bindings.IssueDate1.hints.displayWidth}"
+                                shortDesc="#{bindings.IssueDate1.hints.tooltip}" id="id7" autoSubmit="true"
+                                styleClass="AFInputTextTab RequiredField">
+                    <f:validator binding="#{bindings.IssueDate1.validator}"/>
+                    <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                  </af:inputDate>
+                  <af:inputDate value="#{bindings.ExpirationDate1.inputValue}" label="Expiration Date" required="false"
+                                columns="#{bindings.ExpirationDate1.hints.displayWidth}"
+                                shortDesc="#{bindings.ExpirationDate1.hints.tooltip}" id="id6" autoSubmit="true"
+                                styleClass="AFInputTextTab" partialTriggers="id7">
+                    <f:validator binding="#{bindings.ExpirationDate1.validator}"/>
+                    <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                  </af:inputDate>
+                  <af:selectOneChoice value="#{bindings.Status2.inputValue}" label="Status"
+                                      required="false"
+                                      shortDesc="#{bindings.Status2.hints.tooltip}" id="soc9" autoSubmit="true"
+                                      styleClass="AFInputTextTab RequiredField">
+                    <f:selectItems value="#{bindings.Status2.items}" id="si9"/>
+                    <f:validator binding="#{bindings.Status2.validator}"/>
+                  </af:selectOneChoice>
+                </af:panelFormLayout>
+                <af:separator id="s16" inlineStyle="margin:5px;"/>
+                <af:panelCollection id="pc4" styleClass="AFStretchWidth"
+                                    featuresOff="columnsMenuItem formatMenu freeze freezeMenuItem freezeToolbarItem reorderColumnsMenuItem resizeColumnsMenuItem scrollToFirstMenuItem scrollToLastMenuItem showAsTopMenuItem showAsTopToolbarItem sortMenuItem statusBar viewMenu wrap wrapMenuItem wrapToolbarItem"
+                                    partialTriggers="::b8 ::t2">
+                  <f:facet name="menus"/>
+                  <f:facet name="toolbar"/>
+                  <f:facet name="statusbar"/>
+                  <af:table value="#{bindings.BooksVO1.collectionModel}" var="row" rows="#{bindings.BooksVO1.rangeSize}"
+                            emptyText="#{bindings.BooksVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            rowBandingInterval="0" selectedRowKeys="#{bindings.BooksVO1.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.BooksVO1.collectionModel.makeCurrent}" rowSelection="single"
+                            fetchSize="#{bindings.BooksVO1.rangeSize}" id="t5" contentDelivery="immediate"
+                            autoHeightRows="5" styleClass="AFStretchWidth" inlineStyle="line-height:20px;"
+                            partialTriggers=":::t2 :::b8 :::b1" columnStretching="last">
+                    <af:column sortProperty="#{bindings.BooksVO1.hints.BookNumber.name}" sortable="true"
+                               headerText="Book Number" id="c21" width="140" displayIndex="1">
+                      <af:outputText value="#{row.BookNumber}" shortDesc="#{bindings.BooksVO1.hints.BookNumber.tooltip}"
+                                     id="ot18">
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.BooksVO1.hints.BookNumber.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.BooksVO1.hints.TransBooksWorkOrderNo.name}" sortable="true"
+                               headerText="Order Number" id="c23" width="140">
+                      <af:outputText value="#{row.TransBooksWorkOrderNo}"
+                                     shortDesc="#{bindings.BooksVO1.hints.EsdiId.tooltip}" id="ot19">
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.BooksVO1.hints.EsdiId.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.BooksVO1.hints.IssueType.name}" sortable="true"
+                               headerText="Issue Type" id="c26" width="140">
+                      <af:selectOneChoice value="#{row.bindings.IssueType.inputValue}"
+                                          label="#{row.bindings.IssueType.label}"
+                                          required="#{bindings.BooksVO1.hints.IssueType.mandatory}"
+                                          shortDesc="#{bindings.BooksVO1.hints.IssueType.tooltip}" readOnly="true"
+                                          id="soc11">
+                        <f:selectItems value="#{row.bindings.IssueType.items}" id="si11"/>
+                        <f:validator binding="#{row.bindings.IssueType.validator}"/>
+                      </af:selectOneChoice>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.BooksVO1.hints.TransPreviousBooks.name}" sortable="true"
+                               headerText="Previous Books" id="c28" width="140">
+                      <af:outputText value="#{row.TransPreviousBooks}"
+                                     shortDesc="#{bindings.BooksVO1.hints.TransPreviousBooks.tooltip}" id="ot22"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.BooksVO1.hints.BookType.name}" sortable="true"
+                               headerText="Book Type" id="c22" width="140">
+                      <af:selectOneChoice value="#{row.bindings.BookType.inputValue}"
+                                          label="#{row.bindings.BookType.label}"
+                                          required="#{bindings.BooksVO1.hints.BookType.mandatory}"
+                                          shortDesc="#{bindings.BooksVO1.hints.BookType.tooltip}" readOnly="true"
+                                          id="soc10">
+                        <f:selectItems value="#{row.bindings.BookType.items}" id="si10"/>
+                        <f:validator binding="#{row.bindings.BookType.validator}"/>
+                      </af:selectOneChoice>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.BooksVO1.hints.IssueDate.name}" sortable="true"
+                               headerText="Issue Date" id="c25" width="140">
+                      <af:outputText value="#{row.IssueDate}" shortDesc="#{bindings.BooksVO1.hints.IssueDate.tooltip}"
+                                     id="ot21">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.BooksVO1.hints.ExpirationDate.name}" sortable="true"
+                               headerText="Expiration Date" id="c24" width="140">
+                      <af:outputText value="#{row.ExpirationDate}"
+                                     shortDesc="#{bindings.BooksVO1.hints.ExpirationDate.tooltip}" id="ot20">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.BooksVO1.hints.Status.name}" sortable="true" headerText="Status"
+                               id="c27" width="140">
+                      <af:selectOneChoice value="#{row.bindings.Status.inputValue}" label="#{row.bindings.Status.label}"
+                                          required="#{bindings.BooksVO1.hints.Status.mandatory}"
+                                          shortDesc="#{bindings.BooksVO1.hints.Status.tooltip}" readOnly="true"
+                                          id="soc12">
+                        <f:selectItems value="#{row.bindings.Status.items}" id="si12"/>
+                        <f:validator binding="#{row.bindings.Status.validator}"/>
+                      </af:selectOneChoice>
+                    </af:column>
+                  </af:table>
+                </af:panelCollection>
+              </af:panelBox>
+            </af:showDetailItem>
+            <af:showDetailItem id="tab4" text="Special Qualifications"
+                               binding="#{pageFlowScope.ValidateSeafarerBean.sqcTabBinding}">
+              <af:panelBox text="Special Qualifications" id="pb7" styleClass="AFStretchWidth" showDisclosure="false"
+                           inlineStyle="border:none; box-shadow:none;">
+                <f:facet name="toolbar">
+                  <af:toolbar id="t12" inlineStyle="padding:5px;">
+                    <af:button text="Add" id="b6"
+                               actionListener="#{pageFlowScope.ValidateSeafarerBean.actionListenerAddSqc}"/>
+                    <af:spacer width="5" height="10" id="s33"/>
+                    <af:button text="Delete" id="b9" immediate="true"
+                               actionListener="#{pageFlowScope.ValidateSeafarerBean.actionListenerDeleteSqc}">
+                      <af:resetActionListener/>
+                    </af:button>
+                  </af:toolbar>
+                </f:facet>
+                <af:panelFormLayout id="pfl11" maxColumns="3" rows="1" styleClass="AFStretchWidth"
+                                    inlineStyle="padding:5px;" labelWidth="100">
+                  <af:spacer width="10" height="10" id="s26"/>
+                  <af:inputText value="#{bindings.BookNumber.inputValue}" label="Book Number"
+                                required="#{bindings.BookNumber.hints.mandatory}"
+                                columns="#{bindings.BookNumber.hints.displayWidth}"
+                                maximumLength="#{bindings.BookNumber.hints.precision}"
+                                shortDesc="#{bindings.BookNumber.hints.tooltip}" id="it19"
+                                contentStyle="width:200px; padding:3px;" autoSubmit="true" disabled="true">
+                    <f:validator binding="#{bindings.BookNumber.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.BookNumber.format}"/>
+                  </af:inputText>
+                  <af:spacer width="10" height="10" id="s27"/>
+                </af:panelFormLayout>
+                <af:separator id="s28" inlineStyle="margin:5px;"/>
+                <af:panelFormLayout id="pfl7" styleClass="AFStretchWidth panelFormLayoutClass"
+                                    inlineStyle="padding:10px;" maxColumns="4" rows="4">
+                  <af:inputText value="#{bindings.SqcNumber.inputValue}" label="SQC Number" required="false"
+                                columns="#{bindings.SqcNumber.hints.displayWidth}"
+                                maximumLength="#{bindings.SqcNumber.hints.precision}"
+                                shortDesc="#{bindings.SqcNumber.hints.tooltip}" id="it22" autoSubmit="true"
+                                styleClass="AFInputTextTab RequiredField">
+                    <f:validator binding="#{bindings.SqcNumber.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.SqcNumber.format}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.TransSQCWorkOrderNo.inputValue}" label="Order Number" required="false"
+                                columns="#{bindings.TransSQCWorkOrderNo.hints.displayWidth}"
+                                maximumLength="#{bindings.TransSQCWorkOrderNo.hints.precision}"
+                                shortDesc="#{bindings.TransSQCWorkOrderNo.hints.tooltip}" id="it18" autoSubmit="true"
+                                disabled="true" styleClass="AFInputTextTab">
+                    <f:validator binding="#{bindings.TransSQCWorkOrderNo.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.TransSQCWorkOrderNo.format}"/>
+                  </af:inputText>
+                  <af:selectOneChoice value="#{bindings.IssueType2.inputValue}" label="Issue Type"
+                                      required="#{bindings.SqcNumber.inputValue ne null}"
+                                      shortDesc="#{bindings.IssueType2.hints.tooltip}" id="soc13" autoSubmit="true"
+                                      styleClass="AFInputTextTab">
+                    <f:selectItems value="#{bindings.IssueType2.items}" id="si13"/>
+                    <f:validator binding="#{bindings.IssueType2.validator}"/>
+                  </af:selectOneChoice>
+                  <af:inputListOfValues id="transPreviousSQCId"
+                                        popupTitle="Search and Select: Previous SQC"
+                                        value="#{bindings.TransPreviousSQC.inputValue}" label="Previous SQC"
+                                        model="#{bindings.TransPreviousSQC.listOfValuesModel}" required="false"
+                                        columns="#{bindings.TransPreviousSQC.hints.displayWidth}"
+                                        shortDesc="#{bindings.TransPreviousSQC.hints.tooltip}" autoSubmit="true"
+                                        styleClass="AFInputTextTab">
+                    <f:validator binding="#{bindings.TransPreviousSQC.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.TransPreviousSQC.format}"/>
+                    <af:autoSuggestBehavior suggestedItems="#{bindings.TransPreviousSQC.suggestedItems}"/>
+                  </af:inputListOfValues>
+                  <af:inputListOfValues id="transGradeSqcId"
+                                        popupTitle="Search and Select: Grade"
+                                        value="#{bindings.TransGradeSqc.inputValue}" label="Grade"
+                                        model="#{bindings.TransGradeSqc.listOfValuesModel}" required="false"
+                                        columns="#{bindings.TransGradeSqc.hints.displayWidth}"
+                                        shortDesc="#{bindings.TransGradeSqc.hints.tooltip}" autoSubmit="true"
+                                        styleClass="AFInputTextTab">
+                    <f:validator binding="#{bindings.TransGradeSqc.validator}"/>
+                    <af:autoSuggestBehavior suggestedItems="#{bindings.TransGradeSqc.suggestedItems}"/>
+                  </af:inputListOfValues>
+                  <af:inputDate value="#{bindings.IssueDate2.inputValue}" label="Issue Date"
+                                required="#{bindings.IssueType2.inputValue ne null}"
+                                columns="#{bindings.IssueDate2.hints.displayWidth}"
+                                shortDesc="#{bindings.IssueDate2.hints.tooltip}" id="id11" autoSubmit="true"
+                                styleClass="AFInputTextTab"
+                                validator="#{pageFlowScope.ValidateSeafarerBean.issueDateValidator}">
+                    <f:validator binding="#{bindings.IssueDate2.validator}"/>
+                    <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                  </af:inputDate>
+                  <af:inputDate value="#{bindings.ExpirationDate2.inputValue}" label="Expiration Date" required="false"
+                                columns="#{bindings.ExpirationDate2.hints.displayWidth}"
+                                shortDesc="#{bindings.ExpirationDate2.hints.tooltip}" id="id10" autoSubmit="true"
+                                styleClass="AFInputTextTab">
+                    <f:validator binding="#{bindings.ExpirationDate2.validator}"/>
+                    <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                  </af:inputDate>
+                  <af:selectOneChoice value="#{bindings.Status3.inputValue}" label="Status"
+                                      required="#{bindings.IssueDate2.inputValue ne null}"
+                                      shortDesc="#{bindings.Status3.hints.tooltip}" id="soc14" autoSubmit="true"
+                                      styleClass="AFInputTextTab">
+                    <f:selectItems value="#{bindings.Status3.items}" id="si14"/>
+                    <f:validator binding="#{bindings.Status3.validator}"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{bindings.EndorsementNumber1.inputValue}" label="Endorsement Number"
+                                required="#{bindings.EndorsementNumber1.hints.mandatory}"
+                                columns="#{bindings.EndorsementNumber1.hints.displayWidth}"
+                                maximumLength="#{bindings.EndorsementNumber1.hints.precision}"
+                                shortDesc="#{bindings.EndorsementNumber1.hints.tooltip}" id="it20" autoSubmit="true"
+                                styleClass="AFInputTextTab">
+                    <f:validator binding="#{bindings.EndorsementNumber1.validator}"/>
+                  </af:inputText>
+                  <af:inputListOfValues id="transEndorsCntryId"
+                                        popupTitle="Search and Select: Endorsement Country"
+                                        value="#{bindings.TransEndorsCntry.inputValue}" label="Endorsement Country"
+                                        model="#{bindings.TransEndorsCntry.listOfValuesModel}" required="false"
+                                        columns="#{bindings.TransEndorsCntry.hints.displayWidth}"
+                                        shortDesc="#{bindings.TransEndorsCntry.hints.tooltip}" autoSubmit="true"
+                                        styleClass="AFInputTextTab">
+                    <f:validator binding="#{bindings.TransEndorsCntry.validator}"/>
+                    <af:autoSuggestBehavior suggestedItems="#{bindings.TransEndorsCntry.suggestedItems}"/>
+                  </af:inputListOfValues>
+                  <af:inputDate value="#{bindings.EndorsementIssueDate1.inputValue}" label="Endorsement Issue Date"
+                                required="false" columns="#{bindings.EndorsementIssueDate1.hints.displayWidth}"
+                                shortDesc="#{bindings.EndorsementIssueDate1.hints.tooltip}" id="id9" autoSubmit="true"
+                                styleClass="AFInputTextTab">
+                    <f:validator binding="#{bindings.EndorsementIssueDate1.validator}"/>
+                    <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                  </af:inputDate>
+                  <af:inputDate value="#{bindings.EndorsementExpirationDate1.inputValue}"
+                                label="Endorsement Expiration Date" required="false"
+                                columns="#{bindings.EndorsementExpirationDate1.hints.displayWidth}"
+                                shortDesc="#{bindings.EndorsementExpirationDate1.hints.tooltip}" id="id8"
+                                autoSubmit="true" styleClass="AFInputTextTab">
+                    <f:validator binding="#{bindings.EndorsementExpirationDate1.validator}"/>
+                    <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                  </af:inputDate>
+                </af:panelFormLayout>
+                <af:separator id="s17" inlineStyle="margin:5px;"/>
+                <af:panelCollection id="pc5" styleClass="AFStretchWidth"
+                                    featuresOff="columnsMenuItem formatMenu freeze freezeMenuItem freezeToolbarItem reorderColumnsMenuItem resizeColumnsMenuItem scrollToFirstMenuItem scrollToLastMenuItem showAsTopMenuItem showAsTopToolbarItem sortMenuItem statusBar viewMenu wrap wrapMenuItem wrapToolbarItem">
+                  <f:facet name="menus"/>
+                  <f:facet name="toolbar"/>
+                  <f:facet name="statusbar"/>
+                  <af:table value="#{bindings.SpecialQualificationsVO1.collectionModel}" var="row"
+                            rows="#{bindings.SpecialQualificationsVO1.rangeSize}"
+                            emptyText="#{bindings.SpecialQualificationsVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            rowBandingInterval="0"
+                            selectedRowKeys="#{bindings.SpecialQualificationsVO1.collectionModel.selectedRow}"
+                            selectionListener="#{bindings.SpecialQualificationsVO1.collectionModel.makeCurrent}"
+                            rowSelection="single" fetchSize="#{bindings.SpecialQualificationsVO1.rangeSize}" id="t6"
+                            styleClass="AFStretchWidth" inlineStyle="line-height:20px;" autoHeightRows="5"
+                            contentDelivery="immediate" partialTriggers=":::t12 :::b9 :::b1" columnStretching="last">
+                    <af:column sortProperty="#{bindings.SpecialQualificationsVO1.hints.SqcNumber.name}" sortable="true"
+                               headerText="SQC Number" id="c37" displayIndex="1">
+                      <af:outputText value="#{row.SqcNumber}"
+                                     shortDesc="#{bindings.SpecialQualificationsVO1.hints.SqcNumber.tooltip}" id="ot30">
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.SpecialQualificationsVO1.hints.SqcNumber.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SpecialQualificationsVO1.hints.TransSQCWorkOrderNo.name}"
+                               sortable="true" headerText="Order Number" id="c33">
+                      <af:outputText value="#{row.TransSQCWorkOrderNo}"
+                                     shortDesc="#{bindings.SpecialQualificationsVO1.hints.TransSQCWorkOrderNo.tooltip}"
+                                     id="ot27">
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.SpecialQualificationsVO1.hints.EsdiId.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SpecialQualificationsVO1.hints.IssueType.name}" sortable="true"
+                               headerText="Issue Type" id="c36">
+                      <af:selectOneChoice value="#{row.bindings.IssueType.inputValue}"
+                                          label="#{row.bindings.IssueType.label}"
+                                          required="#{bindings.SpecialQualificationsVO1.hints.IssueType.mandatory}"
+                                          shortDesc="#{bindings.SpecialQualificationsVO1.hints.IssueType.tooltip}"
+                                          readOnly="true" id="soc15">
+                        <f:selectItems value="#{row.bindings.IssueType.items}" id="si15"/>
+                        <f:validator binding="#{row.bindings.IssueType.validator}"/>
+                      </af:selectOneChoice>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SpecialQualificationsVO1.hints.TransPreviousSQC.name}"
+                               sortable="true" headerText="Previous SQC" id="c39">
+                      <af:outputText value="#{row.TransPreviousSQC}"
+                                     shortDesc="#{bindings.SpecialQualificationsVO1.hints.TransPreviousSQC.tooltip}"
+                                     id="ot31">
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.SpecialQualificationsVO1.hints.TransPreviousSQC.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SpecialQualificationsVO1.hints.TransGradeSqc.name}"
+                               sortable="true" headerText="Grade" id="c40">
+                      <af:panelGroupLayout id="pgl11" layout="horizontal">
+                        <af:outputText value="#{row.TransGradeSqc}"
+                                       shortDesc="#{bindings.SpecialQualificationsVO1.hints.TransGradeSqc.tooltip}"
+                                       id="ot32"/>
+                        <af:outputText value="#{row.TransSqcAllGrades}" id="ot17" partialTriggers="ot32"
+                                       visible="#{row.TransGradeSqc eq null}"/>
+                      </af:panelGroupLayout>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SpecialQualificationsVO1.hints.IssueDate.name}" sortable="true"
+                               headerText="Issue Date" id="c35">
+                      <af:outputText value="#{row.IssueDate}"
+                                     shortDesc="#{bindings.SpecialQualificationsVO1.hints.IssueDate.tooltip}" id="ot29">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SpecialQualificationsVO1.hints.ExpirationDate.name}"
+                               sortable="true" headerText="Expiration Date" id="c34">
+                      <af:outputText value="#{row.ExpirationDate}"
+                                     shortDesc="#{bindings.SpecialQualificationsVO1.hints.ExpirationDate.tooltip}"
+                                     id="ot28">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SpecialQualificationsVO1.hints.Status.name}" sortable="true"
+                               headerText="Status" id="c38">
+                      <af:selectOneChoice value="#{row.bindings.Status.inputValue}" label="#{row.bindings.Status.label}"
+                                          required="#{bindings.SpecialQualificationsVO1.hints.Status.mandatory}"
+                                          shortDesc="#{bindings.SpecialQualificationsVO1.hints.Status.tooltip}"
+                                          readOnly="true" id="soc16">
+                        <f:selectItems value="#{row.bindings.Status.items}" id="si16"/>
+                        <f:validator binding="#{row.bindings.Status.validator}"/>
+                      </af:selectOneChoice>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SpecialQualificationsVO1.hints.EndorsementNumber.name}"
+                               sortable="true" headerText="Endorsement Number" id="c32">
+                      <af:outputText value="#{row.EndorsementNumber}"
+                                     shortDesc="#{bindings.SpecialQualificationsVO1.hints.EndorsementNumber.tooltip}"
+                                     id="ot26"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SpecialQualificationsVO1.hints.TransEndorsCntry.name}"
+                               sortable="true" headerText="Endorsement Country" id="c41">
+                      <af:outputText value="#{row.TransEndorsCntry}"
+                                     shortDesc="#{bindings.SpecialQualificationsVO1.hints.TransEndorsCntry.tooltip}"
+                                     id="ot33"
+                                     inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SpecialQualificationsVO1.hints.EndorsementIssueDate.name}"
+                               sortable="true" headerText="Endorsement Issue Date" id="c31">
+                      <af:outputText value="#{row.EndorsementIssueDate}"
+                                     shortDesc="#{bindings.SpecialQualificationsVO1.hints.EndorsementIssueDate.tooltip}"
+                                     id="ot25">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.SpecialQualificationsVO1.hints.EndorsementExpirationDate.name}"
+                               sortable="true" headerText="Endorsement Expiration Date" id="c30">
+                      <af:outputText value="#{row.EndorsementExpirationDate}"
+                                     shortDesc="#{bindings.SpecialQualificationsVO1.hints.EndorsementExpirationDate.tooltip}"
+                                     id="ot24">
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:outputText>
+                    </af:column>
+                  </af:table>
+                </af:panelCollection>
+              </af:panelBox>
+            </af:showDetailItem>
+            <af:showDetailItem id="tab5" text="SQC Details" styleClass="AFStretchWidth" inlineStyle="padding:5px;"
+                               disclosureListener="#{pageFlowScope.ValidateSeafarerBean.sqcDetailsTabDisclosureListener}">
+              <af:panelFormLayout id="pfl8" rows="1" maxColumns="3">
+                <af:spacer width="10" height="10" id="s18"/>
+                <af:inputText value="#{bindings.SqcNumber.inputValue}" label="SQC Number" required="false"
+                              columns="#{bindings.SqcNumber.hints.displayWidth}"
+                              maximumLength="#{bindings.SqcNumber.hints.precision}"
+                              shortDesc="#{bindings.SqcNumber.hints.tooltip}" id="it23"
+                              contentStyle="width:200px; padding:3px;" autoSubmit="true" disabled="true"
+                              labelStyle="width:100px;">
+                  <f:validator binding="#{bindings.SqcNumber.validator}"/>
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SqcNumber.format}"/>
+                </af:inputText>
+                <af:spacer width="10" height="10" id="s19"/>
+              </af:panelFormLayout>
+              <af:separator id="s20" inlineStyle="margin:0px;"/>
+              <af:panelDashboard id="pd2" columns="2" rowHeight="300px" styleClass="AFStretchWidth"
+                                 dimensionsFrom="children">
+                <af:panelBox text="Capacities" id="pb8" showDisclosure="false" styleClass="AFStretchWidth">
+                  <af:panelGroupLayout id="pgl4" layout="vertical" styleClass="AFStretchWidth"
+                                       inlineStyle="padding:10px;">
+                    <af:panelFormLayout id="pfl9" styleClass="AFStretchWidth" inlineStyle="padding:5px;"
+                                        labelWidth="200" rendered="false">
+                      <af:inputText value="#{bindings.TransSqcCapacities.inputValue}" label="Capacities"
+                                    required="#{bindings.TransSqcCapacities.hints.mandatory}"
+                                    columns="#{bindings.TransSqcCapacities.hints.displayWidth}"
+                                    maximumLength="#{bindings.TransSqcCapacities.hints.precision}"
+                                    shortDesc="#{bindings.TransSqcCapacities.hints.tooltip}" id="it24"
+                                    contentStyle="width:200px; padding:3px;" autoSubmit="true" disabled="true">
+                        <f:validator binding="#{bindings.TransSqcCapacities.validator}"/>
+                      </af:inputText>
+                      <af:spacer width="10" height="5" id="s25"/>
+                      <af:inputListOfValues id="transSqcLimitationsId"
+                                            popupTitle="Search and Select: #{bindings.TransSqcLimitations.hints.label}"
+                                            value="#{bindings.TransSqcLimitations.inputValue}" label="Limitations"
+                                            model="#{bindings.TransSqcLimitations.listOfValuesModel}"
+                                            required="#{bindings.TransSqcLimitations.hints.mandatory}"
+                                            columns="#{bindings.TransSqcLimitations.hints.displayWidth}"
+                                            shortDesc="#{bindings.TransSqcLimitations.hints.tooltip}" autoSubmit="true"
+                                            contentStyle="width:200px; padding:3px;">
+                        <f:validator binding="#{bindings.TransSqcLimitations.validator}"/>
+                        <af:autoSuggestBehavior suggestedItems="#{bindings.TransSqcLimitations.suggestedItems}"/>
+                      </af:inputListOfValues>
+                    </af:panelFormLayout>
+                    <af:table value="#{bindings.SqcDetailsCapacitiesVO1.collectionModel}" var="row"
+                              rows="#{bindings.SqcDetailsCapacitiesVO1.rangeSize}"
+                              emptyText="#{bindings.SqcDetailsCapacitiesVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.SqcDetailsCapacitiesVO1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.SqcDetailsCapacitiesVO1.collectionModel.makeCurrent}"
+                              rowSelection="single" fetchSize="#{bindings.SqcDetailsCapacitiesVO1.rangeSize}" id="t7"
+                              styleClass="AFStretchWidth" inlineStyle="line-height:18px;" columnStretching="last"
+                              contentDelivery="immediate" partialTriggers="::b15 ::b16" autoHeightRows="6">
+                      <af:column headerText="Capacity"
+                                 id="c42" width="300">
+                        <af:inputListOfValues id="transSqcCapacitiesId"
+                                              popupTitle="Search and Select: Capacity"
+                                              value="#{row.bindings.TransSqcCapacities.inputValue}"
+                                              model="#{row.bindings.TransSqcCapacities.listOfValuesModel}"
+                                              required="#{bindings.SqcDetailsCapacitiesVO1.hints.TransSqcCapacities.mandatory}"
+                                              columns="#{bindings.SqcDetailsCapacitiesVO1.hints.TransSqcCapacities.displayWidth}"
+                                              shortDesc="#{bindings.SqcDetailsCapacitiesVO1.hints.TransSqcCapacities.tooltip}"
+                                              autoSubmit="true" autoComplete="on">
+                          <f:validator binding="#{row.bindings.TransSqcCapacities.validator}"/>
+                          <af:autoSuggestBehavior suggestedItems="#{bindings.TransSqcCapacities.suggestedItems}"/>
+                        </af:inputListOfValues>
+                      </af:column>
+                      <af:column sortProperty="#{bindings.SqcDetailsCapacitiesVO1.hints.TransSqcLimitations.name}"
+                                 sortable="true" headerText="Limitations" id="c43" width="200">
+                        <af:inputListOfValues id="ilov3"
+                                              popupTitle="Search and Select: Limitations"
+                                              value="#{row.bindings.TransSqcLimitations.inputValue}"
+                                              model="#{row.bindings.TransSqcLimitations.listOfValuesModel}"
+                                              required="false"
+                                              columns="#{bindings.SqcDetailsCapacitiesVO1.hints.TransSqcLimitations.displayWidth}"
+                                              shortDesc="#{bindings.SqcDetailsCapacitiesVO1.hints.TransSqcLimitations.tooltip}"
+                                              contentStyle="padding:2px;" autoSubmit="true" autoComplete="on">
+                          <f:validator binding="#{row.bindings.TransSqcLimitations.validator}"/>
+                          <af:autoSuggestBehavior suggestedItems="#{bindings.TransSqcLimitations.suggestedItems}"/>
+                        </af:inputListOfValues>
+                      </af:column>
+                    </af:table>
+                  </af:panelGroupLayout>
+                  <f:facet name="toolbar">
+                    <af:toolbar id="t15">
+                      <af:button text="Add" id="b15"
+                                 action="#{pageFlowScope.ValidateSeafarerBean.actionAddSqcCapacity}"/>
+                      <af:button text="Delete" id="b16" inlineStyle="margin-left:5px;"
+                                 action="#{pageFlowScope.ValidateSeafarerBean.actionDeleteSqcCapacity}"/>
+                    </af:toolbar>
+                  </f:facet>
+                </af:panelBox>
+                <af:panelBox text="Functions" id="pb9" styleClass="AFStretchWidth" showDisclosure="false">
+                  <af:panelGroupLayout id="pgl5" styleClass="AFStretchWidth" layout="vertical"
+                                       inlineStyle="padding:10px;">
+                    <af:panelFormLayout id="pfl10" styleClass="AFStretchWidth" inlineStyle="padding:5px;" maxColumns="2"
+                                        rows="2" labelWidth="80" rendered="false">
+                      <af:inputText value="#{bindings.TransSqcFunctions.inputValue}" label="Functions"
+                                    required="#{bindings.TransSqcFunctions.hints.mandatory}"
+                                    columns="#{bindings.TransSqcFunctions.hints.displayWidth}"
+                                    maximumLength="#{bindings.TransSqcFunctions.hints.precision}"
+                                    shortDesc="#{bindings.TransSqcFunctions.hints.tooltip}" id="it25"
+                                    contentStyle="width:150px; padding:3px;" disabled="true" autoSubmit="true" rows="2">
+                        <f:validator binding="#{bindings.TransSqcFunctions.validator}"/>
+                      </af:inputText>
+                      <af:spacer width="10" height="0" id="s23"/>
+                      <af:inputText value="#{bindings.TransSqcLevel.inputValue}" label="Level"
+                                    required="#{bindings.TransSqcLevel.hints.mandatory}"
+                                    columns="#{bindings.TransSqcLevel.hints.displayWidth}"
+                                    maximumLength="#{bindings.TransSqcLevel.hints.precision}"
+                                    shortDesc="#{bindings.TransSqcLevel.hints.tooltip}" id="it26" disabled="true"
+                                    autoSubmit="true" contentStyle="width:150px; padding:3px;">
+                        <f:validator binding="#{bindings.TransSqcLevel.validator}"/>
+                      </af:inputText>
+                      <af:inputListOfValues id="transSqcLimitationDescId"
+                                            popupTitle="Search and Select: #{bindings.TransSqcLimitationDesc.hints.label}"
+                                            value="#{bindings.TransSqcLimitationDesc.inputValue}" label="Limitations"
+                                            model="#{bindings.TransSqcLimitationDesc.listOfValuesModel}"
+                                            required="#{bindings.TransSqcLimitationDesc.hints.mandatory}"
+                                            columns="#{bindings.TransSqcLimitationDesc.hints.displayWidth}"
+                                            shortDesc="#{bindings.TransSqcLimitationDesc.hints.tooltip}"
+                                            contentStyle="width:150px; padding:3px;" autoSubmit="true">
+                        <f:validator binding="#{bindings.TransSqcLimitationDesc.validator}"/>
+                        <af:autoSuggestBehavior suggestedItems="#{bindings.TransSqcLimitationDesc.suggestedItems}"/>
+                      </af:inputListOfValues>
+                    </af:panelFormLayout>
+                    <af:table value="#{bindings.SqcDetailsFunctionsVO1.collectionModel}" var="row"
+                              rows="#{bindings.SqcDetailsFunctionsVO1.rangeSize}"
+                              emptyText="#{bindings.SqcDetailsFunctionsVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                              rowBandingInterval="0"
+                              selectedRowKeys="#{bindings.SqcDetailsFunctionsVO1.collectionModel.selectedRow}"
+                              selectionListener="#{bindings.SqcDetailsFunctionsVO1.collectionModel.makeCurrent}"
+                              rowSelection="single" fetchSize="#{bindings.SqcDetailsFunctionsVO1.rangeSize}" id="t8"
+                              styleClass="AFStretchWidth" inlineStyle="line-height:18px;" columnStretching="last"
+                              contentDelivery="immediate" partialTriggers="::b17 ::b18 ::tab5" autoHeightRows="6">
+                      <af:column headerText="Function" id="c44" width="200">
+                        <af:inputListOfValues id="transSqcFunctionsId"
+                                              popupTitle="Search and Select: Function"
+                                              value="#{row.bindings.TransSqcFunctions.inputValue}"
+                                              model="#{row.bindings.TransSqcFunctions.listOfValuesModel}"
+                                              required="#{bindings.SqcDetailsFunctionsVO1.hints.TransSqcFunctions.mandatory}"
+                                              columns="#{bindings.SqcDetailsFunctionsVO1.hints.TransSqcFunctions.displayWidth}"
+                                              autoSubmit="true" autoComplete="on">
+                          <f:validator binding="#{row.bindings.TransSqcFunctions.validator}"/>
+                          <af:autoSuggestBehavior suggestedItems="#{bindings.TransSqcFunctions.suggestedItems}"/>
+                        </af:inputListOfValues>
+                      </af:column>
+                      <af:column sortProperty="#{bindings.SqcDetailsFunctionsVO1.hints.TransSqcLevel.name}"
+                                 sortable="true" headerText="Level" id="c45" width="120">
+                        <af:inputText value="#{row.bindings.TransSqcLevel.inputValue}"
+                                      label="#{bindings.SqcDetailsFunctionsVO1.hints.TransSqcLevel.label}"
+                                      required="false"
+                                      columns="#{bindings.SqcDetailsFunctionsVO1.hints.TransSqcLevel.displayWidth}"
+                                      maximumLength="#{bindings.SqcDetailsFunctionsVO1.hints.TransSqcLevel.precision}"
+                                      shortDesc="#{bindings.SqcDetailsFunctionsVO1.hints.TransSqcLevel.tooltip}"
+                                      id="it32" autoSubmit="true" readOnly="true" partialTriggers="transSqcFunctionsId">
+                          <f:validator binding="#{row.bindings.TransSqcLevel.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column sortProperty="#{bindings.SqcDetailsFunctionsVO1.hints.TransSqcLimitationDesc.name}"
+                                 sortable="true" headerText="Limitations" id="c46" width="200">
+                        <af:inputListOfValues id="ilov4"
+                                              popupTitle="Search and Select: Limitations"
+                                              value="#{row.bindings.TransSqcLimitationDesc.inputValue}"
+                                              model="#{row.bindings.TransSqcLimitationDesc.listOfValuesModel}"
+                                              required="false"
+                                              columns="#{bindings.SqcDetailsFunctionsVO1.hints.TransSqcLimitationDesc.displayWidth}"
+                                              shortDesc="#{bindings.SqcDetailsFunctionsVO1.hints.TransSqcLimitationDesc.tooltip}"
+                                              contentStyle="padding:2px;" autoSubmit="true" autoComplete="on"
+                                              partialTriggers="transSqcFunctionsId">
+                          <f:validator binding="#{row.bindings.TransSqcLimitationDesc.validator}"/>
+                          <af:autoSuggestBehavior suggestedItems="#{bindings.TransSqcLimitationDesc.suggestedItems}"/>
+                        </af:inputListOfValues>
+                      </af:column>
+                    </af:table>
+                  </af:panelGroupLayout>
+                  <f:facet name="toolbar">
+                    <af:toolbar id="t16">
+                      <af:button text="Add" id="b17"
+                                 action="#{pageFlowScope.ValidateSeafarerBean.actionAddSqcFunction}"/>
+                      <af:button text="Delete" id="b18" inlineStyle="margin-left:5px;"
+                                 action="#{pageFlowScope.ValidateSeafarerBean.actionDeleteSqcFunction}"/>
+                    </af:toolbar>
+                  </f:facet>
+                </af:panelBox>
+              </af:panelDashboard>
+            </af:showDetailItem>
+          </af:panelTabbed>
+        </af:panelBox>
+        <f:facet name="toolbar">
+          <af:toolbar id="t9" inlineStyle="padding:5px;">
+            <af:button text="Supporting Documents" id="b10" visible="#{pageFlowScope.P_CALLED_FROM_TF eq 'VS'}">
+              <af:fileDownloadActionListener method="#{pageFlowScope.ValidateSeafarerBean.supportingDocsFileDownloadListener}"
+                                             filename="#{pageFlowScope.ValidateSeafarerBean.mergedFile}.pdf"/>
+            </af:button>
+            <af:spacer width="10" height="10" id="s30"/>
+            <af:button text="Save" id="b1" action="#{pageFlowScope.ValidateSeafarerBean.actionSaveOC}"/>
+            <af:spacer width="10" height="10" id="s9"/>
+            <af:button text="Print" id="b21"
+                       partialTriggers="pc1:t1 pc1 pb3 tab1 pt1 pb10"
+                       visible="#{pageFlowScope.P_CALLED_FROM_TF ne 'VS'}">
+              <af:showPopupBehavior popupId="docPrintStatusResetPopup"/>
+            </af:button>
+            <af:spacer width="10" height="10" id="s3" visible="#{pageFlowScope.P_CALLED_FROM_TF ne 'VS'}"/>
+            <af:button text="Reset Document Print Status" id="b19"
+                       action="#{pageFlowScope.ValidateSeafarerBean.actionResetOrderLineSicdPrintStatus}"
+                       visible="#{pageFlowScope.P_CALLED_FROM_TF ne 'VS'}"/>
+            <af:spacer width="10" height="10" id="s4" visible="#{pageFlowScope.P_CALLED_FROM_TF ne 'VS'}"/>
+            <af:button text="Trade Compliance" id="b20" action="tradeCompliance"
+                       visible="#{pageFlowScope.P_CALLED_FROM_TF ne 'VS'}"/>
+            <af:spacer width="10" height="10" id="s5" visible="#{pageFlowScope.P_CALLED_FROM_TF ne 'VS'}"/>
+            <af:button text="Cancel" id="b2" action="#{pageFlowScope.ValidateSeafarerBean.actionCancelOC}"
+                       immediate="true">
+              <af:resetActionListener/>
+            </af:button>
+            <af:spacer width="10" height="10" id="s2"/>
+            <af:button text="Back" id="b3" action="back" visible="#{pageFlowScope.P_CALLED_FROM_TF ne 'NW'}"
+                       immediate="true"/>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="printDocumentPopup" contentDelivery="lazyUncached"
+                      binding="#{pageFlowScope.ValidateSeafarerBean.printDocumentPopup}">
+              <af:dialog id="d1" affirmativeTextAndAccessKey="Print"
+                         dialogListener="#{pageFlowScope.ValidateSeafarerBean.printSeafarerDocumentDL}">
+                <f:facet name="buttonBar"/>
+                <af:panelBox text="Print Document" id="pb2" showHeader="always" showDisclosure="false">
+                  <f:facet name="toolbar"/>
+                  <af:panelFormLayout id="pfl12" inlineStyle="padding:10px;" styleClass="panelFormLayoutClass">
+                    <af:selectOneChoice value="#{bindings.TransPrintRequestSets.inputValue}" label="Print Request Set"
+                                        required="#{bindings.TransPrintRequestSets.hints.mandatory}"
+                                        shortDesc="#{bindings.TransPrintRequestSets.hints.tooltip}" id="soc17"
+                                        autoSubmit="true" styleClass="AFInputTextHead">
+                      <f:selectItems value="#{bindings.TransPrintRequestSets.items}" id="si17"/>
+                      <f:validator binding="#{bindings.TransPrintRequestSets.validator}"/>
+                    </af:selectOneChoice>
+                  </af:panelFormLayout>
+                </af:panelBox>
+              </af:dialog>
+            </af:popup>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="docPrintStatusResetPopup">
+              <af:dialog id="d2" type="yesNo" title="Confirmation"
+                         dialogListener="#{pageFlowScope.ValidateSeafarerBean.resetDocPrintStatusDL}"
+                         contentWidth="300">
+                <f:facet name="buttonBar"/>
+                <af:outputText value="Document will be reset to print. Do you want to continue ?" id="ot15"/>
+              </af:dialog>
+            </af:popup>
+          </af:toolbar>
+        </f:facet>
+      </af:panelBox>
+    </af:panelGroupLayout>
+  </af:panelGroupLayout>
+</jsp:root>

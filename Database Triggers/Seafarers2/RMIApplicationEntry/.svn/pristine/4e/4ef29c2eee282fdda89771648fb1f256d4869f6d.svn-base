@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DocumentScanningLog"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="RMI_DOCUMENT_UPLOAD_LOG"
+  AliasName="DocumentScanningLogEO"
+  BindingStyle="OracleName"
+  RowClass="com.rmi.applicationEntry.adfbc.entities.DocumentScanningLogImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|DML"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="EdslId"
+    ColumnName="EDSL_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.DBSequence"
+    ColumnType="NUMBER"
+    TableName="RMI_DOCUMENT_UPLOAD_LOG"
+    PrimaryKey="true"
+    IsUpdateable="while_insert"
+    DefaultValue="@0"
+    Domain="oracle.jbo.domain.DBSequence"
+    RetrievedOnInsert="true"/>
+  <Attribute
+    Name="EsiBatchId"
+    ColumnName="ESI_BATCH_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="RMI_DOCUMENT_UPLOAD_LOG"/>
+  <Attribute
+    Name="EsiId"
+    ColumnName="ESI_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="RMI_DOCUMENT_UPLOAD_LOG"/>
+  <Attribute
+    Name="EsdiId"
+    ColumnName="ESDI_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="RMI_DOCUMENT_UPLOAD_LOG"/>
+  <Attribute
+    Name="IriEdocsId"
+    ColumnName="IRI_EDOCS_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="RMI_DOCUMENT_UPLOAD_LOG"/>
+  <Attribute
+    Name="DocumentType"
+    Precision="30"
+    ColumnName="DOCUMENT_TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="RMI_DOCUMENT_UPLOAD_LOG">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SeafarerId"
+    ColumnName="SEAFARER_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="RMI_DOCUMENT_UPLOAD_LOG"/>
+  <Key
+    Name="DocumentscanninglogeoPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="DOCUMENTSCANNINGLOGEO_PRIMARY_"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rmi.applicationEntry.adfbc.entities.DocumentScanningLog.EdslId"/>
+    </AttrArray>
+  </Key>
+</Entity>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RolesView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.login.adfbc.views.readonly.RolesView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pUserId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pRoleId"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <SQLQuery><![CDATA[SELECT ROLE_ID,ROLE_NAME,ROLE_DESCRIPTION,CREATED_BY,CREATION_DATE,LAST_UPDATED_BY,LAST_UPDATE_DATE,ACTIVE_FLAG,DEFAULT_TASKFLOW FROM RMI_SEAFARER.RMI_ROLES      
+WHERE ROLE_ID IN (SELECT ROLE_ID FROM RMI_SEAFARER.RMI_USERS_ROLES WHERE USER_ID=:pUserId AND ROLE_ID=NVL(:pRoleId, ROLE_ID)) ORDER BY role_name]]></SQLQuery>
+  <ViewAttribute
+    Name="RoleId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ROLE_ID"
+    Expression="ROLE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="RoleName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="NVARCHAR2"
+    AliasName="ROLE_NAME"
+    Expression="ROLE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RoleDescription"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ROLE_DESCRIPTION"
+    Expression="ROLE_DESCRIPTION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CREATED_BY"
+    Expression="CREATED_BY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CreationDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CREATION_DATE"
+    Expression="CREATION_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="LAST_UPDATED_BY"
+    Expression="LAST_UPDATED_BY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="LAST_UPDATE_DATE"
+    Expression="LAST_UPDATE_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="ActiveFlag"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACTIVE_FLAG"
+    Expression="ACTIVE_FLAG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DefaultTaskflow"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEFAULT_TASKFLOW"
+    Expression="DEFAULT_TASKFLOW"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="RoleId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="EnterIndividualAlertNotePageDef" Package="oracle.apps.xwrl.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="XwrlResponseIndColumnsView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlResponseIndColumnsView1Iterator" ChangeEventPolicy="none"/>
+    <iterator Binds="XwrlAlertNotesView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlAlertNotesView1Iterator" ChangeEventPolicy="none"/>
+    <searchRegion Criteria="XwrlAlertNotesViewCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="XwrlAlertNotesView1Iterator" id="XwrlAlertNotesViewCriteriaQuery"/>
+    <iterator Binds="XwrlNoteTemplatesView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlNoteTemplatesView1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="XwrlResponseIndColumnsView1Iterator" id="Alertid">
+      <AttrNames>
+        <Item Value="Alertid"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XwrlAlertNotesView1Iterator" id="XwrlAlertNotesView1">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.XwrlAlertNotesView" Name="XwrlAlertNotesView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="RequestId"/>
+          <Item Value="AlertId"/>
+          <Item Value="LineNumber"/>
+          <Item Value="Note"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="Lastupdatedbyattr"/>
+          <Item Value="Createdbyattr"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" DataControl="AppModuleDataControl" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <action IterBinding="XwrlAlertNotesView1Iterator" id="CreateInsert"
+            InstanceName="AppModuleDataControl.XwrlAlertNotesView1" DataControl="AppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="XwrlAlertNotesView1Iterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <attributeValues IterBinding="XwrlAlertNotesView1Iterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView1Iterator" id="RequestId">
+      <AttrNames>
+        <Item Value="RequestId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView1Iterator" id="AlertId">
+      <AttrNames>
+        <Item Value="AlertId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView1Iterator" id="LineNumber">
+      <AttrNames>
+        <Item Value="LineNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView1Iterator" id="Note">
+      <AttrNames>
+        <Item Value="Note"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView1Iterator" id="LastUpdateDate">
+      <AttrNames>
+        <Item Value="LastUpdateDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView1Iterator" id="LastUpdatedBy">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView1Iterator" id="CreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView1Iterator" id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertNotesView1Iterator" id="LastUpdateLogin">
+      <AttrNames>
+        <Item Value="LastUpdateLogin"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XwrlNoteTemplatesView1Iterator" id="XwrlNoteTemplatesView1">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.XwrlNoteTemplatesView" Name="XwrlNoteTemplatesView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="SortKey"/>
+          <Item Value="NoteType"/>
+          <Item Value="NoteCategory"/>
+          <Item Value="Note"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="LastUpdateLogin"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="setNoteTemplate" RequiresUpdateModel="true" Action="invokeMethod" MethodName="setNoteTemplate"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.setNoteTemplate_AppModuleDataControl_dataProvider_setNoteTemplate_result">
+      <NamedData NDName="noteType" NDValue="#{pageFlowScope.varNoteType}" NDType="java.lang.String"/>
+      <NamedData NDName="noteCategory" NDValue="#{pageFlowScope.varNoteCategory}" NDType="java.lang.String"/>
+    </methodAction>
+    <action IterBinding="XwrlAlertNotesView1Iterator" id="Execute" RequiresUpdateModel="true" Action="iteratorExecute"/>
+  </bindings>
+</pageDefinition>

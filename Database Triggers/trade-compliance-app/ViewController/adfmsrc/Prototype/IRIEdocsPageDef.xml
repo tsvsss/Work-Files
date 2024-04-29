@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="IRIEdocsPageDef"
+                Package="Prototype">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="IriEdocsForCaseDocumentsRVO1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="IriEdocsForCaseDocumentsRVO1Iterator"/>
+    <searchRegion Criteria="SearchIriEdocsForCaseDocumentsCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="IriEdocsForCaseDocumentsRVO1Iterator" id="SearchIriEdocsForCaseDocumentsCriteriaQuery"/>
+    <iterator id="XwrlRequestsView1Iterator" Binds="XwrlRequestsView1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="XwrlCaseDocumentsView1Iterator" Binds="XwrlCaseDocumentsView1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="XwrlCaseDocumentsSumView1Iterator" Binds="XwrlCaseDocumentsSumView1"
+              DataControl="AppModuleDataControl" RangeSize="25"/>
+    <iterator id="XwrlResponseIndColumnsView1Iterator" Binds="XwrlResponseIndColumnsView1"
+              DataControl="AppModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="IriEdocsForCaseDocumentsRVO1Iterator" id="IriEdocsForCaseDocumentsRVO1">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.IriEdocsForCaseDocumentsRVO"
+                      Name="IriEdocsForCaseDocumentsRVO10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="FileName"/>
+          <Item Value="CreationDate"/>
+          <Item Value="Category"/>
+          <Item Value="DocumentType"/>
+          <Item Value="Notes"/>
+          <Item Value="Description"/>
+          <Item Value="DiskPath"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+  </bindings>
+</pageDefinition>

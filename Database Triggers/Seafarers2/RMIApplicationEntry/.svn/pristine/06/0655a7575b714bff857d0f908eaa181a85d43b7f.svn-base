@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SeafarerListTcView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  RowClass="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarerListTcViewRowImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarerListTcView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pEsiBatchId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[select seafarer.first_name,seafarer.last_name,seafarer.birth_date,seafarer.seafarer_id,     
+(select count(*) from rmi_seafarer.rmi_seafarers_iface sea ,                      
+rmi_seafarer.rmi_seafarer_docs_iface docs                       
+where docs.esi_id = sea.esi_id and      
+sea.esi_id = seafarer.esi_id and     
+docs.cra_required = 'Y' and nvl(docs.cra_approved_flag,'NA') != 'N') cra_count,        
+(select count(*) from rmi_seafarer.rmi_seafarers_iface sea ,                         
+rmi_seafarer.rmi_seafarer_docs_iface docs                          
+where docs.esi_id = sea.esi_id and       
+sea.esi_id = seafarer.esi_id and     
+docs.cra_required = 'Y'                      
+and docs.cra_sent_date is null and nvl(docs.cra_approved_flag,'NA') != 'N') cra_sent_count,   
+NVL(REGEXP_SUBSTR(RMI_SICD_PUB.get_seafarer_wc_status(seafarer.seafarer_id), '[^,]+'),  
+                         'Not Available') tc_status,  
+                         to_date(NVL(REGEXP_SUBSTR(RMI_SICD_PUB.get_seafarer_wc_status(seafarer.seafarer_id), '[^,]+',1,2),  
+                         NULL),'dd-MON-yyyy') tc_status_date  
+from rmi_seafarer.rmi_seafarers_iface seafarer where seafarer.esi_batch_id = :pEsiBatchId]]></SQLQuery>
+  <ViewAttribute
+    Name="FirstName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FIRST_NAME"
+    Expression="FIRST_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="60"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LAST_NAME"
+    Expression="LAST_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BirthDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="BIRTH_DATE"
+    Expression="BIRTH_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="SeafarerId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SEAFARER_ID"
+    Expression="SEAFARER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CraCount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="CRA_COUNT"
+    Expression="CRA_COUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CraSentCount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="CRA_SENT_COUNT"
+    Expression="CRA_SENT_COUNT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TcStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TC_STATUS"
+    Expression="TC_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TcStatusDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="VARCHAR2"
+    AliasName="TC_STATUS_DATE"
+    Expression="TC_STATUS_DATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranFinalCra"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

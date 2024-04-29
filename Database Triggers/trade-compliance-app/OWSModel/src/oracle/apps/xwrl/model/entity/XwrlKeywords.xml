@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XwrlKeywords"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="XWRL_KEYWORDS"
+  AliasName="XwrlKeywords"
+  BindingStyle="OracleName">
+  <Attribute
+    Name="KeywordAbbreviation"
+    IsNotNull="true"
+    Precision="30"
+    ColumnName="KEYWORD_ABBREVIATION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XWRL_KEYWORDS"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="FullNameOfSource"
+    IsNotNull="true"
+    Precision="500"
+    ColumnName="FULL_NAME_OF_SOURCE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XWRL_KEYWORDS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CountryOfAuthority"
+    Precision="100"
+    ColumnName="COUNTRY_OF_AUTHORITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XWRL_KEYWORDS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Type"
+    Precision="50"
+    ColumnName="TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XWRL_KEYWORDS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Explanation"
+    IsNotNull="true"
+    Precision="3000"
+    ColumnName="EXPLANATION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XWRL_KEYWORDS">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="3000"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdateDate"
+    ColumnName="LAST_UPDATE_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="XWRL_KEYWORDS"/>
+  <Attribute
+    Name="LastUpdatedBy"
+    Precision="15"
+    Scale="0"
+    ColumnName="LAST_UPDATED_BY"
+    SQLType="NUMERIC"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    TableName="XWRL_KEYWORDS"/>
+  <Attribute
+    Name="CreationDate"
+    ColumnName="CREATION_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="XWRL_KEYWORDS"/>
+  <Attribute
+    Name="CreatedBy"
+    Precision="15"
+    Scale="0"
+    ColumnName="CREATED_BY"
+    SQLType="NUMERIC"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    TableName="XWRL_KEYWORDS"/>
+  <Attribute
+    Name="LastUpdateLogin"
+    Precision="15"
+    Scale="0"
+    ColumnName="LAST_UPDATE_LOGIN"
+    SQLType="NUMERIC"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    TableName="XWRL_KEYWORDS"/>
+  <Key
+    Name="XwrlKeywordsPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="XWRL_KEYWORDS_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="oracle.apps.xwrl.model.entity.XwrlKeywords.KeywordAbbreviation"/>
+    </AttrArray>
+  </Key>
+</Entity>

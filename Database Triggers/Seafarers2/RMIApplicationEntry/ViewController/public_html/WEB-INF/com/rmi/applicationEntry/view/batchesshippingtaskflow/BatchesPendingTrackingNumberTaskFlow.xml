@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="BatchesPendingTrackingNumberTaskFlow">
+    <default-activity>executePendingTrackingNumberOnLoad</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__2">
+      <name>param_user_id</name>
+      <value>#{sessionScope.param_user_id}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>BatchesPendingTrackingBean</managed-bean-name>
+      <managed-bean-class>com.rmi.applicationEntry.view.batchesshippingtaskflow.BatchesPendingTrackingBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="BatchesPendingTracking">
+      <page>/WEB-INF/com/rmi/applicationEntry/view/batchesshippingtaskflow/BatchesPendingTracking.jsff</page>
+    </view>
+    <method-call id="executePendingTrackingNumberOnLoad">
+      <method>#{bindings.executePendingTrackingNumberOnLoad.execute}</method>
+      <outcome>
+        <fixed-outcome>executePendingTrackingNumberOnLoad</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__3">
+      <from-activity-id>executePendingTrackingNumberOnLoad</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>executePendingTrackingNumberOnLoad</from-outcome>
+        <to-activity-id>BatchesPendingTracking</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BatchOrderDetailsView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.readonly.BatchOrderDetailsView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pEsiId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT       
+DISTINCT       
+B.ESI_BATCH_ID,       
+B.BATCH_NAME,       
+OH.HEADER_ID,       
+OH.ORDER_NUMBER       
+FROM        
+RMI_SEAFARER.RMI_SEAFARERS_IFACE S,       
+RMI_SEAFARER.RMI_BATCH_IFACE B,     
+OE_ORDER_HEADERS_ALL OH       
+WHERE        
+OH.HEADER_ID = B.OE_HEADER_ID       
+AND B.ESI_BATCH_ID = S.ESI_BATCH_ID       
+AND S.ESI_ID = :pEsiId]]></SQLQuery>
+  <ViewAttribute
+    Name="EsiBatchId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ESI_BATCH_ID"
+    Expression="ESI_BATCH_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="BatchName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BATCH_NAME"
+    Expression="BATCH_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="HeaderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="HEADER_ID"
+    Expression="HEADER_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="OrderNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ORDER_NUMBER"
+    Expression="ORDER_NUMBER"
+    SQLType="INTEGER"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="EsiBatchId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,317 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:af="http://xmlns.oracle.com/adf/faces/rich" 
+                xmlns:f="http://java.sun.com/jsf/core">
+  
+  <af:panelSplitter id="pscss" splitterPosition="350" dimensionsFrom="parent" collapsed="true">
+    <f:facet name="first">
+      <af:panelBox text="Search" id="pb2"  showHeader="never">
+        <f:facet name="toolbar">
+        </f:facet>
+            <af:query id="qryId1" headerText="Search" disclosed="true"  saveQueryMode="hidden"
+                        binding="#{backingBeanScope.CountrySanctionStatus.qry}"
+                      value="#{bindings.SicdCountriesViewCriteriaQuery.queryDescriptor}"
+                      model="#{bindings.SicdCountriesViewCriteriaQuery.queryModel}"
+                      queryListener="#{bindings.SicdCountriesViewCriteriaQuery.processQuery}"
+                      queryOperationListener="#{bindings.SicdCountriesViewCriteriaQuery.processQueryOperation}"/>
+        
+      </af:panelBox>
+    </f:facet>
+    <f:facet name="second">
+      <af:panelBox text="PanelBox1" id="pb1" type="stretch" showHeader="never">
+     
+        <f:facet name="toolbar">
+        </f:facet>
+        
+        <af:panelCollection id="pc1" featuresOff="detach" >
+          <f:facet name="menus">
+            <af:menu text="Options" id="m1">
+              <af:commandMenuItem text="Export to Excel" id="cmi1">
+                <af:exportCollectionActionListener type="excelHTML"  exportedId="t1"  
+                filename="CountrySanctionStatus.xls" title="Country Sanction Status"/>
+              </af:commandMenuItem>
+              <af:commandMenuItem text="Printable Page" id="cmi2">
+                <af:showPrintablePageBehavior/>
+              </af:commandMenuItem>
+            </af:menu>
+          </f:facet>
+          
+         
+           <f:facet name="toolbar">
+           
+            <af:toolbar id="t12">
+            <af:button text="Search" id="srch"   action="#{backingBeanScope.CountrySanctionStatus.search}"/>
+             <af:button text="Reset" id="reset"  action="#{backingBeanScope.CountrySanctionStatus.reset}"/>
+            </af:toolbar>
+          
+          <af:toolbar id="t21">
+             
+              <af:button  text="Save"   action="#{backingBeanScope.CountrySanctionStatus.save}"
+                          id="save"/>
+              <af:button  text="Cancel" action="#{backingBeanScope.CountrySanctionStatus.cancel}"
+                          immediate="true" id="cancel"  >
+              </af:button>
+            </af:toolbar>
+        </f:facet>
+          <af:table value="#{bindings.SicdCountriesView1.collectionModel}" var="row"
+                    rows="#{bindings.SicdCountriesView1.rangeSize}"  contentDelivery="lazy"
+                     binding="#{backingBeanScope.CountrySanctionStatus.table}"
+                    emptyText="#{bindings.SicdCountriesView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0" selectedRowKeys="#{bindings.SicdCountriesView1.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.SicdCountriesView1.collectionModel.makeCurrent}" rowSelection="single"
+                    fetchSize="#{bindings.SicdCountriesView1.rangeSize}"
+                    filterModel="#{bindings.SicdCountriesViewCriteriaQuery.queryDescriptor}"
+                    queryListener="#{bindings.SicdCountriesViewCriteriaQuery.processQuery}" filterVisible="false"
+                    varStatus="vs" id="t1" >
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.CountryCode.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.CountryCode.label}" id="c1">
+              <af:inputText value="#{row.bindings.CountryCode.inputValue}"       readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.CountryCode.label}"
+                            required="#{bindings.SicdCountriesView1.hints.CountryCode.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.CountryCode.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.CountryCode.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.CountryCode.tooltip}" id="it1">
+                <f:validator binding="#{row.bindings.CountryCode.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.CountryName.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.CountryName.label}" id="c2">
+              <af:inputText value="#{row.bindings.CountryName.inputValue}"   readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.CountryName.label}"
+                            required="#{bindings.SicdCountriesView1.hints.CountryName.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.CountryName.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.CountryName.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.CountryName.tooltip}" id="it2">
+                <f:validator binding="#{row.bindings.CountryName.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.Status.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.SicdCountriesView1.hints.Status.label}" id="c3">
+              <af:inputText value="#{row.bindings.Status.inputValue}"    readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.Status.label}"
+                            required="#{bindings.SicdCountriesView1.hints.Status.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.Status.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.Status.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.Status.tooltip}" id="it3">
+                <f:validator binding="#{row.bindings.Status.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.SanctionStatus.name}" filterable="true"
+             width="150"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.SanctionStatus.label}" id="c4">
+              <af:inputText value="#{row.bindings.SanctionStatus.inputValue}"
+                            label="#{bindings.SicdCountriesView1.hints.SanctionStatus.label}"
+                            required="#{bindings.SicdCountriesView1.hints.SanctionStatus.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.SanctionStatus.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.SanctionStatus.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.SanctionStatus.tooltip}" id="it4">
+                <f:validator binding="#{row.bindings.SanctionStatus.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.IsoAlpha2Code.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.IsoAlpha2Code.label}" id="c5">
+              <af:inputText value="#{row.bindings.IsoAlpha2Code.inputValue}"     readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.IsoAlpha2Code.label}"
+                            required="#{bindings.SicdCountriesView1.hints.IsoAlpha2Code.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.IsoAlpha2Code.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.IsoAlpha2Code.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.IsoAlpha2Code.tooltip}" id="it5">
+                <f:validator binding="#{row.bindings.IsoAlpha2Code.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.IsoDescription.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.IsoDescription.label}" id="c6">
+              <af:inputText value="#{row.bindings.IsoDescription.inputValue}"    readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.IsoDescription.label}"
+                            required="#{bindings.SicdCountriesView1.hints.IsoDescription.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.IsoDescription.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.IsoDescription.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.IsoDescription.tooltip}" id="it6">
+                <f:validator binding="#{row.bindings.IsoDescription.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.IsoNumericCode.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.IsoNumericCode.label}" id="c7">
+              <af:inputText value="#{row.bindings.IsoNumericCode.inputValue}"    readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.IsoNumericCode.label}"
+                            required="#{bindings.SicdCountriesView1.hints.IsoNumericCode.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.IsoNumericCode.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.IsoNumericCode.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.IsoNumericCode.tooltip}" id="it7">
+                <f:validator binding="#{row.bindings.IsoNumericCode.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.IsoAlpha3Code.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.IsoAlpha3Code.label}" id="c8">
+              <af:inputText value="#{row.bindings.IsoAlpha3Code.inputValue}"     readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.IsoAlpha3Code.label}"
+                            required="#{bindings.SicdCountriesView1.hints.IsoAlpha3Code.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.IsoAlpha3Code.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.IsoAlpha3Code.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.IsoAlpha3Code.tooltip}" id="it8">
+                <f:validator binding="#{row.bindings.IsoAlpha3Code.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.EuCode.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.SicdCountriesView1.hints.EuCode.label}" id="c9">
+              <af:inputText value="#{row.bindings.EuCode.inputValue}"    readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.EuCode.label}"
+                            required="#{bindings.SicdCountriesView1.hints.EuCode.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.EuCode.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.EuCode.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.EuCode.tooltip}" id="it9">
+                <f:validator binding="#{row.bindings.EuCode.validator}"/>
+              </af:inputText>
+            </af:column>
+           
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.VerificationMethod.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.VerificationMethod.label}"
+                       id="c26">
+              <af:inputText value="#{row.bindings.VerificationMethod.inputValue}"    readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.VerificationMethod.label}"
+                            required="#{bindings.SicdCountriesView1.hints.VerificationMethod.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.VerificationMethod.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.VerificationMethod.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.VerificationMethod.tooltip}" id="it26">
+                <f:validator binding="#{row.bindings.VerificationMethod.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.VerificationUrl.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.VerificationUrl.label}" id="c27">
+              <af:inputText value="#{row.bindings.VerificationUrl.inputValue}"   readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.VerificationUrl.label}"
+                            required="#{bindings.SicdCountriesView1.hints.VerificationUrl.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.VerificationUrl.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.VerificationUrl.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.VerificationUrl.tooltip}" id="it27">
+                <f:validator binding="#{row.bindings.VerificationUrl.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.VerificationEmail.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.VerificationEmail.label}"
+                       id="c28">
+              <af:inputText value="#{row.bindings.VerificationEmail.inputValue}"     readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.VerificationEmail.label}"
+                            required="#{bindings.SicdCountriesView1.hints.VerificationEmail.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.VerificationEmail.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.VerificationEmail.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.VerificationEmail.tooltip}" id="it28">
+                <f:validator binding="#{row.bindings.VerificationEmail.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.VerificationUsername.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.VerificationUsername.label}"
+                       id="c29">
+              <af:inputText value="#{row.bindings.VerificationUsername.inputValue}"  readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.VerificationUsername.label}"
+                            required="#{bindings.SicdCountriesView1.hints.VerificationUsername.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.VerificationUsername.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.VerificationUsername.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.VerificationUsername.tooltip}" id="it29">
+                <f:validator binding="#{row.bindings.VerificationUsername.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.VerificationPassword.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.VerificationPassword.label}"
+                       id="c30">
+              <af:inputText value="#{row.bindings.VerificationPassword.inputValue}"  readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.VerificationPassword.label}"
+                            required="#{bindings.SicdCountriesView1.hints.VerificationPassword.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.VerificationPassword.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.VerificationPassword.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.VerificationPassword.tooltip}" id="it30">
+                <f:validator binding="#{row.bindings.VerificationPassword.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.AcellusCountryName.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.AcellusCountryName.label}"
+                       id="c31">
+              <af:inputText value="#{row.bindings.AcellusCountryName.inputValue}"    readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.AcellusCountryName.label}"
+                            required="#{bindings.SicdCountriesView1.hints.AcellusCountryName.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.AcellusCountryName.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.AcellusCountryName.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.AcellusCountryName.tooltip}" id="it31">
+                <f:validator binding="#{row.bindings.AcellusCountryName.validator}"/>
+              </af:inputText>
+            </af:column>
+            <!--af:column sortProperty="#{bindings.SicdCountriesView1.hints.CreatedBy.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.CreatedBy.label}" id="c32">
+              <af:inputText value="#{row.bindings.CreatedBy.inputValue}"     readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.CreatedBy.label}"
+                            required="#{bindings.SicdCountriesView1.hints.CreatedBy.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.CreatedBy.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.CreatedBy.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.CreatedBy.tooltip}" id="it32">
+                <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.SicdCountriesView1.hints.CreatedBy.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.CreationDate.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.CreationDate.label}" id="c33">
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.SicdCountriesViewCriteriaQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.CreationDate.value}"
+                              id="id1">
+                  <af:convertDateTime pattern="#{bindings.SicdCountriesView1.hints.CreationDate.format}"/>
+                </af:inputDate>
+              </f:facet>
+              <af:inputDate value="#{row.bindings.CreationDate.inputValue}"  readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.CreationDate.label}"
+                            required="#{bindings.SicdCountriesView1.hints.CreationDate.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.CreationDate.displayWidth}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.CreationDate.tooltip}" id="id2">
+                <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.SicdCountriesView1.hints.CreationDate.format}"/>
+              </af:inputDate>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.LastUpdatedBy.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.LastUpdatedBy.label}" id="c34">
+              <af:inputText value="#{row.bindings.LastUpdatedBy.inputValue}"     readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.LastUpdatedBy.label}"
+                            required="#{bindings.SicdCountriesView1.hints.LastUpdatedBy.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.LastUpdatedBy.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.LastUpdatedBy.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.LastUpdatedBy.tooltip}" id="it33">
+                <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.SicdCountriesView1.hints.LastUpdatedBy.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.LastUpdateDate.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.LastUpdateDate.label}" id="c35">
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.SicdCountriesViewCriteriaQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.LastUpdateDate.value}"
+                              id="id3">
+                  <af:convertDateTime pattern="#{bindings.SicdCountriesView1.hints.LastUpdateDate.format}"/>
+                </af:inputDate>
+              </f:facet>
+              <af:inputDate value="#{row.bindings.LastUpdateDate.inputValue}"    readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.LastUpdateDate.label}"
+                            required="#{bindings.SicdCountriesView1.hints.LastUpdateDate.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.LastUpdateDate.displayWidth}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.LastUpdateDate.tooltip}" id="id4">
+                <f:validator binding="#{row.bindings.LastUpdateDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.SicdCountriesView1.hints.LastUpdateDate.format}"/>
+              </af:inputDate>
+            </af:column>
+            <af:column sortProperty="#{bindings.SicdCountriesView1.hints.LastUpdateLogin.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.SicdCountriesView1.hints.LastUpdateLogin.label}" id="c36">
+              <af:inputText value="#{row.bindings.LastUpdateLogin.inputValue}"   readOnly="true"
+                            label="#{bindings.SicdCountriesView1.hints.LastUpdateLogin.label}"
+                            required="#{bindings.SicdCountriesView1.hints.LastUpdateLogin.mandatory}"
+                            columns="#{bindings.SicdCountriesView1.hints.LastUpdateLogin.displayWidth}"
+                            maximumLength="#{bindings.SicdCountriesView1.hints.LastUpdateLogin.precision}"
+                            shortDesc="#{bindings.SicdCountriesView1.hints.LastUpdateLogin.tooltip}" id="it34">
+                <f:validator binding="#{row.bindings.LastUpdateLogin.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.SicdCountriesView1.hints.LastUpdateLogin.format}"/>
+              </af:inputText>
+            </af:column-->
+          </af:table>
+          <f:facet name="statusbar"/>
+         
+        </af:panelCollection>
+      </af:panelBox>
+    </f:facet>
+  </af:panelSplitter>
+</ui:composition>

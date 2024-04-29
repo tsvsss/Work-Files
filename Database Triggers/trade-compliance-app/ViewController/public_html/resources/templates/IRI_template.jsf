@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<af:pageTemplateDef xmlns:af="http://xmlns.oracle.com/adf/faces/rich" var="attrs" definition="private"
+                    xmlns:afc="http://xmlns.oracle.com/adf/faces/rich/component" xmlns:f="http://java.sun.com/jsf/core">
+    <af:xmlContent>
+        <afc:component>
+            <afc:description/>
+            <afc:display-name>IRI_template</afc:display-name>
+            <afc:facet>
+                <afc:facet-name>content</afc:facet-name>
+            </afc:facet>
+          
+             <afc:attribute>
+                <afc:attribute-name>title</afc:attribute-name>
+                <afc:attribute-class>java.lang.String</afc:attribute-class>
+                <afc:default-value>Title</afc:default-value>
+            </afc:attribute>
+            <afc:attribute>
+                <afc:attribute-name>userName</afc:attribute-name>
+                <afc:attribute-class>java.lang.String</afc:attribute-class>
+                <afc:default-value>UserName</afc:default-value>
+                <afc:required>false</afc:required>
+            </afc:attribute>
+            <afc:attribute>
+                <afc:attribute-name>
+                    dbName
+                </afc:attribute-name>
+                <afc:attribute-class>
+                    java.lang.String
+                </afc:attribute-class>
+                <afc:default-value>
+                    DbName
+                </afc:default-value>
+                <afc:required>
+                    false
+                </afc:required>
+            </afc:attribute>
+            <afc:attribute>
+                <afc:attribute-name>
+                    responsibility
+                </afc:attribute-name>
+                <afc:attribute-class>
+                    java.lang.String
+                </afc:attribute-class>
+                <afc:default-value>
+                    Responsibility
+                </afc:default-value>
+            </afc:attribute>
+            <afc:attribute>
+                <afc:attribute-name>
+                    home
+                </afc:attribute-name>
+                <afc:attribute-class>
+                    java.lang.String
+                </afc:attribute-class>
+                <afc:default-value>
+                    Home
+                </afc:default-value>
+            </afc:attribute>
+        </afc:component>
+    </af:xmlContent>
+     <af:resource type="css" source="http://fonts.googleapis.com/css?family=Lato:300,400,700|Open+Sans:300,400,700" />
+   <af:resource type="css" source="/resources/css/bootstrap.css"/>
+    <af:resource type="css" source="/resources/css/main.css"/>
+    <div id="tDv1" class="wrapper"
+         style='background-image:url("../resources/images/bg.jpg"); background-repeat:no-repeat; background-size:cover;'>
+        <div id="tDv2" class="container xwidth">
+            <style>
+                .xwidth {
+                    max-width: 98%;
+                }
+            </style>
+             <div id="tDv3" class="top row d-flex align-items-center justify-content-between pt-2 pb-2">
+                <div id="tDv4" class="col-auto">
+                    <div id="tDv5" class="logo d-flex align-items-center ">
+                        <div id="tDv6" class="glyph">
+                            <img src="../resources/images/IRI-Logo Mark-White.png" alt="glyph" class="img-fluid" height="75"
+                                 width="75"/>
+                        </div>
+                        <div id="tDv7" class="text">
+                            <h1>
+                               INTERNATIONAL REGISTRIES, INC.
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div id="tDv8" class="col-auto xwidth">
+
+                  <af:panelGridLayout id="pt_pgl2" inlineStyle="min-width:800px">
+                        <af:gridRow marginTop="0px" height="auto" id="pt_gr2">
+                            <af:gridCell marginStart="0px" width="auto" marginEnd="0px" id="pt_gc4">
+                                <af:navigationPane id="pt_np2" value="#{root_menu}" var="menuInfo" level="0" hint="bar">
+                                    <f:facet name="nodeStamp">
+                                        <af:commandNavigationItem text="#{menuInfo.label}" id="pt_cni2"
+                                                                  action="#{menuInfo.doAction}"
+                                                                  rendered="#{menuInfo.rendered}"
+                                                                  inlineStyle="color: yellow;"/>
+                                    </f:facet>
+                                </af:navigationPane>
+                            </af:gridCell>
+                        </af:gridRow>
+                        <af:gridRow  height="auto"  id="pt_gr3">
+                                <af:gridCell  width="350px"  id="pt_gc5">
+                                    <af:outputLabel value="Logged In As" id="pt_ol1" inlineStyle="color:white;"/>
+                                    <af:outputText value="#{attrs.userName} on #{attrs.dbName}" id="pt_ot2" inlineStyle="color:white;"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow id="pt_gr7">
+                                <af:gridCell id="pt_gc13">
+                                    <af:outputLabel value="Responsibility" id="pt_ol2"  inlineStyle="color:white;"/>
+                                    <af:outputText value="#{attrs.responsibility}" id="pt_ot4"  inlineStyle="color:white;"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                            <af:gridRow id="pt_gr6">
+                                <af:gridCell id="pt_gc12">
+                                    <af:link text="Home" id="pt_l1" action="#{logoutBean.homeActionListener}"  inlineStyle="color:white;"/>
+                                    <span class="xko"> </span>
+                                    <af:link text="Logout" id="pt_cl1" action="#{logoutBean.logoutActionListener}" inlineStyle="color:white;"/>
+                                </af:gridCell>
+                            </af:gridRow>
+                    </af:panelGridLayout>
+                </div>
+            </div>
+            <div id="tDv9" class="center">
+                <div id="tDv10" class="header row d-flex align-items-center p-1 justify-content-between">
+                    <div id="tDv11" class="">
+                        <h4>
+                            <af:outputText id="pt_ot1" value="#{attrs.title}"/>
+                             
+                        </h4>
+                    </div>
+                </div>
+                <div id="tDv12" class="center-content row">
+                    <div id="tDv13" class="content p-2 col-lg-12">
+                    <af:panelGridLayout id="pt_pgl1" >
+                            <af:gridRow id="pt_gr1" height="auto">
+                                <af:gridCell width="1%" id="pt_gc1" valign="stretch" halign="stretch"/>
+                                <af:gridCell width="98%" id="pt_gc2" valign="stretch" halign="stretch">
+                                    <af:facetRef facetName="content"/>
+                                </af:gridCell>
+                                <af:gridCell width="1%" id="pt_gc3" valign="stretch" halign="stretch"/>
+                            </af:gridRow>
+                        </af:panelGridLayout>
+                    </div>
+                </div>
+            </div>
+            <div id="tDv14" class="footer">
+                <div id="tDv15" class="row d-flex align-items-center justify-content-between pt-5 pb-5">
+                    <div id="tDv16" class="col-auto">© #{sessionScope.currentYear} INTERNATIONAL REGISTRIES</div>
+                    <div id="tDv17" class="col-auto" style="font-size:10px">V#{sessionScope.Version}</div>
+                    
+                    <!--div id="tDv17" class="col-auto">
+                        <ul class="footer-menu d-flex align-items-center">
+                            <li>
+                                <a href="#">SITEMAP</a>
+                            </li>
+                            <li>
+                                <a href="#">PRIVACY</a>
+                            </li>
+                            <li>
+                                <a href="#">TERMS &amp; CONDITIONS</a>
+                            </li>
+                        </ul>
+                    </div-->
+                </div>
+            </div>
+        </div>
+    </div>
+   <af:resource type="javascript" source="http://code.jquery.com/jquery-3.3.1.slim.min.js" />
+    <af:resource type="javascript" source="http://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"/>
+</af:pageTemplateDef>

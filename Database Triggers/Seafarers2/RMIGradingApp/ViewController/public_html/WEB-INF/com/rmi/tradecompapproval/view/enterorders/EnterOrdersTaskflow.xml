@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="EnterOrdersTaskflow">
+    <default-activity>resetOrderFilter</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>EnterOrdersBean</managed-bean-name>
+      <managed-bean-class>com.rmi.tradecompapproval.view.enterorders.EnterOrdersBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <exception-handler>exceptionHandler</exception-handler>
+    <view id="EnterOrdersPage">
+      <page>/WEB-INF/com/rmi/tradecompapproval/view/enterorders/EnterOrdersPage.jsff</page>
+    </view>
+    <method-call id="exceptionHandler">
+      <method>#{pageFlowScope.EnterOrdersBean.exceptionHandler}</method>
+    </method-call>
+    <method-call id="resetOrderFilter">
+      <method>#{bindings.resetOrderFilter.execute}</method>
+      <outcome>
+        <fixed-outcome>resetOrderFilter</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="EditDocumentsTaskflow">
+      <task-flow-reference>
+        <document>/WEB-INF/com/rmi/tradecompapproval/view/editseafarerdocs/EditDocumentsTaskflow.xml</document>
+        <id>EditDocumentsTaskflow</id>
+      </task-flow-reference>
+      <input-parameter id="__8">
+        <name>P_CALLED_FROM_TF</name>
+        <value>SO</value>
+      </input-parameter>
+      <input-parameter id="__9">
+        <name>P_SEAFARER_ID</name>
+        <value>#{data.com_rmi_tradecompapproval_view_EnterOrdersPagePageDef.Attribute1.inputValue}</value>
+      </input-parameter>
+    </task-flow-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>resetOrderFilter</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>resetOrderFilter</from-outcome>
+        <to-activity-id>EnterOrdersPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__6">
+      <from-activity-id>EnterOrdersPage</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>editDocuments</from-outcome>
+        <to-activity-id>EditDocumentsTaskflow</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

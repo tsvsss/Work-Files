@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="LoginPageDef" Package="pages">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="RmiUserLoginViewIterator" Binds="RmiUserLoginView" DataControl="RmiLoginAppModuleDataControl"
+              RangeSize="25"/>
+    <iterator Binds="OtpTimerView1" RangeSize="25" DataControl="RmiLoginAppModuleDataControl"
+              id="OtpTimerView1Iterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="getUserDetails" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getUserDetails"
+                  IsViewObjectMethod="false" DataControl="RmiLoginAppModuleDataControl"
+                  InstanceName="data.RmiLoginAppModuleDataControl.dataProvider"
+                  ReturnName="data.RmiLoginAppModuleDataControl.methodResults.getUserDetails_RmiLoginAppModuleDataControl_dataProvider_getUserDetails_result">
+      <NamedData NDName="userName" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="getRoleDetails" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getRoleDetails"
+                  IsViewObjectMethod="false" DataControl="RmiLoginAppModuleDataControl"
+                  InstanceName="data.RmiLoginAppModuleDataControl.dataProvider"
+                  ReturnName="data.RmiLoginAppModuleDataControl.methodResults.getRoleDetails_RmiLoginAppModuleDataControl_dataProvider_getRoleDetails_result">
+      <NamedData NDName="userId" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="changePassword" RequiresUpdateModel="true" Action="invokeMethod" MethodName="changePassword"
+                  IsViewObjectMethod="false" DataControl="RmiLoginAppModuleDataControl"
+                  InstanceName="data.RmiLoginAppModuleDataControl.dataProvider"
+                  ReturnName="data.RmiLoginAppModuleDataControl.methodResults.changePassword_RmiLoginAppModuleDataControl_dataProvider_changePassword_result">
+      <NamedData NDName="userName" NDType="java.lang.String"/>
+      <NamedData NDName="password" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="setResetPassword" RequiresUpdateModel="true" Action="invokeMethod" MethodName="setResetPassword"
+                  IsViewObjectMethod="false" DataControl="RmiLoginAppModuleDataControl"
+                  InstanceName="data.RmiLoginAppModuleDataControl.dataProvider"
+                  ReturnName="data.RmiLoginAppModuleDataControl.methodResults.setResetPassword_RmiLoginAppModuleDataControl_dataProvider_setResetPassword_result">
+      <NamedData NDName="userName" NDType="java.lang.String"/>
+      <NamedData NDName="resetPassword" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="setResetPassword1" RequiresUpdateModel="true" Action="invokeMethod" MethodName="setResetPassword"
+                  IsViewObjectMethod="false" DataControl="RmiLoginAppModuleDataControl"
+                  InstanceName="data.RmiLoginAppModuleDataControl.dataProvider"
+                  ReturnName="data.RmiLoginAppModuleDataControl.methodResults.setResetPassword_RmiLoginAppModuleDataControl_dataProvider_setResetPassword_result">
+      <NamedData NDName="userName" NDType="java.lang.String"/>
+      <NamedData NDName="resetPassword" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="getEmailNotifBody" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getEmailNotifBody"
+                  IsViewObjectMethod="false" DataControl="RmiLoginAppModuleDataControl"
+                  InstanceName="data.RmiLoginAppModuleDataControl.dataProvider"
+                  ReturnName="data.RmiLoginAppModuleDataControl.methodResults.getEmailNotifBody_RmiLoginAppModuleDataControl_dataProvider_getEmailNotifBody_result">
+      <NamedData NDName="emailType" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="sendMail" RequiresUpdateModel="true" Action="invokeMethod" MethodName="sendMail"
+                  IsViewObjectMethod="false" DataControl="RmiLoginAppModuleDataControl"
+                  InstanceName="data.RmiLoginAppModuleDataControl.dataProvider"
+                  ReturnName="data.RmiLoginAppModuleDataControl.methodResults.sendMail_RmiLoginAppModuleDataControl_dataProvider_sendMail_result">
+      <NamedData NDName="to" NDType="java.lang.String"/>
+      <NamedData NDName="cc" NDType="java.lang.String"/>
+      <NamedData NDName="bcc" NDType="java.lang.String"/>
+      <NamedData NDName="subject" NDType="java.lang.String"/>
+      <NamedData NDName="body" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="getUserRmiDetails" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getUserRmiDetails"
+                  IsViewObjectMethod="false" DataControl="RmiLoginAppModuleDataControl"
+                  InstanceName="data.RmiLoginAppModuleDataControl.dataProvider"
+                  ReturnName="data.RmiLoginAppModuleDataControl.methodResults.getUserRmiDetails_RmiLoginAppModuleDataControl_dataProvider_getUserRmiDetails_result">
+      <NamedData NDName="pUserId" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="validatePasswordHistory" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="validatePasswordHistory" IsViewObjectMethod="false"
+                  DataControl="RmiLoginAppModuleDataControl"
+                  InstanceName="data.RmiLoginAppModuleDataControl.dataProvider"
+                  ReturnName="data.RmiLoginAppModuleDataControl.methodResults.validatePasswordHistory_RmiLoginAppModuleDataControl_dataProvider_validatePasswordHistory_result">
+      <NamedData NDName="password" NDType="java.lang.String"/>
+      <NamedData NDName="userName" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="updateOtpTime" RequiresUpdateModel="true" Action="invokeMethod" MethodName="updateOtpTime"
+                  IsViewObjectMethod="false" DataControl="RmiLoginAppModuleDataControl"
+                  InstanceName="data.RmiLoginAppModuleDataControl.dataProvider"
+                  ReturnName="data.RmiLoginAppModuleDataControl.methodResults.updateOtpTime_RmiLoginAppModuleDataControl_dataProvider_updateOtpTime_result">
+      <NamedData NDName="userName" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="updateUserLoginTime" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="updateUserLoginTime" IsViewObjectMethod="false" DataControl="RmiLoginAppModuleDataControl"
+                  InstanceName="data.RmiLoginAppModuleDataControl.dataProvider"
+                  ReturnName="data.RmiLoginAppModuleDataControl.methodResults.updateUserLoginTime_RmiLoginAppModuleDataControl_dataProvider_updateUserLoginTime_result">
+      <NamedData NDName="userName" NDType="java.lang.String"/>
+    </methodAction>
+    <action id="Commit" DataControl="RmiLoginAppModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <methodAction id="refreshOtpEndTime" RequiresUpdateModel="true" Action="invokeMethod" MethodName="refreshOtpEndTime"
+                  IsViewObjectMethod="false" DataControl="RmiLoginAppModuleDataControl"
+                  InstanceName="data.RmiLoginAppModuleDataControl.dataProvider"
+                  ReturnName="data.RmiLoginAppModuleDataControl.methodResults.refreshOtpEndTime_RmiLoginAppModuleDataControl_dataProvider_refreshOtpEndTime_result">
+      <NamedData NDName="otpEndTime" NDType="java.sql.Timestamp"/>
+    </methodAction>
+    <attributeValues IterBinding="OtpTimerView1Iterator" id="TimeLeft">
+      <AttrNames>
+        <Item Value="TimeLeft"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

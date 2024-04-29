@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelBox text="My Task - Deficient Orders" id="pb1" showDisclosure="false"
+               disclosureListener="#{backingBeanScope.MyTaskDeficientRequestBean.testingButton}">
+    <f:facet name="toolbar"/>
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar">
+        <af:toolbar id="t2">
+          <af:button text="#{backingBeanScope.MyTaskDeficientRequestBean.ot}" id="b3" actionListener="#{pageFlowScope.MyTaskDeficientOrderBean.refreshButton}"/>
+        </af:toolbar>
+      </f:facet>
+      <f:facet name="statusbar"/>
+      <af:table value="#{bindings.MyTaskDeficientView.collectionModel}" var="row"
+                rows="#{bindings.MyTaskDeficientView.rangeSize}"
+                emptyText="#{bindings.MyTaskDeficientView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0" selectedRowKeys="#{bindings.MyTaskDeficientView.collectionModel.selectedRow}"
+                selectionListener="#{bindings.MyTaskDeficientView.collectionModel.makeCurrent}" rowSelection="single"
+                fetchSize="#{bindings.MyTaskDeficientView.rangeSize}"
+                filterModel="#{bindings.MyTaskDeficientViewQuery.queryDescriptor}"
+                queryListener="#{bindings.MyTaskDeficientViewQuery.processQuery}" filterVisible="true" varStatus="vs"
+                id="t1" columnStretching="column:c2" styleClass="AFStretchWidth" autoHeightRows="12"
+                contentDelivery="immediate" partialTriggers="b2 ::b3">
+        <af:column sortProperty="#{bindings.MyTaskDeficientView.hints.WorkOrderNo.name}" filterable="true"
+                   sortable="true" headerText="Work Order Number" id="c5">
+          <af:outputText value="#{row.WorkOrderNo}"
+                         shortDesc="#{bindings.MyTaskDeficientView.hints.WorkOrderNo.tooltip}" id="ot5">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.MyTaskDeficientView.hints.WorkOrderNo.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.MyTaskDeficientView.hints.BatchName.name}" filterable="true" sortable="true"
+                   headerText="Batch Name" id="c2">
+          <af:outputText value="#{row.BatchName}" shortDesc="#{bindings.MyTaskDeficientView.hints.BatchName.tooltip}"
+                         id="ot2"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.MyTaskDeficientView.hints.BatchDate.name}" filterable="true" sortable="true"
+                   headerText="Batch Date" id="c1">
+          <f:facet name="filter">
+            <af:inputDate value="#{bindings.MyTaskDeficientViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                          id="id1">
+              <af:convertDateTime pattern="#{bindings.MyTaskDeficientView.hints.BatchDate.format}"/>
+            </af:inputDate>
+          </f:facet>
+          <af:outputText value="#{row.BatchDate}" shortDesc="#{bindings.MyTaskDeficientView.hints.BatchDate.tooltip}"
+                         id="ot1" inlineStyle="text-transform:uppercase;">
+            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.MyTaskDeficientView.hints.NoOfSeafarer.name}" filterable="true"
+                   sortable="true" headerText="Number of Seafarers" id="c3">
+          <af:outputText value="#{row.NoOfSeafarer}"
+                         shortDesc="#{bindings.MyTaskDeficientView.hints.NoOfSeafarer.tooltip}" id="ot3">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.MyTaskDeficientView.hints.NoOfSeafarer.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.MyTaskDeficientView.hints.Region.name}" filterable="true" sortable="true"
+                   headerText="Region" id="c4">
+          <af:outputText value="#{row.Region}" shortDesc="#{bindings.MyTaskDeficientView.hints.Region.tooltip}"
+                         id="ot4"/>
+        </af:column>
+        <af:column headerText="Expedited Processing" id="c6">
+          <af:selectBooleanCheckbox value="#{row.bindings.ExpeditedProcessingMytask.inputValue}"
+                                    label="#{row.bindings.ExpeditedProcessingMytask.label}"
+                                    shortDesc="#{bindings.MyTaskDeficientView.hints.ExpeditedProcessingMytask.tooltip}"
+                                    id="sbc1"/>
+        </af:column>
+        <af:column id="c7">
+          <af:button text="Edit" id="b1" action="#{pageFlowScope.MyTaskDeficientOrderBean.editBatch}"/>
+        </af:column>
+        <af:column id="c8">
+          <af:button text="Return" id="b2">
+            <af:showPopupBehavior popupId=":::p1"/>
+          </af:button>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
+      <af:dialog id="d1" type="yesNo"
+                 dialogListener="#{pageFlowScope.MyTaskDeficientOrderBean.returnConfirmDialogListener}">
+        <f:facet name="buttonBar"/>
+        <af:outputText value="This action will return the Batch back to Main queue. Are you sure you want to continue?"
+                       id="ot6"/>
+      </af:dialog>
+    </af:popup>
+    <af:panelFormLayout id="pfl1" partialTriggers="pc1:t1" visible="false">
+      <af:inputText value="#{bindings.EsiBatchId.inputValue}" label="#{bindings.EsiBatchId.hints.label}"
+                    required="#{bindings.EsiBatchId.hints.mandatory}" readOnly="true"
+                    columns="#{bindings.EsiBatchId.hints.displayWidth}"
+                    maximumLength="#{bindings.EsiBatchId.hints.precision}"
+                    shortDesc="#{bindings.EsiBatchId.hints.tooltip}" id="it1">
+        <f:validator binding="#{bindings.EsiBatchId.validator}"/>
+        <af:convertNumber groupingUsed="false" pattern="#{bindings.EsiBatchId.format}"/>
+      </af:inputText>
+    </af:panelFormLayout>
+  </af:panelBox>
+</jsp:root>

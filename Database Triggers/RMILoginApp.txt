@@ -1,0 +1,5 @@
+Entity :RmiUserPasswordHistory
+|__Attribute :PasswordHistoryId
+|____Change Primary Key to:false
+|__Remove Key Constraint: RmiuserpasswordhistoryPrimaryKey
+

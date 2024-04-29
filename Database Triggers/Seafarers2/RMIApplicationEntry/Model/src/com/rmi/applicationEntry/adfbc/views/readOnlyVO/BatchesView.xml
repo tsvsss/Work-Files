@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BatchesView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.readOnlyVO.BatchesView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pUserId"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pBatchStatus"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pBatchName"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pFromDate"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="pToDate"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="pCustomer"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[select esi_batch_id,batch_name,batch_date,batch_status,purchase_order_number,vessel_names,            
+notes,batch_submitted_date,     
+(select count(*) from rmi_seafarer.rmi_seafarers_iface      
+where rmi_seafarer.rmi_seafarers_iface.esi_batch_id = rmi_seafarer.rmi_batch_iface.esi_batch_id) No_of_seafarer,     
+(select order_number from OE_ORDER_HEADERS_ALL   
+where OE_ORDER_HEADERS_ALL.header_id = rmi_seafarer.rmi_batch_iface.oe_header_id) work_order_no     
+from rmi_seafarer.rmi_batch_iface              
+where created_by = :pUserId           
+and batch_status = decode(:pBatchStatus,null,batch_status,'All',batch_status,:pBatchStatus)             
+and batch_name = nvl(:pBatchName,batch_name)           
+and to_date(batch_date) between nvl(to_date(:pFromDate),to_date(batch_date)) and nvl(to_date(:pToDate),to_date(sysdate))           
+and ship_to_cust_account_id = nvl(:pCustomer,ship_to_cust_account_id)]]></SQLQuery>
+  <ViewAttribute
+    Name="EsiBatchId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ESI_BATCH_ID"
+    Expression="ESI_BATCH_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="BatchName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BATCH_NAME"
+    Expression="BATCH_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BatchDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="BATCH_DATE"
+    Expression="BATCH_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="BatchStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BATCH_STATUS"
+    Expression="BATCH_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PurchaseOrderNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PURCHASE_ORDER_NUMBER"
+    Expression="PURCHASE_ORDER_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VesselNames"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VESSEL_NAMES"
+    Expression="VESSEL_NAMES"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Notes"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NOTES"
+    Expression="NOTES"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BatchSubmittedDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="BATCH_SUBMITTED_DATE"
+    Expression="BATCH_SUBMITTED_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="NoOfSeafarer"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="NO_OF_SEAFARER"
+    Expression="NO_OF_SEAFARER"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="WorkOrderNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="WORK_ORDER_NO"
+    Expression="WORK_ORDER_NO"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="tranSelect"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    DefaultValue="N"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="EsiBatchId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

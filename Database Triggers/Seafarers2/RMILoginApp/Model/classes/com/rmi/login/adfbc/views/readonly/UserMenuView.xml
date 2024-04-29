@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='windows-1252' ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+
+<ViewObject
+   xmlns="http://xmlns.oracle.com/bc4j"
+   Name="UserMenuView"
+   Version="12.1.3.10.47"
+   InheritPersonalization="merge"
+   BindingStyle="OracleName"
+   CustomQuery="true"
+   PageIterMode="Partial">
+   <DesignTime>
+      <Attr Name="_isExpertMode" Value="true" />
+   </DesignTime>
+   <Properties >
+      <SchemaBasedProperties >
+         <LABEL
+            ResId="com.rmi.login.adfbc.views.readonly.UserMenuView_LABEL" >
+         </LABEL>
+      </SchemaBasedProperties>
+   </Properties>
+   <Variable
+      Name="pUserId"
+      Kind="where"
+      Type="java.lang.Integer" >
+   </Variable>
+   <SQLQuery><![CDATA[
+SELECT distinct RMI_ROLE_MENU.ROLE_ID, RMI_ROLE_MENU.MENU_TITLE, RMI_USER.USER_ID, RMI_ROLE_MENU.DISPLAY_ORDER, RMI_ROLE_MENU.ACTIVE_FLAG         
+from RMI_SEAFARER.RMI_ROLE_MENU RMI_ROLE_MENU,      
+RMI_SEAFARER.RMI_USERS_ROLES RMI_USERS_ROLES,     
+RMI_SEAFARER.RMI_USER RMI_USER,     
+RMI_SEAFARER.RMI_ROLES RMI_ROLES       
+WHERE      
+RMI_ROLE_MENU.ROLE_ID=RMI_USERS_ROLES.ROLE_ID         
+AND RMI_ROLES.ROLE_ID=RMI_USERS_ROLES.ROLE_ID         
+AND RMI_USERS_ROLES.USER_ID=RMI_USER.USER_ID               
+AND RMI_ROLES.ACTIVE_FLAG='Y'         
+AND RMI_ROLE_MENU.ACTIVE_FLAG='Y'  
+AND RMI_USER.USER_ID=:pUserId  
+ORDER BY RMI_ROLE_MENU.DISPLAY_ORDER ASC
+   ]]></SQLQuery>
+   <ViewAttribute
+      Name="RoleId"
+      IsUpdateable="false"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Type="java.math.BigDecimal"
+      ColumnType="NUMBER"
+      AliasName="ROLE_ID"
+      Expression="ROLE_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="MenuTitle"
+      IsUpdateable="false"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="30"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="MENU_TITLE"
+      Expression="MENU_TITLE"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="30" />
+      </DesignTime>
+   </ViewAttribute>
+   <ViewAttribute
+      Name="UserId"
+      IsUpdateable="false"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Type="java.math.BigDecimal"
+      ColumnType="NUMBER"
+      AliasName="USER_ID"
+      Expression="USER_ID"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="DisplayOrder"
+      IsUpdateable="false"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Type="java.math.BigDecimal"
+      ColumnType="NUMBER"
+      AliasName="DISPLAY_ORDER"
+      Expression="DISPLAY_ORDER"
+      SQLType="NUMERIC" >
+   </ViewAttribute>
+   <ViewAttribute
+      Name="ActiveFlag"
+      IsUpdateable="false"
+      IsPersistent="false"
+      PrecisionRule="true"
+      Precision="1"
+      Type="java.lang.String"
+      ColumnType="VARCHAR2"
+      AliasName="ACTIVE_FLAG"
+      Expression="ACTIVE_FLAG"
+      SQLType="VARCHAR" >
+      <DesignTime>
+         <Attr Name="_DisplaySize" Value="1" />
+      </DesignTime>
+   </ViewAttribute>
+   <AttrArray Name="KeyAttributes">
+      <Item Value="MenuTitle" />
+      <Item Value="UserId" />
+   </AttrArray>
+   <ViewLinkAccessor
+      Name="UserSubMenuView"
+      ViewLink="com.rmi.login.adfbc.views.links.MenuSubMenuLogicalLink"
+      Type="oracle.jbo.RowIterator"
+      IsUpdateable="false" >
+   </ViewLinkAccessor>
+   <ResourceBundle >
+      <PropertiesBundle
+         PropertiesFile="model.ModelBundle" >
+      </PropertiesBundle>
+   </ResourceBundle>
+</ViewObject>

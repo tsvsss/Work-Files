@@ -1,0 +1,12 @@
+com.rmi.login.adfbc.views.RmiUserView_LABEL=Rmi User View
+com.rmi.login.adfbc.services.RmiLoginAppModule_LABEL=Rmi Login App Module
+com.rmi.login.adfbc.views.readonly.RmiUserLoginView_LABEL=Rmi User Login View
+com.rmi.login.adfbc.views.readonly.UserMenuView_LABEL=User Menu View
+com.rmi.login.adfbc.views.readonly.UserSubMenuView_LABEL=User Sub Menu View
+com.rmi.login.adfbc.views.links.MenuSubMenuLogicalLink_LABEL=Menu SubMenu Link
+com.rmi.login.adfbc.views.readonly.RolesView_LABEL=Roles View
+com.rmi.login.adfbc.views.readonly.MenuItemView_LABEL=Menu Item View
+com.rmi.login.adfbc.views.readonly.RmiEmailNotifBodyView_LABEL=RmiEmailNotifBodyView
+com.rmi.login.adfbc.views.readonly.UserFndDetailsView_LABEL=User Fnd Details View
+com.rmi.login.adfbc.views.RmiUserPasswordHistoryView_LABEL=Rmi User Password History View
+com.rmi.login.adfbc.views.readonly.OtpTimerView_LABEL=Otp Timer View

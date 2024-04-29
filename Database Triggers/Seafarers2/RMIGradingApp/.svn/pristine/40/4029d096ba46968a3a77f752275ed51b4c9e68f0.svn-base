@@ -1,0 +1,496 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+  <af:panelStretchLayout id="psl1" styleClass="AFStretchWidth">
+    <f:facet name="center">
+      <af:panelGroupLayout id="pgl1" layout="vertical" styleClass="AFStretchWidth">
+        <af:panelFormLayout id="pfl1" maxColumns="2" rows="1" styleClass="AFStretchWidth" inlineStyle="padding:10px;"
+                            labelWidth="150" rendered="false">
+          <af:selectOneChoice value="#{bindings.TransViewOrders.inputValue}" label="View Orders"
+                              required="#{bindings.TransViewOrders.hints.mandatory}"
+                              shortDesc="#{bindings.TransViewOrders.hints.tooltip}" id="soc1"
+                              contentStyle="width:200px; padding:3px;" autoSubmit="true"
+                              valueChangeListener="#{pageFlowScope.ocVerificationBean.valueChangeViewOrders}">
+            <f:selectItems value="#{bindings.TransViewOrders.items}" id="si1"/>
+            <f:validator binding="#{bindings.TransViewOrders.validator}"/>
+          </af:selectOneChoice>
+          <af:inputText value="#{bindings.TransProcesingCenter.inputValue}" label="Processing Center"
+                        required="#{bindings.TransProcesingCenter.hints.mandatory}"
+                        columns="#{bindings.TransProcesingCenter.hints.displayWidth}"
+                        maximumLength="#{bindings.TransProcesingCenter.hints.precision}"
+                        shortDesc="#{bindings.TransProcesingCenter.hints.tooltip}" id="it1"
+                        contentStyle="width:200px; padding:3px;" disabled="true" autoSubmit="true"
+                        partialTriggers="soc1">
+            <f:validator binding="#{bindings.TransProcesingCenter.validator}"/>
+          </af:inputText>
+        </af:panelFormLayout>
+        <af:separator id="s2" inlineStyle="margin:0px;"/>
+        <af:popup childCreation="deferred" autoCancel="disabled" id="p2" contentDelivery="lazyUncached"
+                  popupCanceledListener="#{pageFlowScope.ocVerificationBean.cancelEmailNotificationPopup}"
+                  binding="#{pageFlowScope.ocVerificationBean.bindingEmailPopup}"
+                  partialTriggers="pc1:t1:b3 pc2:t2:b5 pt1">
+          <af:dialog id="d2" title="Email Notification"
+                     dialogListener="#{pageFlowScope.ocVerificationBean.dialogEmailNotification}"
+                     affirmativeTextAndAccessKey="Send">
+            <f:facet name="buttonBar"/>
+            <af:panelFormLayout id="pfl3" labelWidth="100" inlineStyle="padding:10px;"
+                                styleClass="panelFormLayoutClass">
+              <af:inputText value="#{bindings.TransMailTo.inputValue}" label="To"
+                            required="#{bindings.TransMailTo.hints.mandatory}"
+                            columns="#{bindings.TransMailTo.hints.displayWidth}"
+                            maximumLength="#{bindings.TransMailTo.hints.precision}"
+                            shortDesc="#{bindings.TransMailTo.hints.tooltip}" id="it8"
+                            contentStyle="width:400px; padding:3px;" autoSubmit="true">
+                <f:validator binding="#{bindings.TransMailTo.validator}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.TransMailFrom.inputValue}" label="From"
+                            required="#{bindings.TransMailFrom.hints.mandatory}"
+                            columns="#{bindings.TransMailFrom.hints.displayWidth}"
+                            maximumLength="#{bindings.TransMailFrom.hints.precision}"
+                            shortDesc="#{bindings.TransMailFrom.hints.tooltip}" id="it6" autoSubmit="true"
+                            disabled="true" contentStyle="width:400px; padding:3px;">
+                <f:validator binding="#{bindings.TransMailFrom.validator}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.TransMailCc.inputValue}" label="CC"
+                            required="#{bindings.TransMailCc.hints.mandatory}"
+                            columns="#{bindings.TransMailCc.hints.displayWidth}"
+                            maximumLength="#{bindings.TransMailCc.hints.precision}"
+                            shortDesc="#{bindings.TransMailCc.hints.tooltip}" id="it9" autoSubmit="true"
+                            contentStyle="width:400px; padding:3px;">
+                <f:validator binding="#{bindings.TransMailCc.validator}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.TransMailSubject.inputValue}" label="RE"
+                            required="#{bindings.TransMailSubject.hints.mandatory}"
+                            columns="#{bindings.TransMailSubject.hints.displayWidth}"
+                            maximumLength="#{bindings.TransMailSubject.hints.precision}"
+                            shortDesc="#{bindings.TransMailSubject.hints.tooltip}" id="it11"
+                            contentStyle="width:400px; padding:3px;" autoSubmit="true">
+                <f:validator binding="#{bindings.TransMailSubject.validator}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.TransMailAttachments.inputValue}" label="Attachments"
+                            required="#{bindings.TransMailAttachments.hints.mandatory}"
+                            columns="#{bindings.TransMailAttachments.hints.displayWidth}"
+                            maximumLength="#{bindings.TransMailAttachments.hints.precision}"
+                            shortDesc="#{bindings.TransMailAttachments.hints.tooltip}" id="it10" autoSubmit="true"
+                            contentStyle="width:400px; padding:3px;" rendered="false">
+                <f:validator binding="#{bindings.TransMailAttachments.validator}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.TransMailMessage.inputValue}" label="Message"
+                            required="#{bindings.TransMailMessage.hints.mandatory}"
+                            columns="#{bindings.TransMailMessage.hints.displayWidth}"
+                            maximumLength="#{bindings.TransMailMessage.hints.precision}"
+                            shortDesc="#{bindings.TransMailMessage.hints.tooltip}" id="it7" rows="15"
+                            contentStyle="width:500px; padding:3px;" autoSubmit="true">
+                <f:validator binding="#{bindings.TransMailMessage.validator}"/>
+              </af:inputText>
+            </af:panelFormLayout>
+          </af:dialog>
+        </af:popup>
+        <af:panelTabbed position="above" id="pt1">
+          <af:showDetailItem id="tab1" text="Certificate Pending Verification" disclosed="true">
+            <af:panelBox id="pb2" styleClass="AFStretchWidth" showHeader="always" showDisclosure="false"
+                         inlineStyle="border:none; box-shadow:none;">
+              <f:facet name="toolbar"/>
+              <af:popup childCreation="deferred" autoCancel="disabled" id="p4">
+                <af:dialog id="d4" type="yesNo" title="Officer Verification"
+                           dialogListener="#{pageFlowScope.ocVerificationBean.dialogOcManualVerification}"
+                           contentWidth="300">
+                  <f:facet name="buttonBar"/>
+                  <af:message id="m1" message="Are you sure you want to verify this Certificate ?"/>
+                </af:dialog>
+              </af:popup>
+              <af:panelCollection id="pc1" styleClass="AFStretchWidth"
+                                  featuresOff="columnsMenuItem formatMenu freeze freezeMenuItem freezeToolbarItem reorderColumnsMenuItem resizeColumnsMenuItem scrollToFirstMenuItem scrollToLastMenuItem showAsTopMenuItem showAsTopToolbarItem sortMenuItem statusBar viewMenu wrap wrapMenuItem wrapToolbarItem">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="statusbar"/>
+                <af:table value="#{bindings.ViewOcVerificationOrdersRO1.collectionModel}" var="row"
+                          rows="#{bindings.ViewOcVerificationOrdersRO1.rangeSize}"
+                          emptyText="#{bindings.ViewOcVerificationOrdersRO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.ViewOcVerificationOrdersRO1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.ViewOcVerificationOrdersRO1.collectionModel.makeCurrent}"
+                          rowSelection="single" fetchSize="#{bindings.ViewOcVerificationOrdersRO1.rangeSize}" id="t1"
+                          styleClass="AFStretchWidth" autoHeightRows="15"
+                          contentDelivery="immediate"
+                          filterModel="#{bindings.ViewOcVerificationOrdersRO1Query.queryDescriptor}"
+                          queryListener="#{bindings.ViewOcVerificationOrdersRO1Query.processQuery}" filterVisible="true"
+                          varStatus="vs" columnStretching="column:c1">
+                  <af:column sortProperty="#{bindings.ViewOcVerificationOrdersRO1.hints.SeafarerName.name}"
+                             sortable="true" headerText="Seafarer Name" id="c1" width="200" filterable="true">
+                    <af:outputText value="#{row.SeafarerName}"
+                                   shortDesc="#{bindings.ViewOcVerificationOrdersRO1.hints.SeafarerName.tooltip}"
+                                   id="ot1"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.ViewOcVerificationOrdersRO1.hints.OrderNumber.name}"
+                             sortable="true" headerText="Work Order Number" id="c2" align="center" filterable="true"
+                             width="120">
+                    <af:outputText value="#{row.OrderNumber}"
+                                   shortDesc="#{bindings.ViewOcVerificationOrdersRO1.hints.OrderNumber.tooltip}"
+                                   id="ot2">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.ViewOcVerificationOrdersRO1.hints.OrderNumber.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.ViewOcVerificationOrdersRO1.hints.GradeCode.name}" sortable="true"
+                             headerText="Grade" id="c3" align="center" filterable="true" width="120">
+                    <af:outputText value="#{row.GradeCode}"
+                                   shortDesc="#{bindings.ViewOcVerificationOrdersRO1.hints.GradeCode.tooltip}"
+                                   id="ot3"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.ViewOcVerificationOrdersRO1.hints.CountryName.name}"
+                             sortable="true" headerText="Issuing Country" id="c4" width="150" filterable="true">
+                    <af:outputText value="#{row.CountryName}"
+                                   shortDesc="#{bindings.ViewOcVerificationOrdersRO1.hints.CountryName.tooltip}"
+                                   id="ot4"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.ViewOcVerificationOrdersRO1.hints.EndorsementNumber.name}"
+                             sortable="true" headerText="Certificate Number" id="c5" align="center" filterable="true"
+                             width="120">
+                    <af:outputText value="#{row.EndorsementNumber}"
+                                   shortDesc="#{bindings.ViewOcVerificationOrdersRO1.hints.EndorsementNumber.tooltip}"
+                                   id="ot5"/>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.ViewOcVerificationOrdersRO1.hints.EndorsementIssueDate.name}"
+                             sortable="true" headerText="Issue Date" id="c6" align="center" filterable="true"
+                             width="120">
+                    <af:outputText value="#{row.EndorsementIssueDate}"
+                                   shortDesc="#{bindings.ViewOcVerificationOrdersRO1.hints.EndorsementIssueDate.tooltip}"
+                                   id="ot6">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:outputText>
+                    <f:facet name="filter">
+                      <af:inputDate value="#{bindings.ViewOcVerificationOrdersRO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.EndorsementIssueDate.value}"
+                                    id="id3">
+                        <af:convertDateTime pattern="#{bindings.ViewOcVerificationOrdersRO1.hints.EndorsementIssueDate.format}"/>
+                      </af:inputDate>
+                    </f:facet>
+                  </af:column>
+                  <af:column sortProperty="#{bindings.ViewOcVerificationOrdersRO1.hints.EndorsementExpirationDate.name}"
+                             sortable="true" headerText="Expiration Date" id="c7" align="center" filterable="true"
+                             width="120">
+                    <af:outputText value="#{row.EndorsementExpirationDate}"
+                                   shortDesc="#{bindings.ViewOcVerificationOrdersRO1.hints.EndorsementExpirationDate.tooltip}"
+                                   id="ot7">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:outputText>
+                    <f:facet name="filter">
+                      <af:inputDate value="#{bindings.ViewOcVerificationOrdersRO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.EndorsementExpirationDate.value}"
+                                    id="id4">
+                        <af:convertDateTime pattern="#{bindings.ViewOcVerificationOrdersRO1.hints.EndorsementExpirationDate.format}"/>
+                      </af:inputDate>
+                    </f:facet>
+                  </af:column>
+                  <af:column id="c8" align="center" inlineStyle="padding:3px;" sortable="false" filterable="false">
+                    <af:panelGroupLayout id="pgl4" layout="horizontal" visible="#{row.VerificationReqd eq 'Y'}">
+                      <af:button text="Verify" id="b1" visible="#{row.VerificationMethod eq 'Online'}" iconPosition="top"
+                                 action="#{pageFlowScope.ocVerificationBean.actionVerifyOnline}"/>
+                      <af:button text="Send Email" id="b3" visible="#{row.VerificationMethod eq 'Email'}"
+                                 action="#{pageFlowScope.ocVerificationBean.actionSendEmailPending}"/>
+                      <af:popup childCreation="deferred" autoCancel="disabled" id="p1" contentDelivery="lazyUncached"
+                                popupFetchListener="#{pageFlowScope.ocVerificationBean.popupFetchListenerVerifyPending}"
+                                binding="#{pageFlowScope.ocVerificationBean.bindingVerificationPopup}"
+                                partialTriggers="b1">
+                        <af:dialog id="d1" title="Officer Verification"
+                                   dialogListener="#{pageFlowScope.ocVerificationBean.dialogOcVerification}"
+                                   affirmativeTextAndAccessKey="Save">
+                          <f:facet name="buttonBar"/>
+                          <af:panelGroupLayout id="pgl2" layout="horizontal" styleClass="AFStretchWidth" valign="top">
+                            <af:panelFormLayout id="pfl2" inlineStyle="padding:10px;" styleClass="panelFormLayoutClass">
+                              <af:inputText value="#{bindings.VerificationUsername.inputValue}" label="Login Username"
+                                            required="#{bindings.VerificationUsername.hints.mandatory}"
+                                            columns="#{bindings.VerificationUsername.hints.displayWidth}"
+                                            maximumLength="#{bindings.VerificationUsername.hints.precision}"
+                                            shortDesc="#{bindings.VerificationUsername.hints.tooltip}" id="it4"
+                                            disabled="true" autoSubmit="true" styleClass="AFInputTextHead">
+                                <f:validator binding="#{bindings.VerificationUsername.validator}"/>
+                              </af:inputText>
+                              <af:inputText value="#{bindings.TransLoginPassword.inputValue}" label="Login Password"
+                                            required="#{bindings.TransLoginPassword.hints.mandatory}"
+                                            columns="#{bindings.TransLoginPassword.hints.displayWidth}"
+                                            maximumLength="#{bindings.TransLoginPassword.hints.precision}"
+                                            shortDesc="#{bindings.TransLoginPassword.hints.tooltip}" id="it5"
+                                            autoSubmit="true" disabled="true" secret="true"
+                                            styleClass="AFInputTextHead">
+                                <f:validator binding="#{bindings.TransLoginPassword.validator}"/>
+                              </af:inputText>
+                              <af:inputText value="#{bindings.SeafarerName.inputValue}" label="Seafarer Name"
+                                            required="#{bindings.SeafarerName.hints.mandatory}"
+                                            columns="#{bindings.SeafarerName.hints.displayWidth}"
+                                            maximumLength="#{bindings.SeafarerName.hints.precision}"
+                                            shortDesc="#{bindings.SeafarerName.hints.tooltip}" id="it2"
+                                            autoSubmit="true" disabled="true" rows="2" styleClass="AFInputTextHead">
+                                <f:validator binding="#{bindings.SeafarerName.validator}"/>
+                              </af:inputText>
+                              <af:inputDate value="#{bindings.BirthDate.inputValue}" label="Date of Birth"
+                                            required="#{bindings.BirthDate.hints.mandatory}"
+                                            columns="#{bindings.BirthDate.hints.displayWidth}"
+                                            shortDesc="#{bindings.BirthDate.hints.tooltip}" id="id1" disabled="true"
+                                            autoSubmit="true" styleClass="AFInputTextHead">
+                                <f:validator binding="#{bindings.BirthDate.validator}"/>
+                                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                              </af:inputDate>
+                              <af:inputText value="#{bindings.EndorsementNumber.inputValue}" label="Certificate Number"
+                                            required="#{bindings.EndorsementNumber.hints.mandatory}"
+                                            columns="#{bindings.EndorsementNumber.hints.displayWidth}"
+                                            maximumLength="#{bindings.EndorsementNumber.hints.precision}"
+                                            shortDesc="#{bindings.EndorsementNumber.hints.tooltip}" id="it3"
+                                            autoSubmit="true" disabled="true" styleClass="AFInputTextHead">
+                                <f:validator binding="#{bindings.EndorsementNumber.validator}"/>
+                              </af:inputText>
+                              <af:spacer width="10" height="10" id="s6"/>
+                              <af:inputFile label="Upload Verification" id="if1" autoSubmit="true"
+                                            value="#{pageFlowScope.ocVerificationBean.file}"
+                                            valueChangeListener="#{pageFlowScope.ocVerificationBean.valueChangeUploadDocument}"
+                                            rows="1" styleClass="AFInputTextHead"
+                                            binding="#{pageFlowScope.ocVerificationBean.inputFileBinding}"/>
+                              <h:outputLabel value="#{bindings.VerificationEdocId.inputValue != null ? 'Document Uploaded' : 'Not Uploaded'}"
+                                             id="ol1"
+                                             style="font-style:italic; color:#{bindings.VerificationEdocId.inputValue != null ? 'green' : 'red'};"/>
+                              <af:spacer width="10" height="10" id="s5"/>
+                              <af:selectOneRadio value="#{bindings.TransCertVerification.inputValue}"
+                                                 label="Certificate Verification"
+                                                 required="#{bindings.TransCertVerification.hints.mandatory}"
+                                                 shortDesc="#{bindings.TransCertVerification.hints.tooltip}" id="sor1"
+                                                 autoSubmit="true" styleClass="AFInputTextHead">
+                                <f:selectItems value="#{bindings.TransCertVerification.items}" id="si2"/>
+                                <f:validator binding="#{bindings.TransCertVerification.validator}"/>
+                              </af:selectOneRadio>
+                              <af:spacer width="10" height="10" id="s7"/>
+                              <af:selectOneRadio value="#{bindings.TransCancelCert.inputValue}"
+                                                 label="Cancel Verification"
+                                                 required="#{bindings.TransCancelCert.hints.mandatory}"
+                                                 shortDesc="#{bindings.TransCancelCert.hints.tooltip}" id="sor3"
+                                                 autoSubmit="true" partialTriggers="sor1"
+                                                 visible="#{bindings.TransCertVerification.inputValue == 'N'}"
+                                                 styleClass="AFInputTextHead">
+                                <f:selectItems value="#{bindings.TransCancelCert.items}" id="si4"/>
+                                <f:validator binding="#{bindings.TransCancelCert.validator}"/>
+                              </af:selectOneRadio>
+                              <af:spacer width="10" height="10" id="s4"/>
+                              <af:button text="View C.O.C" id="b2" partialSubmit="true"
+                                         actionListener="#{pageFlowScope.ocVerificationBean.viewCocActionListener}">
+                                <af:setPropertyListener type="action"
+                                                        from="#{pageFlowScope.ocVerificationBean.filePath}"
+                                                        to="#{pageFlowScope.ocVerificationBean.inlineFrameSource}"/>
+                              </af:button>
+                            </af:panelFormLayout>
+                            <af:panelBox text="Preview" id="pb4" showDisclosure="false" showHeader="always"
+                                         partialTriggers="b2 pfl2">
+                              <f:facet name="toolbar">
+                                <af:toolbar id="t3">
+                                  <af:button text="View Full Page" id="b9"
+                                             destination="#{applicationScope.ApplicationUrl}#{pageFlowScope.ocVerificationBean.inlineFrameSource}"
+                                             visible="#{pageFlowScope.ocVerificationBean.inlineFrameSource != null}"
+                                             partialTriggers="b2"/>
+                                </af:toolbar>
+                              </f:facet>
+                              <af:inlineFrame id="if2" source="#{pageFlowScope.ocVerificationBean.inlineFrameSource}"
+                                              inlineStyle="width:350px; height:400px;" partialTriggers="b2 pfl2"
+                                              binding="#{pageFlowScope.ocVerificationBean.inlineFrameBinding}"/>
+                            </af:panelBox>
+                          </af:panelGroupLayout>
+                        </af:dialog>
+                      </af:popup>
+                    </af:panelGroupLayout>
+                    <af:panelGroupLayout id="pgl5" visible="#{row.VerificationReqd ne 'Y'}" layout="horizontal">
+                      <af:button text="Verify Manually" id="b8">
+                        <af:showPopupBehavior popupId=":::p4"/>
+                      </af:button>
+                    </af:panelGroupLayout>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </af:panelBox>
+          </af:showDetailItem>
+          <af:showDetailItem id="tab2" text="Waiting on Response">
+            <af:panelBox id="pb3" styleClass="AFStretchWidth"
+                         inlineStyle="border:none; box-shadow:none;" showDisclosure="false" showHeader="always">
+              <f:facet name="toolbar"/>
+              <af:popup childCreation="deferred" autoCancel="disabled" id="p3" contentDelivery="lazyUncached"
+                        partialTriggers="pc2:t2:b4"
+                        popupFetchListener="#{pageFlowScope.ocVerificationBean.popupFetchListenerVerifyWaiting}"
+                        binding="#{pageFlowScope.ocVerificationBean.bindingWaitingPopup}">
+                <af:dialog id="d3" title="Officer Verification"
+                           dialogListener="#{pageFlowScope.ocVerificationBean.dialogWaitingResponse}"
+                           affirmativeTextAndAccessKey="Save">
+                  <f:facet name="buttonBar"/>
+                  <af:panelGroupLayout id="pgl3" layout="horizontal" valign="top" styleClass="AFStretchWidth">
+                    <af:panelFormLayout id="pfl4" inlineStyle="padding:10px;" styleClass="panelFormLayoutClass">
+                      <af:inputText value="#{bindings.SeafarerName1.inputValue}" label="Seafarer Name"
+                                    required="#{bindings.SeafarerName1.hints.mandatory}"
+                                    columns="#{bindings.SeafarerName1.hints.displayWidth}"
+                                    maximumLength="#{bindings.SeafarerName1.hints.precision}"
+                                    shortDesc="#{bindings.SeafarerName1.hints.tooltip}" id="it12" rows="3" autoSubmit="true" disabled="true"
+                                    styleClass="AFInputTextHead">
+                        <f:validator binding="#{bindings.SeafarerName1.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.EndorsementNumber1.inputValue}" label="Certificate Number"
+                                    required="#{bindings.EndorsementNumber1.hints.mandatory}"
+                                    columns="#{bindings.EndorsementNumber1.hints.displayWidth}"
+                                    maximumLength="#{bindings.EndorsementNumber1.hints.precision}"
+                                    shortDesc="#{bindings.EndorsementNumber1.hints.tooltip}" id="it13" disabled="true" autoSubmit="true"
+                                    styleClass="AFInputTextHead">
+                        <f:validator binding="#{bindings.EndorsementNumber1.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.BirthDate1.inputValue}" label="Date of Birth"
+                                    required="#{bindings.BirthDate1.hints.mandatory}"
+                                    columns="#{bindings.BirthDate1.hints.displayWidth}"
+                                    shortDesc="#{bindings.BirthDate1.hints.tooltip}" id="id2" autoSubmit="true"
+                                    disabled="true" styleClass="AFInputTextHead">
+                        <f:validator binding="#{bindings.BirthDate1.validator}"/>
+                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                      </af:inputDate>
+                      <af:spacer width="10" height="10" id="s8"/>
+                      <af:selectOneRadio value="#{bindings.TransCertVerifyWaiting.inputValue}"
+                                         label="Certificate Verification"
+                                         required="#{bindings.TransCertVerifyWaiting.hints.mandatory}"
+                                         shortDesc="#{bindings.TransCertVerifyWaiting.hints.tooltip}" id="sor2"
+                                         autoSubmit="true" styleClass="AFInputTextHead">
+                        <f:selectItems value="#{bindings.TransCertVerifyWaiting.items}" id="si3"/>
+                        <f:validator binding="#{bindings.TransCertVerifyWaiting.validator}"/>
+                      </af:selectOneRadio>
+                      <af:spacer width="10" height="10" id="s9"/>
+                      <af:selectOneRadio value="#{bindings.TransCancelCertWaiting.inputValue}"
+                                         label="Cancel Certification"
+                                         required="#{bindings.TransCancelCertWaiting.hints.mandatory}"
+                                         shortDesc="#{bindings.TransCancelCertWaiting.hints.tooltip}" id="sor4"
+                                         autoSubmit="true" partialTriggers="sor2 pfl4"
+                                         visible="#{bindings.TransCertVerifyWaiting.inputValue == 'N'}"
+                                         styleClass="AFInputTextHead">
+                        <f:selectItems value="#{bindings.TransCancelCertWaiting.items}" id="si5"/>
+                        <f:validator binding="#{bindings.TransCancelCertWaiting.validator}"/>
+                      </af:selectOneRadio>
+                      <af:spacer width="10" height="10" id="s10"/>
+                      <af:button text="View C.O.C." id="b7" partialSubmit="true"
+                                 actionListener="#{pageFlowScope.ocVerificationBean.viewCocWaitingActionListener}">
+                        <af:setPropertyListener from="#{pageFlowScope.ocVerificationBean.fileWaitngPath}"
+                                                to="#{pageFlowScope.ocVerificationBean.inlineFrameWaitingSource}"
+                                                type="action"/>
+                      </af:button>
+                      <af:spacer width="10" height="10" id="s11"/>
+                      <af:inputFile label="Upload Verification" id="if3" autoSubmit="true"
+                                    value="#{pageFlowScope.ocVerificationBean.fileWaitng}" rows="1"
+                                    valueChangeListener="#{pageFlowScope.ocVerificationBean.valueChangeUploadDocumentWaiting}"
+                                    styleClass="AFInputTextHead"
+                                    binding="#{pageFlowScope.ocVerificationBean.inputFileWaitingBinding}"/>
+                      <h:outputLabel value="#{bindings.VerificationEdocId1.inputValue != null ? 'Document Uploaded' : 'Not Uploaded'}" id="ol2"
+                                     style="font-style:italic; color:#{bindings.VerificationEdocId1.inputValue != null ? 'green' : 'red'};"/>
+                    </af:panelFormLayout>
+                    <af:panelBox text="Preview" id="pb5" showHeader="always" showDisclosure="false">
+                      <f:facet name="toolbar"/>
+                      <af:inlineFrame id="if4" source="#{pageFlowScope.ocVerificationBean.inlineFrameWaitingSource}"
+                                      partialTriggers="b7 pfl4"
+                                      binding="#{pageFlowScope.ocVerificationBean.inlineFrameWaitingBinding}"
+                                      inlineStyle="width:300px; height:350px;"/>
+                    </af:panelBox>
+                  </af:panelGroupLayout>
+                </af:dialog>
+              </af:popup>
+              <af:panelCollection id="pc2" styleClass="AFStretchWidth"
+                                  featuresOff="columnsMenuItem formatMenu freeze freezeMenuItem freezeToolbarItem reorderColumnsMenuItem resizeColumnsMenuItem scrollToFirstMenuItem scrollToLastMenuItem showAsTopMenuItem showAsTopToolbarItem sortMenuItem statusBar viewMenu wrap wrapMenuItem wrapToolbarItem">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="statusbar"/>
+                <af:table value="#{bindings.ViewOcWaitingResponseRO1.collectionModel}" var="row"
+                          rows="#{bindings.ViewOcWaitingResponseRO1.rangeSize}"
+                          emptyText="#{bindings.ViewOcWaitingResponseRO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0" fetchSize="#{bindings.ViewOcWaitingResponseRO1.rangeSize}" id="t2"
+                          selectedRowKeys="#{bindings.ViewOcWaitingResponseRO1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.ViewOcWaitingResponseRO1.collectionModel.makeCurrent}"
+                          rowSelection="single" styleClass="AFStretchWidth" contentDelivery="immediate"
+                          autoHeightRows="15" filterModel="#{bindings.ViewOcWaitingResponseRO1Query.queryDescriptor}"
+                          queryListener="#{bindings.ViewOcWaitingResponseRO1Query.processQuery}" filterVisible="true"
+                          varStatus="vs" columnStretching="column:c9">
+                  <af:column headerText="Seafarer Name" id="c9"
+                             sortProperty="#{bindings.ViewOcWaitingResponseRO1.hints.SeafarerName.name}" sortable="true"
+                             width="200" filterable="true">
+                    <af:outputText value="#{row.SeafarerName}"
+                                   shortDesc="#{bindings.ViewOcWaitingResponseRO1.hints.SeafarerName.tooltip}"
+                                   id="ot10"/>
+                  </af:column>
+                  <af:column headerText="Work Order Number" id="c10"
+                             sortProperty="#{bindings.ViewOcWaitingResponseRO1.hints.OrderNumber.name}" sortable="true"
+                             align="center" filterable="true" width="120">
+                    <af:outputText value="#{row.OrderNumber}"
+                                   shortDesc="#{bindings.ViewOcWaitingResponseRO1.hints.OrderNumber.tooltip}" id="ot12">
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.ViewOcWaitingResponseRO1.hints.OrderNumber.format}"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column headerText="Grade" id="c11"
+                             sortProperty="#{bindings.ViewOcWaitingResponseRO1.hints.GradeCode.name}" sortable="true"
+                             align="center" filterable="true" width="120">
+                    <af:outputText value="#{row.GradeCode}"
+                                   shortDesc="#{bindings.ViewOcWaitingResponseRO1.hints.GradeCode.tooltip}" id="ot14"/>
+                  </af:column>
+                  <af:column headerText="Issuing Country" id="c15"
+                             sortProperty="#{bindings.ViewOcWaitingResponseRO1.hints.CountryName.name}" sortable="true"
+                             width="150" filterable="true">
+                    <af:outputText value="#{row.CountryName}"
+                                   shortDesc="#{bindings.ViewOcWaitingResponseRO1.hints.CountryName.tooltip}" id="ot8"/>
+                  </af:column>
+                  <af:column headerText="Certificate Number" id="c12"
+                             sortProperty="#{bindings.ViewOcWaitingResponseRO1.hints.EndorsementNumber.name}"
+                             sortable="true" align="center" filterable="true" width="120">
+                    <af:outputText value="#{row.EndorsementNumber}"
+                                   shortDesc="#{bindings.ViewOcWaitingResponseRO1.hints.EndorsementNumber.tooltip}"
+                                   id="ot11"/>
+                  </af:column>
+                  <af:column headerText="Issue Date" id="c13"
+                             sortProperty="#{bindings.ViewOcWaitingResponseRO1.hints.EndorsementIssueDate.name}"
+                             sortable="true" align="center" filterable="true" width="120">
+                    <af:outputText value="#{row.EndorsementIssueDate}"
+                                   shortDesc="#{bindings.ViewOcWaitingResponseRO1.hints.EndorsementIssueDate.tooltip}"
+                                   id="ot9">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:outputText>
+                    <f:facet name="filter">
+                      <af:inputDate value="#{bindings.ViewOcWaitingResponseRO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.EndorsementIssueDate.value}"
+                                    id="id6">
+                        <af:convertDateTime pattern="#{bindings.ViewOcWaitingResponseRO1.hints.EndorsementIssueDate.format}"/>
+                      </af:inputDate>
+                    </f:facet>
+                  </af:column>
+                  <af:column headerText="Expiration Date" id="c14"
+                             sortProperty="#{bindings.ViewOcWaitingResponseRO1.hints.EndorsementExpirationDate.name}"
+                             sortable="true" align="center" filterable="true" width="120">
+                    <af:outputText value="#{row.EndorsementExpirationDate}"
+                                   shortDesc="#{bindings.ViewOcWaitingResponseRO1.hints.EndorsementExpirationDate.tooltip}"
+                                   id="ot13">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:outputText>
+                    <f:facet name="filter">
+                      <af:inputDate value="#{bindings.ViewOcWaitingResponseRO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.EndorsementExpirationDate.value}"
+                                    id="id5">
+                        <af:convertDateTime pattern="#{bindings.ViewOcWaitingResponseRO1.hints.EndorsementExpirationDate.format}"/>
+                      </af:inputDate>
+                    </f:facet>
+                  </af:column>
+                  <af:column id="c16" align="center" inlineStyle="padding:3px;" sortable="false" filterable="false">
+                    <af:button text="Verify" id="b4"
+                               visible="#{row.VerificationMethod eq 'Online'}"
+                               action="#{pageFlowScope.ocVerificationBean.actionVerifyWaiting}">
+                      <af:showPopupBehavior popupId=":::p3" triggerType="click"/>
+                    </af:button>
+                    <af:button text="Send Email" id="b5" visible="#{row.VerificationMethod eq 'Email'}"
+                               action="#{pageFlowScope.ocVerificationBean.actionSendEmailWaiting}"/>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </af:panelBox>
+          </af:showDetailItem>
+        </af:panelTabbed>
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="top">
+      <af:panelBox text="Verify Officer Certificates" id="pb1" showDisclosure="false"
+                   inlineStyle="border:none; box-shadow:none;">
+        <f:facet name="toolbar">
+          <af:button text="Back" id="b6" action="back"/>
+        </f:facet>
+        <af:separator id="s1" rendered="false"/>
+      </af:panelBox>
+    </f:facet>
+  </af:panelStretchLayout>
+</jsp:root>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="UploadIndividualAlertDocumentPageDef" Package="oracle.apps.xwrl.view.pageDefs.Prototype">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="XwrlResponseIndColumnsView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlResponseIndColumnsView1Iterator" ChangeEventPolicy="none"/>
+    <iterator Binds="XwrlAlertDocumentsView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlAlertDocumentsView1Iterator" ChangeEventPolicy="none"/>
+    <searchRegion Criteria="XwrlAlertDocumentsViewCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="XwrlAlertDocumentsView1Iterator" id="XwrlAlertDocumentsViewCriteriaQuery"/>
+    <iterator id="XwrlRequestsView1Iterator" Binds="XwrlRequestsView1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="XwrlResponseIndColumnsView1Iterator" id="Casekey">
+      <AttrNames>
+        <Item Value="Casekey"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlResponseIndColumnsView1Iterator" id="Alertid">
+      <AttrNames>
+        <Item Value="Alertid"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XwrlAlertDocumentsView1Iterator" id="XwrlAlertDocumentsView1">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.XwrlAlertDocumentsView" Name="XwrlAlertDocumentsView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="RequestId"/>
+          <Item Value="AlertId"/>
+          <Item Value="EdocId"/>
+          <Item Value="DocumentName"/>
+          <Item Value="DocumentCategory"/>
+          <Item Value="DocumentType"/>
+          <Item Value="FileName"/>
+          <Item Value="FilePath"/>
+          <Item Value="ContentType"/>
+          <Item Value="ImageFile"/>
+          <Item Value="UrlPath"/>
+          <Item Value="Comment"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="DocumentFile"/>
+          <Item Value="ImageName"/>
+          <Item Value="ImagePath"/>
+          <Item Value="CreatedByAttr"/>
+          <Item Value="LastUpdatedByAttr"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XwrlAlertDocumentsView1Iterator" id="Delete"
+            InstanceName="AppModuleDataControl.XwrlAlertDocumentsView1" DataControl="AppModuleDataControl"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Commit" DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" DataControl="AppModuleDataControl" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="RequestId">
+      <AttrNames>
+        <Item Value="RequestId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="AlertId">
+      <AttrNames>
+        <Item Value="AlertId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="EdocId">
+      <AttrNames>
+        <Item Value="EdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="DocumentName">
+      <AttrNames>
+        <Item Value="DocumentName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="DocumentCategory">
+      <AttrNames>
+        <Item Value="DocumentCategory"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="DocumentType">
+      <AttrNames>
+        <Item Value="DocumentType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="FileName">
+      <AttrNames>
+        <Item Value="FileName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="FilePath">
+      <AttrNames>
+        <Item Value="FilePath"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="ContentType">
+      <AttrNames>
+        <Item Value="ContentType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="UrlPath">
+      <AttrNames>
+        <Item Value="UrlPath"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="Comment">
+      <AttrNames>
+        <Item Value="Comment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="LastUpdateDate">
+      <AttrNames>
+        <Item Value="LastUpdateDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="LastUpdatedBy">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="CreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="LastUpdateLogin">
+      <AttrNames>
+        <Item Value="LastUpdateLogin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlAlertDocumentsView1Iterator" id="ImageFile">
+      <AttrNames>
+        <Item Value="ImageFile"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="XwrlAlertDocumentsView1Iterator" id="Execute" RequiresUpdateModel="true"
+            Action="iteratorExecute"/>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="CaseId">
+      <AttrNames>
+        <Item Value="CaseId"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

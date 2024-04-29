@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document id="d1" title="Document Upload">
+        <af:messages id="m1"/>
+        <script>
+          $(document).ready(function(){
+                 $('#app').load("/GenericTC/resources/html/Upload.html");
+              });
+        </script>
+        <af:form id="f1" usesUpload="true">
+            <af:panelHeader text="#{requestScope.panelHeader}" id="ph1">
+                <f:facet name="context">
+                    <af:outputText value="#{requestScope.displayKey}" id="ot2"/>
+                </f:facet>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar">
+                    <af:toolbar id="t1">
+                        <af:button text="Return" id="b2" action="return"
+                                   actionListener="#{backingBeanScope.UploadBacking.uploadReturnActionListener}"/>
+                    </af:toolbar>
+                </f:facet>
+                <f:facet name="legend">
+                    <af:inputText label="pageFlowId" id="it1" value="#{requestScope.pageFlowId}" visible="false"/>
+                </f:facet>
+                <f:facet name="info"></f:facet>
+                <af:panelGridLayout id="pgl1">
+                    <af:gridRow marginTop="5px" marginBottom="5px" id="gr1" height="500px">
+                        <af:gridCell marginStart="5px" width="800px" marginEnd="5px" id="gc1">
+                            <div id="container" style="width:800px">
+                                <div id="app"> </div>
+                                <script>
+                                  const pageFlowId = document.getElementById("it1::content").value;
+                                  console.log("pageFlowId: " + pageFlowId);
+                                 
+                                </script>
+                            </div>
+                        </af:gridCell>
+                    </af:gridRow>
+                </af:panelGridLayout>
+            </af:panelHeader>
+        </af:form>
+        <f:facet name="metaContainer">
+          <af:resource type="css"
+                         source="/resources/css/iriDropzone.css?id=#{backingBeanScope.RequestBacking.randomVal}"/>            
+            <af:resource type="javascript" source="/resources/library/dropzone-5.5.0/dist/min/dropzone.min.js"/>
+              <af:resource type="javascript"
+                         source="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"/>          </f:facet>
+    </af:document>
+</f:view>

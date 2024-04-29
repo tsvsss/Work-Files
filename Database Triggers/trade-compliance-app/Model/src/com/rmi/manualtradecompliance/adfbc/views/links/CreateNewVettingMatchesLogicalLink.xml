@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CreateNewVettingMatchesLogicalLink"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.manualtradecompliance.adfbc.views.links.CreateNewVettingMatchesLogicalLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="ParentWcScreenReqIdCreateVettingMatchesRO"
+    Cardinality="1"
+    Source="true"
+    Owner="com.rmi.manualtradecompliance.adfbc.views.CreateVettingMatchesView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="ParentWcScreenReqIdCreateVettingMatchesRO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rmi.manualtradecompliance.adfbc.views.CreateVettingMatchesView.WcScreenReqId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="WcScreenReqIdCreateVettingMatchesRO"
+    Cardinality="-1"
+    Owner="com.rmi.manualtradecompliance.adfbc.views.CreateVettingMatchesView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="WcScreenReqIdCreateVettingMatchesRO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rmi.manualtradecompliance.adfbc.views.CreateVettingMatchesView.ParentWcScreenReqId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.manualtradecompliance.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

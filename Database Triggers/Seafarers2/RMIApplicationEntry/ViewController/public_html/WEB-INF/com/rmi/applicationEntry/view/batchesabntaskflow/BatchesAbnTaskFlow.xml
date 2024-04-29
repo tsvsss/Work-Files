@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="taskflow_batches_ABN">
+    <default-activity>onLoadBatchPendingAbn</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__2">
+      <name>param_user_id</name>
+      <value>#{sessionScope.param_user_id}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>BatchesPendingAbnBean</managed-bean-name>
+      <managed-bean-class>com.rmi.applicationEntry.view.batchesabntaskflow.BatchesPendingAbnBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="BatchesPendingABN">
+      <page>/WEB-INF/com/rmi/applicationEntry/view/batchesabntaskflow/BatchesPendingABN.jsff</page>
+    </view>
+    <method-call id="onLoadBatchPendingAbn">
+      <method>#{bindings.onLoadBatchPendingAbn.execute}</method>
+      <outcome>
+        <fixed-outcome>onLoadBatchPendingAbn</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="BatchesPendingAssignBook">
+      <page>/WEB-INF/com/rmi/applicationEntry/view/batchesabntaskflow/BatchesPendingAssignBook.jsff</page>
+    </view>
+    <control-flow-rule id="__3">
+      <from-activity-id>onLoadBatchPendingAbn</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>onLoadBatchPendingAbn</from-outcome>
+        <to-activity-id>BatchesPendingAssignBook</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

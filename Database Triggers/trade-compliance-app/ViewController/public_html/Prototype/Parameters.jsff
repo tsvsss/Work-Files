@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:af="http://xmlns.oracle.com/adf/faces/rich" 
+                xmlns:f="http://java.sun.com/jsf/core">
+  
+  <af:panelSplitter id="schprm" splitterPosition="350" dimensionsFrom="parent" collapsed="true">
+    <f:facet name="first">
+      <af:panelBox text="Search" id="pb2"  showHeader="never">
+        <f:facet name="toolbar">
+        </f:facet>
+        
+            <af:query id="qryId1" headerText="Search" disclosed="true"    saveQueryMode="hidden"
+                     binding="#{backingBeanScope.Parameters.qry}"
+                      value="#{bindings.XwrlParametersViewCriteriaQuery.queryDescriptor}"
+                      model="#{bindings.XwrlParametersViewCriteriaQuery.queryModel}"
+                      queryListener="#{bindings.XwrlParametersViewCriteriaQuery.processQuery}"
+                      queryOperationListener="#{bindings.XwrlParametersViewCriteriaQuery.processQueryOperation}"
+                      resultComponentId="::pc1:t1"/>
+      
+      </af:panelBox>
+    </f:facet>
+    <f:facet name="second">
+      <af:panelBox text="PanelBox1" id="pb1" type="stretch" showHeader="never">
+     
+        <f:facet name="toolbar">
+        </f:facet>
+        
+        <af:panelCollection id="pc1" featuresOff="detach" >
+          <f:facet name="menus">
+            <af:menu text="Options" id="m1">
+              <af:commandMenuItem text="Export to Excel" id="cmi1">
+                <af:exportCollectionActionListener type="excelHTML"  exportedId="t1"  filename="Parameters.xls" title="OWS Parameters"/>
+              </af:commandMenuItem>
+              <af:commandMenuItem text="Printable Page" id="cmi2">
+                <af:showPrintablePageBehavior/>
+              </af:commandMenuItem>
+            </af:menu>
+          </f:facet>
+          
+         
+           <f:facet name="toolbar">
+           
+            <af:toolbar id="t12">
+            <af:button text="Search" id="srch"   action="#{backingBeanScope.Parameters.search}"/>
+             <af:button text="Reset" id="reset"  action="#{backingBeanScope.Parameters.reset}"/>
+            </af:toolbar>
+          
+          <af:toolbar id="t21">
+              <af:button text="Add" id="add" action="AddEdit"
+               returnListener="#{backingBeanScope.Parameters.paramReturnListener}"
+                   useWindow="true" windowHeight="500" windowWidth="700" >
+            <af:setActionListener to="#{requestScope.paramId}" from="#{'Add'}"/>
+        </af:button>
+        <af:button text="Edit" id="edit" action="AddEdit"
+        returnListener="#{backingBeanScope.Parameters.paramReturnListener}"
+                   useWindow="true" windowHeight="500" windowWidth="700">
+            <af:setActionListener to="#{requestScope.paramId}"
+                                  from="#{bindings.XwrlParametersView1Iterator.currentRowKeyString}"/>
+        </af:button>
+             
+             
+            </af:toolbar>
+        </f:facet>
+          <af:table value="#{bindings.XwrlParametersView11.collectionModel}" var="row"
+                    rows="#{bindings.XwrlParametersView11.rangeSize}"
+                    emptyText="#{bindings.XwrlParametersView11.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"   contentDelivery="lazy"
+                     binding="#{backingBeanScope.Parameters.table}"
+                    selectedRowKeys="#{bindings.XwrlParametersView11.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.XwrlParametersView11.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.XwrlParametersView11.rangeSize}" id="t1">
+            <af:column headerText="#{bindings.XwrlParametersView11.hints.Id.label}" id="c1"  width="150">
+              <af:inputText value="#{row.bindings.Id.inputValue}"   readOnly="true"
+                            label="#{bindings.XwrlParametersView11.hints.Id.label}"
+                            required="#{bindings.XwrlParametersView11.hints.Id.mandatory}"
+                            columns="#{bindings.XwrlParametersView11.hints.Id.displayWidth}"
+                            maximumLength="#{bindings.XwrlParametersView11.hints.Id.precision}"
+                            shortDesc="#{bindings.XwrlParametersView11.hints.Id.tooltip}" id="it1">
+                <f:validator binding="#{row.bindings.Id.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="#{bindings.XwrlParametersView11.hints.Key1.label}" id="c2"  width="200">
+              <af:inputText value="#{row.bindings.Key1.inputValue}" readOnly="true"
+                            label="#{bindings.XwrlParametersView11.hints.Key1.label}"
+                            required="#{bindings.XwrlParametersView11.hints.Key1.mandatory}"
+                            columns="#{bindings.XwrlParametersView11.hints.Key1.displayWidth}"
+                            maximumLength="#{bindings.XwrlParametersView11.hints.Key1.precision}"
+                            shortDesc="#{bindings.XwrlParametersView11.hints.Key1.tooltip}" id="it2">
+                <f:validator binding="#{row.bindings.Key1.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="#{bindings.XwrlParametersView11.hints.ValueString.label}" id="c3"     width="200">
+              <af:inputText value="#{row.bindings.ValueString.inputValue}"  readOnly="true"
+                            label="#{bindings.XwrlParametersView11.hints.ValueString.label}"
+                            required="#{bindings.XwrlParametersView11.hints.ValueString.mandatory}"
+                            columns="#{bindings.XwrlParametersView11.hints.ValueString.displayWidth}"
+                            maximumLength="#{bindings.XwrlParametersView11.hints.ValueString.precision}"
+                            shortDesc="#{bindings.XwrlParametersView11.hints.ValueString.tooltip}" id="it3">
+                <f:validator binding="#{row.bindings.ValueString.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="#{bindings.XwrlParametersView11.hints.Valxml.label}" id="c5">
+              <af:inputText value="#{row.bindings.Valxml.inputValue}"  converter="clobConverter"
+                            label="#{bindings.XwrlParametersView11.hints.Valxml.label}"
+                            required="#{bindings.XwrlParametersView11.hints.Valxml.mandatory}"
+                            columns="#{bindings.XwrlParametersView11.hints.Valxml.displayWidth}"
+                            maximumLength="#{bindings.XwrlParametersView11.hints.Valxml.precision}"
+                            shortDesc="#{bindings.XwrlParametersView11.hints.Valxml.tooltip}" id="it4">
+                <f:validator binding="#{row.bindings.Valxml.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="#{bindings.XwrlParametersView11.hints.ValueDate.label}" id="c4"   width="200">
+              <af:inputDate value="#{row.bindings.ValueDate.inputValue}"    readOnly="true"
+                            label="#{bindings.XwrlParametersView11.hints.ValueDate.label}"
+                            required="#{bindings.XwrlParametersView11.hints.ValueDate.mandatory}"
+                            columns="20"
+                            shortDesc="#{bindings.XwrlParametersView11.hints.ValueDate.tooltip}" id="id1">
+                <f:validator binding="#{row.bindings.ValueDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.XwrlParametersView11.hints.ValueDate.format}"/>
+              </af:inputDate>
+            </af:column>
+           
+            <af:column headerText="#{bindings.XwrlParametersView11.hints.ValueClob.label}" id="c6"   width="200">
+              <af:inputText value="#{row.bindings.ValueClob.inputValue}"     converter="clobConverter"
+                            label="#{bindings.XwrlParametersView11.hints.ValueClob.label}"  readOnly="true"
+                            required="#{bindings.XwrlParametersView11.hints.ValueClob.mandatory}"
+                            columns="#{bindings.XwrlParametersView11.hints.ValueClob.displayWidth}"
+                            maximumLength="#{bindings.XwrlParametersView11.hints.ValueClob.precision}"
+                            shortDesc="#{bindings.XwrlParametersView11.hints.ValueClob.tooltip}" id="it5">
+                            <f:validator binding="#{row.bindings.ValueClob.validator}"/> 
+              </af:inputText>
+            </af:column>
+            <af:column headerText="#{bindings.XwrlParametersView11.hints.LastUpdateDate.label}" id="c7" rendered="false">
+              <af:inputDate value="#{row.bindings.LastUpdateDate.inputValue}"   readOnly="true"
+                            label="#{bindings.XwrlParametersView11.hints.LastUpdateDate.label}"
+                            required="#{bindings.XwrlParametersView11.hints.LastUpdateDate.mandatory}"
+                            columns="#{bindings.XwrlParametersView11.hints.LastUpdateDate.displayWidth}"
+                            shortDesc="#{bindings.XwrlParametersView11.hints.LastUpdateDate.tooltip}" id="id2">
+                <f:validator binding="#{row.bindings.LastUpdateDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.XwrlParametersView11.hints.LastUpdateDate.format}"/>
+              </af:inputDate>
+            </af:column>
+            <af:column headerText="#{bindings.XwrlParametersView11.hints.LastUpdatedBy.label}" id="c8"  rendered="false">
+              <af:inputText value="#{row.bindings.LastUpdatedBy.inputValue}"    readOnly="true"
+                            label="#{bindings.XwrlParametersView11.hints.LastUpdatedBy.label}"
+                            required="#{bindings.XwrlParametersView11.hints.LastUpdatedBy.mandatory}"
+                            columns="#{bindings.XwrlParametersView11.hints.LastUpdatedBy.displayWidth}"
+                            maximumLength="#{bindings.XwrlParametersView11.hints.LastUpdatedBy.precision}"
+                            shortDesc="#{bindings.XwrlParametersView11.hints.LastUpdatedBy.tooltip}" id="it6">
+                <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.XwrlParametersView11.hints.LastUpdatedBy.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="#{bindings.XwrlParametersView11.hints.CreationDate.label}" id="c9"   rendered="false">
+              <af:inputDate value="#{row.bindings.CreationDate.inputValue}" readOnly="true"
+                            label="#{bindings.XwrlParametersView11.hints.CreationDate.label}"
+                            required="#{bindings.XwrlParametersView11.hints.CreationDate.mandatory}"
+                            columns="#{bindings.XwrlParametersView11.hints.CreationDate.displayWidth}"
+                            shortDesc="#{bindings.XwrlParametersView11.hints.CreationDate.tooltip}" id="id3">
+                <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.XwrlParametersView11.hints.CreationDate.format}"/>
+              </af:inputDate>
+            </af:column>
+            <af:column headerText="#{bindings.XwrlParametersView11.hints.CreatedBy.label}" id="c10" rendered="false">
+              <af:inputText value="#{row.bindings.CreatedBy.inputValue}"    readOnly="true"
+                            label="#{bindings.XwrlParametersView11.hints.CreatedBy.label}"
+                            required="#{bindings.XwrlParametersView11.hints.CreatedBy.mandatory}"
+                            columns="#{bindings.XwrlParametersView11.hints.CreatedBy.displayWidth}"
+                            maximumLength="#{bindings.XwrlParametersView11.hints.CreatedBy.precision}"
+                            shortDesc="#{bindings.XwrlParametersView11.hints.CreatedBy.tooltip}" id="it7">
+                <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.XwrlParametersView11.hints.CreatedBy.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="#{bindings.XwrlParametersView11.hints.LastUpdateLogin.label}" id="c11"  rendered="false">
+              <af:inputText value="#{row.bindings.LastUpdateLogin.inputValue}"  readOnly="true"
+                            label="#{bindings.XwrlParametersView11.hints.LastUpdateLogin.label}"
+                            required="#{bindings.XwrlParametersView11.hints.LastUpdateLogin.mandatory}"
+                            columns="#{bindings.XwrlParametersView11.hints.LastUpdateLogin.displayWidth}"
+                            maximumLength="#{bindings.XwrlParametersView11.hints.LastUpdateLogin.precision}"
+                            shortDesc="#{bindings.XwrlParametersView11.hints.LastUpdateLogin.tooltip}" id="it8">
+                <f:validator binding="#{row.bindings.LastUpdateLogin.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.XwrlParametersView11.hints.LastUpdateLogin.format}"/>
+              </af:inputText>
+            </af:column>
+          </af:table>
+          <f:facet name="statusbar"/>
+         
+        </af:panelCollection>
+      </af:panelBox>
+    </f:facet>
+  </af:panelSplitter>
+</ui:composition>

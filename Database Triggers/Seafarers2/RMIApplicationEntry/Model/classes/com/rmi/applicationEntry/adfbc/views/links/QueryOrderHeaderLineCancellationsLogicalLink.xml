@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="QueryOrderHeaderLineCancellationsLogicalLink"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.links.QueryOrderHeaderLineCancellationsLogicalLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="QueryOrderHeaderView"
+    Cardinality="1"
+    Source="true"
+    Owner="com.rmi.applicationEntry.adfbc.views.readOnlyVO.QueryOrderHeaderView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="QueryOrderHeaderView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rmi.applicationEntry.adfbc.views.readOnlyVO.QueryOrderHeaderView.HeaderId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="QueryOrderLineCancellationsView"
+    Cardinality="-1"
+    Owner="com.rmi.applicationEntry.adfbc.views.readOnlyVO.QueryOrderLineCancellationsView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="QueryOrderLineCancellationsView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rmi.applicationEntry.adfbc.views.readOnlyVO.QueryOrderLineCancellationsView.HeaderId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

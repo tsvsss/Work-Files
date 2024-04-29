@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="UploadDocumentTaskFlow">
+    <default-activity>UploadType</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__6">
+      <managed-bean-name>InitialiseUploadDocument</managed-bean-name>
+      <managed-bean-class>oracle.apps.xwrl.beans.backing.InitialiseUploadDocument</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+     <managed-bean id="__37">
+      <managed-bean-name>UploadModel</managed-bean-name>
+      <managed-bean-class>oracle.apps.xwrl.beans.upload.UploadModel</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__38">
+      <managed-bean-name>UploadActiveDataModel</managed-bean-name>
+      <managed-bean-class>oracle.apps.xwrl.beans.upload.UploadActiveDataModel</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__15">
+      <managed-bean-name>CaseDocumentsBean</managed-bean-name>
+      <managed-bean-class>oracle.apps.xwrl.beans.backing.CaseDocuments</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <initializer>#{backingBeanScope.InitialiseUploadDocument.onload}</initializer>
+    <router id="UploadType">
+      <case id="__4">
+        <expression>#{pageFlowScope.Type=='ENTITY'}</expression>
+        <outcome>Entity</outcome>
+      </case>
+      <case id="__5">
+        <expression>#{pageFlowScope.Type=='INDIVIDUAL'}</expression>
+        <outcome>Individual</outcome>
+      </case>
+      <default-outcome>Individual</default-outcome>
+    </router>
+    <view id="UploadEntityCaseDocument">
+      <page>/Prototype/UploadEntityCaseDocument.jsff</page>
+    </view>
+    <view id="UploadIndividualCaseDocument">
+      <page>/Prototype/UploadIndividualCaseDocument.jsff</page>
+    </view>
+    <method-call id="Execute">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome>
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Execute1">
+      <method>#{bindings.Execute.execute}</method>
+      <outcome>
+        <fixed-outcome>Execute</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="Upload-task-flow-definition">
+      <task-flow-reference>
+        <document>/WEB-INF/Upload-task-flow-definition.xml</document>
+        <id>Upload-task-flow-definition</id>
+      </task-flow-reference>
+       <input-parameter id="__49">
+        <name>paramPanelHeader</name>
+        <value>#{pageFlowScope.paneHeader}</value>
+      </input-parameter>
+      <input-parameter id="__50">
+        <name>paramDisplayKey</name>
+        <value>#{pageFlowScope.displayKey}</value>
+      </input-parameter>
+      <input-parameter id="__55">
+        <name>pageFlowId</name>
+        <value>#{pageFlowScope.pageFlowId}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>UploadType</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>Individual</from-outcome>
+        <to-activity-id>Execute</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__10">
+        <from-outcome>Entity</from-outcome>
+        <to-activity-id>Execute1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__8">
+      <from-activity-id>Execute</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome>Execute</from-outcome>
+        <to-activity-id>UploadIndividualCaseDocument</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__11">
+      <from-activity-id>Execute1</from-activity-id>
+      <control-flow-case id="__12">
+        <from-outcome>Execute</from-outcome>
+        <to-activity-id>UploadEntityCaseDocument</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__2">
+      <from-activity-id>UploadEntityCaseDocument</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>UploadEnt</from-outcome>
+        <to-activity-id>Upload-task-flow-definition</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id>UploadIndividualCaseDocument</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>UploadInd</from-outcome>
+        <to-activity-id>Upload-task-flow-definition</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

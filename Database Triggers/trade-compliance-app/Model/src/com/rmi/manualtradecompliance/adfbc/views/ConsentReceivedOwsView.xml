@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ConsentReceivedOwsView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  FetchMode="FETCH_AS_NEEDED"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.manualtradecompliance.adfbc.views.ConsentReceivedOwsView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pSeafarerId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pMasterId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pAliasId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pXrefId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pXwrlRequestId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pNameScreened"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pSourceTable"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      trustMode="untrusted"
+      Name="expression"><![CDATA[adf.context.pageFlowScope.P_SOURCE_TABLE]]></TransientExpression>
+  </Variable>
+  <SQLQuery><![CDATA[select RMI_GENERIC_TC.consent_available(:pSourceTable,:pSeafarerId,             
+	:pMasterId,:pAliasId, :pXrefId, :pXwrlRequestId , :pNameScreened) consent_received   
+  from dual]]></SQLQuery>
+  <ViewAttribute
+    Name="ConsentReceived"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONSENT_RECEIVED"
+    Expression="CONSENT_RECEIVED"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.manualtradecompliance.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

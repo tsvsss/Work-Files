@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="WcScreeningRequestView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  RowClass="com.rmi.manualtradecompliance.adfbc.views.WcScreeningRequestViewRowImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="pWcScreeningBV"
+    Kind="where"
+    Type="java.lang.Integer">
+    <TransientExpression
+      trustMode="untrusted"
+      Name="expression"><![CDATA[adf.context.sessionScope.wcScreeningRequestId]]></TransientExpression>
+  </Variable>
+  <ViewAccessor
+    Name="YesNoLov1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovYesNoView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="StatusLOV1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovStatusView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="FndUsers1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.FndUsersView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="LovCountriesVO1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovCountriesView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="LovIdTypeVO1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovIdTypeView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="LovCityNameVO1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovCityNameView"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pCountryCode">
+        <TransientExpression
+          trustMode="untrusted"><![CDATA[ResidenceCountryCode]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="LovIsOfacEntityOnListView1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovIsOfacEntityOnListView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="LovYesNoView1"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovYesNoView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_OfacListIsEntyOnList"
+    ListVOName="LovIsOfacEntityOnListView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="OfacListIsEntyOnList"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Displayvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_RequiresLegalApproval"
+    ListVOName="YesNoLov1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="RequiresLegalApproval"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Displayvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Status"
+    ListVOName="StatusLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Status"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Status"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Status"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransResidenceCntry"
+    ListVOName="LovCountriesVO1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransResidenceCntry"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ResidenceCountryCode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CountryName"/>
+      <Item Value="CountryCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CountryName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="LovCountriesVOCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransIdIssuingCntry"
+    ListVOName="LovCountriesVO1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransIdIssuingCntry"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="PassportIssuingCountryCode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CountryName"/>
+      <Item Value="CountryCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CountryName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="LovCountriesVOCriteria"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TypeId"
+    ListVOName="LovIdTypeVO1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TypeId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="TypeCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="TypeDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransCityName"
+    ListVOName="LovCityNameVO1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransCityName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="CityName"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CityName"/>
+      <Item Value="CityName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CityName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_NotifyUserUponApproval"
+    ListVOName="LovYesNoView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="NotifyUserUponApproval"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Displayvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT WcScreeningRequestEO.WC_SCREENING_REQUEST_ID,        
+       WcScreeningRequestEO.STATUS,        
+       WcScreeningRequestEO.NAME_SCREENED,        
+       WcScreeningRequestEO.DATE_OF_BIRTH,        
+       WcScreeningRequestEO.SEX,        
+       WcScreeningRequestEO.NAME_IDENTIFIER,        
+       WcScreeningRequestEO.PASSPORT_NUMBER,        
+       WcScreeningRequestEO.XML_RESPONSE,        
+       WcScreeningRequestEO.ENTITY_TYPE,        
+       WcScreeningRequestEO.PASSPORT_ISSUING_COUNTRY_CODE,        
+       WcScreeningRequestEO.STATUS_UPDATED_BY,        
+       WcScreeningRequestEO.STATUS_DATE,        
+       WcScreeningRequestEO.NOTES,        
+       WcScreeningRequestEO.OFAC_LIST_EDOC_ID,        
+       WcScreeningRequestEO.CREATED_BY,        
+       WcScreeningRequestEO.CREATION_DATE,        
+       WcScreeningRequestEO.LAST_UPDATED_BY,        
+       WcScreeningRequestEO.LAST_UPDATE_DATE,        
+       WcScreeningRequestEO.LAST_UPDATE_LOGIN,        
+       WcScreeningRequestEO.OFAC_LIST_IS_ENTY_ON_LIST,        
+       WcScreeningRequestEO.CORP_RESIDENCE_COUNTRY_CODE,        
+       WcScreeningRequestEO.CITIZENSHIP_COUNTRY_CODE,        
+       WcScreeningRequestEO.ALIAS_WC_SCREENING_REQUEST_ID,        
+       WcScreeningRequestEO.SENT_TO_LEGAL_DATE,        
+       WcScreeningRequestEO.RESIDENCE_COUNTRY_CODE,        
+       WcScreeningRequestEO.NOTIFY_USER_UPON_APPROVAL,        
+       WcScreeningRequestEO.CITY_NAME,        
+       WcScreeningRequestEO.WC_CITY_LIST_ID,        
+       WcScreeningRequestEO.TYPE_ID,        
+       WcScreeningRequestEO.IMO_NUMBER,        
+       WcScreeningRequestEO.SENT_TO_LEGAL_BY,        
+       WcScreeningRequestEO.REQUIRES_LEGAL_APPROVAL  ,     
+     NVL ( ( Select user_name from RMI_SEAFARER.RMI_USER where user_id= WcScreeningRequestEO.STATUS_UPDATED_BY),   
+     (Select user_name from fnd_user where user_id= WcScreeningRequestEO.STATUS_UPDATED_BY)) StatusUpdatedByName   
+       
+FROM  WC_SCREENING_REQUEST WcScreeningRequestEO where WcScreeningRequestEO.WC_SCREENING_REQUEST_ID=:pWcScreeningBV]]></SQLQuery>
+  <EntityUsage
+    Name="WcScreeningRequestEO"
+    Entity="com.rmi.manualtradecompliance.adfbc.entities.WcScreeningRequest"/>
+  <ViewAttribute
+    Name="WcScreeningRequestId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="WcScreeningRequestId"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="WC_SCREENING_REQUEST_ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Status"
+    PrecisionRule="true"
+    EntityAttrName="Status"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="STATUS"
+    LOVName="LOV_Status">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NameScreened"
+    PrecisionRule="true"
+    EntityAttrName="NameScreened"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="NAME_SCREENED">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DateOfBirth"
+    PrecisionRule="true"
+    EntityAttrName="DateOfBirth"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="DATE_OF_BIRTH"/>
+  <ViewAttribute
+    Name="Sex"
+    PrecisionRule="true"
+    EntityAttrName="Sex"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="SEX"/>
+  <ViewAttribute
+    Name="NameIdentifier"
+    PrecisionRule="true"
+    EntityAttrName="NameIdentifier"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="NAME_IDENTIFIER">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PassportNumber"
+    PrecisionRule="true"
+    EntityAttrName="PassportNumber"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="PASSPORT_NUMBER"/>
+  <ViewAttribute
+    Name="XmlResponse"
+    PrecisionRule="true"
+    EntityAttrName="XmlResponse"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="XML_RESPONSE"/>
+  <ViewAttribute
+    Name="EntityType"
+    PrecisionRule="true"
+    EntityAttrName="EntityType"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="ENTITY_TYPE"/>
+  <ViewAttribute
+    Name="PassportIssuingCountryCode"
+    PrecisionRule="true"
+    EntityAttrName="PassportIssuingCountryCode"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="PASSPORT_ISSUING_COUNTRY_CODE"/>
+  <ViewAttribute
+    Name="StatusUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="StatusUpdatedBy"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="STATUS_UPDATED_BY"/>
+  <ViewAttribute
+    Name="StatusDate"
+    PrecisionRule="true"
+    EntityAttrName="StatusDate"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="STATUS_DATE"/>
+  <ViewAttribute
+    Name="Notes"
+    PrecisionRule="true"
+    EntityAttrName="Notes"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="NOTES">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OfacListEdocId"
+    PrecisionRule="true"
+    EntityAttrName="OfacListEdocId"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="OFAC_LIST_EDOC_ID"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="CREATION_DATE"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="LAST_UPDATE_DATE"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateLogin"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="LAST_UPDATE_LOGIN"/>
+  <ViewAttribute
+    Name="OfacListIsEntyOnList"
+    PrecisionRule="true"
+    EntityAttrName="OfacListIsEntyOnList"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="OFAC_LIST_IS_ENTY_ON_LIST"
+    LOVName="LOV_OfacListIsEntyOnList">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CorpResidenceCountryCode"
+    PrecisionRule="true"
+    EntityAttrName="CorpResidenceCountryCode"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="CORP_RESIDENCE_COUNTRY_CODE"/>
+  <ViewAttribute
+    Name="CitizenshipCountryCode"
+    PrecisionRule="true"
+    EntityAttrName="CitizenshipCountryCode"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="CITIZENSHIP_COUNTRY_CODE"/>
+  <ViewAttribute
+    Name="AliasWcScreeningRequestId"
+    PrecisionRule="true"
+    EntityAttrName="AliasWcScreeningRequestId"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="ALIAS_WC_SCREENING_REQUEST_ID"/>
+  <ViewAttribute
+    Name="SentToLegalDate"
+    PrecisionRule="true"
+    EntityAttrName="SentToLegalDate"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="SENT_TO_LEGAL_DATE"/>
+  <ViewAttribute
+    Name="ResidenceCountryCode"
+    PrecisionRule="true"
+    EntityAttrName="ResidenceCountryCode"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="RESIDENCE_COUNTRY_CODE"/>
+  <ViewAttribute
+    Name="NotifyUserUponApproval"
+    PrecisionRule="true"
+    EntityAttrName="NotifyUserUponApproval"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="NOTIFY_USER_UPON_APPROVAL"
+    LOVName="LOV_NotifyUserUponApproval">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CityName"
+    PrecisionRule="true"
+    EntityAttrName="CityName"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="CITY_NAME">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="WcCityListId"
+    PrecisionRule="true"
+    EntityAttrName="WcCityListId"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="WC_CITY_LIST_ID"/>
+  <ViewAttribute
+    Name="TypeId"
+    PrecisionRule="true"
+    EntityAttrName="TypeId"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="TYPE_ID"
+    LOVName="LOV_TypeId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ImoNumber"
+    PrecisionRule="true"
+    EntityAttrName="ImoNumber"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="IMO_NUMBER"/>
+  <ViewAttribute
+    Name="SentToLegalBy"
+    PrecisionRule="true"
+    EntityAttrName="SentToLegalBy"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="SENT_TO_LEGAL_BY"/>
+  <ViewAttribute
+    Name="RequiresLegalApproval"
+    PrecisionRule="true"
+    EntityAttrName="RequiresLegalApproval"
+    EntityUsage="WcScreeningRequestEO"
+    AliasName="REQUIRES_LEGAL_APPROVAL"
+    LOVName="LOV_RequiresLegalApproval">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="StatusUpdatedByName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="StatusUpdatedByName"
+    SQLType="VARCHAR"
+    Expression="StatusUpdatedByName"/>
+  <ViewAttribute
+    Name="TransResidenceCntry"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransResidenceCntry">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransIdIssuingCntry"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransIdIssuingCntry">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransPermanentAddres"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2550"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransCityName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransCityName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransOnlineConsentStartDate"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="VIEW_ATTR"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="TransOnlineConsentEndDate"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="VIEW_ATTR"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="TransUploadedConsentStartDate"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="VIEW_ATTR"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="TransUploadedConsentEndDate"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="VIEW_ATTR"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="TransUploadedConsentEdocId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TransOnlineConfirmationNumber"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewLinkAccessor
+    Name="WcRequestDocumentsVO"
+    ViewLink="com.rmi.manualtradecompliance.adfbc.views.links.WcScreeningRequestToDocumentsLogicalLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+</ViewObject>

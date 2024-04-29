@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <af:image source="/#{sessionScope.pFacesServlet}/showimageservlet?fileName=#{'C:/temp/PROD/trade_doc/2019/OWS-201906-131605-ABC7A5-IND/TradeDocument_1275_1000_eml_1.png'}"
+            id="i1"/>
+</ui:composition>

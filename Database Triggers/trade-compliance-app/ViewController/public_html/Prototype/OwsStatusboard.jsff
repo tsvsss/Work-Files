@@ -1,0 +1,960 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelHeader text="Statusboard" id="ph1">
+        <f:facet name="context"/>
+        <f:facet name="menuBar"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="legend"/>
+        <f:facet name="info"/>
+        <af:panelSplitter id="sch" splitterPosition="340" styleClass="CustomizedBorderSplitter">
+            <f:facet name="first">
+                <af:panelHeader text="Search" id="ph2">
+                <!-- T20200730.0025 - Re: Statusboards (IRI) -->
+                    <f:facet name="toolbar">
+                        <af:selectOneChoice label="Saved Search" id="soc23" autoSubmit="true"
+                                            value="#{viewScope.StatusboardBean.savedSearch}"
+                                            valueChangeListener="#{viewScope.StatusboardBean.savedSearchValueChangeListener}"
+                                            contentStyle="width: 100px;font-weight: bold;border-color: #C74200;background: #F25D13;color: white;" simple="true" shortDesc="Saved Search">
+                            <af:selectItem label="Default" value="Default" id="si23"/>
+                            <af:selectItem label="TC a.m" value="TC a.m" id="si24"/>
+                            <af:selectItem label="ESR" value="ESR" id="si32"/>
+                            <af:selectItem label="TC 3P" value="TC 3P" id="si33"/>
+                            <af:selectItem label="Trade" value="Trade" id="si34"/>
+                            <!-- T20210302.0032	RE: OWS - Statusboard - NRMI  -->
+                            <af:selectItem label="NRMI" value="NRMI" id="si35"/>
+                        </af:selectOneChoice>
+                    </f:facet>
+                    <af:query id="qryId1" headerText="Search" disclosed="true"
+                              value="#{bindings.StatusboardCriteriaQuery.queryDescriptor}"
+                              model="#{bindings.StatusboardCriteriaQuery.queryModel}"
+                              queryListener="#{backingBeanScope.OwsStatusboard.processQuery}"
+                              queryOperationListener="#{backingBeanScope.OwsStatusboard.resetSearch}"
+                              resultComponentId="::pc1:t1" saveQueryMode="hidden" displayMode="compact"
+                              modeChangeVisible="false"
+                              visible="#{viewScope.StatusboardBean.savedSearch eq 'Default'}"
+                              partialTriggers="::soc23" styleClass="CustomQueryPanel"/>
+                    <af:spacer width="10" height="10" id="s3"/>
+                    <!-- T20200730.0025 - Re: Statusboards (IRI) -->
+                    <af:panelGroupLayout id="pgl2" layout="vertical"
+                                         visible="#{viewScope.StatusboardBean.savedSearch ne 'Default'}"
+                                         partialTriggers="soc23 b6">
+                        <af:panelFormLayout id="pfl1">
+                            <af:selectManyChoice label="State" id="smc1" labelStyle="text-align:left;"
+                                                 contentStyle="width:200px;" autoSubmit="true"
+                                                 value="#{viewScope.StatusboardBean.stateList}">
+                                <f:selectItems value="#{bindings.CaseStateLOV1.items}" id="si25"/>
+                                <f:validator binding="#{bindings.CaseStateLOV1.validator}"/>
+                            </af:selectManyChoice>
+                            <f:facet name="footer">
+                                <af:panelGroupLayout id="pgl3" layout="vertical" halign="center">
+                                    <af:spacer width="10" height="10" id="s4"/>
+                                    <af:panelGroupLayout id="pgl4" layout="horizontal">
+                                        <af:button text="Search" id="b5"
+                                                   actionListener="#{viewScope.StatusboardBean.doSearch}"/>
+                                        <af:spacer width="10" height="10" id="s2"/>
+                                        <af:button text="Reset" id="b6"
+                                                   actionListener="#{viewScope.StatusboardBean.doReset}"/>
+                                    </af:panelGroupLayout>
+                                </af:panelGroupLayout>
+                            </f:facet>
+                            <af:selectManyChoice label="Workflow" id="smc2" labelStyle="text-align:left;"
+                                                 contentStyle="width:200px;" autoSubmit="true"
+                                                 value="#{viewScope.StatusboardBean.workflowList}">
+                                <f:selectItems value="#{bindings.CaseWorkflowLOV1.items}" id="si26"/>
+                                <f:validator binding="#{bindings.CaseWorkflowLOV1.validator}"/>
+                            </af:selectManyChoice>
+                            <af:selectOneChoice value="#{viewScope.StatusboardBean.statusValue}"
+                                                label="Status"
+                                                required="#{bindings.CaseStatusLOV1.hints.mandatory}"
+                                                shortDesc="#{bindings.CaseStatusLOV1.hints.tooltip}" id="soc24"
+                                                labelStyle="text-align:left;" contentStyle="width:221px;">
+                                <af:selectItem label="" value="" id="si111"/>
+                                <f:selectItems value="#{bindings.CaseStatusLOV1.items}" id="si27"/>
+                                <f:validator binding="#{bindings.CaseStatusLOV1.validator}"/>
+                            </af:selectOneChoice>
+                            <!-- T20200917.0025 - OWS - ESR Search (IRI) -->
+                            <af:selectOneChoice
+                                                label="Case Type"
+                                                required="#{bindings.CaseTypeLOV1.hints.mandatory}"
+                                                shortDesc="#{bindings.CaseTypeLOV1.hints.tooltip}" id="soc25"
+                                                labelStyle="text-align:left;" contentStyle="width:221px;" autoSubmit="true"
+                                                value="#{viewScope.StatusboardBean.caseTypeValue}">
+                                <af:selectItem label="" value="" id="si35"/>
+                                <f:selectItems value="#{bindings.CaseTypeLOV1.items}" id="si34"/>
+                                <f:validator binding="#{bindings.CaseTypeLOV1.validator}"/>
+                            </af:selectOneChoice>
+                            <af:selectManyChoice label="Priority" id="smc3" labelStyle="text-align:left;"
+                                                 contentStyle="width:200px;" autoSubmit="true"
+                                                 value="#{viewScope.StatusboardBean.priorityList}">
+                                <f:selectItems value="#{bindings.PriorityLOV1.items}" id="si28"/>
+                                <f:validator binding="#{bindings.PriorityLOV1.validator}"/>
+                            </af:selectManyChoice>
+                            <af:selectManyChoice label="Department" id="smc4" labelStyle="text-align:left;"
+                                                 contentStyle="width:200px;" autoSubmit="true"
+                                                 value="#{viewScope.StatusboardBean.departmentList}">
+                                <f:selectItems value="#{bindings.CaseDepartmentsLOV1.items}" id="si29"/>
+                                <f:validator binding="#{bindings.CaseDepartmentsLOV1.validator}"/>
+                            </af:selectManyChoice>
+                            <af:selectManyChoice label="Office" id="smc5" labelStyle="text-align:left;"
+                                                 contentStyle="width:200px;" autoSubmit="true"
+                                                 value="#{viewScope.StatusboardBean.officeList}">
+                                <f:selectItems value="#{bindings.OfficeLOV1.items}" id="si30"/>
+                                <f:validator binding="#{bindings.OfficeLOV1.validator}"/>
+                            </af:selectManyChoice>
+                            <af:selectManyChoice value="#{viewScope.StatusboardBean.docTypeList}"
+                                                 label="Doc Type" id="smc6" labelStyle="text-align:left;"
+                                                 contentStyle="width:200px;">
+                                <f:selectItems value="#{bindings.GetCaseDocumentsLOV1.items}" id="si31"/>
+                                <f:validator binding="#{bindings.GetCaseDocumentsLOV1.validator}"/>
+                            </af:selectManyChoice>
+                        </af:panelFormLayout>
+                    </af:panelGroupLayout>
+                </af:panelHeader>
+            </f:facet>
+            <f:facet name="second">
+                <af:panelHeader text="Requests" id="ph3">
+                    <f:facet name="context"/>
+                    <f:facet name="menuBar"/>
+                    <f:facet name="toolbar"/>
+                    <f:facet name="legend"/>
+                    <f:facet name="info"/>
+                    <af:panelCollection id="pc1" binding="#{backingBeanScope.OwsStatusboard.stbPc}"  
+                    styleClass="AFStretchWidth">
+                        <!--af:popup id="stbPopup" binding="#{backingBeanScope.OwsStatusboard.stbPopup}">
+                            <af:dialog type="none" closeIconVisible="true" id="stbPopupDialog"
+                                       title="Screening Request Information" inlineStyle="width:350px;height:350px;">
+                                <af:panelFormLayout id="pfl1">
+                                    <af:inputText value="#{bindings.WcScreeningRequestId.inputValue}"
+                                                  label="#{bindings.WcScreeningRequestId.hints.label}"
+                                                  required="#{bindings.WcScreeningRequestId.hints.mandatory}"
+                                                  readOnly="true"
+                                                  columns="#{bindings.WcScreeningRequestId.hints.displayWidth}"
+                                                  maximumLength="#{bindings.WcScreeningRequestId.hints.precision}"
+                                                  shortDesc="#{bindings.WcScreeningRequestId.hints.tooltip}" id="it28">
+                                        <f:validator binding="#{bindings.WcScreeningRequestId.validator}"/>
+                                        <af:convertNumber groupingUsed="false"
+                                                          pattern="#{bindings.WcScreeningRequestId.format}"/>
+                                    </af:inputText>
+                                    <af:spacer width="10" height="10" id="s1"/>
+                                    <af:inputText value="#{bindings.NameScreened.inputValue}"
+                                                  label="#{bindings.NameScreened.hints.label}"
+                                                  required="#{bindings.NameScreened.hints.mandatory}" readOnly="true"
+                                                  columns="#{bindings.NameScreened.hints.displayWidth}"
+                                                  maximumLength="#{bindings.NameScreened.hints.precision}"
+                                                  shortDesc="#{bindings.NameScreened.hints.tooltip}" id="it1">
+                                        <f:validator binding="#{bindings.NameScreened.validator}"/>
+                                    </af:inputText>
+                                    <af:spacer width="10" height="10" id="s2"/>
+                                    <af:inputDate value="#{bindings.SentToLegalDate.inputValue}" readOnly="true"
+                                                  label="#{bindings.SentToLegalDate.hints.label}"
+                                                  required="#{bindings.SentToLegalDate.hints.mandatory}"
+                                                  columns="#{bindings.SentToLegalDate.hints.displayWidth}"
+                                                  shortDesc="#{bindings.SentToLegalDate.hints.tooltip}" id="id1">
+                                        <f:validator binding="#{bindings.SentToLegalDate.validator}"/>
+                                        <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                                    </af:inputDate>
+                                    <af:spacer width="10" height="10" id="s3"/>
+                                    <af:inputText value="#{bindings.Status.inputValue}"
+                                                  label="#{bindings.Status.hints.label}"
+                                                  required="#{bindings.Status.hints.mandatory}" readOnly="true"
+                                                  columns="#{bindings.Status.hints.displayWidth}"
+                                                  maximumLength="#{bindings.Status.hints.precision}"
+                                                  shortDesc="#{bindings.Status.hints.tooltip}" id="it2">
+                                        <f:validator binding="#{bindings.Status.validator}"/>
+                                    </af:inputText>
+                                    <af:spacer width="10" height="10" id="s4"/>
+                                    <af:inputText value="#{bindings.WcDeptName.inputValue}"
+                                                  label="#{bindings.WcDeptName.hints.label}"
+                                                  required="#{bindings.WcDeptName.hints.mandatory}" readOnly="true"
+                                                  columns="#{bindings.WcDeptName.hints.displayWidth}"
+                                                  maximumLength="#{bindings.WcDeptName.hints.precision}"
+                                                  shortDesc="#{bindings.WcDeptName.hints.tooltip}" id="it3">
+                                        <f:validator binding="#{bindings.WcDeptName.validator}"/>
+                                    </af:inputText>
+                                    <af:spacer width="10" height="10" id="s5"/>
+                                    <af:inputText value="#{bindings.WcCreatedBy.inputValue}"
+                                                  label="#{bindings.WcCreatedBy.hints.label}"
+                                                  required="#{bindings.WcCreatedBy.hints.mandatory}" readOnly="true"
+                                                  columns="#{bindings.WcCreatedBy.hints.displayWidth}"
+                                                  maximumLength="#{bindings.WcCreatedBy.hints.precision}"
+                                                  shortDesc="#{bindings.WcCreatedBy.hints.tooltip}" id="it4"/>
+                                    <af:spacer width="10" height="10" id="s6"/>
+                                </af:panelFormLayout>
+                            </af:dialog>
+                        </af:popup-->
+                        <f:facet name="menus">
+                            <af:menu text="Options" id="m1">
+                                <af:commandMenuItem text="Export to Excel" id="cmi1">
+                                    <af:exportCollectionActionListener type="excelHTML" exportedId="t1"
+                                                                       filename="OWS_Statusboard.xls"
+                                                                       title="Work In Process"/>
+                                </af:commandMenuItem>
+                                <af:commandMenuItem text="Printable Page" id="cmi2">
+                                    <af:showPrintablePageBehavior/>
+                                </af:commandMenuItem>
+                            </af:menu>
+                        </f:facet>
+                        <f:facet name="statusbar"/>
+                        <af:popup childCreation="deferred" id="p1"
+                                  binding="#{backingBeanScope.OwsStatusboard.deleteBatchPopup}"
+                                  contentDelivery="immediate">
+                            <af:dialog id="d1" type="none" title="#{pageFlowScope.deleteBatchId} Delete Confirm...!">
+                                <f:facet name="buttonBar">
+                                    <af:panelGroupLayout id="pgl1" layout="horizontal" halign="right"
+                                                         styleClass="AFStretchWidth">
+                                        <af:button text="No" id="b2"
+                                                   actionListener="#{backingBeanScope.OwsStatusboard.deleteBatchNoActionListener}"/>
+                                        <af:spacer width="10" height="10" id="s1"/>
+                                        <af:button text="Yes" id="b3"
+                                                   actionListener="#{backingBeanScope.OwsStatusboard.batchDeleteConfirmedActionListener}"/>
+                                    </af:panelGroupLayout>
+                                </f:facet>
+                                <af:outputText value="Do you want to Delete this batch #{pageFlowScope.deleteBatchId}?" id="ot31" noWrap="true"/>
+                            </af:dialog>
+                        </af:popup>
+                        <af:table value="#{bindings.XwrlRequestsView1.collectionModel}" var="row"
+                                  rows="#{bindings.XwrlRequestsView1.rangeSize}"
+                                  emptyText="#{bindings.XwrlRequestsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                  rowBandingInterval="0"	styleClass="AFStretchWidth"
+                                  selectedRowKeys="#{bindings.XwrlRequestsView1.collectionModel.selectedRow}"
+                                  selectionListener="#{bindings.XwrlRequestsView1.collectionModel.makeCurrent}"
+                                  rowSelection="single" fetchSize="#{bindings.XwrlRequestsView1.rangeSize}" id="t1"
+                                  partialTriggers=":::qryId1 ::b1 :::b5 :::b6" displayRow="selected"
+                                  clientComponent="true" immediate="true">
+   
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.CaseId.name}" sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.CaseId.label}" id="c24"
+                                       width="225" displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['CaseId']}">
+                                <af:link shortDesc="#{bindings.XwrlRequestsView1.hints.CaseId.tooltip}" id="ot21"
+                                         text="#{row.CaseId}" destination="/#{sessionScope.pFacesServlet}/Request?requestId=#{row.Id}"
+                                         targetFrame="_blank" rendered="#{row.CaseId!=null}"/>
+                                <af:outputText value="Please send an email to Help and Trade with screenshots"
+                                 styleClass="PreWrap"
+                                               id="ot312" rendered="#{row.CaseId==null || row.CaseId==''}"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.BatchId.name}" sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.BatchId.label}" id="c215"
+                                       width="75"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['BatchId']}">
+                                <af:link text="#{row.BatchId}" partialSubmit="true"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.BatchId.tooltip}"
+                                               id="ot212"
+                                         actionListener="#{backingBeanScope.OwsStatusboard.batchDeleteActionListener}"
+                                         rendered="#{(sessionScope.UserRespAndSessionInfo == null)? false : sessionScope.UserRespAndSessionInfo.isSuperUserOnly=='Y' }">
+                                    <f:attribute name="batchId" value="#{row.BatchId}"/>
+                                </af:link>
+                                <af:outputText value="#{row.BatchId}" id="ot32"
+                                               rendered="#{(sessionScope.UserRespAndSessionInfo == null)? true : sessionScope.UserRespAndSessionInfo.isSuperUserOnly=='N' }"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.NameScreened.name}"
+                                       sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.NameScreened.label}" id="c25"
+                                       width="200"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['NameScreened']}">
+                                <af:outputText value="#{row.NameScreened}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.NameScreened.tooltip}"
+                                               id="ot22"/>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.Gender.label}" id="c57"
+                            sortProperty="#{bindings.XwrlRequestsView1.hints.Gender.name}"	width="60"
+                                       sortable="true"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['Gender']}">
+                                <af:outputText value="#{row.Gender}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.Gender.tooltip}"
+                                               id="ot19"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.Matches.name}" sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.Matches.label}" id="c12"
+                                       width="75"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['Matches']}">
+                                <af:outputText value="#{row.Matches}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.Matches.tooltip}"
+                                               id="ot12">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlRequestsView1.hints.Matches.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="Open Alert Count" width="75"
+                                       sortProperty="#{bindings.XwrlRequestsView1.hints.Opencnt.name}" sortable="true"
+                                       id="c52"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['Opencnt']}">
+                                <af:outputText value="#{row.Opencnt}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.Opencnt.tooltip}" id="ot8">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlRequestsView1.hints.Opencnt.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <!-- T20200730.0021 - OWS - Display Legal Review & Possible Alert Counts... (IRI) -->
+                            <af:column headerText="Possible Alert Count" id="c64" rendered="#{sessionScope.UserRespAndSessionInfo.isSuperUserOnly eq 'Y'}"
+                            displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['Possiblecnt']}">
+                                <af:outputText value="#{row.Possiblecnt}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.Possiblecnt.tooltip}"
+                                               id="ot37">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlRequestsView1.hints.Possiblecnt.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="Legal Review Alert Count" id="c63" rendered="#{sessionScope.UserRespAndSessionInfo.isSuperUserOnly eq 'Y'}"
+                            displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['LegalReviewcnt']}">
+                                <af:outputText value="#{row.LegalReviewcnt}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.LegalReviewcnt.tooltip}"
+                                               id="ot36">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlRequestsView1.hints.LegalReviewcnt.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.CaseState.name}"
+                                       sortable="true"	
+                                       displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['CaseStateAttr']}"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.CaseState.label}" id="c43">
+                                <af:selectOneChoice value="#{row.bindings.CaseState.inputValue}"
+                                                    label="#{row.bindings.CaseState.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.CaseState.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.CaseState.tooltip}"
+                                                    readOnly="#{sessionScope.UserRespAndSessionInfo.isSuperUserOnly ne 'Y'}" 
+                                                    id="soc27">
+                                    <f:selectItems value="#{row.bindings.CaseState.items}" id="si37"/>
+                                    <f:validator binding="#{row.bindings.CaseState.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.CaseWorkflow.name}"
+                                       sortable="true"	
+                                       displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['CaseWorkFlowAttr']}"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.CaseWorkflow.label}" id="c45"
+                                       width="175">
+                                <af:selectOneChoice value="#{row.bindings.CaseWorkflow.inputValue}"
+                                                    label="#{row.bindings.CaseWorkflow.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.CaseWorkflow.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.CaseWorkflow.tooltip}"
+                                                    readOnly="#{sessionScope.UserRespAndSessionInfo.isSuperUserOnly ne 'Y'}" 
+                                                    id="soc26">
+                                    <f:selectItems value="#{row.bindings.CaseWorkflow.items}" id="si36"/>
+                                    <f:validator binding="#{row.bindings.CaseWorkflow.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.CaseStatusAttr.name}"
+                                       sortable="true"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['CaseStatusAttr']}"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.CaseStatusAttr.label}" id="c44">
+                                <af:selectOneChoice value="#{row.bindings.CaseStatusAttr.inputValue}"
+                                                    label="#{row.bindings.CaseStatusAttr.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.CaseStatusAttr.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.CaseStatusAttr.tooltip}"
+                                                    readOnly="#{sessionScope.UserRespAndSessionInfo.isSuperUserOnly ne 'Y'}" 
+                                                    id="soc14">
+                                    <f:selectItems value="#{row.bindings.CaseStatusAttr.items}" id="si14"/>
+                                    <f:validator binding="#{row.bindings.CaseStatusAttr.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.RiskLevel.name}" sortable="true"
+							displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['RiskLevel']}"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.RiskLevel.label}" id="c37">
+                                <af:selectOneChoice value="#{row.bindings.RiskLevel.inputValue}"
+                                                    label="#{row.bindings.RiskLevel.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.RiskLevel.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.RiskLevel.tooltip}"
+                                                    readOnly="true" id="soc10">
+                                    <f:selectItems value="#{row.bindings.RiskLevel.items}" id="si10"/>
+                                    <f:validator binding="#{row.bindings.RiskLevel.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column headerText="Department" id="c42" sortable="true"
+							displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['Departmentext']}"
+                                       sortProperty="#{bindings.XwrlRequestsView1.hints.Departmentext.name}"
+                                       width="200">
+                                <af:outputText value="#{row.Departmentext}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.Departmentext.tooltip}"
+                                               id="ot9"/>
+                            </af:column>
+                            <af:column headerText="Corp Number" id="c59" sortable="true"
+							displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['CorpNumber']}"
+                                       sortProperty="#{bindings.XwrlRequestsView1.hints.Corpnumber.name}">
+                                <af:outputText value="#{row.Corpnumber}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.Corpnumber.tooltip}"
+                                               id="ot29"/>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.Finnumber.label}" id="c56"
+                                       sortProperty="#{bindings.XwrlRequestsView1.hints.Finnumber.name}"
+									   displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['Finnumber']}"
+                                       sortable="true">
+                                <af:outputText value="#{row.Finnumber}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.Finnumber.tooltip}"
+                                               id="ot17">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlRequestsView1.hints.Finnumber.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.EsrUserEmailAddress.label}"
+                                       id="c60" displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['EsrUserEmailAddress']}">
+                                <af:outputText value="#{row.EsrUserEmailAddress}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.EsrUserEmailAddress.tooltip}"
+                                               id="ot33"/>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.EsrUserId.label}" id="c61"
+                            displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['EsrUserId']}">
+                                <af:outputText value="#{row.EsrUserId}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.EsrUserId.tooltip}"
+                                               id="ot34"/>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.ErbUserEmailAddress.label}"
+                                       id="c65" displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['ErbUserEmailAddress']}">
+                                <af:outputText value="#{row.ErbUserEmailAddress}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.ErbUserEmailAddress.tooltip}"
+                                               id="ot38"/>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.ErbUserId.label}" id="c66"
+                            displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['ErbUserId']}">
+                                <af:outputText value="#{row.ErbUserId}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.ErbUserId.tooltip}"
+                                               id="ot39"/>
+                            </af:column>
+                            <af:column headerText="Passport Number" 
+							displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['PassportNumber']}"
+                            sortProperty="#{bindings.XwrlRequestsView1.hints.PassportNumber.name}"
+                                       sortable="true"
+                            id="c58">
+                                <af:outputText value="#{row.PassportNumber}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.PassportNumber.tooltip}"
+                                               id="ot28"/>
+                            </af:column>
+                            <!--af:column sortProperty="#{bindings.XwrlRequestsView1.hints.DeptAttr.name}" sortable="true"
+                         headerText="#{bindings.XwrlRequestsView1.hints.DeptAttr.label}" id="c42">
+                <af:selectOneChoice value="#{row.bindings.DeptAttr.inputValue}" label="#{row.bindings.DeptAttr.label}"
+                                    required="#{bindings.XwrlRequestsView1.hints.DeptAttr.mandatory}"
+                                    shortDesc="#{bindings.XwrlRequestsView1.hints.DeptAttr.tooltip}" readOnly="true"
+                                    id="soc12">
+                  <f:selectItems value="#{row.bindings.DeptAttr.items}" id="si12"/>
+                  <f:validator binding="#{row.bindings.DeptAttr.validator}"/>
+                </af:selectOneChoice>
+              </af:column-->
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.OfficeAttr.name}"
+                                       sortable="true" headerText="#{bindings.XwrlRequestsView1.hints.OfficeAttr.label}"
+                                       id="c41"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['OfficeAttr']}">
+                                <af:selectOneChoice value="#{row.bindings.OfficeAttr.inputValue}"
+                                                    label="#{row.bindings.OfficeAttr.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.OfficeAttr.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.OfficeAttr.tooltip}"
+                                                    readOnly="true" id="soc11">
+                                    <f:selectItems value="#{row.bindings.OfficeAttr.items}" id="si11"/>
+                                    <f:validator binding="#{row.bindings.OfficeAttr.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.Priority.name}" sortable="true"
+							displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['Priority']}"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.Priority.label}" id="c36">
+                                <af:selectOneChoice value="#{row.bindings.Priority.inputValue}"
+                                                    label="#{row.bindings.Priority.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.Priority.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.Priority.tooltip}"
+                                                    readOnly="true" id="soc9">
+                                    <f:selectItems value="#{row.bindings.Priority.items}" id="si9"/>
+                                    <f:validator binding="#{row.bindings.Priority.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.ProvisionalRequest.label}"
+                                       id="c67"
+                                       displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['ProvisionalRequest']}"
+                                       sortable="true"
+                                       sortProperty="#{bindings.XwrlRequestsView1.hints.ProvisionalRequest.name}">
+                                <af:outputText value="#{row.ProvisionalRequest}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.ProvisionalRequest.tooltip}"
+                                               id="ot40"/>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.DocTypeAttr.label}" id="c8"
+                                       sortable="true"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['DocTypeAttr']}"
+                                       sortProperty="#{bindings.XwrlRequestsView1.hints.DocTypeAttr.name}" rendered="false">
+                                <af:selectOneChoice value="#{row.bindings.DocTypeAttr.inputValue}"
+                                                    label="#{row.bindings.DocTypeAttr.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.DocTypeAttr.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.DocTypeAttr.tooltip}"
+                                                    readOnly="true" id="soc18">
+                                    <f:selectItems value="#{row.bindings.DocTypeAttr.items}" id="si18"/>
+                                    <f:validator binding="#{row.bindings.DocTypeAttr.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.DateOfBirth.name}"
+                                       sortable="true"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['DateOfBirth']}"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.DateOfBirth.label}" id="c26">
+                                <af:outputText value="#{row.DateOfBirth}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.DateOfBirth.tooltip}"
+                                               id="ot23"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.ImoNumber.name}" sortable="true"
+							displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['ImoNumber']}"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.ImoNumber.label}" id="c27">
+                                <af:outputText value="#{row.ImoNumber}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.ImoNumber.tooltip}"
+                                               id="ot24">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlRequestsView1.hints.ImoNumber.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.VesselIndicator.name}"
+                                       sortable="true"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['VesselIndicator']}"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.VesselIndicator.label}" id="c28">
+                                <af:selectOneChoice value="#{row.bindings.VesselIndicator.inputValue}"
+                                                    label="#{row.bindings.VesselIndicator.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.VesselIndicator.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.VesselIndicator.tooltip}"
+                                                    readOnly="true" id="soc4">
+                                    <f:selectItems value="#{row.bindings.VesselIndicator.items}" id="si4"/>
+                                    <f:validator binding="#{row.bindings.VesselIndicator.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.RejectionReason.name}"
+                                       sortable="true"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['RejectionReason']}"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.RejectionReason.label}" id="c46">
+                                <af:selectOneChoice value="#{row.bindings.RejectionReason.inputValue}"
+                                                    label="#{row.bindings.RejectionReason.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.RejectionReason.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.RejectionReason.tooltip}"
+                                                    readOnly="true" id="soc16">
+                                    <f:selectItems value="#{row.bindings.RejectionReason.items}" id="si16"/>
+                                    <f:validator binding="#{row.bindings.RejectionReason.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.RejectionAttr.name}"  visible="false"
+                                       sortable="true"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['RejectionAttr']}"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.RejectionAttr.label}" id="c47">
+                                <af:selectOneChoice value="#{row.bindings.RejectionAttr.inputValue}"
+                                                    label="#{row.bindings.RejectionAttr.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.RejectionAttr.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.RejectionAttr.tooltip}"
+                                                    readOnly="true" id="soc17">
+                                    <f:selectItems value="#{row.bindings.RejectionAttr.items}" id="si17"/>
+                                    <f:validator binding="#{row.bindings.RejectionAttr.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.CountryOfAddress.label}" id="c19"
+                                       width="150"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['CountryOfAddress']}">
+                                <!--af:outputText value="#{row.CountryOfAddress}"
+                               shortDesc="#{bindings.XwrlRequestsView1.hints.CountryOfAddress.tooltip}" id="ot8"/-->
+                                <af:selectOneChoice value="#{row.bindings.CountryOfAddress.inputValue}"
+                                                    label="#{row.bindings.CountryOfAddress.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.CountryOfAddress.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.CountryOfAddress.tooltip}"
+                                                    readOnly="true" id="soc280">
+                                    <f:selectItems value="#{row.bindings.CountryOfAddress.items}" id="si208"/>
+                                    <f:validator binding="#{row.bindings.CountryOfAddress.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.CountryOfResidence.name}"
+                                       sortable="true"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['CountryOfResidence']}"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.CountryOfResidence.label}"
+                                       id="c38" width="150">
+                                <!--af:outputText value="#{row.CountryOfResidence}"
+                               shortDesc="#{bindings.XwrlRequestsView1.hints.CountryOfResidence.tooltip}" id="ot28"/-->
+                                <af:selectOneChoice value="#{row.bindings.CountryOfResidence.inputValue}"
+                                                    label="#{row.bindings.CountryOfResidence.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.CountryOfResidence.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.CountryOfResidence.tooltip}"
+                                                    readOnly="true" id="soc217">
+                                    <f:selectItems value="#{row.bindings.CountryOfResidence.items}" id="si217"/>
+                                    <f:validator binding="#{row.bindings.CountryOfResidence.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.RistrictedCountryAttr.label}"
+                                       id="c10" visible="false" sortable="true"
+                                       sortProperty="#{bindings.XwrlRequestsView1.hints.RistrictedCountryAttr.name}">
+                                <af:selectOneChoice value="#{row.bindings.RistrictedCountryAttr.inputValue}"
+                                                    label="#{row.bindings.RistrictedCountryAttr.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.RistrictedCountryAttr.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.RistrictedCountryAttr.tooltip}"
+                                                    readOnly="true" id="soc20">
+                                    <f:selectItems value="#{row.bindings.RistrictedCountryAttr.items}" id="si20"/>
+                                    <f:validator binding="#{row.bindings.RistrictedCountryAttr.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.CityOfResidenceId.name}"
+                                       sortable="true"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['CityOfResidenceId']}"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.CityOfResidenceId.label}" id="c39"
+                                       width="150">
+                                <!--af:outputText value="#{row.CityOfResidence}"
+                               shortDesc="#{bindings.XwrlRequestsView1.hints.CityOfResidence.tooltip}" id="ot29"/-->
+                                <af:selectOneChoice value="#{row.bindings.CityOfResidenceId.inputValue}"
+                                                    label="#{row.bindings.CityOfResidenceId.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.CityOfResidenceId.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.CityOfResidenceId.tooltip}"
+                                                    readOnly="true" id="soc297">
+                                    <f:selectItems value="#{row.bindings.CityOfResidenceId.items}" id="si297"/>
+                                    <f:validator binding="#{row.bindings.CityOfResidenceId.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.SubdivisionCityOfResidence.name}"
+                                       sortable="true"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['SubdivisionCityOfResidence']}"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.SubdivisionCityOfResidence.label}"
+                                       id="c40" width="150">
+                                <af:outputText value="#{row.SubdivisionCityOfResidence}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.SubdivisionCityOfResidence.tooltip}"
+                                               id="ot30"/>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.CountryOfNationality.label}"
+							displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['CountryOfNationality']}"
+                                       id="c48" width="150">
+                                <!--af:outputText value="#{row.CountryOfNationality}"
+                               shortDesc="#{bindings.XwrlRequestsView1.hints.CountryOfNationality.tooltip}" id="ot9"/-->
+                                <af:selectOneChoice value="#{row.bindings.CountryOfNationality.inputValue}"
+                                                    label="#{row.bindings.CountryOfNationality.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.CountryOfNationality.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.CountryOfNationality.tooltip}"
+                                                    readOnly="true" id="soc290">
+                                    <f:selectItems value="#{row.bindings.CountryOfNationality.items}" id="si209"/>
+                                    <f:validator binding="#{row.bindings.CountryOfNationality.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.CountryOfBirth.label}" id="c49"
+							displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['CountryOfBirth']}"
+                                       width="150">
+                                <!--af:outputText value="#{row.CountryOfBirth}"
+                               shortDesc="#{bindings.XwrlRequestsView1.hints.CountryOfBirth.tooltip}" id="ot10"/-->
+                                <af:selectOneChoice value="#{row.bindings.CountryOfBirth.inputValue}"
+                                                    label="#{row.bindings.CountryOfBirth.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.CountryOfBirth.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.CountryOfBirth.tooltip}"
+                                                    readOnly="true" id="soc214">
+                                    <f:selectItems value="#{row.bindings.CountryOfBirth.items}" id="si214"/>
+                                    <f:validator binding="#{row.bindings.CountryOfBirth.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.CountryOfRegistration.label}"
+                                       id="c50" width="150"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['CountryOfRegistration']}">
+                                <!--af:outputText value="#{row.CountryOfRegistration}"
+                               shortDesc="#{bindings.XwrlRequestsView1.hints.CountryOfRegistration.tooltip}" id="ot16"/-->
+                                <af:selectOneChoice value="#{row.bindings.CountryOfRegistration.inputValue}"
+                                                    label="#{row.bindings.CountryOfRegistration.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.CountryOfRegistration.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.CountryOfRegistration.tooltip}"
+                                                    readOnly="true" id="soc212">
+                                    <f:selectItems value="#{row.bindings.CountryOfRegistration.items}" id="si212"/>
+                                    <f:validator binding="#{row.bindings.CountryOfRegistration.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.CountryOfOperation.label}"
+                                       id="c51" width="150"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['CountryOfOperation']}">
+                                <!--af:outputText value="#{row.CountryOfOperation}"
+                               shortDesc="#{bindings.XwrlRequestsView1.hints.CountryOfOperation.tooltip}" id="ot17"/-->
+                                <af:selectOneChoice value="#{row.bindings.CountryOfOperation.inputValue}"
+                                                    label="#{row.bindings.CountryOfOperation.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.CountryOfOperation.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.CountryOfOperation.tooltip}"
+                                                    readOnly="true" id="soc211">
+                                    <f:selectItems value="#{row.bindings.CountryOfOperation.items}" id="si211"/>
+                                    <f:validator binding="#{row.bindings.CountryOfOperation.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.AssignedTo.name}"
+                                       sortable="true" headerText="#{bindings.XwrlRequestsView1.hints.AssignedTo.label}"
+                                       id="c35" visible="false" rendered="false">
+                                <af:outputText value="#{row.AssignedTo}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.AssignedTo.tooltip}"
+                                               id="ot27">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlRequestsView1.hints.AssignedTo.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <!--T20200529.0025 - Assigned To as LOV on Statusboard page (IRI): Column enabled and add readonly condition -->
+                            <!-- T20200729.0031 - Assigned To LOV on the statusboard (IRI): Readonly condition updated -->
+                             <!-- T20220311.0012 - TC 2.0 - Saving assignments -->
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.AssignedToAttr.label}" id="c9" width="200"
+                                       sortable="true"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['AssignedToAttr']}"
+                                       sortProperty="#{bindings.XwrlRequestsView1.hints.AssignedToAttr.name}">
+                                <af:selectOneChoice value="#{row.bindings.AssignedToAttr.inputValue}"
+                                                    label="#{row.bindings.AssignedToAttr.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.AssignedToAttr.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.AssignedToAttr.tooltip}" id="soc19"
+                                                    readOnly="#{sessionScope.UserRespAndSessionInfo.isSuperUserOnly == 'N'}"
+                                                    autoSubmit="true"
+                                                    valueChangeListener="#{viewScope.StatusboardBean.assignedToValueChangeListener}"
+                                                    immediate="true">
+                                    <f:selectItems value="#{row.bindings.AssignedToAttr.items}" id="si19"/>
+                                    <f:validator binding="#{row.bindings.AssignedToAttr.validator}"/>
+                                    <f:attribute name="requestId" value="#{row.Id}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <!-- T20200715.0025 - OWS Trade Compliance - Ukraine/Russia Address (IRI) -->
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.PermanentAddress.label}" id="c62"
+                            displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['PermanentAddress']}" width="200">
+                                <af:outputText value="#{row.PermanentAddress}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.PermanentAddress.tooltip}"
+                                               id="ot35"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.ClosedDate.name}"
+                                       sortable="true" headerText="#{bindings.XwrlRequestsView1.hints.ClosedDate.label}"
+                                       id="c34"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['ClosedDate']}">
+                                <af:outputText value="#{row.ClosedDate}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.ClosedDate.tooltip}"
+                                               id="ot26">
+                                    <af:convertDateTime pattern="#{bindings.XwrlRequestsView1.hints.ClosedDate.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="Sent To Legal By" id="c54" sortable="true"
+                                       sortProperty="#{bindings.XwrlRequestsView1.hints.SentToLegalBy.name}"
+                                       width="150"	displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['SentToLegalBy']}">
+                                <af:selectOneChoice value="#{row.bindings.SentToLegalBy.inputValue}"
+                                                    label="#{row.bindings.SentToLegalBy.label}" readOnly="true"
+                                                    required="#{bindings.XwrlRequestsView1.hints.SentToLegalBy.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.SentToLegalBy.tooltip}"
+                                                    id="soc12">
+                                    <f:selectItems value="#{row.bindings.SentToLegalBy.items}" id="si12"/>
+                                    <f:validator binding="#{row.bindings.SentToLegalBy.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column headerText="Sent To Legal" id="c55" sortable="true"
+							displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['SentToLegalDate']}"
+                                       sortProperty="#{bindings.XwrlRequestsView1.hints.SentToLegalDate.name}">
+                                <af:outputText value="#{row.SentToLegalDate}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.SentToLegalDate.tooltip}"
+                                               id="ot16">
+                                    <af:convertDateTime pattern="#{bindings.XwrlRequestsView1.hints.SentToLegalDate.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.CreatedBy.label}" id="c16"
+                                       sortable="true" sortProperty="#{bindings.XwrlRequestsView1.hints.CreatedBy.name}"
+                                       visible="false" width="150">
+                                <af:selectOneChoice value="#{row.bindings.CreatedBy.inputValue}"
+                                                    label="#{row.bindings.CreatedBy.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.CreatedBy.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.CreatedBy.tooltip}"
+                                                    readOnly="true" id="soc21">
+                                    <f:selectItems value="#{row.bindings.CreatedBy.items}" id="si21"/>
+                                    <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.CreationDate.name}"
+                                       sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.CreationDate.label}" id="c18"
+                                       rendered="true" visible="false">
+                                <af:outputText value="#{row.CreationDate}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.CreationDate.tooltip}"
+                                               id="ot18">
+                                    <af:convertDateTime pattern="#{bindings.XwrlRequestsView1.hints.CreationDate.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.LastUpdatedBy.label}" id="c17"
+                                       sortable="true"
+                                       sortProperty="#{bindings.XwrlRequestsView1.hints.LastUpdatedBy.name}"
+                                       visible="false" width="150">
+                                <af:selectOneChoice value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                                    label="#{row.bindings.LastUpdatedBy.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.LastUpdatedBy.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.LastUpdatedBy.tooltip}"
+                                                    readOnly="true" id="soc22">
+                                    <f:selectItems value="#{row.bindings.LastUpdatedBy.items}" id="si22"/>
+                                    <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.LastUpdateLogin.name}"
+                                       sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.LastUpdateLogin.label}" id="c20"
+                                       rendered="true" visible="false">
+                                <af:outputText value="#{row.LastUpdateLogin}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.LastUpdateLogin.tooltip}"
+                                               id="ot20">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlRequestsView1.hints.LastUpdateLogin.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column headerText="#{bindings.XwrlRequestsView1.hints.LastUpdateDate.label}" id="c53"
+                                       sortProperty="#{bindings.XwrlRequestsView1.hints.LastUpdateDate.name}"
+                                       sortable="true" visible="false">
+                                <af:outputText value="#{row.LastUpdateDate}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.LastUpdateDate.tooltip}"
+                                               id="ot10">
+                                    <af:convertDateTime pattern="#{bindings.XwrlRequestsView1.hints.LastUpdateDate.format}"/>
+                                </af:outputText>
+                            </af:column>
+							
+							                         <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.Id.name}" sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.Id.label}" id="c1"
+                                       visible="false">
+                                <af:outputText value="#{row.Id}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.Id.tooltip}" id="ot1">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlRequestsView1.hints.Id.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.ResubmitId.name}"
+                                       sortable="true" headerText="#{bindings.XwrlRequestsView1.hints.ResubmitId.label}"
+                                       id="c2" rendered="false">
+                                <af:outputText value="#{row.ResubmitId}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.ResubmitId.tooltip}"
+                                               id="ot2">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlRequestsView1.hints.ResubmitId.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.SourceTable.name}"
+                                       sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.SourceTable.label}" id="c3"
+                                       visible="false" rendered="false">
+                                <af:outputText value="#{row.SourceTable}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.SourceTable.tooltip}"
+                                               id="ot3"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.SourceId.name}" sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.SourceId.label}" id="c4"
+                                       visible="false" rendered="false">
+                                <af:outputText value="#{row.SourceId}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.SourceId.tooltip}"
+                                               id="ot4">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlRequestsView1.hints.SourceId.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.WcScreeningRequestId.name}"
+                                       sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.WcScreeningRequestId.label}"
+                                       id="c5" rendered="false">
+                                <af:outputText value="#{row.WcScreeningRequestId}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.WcScreeningRequestId.tooltip}"
+                                               id="ot5">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlRequestsView1.hints.WcScreeningRequestId.format}"/>
+                                </af:outputText>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.Server.name}" sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.Server.label}" id="c6"
+                                       rendered="false">
+                                <af:outputText value="#{row.Server}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.Server.tooltip}" id="ot6"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.Path.name}" sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.Path.label}" id="c7"
+                                       rendered="false">
+                                <af:outputText value="#{row.Path}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.Path.tooltip}" id="ot7"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.JobId.name}" sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.JobId.label}" id="c11"
+                                       rendered="false">
+                                <af:outputText value="#{row.JobId}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.JobId.tooltip}" id="ot11"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.Status.name}" sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.Status.label}" id="c13"
+                                       rendered="false">
+                                <af:outputText value="#{row.Status}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.Status.tooltip}"
+                                               id="ot13"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.ErrorCode.name}" sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.ErrorCode.label}" id="c14"
+                                       rendered="false">
+                                <af:outputText value="#{row.ErrorCode}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.ErrorCode.tooltip}"
+                                               id="ot14"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.ErrorMessage.name}"
+                                       sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.ErrorMessage.label}" id="c15"
+                                       rendered="false">
+                                <af:outputText value="#{row.ErrorMessage}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.ErrorMessage.tooltip}"
+                                               id="ot15"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.CaseState.name}" sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.CaseState.label}" id="c21"
+                                       rendered="false">
+                                <af:selectOneChoice value="#{row.bindings.CaseState.inputValue}"
+                                                    label="#{row.bindings.CaseState.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.CaseState.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.CaseState.tooltip}"
+                                                    readOnly="true" id="soc1">
+                                    <f:selectItems value="#{row.bindings.CaseState.items}" id="si1"/>
+                                    <f:validator binding="#{row.bindings.CaseState.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.CaseStatus.name}"
+                                       sortable="true" headerText="#{bindings.XwrlRequestsView1.hints.CaseStatus.label}"
+                                       id="c22" rendered="false">
+                                <af:selectOneChoice value="#{row.bindings.CaseStatus.inputValue}"
+                                                    label="#{row.bindings.CaseStatus.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.CaseStatus.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.CaseStatus.tooltip}"
+                                                    readOnly="true" id="soc2">
+                                    <f:selectItems value="#{row.bindings.CaseStatus.items}" id="si2"/>
+                                    <f:validator binding="#{row.bindings.CaseStatus.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.CaseWorkflow.name}"
+                                       sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.CaseWorkflow.label}" id="c23"
+                                       rendered="false">
+                                <af:selectOneChoice value="#{row.bindings.CaseWorkflow.inputValue}"
+                                                    label="#{row.bindings.CaseWorkflow.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.CaseWorkflow.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.CaseWorkflow.tooltip}"
+                                                    readOnly="true" id="soc3">
+                                    <f:selectItems value="#{row.bindings.CaseWorkflow.items}" id="si3"/>
+                                    <f:validator binding="#{row.bindings.CaseWorkflow.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.Department.name}"
+                                       sortable="true" headerText="#{bindings.XwrlRequestsView1.hints.Department.label}"
+                                       id="c29" rendered="false">
+                                <af:selectOneChoice value="#{row.bindings.Department.inputValue}"
+                                                    label="#{row.bindings.Department.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.Department.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.Department.tooltip}"
+                                                    readOnly="true" id="soc5">
+                                    <f:selectItems value="#{row.bindings.Department.items}" id="si5"/>
+                                    <f:validator binding="#{row.bindings.Department.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.Office.name}" sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.Office.label}" id="c30"
+                                       rendered="false">
+                                <af:selectOneChoice value="#{row.bindings.Office.inputValue}"
+                                                    label="#{row.bindings.Office.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.Office.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.Office.tooltip}"
+                                                    readOnly="true" id="soc6">
+                                    <f:selectItems value="#{row.bindings.Office.items}" id="si6"/>
+                                    <f:validator binding="#{row.bindings.Office.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.Priority.name}" sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.Priority.label}" id="c31"
+                                       rendered="false">
+                                <af:selectOneChoice value="#{row.bindings.Priority.inputValue}"
+                                                    label="#{row.bindings.Priority.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.Priority.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.Priority.tooltip}"
+                                                    readOnly="true" id="soc7">
+                                    <f:selectItems value="#{row.bindings.Priority.items}" id="si7"/>
+                                    <f:validator binding="#{row.bindings.Priority.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.Doctype.name}"
+                                       sortable="true" displayIndex="#{backingBeanScope.OwsStatusboard.reOrderMap['DocTypeAttr']}"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.Doctype.label}" id="c33"
+                                       visible="true">
+                                <af:outputText value="#{row.Doctype}"
+                                               shortDesc="#{bindings.XwrlRequestsView1.hints.Doctype.tooltip}"
+                                               id="ot25"/>
+                            </af:column>
+                            <af:column sortProperty="#{bindings.XwrlRequestsView1.hints.RiskLevel.name}" sortable="true"
+                                       headerText="#{bindings.XwrlRequestsView1.hints.RiskLevel.label}" id="c32"
+                                       rendered="false">
+                                <af:selectOneChoice value="#{row.bindings.RiskLevel.inputValue}"
+                                                    label="#{row.bindings.RiskLevel.label}"
+                                                    required="#{bindings.XwrlRequestsView1.hints.RiskLevel.mandatory}"
+                                                    shortDesc="#{bindings.XwrlRequestsView1.hints.RiskLevel.tooltip}"
+                                                    readOnly="true" id="soc8">
+                                    <f:selectItems value="#{row.bindings.RiskLevel.items}" id="si8"/>
+                                    <f:validator binding="#{row.bindings.RiskLevel.validator}"/>
+                                </af:selectOneChoice>
+                            </af:column>
+							
+							
+                        </af:table>
+                        <f:facet name="toolbar">
+                            <af:toolbar id="t2">
+                                <af:button actionListener="#{bindings.Execute.execute}" text="Refresh"
+                                           disabled="#{!bindings.Execute.enabled}" id="b1"/>
+                                <!-- T20200714.0017 - OWS - New design proposal on Workflow status chang... (IRI): updated render condition -->                   
+                                <af:button actionListener="#{viewScope.StatusboardBean.doSave}" text="Save" id="b4"
+                                           rendered="#{sessionScope.UserRespAndSessionInfo.userName eq 'CHICKMAN' or sessionScope.UserRespAndSessionInfo.isSuperUserOnly eq 'Y'}"/>
+                            </af:toolbar>
+                        </f:facet>
+                    </af:panelCollection>
+                </af:panelHeader>
+            </f:facet>
+        </af:panelSplitter>
+    </af:panelHeader>
+</ui:composition>

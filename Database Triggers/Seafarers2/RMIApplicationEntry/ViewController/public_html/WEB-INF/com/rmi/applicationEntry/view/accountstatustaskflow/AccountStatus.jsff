@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1">
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar">
+        <af:toolbar id="t2">
+          <af:popup childCreation="deferred" autoCancel="disabled" id="searchInvoicePopup" contentDelivery="lazyUncached"
+                    binding="#{pageFlowScope.AccountStatusBean.searchInvoicePopup}">
+            <af:dialog id="d1" affirmativeTextAndAccessKey="Search" type="none" title="Find Invoice"
+                       closeIconVisible="false">
+              <f:facet name="buttonBar">
+                <af:toolbar id="t3" inlineStyle="float:right">
+                  <af:button text="Search" id="b3" action="#{pageFlowScope.AccountStatusBean.searchInvoiceAction}"/>
+                  <af:spacer width="5" height="10" id="s1"/>
+                  <af:button text="Cancel" id="b4" action="#{pageFlowScope.AccountStatusBean.cancelInvoiceAction}"/>
+                </af:toolbar>
+              </f:facet>
+              <af:panelGroupLayout id="pgl2" layout="horizontal" styleClass="AFStretchWidth">
+                <af:panelFormLayout id="pfl1" styleClass="AFStretchWidth panelFormLayoutClass"
+                                    inlineStyle="padding:10px;">
+                  <af:inputText value="#{bindings.TransInvoiceNumber.inputValue}" label="Invoice Number"
+                                required="#{bindings.TransInvoiceNumber.hints.mandatory}"
+                                columns="#{bindings.TransInvoiceNumber.hints.displayWidth}"
+                                maximumLength="#{bindings.TransInvoiceNumber.hints.precision}"
+                                shortDesc="#{bindings.TransInvoiceNumber.hints.tooltip}" id="it1"
+                                styleClass="AFInputTextHead" contentStyle="width:180px;" autoSubmit="true">
+                    <f:validator binding="#{bindings.TransInvoiceNumber.validator}"/>
+                  </af:inputText>
+                  <af:inputDate value="#{bindings.TransInvoiceDate.inputValue}"
+                                label="Invoice Date"
+                                required="#{bindings.TransInvoiceDate.hints.mandatory}"
+                                columns="#{bindings.TransInvoiceDate.hints.displayWidth}"
+                                shortDesc="#{bindings.TransInvoiceDate.hints.tooltip}" id="id2"
+                                contentStyle="width:180px;" styleClass="AFInputTextHead" autoSubmit="true">
+                    <f:validator binding="#{bindings.TransInvoiceDate.validator}"/>
+                    <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                  </af:inputDate>
+                  <af:inputText value="#{bindings.TransWorkOrderNumber.inputValue}" label="Work Order"
+                                required="#{bindings.TransWorkOrderNumber.hints.mandatory}"
+                                columns="#{bindings.TransWorkOrderNumber.hints.displayWidth}"
+                                maximumLength="#{bindings.TransWorkOrderNumber.hints.precision}"
+                                shortDesc="#{bindings.TransWorkOrderNumber.hints.tooltip}" id="it3"
+                                labelStyle="AFInputTextHead" contentStyle="width:180px;" autoSubmit="true">
+                    <f:validator binding="#{bindings.TransWorkOrderNumber.validator}"/>
+                  </af:inputText>
+                </af:panelFormLayout>
+              </af:panelGroupLayout>
+            </af:dialog>
+          </af:popup>
+          <af:button text="Search" id="b2" visible="#{sessionScope.user_type eq 'Internal'}"/>
+        </af:toolbar>
+      </f:facet>
+      <f:facet name="statusbar"/>
+      <af:table value="#{bindings.AccountStatusView.collectionModel}" var="row"
+                rows="#{bindings.AccountStatusView.rangeSize}"
+                emptyText="#{bindings.AccountStatusView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0" selectedRowKeys="#{bindings.AccountStatusView.collectionModel.selectedRow}"
+                selectionListener="#{bindings.AccountStatusView.collectionModel.makeCurrent}" rowSelection="single"
+                fetchSize="#{bindings.AccountStatusView.rangeSize}"
+                filterModel="#{bindings.AccountStatusViewQuery.queryDescriptor}"
+                queryListener="#{bindings.AccountStatusViewQuery.processQuery}" filterVisible="true" varStatus="vs"
+                id="t1" styleClass="AFSretchWidth" columnStretching="column:c1" autoHeightRows="14">
+        <af:column sortProperty="#{bindings.AccountStatusView.hints.TrxNumber.name}" filterable="true" sortable="true"
+                   headerText="Invoice Number" id="c1">
+          <af:outputText value="#{row.TrxNumber}" shortDesc="#{bindings.AccountStatusView.hints.TrxNumber.tooltip}"
+                         id="ot1" inlineStyle="#{(row.InvoiceSent eq 'Y') ? 'color:red; font-weight:bold;' : ''}"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.AccountStatusView.hints.TrxDate.name}" filterable="true" sortable="true"
+                   headerText="Invoice Date" id="c2" width="130">
+          <f:facet name="filter">
+            <af:inputDate value="#{bindings.AccountStatusViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.TrxDate.value}"
+                          id="id1">
+              <af:convertDateTime pattern="#{bindings.AccountStatusView.hints.TrxDate.format}"/>
+            </af:inputDate>
+          </f:facet>
+          <af:outputText value="#{row.TrxDate}" shortDesc="#{bindings.AccountStatusView.hints.TrxDate.tooltip}"
+                         id="ot2"
+                         inlineStyle="text-transform:uppercase; #{(row.InvoiceSent eq 'Y') ? 'color:red; font-weight:bold;' : ''}">
+            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.AccountStatusView.hints.PurchaseOrder.name}" filterable="true"
+                   sortable="true" headerText="Purchase Order Number" id="c6" width="130">
+          <af:outputText value="#{row.PurchaseOrder}"
+                         shortDesc="#{bindings.AccountStatusView.hints.PurchaseOrder.tooltip}" id="ot6"
+                         inlineStyle="#{(row.InvoiceSent eq 'Y') ? 'color:red; font-weight:bold;' : ''}"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.AccountStatusView.hints.WorkOrder.name}" filterable="true" sortable="true"
+                   headerText="Work Order Number" id="c5">
+          <af:outputText value="#{row.WorkOrder}" shortDesc="#{bindings.AccountStatusView.hints.WorkOrder.tooltip}"
+                         id="ot5" inlineStyle="#{(row.InvoiceSent eq 'Y') ? 'color:red; font-weight:bold;' : ''}"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.AccountStatusView.hints.AmountDueOriginal.name}" filterable="true"
+                   sortable="true" headerText="Total Amount Due" id="c3" width="130">
+          <af:outputText value="#{row.AmountDueOriginal}"
+                         shortDesc="#{bindings.AccountStatusView.hints.AmountDueOriginal.tooltip}" id="ot3"
+                         inlineStyle="#{(row.InvoiceSent eq 'Y') ? 'color:red; font-weight:bold;' : ''}">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.AccountStatusView.hints.AmountDueOriginal.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.AccountStatusView.hints.AmountDueRemaining.name}" filterable="true"
+                   sortable="true" headerText="Balance Due" id="c4" width="130">
+          <af:outputText value="#{row.AmountDueRemaining}"
+                         shortDesc="#{bindings.AccountStatusView.hints.AmountDueRemaining.tooltip}" id="ot4"
+                         inlineStyle="#{(row.InvoiceSent eq 'Y') ? 'color:red; font-weight:bold;' : ''}">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.AccountStatusView.hints.AmountDueRemaining.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column id="c7">
+          <af:button text="Email Invoice #{row.InvoiceSent}" id="b1"
+                     actionListener="#{pageFlowScope.AccountStatusBean.emailInvoiceButton}"/>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+  </af:panelGroupLayout>
+</jsp:root>

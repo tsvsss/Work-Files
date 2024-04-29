@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RequestDetailsView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.readOnlyVO.RequestDetailsView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pRequestid"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pProgramId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pRequestDate"
+    Kind="where"
+    Type="oracle.jbo.domain.Date"/>
+  <Variable
+    Name="pRequestedBy"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pDays"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[SELECT fcr.request_id request_id,  
+fcptl.user_concurrent_program_name user_concurrent_program_name,  
+decode(parent_request_id,'-1',null,parent_request_id) "parent_request_id",  
+DECODE (phase_code,  
+'C', 'Completed',  
+'I', 'Inactive',  
+'P', 'Pending',  
+'R', 'Running'  
+) phase,  
+DECODE (status_code,  
+'D', 'Cancelled',  
+'U', 'Disabled',  
+'E', 'Error',  
+'M', 'No Manager',  
+'R', 'Normal',  
+'H', 'On Hold',  
+'W', 'Paused',  
+'B', 'Resuming',  
+'I', 'Scheduled',  
+'Q', 'Standby',  
+'S', 'Suspended',  
+'X', 'Terminated',  
+'T', 'Terminating',  
+'A', 'Waiting',  
+'G', 'Warning'  
+) status,  
+(SELECT user_name  
+FROM fnd_user  
+WHERE user_id = fcr.requested_by) requestor,  
+fcp.concurrent_program_name program_short_name,  
+fcptl.concurrent_program_id concurrent_program_id,  
+fcr.requested_by requested_by, fcr.actual_start_date request_date,  
+fcr.logfile_name logfile_name, fcr.outfile_name outfile_name  
+FROM  
+apps.fnd_concurrent_requests fcr,  
+apps.fnd_concurrent_programs fcp,  
+apps.fnd_concurrent_programs_tl fcptl  
+WHERE 1=1  
+AND fcr.concurrent_program_id = fcp.concurrent_program_id  
+AND fcr.program_application_id = fcp.application_id  
+AND fcp.application_id = fcptl.application_id  
+AND fcp.concurrent_program_id = fcptl.concurrent_program_id  
+and fcp.concurrent_program_id = nvl(:pProgramId,fcp.concurrent_program_id)  
+and fcr.requested_by = nvl(:pRequestedBy,requested_by)  
+and (fcr.PRIORITY_REQUEST_ID = NVL(:pRequestid,fcr.PRIORITY_REQUEST_ID)  
+or fcr.request_id = NVL(:pRequestid,fcr.request_id))  
+and trunc(request_date) = nvl(:pRequestDate,request_date)  
+and requested_by = nvl(:pRequestedBy,requested_by)  
+and (fcr.actual_start_date > sysdate-:pDays or :pDays is null)  
+and (:pProgramId is not null or :pRequestDate is not null or :pRequestedBy is not null or :pRequestid is not null)  
+ORDER BY 1]]></SQLQuery>
+  <ViewAttribute
+    Name="RequestId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="LONGINT"
+    AliasName="REQUEST_ID"
+    Expression="REQUEST_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="UserConcurrentProgramName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="USER_CONCURRENT_PROGRAM_NAME"
+    Expression="USER_CONCURRENT_PROGRAM_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ParentRequestId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="PARENT_REQUEST_ID"
+    Expression="PARENT_REQUEST_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="Phase"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="9"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PHASE"
+    Expression="PHASE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="9"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Status"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="11"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STATUS"
+    Expression="STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="11"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Requestor"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REQUESTOR"
+    Expression="REQUESTOR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProgramShortName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PROGRAM_SHORT_NAME"
+    Expression="PROGRAM_SHORT_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ConcurrentProgramId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="CONCURRENT_PROGRAM_ID"
+    Expression="CONCURRENT_PROGRAM_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="RequestedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="REQUESTED_BY"
+    Expression="REQUESTED_BY"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="RequestDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="REQUEST_DATE"
+    Expression="REQUEST_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="LogfileName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LOGFILE_NAME"
+    Expression="LOGFILE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="255"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OutfileName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="OUTFILE_NAME"
+    Expression="OUTFILE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="255"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

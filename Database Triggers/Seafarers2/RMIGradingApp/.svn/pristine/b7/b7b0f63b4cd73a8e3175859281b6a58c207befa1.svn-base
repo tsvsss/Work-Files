@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="AssignBookNumberPageDef"
+                Package="com.rmi.tradecompapproval.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="AssignBookNumberTaskflow1"
+              taskFlowId="/WEB-INF/com/rmi/tradecompapproval/view/assignbooknumber/AssignBookNumberTaskflow.xml#AssignBookNumberTaskflow"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="P_HEADER_ID" value="4278292"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings/>
+</pageDefinition>

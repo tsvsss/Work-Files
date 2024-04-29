@@ -1,0 +1,707 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" styleClass="AFStretchWidth" layout="scroll">
+    <af:panelTabbed position="above" id="pt1" styleClass="AFStretchWidth">
+      <af:showDetailItem text="Submitted Orders" id="sdi1">
+        <af:panelCollection id="pc3" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.SubmittedBatchesView.collectionModel}" var="row"
+                    rows="#{bindings.SubmittedBatchesView.rangeSize}"
+                    emptyText="#{bindings.SubmittedBatchesView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.SubmittedBatchesView.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.SubmittedBatchesView.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.SubmittedBatchesView.rangeSize}"
+                    filterModel="#{bindings.SubmittedBatchesViewQuery.queryDescriptor}"
+                    queryListener="#{bindings.SubmittedBatchesViewQuery.processQuery}" filterVisible="true"
+                    varStatus="vs" id="t3" styleClass="AFStretchWidth" autoHeightRows="13" contentDelivery="immediate"
+                    columnStretching="column:c12">
+            <af:column sortProperty="#{bindings.SubmittedBatchesView.hints.BatchName.name}" filterable="true"
+                       sortable="true" headerText="Batch Name" id="c12">
+              <af:outputText value="#{row.BatchName}"
+                             shortDesc="#{bindings.SubmittedBatchesView.hints.BatchName.tooltip}" id="ot7"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SubmittedBatchesView.hints.BatchDate.name}" filterable="true"
+                       sortable="true" headerText="Batch Date" id="c13">
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.SubmittedBatchesViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                              id="id3">
+                  <af:convertDateTime pattern="#{bindings.SubmittedBatchesView.hints.BatchDate.format}"/>
+                </af:inputDate>
+              </f:facet>
+              <af:outputText value="#{row.BatchDate}"
+                             shortDesc="#{bindings.SubmittedBatchesView.hints.BatchDate.tooltip}" id="ot10"
+                             inlineStyle="text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SubmittedBatchesView.hints.OrderingCustomerName.name}" filterable="true"
+                       sortable="true" headerText="Customer Name" id="c20" width="250">
+              <af:outputText value="#{row.OrderingCustomerName}"
+                             shortDesc="#{bindings.SubmittedBatchesView.hints.OrderingCustomerName.tooltip}" id="ot16"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SubmittedBatchesView.hints.AccountNumber.name}" filterable="true"
+                       sortable="true" headerText="Account Name" id="c21">
+              <af:outputText value="#{row.AccountNumber}"
+                             shortDesc="#{bindings.SubmittedBatchesView.hints.AccountNumber.tooltip}" id="ot17"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SubmittedBatchesView.hints.PurchaseOrderNumber.name}" filterable="true"
+                       sortable="true" headerText="Purchase Order Number"
+                       id="c14">
+              <af:outputText value="#{row.PurchaseOrderNumber}"
+                             shortDesc="#{bindings.SubmittedBatchesView.hints.PurchaseOrderNumber.tooltip}" id="ot11"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SubmittedBatchesView.hints.VesselNames.name}" filterable="true"
+                       sortable="true" headerText="Vessel Names" id="c15">
+              <af:outputText value="#{row.VesselNames}"
+                             shortDesc="#{bindings.SubmittedBatchesView.hints.VesselNames.tooltip}" id="ot12"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.SubmittedBatchesView.hints.BatchSubmittedDate.name}" filterable="true"
+                       sortable="true" headerText="Batch Submitted Date"
+                       id="c16">
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.SubmittedBatchesViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchSubmittedDate.value}"
+                              id="id4">
+                  <af:convertDateTime pattern="#{bindings.SubmittedBatchesView.hints.BatchSubmittedDate.format}"/>
+                </af:inputDate>
+              </f:facet>
+              <af:outputText value="#{row.BatchSubmittedDate}"
+                             shortDesc="#{bindings.SubmittedBatchesView.hints.BatchSubmittedDate.tooltip}" id="ot13"
+                             inlineStyle="text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SubmittedBatchesView.hints.NoOfSeafarer.name}" filterable="true"
+                       sortable="true" headerText="Number Of Seafarer" id="c18">
+              <af:outputText value="#{row.NoOfSeafarer}"
+                             shortDesc="#{bindings.SubmittedBatchesView.hints.NoOfSeafarer.tooltip}" id="ot14">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.SubmittedBatchesView.hints.NoOfSeafarer.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.SubmittedBatchesView.hints.WorkOrderNo.name}" filterable="true"
+                       sortable="true" headerText="Work Order Number" id="c19">
+              <af:link text="#{row.WorkOrderNo}" id="l1">
+                <af:showPopupBehavior popupId=":::p4" triggerType="action"/>
+              </af:link>
+            </af:column>
+            <af:column headerText="Expedited Processing" id="c23"
+                       width="70">
+              <af:selectBooleanCheckbox value="#{row.bindings.ExpeditedProcessingSubmit.inputValue}"
+                                        label="#{row.bindings.ExpeditedProcessingSubmit.label}"
+                                        shortDesc="#{bindings.SubmittedBatchesView.hints.ExpeditedProcessingSubmit.tooltip}"
+                                        id="sbc2" disabled="true"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:showDetailItem>
+      <af:showDetailItem text="Deficient Seafarer Documents" id="sdi3" visible="false">
+        <af:panelCollection id="pc6" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.BatchesRejectedRO.collectionModel}" var="row"
+                    rows="#{bindings.BatchesRejectedRO.rangeSize}"
+                    emptyText="#{bindings.BatchesRejectedRO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0" selectedRowKeys="#{bindings.BatchesRejectedRO.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.BatchesRejectedRO.collectionModel.makeCurrent}" rowSelection="single"
+                    fetchSize="#{bindings.BatchesRejectedRO.rangeSize}" id="t8" styleClass="AFStretchWidth"
+                    autoHeightRows="14" contentDelivery="immediate" columnStretching="column:c17">
+            <af:column headerText="Batch Name" id="c17">
+              <af:outputText value="#{row.BatchName}" shortDesc="#{bindings.BatchesRejectedRO.hints.BatchName.tooltip}"
+                             id="ot23"/>
+            </af:column>
+            <af:column headerText="Batch Date" id="c45">
+              <af:outputText value="#{row.BatchDate}" shortDesc="#{bindings.BatchesRejectedRO.hints.BatchDate.tooltip}"
+                             id="ot24" inlineStyle="text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Batch Status" id="c46" visible="false">
+              <af:outputText value="#{row.BatchStatus}"
+                             shortDesc="#{bindings.BatchesRejectedRO.hints.BatchStatus.tooltip}" id="ot25"/>
+            </af:column>
+            <af:column headerText="Purchase Order Number" id="c47">
+              <af:outputText value="#{row.PurchaseOrderNumber}"
+                             shortDesc="#{bindings.BatchesRejectedRO.hints.PurchaseOrderNumber.tooltip}" id="ot26"/>
+            </af:column>
+            <af:column headerText="Vessel Name" id="c48">
+              <af:outputText value="#{row.VesselNames}"
+                             shortDesc="#{bindings.BatchesRejectedRO.hints.VesselNames.tooltip}" id="ot27"/>
+            </af:column>
+            <af:column headerText="Batch Submitted Date" id="c50">
+              <af:outputText value="#{row.BatchSubmittedDate}"
+                             shortDesc="#{bindings.BatchesRejectedRO.hints.BatchSubmittedDate.tooltip}" id="ot29"
+                             inlineStyle="text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Number Of Seafarers" id="c51">
+              <af:outputText value="#{row.NoOfSeafarer}"
+                             shortDesc="#{bindings.BatchesRejectedRO.hints.NoOfSeafarer.tooltip}" id="ot48">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesRejectedRO.hints.NoOfSeafarer.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Work Order Number" id="c52">
+              <af:outputText value="#{row.WorkOrderNo}"
+                             shortDesc="#{bindings.BatchesRejectedRO.hints.WorkOrderNo.tooltip}" id="ot49">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesRejectedRO.hints.WorkOrderNo.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column id="c49">
+              <af:button text="Edit" id="b51" action="#{pageFlowScope.SubmittedBatchesBean.editButtonOnRejectedTab}"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:showDetailItem>
+    </af:panelTabbed>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="p6" contentDelivery="lazyUncached"
+              popupFetchListener="#{pageFlowScope.SubmittedBatchesBean.requestedPopupFetchListener}">
+      <af:dialog id="d6" type="none">
+        <f:facet name="buttonBar"/>
+        <af:panelBox id="pb5" showDisclosure="false">
+          <f:facet name="toolbar"/>
+          <af:panelFormLayout id="pfl2" rows="1" styleClass="panelFormLayoutClass" labelWidth="150" fieldWidth="350">
+            <af:inputText value="#{bindings.IssueType.inputValue}" label="Seafarer's Book"
+                          required="#{bindings.IssueType.hints.mandatory}"
+                          columns="#{bindings.IssueType.hints.displayWidth}"
+                          maximumLength="#{bindings.IssueType.hints.precision}"
+                          shortDesc="#{bindings.IssueType.hints.tooltip}" id="it4" disabled="true">
+              <f:validator binding="#{bindings.IssueType.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.IssueTypeIdCard.inputValue}" label="Seafarer's ID Card"
+                          required="#{bindings.IssueTypeIdCard.hints.mandatory}"
+                          columns="#{bindings.IssueTypeIdCard.hints.displayWidth}"
+                          maximumLength="#{bindings.IssueTypeIdCard.hints.precision}"
+                          shortDesc="#{bindings.IssueTypeIdCard.hints.tooltip}" id="it5" disabled="true">
+              <f:validator binding="#{bindings.IssueTypeIdCard.validator}"/>
+            </af:inputText>
+          </af:panelFormLayout>
+        </af:panelBox>
+        <af:panelBox text="Officer Certificate Requested" id="pb3" showDisclosure="false">
+          <f:facet name="toolbar"/>
+          <af:panelCollection id="pc4" inlineStyle="width:1000px;">
+            <f:facet name="menus"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="statusbar"/>
+            <af:table value="#{bindings.SeafarerOcDetailsRO.collectionModel}" var="row"
+                      rows="#{bindings.SeafarerOcDetailsRO.rangeSize}"
+                      emptyText="#{bindings.SeafarerOcDetailsRO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.SeafarerOcDetailsRO.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.SeafarerOcDetailsRO.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.SeafarerOcDetailsRO.rangeSize}" id="t2"
+                      autoHeightRows="2" contentDelivery="immediate"
+                      columnStretching="column:c27" inlineStyle="width:1000px;">
+              <af:column headerText="CRA" id="c11" width="30">
+                <af:selectBooleanCheckbox value="#{row.bindings.CraRequired.inputValue}"
+                                          label="#{row.bindings.CraRequired.label}"
+                                          shortDesc="#{bindings.SeafarerOcDetailsRO.hints.CraRequired.tooltip}"
+                                          id="sbc1" disabled="true"/>
+              </af:column>
+              <af:column headerText="Grade" id="c24">
+                <af:outputText value="#{row.GradeCode}"
+                               shortDesc="#{bindings.SeafarerOcDetailsRO.hints.GradeCode.tooltip}" id="ot18"/>
+              </af:column>
+              <af:column headerText="Description" id="c27" width="200">
+                <af:outputText value="#{row.GradeId}" shortDesc="#{bindings.SeafarerOcDetailsRO.hints.GradeId.tooltip}"
+                               id="ot30"/>
+              </af:column>
+              <af:column headerText="Certificate of Competency Number" id="c25">
+                <af:outputText value="#{row.CocIdentifier}"
+                               shortDesc="#{bindings.SeafarerOcDetailsRO.hints.CocIdentifier.tooltip}" id="ot19"/>
+              </af:column>
+              <af:column headerText="Issuing Country" id="c28" width="280">
+                <af:outputText value="#{row.CocCountry}"
+                               shortDesc="#{bindings.SeafarerOcDetailsRO.hints.CocCountry.tooltip}" id="ot31"/>
+              </af:column>
+              <af:column headerText="Issue date" id="c29" width="130">
+                <af:outputText value="#{row.CocIssueDate}"
+                               shortDesc="#{bindings.SeafarerOcDetailsRO.hints.CocIssueDate.tooltip}" id="ot32">
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="Expiration Date" id="c30" width="130">
+                <af:outputText value="#{row.CocExpirationDate}"
+                               shortDesc="#{bindings.SeafarerOcDetailsRO.hints.CocExpirationDate.tooltip}" id="ot33">
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="Limitation Deck = GT Eng. = KW" id="c31" width="120">
+                <af:outputText value="#{row.Limitation}"
+                               shortDesc="#{bindings.SeafarerOcDetailsRO.hints.Limitation.tooltip}" id="ot34">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.SeafarerOcDetailsRO.hints.Limitation.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="Limitation" id="c26">
+                <af:outputText value="#{row.RestrictionName}"
+                               shortDesc="#{bindings.SeafarerOcDetailsRO.hints.RestrictionName.tooltip}" id="ot20"/>
+              </af:column>
+              <af:column id="c32" width="130" headerText="C.O.C.">
+                <af:button text=" View C.O.C" id="b9" destination="/seaf/previewdocumentservlet?path=#{row.EdocId}" targetFrame="_blank"
+                           visible="#{row.EdocId != null}"/>
+                <af:outputText value="C.O.C not uploaded" id="ot42" inlineStyle="font-size:small;"
+                               visible="#{row.EdocId == null and pageFlowScope.SubmittedBatchesBean.supportLinkVisible  == 'N'}"/>
+                <af:button text="View Documents" id="b16"
+                           destination="/seaf/previewdocumentservlet?path=#{pageFlowScope.SubmittedBatchesBean.supportLink}" targetFrame="_blank"
+                           visible="false"/>
+              </af:column>
+              <af:column headerText="#{bindings.SeafarerOcDetailsRO.hints.EdocId.label}" id="c42" visible="false">
+                <af:outputText value="#{row.EdocId}" shortDesc="#{bindings.SeafarerOcDetailsRO.hints.EdocId.tooltip}"
+                               id="ot43">
+                  <af:convertNumber groupingUsed="false" pattern="#{bindings.SeafarerOcDetailsRO.hints.EdocId.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="#{bindings.SeafarerOcDetailsRO.hints.CocDoc.label}" id="c39" visible="false">
+                <af:outputText value="#{row.CocDoc}" shortDesc="#{bindings.SeafarerOcDetailsRO.hints.CocDoc.tooltip}"
+                               id="ot39"/>
+              </af:column>
+            </af:table>
+          </af:panelCollection>
+        </af:panelBox>
+        <af:panelBox text="Ratings/SQC Requested" id="pb4" showDisclosure="false">
+          <f:facet name="toolbar"/>
+          <af:panelCollection id="pc5" inlineStyle="width:1000px;">
+            <f:facet name="menus"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="statusbar"/>
+            <af:table value="#{bindings.SeafarerSqcDetailsRO.collectionModel}" var="row"
+                      rows="#{bindings.SeafarerSqcDetailsRO.rangeSize}"
+                      emptyText="#{bindings.SeafarerSqcDetailsRO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.SeafarerSqcDetailsRO.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.SeafarerSqcDetailsRO.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.SeafarerSqcDetailsRO.rangeSize}" id="t7" contentDelivery="immediate" autoHeightRows="5"
+                      columnStretching="column:c33" inlineStyle="width:1000px;">
+              <af:column headerText="Grade" id="c53">
+                <af:outputText value="#{row.GradeCode}"
+                               shortDesc="#{bindings.SeafarerSqcDetailsRO.hints.GradeCode.tooltip}" id="ot21"/>
+              </af:column>
+              <af:column headerText="Description" id="c33" width="200">
+                <af:outputText value="#{row.GradeId}" shortDesc="#{bindings.SeafarerSqcDetailsRO.hints.GradeId.tooltip}"
+                               id="ot35"/>
+              </af:column>
+              <af:column headerText="Certificate Number" id="c54">
+                <af:outputText value="#{row.CocIdentifier}"
+                               shortDesc="#{bindings.SeafarerSqcDetailsRO.hints.CocIdentifier.tooltip}" id="ot22"/>
+              </af:column>
+              <af:column headerText="Issuing Country" id="c34" width="280">
+                <af:outputText value="#{row.CocCountry}"
+                               shortDesc="#{bindings.SeafarerSqcDetailsRO.hints.CocCountry.tooltip}" id="ot36"/>
+              </af:column>
+              <af:column headerText="Issue Date" id="c35" width="140">
+                <af:outputText value="#{row.CocIssueDate}"
+                               shortDesc="#{bindings.SeafarerSqcDetailsRO.hints.CocIssueDate.tooltip}" id="ot37">
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="Expiration Date" id="c36" width="140">
+                <af:outputText value="#{row.CocExpirationDate}"
+                               shortDesc="#{bindings.SeafarerSqcDetailsRO.hints.CocExpirationDate.tooltip}" id="ot38">
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                </af:outputText>
+              </af:column>
+              <af:column id="c38" width="130" headerText="Certificate">
+                <af:button text="View SQC" id="b10" destination="/seaf/previewdocumentservlet?path=#{row.EdocId}" targetFrame="_blank"
+                           visible="#{row.EdocId != null}"/>
+                <af:outputText value="C.O.C not uploaded" id="ot46" inlineStyle="font-size:small;"
+                               visible="#{row.EdocId == null and pageFlowScope.SubmittedBatchesBean.supportLinkVisible  == 'N'}"/>
+                <af:button text="View Documents" id="b17"
+                           visible="#{pageFlowScope.SubmittedBatchesBean.supportLinkVisible  == 'Y'}"
+                           destination="/seaf/previewdocumentservlet?path=#{pageFlowScope.SubmittedBatchesBean.supportLink}" targetFrame="_blank"/>
+              </af:column>
+              <af:column id="c37" width="150" headerText="Supporting Documents">
+                <af:button text="View Support Doc." id="b11"
+                           destination="/seaf/previewdocumentservlet?path=#{row.SupportEdocId}" targetFrame="_blank"
+                           visible="#{row.SupportEdocId != null}"/>
+                <af:outputText value="Support Doc not uploaded" id="ot47" inlineStyle="font-size:small;"
+                               visible="#{row.SupportEdocId == null and pageFlowScope.SubmittedBatchesBean.supportLinkVisible  == 'N'}"/>
+                <af:button text="View Documents" id="b18"
+                           visible="#{pageFlowScope.SubmittedBatchesBean.supportLinkVisible  == 'Y'}"
+                           destination="/seaf/previewdocumentservlet?path=#{pageFlowScope.SubmittedBatchesBean.supportLink}" targetFrame="_blank"/>
+              </af:column>
+              <af:column headerText="#{bindings.SeafarerSqcDetailsRO.hints.EdocId.label}" id="c43" visible="false">
+                <af:outputText value="#{row.EdocId}" shortDesc="#{bindings.SeafarerSqcDetailsRO.hints.EdocId.tooltip}"
+                               id="ot44">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.SeafarerSqcDetailsRO.hints.EdocId.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="#{bindings.SeafarerSqcDetailsRO.hints.SupportEdocId.label}" id="c44"
+                         visible="false">
+                <af:outputText value="#{row.SupportEdocId}"
+                               shortDesc="#{bindings.SeafarerSqcDetailsRO.hints.SupportEdocId.tooltip}" id="ot45">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.SeafarerSqcDetailsRO.hints.SupportEdocId.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="#{bindings.SeafarerSqcDetailsRO.hints.CocDoc.label}" id="c40" visible="false">
+                <af:outputText value="#{row.CocDoc}" shortDesc="#{bindings.SeafarerSqcDetailsRO.hints.CocDoc.tooltip}"
+                               id="ot40"/>
+              </af:column>
+              <af:column headerText="#{bindings.SeafarerSqcDetailsRO.hints.SupportDoc.label}" id="c41" visible="false">
+                <af:outputText value="#{row.SupportDoc}"
+                               shortDesc="#{bindings.SeafarerSqcDetailsRO.hints.SupportDoc.tooltip}" id="ot41"/>
+              </af:column>
+            </af:table>
+          </af:panelCollection>
+        </af:panelBox>
+      </af:dialog>
+    </af:popup>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="p4" contentDelivery="lazyUncached">
+      <af:dialog id="d4" type="none">
+        <f:facet name="buttonBar"/>
+        <af:panelBox text="Batch Details" id="pb1" showDisclosure="false" styleClass="AFStretchWidth">
+          <f:facet name="toolbar"/>
+          <af:panelFormLayout id="pfl4" rows="6" fieldWidth="300">
+            <af:inputText value="#{bindings.BatchName1.inputValue}" label="Batch Name :"
+                          required="#{bindings.BatchName1.hints.mandatory}"
+                          columns="#{bindings.BatchName1.hints.displayWidth}"
+                          maximumLength="#{bindings.BatchName1.hints.precision}"
+                          shortDesc="#{bindings.BatchName1.hints.tooltip}" id="it8" disabled="true"
+                          inlineStyle="font-weight:bold;" contentStyle="font-weight:bold;"
+                          labelStyle="font-weight:bold;">
+              <f:validator binding="#{bindings.BatchName1.validator}"/>
+            </af:inputText>
+            <af:inputDate value="#{bindings.BatchDate1.inputValue}" readOnly="false" label="Batch Date :"
+                          required="#{bindings.BatchDate1.hints.mandatory}"
+                          columns="#{bindings.BatchDate1.hints.displayWidth}"
+                          shortDesc="#{bindings.BatchDate1.hints.tooltip}" id="id7" disabled="true"
+                          labelStyle="font-weight:bold;" contentStyle="font-weight:bold;">
+              <f:validator binding="#{bindings.BatchDate1.validator}"/>
+              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+            </af:inputDate>
+            <af:inputText value="#{bindings.WorkflowStatus.inputValue}" label="Status :"
+                          required="#{bindings.WorkflowStatus.hints.mandatory}"
+                          columns="#{bindings.WorkflowStatus.hints.displayWidth}"
+                          maximumLength="#{bindings.WorkflowStatus.hints.precision}"
+                          shortDesc="#{bindings.WorkflowStatus.hints.tooltip}" id="it3"
+                          contentStyle="font-weight:bold;" labelStyle="font-weight:bold;"
+                          inlineStyle="font-weight:bold;" disabled="true" rendered="false">
+              <f:validator binding="#{bindings.WorkflowStatus.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.PurchaseOrderNumber1.inputValue}" label="Purchase Order Number :"
+                          required="#{bindings.PurchaseOrderNumber1.hints.mandatory}" readOnly="false"
+                          columns="#{bindings.PurchaseOrderNumber1.hints.displayWidth}"
+                          maximumLength="#{bindings.PurchaseOrderNumber1.hints.precision}"
+                          shortDesc="#{bindings.PurchaseOrderNumber1.hints.tooltip}" id="it10" disabled="true"
+                          contentStyle="font-weight:bold;" labelStyle="font-weight:bold;">
+              <f:validator binding="#{bindings.PurchaseOrderNumber1.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.VesselNames.inputValue}" label="Vessel Names :"
+                          required="#{bindings.VesselNames.hints.mandatory}" readOnly="false"
+                          columns="#{bindings.VesselNames.hints.displayWidth}"
+                          maximumLength="#{bindings.VesselNames.hints.precision}"
+                          shortDesc="#{bindings.VesselNames.hints.tooltip}" id="it11" disabled="true"
+                          contentStyle="font-weight:bold;" labelStyle="font-weight:bold;">
+              <f:validator binding="#{bindings.VesselNames.validator}"/>
+            </af:inputText>
+            <af:inputDate value="#{bindings.BatchSubmittedDate1.inputValue}" readOnly="false"
+                          label="Batch Submitted Date :" required="#{bindings.BatchSubmittedDate1.hints.mandatory}"
+                          columns="#{bindings.BatchSubmittedDate1.hints.displayWidth}"
+                          shortDesc="#{bindings.BatchSubmittedDate1.hints.tooltip}" id="id8" disabled="true"
+                          labelStyle="font-weight:bold;" contentStyle="font-weight:bold;">
+              <f:validator binding="#{bindings.BatchSubmittedDate1.validator}"/>
+              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+            </af:inputDate>
+            <af:panelLabelAndMessage label="Order Hold :" id="plam11" inlineStyle="font-weight:bold;"
+                                     labelStyle="font-weight:bold;">
+              <af:panelGroupLayout id="pgl12" layout="horizontal">
+                <af:selectBooleanCheckbox value="#{bindings.OrderHold.inputValue}" label="#{bindings.OrderHold.label}"
+                                          shortDesc="#{bindings.OrderHold.hints.tooltip}" id="sbc3" simple="true"
+                                          disabled="true" readOnly="false"/>
+                <af:link text="Details" id="l2" inlineStyle="margin-left:10px;"
+                         visible="#{bindings.OrderHold.inputValue eq true}">
+                  <af:showPopupBehavior popupId="p1"/>
+                </af:link>
+              </af:panelGroupLayout>
+            </af:panelLabelAndMessage>
+            <af:inputText value="#{bindings.NoOfSeafarer1.inputValue}" label="Number Of Seafarers :"
+                          required="#{bindings.NoOfSeafarer1.hints.mandatory}" readOnly="false"
+                          columns="#{bindings.NoOfSeafarer1.hints.displayWidth}"
+                          maximumLength="#{bindings.NoOfSeafarer1.hints.precision}"
+                          shortDesc="#{bindings.NoOfSeafarer1.hints.tooltip}" id="it12" disabled="true"
+                          contentStyle="font-weight:bold;" labelStyle="font-weight:bold;">
+              <f:validator binding="#{bindings.NoOfSeafarer1.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.NoOfSeafarer1.format}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.WorkOrderNo1.inputValue}" label="Work Order Number :"
+                          required="#{bindings.WorkOrderNo1.hints.mandatory}" readOnly="false"
+                          columns="#{bindings.WorkOrderNo1.hints.displayWidth}"
+                          maximumLength="#{bindings.WorkOrderNo1.hints.precision}"
+                          shortDesc="#{bindings.WorkOrderNo1.hints.tooltip}" id="it13" disabled="true"
+                          contentStyle="font-weight:bold;" labelStyle="font-weight:bold;">
+              <f:validator binding="#{bindings.WorkOrderNo1.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.WorkOrderNo1.format}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.OrderingCustomerName.inputValue}"
+                          label="Ordering Agent :"
+                          required="#{bindings.OrderingCustomerName.hints.mandatory}"
+                          columns="#{bindings.OrderingCustomerName.hints.displayWidth}"
+                          maximumLength="#{bindings.OrderingCustomerName.hints.precision}"
+                          shortDesc="#{bindings.OrderingCustomerName.hints.tooltip}" id="it7"
+                          contentStyle="font-weight:bold;" labelStyle="font-weight:bold;"
+                          inlineStyle="font-weight:bold;" disabled="true">
+              <f:validator binding="#{bindings.OrderingCustomerName.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.PayingCustomerName.inputValue}"
+                          label="Paying Customer :"
+                          required="#{bindings.PayingCustomerName.hints.mandatory}"
+                          columns="#{bindings.PayingCustomerName.hints.displayWidth}"
+                          maximumLength="#{bindings.PayingCustomerName.hints.precision}"
+                          shortDesc="#{bindings.PayingCustomerName.hints.tooltip}" id="it9" disabled="true"
+                          contentStyle="font-weight:bold;" labelStyle="font-weight:bold;"
+                          inlineStyle="font-weight:bold;">
+              <f:validator binding="#{bindings.PayingCustomerName.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.ShippingCustomerName.inputValue}"
+                          label="Ship Documents :"
+                          required="#{bindings.ShippingCustomerName.hints.mandatory}"
+                          columns="#{bindings.ShippingCustomerName.hints.displayWidth}"
+                          maximumLength="#{bindings.ShippingCustomerName.hints.precision}"
+                          shortDesc="#{bindings.ShippingCustomerName.hints.tooltip}" id="it14" disabled="true"
+                          contentStyle="font-weight:bold;" labelStyle="font-weight:bold;"
+                          inlineStyle="font-weight:bold;">
+              <f:validator binding="#{bindings.ShippingCustomerName.validator}"/>
+            </af:inputText>
+          </af:panelFormLayout>
+        </af:panelBox>
+        <af:panelBox text="Seafarer Details" id="pb2" showDisclosure="false" styleClass="AFStretchWidth">
+          <f:facet name="toolbar"/>
+          <af:table value="#{bindings.SeafarersDetailsRO.collectionModel}" var="row"
+                    rows="#{bindings.SeafarersDetailsRO.rangeSize}"
+                    emptyText="#{bindings.SeafarersDetailsRO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0" selectedRowKeys="#{bindings.SeafarersDetailsRO.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.SeafarersDetailsRO.collectionModel.makeCurrent}" rowSelection="single"
+                    fetchSize="#{bindings.SeafarersDetailsRO.rangeSize}" id="t1"
+                    autoHeightRows="5" contentDelivery="immediate" columnStretching="column:c2"
+                    inlineStyle="width:1000px;">
+            <af:column headerText="Given Names" id="c2">
+              <af:outputText value="#{row.FirstName}" shortDesc="#{bindings.SeafarersDetailsRO.hints.FirstName.tooltip}"
+                             id="ot2"/>
+            </af:column>
+            <af:column headerText="Surname" id="c1" width="170">
+              <af:outputText value="#{row.LastName}" shortDesc="#{bindings.SeafarersDetailsRO.hints.LastName.tooltip}"
+                             id="ot1"/>
+            </af:column>
+            <af:column headerText="Date of Birth" id="c3">
+              <af:outputText value="#{row.BirthDate}" shortDesc="#{bindings.SeafarersDetailsRO.hints.BirthDate.tooltip}"
+                             id="ot3">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Place of Birth" id="c4" width="150">
+              <af:outputText value="#{row.BirthPlace}"
+                             shortDesc="#{bindings.SeafarersDetailsRO.hints.BirthPlace.tooltip}" id="ot4"/>
+            </af:column>
+            <af:column headerText="Gender" id="c55">
+              <af:outputText value="#{row.Gender}" shortDesc="#{bindings.SeafarersDetailsRO.hints.Gender.tooltip}"
+                             id="ot28"/>
+            </af:column>
+            <af:column headerText="Passport Country" id="c6" width="180">
+              <af:outputText value="#{row.PassportIssuingCountry}"
+                             shortDesc="#{bindings.SeafarersDetailsRO.hints.PassportIssuingCountry.tooltip}" id="ot8"/>
+            </af:column>
+            <af:column headerText="Residence Country" id="c7" width="180">
+              <af:outputText value="#{row.ResidenceCountry}"
+                             shortDesc="#{bindings.SeafarersDetailsRO.hints.ResidenceCountry.tooltip}" id="ot9"/>
+            </af:column>
+            <af:column headerText="Citizenship" id="c56" width="180">
+              <af:outputText value="#{row.NationalityCountry}"
+                             shortDesc="#{bindings.SeafarersDetailsRO.hints.NationalityCountry.tooltip}" id="ot50"/>
+            </af:column>
+            <af:column headerText="Vessel Name" id="c57" width="130">
+              <af:outputText value="#{row.VesselName}"
+                             shortDesc="#{bindings.SeafarersDetailsRO.hints.VesselName.tooltip}" id="ot51"/>
+            </af:column>
+            <af:column headerText="Seafarer's Book" id="c5" visible="false">
+              <af:outputText value="#{row.IssueType}" shortDesc="#{bindings.SeafarersDetailsRO.hints.IssueType.tooltip}"
+                             id="ot5"/>
+            </af:column>
+            <af:column headerText="Seafarer's ID Card" id="c10" visible="false">
+              <af:outputText value="#{row.IssueTypeIdCard}"
+                             shortDesc="#{bindings.SeafarersDetailsRO.hints.IssueTypeIdCard.tooltip}" id="ot6"/>
+            </af:column>
+            <af:column headerText="Application Status" id="c22" width="200">
+              <af:outputText value="#{row.WorkflowStatus}"
+                             shortDesc="#{bindings.SeafarersDetailsRO.hints.WorkflowStatus.tooltip}" id="ot15"/>
+            </af:column>
+            <af:column id="c8" width="150">
+              <af:button text="View Uploaded Documents" id="b3">
+                <af:showPopupBehavior popupId=":::p5"/>
+              </af:button>
+            </af:column>
+            <af:column id="c9" width="150">
+              <af:button text="View Requested Items" id="b8">
+                <af:showPopupBehavior popupId=":::p6"/>
+              </af:button>
+            </af:column>
+          </af:table>
+        </af:panelBox>
+      </af:dialog>
+    </af:popup>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="p5" contentDelivery="lazyUncached"
+              popupFetchListener="#{pageFlowScope.SubmittedBatchesBean.documentPopupFetchlistener}"
+              partialTriggers="t1 t1:b3">
+      <af:dialog id="d5" type="none">
+        <f:facet name="buttonBar"/>
+        <af:panelFormLayout id="pfl1" styleClass="panelFormLayoutClass">
+          <f:facet name="footer"/>
+          <af:panelLabelAndMessage label="Application for Seafarer Documents" id="plam5"
+                                   visible="#{pageFlowScope.SubmittedBatchesBean.affidavitLinkVisible == 'Y'}">
+            <af:panelGroupLayout id="pgl6" layout="horizontal" styleClass="AFStretchWidth">
+              <af:button text="View" id="b7" partialTriggers="p5 t1"
+                         destination="/seaf/previewdocumentservlet?path=#{pageFlowScope.SubmittedBatchesBean.attestaionLink}" targetFrame="_blank"/>
+            </af:panelGroupLayout>
+          </af:panelLabelAndMessage>
+          <af:panelLabelAndMessage label="Photo" id="plam1">
+            <af:panelGroupLayout id="pgl2" layout="horizontal" styleClass="AFStretchWidth">
+              <af:button text="View" id="b1"
+                         destination="/seaf/previewdocumentservlet?path=#{pageFlowScope.SubmittedBatchesBean.photoLink}"
+                         targetFrame="_blank" partialTriggers="p5 t1"/>
+            </af:panelGroupLayout>
+          </af:panelLabelAndMessage>
+          <af:panelLabelAndMessage label="Identity Document" id="plam2"
+                                   visible="#{pageFlowScope.SubmittedBatchesBean.identityLinkVisible == 'Y'}">
+            <af:panelGroupLayout id="pgl3" layout="horizontal" styleClass="AFStretchWidth">
+              <af:button text="View" id="b2"
+                         destination="/seaf/previewdocumentservlet?path=#{pageFlowScope.SubmittedBatchesBean.identityLink}"
+                         targetFrame="_blank" partialTriggers="p5 t1"/>
+            </af:panelGroupLayout>
+          </af:panelLabelAndMessage>
+          <af:panelLabelAndMessage label="Medical Examination Report" id="plam3"
+                                   visible="#{pageFlowScope.SubmittedBatchesBean.medicalLinkVisible == 'Y'}">
+            <af:panelGroupLayout id="pgl4" layout="horizontal" styleClass="AFStretchWidth">
+              <af:button text="View" id="b4" partialTriggers="p5 t1"
+                         destination="/seaf/previewdocumentservlet?path=#{pageFlowScope.SubmittedBatchesBean.medicalLink}" targetFrame="_blank"/>
+            </af:panelGroupLayout>
+          </af:panelLabelAndMessage>
+          <af:panelLabelAndMessage label="Sea Service Transcript" id="plam4"
+                                   visible="#{pageFlowScope.SubmittedBatchesBean.seaserviceLinkVisible == 'Y'}">
+            <af:panelGroupLayout id="pgl5" layout="horizontal" styleClass="AFStretchWidth">
+              <af:button text="View" id="b5" partialTriggers="p5 t1"
+                         destination="/seaf/previewdocumentservlet?path=#{pageFlowScope.SubmittedBatchesBean.seaserviceLink}" targetFrame="_blank"/>
+            </af:panelGroupLayout>
+          </af:panelLabelAndMessage>
+          <af:panelLabelAndMessage label="MI-116 Affidavit of Lost or Destroyed Certificate" id="plam6"
+                                   visible="#{pageFlowScope.SubmittedBatchesBean.affidavitLinkVisible == 'Y'}">
+            <af:panelGroupLayout id="pgl7" layout="horizontal" styleClass="AFStretchWidth">
+              <af:button text="View" id="b12" partialTriggers="p5 t1"
+                         destination="/seaf/previewdocumentservlet?path=#{pageFlowScope.SubmittedBatchesBean.affidavitLink}" targetFrame="_blank"/>
+            </af:panelGroupLayout>
+          </af:panelLabelAndMessage>
+          <af:panelLabelAndMessage label="Security Training Certificate" id="plam7"
+                                   visible="#{pageFlowScope.SubmittedBatchesBean.securityLinkVisible == 'Y'}">
+            <af:panelGroupLayout id="pgl8" layout="horizontal" styleClass="AFStretchWidth">
+              <af:button text="View" id="b13" partialTriggers="p5 t1"
+                         destination="/seaf/previewdocumentservlet?path=#{pageFlowScope.SubmittedBatchesBean.securityLink}" targetFrame="_blank"/>
+            </af:panelGroupLayout>
+          </af:panelLabelAndMessage>
+          <af:panelLabelAndMessage label="Supporting Documents" id="plam8"
+                                   visible="#{pageFlowScope.SubmittedBatchesBean.supportLinkVisible == 'Y'}">
+            <af:panelGroupLayout id="pgl9" layout="horizontal">
+              <af:button text="View" id="b14" partialTriggers="p5 t1"
+                         destination="/seaf/previewdocumentservlet?path=#{pageFlowScope.SubmittedBatchesBean.supportLink}" targetFrame="_blank"/>
+            </af:panelGroupLayout>
+          </af:panelLabelAndMessage>
+          <af:panelLabelAndMessage label="Data Privacy Consent" id="plam9"
+                                   visible="#{bindings.ConsentEdocId.inputValue != null}">
+            <af:panelGroupLayout id="pgl10">
+              <af:button text="View" id="b15"
+                         destination="/seaf/previewdocumentservlet?path=#{pageFlowScope.SubmittedBatchesBean.consentLink}"
+                         targetFrame="_blank" partialTriggers="p5 t1"/>
+            </af:panelGroupLayout>
+          </af:panelLabelAndMessage>
+          <af:panelLabelAndMessage label="Additional Document" id="plam10"
+                                   visible="#{bindings.AdditionalDocEdocId.inputValue != null}" partialTriggers="it6">
+            <af:panelGroupLayout id="pgl11">
+              <af:button text="View" id="b6"
+                         destination="/seaf/previewdocumentservlet?path=#{pageFlowScope.SubmittedBatchesBean.additionalDocLink}"
+                         targetFrame="_blank"/>
+            </af:panelGroupLayout>
+          </af:panelLabelAndMessage>
+          <af:inputText value="#{bindings.tranConsentAckNo.inputValue}" label="Consent Acknowledgement No"
+                        required="#{bindings.tranConsentAckNo.hints.mandatory}"
+                        columns="#{bindings.tranConsentAckNo.hints.displayWidth}"
+                        maximumLength="#{bindings.tranConsentAckNo.hints.precision}"
+                        shortDesc="#{bindings.tranConsentAckNo.hints.tooltip}" id="it1" disabled="true"
+                        visible="#{bindings.tranConsentAckNo.inputValue != null}">
+            <f:validator binding="#{bindings.tranConsentAckNo.validator}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.AdditionalDocEdocId.inputValue}"
+                        label="#{bindings.AdditionalDocEdocId.hints.label}"
+                        required="#{bindings.AdditionalDocEdocId.hints.mandatory}"
+                        columns="#{bindings.AdditionalDocEdocId.hints.displayWidth}"
+                        maximumLength="#{bindings.AdditionalDocEdocId.hints.precision}"
+                        shortDesc="#{bindings.AdditionalDocEdocId.hints.tooltip}" id="it6" visible="false"
+                        partialTriggers="p4 d4 t1">
+            <f:validator binding="#{bindings.AdditionalDocEdocId.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.AdditionalDocEdocId.format}"/>
+          </af:inputText>
+          <af:inputDate value="#{bindings.trnConsentStartDate.inputValue}"
+                        label="Consent Start Date"
+                        required="#{bindings.trnConsentStartDate.hints.mandatory}"
+                        columns="#{bindings.trnConsentStartDate.hints.displayWidth}"
+                        shortDesc="#{bindings.trnConsentStartDate.hints.tooltip}" id="id2" disabled="true"
+                        visible="#{bindings.tranConsentAckNo.inputValue != null}">
+            <f:validator binding="#{bindings.trnConsentStartDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.trnConsentStartDate.format}"/>
+          </af:inputDate>
+          <af:inputDate value="#{bindings.tranConsentExpDate.inputValue}"
+                        label="Consent Expire Date"
+                        required="#{bindings.tranConsentExpDate.hints.mandatory}"
+                        columns="#{bindings.tranConsentExpDate.hints.displayWidth}"
+                        shortDesc="#{bindings.tranConsentExpDate.hints.tooltip}" id="id1" disabled="true"
+                        visible="#{bindings.tranConsentAckNo.inputValue != null}">
+            <f:validator binding="#{bindings.tranConsentExpDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.tranConsentExpDate.format}"/>
+          </af:inputDate>
+          <af:inputText value="#{bindings.ConsentEdocId.inputValue}" label="#{bindings.ConsentEdocId.hints.label}"
+                        required="#{bindings.ConsentEdocId.hints.mandatory}"
+                        columns="#{bindings.ConsentEdocId.hints.displayWidth}"
+                        maximumLength="#{bindings.ConsentEdocId.hints.precision}"
+                        shortDesc="#{bindings.ConsentEdocId.hints.tooltip}" id="it2" visible="false">
+            <f:validator binding="#{bindings.ConsentEdocId.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.ConsentEdocId.format}"/>
+          </af:inputText>
+        </af:panelFormLayout>
+      </af:dialog>
+    </af:popup>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="p1" contentDelivery="lazyUncached"
+              popupFetchListener="#{pageFlowScope.SubmittedBatchesBean.batchDetailPopupFetchListener}">
+      <af:dialog id="d1" type="ok" title="Order Hold Details">
+        <f:facet name="buttonBar"/>
+        <af:table value="#{bindings.OrderHoldView.collectionModel}" var="row" rows="#{bindings.OrderHoldView.rangeSize}"
+                  emptyText="#{bindings.OrderHoldView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" selectedRowKeys="#{bindings.OrderHoldView.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.OrderHoldView.collectionModel.makeCurrent}" rowSelection="single"
+                  fetchSize="#{bindings.OrderHoldView.rangeSize}" id="t4" columnStretching="column:c60"
+                  styleClass="AFStretchWidth" autoHeightRows="10" contentDelivery="immediate">
+          <af:column headerText="Hold Name" id="c59" width="150">
+            <af:outputText value="#{row.HoldName}" shortDesc="#{bindings.OrderHoldView.hints.HoldName.tooltip}"
+                           id="ot53"/>
+          </af:column>
+          <af:column headerText="Hold Date" id="c58">
+            <af:outputText value="#{row.HoldDate}" shortDesc="#{bindings.OrderHoldView.hints.HoldDate.tooltip}"
+                           id="ot52">
+              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+            </af:outputText>
+          </af:column>
+          <af:column headerText="Hold Comments" id="c60" width="250">
+            <af:outputText value="#{row.HoldComment}" shortDesc="#{bindings.OrderHoldView.hints.HoldComment.tooltip}"
+                           id="ot54"/>
+          </af:column>
+          <af:column headerText="Held By" id="c61" width="150">
+            <af:outputText value="#{row.HeldBy}" shortDesc="#{bindings.OrderHoldView.hints.HeldBy.tooltip}" id="ot55"/>
+          </af:column>
+        </af:table>
+      </af:dialog>
+    </af:popup>
+  </af:panelGroupLayout>
+</jsp:root>

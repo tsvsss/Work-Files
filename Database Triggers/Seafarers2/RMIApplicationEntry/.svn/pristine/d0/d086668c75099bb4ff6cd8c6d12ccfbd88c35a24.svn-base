@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="TaskAssignmentTaskFlow_taskflow_taskAssignment_onLoadTaskAssignmentpagePageDef"
+                Package="com.rmi.applicationEntry.view.taskassignmenttaskflow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="onLoadTaskAssignmentpage" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="onLoadTaskAssignmentpage" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.onLoadTaskAssignmentpage_RMIApplicationEntryAppModuleDataControl_dataProvider_onLoadTaskAssignmentpage_result">
+      <NamedData NDName="pUserId" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

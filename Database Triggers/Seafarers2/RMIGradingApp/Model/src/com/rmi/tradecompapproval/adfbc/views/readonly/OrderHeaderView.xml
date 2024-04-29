@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="OrderHeaderView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="com.rmi.tradecompapproval.adfbc.views.readonly.OrderHeaderViewRowImpl"
+  PageIterMode="Full"
+  FetchMode="FETCH_AS_NEEDED"
+  Passivate="All">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.readonly.OrderHeaderView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pCustomer"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="pCustomerPo"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="pOrderNumber"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="pHeaderId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <ViewAccessor
+    Name="ReleaseHoldReasonView1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.ReleaseHoldReasonView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="PrintRequestSetsView1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.PrintRequestSetsView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_TransHoldReleaseReasonCode"
+    ListVOName="ReleaseHoldReasonView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransHoldReleaseReasonCode"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LookupCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PrintReportRequestSet"
+    ListVOName="PrintRequestSetsView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PrintReportRequestSet"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="RequestSet"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="RequestSetName"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT                      
+1 SL_NO,                      
+HEADER_ID,                    
+SOLD_TO_ORG_ID,                      
+ORDER_TYPE_ID,                      
+CUST_PO_NUMBER,                      
+ORDER_NUMBER,                      
+SHIP_TO_ORG_ID,                      
+SHIP_TO_CONTACT_ID,                      
+INVOICE_TO_ORG_ID,                      
+INVOICE_TO_CONTACT_ID,                
+DELIVER_TO_ORG_ID,                
+DELIVER_TO_CONTACT_ID,             
+CREATION_DATE,         
+CREATED_BY,        
+ATTRIBUTE12         
+FROM                      
+OE_ORDER_HEADERS_ALL                      
+WHERE   
+SOLD_TO_ORG_ID = NVL(:pCustomer, SOLD_TO_ORG_ID)                      
+AND NVL(CUST_PO_NUMBER,'NULL') = NVL(:pCustomerPo, NVL(CUST_PO_NUMBER,'NULL'))                      
+AND ORDER_NUMBER = NVL(:pOrderNumber, ORDER_NUMBER)     
+AND HEADER_ID = NVL(:pHeaderId, HEADER_ID)      
+AND ORDER_TYPE_ID = 1003        
+ORDER BY CREATION_DATE DESC]]></SQLQuery>
+  <ViewAttribute
+    Name="SlNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SL_NO"
+    Expression="SL_NO"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="HeaderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="HEADER_ID"
+    Expression="HEADER_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="SoldToOrgId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SOLD_TO_ORG_ID"
+    Expression="SOLD_TO_ORG_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="OrderTypeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ORDER_TYPE_ID"
+    Expression="ORDER_TYPE_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="CustPoNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUST_PO_NUMBER"
+    Expression="CUST_PO_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrderNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ORDER_NUMBER"
+    Expression="ORDER_NUMBER"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="ShipToOrgId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SHIP_TO_ORG_ID"
+    Expression="SHIP_TO_ORG_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="ShipToContactId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SHIP_TO_CONTACT_ID"
+    Expression="SHIP_TO_CONTACT_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="InvoiceToOrgId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="INVOICE_TO_ORG_ID"
+    Expression="INVOICE_TO_ORG_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="InvoiceToContactId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="INVOICE_TO_CONTACT_ID"
+    Expression="INVOICE_TO_CONTACT_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="DeliverToOrgId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="DELIVER_TO_ORG_ID"
+    Expression="DELIVER_TO_ORG_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="DeliverToContactId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="DELIVER_TO_CONTACT_ID"
+    Expression="DELIVER_TO_CONTACT_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="CreationDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CREATION_DATE"
+    Expression="CREATION_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CREATED_BY"
+    Expression="CREATED_BY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Attribute12"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ATTRIBUTE12"
+    Expression="ATTRIBUTE12"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransShipToAddress"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2550"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransBillToAddress"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2550"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransSubtotal"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="37"
+    Scale="2"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TransTaxAmount"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="37"
+    Scale="2"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TransCharges"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="37"
+    Scale="2"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TransTotal"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="37"
+    Scale="2"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC">
+    <TransientExpression
+      trustMode="untrusted"><![CDATA[EnterOrderLinesRO.sum("TransExtendedPrice")]]></TransientExpression>
+    <RecalcCondition
+      trustMode="untrusted"><![CDATA[true]]></RecalcCondition>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransDeliverToAddress"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransShipToContactName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransBillToContactName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransDeliverToContactName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransOrderHold"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransHoldReleaseReasonCode"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_TransHoldReleaseReasonCode">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransReleaseReasonDesc"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransStatus"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="PrintReportRequestSet"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_PrintReportRequestSet">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="HeaderId"/>
+    <Item Value="OrderTypeId"/>
+  </AttrArray>
+  <ViewLinkAccessor
+    Name="EnterOrderLinesRO"
+    ViewLink="com.rmi.tradecompapproval.adfbc.views.links.EnterOrderLinesLogicalLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

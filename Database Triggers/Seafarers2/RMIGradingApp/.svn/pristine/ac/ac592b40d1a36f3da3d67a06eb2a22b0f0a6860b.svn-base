@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SeafarerDataVerificationOrdersView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.readonly.SeafarerDataVerificationOrdersView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pSalesRepId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT     
+OH.HEADER_ID,   
+EB.ESI_BATCH_ID,   
+OH.ORDER_NUMBER,     
+OH.ORDERED_DATE,     
+OH.SALESREP_ID,     
+GET_SALESREP_NAME(OH.SALESREP_ID) PROCESSING_CENTER,     
+EXSICD_UTILS.HAS_ORDER_BEEN_DATA_VERIFIED(OH.HEADER_ID) DATA_VERIFIED   
+FROM     
+APPS.OE_ORDER_HEADERS_ALL OH,   
+RMI_SEAFARER.RMI_BATCH_IFACE EB   
+WHERE   
+EB.OE_HEADER_ID(+) = OH.HEADER_ID   
+AND OH.ATTRIBUTE9 IN ('Pending Data Verification')      
+AND NVL(OH.OPEN_FLAG, 'N') = 'Y'      
+AND OH.SALESREP_ID = (CASE WHEN :pSalesRepId IS NOT NULL                         
+                             THEN EXSICD_PROFILES_PKG.GET_USER_PROFILE                         
+                                (:pSalesRepId, 'Default Processing Office')                         
+                             ELSE TO_CHAR(OH.SALESREP_ID) END)]]></SQLQuery>
+  <ViewAttribute
+    Name="HeaderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="HEADER_ID"
+    Expression="HEADER_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="EsiBatchId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ESI_BATCH_ID"
+    Expression="ESI_BATCH_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="OrderNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ORDER_NUMBER"
+    Expression="ORDER_NUMBER"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="OrderedDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="ORDERED_DATE"
+    Expression="ORDERED_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="SalesrepId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SALESREP_ID"
+    Expression="SALESREP_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="ProcessingCenter"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PROCESSING_CENTER"
+    Expression="PROCESSING_CENTER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DataVerified"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DATA_VERIFIED"
+    Expression="DATA_VERIFIED"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="HeaderId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

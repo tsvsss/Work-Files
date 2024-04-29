@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="GetOnlineConsentByMasterIdView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.manualtradecompliance.adfbc.views.GetOnlineConsentByMasterIdView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="p_master_id"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <Variable
+    Name="p_alias_id"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <Variable
+    Name="p_xref_id"
+    Kind="where"
+    Type="java.math.BigDecimal"/>
+  <SQLQuery><![CDATA[select consent_id,consent_date,consent_expire_date,edoc_id,confirmation_number,entity_type from RMI_DATA_PRIVACY_CONSENT   
+where master_id=rmi_ows_common_util.get_master_id(:p_master_id,:p_alias_id,:p_xref_id)   
+and consent_source='Online' 
+order by consent_id desc]]></SQLQuery>
+  <ViewAttribute
+    Name="ConsentId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CONSENT_ID"
+    Expression="CONSENT_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ConsentDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CONSENT_DATE"
+    Expression="CONSENT_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="ConsentExpireDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CONSENT_EXPIRE_DATE"
+    Expression="CONSENT_EXPIRE_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="EdocId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="EDOC_ID"
+    Expression="EDOC_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ConfirmationNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONFIRMATION_NUMBER"
+    Expression="CONFIRMATION_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EntityType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ENTITY_TYPE"
+    Expression="ENTITY_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="ConsentId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.manualtradecompliance.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

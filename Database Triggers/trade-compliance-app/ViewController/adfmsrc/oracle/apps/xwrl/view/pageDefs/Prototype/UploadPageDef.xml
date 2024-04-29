@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="UploadPageDef"
+                Package="oracle.apps.xwrl.view.pageDefs.Prototype">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="GetAliasNamesRVO1Iterator" Binds="GetAliasNamesRVO1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="XwrlRequestsView1Iterator" Binds="XwrlRequestsView1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="XwrlResponseIndColumnsView1Iterator" Binds="XwrlResponseIndColumnsView1"
+              DataControl="AppModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <methodAction id="getIterBinding" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getIterBinding"
+                  IsViewObjectMethod="false" DataControl="UploadDataControl"
+                  InstanceName="data.UploadDataControl.dataProvider"
+                  ReturnName="data.UploadDataControl.methodResults.getIterBinding_UploadDataControl_dataProvider_getIterBinding_result"/>
+    <methodAction id="setIterBinding" RequiresUpdateModel="true" Action="invokeMethod" MethodName="setIterBinding"
+                  IsViewObjectMethod="false" DataControl="UploadDataControl"
+                  InstanceName="data.UploadDataControl.dataProvider">
+      <NamedData NDName="iterBinding" NDType="java.lang.String"/>
+    </methodAction>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

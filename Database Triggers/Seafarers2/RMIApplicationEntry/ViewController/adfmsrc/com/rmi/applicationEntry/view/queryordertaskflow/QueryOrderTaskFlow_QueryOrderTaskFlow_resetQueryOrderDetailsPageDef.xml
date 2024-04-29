@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="QueryOrderTaskFlow_QueryOrderTaskFlow_resetQueryOrderDetailsPageDef"
+                Package="com.rmi.applicationEntry.view.queryordertaskflow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="resetQueryOrderDetails" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="resetQueryOrderDetails" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.resetQueryOrderDetails_RMIApplicationEntryAppModuleDataControl_dataProvider_resetQueryOrderDetails_result"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+ <af:document id="d1">
+ <!--af:clientListener method="onPageLoad" type="load"/>       
+	<f:facet name="metaContainer">         
+	<af:resource type="javascript">           
+	function onPageLoad(evt) 
+	{             
+	  window.history.forward(-1);          
+	}         
+	</af:resource>       
+	</f:facet-->    
+  <af:form id="f1">
+  <af:panelGroupLayout layout="horizontal" halign="center" valign="middle">
+  <af:spacer height="150" />
+   <af:outputText value="Another User already holds the lock. Please try again after some time" 
+   inlineStyle="color:Red;"
+                 id="it1"/> <!--  value="#{param.errMsg}"  -->
+        <af:spacer height="150" />
+     </af:panelGroupLayout>
+  </af:form>
+ </af:document>
+</f:view>

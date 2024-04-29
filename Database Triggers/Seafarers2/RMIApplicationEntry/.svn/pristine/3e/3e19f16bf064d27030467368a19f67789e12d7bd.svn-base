@@ -1,0 +1,314 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="vertical" styleClass="AFStretchWidth">
+    <af:panelBox text="Request Submission" id="pb1" showDisclosure="false">
+      <f:facet name="toolbar"/>
+      <af:toolbar id="t1" inlineStyle="margin-top:10px;">
+        <af:popup childCreation="deferred" autoCancel="enabled" id="p1" contentDelivery="lazyUncached"
+                  binding="#{pageFlowScope.RequestSubmissionBean.requestSubmitPopupBinding}"
+                  popupFetchListener="#{pageFlowScope.RequestSubmissionBean.requestPopupFetchListener}">
+          <af:dialog id="d1" type="none">
+            <f:facet name="buttonBar">
+              <af:button text="Submit" id="b4" actionListener="#{pageFlowScope.RequestSubmissionBean.submitButton}"/>
+            </f:facet>
+            <af:panelFormLayout id="pfl1" styleClass="panelFormLayoutClass">
+              <af:selectOneChoice value="#{bindings.SelectRequest.inputValue}" label="Select Request"
+                                  required="#{bindings.SelectRequest.hints.mandatory}"
+                                  shortDesc="#{bindings.SelectRequest.hints.tooltip}" id="soc1"
+                                  contentStyle="width:200px;" autoSubmit="true" rendered="false">
+                <f:selectItems value="#{bindings.SelectRequest.items}" id="si1"/>
+                <f:validator binding="#{bindings.SelectRequest.validator}"/>
+              </af:selectOneChoice>
+              <af:inputListOfValues id="selectRequest1Id"
+                                    popupTitle="Search and Select: Request"
+                                    value="#{bindings.SelectRequest1.inputValue}"
+                                    label="Select Request"
+                                    model="#{bindings.SelectRequest1.listOfValuesModel}"
+                                    required="#{bindings.SelectRequest1.hints.mandatory}"
+                                    columns="#{bindings.SelectRequest1.hints.displayWidth}"
+                                    shortDesc="#{bindings.SelectRequest1.hints.tooltip}" styleClass="AFInputTextHead"
+                                    contentStyle="width:400px !important;" autoSubmit="true" autoComplete="on"
+                                    valueChangeListener="#{pageFlowScope.RequestSubmissionBean.selectRequestValueChangeListener}">
+                <f:validator binding="#{bindings.SelectRequest1.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.SelectRequest1.suggestedItems}"/>
+              </af:inputListOfValues>
+              <af:inputListOfValues id="orderNumberId" popupTitle="Search and Select: Order Number"
+                                    value="#{bindings.OrderNumber.inputValue}" label="Order Number"
+                                    model="#{bindings.OrderNumber.listOfValuesModel}"
+                                    required="#{bindings.OrderNumber.hints.mandatory}"
+                                    columns="#{bindings.OrderNumber.hints.displayWidth}"
+                                    shortDesc="#{bindings.OrderNumber.hints.tooltip}" autoSubmit="true"
+                                    contentStyle="width:200px;"
+                                    visible="#{pageFlowScope.header_id_visible == 'Y'}"
+                                    partialTriggers="selectRequest1Id">
+                <f:validator binding="#{bindings.OrderNumber.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.OrderNumber.suggestedItems}"/>
+              </af:inputListOfValues>
+              <af:selectOneChoice value="#{bindings.LineId.inputValue}" label="Line Number"
+                                  required="#{bindings.LineId.hints.mandatory}"
+                                  shortDesc="#{bindings.LineId.hints.tooltip}" id="soc3"
+                                  partialTriggers="orderNumberId selectRequest1Id"
+                                  contentStyle="width:200px;"
+                                  visible="#{pageFlowScope.line_id_visible == 'Y'}">
+                <f:selectItems value="#{bindings.LineId.items}" id="si3"/>
+                <f:validator binding="#{bindings.LineId.validator}"/>
+              </af:selectOneChoice>
+              <af:inputDate value="#{bindings.FromDate.inputValue}" label="Begin Date"
+                            required="#{bindings.FromDate.hints.mandatory}"
+                            columns="#{bindings.FromDate.hints.displayWidth}"
+                            shortDesc="#{bindings.FromDate.hints.tooltip}" id="id3"
+                            contentStyle="width:200px;text-transform:uppercase" autoSubmit="true"
+                            visible="#{pageFlowScope.begin_date_visible == 'Y'}" partialTriggers="selectRequest1Id">
+                <f:validator binding="#{bindings.FromDate.validator}"/>
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:inputDate>
+              <af:inputDate value="#{bindings.ToDate.inputValue}" label="End Date"
+                            required="#{bindings.ToDate.hints.mandatory}"
+                            columns="#{bindings.ToDate.hints.displayWidth}" shortDesc="#{bindings.ToDate.hints.tooltip}"
+                            id="id4" contentStyle="width:200px;text-transform:uppercase" autoSubmit="true"
+                            visible="#{pageFlowScope.end_date_visible == 'Y'}" partialTriggers="selectRequest1Id">
+                <f:validator binding="#{bindings.ToDate.validator}"/>
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:inputDate>
+              <af:selectOneChoice value="#{bindings.SalesOffice.inputValue}" label="Sales Office"
+                                  required="#{bindings.SalesOffice.hints.mandatory}"
+                                  shortDesc="#{bindings.SalesOffice.hints.tooltip}" id="soc4"
+                                  contentStyle="width:200px;" autoSubmit="true"
+                                  visible="#{pageFlowScope.sales_office_visible == 'Y'}"
+                                  partialTriggers="selectRequest1Id">
+                <f:selectItems value="#{bindings.SalesOffice.items}" id="si4"/>
+                <f:validator binding="#{bindings.SalesOffice.validator}"/>
+              </af:selectOneChoice>
+              <af:inputListOfValues id="batchNameId" popupTitle="Search and Select: #{bindings.BatchName.hints.label}"
+                                    value="#{bindings.BatchName.inputValue}" label="Batch Name"
+                                    model="#{bindings.BatchName.listOfValuesModel}"
+                                    required="#{bindings.BatchName.hints.mandatory}"
+                                    columns="#{bindings.BatchName.hints.displayWidth}"
+                                    shortDesc="#{bindings.BatchName.hints.tooltip}" contentStyle="width:200px;"
+                                    autoSubmit="true" partialTriggers="selectRequest1Id"
+                                    visible="#{pageFlowScope.batch_name_visible == 'Y'}">
+                <f:validator binding="#{bindings.BatchName.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.BatchName.suggestedItems}"/>
+              </af:inputListOfValues>
+              <af:selectOneChoice value="#{bindings.IncludeAllSeafarer.inputValue}"
+                                  label="Include All Seafarer"
+                                  required="#{bindings.IncludeAllSeafarer.hints.mandatory}"
+                                  shortDesc="#{bindings.IncludeAllSeafarer.hints.tooltip}" id="soc8"
+                                  contentStyle="width:200px;" autoSubmit="true"
+                                  visible="#{pageFlowScope.batch_name_visible == 'Y'}"
+                                  partialTriggers="selectRequest1Id">
+                <f:selectItems value="#{bindings.IncludeAllSeafarer.items}" id="si8"/>
+                <f:validator binding="#{bindings.IncludeAllSeafarer.validator}"/>
+              </af:selectOneChoice>
+              <af:inputText value="#{bindings.SeafarerId.inputValue}" label="Seafarer Id"
+                            required="#{bindings.SeafarerId.hints.mandatory}"
+                            columns="#{bindings.SeafarerId.hints.displayWidth}"
+                            maximumLength="#{bindings.SeafarerId.hints.precision}"
+                            shortDesc="#{bindings.SeafarerId.hints.tooltip}" id="it7"
+                            visible="#{pageFlowScope.batch_name_visible == 'Y'}" autoSubmit="true"
+                            contentStyle="width:200px;" partialTriggers="selectRequest1Id">
+                <f:validator binding="#{bindings.SeafarerId.validator}"/>
+              </af:inputText>
+              <af:selectOneChoice value="#{bindings.GroupName.inputValue}" label="Group Name"
+                                  required="#{bindings.GroupName.hints.mandatory}"
+                                  shortDesc="#{bindings.GroupName.hints.tooltip}" id="soc5" contentStyle="width:200px;"
+                                  autoSubmit="true" visible="#{pageFlowScope.group_name_visible == 'Y'}"
+                                  partialTriggers="selectRequest1Id">
+                <f:selectItems value="#{bindings.GroupName.items}" id="si5"/>
+                <f:validator binding="#{bindings.GroupName.validator}"/>
+              </af:selectOneChoice>
+              <af:selectOneChoice value="#{bindings.ActionName.inputValue}" label="Action"
+                                  required="#{bindings.ActionName.hints.mandatory}"
+                                  shortDesc="#{bindings.ActionName.hints.tooltip}" id="soc6"
+                                  contentStyle="width:200px;" partialTriggers="selectRequest1Id" autoSubmit="true"
+                                  visible="#{pageFlowScope.action_name_visible == 'Y'}">
+                <f:selectItems value="#{bindings.ActionName.items}" id="si6"/>
+                <f:validator binding="#{bindings.ActionName.validator}"/>
+              </af:selectOneChoice>
+              <af:selectOneChoice value="#{bindings.OrderBy.inputValue}" label="Order By"
+                                  required="#{bindings.OrderBy.hints.mandatory}"
+                                  shortDesc="#{bindings.OrderBy.hints.tooltip}" id="soc7" contentStyle="width:200px;"
+                                  autoSubmit="true" partialTriggers="selectRequest1Id"
+                                  visible="#{pageFlowScope.orderby_name_visible == 'Y'}">
+                <f:selectItems value="#{bindings.OrderBy.items}" id="si7"/>
+                <f:validator binding="#{bindings.OrderBy.validator}"/>
+              </af:selectOneChoice>
+              <af:inputListOfValues id="printerNameId"
+                                    popupTitle="Search and Select: Printer"
+                                    value="#{bindings.PrinterName.inputValue}"
+                                    label="Printer Name"
+                                    model="#{bindings.PrinterName.listOfValuesModel}"
+                                    required="#{bindings.PrinterName.hints.mandatory}"
+                                    columns="#{bindings.PrinterName.hints.displayWidth}"
+                                    shortDesc="#{bindings.PrinterName.hints.tooltip}" contentStyle="width:200px;"
+                                    autoSubmit="true" autoComplete="on">
+                <f:validator binding="#{bindings.PrinterName.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.PrinterName.suggestedItems}"/>
+              </af:inputListOfValues>
+              <af:inputText value="#{bindings.NumberOfCopies.inputValue}" label="Number Of Copies"
+                            required="#{bindings.NumberOfCopies.hints.mandatory}"
+                            columns="#{bindings.NumberOfCopies.hints.displayWidth}"
+                            maximumLength="#{bindings.NumberOfCopies.hints.precision}"
+                            shortDesc="#{bindings.NumberOfCopies.hints.tooltip}" id="it6" contentStyle="width:200px;"
+                            autoSubmit="true">
+                <f:validator binding="#{bindings.NumberOfCopies.validator}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.ProgramShortName.inputValue}"
+                            label="#{bindings.ProgramShortName.hints.label}"
+                            required="#{bindings.ProgramShortName.hints.mandatory}"
+                            columns="#{bindings.ProgramShortName.hints.displayWidth}"
+                            maximumLength="#{bindings.ProgramShortName.hints.precision}"
+                            shortDesc="#{bindings.ProgramShortName.hints.tooltip}" id="it5" partialTriggers="soc1"
+                            visible="false">
+                <f:validator binding="#{bindings.ProgramShortName.validator}"/>
+              </af:inputText>
+            </af:panelFormLayout>
+          </af:dialog>
+        </af:popup>
+        <af:button text="Request Submit/Resubmit" id="b1">
+          <af:showPopupBehavior popupId="p1" triggerType="action"/>
+        </af:button>
+      </af:toolbar>
+      <af:panelBox text="Request Search" id="pb2" showDisclosure="false" inlineStyle="margin-top:10px;">
+        <f:facet name="toolbar"/>
+        <af:panelFormLayout id="pfl2" inlineStyle="margin-top:10px;" labelWidth="250" partialTriggers="b3"
+                            styleClass="panelFormLayoutClass" rows="3">
+          <af:inputText value="#{bindings.RequestId.inputValue}" label="Request ID"
+                        required="#{bindings.RequestId.hints.mandatory}"
+                        columns="#{bindings.RequestId.hints.displayWidth}"
+                        maximumLength="#{bindings.RequestId.hints.precision}"
+                        shortDesc="#{bindings.RequestId.hints.tooltip}" id="it1" contentStyle="width:200px;"
+                        autoSubmit="true">
+            <f:validator binding="#{bindings.RequestId.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.RequestId.format}"/>
+          </af:inputText>
+          <af:inputDate value="#{bindings.RequestDate.inputValue}" label="Request Date"
+                        required="#{bindings.RequestDate.hints.mandatory}"
+                        columns="#{bindings.RequestDate.hints.displayWidth}"
+                        shortDesc="#{bindings.RequestDate.hints.tooltip}" id="id2"
+                        contentStyle="width:200px;text-transform:uppercase;"
+                        autoSubmit="true">
+            <f:validator binding="#{bindings.RequestDate.validator}"/>
+            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+          </af:inputDate>
+          <af:inputText value="#{bindings.Days.inputValue}" label="Enter the Number of Days to View"
+                        required="#{bindings.Days.hints.mandatory}" columns="#{bindings.Days.hints.displayWidth}"
+                        maximumLength="#{bindings.Days.hints.precision}" shortDesc="#{bindings.Days.hints.tooltip}"
+                        id="it2" contentStyle="width:30px;" inlineStyle="margin-left:50px;" autoSubmit="true">
+            <f:validator binding="#{bindings.Days.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.Days.format}"/>
+          </af:inputText>
+          <af:selectOneChoice value="#{bindings.ProgramId.inputValue}" label="Name"
+                              required="#{bindings.ProgramId.hints.mandatory}"
+                              shortDesc="#{bindings.ProgramId.hints.tooltip}" id="soc2" contentStyle="width:200px;"
+                              autoSubmit="true">
+            <f:selectItems value="#{bindings.ProgramId.items}" id="si2"/>
+            <f:validator binding="#{bindings.ProgramId.validator}"/>
+          </af:selectOneChoice>
+          <af:inputListOfValues id="userNameId" popupTitle="Search and Select: User"
+                                value="#{bindings.UserName.inputValue}" label="Requestor"
+                                model="#{bindings.UserName.listOfValuesModel}"
+                                required="#{bindings.UserName.hints.mandatory}"
+                                columns="#{bindings.UserName.hints.displayWidth}"
+                                shortDesc="#{bindings.UserName.hints.tooltip}" contentStyle="width:200px;"
+                                autoSubmit="true" disabled="true">
+            <f:validator binding="#{bindings.UserName.validator}"/>
+            <af:autoSuggestBehavior suggestedItems="#{bindings.UserName.suggestedItems}"/>
+          </af:inputListOfValues>
+        </af:panelFormLayout>
+      </af:panelBox>
+      <af:toolbar id="t3">
+        <af:button text="Search" id="b2" actionListener="#{pageFlowScope.RequestSubmissionBean.searchButton}"/>
+        <af:button text="Reset" id="b3" inlineStyle="margin-left:5px;"
+                   actionListener="#{pageFlowScope.RequestSubmissionBean.resetButton}"/>
+      </af:toolbar>
+      <af:panelCollection id="pc1" styleClass="AFStretchWidth" inlineStyle="margin-top:10px;">
+        <f:facet name="menus"/>
+        <f:facet name="toolbar"/>
+        <f:facet name="statusbar"/>
+        <af:table value="#{bindings.RequestDetailsView.collectionModel}" var="row"
+                  rows="#{bindings.RequestDetailsView.rangeSize}"
+                  emptyText="#{bindings.RequestDetailsView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" selectedRowKeys="#{bindings.RequestDetailsView.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.RequestDetailsView.collectionModel.makeCurrent}" rowSelection="single"
+                  fetchSize="#{bindings.RequestDetailsView.rangeSize}"
+                  filterModel="#{bindings.RequestDetailsViewQuery.queryDescriptor}"
+                  queryListener="#{bindings.RequestDetailsViewQuery.processQuery}" filterVisible="true" varStatus="vs"
+                  id="t2" styleClass="AFStretchWidth" columnStretching="column:c2" autoHeightRows="5"
+                  contentDelivery="immediate" partialTriggers=":::b2 :::b3">
+          <af:column sortProperty="#{bindings.RequestDetailsView.hints.RequestId.name}" filterable="true"
+                     sortable="true" headerText="Request ID" id="c1">
+            <af:outputText value="#{row.RequestId}" shortDesc="#{bindings.RequestDetailsView.hints.RequestId.tooltip}"
+                           id="ot1">
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.RequestDetailsView.hints.RequestId.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column sortProperty="#{bindings.RequestDetailsView.hints.UserConcurrentProgramName.name}"
+                     filterable="true" sortable="true"
+                     headerText="Name" id="c2">
+            <af:outputText value="#{row.UserConcurrentProgramName}"
+                           shortDesc="#{bindings.RequestDetailsView.hints.UserConcurrentProgramName.tooltip}" id="ot2"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.RequestDetailsView.hints.ParentRequestId.name}" filterable="true"
+                     sortable="true" headerText="Parent" id="c3">
+            <af:outputText value="#{row.ParentRequestId}"
+                           shortDesc="#{bindings.RequestDetailsView.hints.ParentRequestId.tooltip}" id="ot3">
+              <af:convertNumber groupingUsed="false"
+                                pattern="#{bindings.RequestDetailsView.hints.ParentRequestId.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column sortProperty="#{bindings.RequestDetailsView.hints.Phase.name}" filterable="true" sortable="true"
+                     headerText="Phase" id="c4">
+            <af:outputText value="#{row.Phase}" shortDesc="#{bindings.RequestDetailsView.hints.Phase.tooltip}"
+                           id="ot4"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.RequestDetailsView.hints.Status.name}" filterable="true" sortable="true"
+                     headerText="Status" id="c5">
+            <af:outputText value="#{row.Status}" shortDesc="#{bindings.RequestDetailsView.hints.Status.tooltip}"
+                           id="ot5"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.RequestDetailsView.hints.Requestor.name}" filterable="true"
+                     sortable="true" headerText="Requestor" id="c6">
+            <af:outputText value="#{row.Requestor}" shortDesc="#{bindings.RequestDetailsView.hints.Requestor.tooltip}"
+                           id="ot6"/>
+          </af:column>
+          <af:column sortProperty="#{bindings.RequestDetailsView.hints.RequestDate.name}" filterable="true"
+                     sortable="true" headerText="Request Date" id="c7">
+            <f:facet name="filter">
+              <af:inputDate value="#{bindings.RequestDetailsViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.RequestDate.value}"
+                            id="id1">
+                <af:convertDateTime pattern="#{bindings.RequestDetailsView.hints.RequestDate.format}"/>
+              </af:inputDate>
+            </f:facet>
+            <af:outputText value="#{row.RequestDate}"
+                           shortDesc="#{bindings.RequestDetailsView.hints.RequestDate.tooltip}" id="ot7"
+                           inlineStyle="text-transform:uppercase;">
+              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+            </af:outputText>
+          </af:column>
+        </af:table>
+      </af:panelCollection>
+      <af:button text="View Log" id="b5"
+                 actionListener="#{pageFlowScope.RequestSubmissionBean.viewLogActionListener}"/>
+      <af:button text="View Output" id="b6" inlineStyle="margin-left:5px;"
+                 actionListener="#{pageFlowScope.RequestSubmissionBean.viewOutputActionListener}"/>
+      <af:panelFormLayout id="pfl3" partialTriggers="pc1:t2" visible="false">
+        <af:inputText value="#{bindings.LogfileName.inputValue}" label="#{bindings.LogfileName.hints.label}"
+                      required="#{bindings.LogfileName.hints.mandatory}" readOnly="true"
+                      columns="#{bindings.LogfileName.hints.displayWidth}"
+                      maximumLength="#{bindings.LogfileName.hints.precision}"
+                      shortDesc="#{bindings.LogfileName.hints.tooltip}" id="it3">
+          <f:validator binding="#{bindings.LogfileName.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.OutfileName.inputValue}" label="#{bindings.OutfileName.hints.label}"
+                      required="#{bindings.OutfileName.hints.mandatory}" readOnly="true"
+                      columns="#{bindings.OutfileName.hints.displayWidth}"
+                      maximumLength="#{bindings.OutfileName.hints.precision}"
+                      shortDesc="#{bindings.OutfileName.hints.tooltip}" id="it4">
+          <f:validator binding="#{bindings.OutfileName.validator}"/>
+        </af:inputText>
+      </af:panelFormLayout>
+    </af:panelBox>
+  </af:panelGroupLayout>
+</jsp:root>

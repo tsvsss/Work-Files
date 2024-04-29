@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<skins xmlns="http://myfaces.apache.org/trinidad/skin">
+  <skin>
+    <id>Green.desktop</id>
+    <family>Green</family>
+    <extends>skyros-v1.desktop</extends>
+    <render-kit-id>org.apache.myfaces.trinidad.desktop</render-kit-id>
+    <style-sheet-name>/skins/Green.css</style-sheet-name>
+    <!--<style-sheet-name>file:/E:/WIP/RMIGradingApp/ViewController/public_html/skins/Green.css</style-sheet-name>-->
+    <bundle-name>com.rmi.tradecompapproval.view.skinBundle</bundle-name>
+  </skin>
+</skins>

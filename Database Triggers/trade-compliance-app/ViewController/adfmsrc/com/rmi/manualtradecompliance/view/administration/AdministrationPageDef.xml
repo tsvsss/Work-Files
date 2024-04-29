@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="AdministrationPageDef"
+                Package="com.rmi.manualtradecompliance.view.administration">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="RmiGenericParametersView1" RangeSize="10"
+              DataControl="RMIManualTradeComplianceAppModuleDataControl" id="RmiGenericParametersView1Iterator"/>
+    <searchRegion Criteria="RmiGenericParametersViewCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="RmiGenericParametersView1Iterator" id="RmiGenericParametersViewCriteriaQuery"/>
+    <iterator Binds="RmiGenericLogsView1" RangeSize="10" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+              id="RmiGenericLogsView1Iterator"/>
+    <searchRegion Criteria="RmiGenericLogsViewCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="RmiGenericLogsView1Iterator" id="RmiGenericLogsViewCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="RmiGenericParametersView1Iterator" id="RmiGenericParametersView1">
+      <nodeDefinition DefName="com.rmi.manualtradecompliance.adfbc.views.RmiGenericParametersView"
+                      Name="RmiGenericParametersView10">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="OptionKey"/>
+          <Item Value="OptionValue"/>
+          <Item Value="Description"/>
+          <Item Value="Enabled" Binds="Enabled"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="RmiGenericParametersView1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="RMIManualTradeComplianceAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="RMIManualTradeComplianceAppModuleDataControl"/>
+    <tree IterBinding="RmiGenericLogsView1Iterator" id="RmiGenericLogsView1">
+      <nodeDefinition DefName="com.rmi.manualtradecompliance.adfbc.views.RmiGenericLogsView"
+                      Name="RmiGenericLogsView10">
+        <AttrNames>
+          <Item Value="LogId"/>
+          <Item Value="Type"/>
+          <Item Value="Title"/>
+          <Item Value="Message"/>
+          <Item Value="ClassName"/>
+          <Item Value="MethodName"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="SourceId"/>
+          <Item Value="SourceTable"/>
+          <Item Value="SourceTableColumn"/>
+          <Item Value="SourceType"/>
+          <Item Value="Param1"/>
+          <Item Value="Param2"/>
+          <Item Value="Param3"/>
+          <Item Value="Param4"/>
+          <Item Value="Param5"/>
+          <Item Value="Attribute1"/>
+          <Item Value="Attribute2"/>
+          <Item Value="Attribute3"/>
+          <Item Value="Attribute4"/>
+          <Item Value="Attribute5"/>
+          <Item Value="CreatedUser"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="RmiGenericLogsView1Iterator" id="DetailedMessage">
+      <AttrNames>
+        <Item Value="DetailedMessage"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="RmiGenericParametersView1Iterator" id="Enabled" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Enabled"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+  </bindings>
+</pageDefinition>

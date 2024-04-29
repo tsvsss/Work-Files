@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" styleClass="AFStretchWidth">
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar"/>
+      <f:facet name="statusbar"/>
+      <af:table value="#{bindings.BatchesPendingShippingView.collectionModel}" var="row"
+                rows="#{bindings.BatchesPendingShippingView.rangeSize}"
+                emptyText="#{bindings.BatchesPendingShippingView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0"
+                selectedRowKeys="#{bindings.BatchesPendingShippingView.collectionModel.selectedRow}"
+                selectionListener="#{bindings.BatchesPendingShippingView.collectionModel.makeCurrent}"
+                rowSelection="single" fetchSize="#{bindings.BatchesPendingShippingView.rangeSize}"
+                filterModel="#{bindings.BatchesPendingShippingViewQuery.queryDescriptor}"
+                queryListener="#{bindings.BatchesPendingShippingViewQuery.processQuery}" filterVisible="true"
+                varStatus="vs" id="t1" styleClass="AFStretchWidth" columnStretching="column:c2" autoHeightRows="12"
+                scrollPolicy="scroll">
+        <af:column sortProperty="#{bindings.BatchesPendingShippingView.hints.BatchName.name}" filterable="true"
+                   sortable="true" headerText="Batch Name" id="c2">
+          <af:outputText value="#{row.BatchName}"
+                         shortDesc="#{bindings.BatchesPendingShippingView.hints.BatchName.tooltip}" id="ot2"
+                         inlineStyle=" color:#{row.CraCount == 0 ? '' : 'Green'};"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesPendingShippingView.hints.BatchDate.name}" filterable="true"
+                   sortable="true" headerText="Batch Submitted Date" id="c1">
+          <f:facet name="filter">
+            <af:inputDate value="#{bindings.BatchesPendingShippingViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                          id="id1">
+              <af:convertDateTime pattern="#{bindings.BatchesPendingShippingView.hints.BatchDate.format}"/>
+            </af:inputDate>
+          </f:facet>
+          <af:outputText value="#{row.BatchDate}"
+                         shortDesc="#{bindings.BatchesPendingShippingView.hints.BatchDate.tooltip}" id="ot1"
+                         inlineStyle="text-transform:uppercase;color:#{row.CraCount == 0 ? '' : 'Green'};">
+            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesPendingShippingView.hints.NoOfSeafarer.name}" filterable="true"
+                   sortable="true" headerText="Number Of Seafarers" id="c3">
+          <af:outputText value="#{row.NoOfSeafarer}"
+                         shortDesc="#{bindings.BatchesPendingShippingView.hints.NoOfSeafarer.tooltip}" id="ot3"
+                         inlineStyle=" color:#{row.CraCount == 0 ? '' : 'Green'};">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.BatchesPendingShippingView.hints.NoOfSeafarer.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesPendingShippingView.hints.Region.name}" filterable="true"
+                   sortable="true" headerText="Region" id="c4">
+          <af:outputText value="#{row.Region}" shortDesc="#{bindings.BatchesPendingShippingView.hints.Region.tooltip}"
+                         id="ot4" inlineStyle=" color:#{row.CraCount == 0 ? '' : 'Green'};"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesPendingShippingView.hints.WorkOrderNo.name}" filterable="true"
+                   sortable="true" headerText="Work Order Number" id="c5">
+          <af:outputText value="#{row.WorkOrderNo}"
+                         shortDesc="#{bindings.BatchesPendingShippingView.hints.WorkOrderNo.tooltip}" id="ot5"
+                         inlineStyle=" color:#{row.CraCount == 0 ? '' : 'Green'};">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.BatchesPendingShippingView.hints.WorkOrderNo.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesPendingShippingView.hints.OrderType.name}" filterable="true"
+                   sortable="true" headerText="Order Type" id="c6">
+          <af:outputText value="#{row.OrderType}"
+                         shortDesc="#{bindings.BatchesPendingShippingView.hints.OrderType.tooltip}" id="ot6"
+                         inlineStyle=" color:#{row.CraCount == 0 ? '' : 'Green'};"/>
+        </af:column>
+        <af:column headerText="Expedited Processing" id="c9">
+          <af:selectBooleanCheckbox value="#{row.bindings.ExpeditedProcessing.inputValue}"
+                                    label="#{row.bindings.ExpeditedProcessing.label}"
+                                    shortDesc="#{bindings.BatchesPendingShippingView.hints.ExpeditedProcessing.tooltip}"
+                                    id="sbc1"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesPendingShippingView.hints.CraCount.name}" filterable="true"
+                   sortable="true" headerText="#{bindings.BatchesPendingShippingView.hints.CraCount.label}" id="c7"
+                   visible="false">
+          <af:outputText value="#{row.CraCount}"
+                         shortDesc="#{bindings.BatchesPendingShippingView.hints.CraCount.tooltip}" id="ot7">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.BatchesPendingShippingView.hints.CraCount.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column id="c8">
+          <af:button text="Assign" id="b1" actionListener="#{viewScope.BatchesShippingBean.assignShippingButton}"/>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+  </af:panelGroupLayout>
+</jsp:root>

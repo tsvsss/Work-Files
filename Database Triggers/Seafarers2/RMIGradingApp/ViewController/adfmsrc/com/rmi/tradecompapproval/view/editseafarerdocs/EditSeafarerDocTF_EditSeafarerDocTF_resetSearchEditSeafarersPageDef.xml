@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8"
+                id="EditSeafarerDocTF_EditSeafarerDocTF_resetSearchEditSeafarersPageDef"
+                Package="com.rmi.tradecompapproval.view.editseafarerdocs" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="resetSearchEditSeafarers" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="resetSearchEditSeafarers" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.resetSearchEditSeafarers_RMITradeCompApprovalAppModuleDataControl_dataProvider_resetSearchEditSeafarers_result"/>
+  </bindings>
+</pageDefinition>

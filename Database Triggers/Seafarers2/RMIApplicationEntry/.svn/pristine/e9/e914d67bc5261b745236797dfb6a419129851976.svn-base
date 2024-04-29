@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RestrictionView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.lovs.RestrictionView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pResName"
+    Kind="viewcriteria"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.rmi.applicationEntry.adfbc.views.lovs.RestrictionView.pResName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT  
+S.RESTRICTION_ID, S.RESTRICTION_NAME 
+FROM SICD.SICD_RESTRICTIONS S 
+where status='Active' 
+order by restriction_name]]></SQLQuery>
+  <ViewAttribute
+    Name="RestrictionId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="BIGINT"
+    AliasName="RESTRICTION_ID"
+    Expression="RESTRICTION_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="RestrictionName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RESTRICTION_NAME"
+    Expression="RESTRICTION_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.rmi.applicationEntry.adfbc.views.lovs.RestrictionView.RestrictionName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="RestrictionLOVCriteria"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.RestrictionView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="Never"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="false"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="RestrictionLOVCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="RestrictionName"
+        ViewAttribute="RestrictionName"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Value=":pResName"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="RestrictionId"/>
+  </AttrArray>
+</ViewObject>

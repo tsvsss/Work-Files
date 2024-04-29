@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="VesselPageDef"
+                Package="com.rmi.applicationEntry.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="QueryVesselDetailsTaskFlow1"
+              taskFlowId="/WEB-INF/com/rmi/applicationEntry/view/queryvesseltaskflow/QueryVesselDetailsTaskFlow.xml#QueryVesselDetailsTaskFlow"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings/>
+</pageDefinition>

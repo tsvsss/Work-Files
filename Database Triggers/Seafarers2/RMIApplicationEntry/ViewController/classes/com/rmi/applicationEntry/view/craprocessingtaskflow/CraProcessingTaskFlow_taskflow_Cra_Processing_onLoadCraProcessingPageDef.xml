@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="CraProcessingTaskFlow_taskflow_Cra_Processing_onLoadCraProcessingPageDef"
+                Package="com.rmi.applicationEntry.view.craprocessingtaskflow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="onLoadCraProcessing" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="onLoadCraProcessing" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.onLoadCraProcessing_RMIApplicationEntryAppModuleDataControl_dataProvider_onLoadCraProcessing_result">
+      <NamedData NDName="p_batch_id" NDValue="#{pageFlowScope.param_batch_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

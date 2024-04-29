@@ -1,0 +1,78 @@
+@charset "UTF-8";
+
+/**ADFFaces_Skin_File / DO NOT REMOVE**/
+@namespace af "http://xmlns.oracle.com/adf/faces/rich";
+@namespace dvt "http://xmlns.oracle.com/dss/adf/faces";
+
+.customTable af|table{
+    height: 300px;
+}
+
+.SubjWrap 
+{
+   width:600px;
+   display:inline-block;
+   word-wrap:break-word;
+}
+
+.PreWrap {
+    white-space: -moz-pre-wrap; /* Mozilla */
+    white-space: pre;           /* CSS 2.0 */
+    white-space: pre-wrap;      /* CSS 2.1 */
+    word-wrap: break-word;      /* IE 5.5-7 */
+}
+
+
+.AFDefaultFontFamily:alias {
+    font-size: 13px;    
+    font-style: normal;
+    color: #444852;
+    font-weight: 300;
+    font-family: sans-serif;
+}
+
+.AFDefaultFont:alias {
+    font-size: 13px;
+}
+
+.AFAutoSuggestItem {
+    height: 25px;
+    font-size: 13px;
+    line-height: 2;
+}
+
+.AFRequiredColor:alias {
+    color: Red;
+}
+
+af|panelFormLayout::label-cell {
+    white-space: nowrap;
+}
+
+af|inputListOfValues {
+    -tr-stretch-search-dialog: true;
+}
+
+af|inputComboboxListOfValues {
+    -tr-stretch-search-dialog: true;
+}
+
+af|panelWindow::close-icon-style{ display:none; }
+
+af|panelWindow.withCloseIcon::close-icon-style{ display:block; }
+
+.x25 {
+    font-size: 13px;
+}
+
+.outputTextAsLink{
+    cursor:pointer !important;
+    color:Blue;
+    text-decoration: underline ;
+}
+
+af|table::data-row:Selected af|column::data-cell{
+    font-weight: bold;
+    background-color: #fbac70 !important;
+    color:Black;
+}

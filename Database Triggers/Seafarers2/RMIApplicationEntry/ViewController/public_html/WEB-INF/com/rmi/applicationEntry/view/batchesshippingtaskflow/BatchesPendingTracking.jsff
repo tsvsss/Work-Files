@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1">
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar"/>
+      <f:facet name="statusbar"/>
+      <af:table value="#{bindings.BatchesPendingtrackingNumberView.collectionModel}" var="row"
+                rows="#{bindings.BatchesPendingtrackingNumberView.rangeSize}"
+                emptyText="#{bindings.BatchesPendingtrackingNumberView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0"
+                selectedRowKeys="#{bindings.BatchesPendingtrackingNumberView.collectionModel.selectedRow}"
+                selectionListener="#{bindings.BatchesPendingtrackingNumberView.collectionModel.makeCurrent}"
+                rowSelection="single" fetchSize="#{bindings.BatchesPendingtrackingNumberView.rangeSize}"
+                filterModel="#{bindings.BatchesPendingtrackingNumberViewQuery.queryDescriptor}"
+                queryListener="#{bindings.BatchesPendingtrackingNumberViewQuery.processQuery}" filterVisible="true"
+                varStatus="vs" id="t1" columnStretching="column:c2" styleClass="AFStretchWidth" autoHeightRows="12"
+                contentDelivery="immediate" scrollPolicy="page" partialTriggers="b1">
+        <af:column sortProperty="#{bindings.BatchesPendingtrackingNumberView.hints.BatchName.name}" filterable="true"
+                   sortable="true" headerText="Batch Name"
+                   id="c2">
+          <af:outputText value="#{row.BatchName}"
+                         shortDesc="#{bindings.BatchesPendingtrackingNumberView.hints.BatchName.tooltip}" id="ot2"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesPendingtrackingNumberView.hints.BatchDate.name}" filterable="true"
+                   sortable="true" headerText="Batch Date"
+                   id="c1">
+          <f:facet name="filter">
+            <af:inputDate value="#{bindings.BatchesPendingtrackingNumberViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                          id="id1">
+              <af:convertDateTime pattern="#{bindings.BatchesPendingtrackingNumberView.hints.BatchDate.format}"/>
+            </af:inputDate>
+          </f:facet>
+          <af:outputText value="#{row.BatchDate}"
+                         shortDesc="#{bindings.BatchesPendingtrackingNumberView.hints.BatchDate.tooltip}" id="ot1"
+                         inlineStyle="text-transform:uppercase;">
+            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesPendingtrackingNumberView.hints.NoOfSeafarer.name}" filterable="true"
+                   sortable="true" headerText="Number Of Seafarer"
+                   id="c3">
+          <af:outputText value="#{row.NoOfSeafarer}"
+                         shortDesc="#{bindings.BatchesPendingtrackingNumberView.hints.NoOfSeafarer.tooltip}" id="ot3">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.BatchesPendingtrackingNumberView.hints.NoOfSeafarer.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesPendingtrackingNumberView.hints.Region.name}" filterable="true"
+                   sortable="true" headerText="Region" id="c4">
+          <af:outputText value="#{row.Region}"
+                         shortDesc="#{bindings.BatchesPendingtrackingNumberView.hints.Region.tooltip}" id="ot4"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesPendingtrackingNumberView.hints.WorkOrderNo.name}" filterable="true"
+                   sortable="true" headerText="Work Order Number"
+                   id="c5">
+          <af:outputText value="#{row.WorkOrderNo}"
+                         shortDesc="#{bindings.BatchesPendingtrackingNumberView.hints.WorkOrderNo.tooltip}" id="ot5">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.BatchesPendingtrackingNumberView.hints.WorkOrderNo.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesPendingtrackingNumberView.hints.OrderType.name}" filterable="true"
+                   sortable="true" headerText="Order Type"
+                   id="c6">
+          <af:outputText value="#{row.OrderType}"
+                         shortDesc="#{bindings.BatchesPendingtrackingNumberView.hints.OrderType.tooltip}" id="ot6"/>
+        </af:column>
+        <af:column id="c7">
+          <af:button text="Assign" id="b1" actionListener="#{pageFlowScope.BatchesPendingTrackingBean.assignButton}"/>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+  </af:panelGroupLayout>
+</jsp:root>

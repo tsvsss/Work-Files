@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="LovCountriesView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.manualtradecompliance.adfbc.views.lovs.LovCountriesView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pSearchCountry"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pIsoCode"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <!-- T20211213.0036 - TC Problem- Issuing Country & Citizenship: Added status filter to fetch active records-->
+  <SQLQuery><![CDATA[select country_code , country_name, iso_alpha2_code from apps.sicd_countries 
+where iso_alpha2_code = nvl(:pIsoCode, iso_alpha2_code)
+and status='Active']]></SQLQuery>
+  <ViewAttribute
+    Name="CountryCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COUNTRY_CODE"
+    Expression="COUNTRY_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountryName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="80"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COUNTRY_NAME"
+    Expression="COUNTRY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.rmi.manualtradecompliance.adfbc.views.lovs.LovCountriesView.CountryName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <DISPLAYHEIGHT
+          Value="15"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IsoAlpha2Code"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ISO_ALPHA2_CODE"
+    Expression="ISO_ALPHA2_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="LovCountriesVOCriteria"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovCountriesView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="LovCountriesVOCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="CountryName"
+        ViewAttribute="CountryName"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Value=":pSearchCountry"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="CountryCode"/>
+  </AttrArray>
+  <LOVUIHints
+    ListType="108"
+    MRUCount="0"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    ComboRowCountHint="10">
+    <DisplayCriteria/>
+  </LOVUIHints>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.manualtradecompliance.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

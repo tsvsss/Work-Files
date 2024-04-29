@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="GetCraEmailAddressForExternalView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.readOnlyVO.GetCraEmailAddressForExternalView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pUserId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pCustomer"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[SELECT email_otp.cust_contact_point_id cust_contact_point_id,email_otp.email_address email_address          
+  FROM ar_contacts_v con,          
+       (SELECT   phone_country_code country_code, phone_area_code area_code,          
+                 phone_number, phone_extension extension, primary_flag,          
+                 primary_by_purpose, status, orig_system_reference,          
+                 contact_point_id phone_id,          
+                 contact_point_id cust_contact_point_id, contact_point_type,          
+                 owner_table_id, email_address, email_format,          
+                 contact_point_purpose          
+            FROM hz_contact_points          
+           WHERE owner_table_name = 'HZ_PARTIES'          
+             AND status = 'A'          
+             AND contact_point_type = 'EMAIL'          
+             AND contact_point_purpose = 'SICD_CRA_EMAIL'          
+        ORDER BY primary_flag DESC) email_otp          
+WHERE 1 = 1          
+   AND email_otp.owner_table_id = con.rel_party_id          
+   AND con.contact_id in (select apps_cust_contact_id from rmi_seafarer.rmi_user_order_agent_map where user_id = :pUserId and Ordering_agent_account_id = :pCustomer)     
+   order by upper(email_address)]]></SQLQuery>
+  <ViewAttribute
+    Name="CustContactPointId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Long"
+    ColumnType="LONGINT"
+    AliasName="CUST_CONTACT_POINT_ID"
+    Expression="CUST_CONTACT_POINT_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EmailAddress"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2093"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EMAIL_ADDRESS"
+    Expression="EMAIL_ADDRESS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2093"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

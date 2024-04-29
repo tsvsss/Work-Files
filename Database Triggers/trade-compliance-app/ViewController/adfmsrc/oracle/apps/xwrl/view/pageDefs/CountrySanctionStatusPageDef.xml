@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="CountrySanctionStatusPageDef"
+                Package="oracle.apps.xwrl.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SicdCountriesView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="SicdCountriesView1Iterator"/>
+    <searchRegion Criteria="SicdCountriesViewCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="SicdCountriesView1Iterator" id="SicdCountriesViewCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SicdCountriesView1Iterator" id="SicdCountriesView1">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.SicdCountriesView" Name="SicdCountriesView10">
+        <AttrNames>
+          <Item Value="CountryCode"/>
+          <Item Value="CountryName"/>
+          <Item Value="Status"/>
+          <Item Value="SanctionStatus"/>
+          <Item Value="IsoAlpha2Code"/>
+          <Item Value="IsoDescription"/>
+          <Item Value="IsoNumericCode"/>
+          <Item Value="IsoAlpha3Code"/>
+          <Item Value="EuCode"/>
+          <Item Value="AttributeCategory"/>
+          <Item Value="Attribute1"/>
+          <Item Value="Attribute2"/>
+          <Item Value="Attribute3"/>
+          <Item Value="Attribute4"/>
+          <Item Value="Attribute5"/>
+          <Item Value="Attribute6"/>
+          <Item Value="Attribute7"/>
+          <Item Value="Attribute8"/>
+          <Item Value="Attribute9"/>
+          <Item Value="Attribute10"/>
+          <Item Value="Attribute11"/>
+          <Item Value="Attribute12"/>
+          <Item Value="Attribute13"/>
+          <Item Value="Attribute14"/>
+          <Item Value="Attribute15"/>
+          <Item Value="VerificationMethod"/>
+          <Item Value="VerificationUrl"/>
+          <Item Value="VerificationEmail"/>
+          <Item Value="VerificationUsername"/>
+          <Item Value="VerificationPassword"/>
+          <Item Value="AcellusCountryName"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="clearVC" RequiresUpdateModel="true" Action="invokeMethod" MethodName="clearVC"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.SicdCountriesView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.clearVC_AppModuleDataControl_SicdCountriesView1_clearVC_result"/>
+    <action IterBinding="SicdCountriesView1Iterator" id="Execute" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

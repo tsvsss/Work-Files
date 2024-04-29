@@ -1,0 +1,975 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="seafarerAddEditPageDef"
+                Package="com.rmi.applicationEntry.view.batchcreateedittaskflow">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SeafarerIfaceView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="SeafarerVOIterator" ChangeEventPolicy="none"/>
+    <iterator Binds="SeafarerDocsSqcView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="SeafarerDocsSqcVOIterator" ChangeEventPolicy="none"/>
+    <iterator Binds="SeafarerDocsOcView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="SeafarerDocsOcVOIterator" ChangeEventPolicy="none"/>
+    <iterator Binds="SearchSeafarerView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="SearchSeafarerROIterator"/>
+    <searchRegion Binds="SearchSeafarerROIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="SearchSeafarerROQuery"/>
+    <iterator Binds="BatchIfaceView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="BatchesVOIterator"/>
+    <iterator Binds="GradeOcView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="GradeOcROIterator" ChangeEventPolicy="none"/>
+    <iterator Binds="GradeSqcView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="GradeSqcROIterator" ChangeEventPolicy="none"/>
+    <searchRegion Binds="GradeOcROIterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="GradeOcROQuery"/>
+    <searchRegion Binds="GradeSqcROIterator" Criteria="" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="GradeSqcROQuery"/>
+    <iterator Binds="DocumentHistoryDetailsView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="DocumentHistoryDetailsViewIterator"/>
+    <iterator Binds="SearchSeafarerDetailsView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="SearchSeafarerDetailsViewIterator"/>
+    <iterator Binds="DocumentHistoryDetailsDocsIfaceView" RangeSize="25"
+              DataControl="RMIApplicationEntryAppModuleDataControl" id="DocumentHistoryDetailsDocsIfaceViewIterator"/>
+    <searchRegion Binds="SearchSeafarerDetailsViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="SearchSeafarerDetailsViewQuery"/>
+    <iterator Binds="VesselDetailView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="VesselDetailViewIterator"/>
+    <iterator Binds="ValidationMessageView" RangeSize="10" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="ValidationMessageViewIterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="SeafarerVOIterator" id="BirthPlace">
+      <AttrNames>
+        <Item Value="BirthPlace"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="DistinguishingMarks">
+      <AttrNames>
+        <Item Value="DistinguishingMarks"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="FirstName">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="LastName">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="PermanentAddress">
+      <AttrNames>
+        <Item Value="PermanentAddress"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="SeafarerVOIterator" id="Gender1" DTSupportsMRU="false" SelectItemValueMode="ListObject"
+          StaticList="true">
+      <AttrNames>
+        <Item Value="Gender"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Male"/>
+        <Item Value="Female"/>
+      </ValueList>
+    </list>
+    <attributeValues IterBinding="SeafarerVOIterator" id="IssueType">
+      <AttrNames>
+        <Item Value="IssueType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="IssueTypeIdCard">
+      <AttrNames>
+        <Item Value="IssueTypeIdCard"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="Nationality">
+      <AttrNames>
+        <Item Value="Nationality"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="SeafarerVOIterator" StaticList="false" Uses="LOV_transNationality"
+                  id="transNationality"/>
+    <listOfValues IterBinding="SeafarerVOIterator" StaticList="false" Uses="LOV_tranPassportCntry"
+                  id="tranPassportCntry"/>
+    <listOfValues IterBinding="SeafarerVOIterator" StaticList="false" Uses="LOV_tranResidenceCntry"
+                  id="tranResidenceCntry"/>
+                    <listOfValues Uses="LOV_tranRestrictionName" StaticList="false" IterBinding="SeafarerDocsOcVOIterator"
+                  id="tranRestrictionName"/>
+    <listOfValues Uses="LOV_tranGradeCode" StaticList="false" IterBinding="SeafarerDocsOcVOIterator"
+                  id="tranGradeCode"/>
+    <listOfValues Uses="LOV_tranGradeCode" StaticList="false" IterBinding="SeafarerDocsSqcVOIterator"
+                  id="tranGradeCode1"/>
+    <listOfValues Uses="LOV_tranCountryName" StaticList="false" IterBinding="SeafarerDocsSqcVOIterator"
+                  id="tranCountryName1"/>
+                    <listOfValues Uses="LOV_tranCountryName" StaticList="false" IterBinding="SeafarerDocsOcVOIterator"
+                  id="tranCountryName"/>
+    <attributeValues IterBinding="SeafarerVOIterator" id="PassportIssuingCountryCode">
+      <AttrNames>
+        <Item Value="PassportIssuingCountryCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="ResidenceCountryCode">
+      <AttrNames>
+        <Item Value="ResidenceCountryCode"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="copySeafarerValues" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="copySeafarerValues" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.copySeafarerValues_RMIApplicationEntryAppModuleDataControl_dataProvider_copySeafarerValues_result"/>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranVesselNo">
+      <AttrNames>
+        <Item Value="tranVesselNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranVesselName">
+      <AttrNames>
+        <Item Value="tranVesselName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="VesselPk">
+      <AttrNames>
+        <Item Value="VesselPk"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="imoValueChange" RequiresUpdateModel="true" Action="invokeMethod" MethodName="imoValueChange"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.imoValueChange_RMIApplicationEntryAppModuleDataControl_dataProvider_imoValueChange_result">
+      <NamedData NDName="imo" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="setSeafarer" RequiresUpdateModel="true" Action="invokeMethod" MethodName="setSeafarer"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.setSeafarer_RMIApplicationEntryAppModuleDataControl_dataProvider_setSeafarer_result"/>
+    <attributeValues IterBinding="SeafarerVOIterator" id="SeafarerId1">
+      <AttrNames>
+        <Item Value="SeafarerId"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="SeafarerVOIterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="SeafarerVOIterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="SeafarerVOIterator" id="CreateInsert" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <tree IterBinding="SeafarerDocsSqcVOIterator" id="SeafarerDocsSqcVO" ChangeEventPolicy="none">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.SeafarerDocsSqcView" Name="SeafarerDocsSqcVO0">
+        <AttrNames>
+          <Item Value="CocCountry"/>
+          <Item Value="CocExpirationDate"/>
+          <Item Value="CocIdentifier"/>
+          <Item Value="CocIssueDate"/>
+          <Item Value="CraApprovedBy"/>
+          <Item Value="CraApprovedDate"/>
+          <Item Value="CraRequired"/>
+          <Item Value="CraSentBy"/>
+          <Item Value="CraSentDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="DocIdentifier"/>
+          <Item Value="DocOrder"/>
+          <Item Value="DocumentApprovedBy"/>
+          <Item Value="DocumentApprovedDate"/>
+          <Item Value="DocumentId"/>
+          <Item Value="EdocId"/>
+          <Item Value="EsdiId"/>
+          <Item Value="EsiId"/>
+          <Item Value="GradeId"/>
+          <Item Value="GradeType"/>
+          <Item Value="GradingComments"/>
+          <Item Value="GradingInstructions"/>
+          <Item Value="GradingStatus"/>
+          <Item Value="InventoryItemId"/>
+          <Item Value="IssueType"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="Limitation"/>
+          <Item Value="LineId"/>
+          <Item Value="PreviousDocumentId"/>
+          <Item Value="Restriction"/>
+          <Item Value="SupportEdocId"/>
+          <Item Value="tranCOC"/>
+          <Item Value="tranCOCFileName"/>
+          <Item Value="tranCocHistoryLink"/>
+          <Item Value="tranCountryName"/>
+          <Item Value="tranGradeCode"/>
+          <Item Value="tranGradeDescription"/>
+          <Item Value="tranRestrictionNameSqc"/>
+          <Item Value="tranSupport"/>
+          <Item Value="tranSupportFileName"/>
+          <Item Value="tranSupportHistoryLink"/>
+          <Item Value="VerificationBy"/>
+          <Item Value="VerificationRequestDate"/>
+          <Item Value="DocChargeable"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="SeafarerDocsOcVOIterator" id="SeafarerDocsOcVO" ChangeEventPolicy="none">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.SeafarerDocsOcView" Name="SeafarerDocsOcVO0">
+        <AttrNames>
+          <Item Value="CocCountry"/>
+          <Item Value="CocExpirationDate"/>
+          <Item Value="CocIssueDate"/>
+          <Item Value="tranCountryName"/>
+          <Item Value="GradeId"/>
+          <Item Value="tranGradeCode"/>
+          <Item Value="tranGradeName"/>
+          <Item Value="CocIdentifier"/>
+          <Item Value="Limitation"/>
+          <Item Value="Restriction"/>
+          <Item Value="tranRestrictionName"/>
+          <Item Value="CraRequired" Binds="CraRequired"/>
+          <Item Value="EdocId"/>
+          <Item Value="tranUrl"/>
+          <Item Value="tranCoCFileName"/>
+          <Item Value="GradingStatus"/>
+          <Item Value="tranEdocHistoryLink"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="SeafarerDocsOcVOIterator" id="CraRequired" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="CraRequired"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="SeafarerVOIterator" id="PhotoEdocId">
+      <AttrNames>
+        <Item Value="PhotoEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="SeafarerVOIterator" id="SeafarerVO">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.SeafarerIfaceView" Name="SeafarerVO0">
+        <AttrNames>
+          <Item Value="BirthDate"/>
+          <Item Value="BirthPlace"/>
+          <Item Value="DistinguishingMarks"/>
+          <Item Value="FirstName"/>
+          <Item Value="LastName"/>
+          <Item Value="tranCraCount"/>
+          <Item Value="SeafarerWfStatusFinal"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="getlink" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getlink"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getlink_RMIApplicationEntryAppModuleDataControl_dataProvider_getlink_result">
+      <NamedData NDName="code" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="SeafarerVOIterator" id="IdentityDocEdocId">
+      <AttrNames>
+        <Item Value="IdentityDocEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="PhysicalEdocId">
+      <AttrNames>
+        <Item Value="PhysicalEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="SeaserviceTranscriptEdocId">
+      <AttrNames>
+        <Item Value="SeaserviceTranscriptEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="ApplicationEdocId">
+      <AttrNames>
+        <Item Value="ApplicationEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="AffidavitEdocId">
+      <AttrNames>
+        <Item Value="AffidavitEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="SatEdocId">
+      <AttrNames>
+        <Item Value="SatEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    
+     <attributeValues IterBinding="SeafarerVOIterator" id="InternalEdocId">
+      <AttrNames>
+        <Item Value="InternalEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" DataControl="RMIApplicationEntryAppModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <methodAction id="cancelSeafarer" RequiresUpdateModel="true" Action="invokeMethod" MethodName="cancelSeafarer"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.cancelSeafarer_RMIApplicationEntryAppModuleDataControl_dataProvider_cancelSeafarer_result"/>
+    <action id="Rollback" DataControl="RMIApplicationEntryAppModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <methodAction id="getlinkforOC" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getlinkforOC"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getlinkforOC_RMIApplicationEntryAppModuleDataControl_dataProvider_getlinkforOC_result"/>
+    <tree IterBinding="SearchSeafarerROIterator" id="SearchSeafarerRO">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SearchSeafarerView"
+                      Name="SearchSeafarerRO0">
+        <AttrNames>
+          <Item Value="FirstName"/>
+          <Item Value="LastName"/>
+          <Item Value="BirthDate"/>
+          <Item Value="BirthPlace"/>
+          <Item Value="Citizenship"/>
+          <Item Value="Gender"/>
+          <Item Value="SeafarerId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="BatchesVOIterator" id="BatchStatus">
+      <AttrNames>
+        <Item Value="BatchStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="deleteOc" RequiresUpdateModel="true" Action="invokeMethod" MethodName="deleteOc"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.deleteOc_RMIApplicationEntryAppModuleDataControl_dataProvider_deleteOc_result"/>
+    <methodAction id="deleteSqc" RequiresUpdateModel="true" Action="invokeMethod" MethodName="deleteSqc"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.deleteSqc_RMIApplicationEntryAppModuleDataControl_dataProvider_deleteSqc_result"/>
+    <action IterBinding="SeafarerDocsSqcVOIterator" id="Delete"
+            InstanceName="RMIApplicationEntryAppModuleDataControl.SeafarerDocsSqcView"
+            DataControl="RMIApplicationEntryAppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="SeafarerDocsOcVOIterator" id="Delete1"
+            InstanceName="RMIApplicationEntryAppModuleDataControl.SeafarerDocsOcView"
+            DataControl="RMIApplicationEntryAppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="GradeOcROIterator" id="GradeOcRO" ChangeEventPolicy="none">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.GradeOcView" Name="GradeOcRO0">
+        <AttrNames>
+          <Item Value="tranSelect" Binds="tranSelect"/>
+          <Item Value="ItemCode"/>
+          <Item Value="GradeCode"/>
+          <Item Value="GradeName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="GradeSqcROIterator" id="GradeSqcRO">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.GradeSqcView" Name="GradeSqcRO0">
+        <AttrNames>
+          <Item Value="ItemCode"/>
+          <Item Value="GradeCode"/>
+          <Item Value="GradeName"/>
+          <Item Value="tranRadio" Binds="tranRadio"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="GradeSqcROIterator" id="tranSelect1" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="tranSelect"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="GradeSqcROIterator" id="tranRadio" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="tranRadio"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranAffidavitFileName">
+      <AttrNames>
+        <Item Value="tranAffidavitFileName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranAttestationFileName">
+      <AttrNames>
+        <Item Value="tranAttestationFileName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranIdentityFileName">
+      <AttrNames>
+        <Item Value="tranIdentityFileName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranMedicalFileName">
+      <AttrNames>
+        <Item Value="tranMedicalFileName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranPhotoFilename">
+      <AttrNames>
+        <Item Value="tranPhotoFilename"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranSeaServiceFileName">
+      <AttrNames>
+        <Item Value="tranSeaServiceFileName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranSecurityFileName">
+      <AttrNames>
+        <Item Value="tranSecurityFileName"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="findConsent" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findConsent"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.findConsent_RMIApplicationEntryAppModuleDataControl_dataProvider_findConsent_result"/>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranAckNoConsent">
+      <AttrNames>
+        <Item Value="tranAckNoConsent"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranConsentStartDate">
+      <AttrNames>
+        <Item Value="tranConsentStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranConsentExpDate">
+      <AttrNames>
+        <Item Value="tranConsentExpDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="getLinkForConsent" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getLinkForConsent"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getLinkForConsent_RMIApplicationEntryAppModuleDataControl_dataProvider_getLinkForConsent_result">
+      <NamedData NDName="edoc_id" NDType="java.lang.Integer"/>
+    </methodAction>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranUploadedConsentStartDate">
+      <AttrNames>
+        <Item Value="tranUploadedConsentStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranUploadedConsentExpireDate">
+      <AttrNames>
+        <Item Value="tranUploadedConsentExpireDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="add_consent" RequiresUpdateModel="true" Action="invokeMethod" MethodName="add_consent"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.add_consent_RMIApplicationEntryAppModuleDataControl_dataProvider_add_consent_result">
+      <NamedData NDName="p_user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="setUploadConsent" RequiresUpdateModel="true" Action="invokeMethod" MethodName="setUploadConsent"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.setUploadConsent_RMIApplicationEntryAppModuleDataControl_dataProvider_setUploadConsent_result"/>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranUploadButtonLabel">
+      <AttrNames>
+        <Item Value="tranUploadButtonLabel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="PhotoGrdStatus">
+      <AttrNames>
+        <Item Value="PhotoGrdStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="IdentityDocGrdStatus">
+      <AttrNames>
+        <Item Value="IdentityDocGrdStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="PhysicalGrdStatus">
+      <AttrNames>
+        <Item Value="PhysicalGrdStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="SeaserviceGrdStatus">
+      <AttrNames>
+        <Item Value="SeaserviceGrdStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="ApplicationGrdStatus">
+      <AttrNames>
+        <Item Value="ApplicationGrdStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="AffidavitGrdStatus">
+      <AttrNames>
+        <Item Value="AffidavitGrdStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="SatGrdStatus">
+      <AttrNames>
+        <Item Value="SatGrdStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="setConsentExpDate" RequiresUpdateModel="true" Action="invokeMethod" MethodName="setConsentExpDate"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.setConsentExpDate_RMIApplicationEntryAppModuleDataControl_dataProvider_setConsentExpDate_result">
+      <NamedData NDName="startDate" NDType="oracle.jbo.domain.Date"/>
+    </methodAction>
+    <methodAction id="deleteSeafarer" RequiresUpdateModel="true" Action="invokeMethod" MethodName="deleteSeafarer"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.deleteSeafarer_RMIApplicationEntryAppModuleDataControl_dataProvider_deleteSeafarer_result"/>
+    <methodAction id="addocLine" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addocLine"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.addocLine_RMIApplicationEntryAppModuleDataControl_dataProvider_addocLine_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="addsqcLine" RequiresUpdateModel="true" Action="invokeMethod" MethodName="addsqcLine"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.addsqcLine_RMIApplicationEntryAppModuleDataControl_dataProvider_addsqcLine_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="getNewDate" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getNewDate"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getNewDate_RMIApplicationEntryAppModuleDataControl_dataProvider_getNewDate_result">
+      <NamedData NDName="issueDate" NDType="oracle.jbo.domain.Date"/>
+    </methodAction>
+    <methodAction id="usegradeOc" RequiresUpdateModel="true" Action="invokeMethod" MethodName="usegradeOc"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.usegradeOc_RMIApplicationEntryAppModuleDataControl_dataProvider_usegradeOc_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="usegradeSqcc" RequiresUpdateModel="true" Action="invokeMethod" MethodName="usegradeSqcc"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.usegradeSqcc_RMIApplicationEntryAppModuleDataControl_dataProvider_usegradeSqcc_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranConsentUploadedBoolean">
+      <AttrNames>
+        <Item Value="tranConsentUploadedBoolean"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranInternalDocStatus">
+      <AttrNames>
+        <Item Value="tranInternalDocStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="checkDateValidate" RequiresUpdateModel="true" Action="invokeMethod" MethodName="checkDateValidate"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.checkDateValidate_RMIApplicationEntryAppModuleDataControl_dataProvider_checkDateValidate_result">
+      <NamedData NDName="endDate" NDType="oracle.jbo.domain.Date"/>
+    </methodAction>
+    <methodAction id="checkDateValidateSqc" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="checkDateValidateSqc" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.checkDateValidateSqc_RMIApplicationEntryAppModuleDataControl_dataProvider_checkDateValidateSqc_result">
+      <NamedData NDName="endDate" NDType="oracle.jbo.domain.Date"/>
+    </methodAction>
+    <listOfValues IterBinding="SeafarerVOIterator" StaticList="false" Uses="LOV_tranCity" id="tranCity"/>
+    <methodAction id="resetCity" RequiresUpdateModel="true" Action="invokeMethod" MethodName="resetCity"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.resetCity_RMIApplicationEntryAppModuleDataControl_dataProvider_resetCity_result"/>
+    <methodAction id="existsSeafarer" RequiresUpdateModel="true" Action="invokeMethod" MethodName="existsSeafarer"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.existsSeafarer_RMIApplicationEntryAppModuleDataControl_dataProvider_existsSeafarer_result"/>
+    <methodAction id="validateBeforeCopySeafarerValues" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="validateBeforeCopySeafarerValues" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.validateBeforeCopySeafarerValues_RMIApplicationEntryAppModuleDataControl_dataProvider_validateBeforeCopySeafarerValues_result"/>
+    <button IterBinding="GradeOcROIterator" id="tranSelect" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="tranSelect"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranOfficialNo">
+      <AttrNames>
+        <Item Value="tranOfficialNo"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="SeafarerVOIterator" id="tranImotype" DTSupportsMRU="false" SelectItemValueMode="ListObject"
+          StaticList="true">
+      <AttrNames>
+        <Item Value="tranImotype"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Vessel IMO"/>
+        <Item Value="Official Number"/>
+      </ValueList>
+    </list>
+    <methodAction id="offValueChange" RequiresUpdateModel="true" Action="invokeMethod" MethodName="offValueChange"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.offValueChange_RMIApplicationEntryAppModuleDataControl_dataProvider_offValueChange_result">
+      <NamedData NDName="off" NDType="java.lang.Integer"/>
+    </methodAction>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranSupportingFileName">
+      <AttrNames>
+        <Item Value="tranSupportingFileName"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="DocumentHistoryDetailsViewIterator" id="DocumentHistoryDetailsView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.DocumentHistoryDetailsView"
+                      Name="DocumentHistoryDetailsView0">
+        <AttrNames>
+          <Item Value="EdocId"/>
+          <Item Value="CreationDate"/>
+          <Item Value="CreatedByUser"/>
+          <Item Value="DocLink"/>
+          <Item Value="UploadedByUser"/>
+          <Item Value="DocumentUploadedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="filterDocumentHistoryDetails" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterDocumentHistoryDetails" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.filterDocumentHistoryDetails_RMIApplicationEntryAppModuleDataControl_dataProvider_filterDocumentHistoryDetails_result">
+      <NamedData NDName="p_doc_code" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranAffidavitHistoryLink">
+      <AttrNames>
+        <Item Value="tranAffidavitHistoryLink"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranAttestationHistoryLink">
+      <AttrNames>
+        <Item Value="tranAttestationHistoryLink"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranIdentityHistoryLink">
+      <AttrNames>
+        <Item Value="tranIdentityHistoryLink"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranInternalHistoryLink">
+      <AttrNames>
+        <Item Value="tranInternalHistoryLink"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranMedicalHistoryLink">
+      <AttrNames>
+        <Item Value="tranMedicalHistoryLink"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranPhotoHistoryLink">
+      <AttrNames>
+        <Item Value="tranPhotoHistoryLink"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranSeaserviceHistoryLink">
+      <AttrNames>
+        <Item Value="tranSeaserviceHistoryLink"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranSecurityHistoryLink">
+      <AttrNames>
+        <Item Value="tranSecurityHistoryLink"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="uploadDocument" RequiresUpdateModel="true" Action="invokeMethod" MethodName="uploadDocument"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.uploadDocument_RMIApplicationEntryAppModuleDataControl_dataProvider_uploadDocument_result">
+      <NamedData NDName="param1" NDType="java.lang.String"/>
+      <NamedData NDName="param2" NDType="java.lang.String"/>
+      <NamedData NDName="param3" NDType="java.lang.String"/>
+      <NamedData NDName="fileName" NDType="java.lang.String"/>
+      <NamedData NDName="rejected" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="searchSeafarer" RequiresUpdateModel="true" Action="invokeMethod" MethodName="searchSeafarer"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.searchSeafarer_RMIApplicationEntryAppModuleDataControl_dataProvider_searchSeafarer_result">
+      <NamedData NDName="documentId" NDType="java.lang.Integer"/>
+      <NamedData NDName="documentType" NDType="java.lang.String"/>
+      <NamedData NDName="name" NDType="java.lang.String"/>
+      <NamedData NDName="birth_date" NDType="oracle.jbo.domain.Date"/>
+      <NamedData NDName="seafarer_id" NDType="java.lang.Integer"/>
+    </methodAction>
+    <tree IterBinding="SearchSeafarerDetailsViewIterator" id="SearchSeafarerDetailsView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SearchSeafarerDetailsView"
+                      Name="SearchSeafarerDetailsView0">
+        <AttrNames>
+          <Item Value="DocumentNumber"/>
+          <Item Value="DocumentType"/>
+          <Item Value="DocumentCode"/>
+          <Item Value="SeafarerId"/>
+          <Item Value="LastName"/>
+          <Item Value="FirstName"/>
+          <Item Value="IssueDate"/>
+          <Item Value="ExpirationDate"/>
+          <Item Value="Status"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="filterSearchSeafarerDetails" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterSearchSeafarerDetails" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.filterSearchSeafarerDetails_RMIApplicationEntryAppModuleDataControl_dataProvider_filterSearchSeafarerDetails_result"/>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranAdditionalDocument">
+      <AttrNames>
+        <Item Value="tranAdditionalDocument"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="AdditionalDocEdocId">
+      <AttrNames>
+        <Item Value="AdditionalDocEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="SeafarerWfStatus">
+      <AttrNames>
+        <Item Value="SeafarerWfStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="filterDocumentHistoryDocsIfaceDetails" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterDocumentHistoryDocsIfaceDetails" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.filterDocumentHistoryDocsIfaceDetails_RMIApplicationEntryAppModuleDataControl_dataProvider_filterDocumentHistoryDocsIfaceDetails_result">
+      <NamedData NDName="p_doc_code" NDType="java.lang.String"/>
+    </methodAction>
+    <tree IterBinding="DocumentHistoryDetailsDocsIfaceViewIterator" id="DocumentHistoryDetailsDocsIfaceView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.DocumentHistoryDetailsDocsIfaceView"
+                      Name="DocumentHistoryDetailsDocsIfaceView0">
+        <AttrNames>
+          <Item Value="EdocId"/>
+          <Item Value="CreationDate"/>
+          <Item Value="DocumentUploadedDate"/>
+          <Item Value="DocLink"/>
+          <Item Value="CreatedByUser"/>
+          <Item Value="UploadedByUser"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="SeafarerVOIterator" id="SeafarerWfStatusFinal">
+      <AttrNames>
+        <Item Value="SeafarerWfStatusFinal"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="UploadTabColor">
+      <AttrNames>
+        <Item Value="UploadTabColor"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="SqcTabColor">
+      <AttrNames>
+        <Item Value="SqcTabColor"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="OcTabColor">
+      <AttrNames>
+        <Item Value="OcTabColor"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="BirthDate">
+      <AttrNames>
+        <Item Value="BirthDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SeafarerVOIterator" id="ConsentEdocId">
+      <AttrNames>
+        <Item Value="ConsentEdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="getAllRowStateSeafarer" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="getAllRowStateSeafarer" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getAllRowStateSeafarer_RMIApplicationEntryAppModuleDataControl_dataProvider_getAllRowStateSeafarer_result"/>
+    <attributeValues IterBinding="VesselDetailViewIterator" id="VsslStatus">
+      <AttrNames>
+        <Item Value="VsslStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VesselDetailViewIterator" id="VsslType">
+      <AttrNames>
+        <Item Value="VsslType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VesselDetailViewIterator" id="GrossTons">
+      <AttrNames>
+        <Item Value="GrossTons"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VesselDetailViewIterator" id="PropulsionPower">
+      <AttrNames>
+        <Item Value="PropulsionPower"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VesselDetailViewIterator" id="EngineType">
+      <AttrNames>
+        <Item Value="EngineType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VesselDetailViewIterator" id="VsslRegDate">
+      <AttrNames>
+        <Item Value="VsslRegDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="filterVesselDetail" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterVesselDetail" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.filterVesselDetail_RMIApplicationEntryAppModuleDataControl_dataProvider_filterVesselDetail_result"/>
+    <button IterBinding="SeafarerVOIterator" id="tranConsentMarketing" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="tranConsentMarketing"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="true"/>
+        <Item Value="false"/>
+      </ValueList>
+    </button>
+    <listOfValues IterBinding="SeafarerVOIterator" StaticList="false" Uses="LOV_tranVesselNameInternal"
+                  id="tranVesselNameInternal" ChangeEventPolicy="none"/>
+    <listOfValues IterBinding="SeafarerDocsSqcVOIterator" StaticList="false" Uses="LOV_tranRestrictionName"
+                  id="tranRestrictionNameSqc"/>
+    <methodAction id="validateConsentExpDate" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="validateConsentExpDate" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.validateConsentExpDate_RMIApplicationEntryAppModuleDataControl_dataProvider_validateConsentExpDate_result"/>
+    <methodAction id="validateConsentDataBeforeSave" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="validateConsentDataBeforeSave" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.validateConsentDataBeforeSave_RMIApplicationEntryAppModuleDataControl_dataProvider_validateConsentDataBeforeSave_result"/>
+    <methodAction id="deficiency_details" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="deficiency_details" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.deficiency_details_RMIApplicationEntryAppModuleDataControl_dataProvider_deficiency_details_result"/>
+    <tree IterBinding="ValidationMessageViewIterator" id="ValidationMessageView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.ValidationMessageView"
+                      Name="ValidationMessageView0">
+        <AttrNames>
+          <Item Value="ErrorMessage"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="setConsentStartEndDate" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="setConsentStartEndDate" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.setConsentStartEndDate_RMIApplicationEntryAppModuleDataControl_dataProvider_setConsentStartEndDate_result"/>
+    <methodAction id="deleteCurrentSeafarer" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="deleteCurrentSeafarer" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.deleteCurrentSeafarer_RMIApplicationEntryAppModuleDataControl_dataProvider_deleteCurrentSeafarer_result"/>
+    <list IterBinding="SeafarerVOIterator" StaticList="false" Uses="LOV_tranEntityType" id="tranEntityType"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction id="ackNumberValueChangeListener" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="ackNumberValueChangeListener" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.ackNumberValueChangeListener_RMIApplicationEntryAppModuleDataControl_dataProvider_ackNumberValueChangeListener_result">
+      <NamedData NDName="ackNo" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="seafarerValidationMessage" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="seafarerValidationMessage" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.seafarerValidationMessage_RMIApplicationEntryAppModuleDataControl_dataProvider_seafarerValidationMessage_result"/>
+    <attributeValues IterBinding="SeafarerVOIterator" id="BookGrdStatus">
+      <AttrNames>
+        <Item Value="BookGrdStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="gradeIdValueChangeListener" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="gradeIdValueChangeListener" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.gradeIdValueChangeListener_RMIApplicationEntryAppModuleDataControl_dataProvider_gradeIdValueChangeListener_result"/>
+    <methodAction id="changeDocChargable" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="changeDocChargable" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.changeDocChargable_RMIApplicationEntryAppModuleDataControl_dataProvider_changeDocChargable_result"/>
+    <methodAction id="gradeIdOcValueChangeListener" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="gradeIdOcValueChangeListener" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.gradeIdOcValueChangeListener_RMIApplicationEntryAppModuleDataControl_dataProvider_gradeIdOcValueChangeListener_result"/>
+    <methodAction id="changeDocExpDateChargable" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="changeDocExpDateChargable" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.changeDocExpDateChargable_RMIApplicationEntryAppModuleDataControl_dataProvider_changeDocExpDateChargable_result"/>
+    <methodAction id="validationOnBackButton" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="validationOnBackButton" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.validationOnBackButton_RMIApplicationEntryAppModuleDataControl_dataProvider_validationOnBackButton_result"/>
+    <methodAction id="checkNames" RequiresUpdateModel="true" Action="invokeMethod" MethodName="checkNames"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.checkNames_RMIApplicationEntryAppModuleDataControl_dataProvider_checkNames_result"/>
+    <methodAction id="checkSeafarerNew" RequiresUpdateModel="true" Action="invokeMethod" MethodName="checkSeafarerNew"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.checkSeafarerNew_RMIApplicationEntryAppModuleDataControl_dataProvider_checkSeafarerNew_result"/>
+    <methodAction id="deleteSingleSeafarer" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="deleteSingleSeafarer" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.deleteSingleSeafarer_RMIApplicationEntryAppModuleDataControl_dataProvider_deleteSingleSeafarer_result"/>
+    <attributeValues IterBinding="SeafarerVOIterator" id="ConGrdStatus">
+      <AttrNames>
+        <Item Value="ConGrdStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="getUserType" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getUserType"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.getUserType_RMIApplicationEntryAppModuleDataControl_dataProvider_getUserType_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <attributeValues IterBinding="SeafarerVOIterator" id="tranAdditionalDocStatus">
+      <AttrNames>
+        <Item Value="tranAdditionalDocStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="updateIssueTypeManually" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="updateIssueTypeManually" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.updateIssueTypeManually_RMIApplicationEntryAppModuleDataControl_dataProvider_updateIssueTypeManually_result">
+      <NamedData NDName="updateFor" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="ackNumberValidate" RequiresUpdateModel="true" Action="invokeMethod" MethodName="ackNumberValidate"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.ackNumberValidate_RMIApplicationEntryAppModuleDataControl_dataProvider_ackNumberValidate_result">
+      <NamedData NDName="ackNo" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="BatchesVOIterator" id="BatchName">
+      <AttrNames>
+        <Item Value="BatchName"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="editBatch" RequiresUpdateModel="true" Action="invokeMethod" MethodName="editBatch"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.editBatch_RMIApplicationEntryAppModuleDataControl_dataProvider_editBatch_result">
+      <NamedData NDName="batchId" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="batchCurrentRow" RequiresUpdateModel="true" Action="invokeMethod" MethodName="batchCurrentRow"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.batchCurrentRow_RMIApplicationEntryAppModuleDataControl_dataProvider_batchCurrentRow_result"/>
+    <attributeValues IterBinding="SeafarerVOIterator" id="ExternalOld">
+      <AttrNames>
+        <Item Value="ExternalOld"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>
+

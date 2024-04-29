@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="CitylistPageDef"
+                Package="oracle.apps.xwrl.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="WcCityListView1" RangeSize="25" DataControl="AppModuleDataControl" id="WcCityListView1Iterator"/>
+    <searchRegion Criteria="WcCityListViewCriteria" Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="WcCityListView1Iterator" id="WcCityListViewCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="WcCityListView1Iterator" id="WcCityListView1">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.WcCityListView" Name="WcCityListView10">
+        <AttrNames>
+          <Item Value="WcCityListId"/>
+          <Item Value="CityName"/>
+          <Item Value="Subdivision"/>
+          <Item Value="CountryCode"/>
+          <Item Value="Status"/>
+          <Item Value="SortOrder"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="InternalUseOnly"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="WcCityListView1Iterator" id="WcCityListView11">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.WcCityListView" Name="WcCityListView110">
+        <AttrNames>
+          <Item Value="WcCityListId"/>
+          <Item Value="CityName"/>
+          <Item Value="Subdivision"/>
+          <Item Value="CountryCode"/>
+          <Item Value="Status"/>
+          <Item Value="SortOrder"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdateDate"/>
+          <Item Value="LastUpdateLogin"/>
+          <Item Value="InternalUseOnly"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="WcCityListView1Iterator" id="Execute" RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <methodAction id="clearVC" RequiresUpdateModel="true" Action="invokeMethod" MethodName="clearVC"
+                  IsViewObjectMethod="true" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.WcCityListView1"
+                  ReturnName="data.AppModuleDataControl.methodResults.clearVC_AppModuleDataControl_WcCityListView1_clearVC_result"/>
+  </bindings>
+</pageDefinition>

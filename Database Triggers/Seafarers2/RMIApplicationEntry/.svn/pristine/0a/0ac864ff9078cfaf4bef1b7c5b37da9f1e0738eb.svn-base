@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="AccountStatusPageDef"
+                Package="com.rmi.applicationEntry.view.accountstatustaskflow">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="AccountStatusView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="AccountStatusViewIterator"/>
+    <searchRegion Binds="AccountStatusViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="AccountStatusViewQuery"/>
+    <iterator Binds="CraMailDualView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="CraMailDualViewIterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="AccountStatusViewIterator" id="AccountStatusView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.AccountStatusView"
+                      Name="AccountStatusView0">
+        <AttrNames>
+          <Item Value="TrxNumber"/>
+          <Item Value="TrxDate"/>
+          <Item Value="AmountDueOriginal"/>
+          <Item Value="AmountDueRemaining"/>
+          <Item Value="WorkOrder"/>
+          <Item Value="PurchaseOrder"/>
+          <Item Value="InvoiceSent"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="email_invoice" RequiresUpdateModel="true" Action="invokeMethod" MethodName="email_invoice"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.email_invoice_RMIApplicationEntryAppModuleDataControl_dataProvider_email_invoice_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <attributeValues IterBinding="CraMailDualViewIterator" id="TransInvoiceNumber">
+      <AttrNames>
+        <Item Value="TransInvoiceNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CraMailDualViewIterator" id="TransInvoiceDate">
+      <AttrNames>
+        <Item Value="TransInvoiceDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CraMailDualViewIterator" id="TransWorkOrderNumber">
+      <AttrNames>
+        <Item Value="TransWorkOrderNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="validateSearchInvoice" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="validateSearchInvoice" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.validateSearchInvoice_RMIApplicationEntryAppModuleDataControl_dataProvider_validateSearchInvoice_result"/>
+    <methodAction id="searchInvoice" RequiresUpdateModel="true" Action="invokeMethod" MethodName="searchInvoice"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.searchInvoice_RMIApplicationEntryAppModuleDataControl_dataProvider_searchInvoice_result"/>
+  </bindings>
+</pageDefinition>

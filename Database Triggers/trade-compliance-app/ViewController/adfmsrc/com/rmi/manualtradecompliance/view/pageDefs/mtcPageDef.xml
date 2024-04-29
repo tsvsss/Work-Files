@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="mtcPageDef"
+                Package="com.iri.manualtradecomplaince.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="vettingTF1" taskFlowId="/WEB-INF/com/rmi/manualtradecompliance/view/vetting/vettingTF.xml#vettingTF"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="P_OWS_REGION_RENDERED"
+                   value="#{sessionScope.UserRespAndSessionInfo.isReadOnly=='Y' || sessionScope.UserRespAndSessionInfo.isSuperUserOnly == 'Y'}"/>
+        <parameter id="P_FACES_SERVLET" value="faces"/>
+      </parameters>
+    </taskFlow>
+    <iterator id="TcReferencesView1Iterator" Binds="TcReferencesView1"
+              DataControl="RMIManualTradeComplianceAppModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings/>
+</pageDefinition>

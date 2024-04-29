@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CustClearEntityAlertView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"  
+  FetchMode="FETCH_AS_NEEDED"
+  MaxFetchSize="0">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>    
+  </DesignTime>
+  <ViewAccessor
+    Name="CustClearEntityAlertLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.view.CustClearEntityAlertLOV"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CustClearEntityAlertStateLOV1"
+    ViewObjectName="oracle.apps.xwrl.model.lov.CustClearEntityAlertStateLOV"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_NoteAttr"
+    ListVOName="CustClearEntityAlertLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="NoteAttr"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Note"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Note"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CaseAlertStateAttr"
+    ListVOName="CustClearEntityAlertStateLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CaseAlertStateAttr"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Lookupvalue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Lookupvalue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ViewAttribute
+    Name="NoteAttr"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NOTEATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_NoteAttr"
+    IsNotNull="true"
+    Passivate="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.CustClearEntityAlertView.NoteAttr_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseAlertStateAttr"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_CaseAlertStateAttr"
+    Passivate="true"
+    IsNotNull="true">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="oracle.apps.xwrl.model.view.CustClearEntityAlertView.CaseAlertStateAttr_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="NoteAttr"/>
+    <Item Value="CaseAlertStateAttr"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="oracle.apps.xwrl.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="SeafarerListTcTaskFlow_SeafarerListTcTaskFlow_onLoadSeafarerListTcPageDef"
+                Package="com.rmi.applicationEntry.view.batchestaskflow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="onLoadSeafarerListTc" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="onLoadSeafarerListTc" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.onLoadSeafarerListTc_RMIApplicationEntryAppModuleDataControl_dataProvider_onLoadSeafarerListTc_result">
+      <NamedData NDName="pEsiBatchId" NDValue="#{pageFlowScope.pEsiBatchId}" NDType="java.lang.Integer"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

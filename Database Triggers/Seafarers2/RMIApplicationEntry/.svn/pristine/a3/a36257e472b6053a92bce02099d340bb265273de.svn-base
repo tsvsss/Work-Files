@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="RequestSubmitTaskFlow_RequestSubmitTaskFlow_onLoadRequestSubmissionPageDef"
+                Package="com.rmi.applicationEntry.view.requestsubmittaskflow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="onLoadRequestSubmission" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="onLoadRequestSubmission" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.onLoadRequestSubmission_RMIApplicationEntryAppModuleDataControl_dataProvider_onLoadRequestSubmission_result">
+      <NamedData NDName="p_request_id" NDValue="#{pageFlowScope.RequestId}" NDType="java.lang.Integer"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="FindOrdersView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.readonly.FindOrdersView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pOrderNumber"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pCustomerId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pCustomerNumber"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pSalesrepId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pOrderTypeId"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pOrderSource"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pFromOrderDate"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pToOrderDate"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pCreatedBy"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pOrderStatus"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pIncludeCancelledOrders"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pIncludeCancelledLines"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pOrderSourceRef"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pCustomerPoNumber"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pInternalItem"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pWarehouse"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pShippingMethod"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pLineFreightTerms"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pRequestDateFrom"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pRequestDateTo"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pPromiseDateFrom"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pPromiseDateTo"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pScheduleShipDateFrom"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pScheduleShipDateTo"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pScheduleArrivalDateFrom"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pScheduleArrivalDateTo"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pShipToLocId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pInvoiceToLocId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pLineShipToLocId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pLineInvoiceToLocId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pHoldId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pIncludeClosedOrders"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pIncludeClosedLines"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pVesselName"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[select distinct fu.user_name,           
+fu.email_address,           
+ooha.header_id,           
+ooha.order_number,       
+rbi.batch_name,    
+rbi.vessel_names,    
+hca.account_number Customer_Number,           
+hp.party_name customer_name,           
+ott.name Order_Type,           
+ooha.cust_po_number,           
+(select meaning from apps.oe_lookups           
+ where upper (lookup_type) = 'FLOW_STATUS'           
+ and upper (lookup_code) = upper (ooha.flow_status_code)           
+ and rownum = 1           
+ ) Order_Status,           
+order_src.name  order_source,           
+ooha.orig_sys_document_ref order_source_ref_num,           
+ooha.ordered_date ordered_date,           
+ooha.request_date request_date,           
+ooha.pricing_date pricing_date,           
+ooha.demand_class_code,           
+hou.name Operating_Unit,           
+qph.name PriceList,           
+rt.name terms,           
+hcsu_bill.orig_system_reference bill_to,           
+hcsu_ship.orig_system_reference ship_to,           
+hcsu_bill.LOCATION bill_to_location,           
+hcsu_ship.LOCATION ship_to_location,           
+loc_bill.address1 bill_to_address1,           
+DECODE (loc_bill.city,           
+                     NULL, NULL,           
+                     loc_bill.city || ', '           
+                    )           
+          || DECODE (loc_bill.state,           
+                     NULL, loc_bill.province || ', ',           
+                     loc_bill.state || ', '           
+                    )           
+          || DECODE (loc_bill.postal_code,           
+                     NULL, NULL,           
+                     loc_bill.postal_code || ', '           
+                    )           
+          || DECODE (loc_bill.country, NULL, NULL, loc_bill.country)           
+                                                          bill_to_address5,           
+hcsu_ship.LOCATION ship_to_location,           
+loc_ship.address1 ship_to_address1,           
+DECODE (loc_ship.city,           
+                     NULL, NULL,           
+                     loc_ship.city || ', '           
+                    )           
+          || DECODE (loc_ship.state,           
+                     NULL, loc_ship.province || ', ',           
+                     loc_ship.state || ', '           
+                    )           
+          || DECODE (loc_ship.postal_code,           
+                     NULL, NULL,           
+                     loc_ship.postal_code || ', '           
+                    )           
+          || DECODE (loc_ship.country, NULL, NULL, loc_ship.country)           
+                                                          ship_to_address5,           
+ooha.transactional_curr_code currency,           
+mp.organization_code warehouse,           
+(select meaning from apps.oe_lookups           
+ where upper (lookup_type) = 'FREIGHT_TERMS'           
+ and upper (lookup_code) = upper (ooha.freight_terms_code)           
+ and rownum = 1           
+ ) freight_terms           
+from apps.oe_order_headers_all ooha,           
+apps.oe_order_lines_all oola,           
+apps.fnd_user fu,           
+apps.hr_operating_units hou,           
+apps.qp_list_headers_all qph,           
+apps.hz_parties hp,           
+apps.hz_cust_accounts_all hca,           
+hz_party_sites hps_ship,           
+hz_party_sites hps_bill,           
+apps.hz_cust_acct_sites_all hcas_ship,           
+apps.hz_cust_acct_sites_all hcas_bill,           
+apps.hz_cust_site_uses_all hcsu_bill,           
+apps.hz_cust_site_uses_all hcsu_ship,           
+hz_locations loc_ship,           
+hz_locations loc_bill,           
+apps.oe_transaction_types_all otta,           
+apps.oe_transaction_types_tl ott,           
+apps.mtl_parameters mp,           
+ra_terms rt,           
+apps.ra_salesreps_all rs,           
+apps.oe_order_sources order_src,    
+rmi_batch_iface rbi    
+--apps.jtf_rs_defresources_v jrd           
+where 1=1           
+and ooha.header_id = oola.header_id           
+and ooha.created_by = fu.user_id           
+and mp.organization_id = oola.ship_from_org_id           
+and hou.organization_id = ooha.org_id           
+and oola.price_list_id = qph.list_header_id           
+and ooha.sold_to_org_id = hca.cust_account_id           
+AND hp.party_id = hca.party_id           
+and ooha.invoice_to_org_id = hcsu_bill.site_use_id(+)           
+AND hcsu_bill.cust_acct_site_id = hcas_bill.cust_acct_site_id(+)           
+AND hcas_bill.party_site_id = hps_bill.party_site_id(+)           
+AND loc_bill.location_id(+) = hps_bill.location_id           
+and ooha.ship_to_org_id = hcsu_ship.site_use_id           
+AND hcsu_ship.cust_acct_site_id = hcas_ship.cust_acct_site_id(+)           
+AND hcas_ship.party_site_id = hps_ship.party_site_id(+)           
+AND loc_ship.location_id(+) = hps_ship.location_id           
+and ooha.order_type_id = otta.transaction_type_id           
+and otta.transaction_type_id = ott.transaction_type_id           
+and ott.language = 'US'           
+and ooha.created_by = fu.user_id           
+and ooha.payment_term_id = rt.term_id           
+and ooha.salesrep_id = rs.salesrep_id(+)           
+and ooha.org_id = rs.org_id (+)           
+and order_src.order_source_id= ooha.order_source_id      
+and rbi.oe_header_id = ooha.header_id    
+and upper(rbi.vessel_names) like ('%'||upper(nvl(:pVesselName,rbi.vessel_names))||'%')    
+and ooha.order_number = nvl(:pOrderNumber,ooha.order_number)           
+and ooha.sold_to_org_id = nvl(:pCustomerId,ooha.sold_to_org_id)           
+and hca.account_number = nvl(:pCustomerNumber,hca.account_number)           
+and rs.resource_id = nvl(:pSalesrepId,rs.resource_id)           
+and ott.transaction_type_id = nvl(:pOrderTypeId,ott.transaction_type_id)           
+and order_src.name = nvl(:pOrderSource,order_src.name)           
+and to_char(to_date(ooha.ordered_date),'yyyy-mm-dd') >= to_char(to_date(to_date(nvl(:pFromOrderDate,to_date(ooha.ordered_date,'yyyy-mm-dd')),'yyyy-mm-dd')),'yyyy-mm-dd')    
+and to_char(to_date(ooha.ordered_date),'yyyy-mm-dd') <= to_char(to_date(to_date(nvl(:pToOrderDate,to_date(ooha.ordered_date,'yyyy-mm-dd')),'yyyy-mm-dd')),'yyyy-mm-dd')    
+and fu.user_id = nvl(:pCreatedBy,fu.user_id)           
+and ooha.flow_status_code = nvl(:pOrderStatus,ooha.flow_status_code)           
+and ooha.cancelled_flag = decode(:pIncludeCancelledOrders,'N','Y',ooha.cancelled_flag,'N','N')           
+and ((nvl(:pIncludeClosedOrders,'N') = 'N' and ooha.flow_status_code <> 'CLOSED') OR (nvl(:pIncludeClosedOrders,'Y') = 'Y') )           
+and oola.cancelled_flag = decode(:pIncludeCancelledLines,'N','Y',oola.cancelled_flag,'N','N')           
+and ((nvl(:pIncludeClosedLines,'N') = 'N' and oola.flow_status_code <> 'CLOSED') OR (nvl(:pIncludeClosedLines,'Y') = 'Y') )           
+and NVL(ooha.orig_sys_document_ref,'X') = nvl(:pOrderSourceRef,NVL(ooha.orig_sys_document_ref,'X'))           
+and NVL(ooha.cust_po_number,'X') = nvl(:pCustomerPoNumber,NVL(ooha.cust_po_number,'X'))           
+and NVL(oola.ordered_item,'X') = nvl(:pInternalItem,NVL(oola.ordered_item,'X'))           
+and mp.organization_code = nvl(:pWarehouse,mp.organization_code)           
+and nvl(oola.shipping_method_code,'X') = nvl(:pShippingMethod,NVL(oola.shipping_method_code,'X'))           
+and nvl(oola.freight_terms_code,'X') = nvl(:pLineFreightTerms,nvl(oola.freight_terms_code,'X'))           
+and to_char(to_date(nvl(oola.request_date,sysdate)),'yyyy-mm-dd') between to_char(nvl(to_date(:pRequestDateFrom,'yyyy-mm-dd'),to_date(nvl(oola.request_date,sysdate))),'yyyy-mm-dd') and to_char(nvl(to_date(:pRequestDateTo,'yyyy-mm-dd'),to_date(nvl(oola.request_date,sysdate))),'yyyy-mm-dd')      
+and to_char(to_date(nvl(oola.promise_date,sysdate)),'yyyy-mm-dd') between to_char(nvl(to_date(:pPromiseDateFrom,'yyyy-mm-dd'),to_date(nvl(oola.promise_date,sysdate))),'yyyy-mm-dd') and to_char(nvl(to_date(:pPromiseDateTo,'yyyy-mm-dd'),to_date(nvl(oola.promise_date,sysdate))),'yyyy-mm-dd')     
+and to_char(to_date(nvl(oola.schedule_ship_date,sysdate)),'yyyy-mm-dd') between to_char(nvl(to_date(:pScheduleShipDateFrom,'yyyy-mm-dd'),to_date(nvl(oola.schedule_ship_date,sysdate))),'yyyy-mm-dd') and to_char(nvl(to_date(:pScheduleShipDateTo,'yyyy-mm-dd'),to_date(nvl(oola.schedule_ship_date,sysdate))),'yyyy-mm-dd')     
+and to_char(to_date(nvl(oola.schedule_arrival_date,sysdate)),'yyyy-mm-dd') between to_char(nvl(to_date(:pScheduleArrivalDateFrom,'yyyy-mm-dd'),to_date(nvl(oola.schedule_arrival_date,sysdate))),'yyyy-mm-dd') and to_char(nvl(to_date(:pScheduleArrivalDateTo,'yyyy-mm-dd'),to_date(nvl(oola.schedule_arrival_date,sysdate))),'yyyy-mm-dd')     
+/*and to_date((nvl(oola.request_date,sysdate))) between (to_date(nvl(:pRequestDateFrom,(nvl(oola.request_date,sysdate))))) and (to_date(nvl(:pRequestDateTo,nvl(oola.request_date,sysdate))))      
+and to_date((nvl(oola.promise_date,sysdate))) between (to_date(nvl(:pPromiseDateFrom,(nvl(oola.promise_date,sysdate))))) and (to_date(nvl(:pPromiseDateTo,(nvl(oola.promise_date,sysdate)))))      
+and to_date((nvl(oola.schedule_ship_date,sysdate))) between (to_date(nvl(:pScheduleShipDateFrom,(nvl(oola.schedule_ship_date,sysdate))))) and (to_date(nvl(:pScheduleShipDateTo,(nvl(oola.schedule_ship_date,sysdate)))))      
+and to_date((nvl(oola.schedule_arrival_date,sysdate))) between (to_date(nvl(:pScheduleArrivalDateFrom,(nvl(oola.schedule_arrival_date,sysdate))))) and (to_date(nvl(:pScheduleArrivalDateTo,(nvl(oola.schedule_arrival_date,sysdate)))))*/    
+and ooha.ship_to_org_id = nvl(:pShipToLocId,ooha.ship_to_org_id)           
+and ooha.invoice_to_org_id = nvl(:pInvoiceToLocId,ooha.invoice_to_org_id)           
+and oola.ship_to_org_id = nvl(:pLineShipToLocId,oola.ship_to_org_id)           
+and oola.invoice_to_org_id = nvl(:pLineInvoiceToLocId,oola.invoice_to_org_id)           
+and exists (           
+            select 1           
+            from   apps.OE_ORDER_HOLDS_ALL hld_hdr,           
+                    apps.OE_HOLD_SOURCES_ALL hold_src_hdr           
+            where ooha.header_id = hld_hdr.header_id           
+            and hld_hdr.line_id IS NULL           
+            and hld_hdr.hold_source_id = hold_src_hdr.hold_source_id           
+            and hold_src_hdr.hold_id = :pHoldId    
+            and nvl(hld_hdr.released_flag,'N') = 'N'           
+            and :pHoldId is not null           
+            union all           
+            select 1           
+            from   apps.OE_ORDER_HOLDS_ALL hld,           
+                    apps.OE_HOLD_SOURCES_ALL hold_src           
+            where ooha.header_id = hld.header_id           
+            and oola.line_id = hld.line_id            
+            and hld.hold_source_id = hold_src.hold_source_id           
+            and hold_src.hold_id = :pHoldId    
+            and nvl(hld.released_flag,'N') = 'N'           
+            and :pHoldId is not null           
+            union all           
+            select 1 from dual where :pHoldId is null           
+            )           
+order by ooha.order_number desc]]></SQLQuery>
+  <ViewAttribute
+    Name="UserName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="USER_NAME"
+    Expression="USER_NAME"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="EmailAddress"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EMAIL_ADDRESS"
+    Expression="EMAIL_ADDRESS"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="HeaderId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="HEADER_ID"
+    Expression="HEADER_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="OrderNumber"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ORDER_NUMBER"
+    Expression="ORDER_NUMBER"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="BatchName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BATCH_NAME"
+    Expression="BATCH_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VesselNames"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VESSEL_NAMES"
+    Expression="VESSEL_NAMES"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CustomerNumber"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUSTOMER_NUMBER"
+    Expression="CUSTOMER_NUMBER"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="CustomerName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUSTOMER_NAME"
+    Expression="CUSTOMER_NAME"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="OrderType"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ORDER_TYPE"
+    Expression="ORDER_TYPE"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="CustPoNumber"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUST_PO_NUMBER"
+    Expression="CUST_PO_NUMBER"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="OrderStatus"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ORDER_STATUS"
+    Expression="ORDER_STATUS"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="OrderSource"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ORDER_SOURCE"
+    Expression="ORDER_SOURCE"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="OrderSourceRefNum"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ORDER_SOURCE_REF_NUM"
+    Expression="ORDER_SOURCE_REF_NUM"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="OrderedDate"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    AliasName="ORDERED_DATE"
+    Expression="ORDERED_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="RequestDate"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    AliasName="REQUEST_DATE"
+    Expression="REQUEST_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="PricingDate"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Timestamp"
+    ColumnType="DATE"
+    AliasName="PRICING_DATE"
+    Expression="PRICING_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="DemandClassCode"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEMAND_CLASS_CODE"
+    Expression="DEMAND_CLASS_CODE"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="OperatingUnit"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="OPERATING_UNIT"
+    Expression="OPERATING_UNIT"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="Pricelist"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PRICELIST"
+    Expression="PRICELIST"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="Terms"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TERMS"
+    Expression="TERMS"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="BillTo"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BILL_TO"
+    Expression="BILL_TO"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="ShipTo"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHIP_TO"
+    Expression="SHIP_TO"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="BillToLocation"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BILL_TO_LOCATION"
+    Expression="BILL_TO_LOCATION"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="ShipToLocation"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHIP_TO_LOCATION"
+    Expression="SHIP_TO_LOCATION"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="BillToAddress1"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BILL_TO_ADDRESS1"
+    Expression="BILL_TO_ADDRESS1"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="BillToAddress5"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BILL_TO_ADDRESS5"
+    Expression="BILL_TO_ADDRESS5"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="ShipToLocation1"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHIP_TO_LOCATION"
+    Expression="SHIP_TO_LOCATION"
+    SQLType="VARCHAR"
+    IsUpdateable="false"
+    Precision="40">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipToAddress1"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHIP_TO_ADDRESS1"
+    Expression="SHIP_TO_ADDRESS1"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="ShipToAddress5"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHIP_TO_ADDRESS5"
+    Expression="SHIP_TO_ADDRESS5"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="Currency"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CURRENCY"
+    Expression="CURRENCY"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="Warehouse"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="WAREHOUSE"
+    Expression="WAREHOUSE"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="FreightTerms"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FREIGHT_TERMS"
+    Expression="FREIGHT_TERMS"
+    SQLType="VARCHAR"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="HeaderId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

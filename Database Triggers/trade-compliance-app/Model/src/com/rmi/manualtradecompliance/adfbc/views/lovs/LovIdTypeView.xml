@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="LovIdTypeView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.manualtradecompliance.adfbc.views.lovs.LovIdTypeView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT type_id TYPE_CODE,  
+ type_description TYPE_DESC  
+FROM WC_ID_TYPES
+where enabled='Y']]></SQLQuery>
+  <ViewAttribute
+    Name="TypeCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="TYPE_CODE"
+    Expression="TYPE_CODE"
+    SQLType="INTEGER">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="17"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TypeDesc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="17"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TYPE_DESC"
+    Expression="TYPE_DESC"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="17"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="TypeCode"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.manualtradecompliance.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SeafarerDetailSqcDetailLogicalLink"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.links.SeafarerDetailSqcDetailLogicalLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="SeafarersDetailsRO"
+    Cardinality="1"
+    Source="true"
+    Owner="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarersDetailsView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="SeafarersDetailsRO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarersDetailsView.EsiId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="SeafarerSqcDetailsRO"
+    Cardinality="-1"
+    Owner="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarerSqcDetailsView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="SeafarerSqcDetailsRO"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarerSqcDetailsView.EsiId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

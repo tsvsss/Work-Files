@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="RequestSubmitPageDef"
+                Package="com.rmi.applicationEntry.view.requestsubmittaskflow">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="RMISubmitRequestDualView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="RMISubmitRequestDualViewIterator"/>
+    <iterator Binds="RequestDetailsView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="RequestDetailsViewIterator"/>
+    <searchRegion Binds="RequestDetailsViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="RequestDetailsViewQuery"/>
+    <iterator Binds="RequestSearchDualView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="RequestSearchDualViewIterator"/>
+  </executables>
+  <bindings>
+    <list IterBinding="RMISubmitRequestDualViewIterator" StaticList="false" Uses="LOV_SelectRequest"
+          id="SelectRequest" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <tree IterBinding="RequestDetailsViewIterator" id="RequestDetailsView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.RequestDetailsView"
+                      Name="RequestDetailsView0">
+        <AttrNames>
+          <Item Value="RequestId"/>
+          <Item Value="UserConcurrentProgramName"/>
+          <Item Value="ParentRequestId"/>
+          <Item Value="Phase"/>
+          <Item Value="Status"/>
+          <Item Value="Requestor"/>
+          <Item Value="RequestDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="RequestSearchDualViewIterator" id="RequestId">
+      <AttrNames>
+        <Item Value="RequestId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RequestSearchDualViewIterator" id="RequestDate">
+      <AttrNames>
+        <Item Value="RequestDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="RequestSearchDualViewIterator" StaticList="false" Uses="LOV_ProgramId" id="ProgramId"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="RequestSearchDualViewIterator" StaticList="false" Uses="LOV_UserName" id="UserName"/>
+    <methodAction id="searchRequestDeatailView" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="searchRequestDeatailView" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.searchRequestDeatailView_RMIApplicationEntryAppModuleDataControl_dataProvider_searchRequestDeatailView_result"/>
+    <methodAction id="resetRequestSearchform" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="resetRequestSearchform" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.resetRequestSearchform_RMIApplicationEntryAppModuleDataControl_dataProvider_resetRequestSearchform_result"/>
+    <attributeValues IterBinding="RequestSearchDualViewIterator" id="Days">
+      <AttrNames>
+        <Item Value="Days"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="RMISubmitRequestDualViewIterator" StaticList="false" Uses="LOV_OrderNumber"
+                  id="OrderNumber"/>
+    <list IterBinding="RMISubmitRequestDualViewIterator" StaticList="false" Uses="LOV_LineId" id="LineId"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <methodAction id="submitRequest" RequiresUpdateModel="true" Action="invokeMethod" MethodName="submitRequest"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.submitRequest_RMIApplicationEntryAppModuleDataControl_dataProvider_submitRequest_result"/>
+    <attributeValues IterBinding="RequestDetailsViewIterator" id="LogfileName">
+      <AttrNames>
+        <Item Value="LogfileName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RequestDetailsViewIterator" id="OutfileName">
+      <AttrNames>
+        <Item Value="OutfileName"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="copyLogFile" RequiresUpdateModel="true" Action="invokeMethod" MethodName="copyLogFile"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.copyLogFile_RMIApplicationEntryAppModuleDataControl_dataProvider_copyLogFile_result"/>
+    <attributeValues IterBinding="RMISubmitRequestDualViewIterator" id="FromDate">
+      <AttrNames>
+        <Item Value="FromDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="RMISubmitRequestDualViewIterator" id="ToDate">
+      <AttrNames>
+        <Item Value="ToDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="RMISubmitRequestDualViewIterator" StaticList="false" Uses="LOV_SalesOffice" id="SalesOffice"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="RMISubmitRequestDualViewIterator" id="ProgramShortName">
+      <AttrNames>
+        <Item Value="ProgramShortName"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="copyOutFile" RequiresUpdateModel="true" Action="invokeMethod" MethodName="copyOutFile"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.copyOutFile_RMIApplicationEntryAppModuleDataControl_dataProvider_copyOutFile_result"/>
+    <methodAction id="selectRequestValueChange" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="selectRequestValueChange" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.selectRequestValueChange_RMIApplicationEntryAppModuleDataControl_dataProvider_selectRequestValueChange_result">
+      <NamedData NDName="newValue" NDType="java.lang.String"/>
+    </methodAction>
+    <listOfValues IterBinding="RMISubmitRequestDualViewIterator" StaticList="false" Uses="LOV_SelectRequest"
+                  id="SelectRequest1"/>
+    <listOfValues IterBinding="RMISubmitRequestDualViewIterator" StaticList="false" Uses="LOV_BatchName"
+                  id="BatchName"/>
+    <list IterBinding="RMISubmitRequestDualViewIterator" StaticList="false" Uses="LOV_GroupName" id="GroupName"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="RMISubmitRequestDualViewIterator" StaticList="false" Uses="LOV_ActionName" id="ActionName"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <list IterBinding="RMISubmitRequestDualViewIterator" StaticList="false" Uses="LOV_OrderBy" id="OrderBy"
+          DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <listOfValues IterBinding="RMISubmitRequestDualViewIterator" StaticList="false" Uses="LOV_PrinterName"
+                  id="PrinterName"/>
+    <attributeValues IterBinding="RMISubmitRequestDualViewIterator" id="NumberOfCopies">
+      <AttrNames>
+        <Item Value="NumberOfCopies"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="requestSubmitFetchListener" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="requestSubmitFetchListener" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.requestSubmitFetchListener_RMIApplicationEntryAppModuleDataControl_dataProvider_requestSubmitFetchListener_result"/>
+    <list IterBinding="RMISubmitRequestDualViewIterator" StaticList="false" Uses="LOV_IncludeAllSeafarer"
+          id="IncludeAllSeafarer" DTSupportsMRU="true" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="RMISubmitRequestDualViewIterator" id="SeafarerId">
+      <AttrNames>
+        <Item Value="SeafarerId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="validateRequestSubmit" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="validateRequestSubmit" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.validateRequestSubmit_RMIApplicationEntryAppModuleDataControl_dataProvider_validateRequestSubmit_result"/>
+    <methodAction id="searchRequestDeatailViewOnSubmission" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="searchRequestDeatailViewOnSubmission" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.searchRequestDeatailViewOnSubmission_RMIApplicationEntryAppModuleDataControl_dataProvider_searchRequestDeatailViewOnSubmission_result">
+      <NamedData NDName="RequestId" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

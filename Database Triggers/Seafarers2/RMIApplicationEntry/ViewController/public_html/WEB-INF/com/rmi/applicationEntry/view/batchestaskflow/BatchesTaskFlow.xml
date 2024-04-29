@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="taskflow_Batches">
+    <default-activity>init</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__6">
+      <name>param_user_id</name>
+      <value>#{sessionScope.param_user_id}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__7">
+      <name>param_batch_status</name>
+      <value>#{sessionScope.param_batch_status}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__15">
+      <name>RoleName</name>
+      <value>#{sessionScope.RoleName}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__3">
+      <managed-bean-name>BatchesBean</managed-bean-name>
+      <managed-bean-class>com.rmi.applicationEntry.view.batchestaskflow.BatchesBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__19">
+      <managed-bean-name>BatchesBackingBean</managed-bean-name>
+      <managed-bean-class>com.rmi.applicationEntry.view.batchestaskflow.BatchesBackingBean</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="Batches">
+      <page>/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/Batches.jsff</page>
+    </view>
+    <task-flow-call id="taskflow_Batch_CreateEdit">
+      <task-flow-reference>
+        <document>/WEB-INF/com/rmi/applicationEntry/view/batchcreateedittaskflow/BatchCreateEditTaskFlow.xml</document>
+        <id>taskflow_Batch_CreateEdit</id>
+      </task-flow-reference>
+      <input-parameter id="__4">
+        <name>param_batch_mode</name>
+        <value>#{pageFlowScope.batchMode}</value>
+      </input-parameter>
+      <input-parameter id="__5">
+        <name>param_batch_id</name>
+        <value>#{pageFlowScope.batchNumber}</value>
+      </input-parameter>
+      <input-parameter id="__10">
+        <name>param_user_id</name>
+        <value>#{sessionScope.param_user_id}</value>
+      </input-parameter>
+      <input-parameter id="__8">
+        <name>param_calling_tf</name>
+        <value>new</value>
+      </input-parameter>
+      <input-parameter id="__12">
+        <name>param_rejected_tab</name>
+        <value>#{pageFlowScope.batchReject}</value>
+      </input-parameter>
+      <input-parameter id="__18">
+        <name>RoleName</name>
+        <value>#{sessionScope.RoleName}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="searchBatch">
+      <method>#{bindings.searchBatch.execute}</method>
+      <outcome>
+        <fixed-outcome>searchBatch</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="init">
+      <method>#{pageFlowScope.BatchesBean.initMethod}</method>
+      <outcome>
+        <fixed-outcome>go</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>Batches</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>batchCreateEdit</from-outcome>
+        <to-activity-id>taskflow_Batch_CreateEdit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id>searchBatch</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>searchBatch</from-outcome>
+        <to-activity-id>Batches</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__9">
+      <from-activity-id>init</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>go</from-outcome>
+        <to-activity-id>searchBatch</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

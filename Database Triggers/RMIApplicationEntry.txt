@@ -1,0 +1,196 @@
+Entity :BatchIface
+|__Attribute :EsiBatchId
+|____Change Mandatory to:true
+|____Change Primary Key to:false
+|__Remove Key Constraint: BatcheseoPrimaryKey
+
+Entity :DispensationLetterLinks
+|__Attribute :DispensationId
+|____Change Column type to NUMBER
+|____Change Primary Key to:false
+|__Remove Key Constraint: DispensationletterlinkseoPrimaryKey
+
+Entity :DocumentHistory
+|__Attribute :DocCode
+|____Change Column type to VARCHAR2(20)
+|____Change Precision to 20
+|__Remove Key Constraint: SysC001260801
+|__Create Key for Constraint: SYS_C002107384
+
+Entity :DocumentScanningLog
+|__Attribute :EdslId
+|____Change Mandatory to:true
+|____Change Primary Key to:false
+|__Create Attribute for column: CREATED_BY
+|__Create Attribute for column: CREATION_DATE
+|__Create Attribute for column: LAST_UPDATED_BY
+|__Create Attribute for column: LAST_UPDATE_DATE
+|__Create Attribute for column: LAST_UPDATE_LOGIN
+|__Remove Key Constraint: DocumentscanninglogeoPrimaryKey
+
+Entity :IRIEdocsHeader
+|__Attribute :IeHeaderId
+|____Change Column type to NUMBER
+|____Change Primary Key to:false
+|__Remove Key Constraint: IriedocsheadereoPrimaryKey
+
+Entity :SeafarerDocsIface
+|__Attribute :GradingComments
+|____Change Column type to VARCHAR2(4000)
+|____Change Precision to 4000
+|__Attribute :GradingStatus
+|____Change Column type to VARCHAR2(100)
+|____Change Precision to 100
+|__Attribute :CocIssueDate
+|____Change Column type to DATE
+|__Attribute :EsdiId
+|____Change Primary Key to:false
+|__Create Attribute for column: SEND_FOR_VERIFICATION_FLG
+|__Create Attribute for column: ADDED_BY_ROLE
+|__Create Attribute for column: DATA_VERIFIED
+|__Create Attribute for column: VERIFIED
+|__Create Attribute for column: VERIFICATION_EDOC_ID
+|__Create Attribute for column: GRADING_STATUS_OC
+|__Create Attribute for column: DOC_GRD_HOLD_REASON
+|__Create Attribute for column: DATA_VERIFIED_COMNT
+|__Create Attribute for column: CRA_APPROVED_FLAG
+|__Create Attribute for column: REPLACEMENT_ISSUE_TYPE
+|__Create Attribute for column: RESTRICTION_NAME
+|__Create Attribute for column: DOC_ISSUE_TYPE_UPD
+|__Create Attribute for column: DOC_ISSUE_TYPE_UPD_DT
+|__Create Attribute for column: DOC_LIMITATION_UPD
+|__Create Attribute for column: LINE_PROCESSED
+|__Remove Key Constraint: SeafarerdocseoPrimaryKey
+
+Entity :SeafarerIface
+|__Attribute :IdCardGrdCmnt
+|____Change Column type to VARCHAR2(4000)
+|____Change Precision to 4000
+|__Attribute :IdCardGrdStatus
+|____Change Column type to VARCHAR2(100)
+|____Change Precision to 100
+|__Attribute :ConGrdComnt
+|____Change Column type to VARCHAR2(4000)
+|____Change Precision to 4000
+|__Attribute :ConGrdStatus
+|____Change Column type to VARCHAR2(100)
+|____Change Precision to 100
+|__Attribute :SatGrdComnt
+|____Change Column type to VARCHAR2(4000)
+|____Change Precision to 4000
+|__Attribute :SatGrdStatus
+|____Change Column type to VARCHAR2(100)
+|____Change Precision to 100
+|__Attribute :AffidavitGrdComnt
+|____Change Column type to VARCHAR2(4000)
+|____Change Precision to 4000
+|__Attribute :ApplicationGrdComnt
+|____Change Column type to VARCHAR2(4000)
+|____Change Precision to 4000
+|__Attribute :AffidavitGrdStatus
+|____Change Column type to VARCHAR2(100)
+|____Change Precision to 100
+|__Attribute :ApplicationGrdStatus
+|____Change Column type to VARCHAR2(100)
+|____Change Precision to 100
+|__Attribute :SeafarerGrdComnt
+|____Change Column type to VARCHAR2(4000)
+|____Change Precision to 4000
+|__Attribute :SeafarerGrdStatus
+|____Change Column type to VARCHAR2(100)
+|____Change Precision to 100
+|__Attribute :BookGrdComnt
+|____Change Column type to VARCHAR2(4000)
+|____Change Precision to 4000
+|__Attribute :BookGrdStatus
+|____Change Column type to VARCHAR2(100)
+|____Change Precision to 100
+|__Attribute :PhotoGrdComnt
+|____Change Column type to VARCHAR2(4000)
+|____Change Precision to 4000
+|__Attribute :PhotoGrdStatus
+|____Change Column type to VARCHAR2(100)
+|____Change Precision to 100
+|__Attribute :IdentityDocGrdComnt
+|____Change Column type to VARCHAR2(4000)
+|____Change Precision to 4000
+|__Attribute :IdentityDocGrdStatus
+|____Change Column type to VARCHAR2(100)
+|____Change Precision to 100
+|__Attribute :PhysicalGrdComnt
+|____Change Column type to VARCHAR2(4000)
+|____Change Precision to 4000
+|__Attribute :PhysicalGrdStatus
+|____Change Column type to VARCHAR2(100)
+|____Change Precision to 100
+|__Attribute :SeaserviceGrdComnt
+|____Change Column type to VARCHAR2(4000)
+|____Change Precision to 4000
+|__Attribute :SeaserviceGrdStatus
+|____Change Column type to VARCHAR2(100)
+|____Change Precision to 100
+|__Attribute :PermanentAddress
+|____Change Column type to VARCHAR2(4000)
+|____Change Precision to 4000
+|__Attribute :Notes
+|____Change Column type to VARCHAR2(4000)
+|____Change Precision to 4000
+|__Create Attribute for column: DATA_VERIFIED
+|__Create Attribute for column: DATA_VERIFIED_INFO
+|__Create Attribute for column: DATA_VERIFIED_INFO_COMNT
+|__Create Attribute for column: PHOTO_GRD_HOLD_REASON
+|__Create Attribute for column: BOOK_GRD_HOLD_REASON
+|__Create Attribute for column: SEAFARER_GRD_HOLD_REASON
+|__Create Attribute for column: APPLICATION_GRD_HOLD_REASON
+|__Create Attribute for column: AFFIDAVIT_GRD_HOLD_REASON
+|__Create Attribute for column: SAT_GRD_HOLD_REASON
+|__Create Attribute for column: CON_GRD_HOLD_REASON
+|__Create Attribute for column: ID_CARD_GRD_HOLD_REASON
+|__Create Attribute for column: IDENTITY_DOC_GRD_HOLD_REASON
+|__Create Attribute for column: PHYSICAL_GRD_HOLD_REASON
+|__Create Attribute for column: SEASERVICE_GRD_HOLD_REASON
+|__Create Attribute for column: PHOTO_VERIFIED
+|__Create Attribute for column: BOOK_VERIFIED
+|__Create Attribute for column: SEAFARER_VERIFIED
+|__Create Attribute for column: APPLICATION_VERIFIED
+|__Create Attribute for column: AFFIDAVIT_VERIFIED
+|__Create Attribute for column: SAT_VERIFIED
+|__Create Attribute for column: CON_VERIFIED
+|__Create Attribute for column: ID_CARD_VERIFIED
+|__Create Attribute for column: IDENTITY_DOC_VERIFIED
+|__Create Attribute for column: PHYSICAL_VERIFIED
+|__Create Attribute for column: SEASERVICE_VERIFIED
+|__Create Attribute for column: PHOTO_VERIFIED_COMNT
+|__Create Attribute for column: BOOK_VERIFIED_COMNT
+|__Create Attribute for column: APPLICATION_VERIFIED_COMNT
+|__Create Attribute for column: AFFIDAVIT_VERIFIED_COMNT
+|__Create Attribute for column: SAT_VERIFIED_COMNT
+|__Create Attribute for column: CON_VERIFIED_COMNT
+|__Create Attribute for column: ID_CARD_VERIFIED_COMNT
+|__Create Attribute for column: IDENTITY_DOC_VERIFIED_COMNT
+|__Create Attribute for column: PHYSICAL_VERIFIED_COMNT
+|__Create Attribute for column: SEASERVICE_VERIFIED_COMNT
+|__Create Attribute for column: CRA_APPROVAL_FLAG
+|__Create Attribute for column: REPLACEMENT_ISSUE_TYPE
+|__Create Attribute for column: BOOK_REPLACEMENT_ISSUE_TYPE
+|__Create Attribute for column: BOOK_CHARGEABLE
+|__Create Attribute for column: IDCARD_CHARGEABLE
+|__Create Attribute for column: ACK_CONC_REQ_ID
+|__Create Attribute for column: SEAFARER_VLDT_FLAG
+|__Remove Key Constraint: SeafarereoPrimaryKey
+|__Create Key for Constraint: RMI_SEAFARERS_IFACE_FK
+|__Create Entity Association
+|__Create Key for Constraint: RMI_SEAFARERS_IFACE_PK
+
+Entity :VsslInspComm
+|__Attribute :CreationDate
+|____Change Column type to DATE
+|____Change Mandatory to:true
+|__Attribute :CommId
+|____Change Primary Key to:false
+|__Remove Key Constraint: VsslinspcommeoPrimaryKey
+
+Entity :WorkFlow
+|__Remove Key Constraint: SysC001258225
+|__Create Key for Constraint: SYS_C002107416
+

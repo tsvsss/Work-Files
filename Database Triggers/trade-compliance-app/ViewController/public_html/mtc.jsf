@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+        <af:document title="Trade Compliance" id="d1">
+        <af:form id="f1" usesUpload="true">
+        <af:pageTemplate viewId="/resources/templates/IRI_template.jsf"  id="pt1">
+                <f:facet name="content">
+          <af:region value="#{bindings.vettingTF1.regionModel}" id="r1"/>
+           </f:facet>
+              <f:attribute name="title" value="#{sessionScope.UserRespAndSessionInfo.pageTitle}"/>
+                <f:attribute name="dbName" value="#{sessionScope.UserRespAndSessionInfo.dbName}"/>
+                <f:attribute name="userName" value="#{sessionScope.UserRespAndSessionInfo.userName}"/>
+                <f:attribute name="responsibility" value="#{sessionScope.UserRespAndSessionInfo.responsibilityName}"/>
+                <f:attribute name="home" value="#{sessionScope.UserRespAndSessionInfo.home}"/>
+            </af:pageTemplate> 
+        </af:form>
+    </af:document>
+</f:view>

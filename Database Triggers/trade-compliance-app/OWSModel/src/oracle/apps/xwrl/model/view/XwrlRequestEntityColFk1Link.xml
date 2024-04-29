@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XwrlRequestEntityColFk1Link"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  EntityAssociation="oracle.apps.xwrl.model.entity.XwrlRequestEntityColFk1Assoc">
+  <ViewLinkDefEnd
+    Name="XwrlRequestsView"
+    Cardinality="1"
+    Source="true"
+    Owner="oracle.apps.xwrl.model.view.XwrlRequestsView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XwrlRequestsView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="oracle.apps.xwrl.model.view.XwrlRequestsView.Id"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="XwrlRequestEntityColumnsView"
+    Cardinality="-1"
+    Owner="oracle.apps.xwrl.model.view.XwrlRequestEntityColumnsView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XwrlRequestEntityColumnsView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="oracle.apps.xwrl.model.view.XwrlRequestEntityColumnsView.RequestId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+</ViewLink>

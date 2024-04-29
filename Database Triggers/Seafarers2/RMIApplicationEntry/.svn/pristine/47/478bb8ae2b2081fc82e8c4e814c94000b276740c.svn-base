@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="QueryOrderTaskFlow">
+    <default-activity>resetQueryOrderDetails</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>QueryOrderBean</managed-bean-name>
+      <managed-bean-class>com.rmi.applicationEntry.view.queryordertaskflow.QueryOrderBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="QueryOrder">
+      <page>/WEB-INF/com/rmi/applicationEntry/view/queryordertaskflow/QueryOrder.jsff</page>
+    </view>
+    <method-call id="resetQueryOrderDetails">
+      <method>#{bindings.resetQueryOrderDetails.execute}</method>
+      <outcome>
+        <fixed-outcome>resetQueryOrderDetails</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>resetQueryOrderDetails</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>resetQueryOrderDetails</from-outcome>
+        <to-activity-id>QueryOrder</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

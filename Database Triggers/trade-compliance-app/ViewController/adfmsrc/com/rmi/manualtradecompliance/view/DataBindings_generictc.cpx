@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.1.3.10.8" id="DataBindings_generictc"
+             SeparateXMLFiles="false" Package="com.rmi.manualtradecompliance.view" ClientType="Generic">
+    <definitionFactories>
+        <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+                 className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+        <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+    </definitionFactories>
+    <pageMap>
+        <page path="/WEB-INF/com/rmi/manualtradecompliance/view/vetting/vetting.jsff"
+              usageId="com_rmi_manualtradecompliance_view_vettingPageDef"/>
+        <page path="/mtc.jsf" usageId="com_rmi_manualtradecompliance_view_mtcPageDef"/>
+        <page path="/WEB-INF/com/rmi/manualtradecompliance/view/tradecompliance/tradecomplaince.jsf"
+              usageId="com_rmi_manualtradecompliance_view_tradecomplaincePageDef"/>
+        <page path="/Prototype/ReviewIndividualResponse.jsff"
+              usageId="oracle_apps_xwrl_view_ReviewIndividualResponsePageDef"/>
+        <page path="/Prototype/ReviewEntityResponse.jsff" usageId="oracle_apps_xwrl_view_ReviewEntityResponsePageDef"/>
+        <page path="/Prototype/EnterIndividualRequest.jsff"
+              usageId="oracle_apps_xwrl_view_EnterIndividualRequestPageDef"/>
+        <page path="/Prototype/EnterEntityRequest.jsff" usageId="oracle_apps_xwrl_view_EnterEntityRequestPageDef"/>
+        <page path="/Request.jsf" usageId="oracle_apps_xwrl_view_RequestPageDef"/>
+        <page path="/WEB-INF/Prototype-task-flow-definition.xml#Prototype-task-flow-definition@executeRequestView"
+              usageId="oracle_apps_xwrl_view_Prototype_task_flow_definition_Prototype_task_flow_definition_executeRequestViewPageDef"/>
+        <page path="/Prototype/EnterEntityAlertNote.jsff" usageId="oracle_apps_xwrl_view_EnterEntityAlertNotePageDef"/>
+        <page path="/Prototype/EnterIndividualAlertNote.jsff"
+              usageId="oracle_apps_xwrl_view_EnterIndividualAlertNotePageDef"/>
+        <page path="/Prototype/EnterEntityCaseNote.jsff" usageId="oracle_apps_xwrl_view_EnterEntityCaseNotePageDef"/>
+        <page path="/Prototype/EnterIndividualCaseNote.jsff"
+              usageId="oracle_apps_xwrl_view_EnterIndividualCaseNotePageDef"/>
+        <page path="/Prototype/UploadIndividualCaseDocument.jsff"
+              usageId="oracle_apps_xwrl_view_UploadIndividualCaseDocumentPageDef"/>
+        <page path="/Prototype/UploadIndividualAlertDocument.jsff"
+              usageId="oracle_apps_xwrl_view_UploadIndividualAlertDocumentPageDef"/>
+        <page path="/Prototype/UploadEntityCaseDocument.jsff"
+              usageId="oracle_apps_xwrl_view_UploadEntityCaseDocumentPageDef"/>
+        <page path="/Prototype/UploadEntityAlertDocument.jsff"
+              usageId="oracle_apps_xwrl_view_UploadEntityAlertDocumentPageDef"/>
+        <page path="/Upload.jsf" usageId="oracle_apps_xwrl_view_UploadPageDef"/>
+        <page path="/WEB-INF/Prototype-task-flow-definition.xml#Prototype-task-flow-definition@storeDCFrameNameListener"
+              usageId="oracle_apps_xwrl_view_Prototype_task_flow_definition_Prototype_task_flow_definition_storeDCFrameNameListenerPageDef"/>
+        <page path="/faces/upload" usageId="oracle_apps_xwrl_view_UploadPageDef"/>
+        <page path="/upload" usageId="oracle_apps_xwrl_view_UploadPageDef"/>
+        <page path="/Statusboard.jsf" usageId="oracle_apps_xwrl_view_AdministrationPageDef"/>
+        <page path="/Prototype/OwsStatusboard.jsff" usageId="oracle_apps_xwrl_view_OwsStatusboardPageDef"/>
+        <page path="/Administration.jsf" usageId="oracle_apps_xwrl_view_AdministrationPageDef1"/>
+        <page path="/Prototype/Parameters.jsff" usageId="oracle_apps_xwrl_view_ParametersPageDef"/>
+        <page path="/Prototype/Citylist.jsff" usageId="oracle_apps_xwrl_view_CitylistPageDef"/>
+        <page path="/Prototype/CountrySanctionStatus.jsff"
+              usageId="oracle_apps_xwrl_view_CountrySanctionStatusPageDef"/>
+        <page path="/WEB-INF/ParametersEditTaskFlow.xml#ParametersEditTaskFlow@SetCurrentRowWithKey"
+              usageId="oracle_apps_xwrl_view_ParametersEditTaskFlow_ParametersEditTaskFlow_SetCurrentRowWithKeyPageDef"/>
+        <page path="/Prototype/UpdateParameters.jsf" usageId="oracle_apps_xwrl_view_UpdateParametersPageDef"/>
+        <page path="/WEB-INF/OwsParametersTaskFlow.xml#OwsParametersTaskFlow@execParameters"
+              usageId="oracle_apps_xwrl_view_OwsParametersTaskFlow_OwsParametersTaskFlow_execParametersPageDef"/>
+        <page path="/WEB-INF/CitylistTaskFlow.xml#CitylistTaskFlow@execCity"
+              usageId="oracle_apps_xwrl_view_CitylistTaskFlow_CitylistTaskFlow_execCityPageDef"/>
+        <page path="/WEB-INF/CountrySanctionStatusTaskFlow.xml#CountrySanctionStatusTaskFlow@execSanction"
+              usageId="oracle_apps_xwrl_view_CountrySanctionStatusTaskFlow_CountrySanctionStatusTaskFlow_execSanctionPageDef"/>
+        <page path="/WEB-INF/OwsStatusboardTaskFlow.xml#OwsStatusboardTaskFlow@executeStatusboard"
+              usageId="oracle_apps_xwrl_view_OwsStatusboardTaskFlow_OwsStatusboardTaskFlow_executeStatusboardPageDef"/>
+        <page path="/UploadDocument.jsf" usageId="oracle_apps_xwrl_view_UploadDocumentPageDef"/>
+        <page path="/WEB-INF/UploadDocumentTaskFlow.xml#UploadDocumentTaskFlow@Execute"
+              usageId="oracle_apps_xwrl_view_UploadDocumentTaskFlow_UploadDocumentTaskFlow_ExecutePageDef"/>
+        <page path="/WEB-INF/UploadDocumentTaskFlow.xml#UploadDocumentTaskFlow@Execute1"
+              usageId="oracle_apps_xwrl_view_UploadDocumentTaskFlow_UploadDocumentTaskFlow_Execute1PageDef"/>
+        <page path="/Prototype/Sample.jsff" usageId="oracle_apps_xwrl_view_SamplePageDef"/>
+        <page path="/Error.jsf" usageId="oracle_apps_xwrl_view_ErrorPageDef"/>
+        <page path="/Prototype/DataPrivacyConsent.jsff" usageId="oracle_apps_xwrl_view_DataPrivacyConsentPageDef"/>
+        <page path="/CaseNote.jsf" usageId="oracle_apps_xwrl_view_CaseNotePageDef"/>
+        <page path="/Prototype/IRIEdocs.jsff" usageId="oracle_apps_xwrl_view_IRIEdocsPageDef"/>
+        <page path="/WEB-INF/com/rmi/manualtradecompliance/view/vetting/vettingTF.xml#vettingTF@initializeViewContextAGetData"
+              usageId="com_rmi_manualtradecompliance_view_vettingTF_vettingTF_initializeViewContextAGetDataPageDef"/>
+        <page path="/WEB-INF/com/rmi/manualtradecompliance/view/Admin.jsf"
+              usageId="com_rmi_manualtradecompliance_view_AdminPageDef"/>
+        <page path="/WEB-INF/com/rmi/manualtradecompliance/view/administration/Administration.jsff"
+              usageId="com_rmi_manualtradecompliance_view_AdministrationPageDef"/>
+        <page path="/WEB-INF/com/rmi/manualtradecompliance/view/vetting/vettingTF.xml#vettingTF@callXwrlPartyMaster"
+              usageId="com_rmi_manualtradecompliance_view_vettingTF_vettingTF_callXwrlPartyMasterPageDef"/>
+        <page path="/WEB-INF/com/rmi/manualtradecompliance/view/vetting/vettingTF.xml#vettingTF@onLoad"
+              usageId="com_rmi_manualtradecompliance_view_vettingTF_vettingTF_onLoadPageDef"/>
+    </pageMap>
+    <pageDefinitionUsages>
+        <page id="com_rmi_manualtradecompliance_view_vettingPageDef"
+              path="com.rmi.manualtradecompliance.view.vetting.vettingPageDef"/>
+        <page id="com_rmi_manualtradecompliance_view_mtcPageDef"
+              path="com.rmi.manualtradecompliance.view.pageDefs.mtcPageDef"/>
+        <page id="com_rmi_manualtradecompliance_view_tradecomplaincePageDef"
+              path="com.rmi.manualtradecompliance.view.tradecompliance.tradecomplaincePageDef"/>
+        <page id="com_rmi_manualtradecompliance_view_OwsPageDef"
+              path="com.rmi.manualtradecompliance.view.ows.OwsPageDef"/>
+        <page id="oracle_apps_xwrl_view_ReviewIndividualResponsePageDef"
+              path="oracle.apps.xwrl.view.pageDefs.ReviewIndividualResponsPageDef"/>
+        <page id="oracle_apps_xwrl_view_ReviewEntityResponsePageDef"
+              path="oracle.apps.xwrl.view.pageDefs.ReviewEntityResponsePageDef"/>
+        <page id="oracle_apps_xwrl_view_EnterIndividualRequestPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.EnterRequestIndividualPageDef"/>
+        <page id="oracle_apps_xwrl_view_EnterEntityRequestPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.EnterEntityRequestPageDef"/>
+        <page id="oracle_apps_xwrl_view_RequestPageDef" path="oracle.apps.xwrl.view.pageDefs.RequestPageDef"/>
+        <page id="oracle_apps_xwrl_view_Prototype_task_flow_definition_Prototype_task_flow_definition_executeRequestViewPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.Prototype_task_flow_definition_Prototype_task_flow_definition_executeRequestViewPageDef"/>
+        <page id="oracle_apps_xwrl_view_EnterEntityAlertNotePageDef"
+              path="oracle.apps.xwrl.view.pageDefs.EnterEntityAlertNotePageDef"/>
+        <page id="oracle_apps_xwrl_view_EnterIndividualAlertNotePageDef"
+              path="oracle.apps.xwrl.view.pageDefs.EnterIndividualAlertNotePageDef"/>
+        <page id="oracle_apps_xwrl_view_EnterEntityCaseNotePageDef"
+              path="oracle.apps.xwrl.view.pageDefs.EnterEntityCaseNotePageDef"/>
+        <page id="oracle_apps_xwrl_view_EnterIndividualCaseNotePageDef"
+              path="oracle.apps.xwrl.view.pageDefs.EnterIndividualCaseNotePageDef"/>
+        <page id="oracle_apps_xwrl_view_UploadIndividualCaseDocumentPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.Prototype.UploadIndividualCaseDocumentPageDef"/>
+        <page id="oracle_apps_xwrl_view_UploadIndividualAlertDocumentPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.Prototype.UploadIndividualAlertDocumentPageDef"/>
+        <page id="oracle_apps_xwrl_view_UploadEntityCaseDocumentPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.Prototype.UploadEntityCaseDocumentPageDef"/>
+        <page id="oracle_apps_xwrl_view_UploadEntityAlertDocumentPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.Prototype.UploadEntityAlertDocumentPageDef"/>
+        <page id="oracle_apps_xwrl_view_UploadPageDef" path="oracle.apps.xwrl.view.pageDefs.Prototype.UploadPageDef"/>
+        <page id="oracle_apps_xwrl_view_Prototype_task_flow_definition_Prototype_task_flow_definition_storeDCFrameNameListenerPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.Prototype_task_flow_definition_Prototype_task_flow_definition_storeDCFrameNameListenerPageDef"/>
+        <page id="oracle_apps_xwrl_view_AdministrationPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.StatusboardPageDef"/>
+        <page id="oracle_apps_xwrl_view_OwsStatusboardPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.OwsStatusboardPageDef"/>
+        <page id="oracle_apps_xwrl_view_AdministrationPageDef1"
+              path="oracle.apps.xwrl.view.pageDefs.AdministrationPageDef"/>
+        <page id="oracle_apps_xwrl_view_ParametersPageDef" path="oracle.apps.xwrl.view.pageDefs.ParametersPageDef"/>
+        <page id="oracle_apps_xwrl_view_CitylistPageDef" path="oracle.apps.xwrl.view.pageDefs.CitylistPageDef"/>
+        <page id="oracle_apps_xwrl_view_CountrySanctionStatusPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.CountrySanctionStatusPageDef"/>
+        <page id="oracle_apps_xwrl_view_ParametersEditTaskFlow_ParametersEditTaskFlow_SetCurrentRowWithKeyPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.ParametersEditTaskFlow_ParametersEditTaskFlow_SetCurrentRowWithKeyPageDef"/>
+        <page id="oracle_apps_xwrl_view_UpdateParametersPageDef" path="Prototype.UpdateParametersPageDef"/>
+        <page id="oracle_apps_xwrl_view_OwsParametersTaskFlow_OwsParametersTaskFlow_execParametersPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.OwsParametersTaskFlow_OwsParametersTaskFlow_execParametersPageDef"/>
+        <page id="oracle_apps_xwrl_view_CitylistTaskFlow_CitylistTaskFlow_execCityPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.CitylistTaskFlow_CitylistTaskFlow_execCityPageDef"/>
+        <page id="oracle_apps_xwrl_view_CountrySanctionStatusTaskFlow_CountrySanctionStatusTaskFlow_execSanctionPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.CountrySanctionStatusTaskFlow_CountrySanctionStatusTaskFlow_execSanctionPageDef"/>
+        <page id="oracle_apps_xwrl_view_OwsStatusboardTaskFlow_OwsStatusboardTaskFlow_executeStatusboardPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.OwsStatusboardTaskFlow_OwsStatusboardTaskFlow_executeStatusboardPageDef"/>
+        <page id="oracle_apps_xwrl_view_UploadDocumentPageDef"
+              path="oracle.apps.xwrl.view.pageDefs.UploadDocumentPageDef"/>
+        <page id="oracle_apps_xwrl_view_UploadDocumentTaskFlow_UploadDocumentTaskFlow_ExecutePageDef"
+              path="oracle.apps.xwrl.view.pageDefs.UploadDocumentTaskFlow_UploadDocumentTaskFlow_ExecutePageDef"/>
+        <page id="oracle_apps_xwrl_view_UploadDocumentTaskFlow_UploadDocumentTaskFlow_Execute1PageDef"
+              path="oracle.apps.xwrl.view.pageDefs.UploadDocumentTaskFlow_UploadDocumentTaskFlow_Execute1PageDef"/>
+        <page id="oracle_apps_xwrl_view_SamplePageDef" path="Prototype.SamplePageDef"/>
+        <page id="oracle_apps_xwrl_view_ErrorPageDef" path="oracle.apps.xwrl.view.pageDefs.ErrorPageDef"/>
+        <page id="oracle_apps_xwrl_view_DataPrivacyConsentPageDef" path="Prototype.DataPrivacyConsentPageDef"/>
+        <page id="oracle_apps_xwrl_view_CaseNotePageDef" path="oracle.apps.xwrl.view.pageDefs.CaseNotePageDef"/>
+        <page id="oracle_apps_xwrl_view_IRIEdocsPageDef" path="Prototype.IRIEdocsPageDef"/>
+        <page id="com_rmi_manualtradecompliance_view_vettingTF_vettingTF_initializeViewContextAGetDataPageDef"
+              path="com.rmi.manualtradecompliance.view.vetting.vettingTF_vettingTF_initializeViewContextAGetDataPageDef"/>
+        <page id="com_rmi_manualtradecompliance_view_AdminPageDef"
+              path="com.rmi.manualtradecompliance.view.AdminPageDef"/>
+        <page id="com_rmi_manualtradecompliance_view_AdministrationPageDef"
+              path="com.rmi.manualtradecompliance.view.administration.AdministrationPageDef"/>
+        <page id="com_rmi_manualtradecompliance_view_vettingTF_vettingTF_callXwrlPartyMasterPageDef"
+              path="com.rmi.manualtradecompliance.view.vetting.vettingTF_vettingTF_callXwrlPartyMasterPageDef"/>
+        <page id="com_rmi_manualtradecompliance_view_vettingTF_vettingTF_onLoadPageDef"
+              path="com.rmi.manualtradecompliance.view.vetting.vettingTF_vettingTF_onLoadPageDef"/>
+    </pageDefinitionUsages>
+    <dataControlUsages>
+        <BC4JDataControl id="RMIManualTradeComplianceAppModuleDataControl"
+                         Package="com.rmi.manualtradecompliance.adfbc.services"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="DevDS" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+        <BC4JDataControl id="AppModuleDataControl" Package="oracle.apps.xwrl.model.am"
+                         FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                         SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                         SupportsSortCollection="true" Configuration="DevDS" syncMode="Immediate"
+                         xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+    </dataControlUsages>
+</Application>

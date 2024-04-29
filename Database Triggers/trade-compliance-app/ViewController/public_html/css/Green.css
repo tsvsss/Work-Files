@@ -1,0 +1,647 @@
+@charset "UTF-8";
+ @namespace af "http://xmlns.oracle.com/adf/faces/rich";
+ @namespace dvt "http://xmlns.oracle.com/dss/adf/faces";
+ af|button {
+     text-align: center;
+}
+ af|button.customwidth {
+     text-align: center;
+}
+ af|button.customwidthalign {
+     text-align: center;
+}
+ af|button.rmi-button,
+ af|button.rmi-button af|button:text-only, 
+ af|button.rmi-button:focus:text-only, 
+ af|button.rmi-button:focus:hover:text-only, 
+ af|button.rmi-button:active:text-only {
+     padding: 8px 20px;
+     font-family: 'Bree Serif', serif;
+     font-weight: 300;
+     font-size: 14px;
+     color: White;
+     border: 1px solid #46b3d3;
+     border-radius: 5px;
+     cursor: pointer;
+     background: #245c94;
+}
+ af|button.rmi-button:focus:hover::text-only, 
+ af|button.rmi-buttom:hover:text-only, 
+ af|button.rmi-button:hover-target:text-only {
+     background-image:none;
+     border:#828c95 1px solid;
+     background-color:#3886b7;
+     font-size: 14px;
+     font-weight: 700;
+     border-color: Green ;
+     padding: 8px 20px;
+     font-family: 'Bree Serif', serif;
+     font-weight: 300;
+     font-size: 14px;
+     border: 1px solid #46b3d3;
+     border-radius: 5px;
+     cursor: pointer;
+     border: 1px solid rgba(256, 256, 256, 0.75);
+}
+af|panelGrouLayout.rmi-panelGrouLayout {
+}
+ af|inputText::content:hover {
+     background: #dfe9ec;
+     color: #414848;
+}
+ af|inputDate::content {
+    font-family: 'Open Sans',sans-serif !important;
+    text-transform:uppercase;
+}
+ af|inputText.UpperCaseText::content{
+     text-transform:uppercase !important;
+}
+ af|inputListOfValues.UpperCaseText::content{
+     text-transform:uppercase !important;
+}
+ af|inputDate.UpperCaseText::content{
+     text-transform:uppercase !important;
+}
+ af|selectOneChoice.UpperCaseText::content{
+     text-transform:uppercase !important;
+}
+ af|selectOneRadio.UpperCaseText::content{
+     text-transform:uppercase !important;
+}
+ af|inputFile.UpperCaseText::content{
+     text-transform:uppercase !important;
+}
+ af|inputText.sfxInputLoginLbl::label{
+     padding-right:6px;
+     font-family:Calibri;
+     font-size: 12px;
+     color: Black;
+     font-weight: bold;
+     text-align: left;
+     text-indent: 2px;
+     line-height: 18px;
+     padding-right: 1px;
+     padding-top: 8px;
+}
+ af|inputText.sfxInputLoginTxt::content {
+     padding-right:6px;
+     font-family:Calibri;
+     font-size: 13px;
+     color: Black;
+     font-weight: bolder;
+     text-align: left;
+     text-indent: 4px;
+     padding-right: 1px;
+     border-color:Black;
+     padding: 5px 7px;
+     font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+     font-weight: 400;
+     font-size: 14px;
+     color: #9d9e9e;
+     border-style: outset;
+     background: #fff;
+     margin-right: 5px;
+     border: 1px solid #fff;
+     border-color: #5275ca;
+}
+ af|inputText.sfxInputLoginTxt::content:focus {
+     background: #dfe9ec;
+     color: #414848;
+}
+ af|inputText.sfxInputLoginTxt::content:hover {
+     color: black;
+}
+ af|inputText:read-only{
+     border-color: #5275ca;
+}
+ .AFTextDisabledColor:alias {
+     color: Red;
+}
+ af|inputText::content {
+     width: 180px;
+}
+ af|panelFormLayout.panelFormLayoutClass::label-cell{
+     padding-right:10px;
+     font-family: SansSerif;
+     font-size: 12px;
+     color: Black;
+     font-weight: bold;
+     text-align: left;
+     background-color: rgb(239,244,246);
+     text-transform: none;
+     border-style: solid;
+     border-width: 1px;
+     padding-left: 5px;
+     empty-cells: hide;
+     border-color: ThreeDHighlight;
+     font-weight:bold;
+     padding-inline-start:10px;
+}
+
+af|panelFormLayout.panelFormLayoutClass 
+    af|inputText.BasicInfo::label-cell, af|inputDate.BasicInfo::label-cell,
+    af|selectOneChoice.BasicInfo::label-cell, af|panelLabelAndMessage.BasicInfo::label-cell,
+    af|inputListOfValues.BasicInfo::label-cell, af|selectBooleanCheckbox.BasicInfo::label-cell,
+    af|selectOneRadio.BasicInfo::label-cell{
+    line-height: 30px !important;
+}
+
+af|panelFormLayout.panelFormLayoutClass 
+    af|inputText.BasicInfo::label, af|inputDate.BasicInfo::label,
+    af|selectOneChoice.BasicInfo::label, af|panelLabelAndMessage.BasicInfo::label,
+    af|inputListOfValues.BasicInfo::label, af|selectBooleanCheckbox.BasicInfo::label,
+    af|selectOneRadio.BasicInfo::label{
+    line-height: 30px !important;
+}
+
+ af|column::cell-text {
+     text-decoration: none;
+     font-size: 9pt;
+     color: rgb(0,0,0);
+     text-align: left;
+     height: 10px;
+     padding-left: 5px;
+}
+ af|table {
+     background: none;
+}
+ af|column::banded-data-cell {
+     color: black;
+}
+ af|table af|column::column-header-cell {
+     height:30px;
+     color:#ffffff;
+     text-align: left;
+     font-size: 13px;
+     font-family:"Lato",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+     font-weight: bold;
+     background-image: none;
+     background-color: #4c5f7b;
+     vertical-align: middle;
+     border-left: 1px solid #BF691E;
+}
+ af|table::data-table-VH-lines af|column::data-cell {
+     background-color: #fff;
+     color: #3C3A39;
+     font-size: 12px;
+     border-right: solid 1px gray !important;
+     padding-right: 0px !important;
+     height: 25px;
+     vertical-align: middle;
+     /*text-align: left;*/
+}
+ af|inputText.sfxInputLableCss1::label{
+     padding-right:6px;
+     font-family: SansSerif;
+     font-size: 16px;
+     color: Black;
+     font-weight: bold;
+     text-align: left;
+     text-indent: 4px;
+     text-transform: none;
+     border-color: White;
+     border-style: hidden ;
+     border-width: 1px;
+     padding-right: 1px;
+     width: 40px;
+}
+ af|inputText.sfxInputLableTop::label{
+     font-family: SansSerif;
+     font-size: 15px;
+     color: white;
+     font-weight: bold;
+     text-align: left;
+     text-indent: 4px;
+     color: white;
+     font-family:"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+     font-size: 12px;
+     border-radius: 5px;
+}
+ af|inputText.sfxInputLableTop1::label{
+     font-family: SansSerif;
+     font-size: 15px;
+     color: BLACK;
+     font-weight: bold;
+     text-align: left;
+     text-indent: 4px;
+}
+ af|panelBox::header-text{
+     padding-top:3.0px ;
+     padding-bottom:4.0px ;
+}
+ af|panelBox.panelBoxHeaderClass::header-center:core:default {
+     background-image: none;
+     background-color: rgb(214, 219, 189);
+     background-repeat: repeat-x;
+}
+ af|panelBox.panelBoxHeaderClass::header-start:core:default {
+     background-image: none;
+     background-color: rgb(214, 219, 189);
+     background-repeat: repeat-x;
+}
+ af|panelBox.panelBoxHeaderClass::header-end:core:default {
+     background-image: none;
+     background-color: rgb(214, 219, 189);
+     background-repeat: repeat-x;
+}
+ af|panelBox.homePagePanelBoxHeaderClass::header-center:core:default {
+     background-image: none;
+     background-color: rgb(239, 241, 240);
+     background-repeat: repeat-x;
+}
+ af|panelBox.homePagePanelBoxHeaderClass::header-start:core:default {
+     background-image: none;
+     background-color: rgb(239, 241, 240);
+     background-repeat: repeat-x;
+}
+ af|panelBox.homePagePanelBoxHeaderClass::header-end:core:default {
+     background-image: none;
+     background-color: rgb(239, 241, 240);
+     background-repeat: repeat-x;
+}
+ af|panelBox.panelBoxHeaderClass1::header-center:core:default {
+     background-image: none;
+     background-repeat: repeat-x;
+     background-color: #CFD6C2;
+}
+ af|panelBox::header-text{
+     font-weight: bold;
+     font-size: 20px;
+}
+ af|inputText.sfxInputLoginTxt2::content {
+     padding-right:6px;
+     font-family:Calibri;
+     font-size: 13px;
+     color: Black;
+     font-weight: bolder;
+     text-align: left;
+     text-indent: 4px;
+     padding-right: 1px;
+     border-color:Green;
+     padding: 5px 7px;
+     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+     font-size: 12px;
+     color: white;
+     border-radius: 5px;
+}
+ af|inputText.sfxInputLoginTxt2::content:focus {
+     background: #dfe9ec;
+     color: #414848;
+}
+ af|inputText.sfxInputLoginTxt2::content:hover {
+     background: #dfe9ec;
+     color: black;
+}
+
+ af|link.rmi-link {
+     font-size: 14px;
+}
+ af|inputText.InputTxt::content {
+     font-size: 14px;
+     color: #9d9e9e;
+}
+ af|inputText.sfx::label {
+}
+ af|panelFormLayout.panelFormLayoutClass7::label-cell{
+     padding-right: 6px;
+     font-family: sans-serif;
+     font-size : 11px;
+     text-align : left;
+     background-color: rgb(239,244,246);
+     text-indent: 4px;
+     line-height: 20px;
+     text-transform: none;
+     border-color: ThreeDHighlight;
+     border-style:solid;
+     border-width: 1px;
+     padding-left: 5px;
+     empty-cells: hide;
+     white-space:nowrap;
+     font-weight:bold;
+     color:Maroon;
+     margin-top:10px;
+     margin-left:10px;
+}
+ af|dialog {
+     -tr-default-content-min-width: 100;
+     -tr-default-content-height: -1;
+     border-color: #006262;
+}
+ af|inputListOfValues, af|inputComboboxListOfValues {
+     -tr-stretch-search-dialog: true;
+}
+ af|inputListOfValues::dialog af|dialog::content-center, af|inputComboboxListOfValues::dialog af|dialog::content-center {
+     min-width:600px;
+     max-height:300px;
+}
+ af|dialog::title {
+     color: #002e4e;
+}
+
+af|panelFormLayout.panelFormLayoutClass af|inputText.BasicInfo::content{
+    font-family: Tahoma, Verdana, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 11px;
+    color: #000000;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #B9B9B4;
+    padding: 5px 2px 5px 3px !important;
+    margin: 5px 0px 5px 0px !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+af|panelFormLayout.panelFormLayoutClass af|inputDate.BasicInfo::content{
+    font-family: Tahoma, Verdana, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 11px;
+    color: #000000;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #B9B9B4;
+    padding: 5px 2px 5px 3px !important;
+    margin: 5px 0px 5px 0px !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+af|panelFormLayout.panelFormLayoutClass af|selectOneRadio.BasicInfo::content{
+    font-family: Tahoma, Verdana, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 11px;
+    color: #000000;
+    padding: 5px 2px 5px 3px !important;
+    margin: 5px 0px 5px 0px !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+af|panelFormLayout.panelFormLayoutClass af|selectBooleanCheckbox.BasicInfo::content{
+    font-family: Tahoma, Verdana, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 11px;
+    color: #000000;
+    padding: 5px 2px 5px 3px !important;
+    margin: 5px 0px 5px 0px !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+af|panelFormLayout.panelFormLayoutClass af|inputListOfValues.BasicInfo::content{
+    font-family: Tahoma, Verdana, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 11px;
+    color: #000000;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #B9B9B4;
+    padding: 5px 2px 5px 3px !important;
+    margin: 5px 0px 5px 0px !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+af|panelFormLayout.panelFormLayoutClass af|inputText.RequiredField::label:after{
+    content: ' *';
+    color: Red !important;
+    font-weight: bolder !important;
+}
+
+af|panelFormLayout.panelFormLayoutClass af|inputListOfValues.RequiredField::label:after{
+    content: ' *';
+    color: Red !important;
+    font-weight: bolder !important;
+}
+
+af|panelFormLayout.panelFormLayoutClass af|inputDate.RequiredField::label:after{
+    content: ' *';
+    color: Red !important;
+    font-weight: bolder !important;
+}
+
+af|panelFormLayout.panelFormLayoutClass af|selectOneChoice.RequiredField::label:after{
+    content: ' *';
+    color: Red !important;
+    font-weight: bolder !important;
+}
+
+af|panelFormLayout.panelFormLayoutClass af|selectOneRadio.RequiredField::label:after{
+    content: ' *';
+    color: Red !important;
+    font-weight: bolder !important;
+}
+
+af|panelFormLayout.panelFormLayoutClass af|inputFile.RequiredField::label:after{
+    content: ' *';
+    color: Red !important;
+    font-weight: bolder !important;
+}
+
+af|panelFormLayout.panelFormLayoutClass af|selectBooleanCheckbox.RequiredField::label:after{
+    content: ' *';
+    color: Red !important;
+    font-weight: bolder !important;
+}
+
+af|panelFormLayout.panelFormLayoutClass af|panelLabelAndMessage.RequiredField::label:after{
+    content: ' *';
+    color: Red !important;
+    font-weight: bolder !important;
+}
+
+af|panelFormLayout.panelFormLayoutClass af|inputComboboxListOfValues.RequiredField::label:after{
+    content: ' *';
+    color: Red !important;
+    font-weight: bolder !important;
+}
+
+ af|panelFormLayout.panelFormLayoutClass af|inputText.AFInputTextHead::content{
+     width:180px !important;
+     padding:2px !important;
+     text-align:left !important;
+}
+ af|panelFormLayout.panelFormLayoutClass af|inputListOfValues.AFInputTextHead::content{
+     width:180px !important;
+     padding:2px !important;
+     text-align:left !important;
+}
+ af|panelFormLayout.panelFormLayoutClass af|inputDate.AFInputTextHead::content{
+     width:180px !important;
+     padding:2px !important;
+     text-align:left !important;
+}
+ af|panelFormLayout.panelFormLayoutClass af|selectOneChoice.AFInputTextHead::content{
+     width:185px !important;
+     padding:2.5px !important;
+     text-align:left !important;
+}
+ af|panelFormLayout.panelFormLayoutClass af|selectOneRadio.AFInputTextHead::content{
+     padding:0px !important;
+     text-align:left !important;
+     vertical-align : auto !important;
+}
+ af|panelFormLayout.panelFormLayoutClass af|inputText.AFInputTextTab::content{
+     width:250px !important;
+     padding:2px !important;
+     text-align:left !important;
+     text-transform: uppercase;
+}
+ af|panelFormLayout.panelFormLayoutClass af|inputListOfValues.AFInputTextTab::content{
+     width:250px !important;
+     padding:2px !important;
+     text-align:left !important;
+     text-transform: uppercase;
+}
+ af|panelFormLayout.panelFormLayoutClass af|inputDate.AFInputTextTab::content{
+     width:250px !important;
+     padding:2px !important;
+     text-align:left !important;
+     text-transform: uppercase;
+}
+ af|panelFormLayout.panelFormLayoutClass af|selectOneChoice.AFInputTextTab::content{
+     width:250px !important;
+     padding:2.5px !important;
+     text-align:left !important;
+     text-transform: uppercase;
+}
+af|panelFormLayout.panelFormLayoutClass af|inputFile.AFInputTextTab af|button, af|commandButton {
+    width: 70px !important;
+}
+
+af|button.uploadTabButton, af|commandButton.uploadTabButton {
+    width: 70px !important;
+}
+
+ af|selectOneChoice::content {
+     padding-right:6px;
+     font-family:Calibri;
+     font-size: 13px;
+     color: Black;
+     font-weight: bolder;
+     text-align: left;
+     text-indent: 4px;
+     padding-right: 1px;
+     border-color:Black;
+     font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+     font-weight: 400;
+     font-size: 12px;
+     margin-right: 5px;
+     border: 1px solid #DEE4E7;
+}
+ af|selectOneRadio {
+     margin-right: 5px;
+}
+ .AFAutoSuggestItemsContainer{
+    min-width:250px;
+}
+ .xhw.p_AFUpdate{
+     vertical-align:middle !important;
+     -webkit-margin-before:-1px !important;
+     display: inline-block !important;
+     margin-top:4px;
+}
+ .x2l{
+    margin-left: 3px !important;
+     margin-right: 3px !important;
+}
+ .x19.x1zd .x4z{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
+.outputTextAsLink{
+    cursor: pointer !important;
+    text-decoration: underline ;
+    color: blue;
+}
+
+af|query af|selectOneChoice::content {
+    width: 180px;
+}
+
+af|query af|selectManyCheckbox::content {
+    width: 180px;
+}
+
+af|table::data-row:Selected af|column::data-cell{
+    font-weight: bold;
+    background-color: #f7caa8 !important;
+    color:Black;
+    font-size: 11px;
+}
+
+af|table::data-row:Selected af|column::data-cell af|link::text{
+    font-weight:bold;
+}
+
+af|table::data-row:Selected af|column::data-cell af|inputListOfValues:read-only::content{
+    font-weight:bold;
+}
+
+af|table::data-row:Selected af|column::data-cell af|selectOneChoice:read-only::content{
+    font-weight:bold;
+}
+
+af|query.CustomQueryPanel::disclosure-icon-container { 
+display:none; 
+height:0px; 
+width:0px; 
+}
+
+af|query.CustomQueryPanel::disclosed-icon { 
+display:none; 
+}
+
+af|query.CustomQueryPanel::undisclosed-icon { 
+display:none; 
+}
+
+af|panelSplitter.CustomizedBorderSplitter::pane {
+    border-width: 1px !important ;
+}
+
+af|panelSplitter.CustomizedBorderSplitter::pane:hover {
+    border-width: 1px !important ;
+    background: #ecf5fc;
+}
+
+af|panelHeader::content1{
+    padding: 0px !important ;
+}
+
+af|panelAccordion.CustomAccordion::header{
+    height:auto !important;
+    margin-bottom: 0px !important;
+    background:#fff  !important ;
+    cursor: pointer;
+}
+
+af|panelAccordion.CustomAccordion::header-title{
+    cursor: pointer;
+}
+
+af|panelAccordion.CustomAccordion::header-subsequent{
+    height:auto !important;
+    margin-bottom: 0px !important;
+     background:#fff  !important ; 
+     cursor: pointer;
+}
+
+af|panelAccordion.CustomAccordion::header:hover{
+    background:#ecf5fc !important ;
+}
+
+af|panelAccordion::body-content:hover{
+    background:#ecf5fc !important ;
+}
+
+af|panelGroupLayout.CustomBackgroundGroupLayout:hover{
+    background:#ecf5fc !important ;
+}
+
+.PreWrap {
+    white-space: -moz-pre-wrap; /* Mozilla */
+    white-space: pre;           /* CSS 2.0 */
+    white-space: pre-wrap;      /* CSS 2.1 */
+    word-wrap: break-word;      /* IE 5.5-7 */
+}

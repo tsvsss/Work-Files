@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="OwsParametersTaskFlow">
+    <default-activity>execParameters</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__1">
+      <managed-bean-name>Parameters</managed-bean-name>
+      <managed-bean-class>oracle.apps.xwrl.beans.backing.Parameters</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <view id="Parameters">
+      <page>/Prototype/Parameters.jsff</page>
+    </view>
+    <task-flow-call id="ParametersEditTaskFlow">
+      <task-flow-reference>
+        <document>/WEB-INF/ParametersEditTaskFlow.xml</document>
+        <id>ParametersEditTaskFlow</id>
+      </task-flow-reference>
+      <input-parameter id="__4">
+        <name>ipParam</name>
+        <value>#{requestScope.paramId}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <method-call id="execParameters">
+      <method>#{bindings.execParameters.execute}</method>
+      <outcome>
+        <fixed-outcome>execParameters</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__2">
+      <from-activity-id>Parameters</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>AddEdit</from-outcome>
+        <to-activity-id>ParametersEditTaskFlow</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>execParameters</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>execParameters</from-outcome>
+        <to-activity-id>Parameters</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

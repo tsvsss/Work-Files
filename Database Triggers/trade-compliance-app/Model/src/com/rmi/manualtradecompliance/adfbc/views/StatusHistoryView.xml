@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="StatusHistoryView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.rmi.manualtradecompliance.adfbc.views.StatusHistoryViewImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Coll|VarAccess"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.manualtradecompliance.adfbc.views.StatusHistoryView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pWcScreeningBV"
+    Kind="where"
+    Type="java.lang.Integer">
+    <TransientExpression
+      trustMode="untrusted"
+      Name="expression"><![CDATA[adf.context.sessionScope.wcScreeningRequestId]]></TransientExpression>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT  WCH.WC_REQUEST_APPROVAL_HISTORY_ID,WCH.WC_SCREENING_REQUEST_ID,WCH.STATUS,WCH.STATUS_DATE,   
+WCH.STATUS_UPDATED_BY, WCH.CREATED_BY,  
+WCH.CREATION_DATE,WCH.LAST_UPDATED_BY,WCH.LAST_UPDATE_DATE,WCH.LAST_UPDATE_LOGIN,   
+ NVL ( ( Select user_name from RMI_SEAFARER.RMI_USER where user_id= WCH.STATUS_UPDATED_BY),   
+     (Select user_name from fnd_user where user_id= WCH.STATUS_UPDATED_BY)) StatusUpdatedByName,   
+     NVL ( ( Select user_name from RMI_SEAFARER.RMI_USER where user_id= WCH.LAST_UPDATED_BY),   
+     (Select user_name from fnd_user where user_id= WCH.LAST_UPDATED_BY)) LastUpdatedByName   
+FROM WC_REQUEST_APPROVAL_HISTORY   WCH   
+WHERE WC_SCREENING_REQUEST_ID=:pWcScreeningBV     
+ORDER BY LAST_UPDATE_DATE DESC]]></SQLQuery>
+  <ViewAttribute
+    Name="WcRequestApprovalHistoryId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="WC_REQUEST_APPROVAL_HISTORY_ID"
+    Expression="WC_REQUEST_APPROVAL_HISTORY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="WcScreeningRequestId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="WC_SCREENING_REQUEST_ID"
+    Expression="WC_SCREENING_REQUEST_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Status"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="STATUS"
+    Expression="STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="StatusDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="STATUS_DATE"
+    Expression="STATUS_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="StatusUpdatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="STATUS_UPDATED_BY"
+    Expression="STATUS_UPDATED_BY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CREATED_BY"
+    Expression="CREATED_BY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CreationDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CREATION_DATE"
+    Expression="CREATION_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="LAST_UPDATED_BY"
+    Expression="LAST_UPDATED_BY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="LAST_UPDATE_DATE"
+    Expression="LAST_UPDATE_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="LAST_UPDATE_LOGIN"
+    Expression="LAST_UPDATE_LOGIN"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TransStatusUpdatedByName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="StatusUpdatedByName"
+    SQLType="VARCHAR"
+    Expression="StatusUpdatedByName"
+    IsQueriable="false"/>
+  <ViewAttribute
+    Name="TransLastUpdatedByName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LastUpdatedByName"
+    SQLType="VARCHAR"
+    Expression="LastUpdatedByName"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="WcRequestApprovalHistoryId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.manualtradecompliance.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

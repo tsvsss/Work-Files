@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="WcRequestDocumentsView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="com.rmi.manualtradecompliance.adfbc.views.WcRequestDocumentsViewRowImpl"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.manualtradecompliance.adfbc.views.WcRequestDocumentsView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT WcRequestDocumentsEO.CREATED_BY,    
+       WcRequestDocumentsEO.CREATION_DATE,    
+       WcRequestDocumentsEO.DOC_DESCRIPTION,    
+       WcRequestDocumentsEO.EDOCS_ID,    
+       WcRequestDocumentsEO.LAST_UPDATE_DATE,    
+       WcRequestDocumentsEO.LAST_UPDATE_LOGIN,    
+       WcRequestDocumentsEO.LAST_UPDATED_BY,    
+       WcRequestDocumentsEO.WC_REQUEST_DOCUMENTS_ID,    
+       WcRequestDocumentsEO.WC_SCREENING_REQUEST_ID,     
+     NVL ( ( Select user_name from RMI_SEAFARER.RMI_USER where user_id= WcRequestDocumentsEO.CREATED_BY),   
+     (Select user_name from fnd_user where user_id= WcRequestDocumentsEO.CREATED_BY)) CreatedByName,     
+     NVL ( ( Select user_name from RMI_SEAFARER.RMI_USER where user_id= WcRequestDocumentsEO.LAST_UPDATED_BY),   
+     (Select user_name from fnd_user where user_id= WcRequestDocumentsEO.LAST_UPDATED_BY)) UpdatedByName,  
+     (select disk_path from iri_edocs where id=WcRequestDocumentsEO.edocs_id) disk_path, 
+     (select file_name from iri_edocs where id=WcRequestDocumentsEO.edocs_id) file_name 
+FROM  WC_REQUEST_DOCUMENTS WcRequestDocumentsEO]]></SQLQuery>
+  <EntityUsage
+    Name="WcRequestDocumentsEO"
+    Entity="com.rmi.manualtradecompliance.adfbc.entities.WcRequestDocuments"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="WcRequestDocumentsEO"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="WcRequestDocumentsEO"
+    AliasName="CREATION_DATE"/>
+  <ViewAttribute
+    Name="DocDescription"
+    PrecisionRule="true"
+    EntityAttrName="DocDescription"
+    EntityUsage="WcRequestDocumentsEO"
+    AliasName="DOC_DESCRIPTION"/>
+  <ViewAttribute
+    Name="EdocsId"
+    PrecisionRule="true"
+    EntityAttrName="EdocsId"
+    EntityUsage="WcRequestDocumentsEO"
+    AliasName="EDOCS_ID"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="WcRequestDocumentsEO"
+    AliasName="LAST_UPDATE_DATE"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateLogin"
+    EntityUsage="WcRequestDocumentsEO"
+    AliasName="LAST_UPDATE_LOGIN"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="WcRequestDocumentsEO"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="WcRequestDocumentsId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="WcRequestDocumentsId"
+    EntityUsage="WcRequestDocumentsEO"
+    AliasName="WC_REQUEST_DOCUMENTS_ID"/>
+  <ViewAttribute
+    Name="WcScreeningRequestId"
+    PrecisionRule="true"
+    EntityAttrName="WcScreeningRequestId"
+    EntityUsage="WcRequestDocumentsEO"
+    AliasName="WC_SCREENING_REQUEST_ID"/>
+  <ViewAttribute
+    Name="TransCreatedByName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CREATEDBYNAME"
+    Expression="CREATEDBYNAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransUpdatedByName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UPDATEDBYNAME"
+    Expression="UPDATEDBYNAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DiskPath"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DISK_PATH"
+    SQLType="VARCHAR"
+    Expression="DISK_PATH"
+    IsUpdateable="false">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FileName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FILE_NAME"
+    Expression="FILE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.manualtradecompliance.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="FindSeafarerPageDef"
+                Package="com.rmi.applicationEntry.view.findseafarertaskflow">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="FindSeafarerView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="FindSeafarerROIterator"/>
+    <iterator id="SeafarersDetailsFindViewIterator" Binds="SeafarersDetailsFindView"
+              DataControl="RMIApplicationEntryAppModuleDataControl" RangeSize="25"/>
+    <iterator Binds="FindSeafarerDualView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="FindSeafarerDualViewIterator"/>
+    <iterator Binds="SeafarerOrderHistoryDetailsView" RangeSize="25"
+              DataControl="RMIApplicationEntryAppModuleDataControl" id="SeafarerOrderHistoryDetailsViewIterator"/>
+    <searchRegion Binds="SeafarerOrderHistoryDetailsViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="SeafarerOrderHistoryDetailsViewQuery"/>
+  </executables>
+  <bindings>
+    <button IterBinding="FindSeafarerROIterator" id="ExpeditedProcessing1" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="ExpeditedProcessing"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues IterBinding="FindSeafarerROIterator" id="BatchName">
+      <AttrNames>
+        <Item Value="BatchName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindSeafarerROIterator" id="BatchDate">
+      <AttrNames>
+        <Item Value="BatchDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindSeafarerROIterator" id="PurchaseOrderNumber">
+      <AttrNames>
+        <Item Value="PurchaseOrderNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindSeafarerROIterator" id="WorkOrderNo">
+      <AttrNames>
+        <Item Value="WorkOrderNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindSeafarerROIterator" id="BatchSubmittedDate">
+      <AttrNames>
+        <Item Value="BatchSubmittedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="SeafarersDetailsFindViewIterator" id="SeafarersDetailsRO">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarersDetailsView"
+                      Name="SeafarersDetailsRO0">
+        <AttrNames>
+          <Item Value="LastName"/>
+          <Item Value="FirstName"/>
+          <Item Value="BirthDate"/>
+          <Item Value="BirthPlace"/>
+          <Item Value="Gender"/>
+          <Item Value="PassportIssuingCountry"/>
+          <Item Value="ResidenceCountry"/>
+          <Item Value="IssueType"/>
+          <Item Value="IssueTypeIdCard"/>
+          <Item Value="WorkflowStatus"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="find_seafarer" RequiresUpdateModel="true" Action="invokeMethod" MethodName="find_seafarer"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.find_seafarer_RMIApplicationEntryAppModuleDataControl_dataProvider_find_seafarer_result">
+      <NamedData NDName="esi_id" NDType="java.lang.Integer"/>
+      <NamedData NDName="sea_name" NDType="java.lang.String"/>
+      <NamedData NDName="birth_date" NDType="oracle.jbo.domain.Date"/>
+    </methodAction>
+    <attributeValues IterBinding="FindSeafarerDualViewIterator" id="TranSeafarerId">
+      <AttrNames>
+        <Item Value="TranSeafarerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindSeafarerDualViewIterator" id="TranLastName">
+      <AttrNames>
+        <Item Value="TranLastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="FindSeafarerDualViewIterator" id="TranDateOfBirth">
+      <AttrNames>
+        <Item Value="TranDateOfBirth"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="clearFindSeafarerSearch" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="clearFindSeafarerSearch" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.clearFindSeafarerSearch_RMIApplicationEntryAppModuleDataControl_dataProvider_clearFindSeafarerSearch_result"/>
+    <tree IterBinding="SeafarerOrderHistoryDetailsViewIterator" id="SeafarerOrderHistoryDetailsView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarerOrderHistoryDetailsView"
+                      Name="SeafarerOrderHistoryDetailsView0">
+        <AttrNames>
+          <Item Value="SeafarerId"/>
+          <Item Value="OrderNumber"/>
+          <Item Value="CustomerNumber"/>
+          <Item Value="CustomerName"/>
+          <Item Value="OrderedDate"/>
+          <Item Value="BookedFlag"/>
+          <Item Value="OpenFlag"/>
+          <Item Value="Note"/>
+          <Item Value="SeafarerName"/>
+          <Item Value="BatchName"/>
+          <Item Value="PurchaseOrderNumber"/>
+          <Item Value="ApplicationStatus"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

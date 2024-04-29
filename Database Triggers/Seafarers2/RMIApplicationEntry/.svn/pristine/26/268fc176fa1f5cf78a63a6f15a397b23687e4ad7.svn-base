@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="GetIfEvalRejectedView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.readOnlyVO.GetIfEvalRejectedView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pBatchId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[select nvl(RMI_SICD_PUB.batch_return_by_eval(:pBatchId),'N') 
+batch_return_by_eval from dual]]></SQLQuery>
+  <ViewAttribute
+    Name="BatchReturnByEval"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="com.rmi.applicationEntry.adfbc.views.readOnlyVO.common.Type"
+    ColumnType="TYPE"
+    AliasName="BATCH_RETURN_BY_EVAL"
+    Expression="BATCH_RETURN_BY_EVAL"
+    SQLType="STRUCT"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

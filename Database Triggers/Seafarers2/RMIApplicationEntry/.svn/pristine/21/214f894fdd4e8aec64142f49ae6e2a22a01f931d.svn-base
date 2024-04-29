@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelBox text="Query Vessel Details" id="pb1" showDisclosure="false">
+    <f:facet name="toolbar"/>
+    <af:panelFormLayout id="pfl1" rows="1" maxColumns="4" partialTriggers="b2 b1">
+      <af:inputText value="#{bindings.TranImoNumber.inputValue}" label="IMO Number"
+                    required="#{bindings.TranImoNumber.hints.mandatory}"
+                    columns="#{bindings.TranImoNumber.hints.displayWidth}"
+                    maximumLength="#{bindings.TranImoNumber.hints.precision}"
+                    shortDesc="#{bindings.TranImoNumber.hints.tooltip}" id="it1" contentStyle="width:120px;"
+                    autoSubmit="true">
+        <f:validator binding="#{bindings.TranImoNumber.validator}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.TranOfficialNumber.inputValue}" label="Official Number"
+                    required="#{bindings.TranOfficialNumber.hints.mandatory}"
+                    columns="#{bindings.TranOfficialNumber.hints.displayWidth}"
+                    maximumLength="#{bindings.TranOfficialNumber.hints.precision}"
+                    shortDesc="#{bindings.TranOfficialNumber.hints.tooltip}" id="it2" contentStyle="width:120px;"
+                    autoSubmit="true">
+        <f:validator binding="#{bindings.TranOfficialNumber.validator}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.TranVesselName.inputValue}" label="Vessel Name"
+                    required="#{bindings.TranVesselName.hints.mandatory}"
+                    columns="#{bindings.TranVesselName.hints.displayWidth}"
+                    maximumLength="#{bindings.TranVesselName.hints.precision}"
+                    shortDesc="#{bindings.TranVesselName.hints.tooltip}" id="it3" contentStyle="width:150px;"
+                    autoSubmit="true">
+        <f:validator binding="#{bindings.TranVesselName.validator}"/>
+      </af:inputText>
+      <af:toolbar id="t1">
+        <af:button text="Search" id="b2" actionListener="#{pageFlowScope.QueryVesselDetailBean.searchVessel}"/>
+        <af:button text="Clear" id="b1" actionListener="#{pageFlowScope.QueryVesselDetailBean.clearSearch}"/>
+      </af:toolbar>
+    </af:panelFormLayout>
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth" inlineStyle="margin-top:10px;">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar"/>
+      <af:table value="#{bindings.SearchVesselDetailView.collectionModel}" var="row"
+                rows="#{bindings.SearchVesselDetailView.rangeSize}"
+                emptyText="#{bindings.SearchVesselDetailView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0" selectedRowKeys="#{bindings.SearchVesselDetailView.collectionModel.selectedRow}"
+                selectionListener="#{bindings.SearchVesselDetailView.collectionModel.makeCurrent}" rowSelection="single"
+                fetchSize="#{bindings.SearchVesselDetailView.rangeSize}"
+                filterModel="#{bindings.SearchVesselDetailViewQuery.queryDescriptor}"
+                queryListener="#{bindings.SearchVesselDetailViewQuery.processQuery}" filterVisible="true" varStatus="vs"
+                id="t2" styleClass="AFStretchWidth" contentDelivery="immediate" autoHeightRows="10"
+                partialTriggers=":::b2 :::b1" columnStretching="column:c3">
+        <af:column sortProperty="#{bindings.SearchVesselDetailView.hints.VesselPk.name}" filterable="true"
+                   sortable="true" headerText="Vessel PK" id="c1" width="80" rendered="false">
+          <af:outputText value="#{row.VesselPk}" shortDesc="#{bindings.SearchVesselDetailView.hints.VesselPk.tooltip}"
+                         id="ot1">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.SearchVesselDetailView.hints.VesselPk.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchVesselDetailView.hints.ImoNumber.name}" filterable="true"
+                   sortable="true" headerText="IMO Number" id="c2">
+          <af:outputText value="#{row.ImoNumber}" shortDesc="#{bindings.SearchVesselDetailView.hints.ImoNumber.tooltip}"
+                         id="ot2">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.SearchVesselDetailView.hints.ImoNumber.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchVesselDetailView.hints.Name.name}" filterable="true" sortable="true"
+                   headerText="Vessel Name" id="c3">
+          <af:outputText value="#{row.Name}" shortDesc="#{bindings.SearchVesselDetailView.hints.Name.tooltip}"
+                         id="ot3"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchVesselDetailView.hints.OfficialNumber.name}" filterable="true"
+                   sortable="true" headerText="Official Number" id="c4" width="80">
+          <af:outputText value="#{row.OfficialNumber}"
+                         shortDesc="#{bindings.SearchVesselDetailView.hints.OfficialNumber.tooltip}" id="ot4">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.SearchVesselDetailView.hints.OfficialNumber.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchVesselDetailView.hints.VsslStatus.name}" filterable="true"
+                   sortable="true" headerText="Status" id="c5" width="80">
+          <af:outputText value="#{row.VsslStatus}"
+                         shortDesc="#{bindings.SearchVesselDetailView.hints.VsslStatus.tooltip}" id="ot5"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchVesselDetailView.hints.VsslType.name}" filterable="true"
+                   sortable="true" headerText="Vessel Type" id="c6" width="250">
+          <af:outputText value="#{row.VsslType}" shortDesc="#{bindings.SearchVesselDetailView.hints.VsslType.tooltip}"
+                         id="ot6"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchVesselDetailView.hints.GrossTons.name}" filterable="true"
+                   sortable="true" headerText="Gross Tons" id="c7">
+          <af:outputText value="#{row.GrossTons}" shortDesc="#{bindings.SearchVesselDetailView.hints.GrossTons.tooltip}"
+                         id="ot7">
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.SearchVesselDetailView.hints.GrossTons.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchVesselDetailView.hints.PropulsionPower.name}" filterable="true"
+                   sortable="true" headerText="Propulsion Power" id="c8">
+          <af:outputText value="#{row.PropulsionPower}"
+                         shortDesc="#{bindings.SearchVesselDetailView.hints.PropulsionPower.tooltip}" id="ot8">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.SearchVesselDetailView.hints.PropulsionPower.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column headerText="Comp Code" id="c12" sortable="true"
+                   filterable="true">
+          <af:outputText value="#{row.CompCode}" shortDesc="#{bindings.SearchVesselDetailView.hints.CompCode.tooltip}"
+                         id="ot11"/>
+        </af:column>
+        <af:column headerText="#{bindings.SearchVesselDetailView.hints.CompCode.label}" id="c11" sortable="true"
+                   filterable="true" rendered="false">
+          <af:inputText value="#{row.bindings.CompCode.inputValue}"
+                        label="#{bindings.SearchVesselDetailView.hints.CompCode.label}"
+                        required="#{bindings.SearchVesselDetailView.hints.CompCode.mandatory}"
+                        columns="#{bindings.SearchVesselDetailView.hints.CompCode.displayWidth}"
+                        maximumLength="#{bindings.SearchVesselDetailView.hints.CompCode.precision}"
+                        shortDesc="#{bindings.SearchVesselDetailView.hints.CompCode.tooltip}" id="it4">
+            <f:validator binding="#{row.bindings.CompCode.validator}"/>
+          </af:inputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchVesselDetailView.hints.PropulsionCode.name}" filterable="true"
+                   sortable="true" headerText="Propulsion Code" id="c81">
+          <af:outputText value="#{row.PropulsionCode}"
+                         shortDesc="#{bindings.SearchVesselDetailView.hints.PropulsionCode.tooltip}" id="ot81">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.SearchVesselDetailView.hints.PropulsionCode.format}"/>
+          </af:outputText>
+        </af:column>
+        
+        <af:column sortProperty="#{bindings.SearchVesselDetailView.hints.EngineType.name}" filterable="true"
+                   sortable="true" headerText="Engine Type" id="c9">
+          <af:outputText value="#{row.EngineType}"
+                         shortDesc="#{bindings.SearchVesselDetailView.hints.EngineType.tooltip}" id="ot9"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.SearchVesselDetailView.hints.VsslRegDate.name}" filterable="true"
+                   sortable="true" headerText="Vessel Reg. Date" id="c10">
+          <f:facet name="filter">
+          
+            <af:inputDate value="#{bindings.SearchVesselDetailViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.VsslRegDate.value}"
+                          id="id1">
+              <af:convertDateTime pattern="#{bindings.SearchVesselDetailView.hints.VsslRegDate.format}"/>
+            </af:inputDate>
+          </f:facet>
+          <af:outputText value="#{row.VsslRegDate}"
+                         shortDesc="#{bindings.SearchVesselDetailView.hints.VsslRegDate.tooltip}" id="ot10">
+            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+          </af:outputText>
+        </af:column>
+      </af:table>
+      <f:facet name="statusbar"/>
+    </af:panelCollection>
+  </af:panelBox>
+</ui:composition>

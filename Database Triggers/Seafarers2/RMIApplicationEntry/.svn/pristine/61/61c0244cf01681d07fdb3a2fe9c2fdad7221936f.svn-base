@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CustAccountBilltoView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  FetchSize="10"
+  RangeSize="10"
+  FetchMode="FETCH_AS_NEEDED"
+  ComponentClass="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountBilltoViewImpl">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_codeGenFlag2" Value="Coll|Prog|VarAccess"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountBilltoView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pPartyName"
+    Kind="viewcriteria"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountBilltoView.pPartyName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <Variable
+    Name="pOrderingCustomerId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT rel_cust_id cust_account_id, party_name, party_name_account 
+  FROM (SELECT hca.cust_account_id, hca.cust_account_id rel_cust_id, 
+               hp_ship.party_name party_name, hp_ship.party_id, 
+                  hp_ship.party_name 
+               || '(' 
+               || hca.account_number 
+               || ')' party_name_account 
+          FROM hz_parties hp_ship, hz_cust_accounts hca 
+         WHERE 1 = 1 
+           AND hca.account_name = 'SICD' 
+           AND hca.party_id = hp_ship.party_id 
+        UNION ALL 
+        SELECT hca.cust_account_id, hca1.cust_account_id, 
+               hp_ship.party_name party_name, hp_ship.party_id, 
+                  hp_ship.party_name 
+               || '(' 
+               || hca1.account_number 
+               || ')' party_name_account 
+          FROM hz_parties hp_ship, 
+               hz_cust_accounts hca, 
+               hz_cust_acct_relate_all rel, 
+               hz_cust_accounts hca1 
+         WHERE 1 = 1 
+           AND hca.account_name = 'SICD' 
+           AND hca1.party_id = hp_ship.party_id 
+           AND hca.cust_account_id = rel.related_cust_account_id 
+           AND hca1.cust_account_id = rel.cust_account_id 
+           AND bill_to_flag = 'Y') qry 
+ WHERE 1 = 1 
+   AND cust_account_id = :pOrderingCustomerId 
+   AND EXISTS ( 
+          SELECT 1 
+            FROM hz_cust_acct_sites_all a, hz_cust_site_uses_all b 
+           WHERE a.cust_acct_site_id = b.cust_acct_site_id 
+             AND a.cust_account_id = qry.rel_cust_id 
+             AND b.site_use_code = 'BILL_TO' 
+             AND b.status = 'A' 
+             AND a.status = 'A')]]></SQLQuery>
+  <ViewAttribute
+    Name="CustAccountId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="LONGINT"
+    AliasName="CUST_ACCOUNT_ID"
+    Expression="CUST_ACCOUNT_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="PartyName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="360"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_NAME"
+    Expression="PARTY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="360"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <LABEL
+          ResId="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountBilltoView.PartyName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartyNameAccount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="392"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PARTY_NAME_ACCOUNT"
+    Expression="PARTY_NAME_ACCOUNT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="392"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountBilltoView.PartyNameAccount_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="CustAccountBilltoLOVCriteria"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountBilltoView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="Never"/>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="CustAccountBilltoLOVCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="PartyNameAccount"
+        ViewAttribute="PartyNameAccount"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Value=":pPartyName"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="CustAccountId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

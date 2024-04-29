@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<!-- T20220119.0004 - TC 2.0 Party Master Cleanup -->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="LovVettingsNameScreenedRestrictedView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.manualtradecompliance.adfbc.views.lovs.LovVettingsNameScreenedRestrictedView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pFullName"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pSourceId"
+    Kind="viewcriteria"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pSourceTable"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pEntityType"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pIdentifier"
+    Kind="viewcriteria"
+    Type="java.lang.String"/>
+  <Variable
+    Name="p_source_id"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      trustMode="untrusted"
+      Name="expression"><![CDATA[adf.context.pageFlowScope.P_SOURCE_ID]]></TransientExpression>
+  </Variable>
+  <Variable
+    Name="p_source_table"
+    Kind="where"
+    Type="java.lang.String">
+    <TransientExpression
+      trustMode="untrusted"
+      Name="expression"><![CDATA[adf.context.pageFlowScope.P_SOURCE_TABLE]]></TransientExpression>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT full_name,   
+         source_table_column,   
+         m.source_table,   
+         m.source_id,   
+         m.ID,   
+         TO_DATE (m.date_of_birth, 'YYYYMMDD') dob,   
+         IDENTIFIER,   
+         ENTITY_TYPE,   
+         UPPER (SEX) SEX,   
+         ID_TYPE,   
+         m.PASSPORT_NUMBER,   
+         PASSPORT_ISSUING_COUNTRY_CODE,   
+         CITIZENSHIP_COUNTRY_CODE,   
+         m.COUNTRY_OF_RESIDENCE,   
+         (SELECT country_code   
+            FROM apps.sicd_countries   
+           WHERE     iso_alpha2_code = m.COUNTRY_OF_RESIDENCE   
+                 AND status = 'Active'   
+                 AND ROWNUM = 1)   
+            COUNTRY_OF_RESIDENCE_CODE,   
+         (SELECT country_name   
+            FROM apps.sicd_countries   
+           WHERE     iso_alpha2_code = m.COUNTRY_OF_RESIDENCE   
+                 AND status = 'Active'   
+                 AND ROWNUM = 1)   
+            COUNTRY_OF_RESIDENCE_NAME,   
+         m.CITY_OF_RESIDENCE_ID,   
+         (SELECT CITY_NAME  
+         --T20220228.0033 - Enhance WC_CITY_LIST for Start Date/End Date
+            FROM WC_CITY_LIST_V   
+           WHERE     WC_CITY_LIST_ID = m.CITY_OF_RESIDENCE_ID   
+           --T20220302.0021 - Address Conflict is not listed under the city options for Ukraine or Russia
+                 --AND INTERNAL_USE_ONLY = 'N'
+                 )   
+            CITY_NAME,   
+         NVL (LEGACY_VETTING_FLAG, 'No') LEGACY_VETTING_FLAG,   
+         RELATIONSHIP_TYPE,   
+         m.IMO_NUMBER,   
+         r.id TC_request_id,   
+         r1.batch_id tc_batch,   
+         TRUNC (r1.last_update_date) TC_BATCH_UPDATE_date   
+    FROM xwrl_party_master m, (  SELECT MAX (id) id, actual_master_id   
+              FROM xwrl_requests   
+              WHERE alias_id IS NULL   
+              AND NVL (case_state, 'Xx') NOT IN ('D')   
+          GROUP BY actual_master_id) r,   
+         xwrl_requests r1   
+   WHERE TRIM (full_name) IS NOT NULL   
+         AND end_date IS NULL   
+         AND r.actual_master_id(+) = m.id   
+         AND r1.id(+) = r.id  
+         AND EXISTS ( 
+        SELECT 
+            1 
+        FROM 
+            xwrl_party_master m1 
+        WHERE 
+            m1.relationship_type = 'Primary' 
+            AND m1.source_table = :p_source_table 
+            AND m1.source_id = :p_source_id 
+            AND m1.end_date IS NULL 
+            AND m1.id = m.id 
+        UNION ALL 
+        SELECT 
+            1 
+        FROM 
+            xwrl_party_master m2, 
+            xwrl_party_xref   x1 
+        WHERE 
+            x1.master_id = m2.id 
+            AND m2.source_table = :p_source_table 
+            AND m2.source_id = :p_source_id 
+            AND x1.end_date IS NULL 
+            AND x1.relationship_master_id = m.id 
+            AND x1.relationship_master_id != x1.master_id 
+    ) 
+ORDER BY 1]]></SQLQuery>
+  <ViewAttribute
+    Name="FullName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FULL_NAME"
+    Expression="FULL_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2700"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SourceTableColumn"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SOURCE_TABLE_COLUMN"
+    Expression="SOURCE_TABLE_COLUMN"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SourceTable"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SOURCE_TABLE"
+    Expression="SOURCE_TABLE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SourceId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SOURCE_ID"
+    Expression="SOURCE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="ID"
+    Expression="ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Dob"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="DOB"
+    Expression="DOB"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="Identifier"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="300"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="IDENTIFIER"
+    Expression="IDENTIFIER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="300"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EntityType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ENTITY_TYPE"
+    Expression="ENTITY_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Sex"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SEX"
+    Expression="SEX"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="60"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ID_TYPE"
+    Expression="ID_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="60"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PassportNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2700"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PASSPORT_NUMBER"
+    Expression="PASSPORT_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2700"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PassportIssuingCountryCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PASSPORT_ISSUING_COUNTRY_CODE"
+    Expression="PASSPORT_ISSUING_COUNTRY_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CitizenshipCountryCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CITIZENSHIP_COUNTRY_CODE"
+    Expression="CITIZENSHIP_COUNTRY_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountryOfResidence"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COUNTRY_OF_RESIDENCE"
+    Expression="COUNTRY_OF_RESIDENCE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountryOfResidenceCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COUNTRY_OF_RESIDENCE_CODE"
+    Expression="COUNTRY_OF_RESIDENCE_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountryOfResidenceName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="80"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COUNTRY_OF_RESIDENCE_NAME"
+    Expression="COUNTRY_OF_RESIDENCE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CityOfResidenceId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CITY_OF_RESIDENCE_ID"
+    Expression="CITY_OF_RESIDENCE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CityName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CITY_NAME"
+    Expression="CITY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LegacyVettingFlag"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LEGACY_VETTING_FLAG"
+    Expression="LEGACY_VETTING_FLAG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RelationshipType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RELATIONSHIP_TYPE"
+    Expression="RELATIONSHIP_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ImoNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="IMO_NUMBER"
+    Expression="IMO_NUMBER"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TcRequestId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TC_REQUEST_ID"
+    Expression="TC_REQUEST_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TcBatch"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="TC_BATCH"
+    Expression="TC_BATCH"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TcBatchUpdateDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="TC_BATCH_UPDATE_DATE"
+    Expression="TC_BATCH_UPDATE_DATE"
+    SQLType="DATE"/>
+  <ViewCriteria
+    Name="LovVettingsNameScreenedWithPrimaryViewSearch"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovVettingsNameScreenedRestrictedView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="LovVettingsNameScreenedWithPrimaryViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="FullName"
+        ViewAttribute="FullName"
+        Operator="="
+        Conjunction="AND"
+        Value=":pFullName"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="SourceTable"
+        ViewAttribute="SourceTable"
+        Operator="="
+        Conjunction="AND"
+        Value=":pSourceTable"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="SourceId"
+        ViewAttribute="SourceId"
+        Operator="="
+        Conjunction="AND"
+        Value=":pSourceId"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Identifier"
+        ViewAttribute="Identifier"
+        Operator="="
+        Conjunction="AND"
+        Value=":pIdentifier"
+        IsBindVarValue="true"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="EntityType"
+        ViewAttribute="EntityType"
+        Operator="="
+        Conjunction="AND"
+        Value=":pEntityType"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewCriteria
+    Name="LovVettingsNameScreenedWithOutPrimaryViewCriteria"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.lovs.LovVettingsNameScreenedRestrictedView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="LovVettingsNameScreenedWithOutPrimaryViewCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="FullName"
+        ViewAttribute="FullName"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Value=":pFullName"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.manualtradecompliance.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

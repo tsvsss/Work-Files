@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="QueryOrderHeaderView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.readOnlyVO.QueryOrderHeaderView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pOrderNumber"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[select ord.header_id,ord.order_number,ord.order_hold,ord.order_date,ord.order_status,ord.order_total,    
+ord.order_by_acct,ord.order_by_cust,ord.bill_to_acct,ord.bill_to_cust, 
+(select HCA.ACCOUNT_NUMBER FROM HZ_CUST_ACCOUNTS HCA, HZ_PARTIES HP            
+WHERE HCA.PARTY_ID = HP.PARTY_ID         
+AND HCA.CUST_ACCOUNT_ID = bt.ship_to_cust_account_id) ship_to_acct, 
+(select HP.PARTY_NAME FROM HZ_CUST_ACCOUNTS HCA, HZ_PARTIES HP            
+WHERE HCA.PARTY_ID = HP.PARTY_ID         
+AND HCA.CUST_ACCOUNT_ID = bt.ship_to_cust_account_id) ship_to_cust,    
+ord.deliver_to_acct,ord.deliver_to_cust,  
+decode((select user_type from rmi_seafarer.rmi_user where user_id = bt.created_by),  
+'External','Online Application','Internal','Paper Application','Online Application') order_source  
+from SICD_ORDERS2_VW ord, rmi_seafarer.rmi_batch_iface  bt   
+where ord.header_id = bt.oe_header_id    
+and ord.order_number = :pOrderNumber]]></SQLQuery>
+  <ViewAttribute
+    Name="HeaderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="HEADER_ID"
+    Expression="HEADER_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="OrderNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ORDER_NUMBER"
+    Expression="ORDER_NUMBER"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="OrderHold"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="ORDER_HOLD"
+    Expression="ORDER_HOLD"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrderDate"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="ORDER_DATE"
+    Expression="ORDER_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="OrderStatus"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ORDER_STATUS"
+    Expression="ORDER_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrderTotal"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ORDER_TOTAL"
+    Expression="ORDER_TOTAL"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="OrderByAcct"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ORDER_BY_ACCT"
+    Expression="ORDER_BY_ACCT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrderByCust"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="360"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ORDER_BY_CUST"
+    Expression="ORDER_BY_CUST"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="360"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BillToAcct"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BILL_TO_ACCT"
+    Expression="BILL_TO_ACCT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BillToCust"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="360"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="BILL_TO_CUST"
+    Expression="BILL_TO_CUST"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="360"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipToAcct"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHIP_TO_ACCT"
+    Expression="SHIP_TO_ACCT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipToCust"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="360"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHIP_TO_CUST"
+    Expression="SHIP_TO_CUST"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="360"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DeliverToAcct"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DELIVER_TO_ACCT"
+    Expression="DELIVER_TO_ACCT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DeliverToCust"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="360"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DELIVER_TO_CUST"
+    Expression="DELIVER_TO_CUST"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="360"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OrderSource"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="18"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ORDER_SOURCE"
+    Expression="ORDER_SOURCE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="18"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewLinkAccessor
+    Name="QuerOrderLineStationsView"
+    ViewLink="com.rmi.applicationEntry.adfbc.views.links.QueryOrderHeaderLineStationsLogicalLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="QueryOrderLineShipmentsView"
+    ViewLink="com.rmi.applicationEntry.adfbc.views.links.QueryOrderHeaderLineShipmentLogicalLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="QueryOrderLineCancellationsView"
+    ViewLink="com.rmi.applicationEntry.adfbc.views.links.QueryOrderHeaderLineCancellationsLogicalLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="QueryOrderLineHoldsView"
+    ViewLink="com.rmi.applicationEntry.adfbc.views.links.QueryOrderHeaderLineHoldsLogicalLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="QueryOrderHoldsView"
+    ViewLink="com.rmi.applicationEntry.adfbc.views.links.QueryOrderHeaderOrderHoldLogicalLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1" topHeight="30px">
+    <f:facet name="bottom"/>
+    <f:facet name="center">
+      <af:panelGroupLayout id="pgl1">
+        <af:separator id="s1"/>
+        <af:panelFormLayout id="pfl1" styleClass="AFStretchWidth" inlineStyle="padding:10px;">
+          <af:selectOneChoice value="#{bindings.TransOrdersOf.inputValue}" label="View Orders" required="false"
+                              shortDesc="View Orders" id="soc1" autoSubmit="true"
+                              contentStyle="width:200px; padding:3px;"
+                              valueChangeListener="#{pageFlowScope.SeafarerDataVerificationBean.viewOrdersVCL}">
+            <f:selectItems value="#{bindings.TransOrdersOf.items}" id="si1"/>
+            <f:validator binding="#{bindings.TransOrdersOf.validator}"/>
+          </af:selectOneChoice>
+        </af:panelFormLayout>
+        <af:separator id="s2"/>
+        <af:panelCollection id="pc1" styleClass="AFStretchWidth"
+                            featuresOff="columnsMenuItem formatMenu freeze freezeMenuItem freezeToolbarItem reorderColumnsMenuItem resizeColumnsMenuItem scrollToFirstMenuItem scrollToLastMenuItem showAsTopMenuItem showAsTopToolbarItem sortMenuItem statusBar viewMenu wrap wrapMenuItem wrapToolbarItem">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.ViewSeafarerDataVerificationOrdersRO1.collectionModel}" var="row"
+                    rows="#{bindings.ViewSeafarerDataVerificationOrdersRO1.rangeSize}"
+                    emptyText="#{bindings.ViewSeafarerDataVerificationOrdersRO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.ViewSeafarerDataVerificationOrdersRO1.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.ViewSeafarerDataVerificationOrdersRO1.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.ViewSeafarerDataVerificationOrdersRO1.rangeSize}"
+                    filterModel="#{bindings.ViewSeafarerDataVerificationOrdersRO1Query.queryDescriptor}"
+                    queryListener="#{bindings.ViewSeafarerDataVerificationOrdersRO1Query.processQuery}"
+                    filterVisible="true" varStatus="vs" id="t1" styleClass="AFStretchWidth" autoHeightRows="10"
+                    contentDelivery="immediate" columnStretching="column:c3">
+            <af:column sortProperty="#{bindings.ViewSeafarerDataVerificationOrdersRO1.hints.OrderNumber.name}"
+                       filterable="true"
+                       headerText="Order Number" id="c1"
+                       width="150">
+              <af:outputText value="#{row.OrderNumber}"
+                             shortDesc="#{bindings.ViewSeafarerDataVerificationOrdersRO1.hints.OrderNumber.tooltip}"
+                             id="ot3" rendered="false">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.ViewSeafarerDataVerificationOrdersRO1.hints.OrderNumber.format}"/>
+              </af:outputText>
+              <af:link text="#{row.OrderNumber}" id="l1"
+                       action="#{pageFlowScope.SeafarerDataVerificationBean.viewWorkOrderAction}"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.ViewSeafarerDataVerificationOrdersRO1.hints.OrderedDate.name}"
+                       filterable="false"
+                       headerText="Ordered Date" id="c2"
+                       displayIndex="-1" width="150">
+              <af:outputText value="#{row.OrderedDate}"
+                             shortDesc="#{bindings.ViewSeafarerDataVerificationOrdersRO1.hints.OrderedDate.tooltip}"
+                             id="ot2">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.ViewSeafarerDataVerificationOrdersRO1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.OrderedDate.value}"
+                              id="id1">
+                  <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                </af:inputDate>
+              </f:facet>
+            </af:column>
+            <af:column sortProperty="#{bindings.ViewSeafarerDataVerificationOrdersRO1.hints.ProcessingCenter.name}"
+                       filterable="false"
+                       headerText="Processing Center"
+                       id="c3" width="200">
+              <af:outputText value="#{row.ProcessingCenter}"
+                             shortDesc="#{bindings.ViewSeafarerDataVerificationOrdersRO1.hints.ProcessingCenter.tooltip}"
+                             id="ot1"/>
+            </af:column>
+            <af:column headerText="Data Verified" id="c4"
+                       align="center">
+              <af:selectBooleanCheckbox value="#{row.bindings.DataVerified.inputValue}"
+                                        label="#{row.bindings.DataVerified.label}"
+                                        shortDesc="Data Verified"
+                                        id="sbc1" disabled="true" autoSubmit="true"/>
+            </af:column>
+            <af:column id="c5" width="120">
+              <af:button text="Approve Order" id="b1"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="start"/>
+    <f:facet name="end"/>
+    <f:facet name="top">
+      <af:panelGroupLayout id="pgl2" layout="vertical" styleClass="AFStretchWidth">
+        <af:panelBox text="Order Verification" id="pb1" showDisclosure="false"
+                     inlineStyle="border:none; box-shadow:none;">
+          <f:facet name="toolbar"/>
+        </af:panelBox>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:panelStretchLayout>
+</ui:composition>

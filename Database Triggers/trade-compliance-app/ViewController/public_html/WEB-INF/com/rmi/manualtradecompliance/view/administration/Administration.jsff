@@ -1,0 +1,260 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelTabbed position="above" id="pt1" >
+    <af:showDetailItem id="parametersTab" text="Parameters" disclosed="true">
+      <af:panelSplitter id="ps1" splitterPosition="300">
+        <f:facet name="first">
+          <af:panelGroupLayout layout="vertical" id="pgl1">
+            <af:query id="qryId1" headerText="Search" disclosed="true"
+                      value="#{bindings.RmiGenericParametersViewCriteriaQuery.queryDescriptor}"
+                      model="#{bindings.RmiGenericParametersViewCriteriaQuery.queryModel}"
+                      queryListener="#{bindings.RmiGenericParametersViewCriteriaQuery.processQuery}"
+                      queryOperationListener="#{bindings.RmiGenericParametersViewCriteriaQuery.processQueryOperation}"
+                      saveQueryMode="hidden"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="second">
+          <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+            <f:facet name="toolbar">
+              <af:toolbar id="t2">
+                <af:button text="Add" id="b1" actionListener="#{bindings.CreateInsert.execute}"/>
+                <af:spacer width="10" height="10" id="s1"/>
+                <af:button text="Save" id="b3" actionListener="#{bindings.Commit.execute}"/>
+                <af:button text="Cancel" id="b4" actionListener="#{bindings.Rollback.execute}" immediate="true">
+                  <af:resetActionListener/>
+                </af:button>
+              </af:toolbar>
+            </f:facet>
+            <af:table value="#{bindings.RmiGenericParametersView1.collectionModel}" var="row"
+                      rows="#{bindings.RmiGenericParametersView1.rangeSize}"
+                      emptyText="#{bindings.RmiGenericParametersView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.RmiGenericParametersView1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.RmiGenericParametersView1.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.RmiGenericParametersView1.rangeSize}" id="t1"
+                      styleClass="AFStretchWidth" columnStretching="column:c4" partialTriggers="::b1 ::b3 ::b4"
+                      editingMode="clickToEdit">
+              <af:column sortProperty="#{bindings.RmiGenericParametersView1.hints.Id.name}" sortable="true"
+                         headerText="#{bindings.RmiGenericParametersView1.hints.Id.label}" id="c1" width="200">
+                <af:inputText value="#{row.bindings.Id.inputValue}"
+                              label="#{bindings.RmiGenericParametersView1.hints.Id.label}"
+                              required="#{bindings.RmiGenericParametersView1.hints.Id.mandatory}"
+                              maximumLength="#{bindings.RmiGenericParametersView1.hints.Id.precision}"
+                              shortDesc="#{bindings.RmiGenericParametersView1.hints.Id.tooltip}" id="it1">
+                  <f:validator binding="#{row.bindings.Id.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.RmiGenericParametersView1.hints.OptionKey.name}" sortable="true"
+                         headerText="#{bindings.RmiGenericParametersView1.hints.OptionKey.label}" id="c2" width="200">
+                <af:inputText value="#{row.bindings.OptionKey.inputValue}"
+                              label="#{bindings.RmiGenericParametersView1.hints.OptionKey.label}"
+                              required="#{bindings.RmiGenericParametersView1.hints.OptionKey.mandatory}"
+                              maximumLength="#{bindings.RmiGenericParametersView1.hints.OptionKey.precision}"
+                              shortDesc="#{bindings.RmiGenericParametersView1.hints.OptionKey.tooltip}" id="it2">
+                  <f:validator binding="#{row.bindings.OptionKey.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.RmiGenericParametersView1.hints.OptionValue.name}" sortable="true"
+                         headerText="#{bindings.RmiGenericParametersView1.hints.OptionValue.label}" id="c3" width="200">
+                <af:inputText value="#{row.bindings.OptionValue.inputValue}"
+                              label="#{bindings.RmiGenericParametersView1.hints.OptionValue.label}"
+                              required="#{bindings.RmiGenericParametersView1.hints.OptionValue.mandatory}"
+                              maximumLength="#{bindings.RmiGenericParametersView1.hints.OptionValue.precision}"
+                              shortDesc="#{bindings.RmiGenericParametersView1.hints.OptionValue.tooltip}" id="it3">
+                  <f:validator binding="#{row.bindings.OptionValue.validator}"/>
+                </af:inputText>
+              </af:column>
+              <af:column headerText="#{bindings.RmiGenericParametersView1.hints.Enabled.label}" id="c27" width="60">
+                <af:selectBooleanCheckbox value="#{row.bindings.Enabled.inputValue}"
+                                          label="#{row.bindings.Enabled.label}"
+                                          shortDesc="#{bindings.RmiGenericParametersView1.hints.Enabled.tooltip}"
+                                          id="sbc1"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.RmiGenericParametersView1.hints.Description.name}" sortable="true"
+                         headerText="#{bindings.RmiGenericParametersView1.hints.Description.label}" id="c4">
+                <af:inputText value="#{row.bindings.Description.inputValue}"
+                              label="#{bindings.RmiGenericParametersView1.hints.Description.label}"
+                              required="#{bindings.RmiGenericParametersView1.hints.Description.mandatory}"
+                              maximumLength="#{bindings.RmiGenericParametersView1.hints.Description.precision}"
+                              shortDesc="#{bindings.RmiGenericParametersView1.hints.Description.tooltip}" id="it4">
+                  <f:validator binding="#{row.bindings.Description.validator}"/>
+                </af:inputText>
+              </af:column>
+            </af:table>
+          </af:panelCollection>
+        </f:facet>
+      </af:panelSplitter>
+    </af:showDetailItem>
+    <af:showDetailItem id="logsTab" text="Logs">
+      <af:panelGroupLayout id="pgl2" layout="vertical">
+        <af:panelSplitter id="ps3" orientation="vertical" splitterPosition="360">
+          <f:facet name="first">
+            <af:panelSplitter id="ps4" splitterPosition="300">
+              <f:facet name="first">
+                <af:query id="qryId2" headerText="Search" disclosed="true"
+                          value="#{bindings.RmiGenericLogsViewCriteriaQuery.queryDescriptor}"
+                          model="#{bindings.RmiGenericLogsViewCriteriaQuery.queryModel}"
+                          queryListener="#{bindings.RmiGenericLogsViewCriteriaQuery.processQuery}"
+                          queryOperationListener="#{bindings.RmiGenericLogsViewCriteriaQuery.processQueryOperation}"
+                          saveQueryMode="hidden" resultComponentId="::pc2:t3"/>
+              </f:facet>
+              <f:facet name="second">
+                <af:panelCollection id="pc2">
+                  <f:facet name="toolbar">
+                    <af:toolbar id="t4">
+                      <af:button text="Delete" id="b2"
+                                 actionListener="#{viewScope.AdministrationBean.deleteLogsActionListener}"/>
+                      <af:spacer width="10" height="10" id="s2"/>
+                      <af:button text="Save" id="b5" actionListener="#{bindings.Commit.execute}"/>
+                      <af:button text="Cancel" id="b6" actionListener="#{bindings.Rollback.execute}" immediate="true">
+                        <af:resetActionListener/>
+                      </af:button>
+                    </af:toolbar>
+                  </f:facet>
+                  <af:table value="#{bindings.RmiGenericLogsView1.collectionModel}" var="row"
+                            rows="#{bindings.RmiGenericLogsView1.rangeSize}"
+                            emptyText="#{bindings.RmiGenericLogsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            rowBandingInterval="0"
+                            selectionListener="#{bindings.RmiGenericLogsView1.collectionModel.makeCurrent}"
+                            rowSelection="multiple" fetchSize="#{bindings.RmiGenericLogsView1.rangeSize}" id="t3"
+                            binding="#{viewScope.AdministrationBean.logsTableObj}" partialTriggers="::b2 ::b5 ::b6">
+                    <af:column headerText="#{bindings.RmiGenericLogsView1.hints.LogId.label}" id="c5" width="50"
+                               sortable="true" sortProperty="#{bindings.RmiGenericLogsView1.hints.LogId.name}">
+                      <af:outputText value="#{row.LogId}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.LogId.tooltip}" id="ot1">
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.RmiGenericLogsView1.hints.LogId.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.SourceId.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.SourceId.label}" id="c13" width="60">
+                      <af:outputText value="#{row.SourceId}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.SourceId.tooltip}" id="ot9">
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.RmiGenericLogsView1.hints.SourceId.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.CreationDate.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.CreationDate.label}" id="c12"
+                               width="80">
+                      <af:outputText value="#{row.CreationDate}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.CreationDate.tooltip}" id="ot8">
+                        <af:convertDateTime pattern="#{bindings.RmiGenericLogsView1.hints.CreationDate.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.RmiGenericLogsView1.hints.CreatedUser.label}" id="c11"
+                               width="130">
+                      <af:outputText value="#{row.CreatedUser}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.CreatedUser.tooltip}" id="ot7"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.Title.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.Title.label}" id="c7" width="200">
+                      <af:outputText value="#{row.Title}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.Title.tooltip}" id="ot3"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.ClassName.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.ClassName.label}" id="c9">
+                      <af:outputText value="#{row.ClassName}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.ClassName.tooltip}" id="ot5"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.MethodName.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.MethodName.label}" id="c10">
+                      <af:outputText value="#{row.MethodName}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.MethodName.tooltip}" id="ot6"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.SourceTable.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.SourceTable.label}" id="c14"
+                               width="110">
+                      <af:outputText value="#{row.SourceTable}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.SourceTable.tooltip}" id="ot10"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.SourceTableColumn.name}"
+                               sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.SourceTableColumn.label}" id="c15">
+                      <af:outputText value="#{row.SourceTableColumn}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.SourceTableColumn.tooltip}"
+                                     id="ot11"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.SourceType.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.SourceType.label}" id="c16">
+                      <af:outputText value="#{row.SourceType}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.SourceType.tooltip}" id="ot12"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.Type.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.Type.label}" id="c6" width="50">
+                      <af:outputText value="#{row.Type}" shortDesc="#{bindings.RmiGenericLogsView1.hints.Type.tooltip}"
+                                     id="ot2"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.Message.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.Message.label}" id="c8">
+                      <af:outputText value="#{row.Message}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.Message.tooltip}" id="ot4"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.Param1.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.Param1.label}" id="c17">
+                      <af:outputText value="#{row.Param1}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.Param1.tooltip}" id="ot13"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.Param2.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.Param2.label}" id="c18">
+                      <af:outputText value="#{row.Param2}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.Param2.tooltip}" id="ot14"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.Param3.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.Param3.label}" id="c19">
+                      <af:outputText value="#{row.Param3}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.Param3.tooltip}" id="ot15"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.Param4.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.Param4.label}" id="c20">
+                      <af:outputText value="#{row.Param4}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.Param4.tooltip}" id="ot16"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.Param5.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.Param5.label}" id="c21">
+                      <af:outputText value="#{row.Param5}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.Param5.tooltip}" id="ot17"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.Attribute1.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.Attribute1.label}" id="c22">
+                      <af:outputText value="#{row.Attribute1}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.Attribute1.tooltip}" id="ot18"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.Attribute2.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.Attribute2.label}" id="c23">
+                      <af:outputText value="#{row.Attribute2}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.Attribute2.tooltip}" id="ot19"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.Attribute3.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.Attribute3.label}" id="c24">
+                      <af:outputText value="#{row.Attribute3}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.Attribute3.tooltip}" id="ot20"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.Attribute4.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.Attribute4.label}" id="c25">
+                      <af:outputText value="#{row.Attribute4}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.Attribute4.tooltip}" id="ot21"/>
+                    </af:column>
+                    <af:column sortProperty="#{bindings.RmiGenericLogsView1.hints.Attribute5.name}" sortable="true"
+                               headerText="#{bindings.RmiGenericLogsView1.hints.Attribute5.label}" id="c26">
+                      <af:outputText value="#{row.Attribute5}"
+                                     shortDesc="#{bindings.RmiGenericLogsView1.hints.Attribute5.tooltip}" id="ot22"/>
+                    </af:column>
+                  </af:table>
+                </af:panelCollection>
+              </f:facet>
+            </af:panelSplitter>
+          </f:facet>
+          <f:facet name="second">
+            <af:panelBox text="Detailed Message" id="pb1">
+              <af:inputText label="Label 2" id="it5" simple="true" value="#{bindings.DetailedMessage.inputValue}"
+                            partialTriggers="qryId2 pc2:t3" readOnly="true" rows="20" styleClass="AFStretchWidth"
+                            contentStyle="width: 100%; resize: none;" dimensionsFrom="parent"/>
+            </af:panelBox>
+          </f:facet>
+        </af:panelSplitter>
+      </af:panelGroupLayout>
+    </af:showDetailItem>
+  </af:panelTabbed>
+</jsp:root>

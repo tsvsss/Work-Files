@@ -1,0 +1,286 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelStretchLayout id="psl1" topHeight="40px">
+    <f:facet name="bottom"/>
+    <f:facet name="center">
+      <af:panelBox text="Edit Seafarers/Documents" id="pb1" showHeader="always" showDisclosure="false"
+                   inlineStyle="border:none; box-shadow:none;">
+        <af:resource type="javascript">
+          function toUpperCase(evt)
+          {
+              var _filterField = evt.getCurrentTarget();
+              var _value = _filterField.getSubmittedValue();
+              _filterField.setValue(_value.toUpperCase());
+          }
+        </af:resource>
+        <f:facet name="toolbar">
+          <af:toolbar id="t2" inlineStyle="padding:5px;">
+            <af:button text="Save" id="b3" action="#{pageFlowScope.editSeafarersBean.actionSave}"
+                       inlineStyle="margin-right:10px !important;"/>
+            <af:button text="Cancel" id="b4" action="#{pageFlowScope.editSeafarersBean.actionCancel}" immediate="true">
+              <af:resetActionListener/>
+            </af:button>
+          </af:toolbar>
+        </f:facet>
+        <af:panelGroupLayout id="pgl1" styleClass="AFStretchWidth" layout="vertical">
+          <af:panelFormLayout id="pfl1" styleClass="AFStretchWidth panelFormLayoutClass" inlineStyle="padding:10px;"
+                              rows="2" labelWidth="120">
+            <af:inputText value="#{bindings.TransSeafarerId.inputValue}" label="Seafarer ID" required="false"
+                          columns="#{bindings.TransSeafarerId.hints.displayWidth}"
+                          maximumLength="#{bindings.TransSeafarerId.hints.precision}"
+                          shortDesc="#{bindings.TransSeafarerId.hints.tooltip}" id="it10" autoSubmit="true"
+                          styleClass="AFInputTextHead">
+              <f:validator binding="#{bindings.TransSeafarerId.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.TransSeafarerId.format}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.TransLastName.inputValue}" label="Surname" required="false"
+                          columns="#{bindings.TransLastName.hints.displayWidth}"
+                          maximumLength="#{bindings.TransLastName.hints.precision}"
+                          shortDesc="#{bindings.TransLastName.hints.tooltip}" id="it9" styleClass="AFInputTextHead"
+                          autoSubmit="true">
+              <f:validator binding="#{bindings.TransLastName.validator}"/>
+              <af:clientListener method="toUpperCase" type="valueChange"/>
+            </af:inputText>
+            <af:inputDate value="#{bindings.TransBirthDate.inputValue}" label="Birth Date" required="false"
+                          columns="#{bindings.TransBirthDate.hints.displayWidth}"
+                          shortDesc="#{bindings.TransBirthDate.hints.tooltip}" id="id3" autoSubmit="true"
+                          styleClass="AFInputTextHead">
+              <f:validator binding="#{bindings.TransBirthDate.validator}"/>
+              <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+            </af:inputDate>
+            <af:inputText value="#{bindings.TransFirstName.inputValue}" label="Given Name"
+                          required="#{bindings.TransFirstName.hints.mandatory}"
+                          columns="#{bindings.TransFirstName.hints.displayWidth}"
+                          maximumLength="#{bindings.TransFirstName.hints.precision}"
+                          shortDesc="#{bindings.TransFirstName.hints.tooltip}" id="it8" styleClass="AFInputTextHead">
+              <f:validator binding="#{bindings.TransFirstName.validator}"/>
+              <af:clientListener method="toUpperCase" type="valueChange"/>
+            </af:inputText>
+            <af:spacer width="10" height="10" id="s4"/>
+            <af:panelGroupLayout id="pgl2" layout="horizontal" inlineStyle="margin-left:30px;">
+              <af:button text="Find" id="b1" action="#{pageFlowScope.editSeafarersBean.searchSeafarerAction}"/>
+              <af:spacer width="10" id="s2"/>
+              <af:button text="Reset" id="b2" immediate="true"
+                         action="#{pageFlowScope.editSeafarersBean.resetSearchSeafarerAction}">
+                <af:resetActionListener/>
+              </af:button>
+              <af:spacer width="10" id="s3"/>
+              <af:button text="Create" id="b7" action="#{pageFlowScope.editSeafarersBean.actionAddSeafarer}"/>
+            </af:panelGroupLayout>
+          </af:panelFormLayout>
+          <af:separator id="s1" inlineStyle="margin-top:0px;"/>
+          <af:popup childCreation="deferred" autoCancel="disabled" id="seafarerStatusConfirmPopup" contentDelivery="lazyUncached"
+                    binding="#{pageFlowScope.editSeafarersBean.seafarerStatusConfirmPopup}">
+            <af:dialog id="d1" type="yesNo"
+                       dialogListener="#{pageFlowScope.editSeafarersBean.seafarerStatusCnfDialogListener}">
+              <f:facet name="buttonBar"/>
+              <af:message id="m1" messageType="confirmation"
+                          message="All Seafarer documents will be updated. Do you want to continue?"/>
+            </af:dialog>
+          </af:popup>
+          <af:table value="#{bindings.EditSeafarersVO1.collectionModel}" var="row"
+                    rows="#{bindings.EditSeafarersVO1.rangeSize}"
+                    emptyText="#{bindings.EditSeafarersVO1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0" selectedRowKeys="#{bindings.EditSeafarersVO1.collectionModel.selectedRow}"
+                    selectionListener="#{pageFlowScope.editSeafarersBean.editSeafarersRowSelectionListener}" rowSelection="single"
+                    fetchSize="#{bindings.EditSeafarersVO1.rangeSize}" id="t1" styleClass="AFStretchWidth"
+                    autoHeightRows="10" contentDelivery="immediate">
+            <af:column id="c8">
+              <af:button text="Edit Documents" id="b5" action="editDocuments"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.EditSeafarersVO1.hints.SeafarerId.name}" sortable="true"
+                       headerText="Seafarer ID" id="c9" width="100">
+              <af:inputText value="#{row.bindings.SeafarerId.inputValue}"
+                            label="#{bindings.EditSeafarersVO1.hints.SeafarerId.label}"
+                            required="#{bindings.EditSeafarersVO1.hints.SeafarerId.mandatory}"
+                            columns="#{bindings.EditSeafarersVO1.hints.SeafarerId.displayWidth}"
+                            maximumLength="#{bindings.EditSeafarersVO1.hints.SeafarerId.precision}"
+                            shortDesc="#{bindings.EditSeafarersVO1.hints.SeafarerId.tooltip}" id="it7" autoSubmit="true"
+                            disabled="true" styleClass="AFInputTextTable" contentStyle="text-align:left !important;">
+                <f:validator binding="#{row.bindings.SeafarerId.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.EditSeafarersVO1.hints.SeafarerId.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.EditSeafarersVO1.hints.LastName.name}" sortable="true"
+                       headerText="Surname" id="c6" width="150">
+              <af:inputText value="#{row.bindings.LastName.inputValue}"
+                            label="#{bindings.EditSeafarersVO1.hints.LastName.label}"
+                            required="#{bindings.EditSeafarersVO1.hints.LastName.mandatory}"
+                            columns="#{bindings.EditSeafarersVO1.hints.LastName.displayWidth}"
+                            maximumLength="#{bindings.EditSeafarersVO1.hints.LastName.precision}"
+                            shortDesc="#{bindings.EditSeafarersVO1.hints.LastName.tooltip}" id="it4" autoSubmit="true"
+                            styleClass="AFInputTextTable">
+                <f:validator binding="#{row.bindings.LastName.validator}"/>
+                <af:clientListener type="valueChange" method="toUpperCase"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.EditSeafarersVO1.hints.FirstName.name}" sortable="true"
+                       headerText="Given Name" id="c4" width="120">
+              <af:inputText value="#{row.bindings.FirstName.inputValue}"
+                            label="#{bindings.EditSeafarersVO1.hints.FirstName.label}"
+                            required="#{bindings.EditSeafarersVO1.hints.FirstName.mandatory}"
+                            columns="#{bindings.EditSeafarersVO1.hints.FirstName.displayWidth}"
+                            maximumLength="#{bindings.EditSeafarersVO1.hints.FirstName.precision}"
+                            shortDesc="#{bindings.EditSeafarersVO1.hints.FirstName.tooltip}" id="it3" autoSubmit="true"
+                            styleClass="AFInputTextTable">
+                <f:validator binding="#{row.bindings.FirstName.validator}"/>
+                <af:clientListener method="toUpperCase" type="valueChange"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.EditSeafarersVO1.hints.MiddleInitial.name}" sortable="true"
+                       headerText="Middle Initial" id="c7">
+              <af:inputText value="#{row.bindings.MiddleInitial.inputValue}"
+                            label="#{bindings.EditSeafarersVO1.hints.MiddleInitial.label}"
+                            required="#{bindings.EditSeafarersVO1.hints.MiddleInitial.mandatory}"
+                            columns="#{bindings.EditSeafarersVO1.hints.MiddleInitial.displayWidth}"
+                            maximumLength="#{bindings.EditSeafarersVO1.hints.MiddleInitial.precision}"
+                            shortDesc="#{bindings.EditSeafarersVO1.hints.MiddleInitial.tooltip}" id="it5"
+                            autoSubmit="true" styleClass="AFInputTextTable">
+                <f:validator binding="#{row.bindings.MiddleInitial.validator}"/>
+                <af:clientListener method="toUpperCase" type="valueChange"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.EditSeafarersVO1.hints.BirthDate.name}" sortable="true"
+                       headerText="Birth Date" id="c1">
+              <af:inputDate value="#{row.bindings.BirthDate.inputValue}"
+                            label="#{bindings.EditSeafarersVO1.hints.BirthDate.label}"
+                            required="#{bindings.EditSeafarersVO1.hints.BirthDate.mandatory}"
+                            columns="#{bindings.EditSeafarersVO1.hints.BirthDate.displayWidth}"
+                            shortDesc="#{bindings.EditSeafarersVO1.hints.BirthDate.tooltip}" id="id2" autoSubmit="true"
+                            styleClass="AFInputTextTable">
+                <f:validator binding="#{row.bindings.BirthDate.validator}"/>
+                <af:convertDateTime pattern="dd-MMM-yyyy"
+                                    secondaryPattern="ddMMMyyyy"/>
+              </af:inputDate>
+            </af:column>
+            <af:column sortProperty="#{bindings.EditSeafarersVO1.hints.BirthPlace.name}" sortable="true"
+                       headerText="Birth Place" id="c2" width="120">
+              <af:inputText value="#{row.bindings.BirthPlace.inputValue}"
+                            label="#{bindings.EditSeafarersVO1.hints.BirthPlace.label}"
+                            required="#{bindings.EditSeafarersVO1.hints.BirthPlace.mandatory}"
+                            columns="#{bindings.EditSeafarersVO1.hints.BirthPlace.displayWidth}"
+                            maximumLength="#{bindings.EditSeafarersVO1.hints.BirthPlace.precision}"
+                            shortDesc="#{bindings.EditSeafarersVO1.hints.BirthPlace.tooltip}" id="it1"
+                            styleClass="AFInputTextTable" autoSubmit="true">
+                <f:validator binding="#{row.bindings.BirthPlace.validator}"/>
+                <af:clientListener method="toUpperCase" type="valueChange"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.EditSeafarersVO1.hints.TransNationality.name}" sortable="true"
+                       headerText="Nationality" id="c11" width="250">
+              <af:inputListOfValues id="transNationalityId"
+                                    popupTitle="Search and Select: Nationality"
+                                    value="#{row.bindings.TransNationality.inputValue}"
+                                    model="#{row.bindings.TransNationality.listOfValuesModel}"
+                                    required="#{bindings.EditSeafarersVO1.hints.TransNationality.mandatory}"
+                                    columns="#{bindings.EditSeafarersVO1.hints.TransNationality.displayWidth}"
+                                    shortDesc="#{bindings.EditSeafarersVO1.hints.TransNationality.tooltip}"
+                                    autoSubmit="true" styleClass="AFInputTextTable" autoComplete="on">
+                <f:validator binding="#{row.bindings.TransNationality.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.TransNationality.suggestedItems}"
+                                        maxSuggestedItems="10"/>
+              </af:inputListOfValues>
+            </af:column>
+            <af:column sortProperty="#{bindings.EditSeafarersVO1.hints.Gender.name}" sortable="true" headerText="Gender"
+                       id="c5">
+              <af:selectOneChoice value="#{row.bindings.Gender.inputValue}" label="#{row.bindings.Gender.label}"
+                                  required="false" shortDesc="#{bindings.EditSeafarersVO1.hints.Gender.tooltip}"
+                                  id="soc1" autoSubmit="true" styleClass="AFInputTextTable">
+                <f:selectItems value="#{row.bindings.Gender.items}" id="si1"/>
+                <f:validator binding="#{row.bindings.Gender.validator}"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column sortProperty="#{bindings.EditSeafarersVO1.hints.Status.name}" sortable="true" headerText="Status"
+                       id="c10">
+              <af:selectOneChoice value="#{row.bindings.Status.inputValue}" label="#{row.bindings.Status.label}"
+                                  required="false" shortDesc="#{bindings.EditSeafarersVO1.hints.Status.tooltip}"
+                                  id="soc2" styleClass="AFInputTextTable" autoSubmit="true"
+                                  valueChangeListener="#{pageFlowScope.editSeafarersBean.seafarerStatusValueChangeListener}">
+                <f:selectItems value="#{row.bindings.Status.items}" id="si2"/>
+                <f:validator binding="#{row.bindings.Status.validator}"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column sortProperty="#{bindings.EditSeafarersVO1.hints.DistinguishingMarks.name}" sortable="true"
+                       headerText="Distinguishing Mark" id="c3" width="200">
+              <af:inputText value="#{row.bindings.DistinguishingMarks.inputValue}"
+                            label="#{bindings.EditSeafarersVO1.hints.DistinguishingMarks.label}"
+                            required="#{bindings.EditSeafarersVO1.hints.DistinguishingMarks.mandatory}"
+                            columns="#{bindings.EditSeafarersVO1.hints.DistinguishingMarks.displayWidth}"
+                            maximumLength="#{bindings.EditSeafarersVO1.hints.DistinguishingMarks.precision}"
+                            shortDesc="#{bindings.EditSeafarersVO1.hints.DistinguishingMarks.tooltip}" id="it2"
+                            autoSubmit="true" styleClass="AFInputTextTable" rows="1">
+                <f:validator binding="#{row.bindings.DistinguishingMarks.validator}"/>
+                <af:clientListener method="toUpperCase" type="valueChange"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="#{bindings.EditSeafarersVO1.hints.checkRowStatus.label}" id="c13" visible="false">
+              <af:outputText value="#{row.checkRowStatus}"
+                             shortDesc="#{bindings.EditSeafarersVO1.hints.checkRowStatus.tooltip}" id="ot1">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.EditSeafarersVO1.hints.checkRowStatus.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.EditSeafarersVO1.hints.Photo.label}" id="c14"
+                       partialTriggers="if1 ::b3 ::b4" visible="false">
+              <af:outputText value="#{row.Photo}" shortDesc="#{bindings.EditSeafarersVO1.hints.Photo.tooltip}"
+                             id="ot2"/>
+            </af:column>
+            <af:column id="c12" partialTriggers="::b3 ::b4 ::b1 ::b2 ::b7 c14" width="250" headerText="Photo">
+              <af:panelGroupLayout id="pgl4" layout="horizontal">
+                <af:button text="View" id="b6" targetFrame="_blank"
+                           visible="#{row.checkRowStatus != 0}" partialTriggers="if1" immediate="true"
+                           clientComponent="true">
+                  <af:fileDownloadActionListener filename="#{row.SeafarerId}.jpeg"
+                                                 method="#{pageFlowScope.editSeafarersBean.photoDownloadListener}"/>
+                </af:button>
+                <af:inputFile label="Upload photo" id="if1" autoSubmit="true"
+                              valueChangeListener="#{pageFlowScope.editSeafarersBean.uploadPhotoValuechangelistener}"/>
+              </af:panelGroupLayout>
+            </af:column>
+            <af:column id="c15">
+              <af:link text="Notes" id="l1" styleClass="AdditionalLink">
+                <af:showPopupBehavior popupId="seafarerShortTextPopup"/>
+              </af:link>
+              <af:popup childCreation="deferred" autoCancel="disabled" id="seafarerShortTextPopup"
+                        contentDelivery="lazyUncached"
+                        binding="#{pageFlowScope.editSeafarersBean.seafarerShortTextPopup}"
+                        popupFetchListener="#{pageFlowScope.editSeafarersBean.seafarerShortTextPopupFetchListener}">
+                <af:dialog id="d2" affirmativeTextAndAccessKey="Save"
+                           dialogListener="#{pageFlowScope.editSeafarersBean.seafarerShortTextDialogListener}">
+                  <af:panelFormLayout id="pfl2" styleClass="panelFormLayoutClass">
+                    <af:inputText value="#{row.bindings.TransShortText.inputValue}"
+                                  label="Short Text"
+                                  required="#{bindings.EditSeafarersVO1.hints.TransShortText.mandatory}"
+                                  columns="#{bindings.EditSeafarersVO1.hints.TransShortText.displayWidth}"
+                                  maximumLength="#{bindings.EditSeafarersVO1.hints.TransShortText.precision}"
+                                  shortDesc="#{bindings.EditSeafarersVO1.hints.TransShortText.tooltip}" id="it11"
+                                  rows="20" contentStyle="width:500px; padding:3px;" readOnly="false" autoSubmit="true">
+                      <f:validator binding="#{row.bindings.TransShortText.validator}"/>
+                    </af:inputText>
+                  </af:panelFormLayout>
+                  <f:facet name="buttonBar"/>
+                </af:dialog>
+              </af:popup>
+            </af:column>
+          </af:table>
+        </af:panelGroupLayout>
+        <af:panelGroupLayout id="pgl3" visible="false" layout="horizontal">
+          <af:inputListOfValues id="ilov1" popupTitle="Search and Select: #{bindings.TransNationality.hints.label}"
+                                value="#{bindings.TransNationality.inputValue}"
+                                label="#{bindings.TransNationality.hints.label}"
+                                model="#{bindings.TransNationality.listOfValuesModel}"
+                                required="#{bindings.TransNationality.hints.mandatory}"
+                                columns="#{bindings.TransNationality.hints.displayWidth}"
+                                shortDesc="#{bindings.TransNationality.hints.tooltip}" autoSubmit="true">
+            <f:validator binding="#{bindings.TransNationality.validator}"/>
+            <af:autoSuggestBehavior/>
+          </af:inputListOfValues>
+        </af:panelGroupLayout>
+      </af:panelBox>
+    </f:facet>
+    <f:facet name="start"/>
+    <f:facet name="end"/>
+    <f:facet name="top"/>
+  </af:panelStretchLayout>
+</ui:composition>

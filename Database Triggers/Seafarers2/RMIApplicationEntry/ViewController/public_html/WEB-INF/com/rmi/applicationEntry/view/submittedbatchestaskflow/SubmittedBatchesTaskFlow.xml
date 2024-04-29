@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="taskflow_SubmittedBatches">
+    <default-activity>searchBatchInternal</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__3">
+      <name>param_user_id</name>
+      <value>#{sessionScope.param_user_id}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <managed-bean id="__4">
+      <managed-bean-name>SubmittedBatchesBean</managed-bean-name>
+      <managed-bean-class>com.rmi.applicationEntry.view.submittedbatchestaskflow.SubmittedBatchesBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="submittedBatches">
+      <page>/WEB-INF/com/rmi/applicationEntry/view/submittedbatchestaskflow/submittedBatches.jsff</page>
+    </view>
+    <task-flow-call id="taskflow_Batch_CreateEdit">
+      <task-flow-reference>
+        <document>/WEB-INF/com/rmi/applicationEntry/view/batchcreateedittaskflow/BatchCreateEditTaskFlow.xml</document>
+        <id>taskflow_Batch_CreateEdit</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>param_calling_tf</name>
+        <value>new</value>
+      </input-parameter>
+      <input-parameter id="__8">
+        <name>param_user_id</name>
+        <value>#{sessionScope.param_user_id}</value>
+      </input-parameter>
+      <input-parameter id="__9">
+        <name>param_batch_mode</name>
+        <value>#{pageFlowScope.batchMode}</value>
+      </input-parameter>
+      <input-parameter id="__10">
+        <name>param_batch_id</name>
+        <value>#{pageFlowScope.batchNumber}</value>
+      </input-parameter>
+      <input-parameter id="__11">
+        <name>param_rejected_tab</name>
+        <value>#{pageFlowScope.batchReject}</value>
+      </input-parameter>
+    </task-flow-call>
+    <method-call id="searchBatchInternal">
+      <method>#{bindings.searchBatchInternal.execute}</method>
+      <outcome>
+        <fixed-outcome>searchBatchInternal</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__5">
+      <from-activity-id>submittedBatches</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>batchCreateEdit</from-outcome>
+        <to-activity-id>taskflow_Batch_CreateEdit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__1">
+      <from-activity-id>searchBatchInternal</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>searchBatchInternal</from-outcome>
+        <to-activity-id>submittedBatches</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="FindSeafarerTaskFlow_FindSeafarerTaskFlow_findSeafarerResetPageDef"
+                Package="com.rmi.applicationEntry.view.findseafarertaskflow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="findSeafarerReset" RequiresUpdateModel="true" Action="invokeMethod" MethodName="findSeafarerReset"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.findSeafarerReset_RMIApplicationEntryAppModuleDataControl_dataProvider_findSeafarerReset_result"/>
+  </bindings>
+</pageDefinition>

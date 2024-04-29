@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="Prototype_task_flow_definition_Prototype_task_flow_definition_storeDCFrameNameListenerPageDef"
+                Package="oracle.apps.xwrl.view.pageDefs" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="storeDCFrameNameListener" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="storeDCFrameNameListener" IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="data.AppModuleDataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.storeDCFrameNameListener_AppModuleDataControl_dataProvider_storeDCFrameNameListener_result"/>
+  </bindings>
+</pageDefinition>

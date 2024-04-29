@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="SearchVesselDetailView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SearchVesselDetailView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pVesselImo"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pOfficialNumber"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pName"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[SELECT         
+vessel_pk,         
+imo_number,         
+name,         
+official_number,         
+vs.description vssl_status,         
+vt.description vssl_type,         
+vv.gross_tons,         
+vv.propulsion_power,         
+vv.engine_type,         
+vv. propulsion_code ,     
+yacht_utils.get_yacht_compliance_status (vessel_pk) comp_code,  
+NVL (registration_date, expected_reg_date) vssl_reg_date         
+FROM vssl_vessels vv,         
+vssl_statuses vs,         
+vssl_vessel_types vt         
+WHERE         
+vs.code = vv.status         
+AND vt.code(+) = vv.vstp_code         
+AND (nvl(imo_number,'9999999') = nvl(:pVesselImo, nvl(imo_number,'9999999'))         
+and nvl(official_number,'9999999') = nvl(:pOfficialNumber,nvl(official_number,'9999999'))         
+and upper(name) like '%'||upper(nvl(:pName,name))||'%')         
+AND status NOT IN ('SU', 'V', 'H','RV','I')         
+and (:pVesselImo is not null or :pOfficialNumber is not null or :pName is not null)         
+ORDER BY status,         
+NVL (registration_date, expected_reg_date) ASC]]></SQLQuery>
+  <ViewAttribute
+    Name="VesselPk"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="VESSEL_PK"
+    Expression="VESSEL_PK"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ImoNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="IMO_NUMBER"
+    Expression="IMO_NUMBER"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Name"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NAME"
+    Expression="NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OfficialNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="OFFICIAL_NUMBER"
+    Expression="OFFICIAL_NUMBER"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="VsslStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VSSL_STATUS"
+    Expression="VSSL_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VsslType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VSSL_TYPE"
+    Expression="VSSL_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GrossTons"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="GROSS_TONS"
+    Expression="GROSS_TONS"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PropulsionPower"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="PROPULSION_POWER"
+    Expression="PROPULSION_POWER"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EngineType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ENGINE_TYPE"
+    Expression="ENGINE_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PropulsionCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PROPULSION_CODE"
+    Expression="PROPULSION_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CompCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="TYPE"
+    AliasName="COMP_CODE"
+    Expression="COMP_CODE"
+    SQLType="STRUCT"/>
+  <ViewAttribute
+    Name="VsslRegDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="VSSL_REG_DATE"
+    Expression="VSSL_REG_DATE"
+    SQLType="DATE"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

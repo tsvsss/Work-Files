@@ -1,0 +1,2321 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RmiSeafarerView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Full"
+  SelectListFlags="1"
+  FromListFlags="1"
+  WhereFlags="1"
+  SelectAllAttributes="false"
+  RowClass="com.rmi.tradecompapproval.adfbc.views.RmiSeafarerViewRowImpl"
+  FetchMode="FETCH_AS_NEEDED"
+  Passivate="All">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.RmiSeafarerView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pEsiBatchId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <ViewAccessor
+    Name="countriesLOV1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.CountriesView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ViewVesselRO1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.readonly.VesselView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="GetCityNameByCityIdRO1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.readonly.GetCityNameByCityIdView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="YesNoLOV1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.YesNoView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="IssueTypeLOV1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.IssueTypeView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="PreviousExsicdBookLOV1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.PreviousBookView"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pSeafarerId">
+        <TransientExpression><![CDATA[SeafarerId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="HoldReasonView1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.HoldReasonView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CitiesView1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.CitiesView"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pCountryCode">
+        <TransientExpression><![CDATA[ResidenceCountryCode]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="LovReplacementUomView1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.LovReplacementUomView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="PreviousIdCardView1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.PreviousIdCardView"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pSeafarerId">
+        <TransientExpression
+          trustMode="untrusted"><![CDATA[SeafarerId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="YesNoCancelView1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.YesNoCancelView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_transNationality"
+    ListVOName="countriesLOV1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="transNationality"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Nationality"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CountryName"/>
+      <Item Value="CountryCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CountryName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="countriesLOVCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_tranPassportCntry"
+    ListVOName="countriesLOV1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="tranPassportCntry"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="PassportIssuingCountryCode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CountryName"/>
+      <Item Value="CountryCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CountryName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="countriesLOVCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_tranResidenceCntry"
+    ListVOName="countriesLOV1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="tranResidenceCntry"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ResidenceCountryCode"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CountryName"/>
+      <Item Value="CountryCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CountryName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="countriesLOVCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_DataVerified"
+    ListVOName="YesNoLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DataVerified3"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_IssueType"
+    ListVOName="IssueTypeLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="IssueType3"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="IssueCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="IssueType"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransPreviousBook"
+    ListVOName="PreviousExsicdBookLOV1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransPreviousBook"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="PreviousBookDocumentId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="BookNumber"/>
+      <Item Value="DocumentId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="BookNumber"/>
+      <Item Value="ExpirationDate"/>
+      <Item Value="Status"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="PreviousExsicdBookLOVCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_DataVerifiedInfo"
+    ListVOName="YesNoLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DataVerifiedInfo"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PhotoGrdHoldReason"
+    ListVOName="HoldReasonView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PhotoGrdHoldReason"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="PhotoGrdComnt"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DisplayValue"/>
+      <Item Value="Description"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_AffidavitGrdHoldReason"
+    ListVOName="HoldReasonView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="AffidavitGrdHoldReason"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="AffidavitGrdComnt"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DisplayValue"/>
+      <Item Value="Description"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ApplicationGrdHoldReason"
+    ListVOName="HoldReasonView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ApplicationGrdHoldReason"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ApplicationGrdComnt"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DisplayValue"/>
+      <Item Value="Description"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_BookGrdHoldReason"
+    ListVOName="HoldReasonView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="BookGrdHoldReason"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="BookGrdComnt"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DisplayValue"/>
+      <Item Value="Description"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ConGrdHoldReason"
+    ListVOName="HoldReasonView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ConGrdHoldReason"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ConGrdComnt"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DisplayValue"/>
+      <Item Value="Description"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_IdCardGrdHoldReason"
+    ListVOName="HoldReasonView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="IdCardGrdHoldReason"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="IdCardGrdCmnt"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DisplayValue"/>
+      <Item Value="Description"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_SatGrdHoldReason"
+    ListVOName="HoldReasonView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="SatGrdHoldReason"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="SatGrdComnt"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DisplayValue"/>
+      <Item Value="Description"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_IdentityDocGrdHoldReason"
+    ListVOName="HoldReasonView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="IdentityDocGrdHoldReason"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="IdentityDocGrdComnt"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DisplayValue"/>
+      <Item Value="Description"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PhysicalGrdHoldReason"
+    ListVOName="HoldReasonView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PhysicalGrdHoldReason"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="PhysicalGrdComnt"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DisplayValue"/>
+      <Item Value="Description"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_SeaserviceGrdHoldReason"
+    ListVOName="HoldReasonView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="SeaserviceGrdHoldReason"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="SeaserviceGrdComnt"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DisplayValue"/>
+      <Item Value="Description"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ApplicationVerified"
+    ListVOName="YesNoLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ApplicationVerified"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_AffidavitVerified"
+    ListVOName="YesNoLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="AffidavitVerified"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_BookVerified"
+    ListVOName="YesNoCancelView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="BookVerified"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ConVerified"
+    ListVOName="YesNoLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ConVerified"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_IdCardVerified"
+    ListVOName="YesNoCancelView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="IdCardVerified"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_IdentityDocVerified"
+    ListVOName="YesNoLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="IdentityDocVerified"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PhotoVerified"
+    ListVOName="YesNoLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PhotoVerified"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PhysicalVerified"
+    ListVOName="YesNoLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PhysicalVerified"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_SatVerified"
+    ListVOName="YesNoLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="SatVerified"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_SeaserviceVerified"
+    ListVOName="YesNoLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="SeaserviceVerified"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_tranCity"
+    ListVOName="CitiesView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="tranCity"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="WcCityListId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CityName"/>
+      <Item Value="WcCityListId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CityName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="CitiesViewCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_BookReplacementIssueType"
+    ListVOName="LovReplacementUomView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="BookReplacementIssueType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="UomCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ReplacementIssueType"
+    ListVOName="LovReplacementUomView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ReplacementIssueType"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="UomCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransPreviousIdCard"
+    ListVOName="PreviousIdCardView1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransPreviousIdCard"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="PreviousIdCardDocumentId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="BookNumber"/>
+      <Item Value="DocumentId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="BookNumber"/>
+      <Item Value="ExpirationDate"/>
+      <Item Value="Status"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="PreviousIdCardViewCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <EntityUsage
+    Name="viewSeafarerEO"
+    Entity="com.rmi.tradecompapproval.adfbc.entities.RmiSeafarers"/>
+  <ViewAttribute
+    Name="AffidavitApvdBy"
+    PrecisionRule="true"
+    EntityAttrName="AffidavitApvdBy"
+    EntityUsage="viewSeafarerEO"
+    AliasName="AFFIDAVIT_APVD_BY"/>
+  <ViewAttribute
+    Name="AffidavitApvdDate"
+    PrecisionRule="true"
+    EntityAttrName="AffidavitApvdDate"
+    EntityUsage="viewSeafarerEO"
+    AliasName="AFFIDAVIT_APVD_DATE"/>
+  <ViewAttribute
+    Name="AffidavitEdocId"
+    PrecisionRule="true"
+    EntityAttrName="AffidavitEdocId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="AFFIDAVIT_EDOC_ID"/>
+  <ViewAttribute
+    Name="AffidavitGrdComnt"
+    PrecisionRule="true"
+    EntityAttrName="AffidavitGrdComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="AFFIDAVIT_GRD_COMNT">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="60"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AffidavitGrdStatus"
+    PrecisionRule="true"
+    EntityAttrName="AffidavitGrdStatus"
+    EntityUsage="viewSeafarerEO"
+    AliasName="AFFIDAVIT_GRD_STATUS"/>
+  <ViewAttribute
+    Name="ApplicationApvdBy"
+    PrecisionRule="true"
+    EntityAttrName="ApplicationApvdBy"
+    EntityUsage="viewSeafarerEO"
+    AliasName="APPLICATION_APVD_BY"/>
+  <ViewAttribute
+    Name="ApplicationApvdDate"
+    PrecisionRule="true"
+    EntityAttrName="ApplicationApvdDate"
+    EntityUsage="viewSeafarerEO"
+    AliasName="APPLICATION_APVD_DATE"/>
+  <ViewAttribute
+    Name="ApplicationEdocId"
+    PrecisionRule="true"
+    EntityAttrName="ApplicationEdocId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="APPLICATION_EDOC_ID"/>
+  <ViewAttribute
+    Name="ApplicationGrdComnt"
+    PrecisionRule="true"
+    EntityAttrName="ApplicationGrdComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="APPLICATION_GRD_COMNT">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="60"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ApplicationGrdStatus"
+    PrecisionRule="true"
+    EntityAttrName="ApplicationGrdStatus"
+    EntityUsage="viewSeafarerEO"
+    AliasName="APPLICATION_GRD_STATUS"/>
+  <ViewAttribute
+    Name="BirthDate"
+    PrecisionRule="true"
+    EntityAttrName="BirthDate"
+    EntityUsage="viewSeafarerEO"
+    AliasName="BIRTH_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BirthPlace"
+    PrecisionRule="true"
+    EntityAttrName="BirthPlace"
+    EntityUsage="viewSeafarerEO"
+    AliasName="BIRTH_PLACE">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BookApprovedBy"
+    PrecisionRule="true"
+    EntityAttrName="BookApprovedBy"
+    EntityUsage="viewSeafarerEO"
+    AliasName="BOOK_APPROVED_BY"/>
+  <ViewAttribute
+    Name="BookApprovedDate"
+    PrecisionRule="true"
+    EntityAttrName="BookApprovedDate"
+    EntityUsage="viewSeafarerEO"
+    AliasName="BOOK_APPROVED_DATE"/>
+  <ViewAttribute
+    Name="BookGrdComnt"
+    PrecisionRule="true"
+    EntityAttrName="BookGrdComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="BOOK_GRD_COMNT">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BookGrdStatus"
+    PrecisionRule="true"
+    EntityAttrName="BookGrdStatus"
+    EntityUsage="viewSeafarerEO"
+    AliasName="BOOK_GRD_STATUS"/>
+  <ViewAttribute
+    Name="ConApvdBy"
+    PrecisionRule="true"
+    EntityAttrName="ConApvdBy"
+    EntityUsage="viewSeafarerEO"
+    AliasName="CON_APVD_BY"/>
+  <ViewAttribute
+    Name="ConApvdDate"
+    PrecisionRule="true"
+    EntityAttrName="ConApvdDate"
+    EntityUsage="viewSeafarerEO"
+    AliasName="CON_APVD_DATE"/>
+  <ViewAttribute
+    Name="ConGrdComnt"
+    PrecisionRule="true"
+    EntityAttrName="ConGrdComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="CON_GRD_COMNT">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="60"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ConGrdStatus"
+    PrecisionRule="true"
+    EntityAttrName="ConGrdStatus"
+    EntityUsage="viewSeafarerEO"
+    AliasName="CON_GRD_STATUS"/>
+  <ViewAttribute
+    Name="ConsentEdocId"
+    PrecisionRule="true"
+    EntityAttrName="ConsentEdocId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="CONSENT_EDOC_ID"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="viewSeafarerEO"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="viewSeafarerEO"
+    AliasName="CREATION_DATE"/>
+  <ViewAttribute
+    Name="DistinguishingMarks"
+    PrecisionRule="true"
+    EntityAttrName="DistinguishingMarks"
+    EntityUsage="viewSeafarerEO"
+    AliasName="DISTINGUISHING_MARKS">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EsiBatchId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="EsiBatchId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="ESI_BATCH_ID"/>
+  <ViewAttribute
+    Name="EsiId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="EsiId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="ESI_ID"/>
+  <ViewAttribute
+    Name="FirstName"
+    PrecisionRule="true"
+    EntityAttrName="FirstName"
+    EntityUsage="viewSeafarerEO"
+    AliasName="FIRST_NAME">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Gender"
+    PrecisionRule="true"
+    EntityAttrName="Gender"
+    EntityUsage="viewSeafarerEO"
+    AliasName="GENDER"/>
+  <ViewAttribute
+    Name="IdCardApprovedBy"
+    PrecisionRule="true"
+    EntityAttrName="IdCardApprovedBy"
+    EntityUsage="viewSeafarerEO"
+    AliasName="ID_CARD_APPROVED_BY"/>
+  <ViewAttribute
+    Name="IdCardApprovedDate"
+    PrecisionRule="true"
+    EntityAttrName="IdCardApprovedDate"
+    EntityUsage="viewSeafarerEO"
+    AliasName="ID_CARD_APPROVED_DATE"/>
+  <ViewAttribute
+    Name="IdCardGrdCmnt"
+    PrecisionRule="true"
+    EntityAttrName="IdCardGrdCmnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="ID_CARD_GRD_CMNT">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="60"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdCardGrdStatus"
+    PrecisionRule="true"
+    EntityAttrName="IdCardGrdStatus"
+    EntityUsage="viewSeafarerEO"
+    AliasName="ID_CARD_GRD_STATUS"/>
+  <ViewAttribute
+    Name="IdentityDocApprovedBy"
+    PrecisionRule="true"
+    EntityAttrName="IdentityDocApprovedBy"
+    EntityUsage="viewSeafarerEO"
+    AliasName="IDENTITY_DOC_APPROVED_BY"/>
+  <ViewAttribute
+    Name="IdentityDocApprovedDate"
+    PrecisionRule="true"
+    EntityAttrName="IdentityDocApprovedDate"
+    EntityUsage="viewSeafarerEO"
+    AliasName="IDENTITY_DOC_APPROVED_DATE"/>
+  <ViewAttribute
+    Name="IdentityDocEdocId"
+    PrecisionRule="true"
+    EntityAttrName="IdentityDocEdocId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="IDENTITY_DOC_EDOC_ID"/>
+  <ViewAttribute
+    Name="IdentityDocGrdComnt"
+    PrecisionRule="true"
+    EntityAttrName="IdentityDocGrdComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="IDENTITY_DOC_GRD_COMNT">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="60"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdentityDocGrdStatus"
+    PrecisionRule="true"
+    EntityAttrName="IdentityDocGrdStatus"
+    EntityUsage="viewSeafarerEO"
+    AliasName="IDENTITY_DOC_GRD_STATUS"/>
+  <ViewAttribute
+    Name="IssueType3"
+    PrecisionRule="true"
+    EntityAttrName="IssueType"
+    EntityUsage="viewSeafarerEO"
+    AliasName="ISSUE_TYPE"
+    LOVName="LOV_IssueType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IssueTypeIdCard"
+    PrecisionRule="true"
+    EntityAttrName="IssueTypeIdCard"
+    EntityUsage="viewSeafarerEO"
+    AliasName="ISSUE_TYPE_ID_CARD"/>
+  <ViewAttribute
+    Name="LastName"
+    PrecisionRule="true"
+    EntityAttrName="LastName"
+    EntityUsage="viewSeafarerEO"
+    AliasName="LAST_NAME">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="viewSeafarerEO"
+    AliasName="LAST_UPDATE_DATE"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateLogin"
+    EntityUsage="viewSeafarerEO"
+    AliasName="LAST_UPDATE_LOGIN"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="viewSeafarerEO"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="MiddleInitial"
+    PrecisionRule="true"
+    EntityAttrName="MiddleInitial"
+    EntityUsage="viewSeafarerEO"
+    AliasName="MIDDLE_INITIAL"/>
+  <ViewAttribute
+    Name="Nationality"
+    PrecisionRule="true"
+    EntityAttrName="Nationality"
+    EntityUsage="viewSeafarerEO"
+    AliasName="NATIONALITY"/>
+  <ViewAttribute
+    Name="Notes"
+    PrecisionRule="true"
+    EntityAttrName="Notes"
+    EntityUsage="viewSeafarerEO"
+    AliasName="NOTES"/>
+  <ViewAttribute
+    Name="PassportIssuingCountryCode"
+    PrecisionRule="true"
+    EntityAttrName="PassportIssuingCountryCode"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PASSPORT_ISSUING_COUNTRY_CODE"/>
+  <ViewAttribute
+    Name="PermanentAddress"
+    PrecisionRule="true"
+    EntityAttrName="PermanentAddress"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PERMANENT_ADDRESS">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="37"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PhotoApprovedBy"
+    PrecisionRule="true"
+    EntityAttrName="PhotoApprovedBy"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PHOTO_APPROVED_BY"/>
+  <ViewAttribute
+    Name="PhotoApprovedDate"
+    PrecisionRule="true"
+    EntityAttrName="PhotoApprovedDate"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PHOTO_APPROVED_DATE"/>
+  <ViewAttribute
+    Name="PhotoEdocId"
+    PrecisionRule="true"
+    EntityAttrName="PhotoEdocId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PHOTO_EDOC_ID"/>
+  <ViewAttribute
+    Name="PhotoGrdComnt"
+    PrecisionRule="true"
+    EntityAttrName="PhotoGrdComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PHOTO_GRD_COMNT">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="60"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PhotoGrdStatus"
+    PrecisionRule="true"
+    EntityAttrName="PhotoGrdStatus"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PHOTO_GRD_STATUS"/>
+  <ViewAttribute
+    Name="PhysicalApprovedBy"
+    PrecisionRule="true"
+    EntityAttrName="PhysicalApprovedBy"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PHYSICAL_APPROVED_BY"/>
+  <ViewAttribute
+    Name="PhysicalApprovedDate"
+    PrecisionRule="true"
+    EntityAttrName="PhysicalApprovedDate"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PHYSICAL_APPROVED_DATE"/>
+  <ViewAttribute
+    Name="PhysicalEdocId"
+    PrecisionRule="true"
+    EntityAttrName="PhysicalEdocId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PHYSICAL_EDOC_ID"/>
+  <ViewAttribute
+    Name="PhysicalGrdComnt"
+    PrecisionRule="true"
+    EntityAttrName="PhysicalGrdComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PHYSICAL_GRD_COMNT">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="60"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PhysicalGrdStatus"
+    PrecisionRule="true"
+    EntityAttrName="PhysicalGrdStatus"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PHYSICAL_GRD_STATUS"/>
+  <ViewAttribute
+    Name="PreviousBookDocumentId"
+    PrecisionRule="true"
+    EntityAttrName="PreviousBookDocumentId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PREVIOUS_BOOK_DOCUMENT_ID"/>
+  <ViewAttribute
+    Name="PreviousIdCardDocumentId"
+    PrecisionRule="true"
+    EntityAttrName="PreviousIdCardDocumentId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PREVIOUS_ID_CARD_DOCUMENT_ID"/>
+  <ViewAttribute
+    Name="ResidenceCountryCode"
+    PrecisionRule="true"
+    EntityAttrName="ResidenceCountryCode"
+    EntityUsage="viewSeafarerEO"
+    AliasName="RESIDENCE_COUNTRY_CODE"/>
+  <ViewAttribute
+    Name="SatApvdBy"
+    PrecisionRule="true"
+    EntityAttrName="SatApvdBy"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SAT_APVD_BY"/>
+  <ViewAttribute
+    Name="SatApvdDate"
+    PrecisionRule="true"
+    EntityAttrName="SatApvdDate"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SAT_APVD_DATE"/>
+  <ViewAttribute
+    Name="SatEdocId"
+    PrecisionRule="true"
+    EntityAttrName="SatEdocId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SAT_EDOC_ID"/>
+  <ViewAttribute
+    Name="SatGrdComnt"
+    PrecisionRule="true"
+    EntityAttrName="SatGrdComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SAT_GRD_COMNT">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="60"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SatGrdStatus"
+    PrecisionRule="true"
+    EntityAttrName="SatGrdStatus"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SAT_GRD_STATUS"/>
+  <ViewAttribute
+    Name="SeafarerApprovedBy"
+    PrecisionRule="true"
+    EntityAttrName="SeafarerApprovedBy"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEAFARER_APPROVED_BY"/>
+  <ViewAttribute
+    Name="SeafarerApprovedDate"
+    PrecisionRule="true"
+    EntityAttrName="SeafarerApprovedDate"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEAFARER_APPROVED_DATE"/>
+  <ViewAttribute
+    Name="SeafarerGrdComnt"
+    PrecisionRule="true"
+    EntityAttrName="SeafarerGrdComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEAFARER_GRD_COMNT">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="60"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SeafarerGrdStatus"
+    PrecisionRule="true"
+    EntityAttrName="SeafarerGrdStatus"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEAFARER_GRD_STATUS"/>
+  <ViewAttribute
+    Name="SeafarerId"
+    PrecisionRule="true"
+    EntityAttrName="SeafarerId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEAFARER_ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SeaserviceGrdComnt"
+    PrecisionRule="true"
+    EntityAttrName="SeaserviceGrdComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEASERVICE_GRD_COMNT">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="60"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SeaserviceGrdStatus"
+    PrecisionRule="true"
+    EntityAttrName="SeaserviceGrdStatus"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEASERVICE_GRD_STATUS"/>
+  <ViewAttribute
+    Name="SeaserviceTranscriptApvdBy"
+    PrecisionRule="true"
+    EntityAttrName="SeaserviceTranscriptApvdBy"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEASERVICE_TRANSCRIPT_APVD_BY"/>
+  <ViewAttribute
+    Name="SeaserviceTranscriptApvdDt"
+    PrecisionRule="true"
+    EntityAttrName="SeaserviceTranscriptApvdDt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEASERVICE_TRANSCRIPT_APVD_DT"/>
+  <ViewAttribute
+    Name="SeaserviceTranscriptEdocId"
+    PrecisionRule="true"
+    EntityAttrName="SeaserviceTranscriptEdocId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEASERVICE_TRANSCRIPT_EDOC_ID"/>
+  <ViewAttribute
+    Name="Status"
+    PrecisionRule="true"
+    EntityAttrName="Status"
+    EntityUsage="viewSeafarerEO"
+    AliasName="STATUS">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VesselPk"
+    PrecisionRule="true"
+    EntityAttrName="VesselPk"
+    EntityUsage="viewSeafarerEO"
+    AliasName="VESSEL_PK"/>
+  <ViewAttribute
+    Name="WcCityListId"
+    PrecisionRule="true"
+    EntityAttrName="WcCityListId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="WC_CITY_LIST_ID"/>
+  <ViewAttribute
+    Name="transNationality"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_transNationality">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+        <PAYLOADHINT
+          Value="Show"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranPassportCntry"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_tranPassportCntry">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranResidenceCntry"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_tranResidenceCntry">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranVesselNo"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.Integer"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranVesselName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InternalEdocId"
+    PrecisionRule="true"
+    EntityAttrName="InternalEdocId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="INTERNAL_EDOC_ID"/>
+  <ViewAttribute
+    Name="tranCity"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_tranCity">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DataVerified3"
+    PrecisionRule="true"
+    EntityAttrName="DataVerified"
+    EntityUsage="viewSeafarerEO"
+    AliasName="DATA_VERIFIED"
+    LOVName="LOV_DataVerified">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransVesselRegDate"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="VIEW_ATTR"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="TransVesselType"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransVesselGrossTons"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TransVesselPropPower"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TransVesselStatus"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransVesselEngineType"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransPreviousBook"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"
+    LOVName="LOV_TransPreviousBook">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransVesselOfficialNumber"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DataVerifiedInfo"
+    PrecisionRule="true"
+    EntityAttrName="DataVerifiedInfo"
+    EntityUsage="viewSeafarerEO"
+    AliasName="DATA_VERIFIED_INFO"
+    LOVName="LOV_DataVerifiedInfo">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransIsPhotoHistoryAvailable"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransIsDocsHistoryAvailable"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransSeafarerStatus"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="SeafarerWfStatus"
+    PrecisionRule="true"
+    EntityAttrName="SeafarerWfStatus"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEAFARER_WF_STATUS"/>
+  <ViewAttribute
+    Name="AdditionalDocEdocId"
+    PrecisionRule="true"
+    EntityAttrName="AdditionalDocEdocId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="ADDITIONAL_DOC_EDOC_ID"/>
+  <ViewAttribute
+    Name="PhotoGrdHoldReason"
+    PrecisionRule="true"
+    EntityAttrName="PhotoGrdHoldReason"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PHOTO_GRD_HOLD_REASON"
+    LOVName="LOV_PhotoGrdHoldReason">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AffidavitGrdHoldReason"
+    PrecisionRule="true"
+    EntityAttrName="AffidavitGrdHoldReason"
+    EntityUsage="viewSeafarerEO"
+    AliasName="AFFIDAVIT_GRD_HOLD_REASON"
+    LOVName="LOV_AffidavitGrdHoldReason">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ApplicationGrdHoldReason"
+    PrecisionRule="true"
+    EntityAttrName="ApplicationGrdHoldReason"
+    EntityUsage="viewSeafarerEO"
+    AliasName="APPLICATION_GRD_HOLD_REASON"
+    LOVName="LOV_ApplicationGrdHoldReason">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BookGrdHoldReason"
+    PrecisionRule="true"
+    EntityAttrName="BookGrdHoldReason"
+    EntityUsage="viewSeafarerEO"
+    AliasName="BOOK_GRD_HOLD_REASON"
+    LOVName="LOV_BookGrdHoldReason">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ConGrdHoldReason"
+    PrecisionRule="true"
+    EntityAttrName="ConGrdHoldReason"
+    EntityUsage="viewSeafarerEO"
+    AliasName="CON_GRD_HOLD_REASON"
+    LOVName="LOV_ConGrdHoldReason">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdCardGrdHoldReason"
+    PrecisionRule="true"
+    EntityAttrName="IdCardGrdHoldReason"
+    EntityUsage="viewSeafarerEO"
+    AliasName="ID_CARD_GRD_HOLD_REASON"
+    LOVName="LOV_IdCardGrdHoldReason">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SeafarerGrdHoldReason"
+    PrecisionRule="true"
+    EntityAttrName="SeafarerGrdHoldReason"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEAFARER_GRD_HOLD_REASON"/>
+  <ViewAttribute
+    Name="SatGrdHoldReason"
+    PrecisionRule="true"
+    EntityAttrName="SatGrdHoldReason"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SAT_GRD_HOLD_REASON"
+    LOVName="LOV_SatGrdHoldReason">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdentityDocGrdHoldReason"
+    PrecisionRule="true"
+    EntityAttrName="IdentityDocGrdHoldReason"
+    EntityUsage="viewSeafarerEO"
+    AliasName="IDENTITY_DOC_GRD_HOLD_REASON"
+    LOVName="LOV_IdentityDocGrdHoldReason">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PhysicalGrdHoldReason"
+    PrecisionRule="true"
+    EntityAttrName="PhysicalGrdHoldReason"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PHYSICAL_GRD_HOLD_REASON"
+    LOVName="LOV_PhysicalGrdHoldReason">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SeaserviceGrdHoldReason"
+    PrecisionRule="true"
+    EntityAttrName="SeaserviceGrdHoldReason"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEASERVICE_GRD_HOLD_REASON"
+    LOVName="LOV_SeaserviceGrdHoldReason">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ApplicationVerified"
+    PrecisionRule="true"
+    EntityAttrName="ApplicationVerified"
+    EntityUsage="viewSeafarerEO"
+    AliasName="APPLICATION_VERIFIED"
+    LOVName="LOV_ApplicationVerified">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AffidavitVerified"
+    PrecisionRule="true"
+    EntityAttrName="AffidavitVerified"
+    EntityUsage="viewSeafarerEO"
+    AliasName="AFFIDAVIT_VERIFIED"
+    LOVName="LOV_AffidavitVerified">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BookVerified"
+    PrecisionRule="true"
+    EntityAttrName="BookVerified"
+    EntityUsage="viewSeafarerEO"
+    AliasName="BOOK_VERIFIED"
+    LOVName="LOV_BookVerified">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ConVerified"
+    PrecisionRule="true"
+    EntityAttrName="ConVerified"
+    EntityUsage="viewSeafarerEO"
+    AliasName="CON_VERIFIED"
+    LOVName="LOV_ConVerified">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdCardVerified"
+    PrecisionRule="true"
+    EntityAttrName="IdCardVerified"
+    EntityUsage="viewSeafarerEO"
+    AliasName="ID_CARD_VERIFIED"
+    LOVName="LOV_IdCardVerified">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IdentityDocVerified"
+    PrecisionRule="true"
+    EntityAttrName="IdentityDocVerified"
+    EntityUsage="viewSeafarerEO"
+    AliasName="IDENTITY_DOC_VERIFIED"
+    LOVName="LOV_IdentityDocVerified">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PhotoVerified"
+    PrecisionRule="true"
+    EntityAttrName="PhotoVerified"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PHOTO_VERIFIED"
+    LOVName="LOV_PhotoVerified">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PhysicalVerified"
+    PrecisionRule="true"
+    EntityAttrName="PhysicalVerified"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PHYSICAL_VERIFIED"
+    LOVName="LOV_PhysicalVerified">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SatVerified"
+    PrecisionRule="true"
+    EntityAttrName="SatVerified"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SAT_VERIFIED"
+    LOVName="LOV_SatVerified">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SeafarerVerified"
+    PrecisionRule="true"
+    EntityAttrName="SeafarerVerified"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEAFARER_VERIFIED"/>
+  <ViewAttribute
+    Name="SeaserviceVerified"
+    PrecisionRule="true"
+    EntityAttrName="SeaserviceVerified"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEASERVICE_VERIFIED"
+    LOVName="LOV_SeaserviceVerified">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ConVerifiedComnt"
+    PrecisionRule="true"
+    EntityAttrName="ConVerifiedComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="CON_VERIFIED_COMNT"/>
+  <ViewAttribute
+    Name="BookVerifiedComnt"
+    PrecisionRule="true"
+    EntityAttrName="BookVerifiedComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="BOOK_VERIFIED_COMNT"/>
+  <ViewAttribute
+    Name="IdCardVerifiedComnt"
+    PrecisionRule="true"
+    EntityAttrName="IdCardVerifiedComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="ID_CARD_VERIFIED_COMNT"/>
+  <ViewAttribute
+    Name="ApplicationVerifiedComnt"
+    PrecisionRule="true"
+    EntityAttrName="ApplicationVerifiedComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="APPLICATION_VERIFIED_COMNT"/>
+  <ViewAttribute
+    Name="AffidavitVerifiedComnt"
+    PrecisionRule="true"
+    EntityAttrName="AffidavitVerifiedComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="AFFIDAVIT_VERIFIED_COMNT"/>
+  <ViewAttribute
+    Name="IdentityDocVerifiedComnt"
+    PrecisionRule="true"
+    EntityAttrName="IdentityDocVerifiedComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="IDENTITY_DOC_VERIFIED_COMNT"/>
+  <ViewAttribute
+    Name="PhotoVerifiedComnt"
+    PrecisionRule="true"
+    EntityAttrName="PhotoVerifiedComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PHOTO_VERIFIED_COMNT"/>
+  <ViewAttribute
+    Name="PhysicalVerifiedComnt"
+    PrecisionRule="true"
+    EntityAttrName="PhysicalVerifiedComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="PHYSICAL_VERIFIED_COMNT"/>
+  <ViewAttribute
+    Name="SatVerifiedComnt"
+    PrecisionRule="true"
+    EntityAttrName="SatVerifiedComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SAT_VERIFIED_COMNT"/>
+  <ViewAttribute
+    Name="SeaserviceVerifiedComnt"
+    PrecisionRule="true"
+    EntityAttrName="SeaserviceVerifiedComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEASERVICE_VERIFIED_COMNT"/>
+  <ViewAttribute
+    Name="DataVerifiedInfoComnt"
+    PrecisionRule="true"
+    EntityAttrName="DataVerifiedInfoComnt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="DATA_VERIFIED_INFO_COMNT"/>
+  <ViewAttribute
+    Name="CraApprovalFlag"
+    PrecisionRule="true"
+    EntityAttrName="CraApprovalFlag"
+    EntityUsage="viewSeafarerEO"
+    AliasName="CRA_APPROVAL_FLAG"/>
+  <ViewAttribute
+    Name="BookReplacementIssueType"
+    PrecisionRule="true"
+    EntityAttrName="BookReplacementIssueType"
+    EntityUsage="viewSeafarerEO"
+    AliasName="BOOK_REPLACEMENT_ISSUE_TYPE"
+    LOVName="LOV_BookReplacementIssueType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransCraDoc"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransBatchStatus"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransOcCorrected"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransSqcCorrected"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransApproveAll"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransVesselPropulsionCode"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransCompCode"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="BookIssueTypeUpd"
+    PrecisionRule="true"
+    EntityAttrName="BookIssueTypeUpd"
+    EntityUsage="viewSeafarerEO"
+    AliasName="BOOK_ISSUE_TYPE_UPD"/>
+  <ViewAttribute
+    Name="BookIssueTypeUpdDt"
+    PrecisionRule="true"
+    EntityAttrName="BookIssueTypeUpdDt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="BOOK_ISSUE_TYPE_UPD_DT"/>
+  <ViewAttribute
+    Name="IdcardIssueTypeUpd"
+    PrecisionRule="true"
+    EntityAttrName="IdcardIssueTypeUpd"
+    EntityUsage="viewSeafarerEO"
+    AliasName="IDCARD_ISSUE_TYPE_UPD"/>
+  <ViewAttribute
+    Name="IdcardIssueTypeUpdDt"
+    PrecisionRule="true"
+    EntityAttrName="IdcardIssueTypeUpdDt"
+    EntityUsage="viewSeafarerEO"
+    AliasName="IDCARD_ISSUE_TYPE_UPD_DT"/>
+  <ViewAttribute
+    Name="TransTcStatus"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransTcStatusDate"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransUpdateSeafarerId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TransConcRequestId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TransColorCode"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="AckConcReqId"
+    PrecisionRule="true"
+    EntityAttrName="AckConcReqId"
+    EntityUsage="viewSeafarerEO"
+    AliasName="ACK_CONC_REQ_ID"/>
+  <ViewAttribute
+    Name="TransAckColorCode"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="ReplacementIssueType"
+    PrecisionRule="true"
+    EntityAttrName="ReplacementIssueType"
+    EntityUsage="viewSeafarerEO"
+    AliasName="REPLACEMENT_ISSUE_TYPE"
+    LOVName="LOV_ReplacementIssueType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransPreviousIdCard"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"
+    LOVName="LOV_TransPreviousIdCard">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SeafarerVldtFlag"
+    PrecisionRule="true"
+    EntityAttrName="SeafarerVldtFlag"
+    EntityUsage="viewSeafarerEO"
+    AliasName="SEAFARER_VLDT_FLAG"/>
+  <ViewAttribute
+    Name="TransUploadedDocsCorrected"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransSaveLineOc"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransSaveLineSqc"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="CorrectedFlag"
+    PrecisionRule="true"
+    EntityAttrName="CorrectedFlag"
+    EntityUsage="viewSeafarerEO"
+    AliasName="CORRECTED_FLAG"/>
+  <ViewAttribute
+    Name="ApplicationCorrectedFlag"
+    PrecisionRule="true"
+    EntityAttrName="ApplicationCorrectedFlag"
+    EntityUsage="viewSeafarerEO"
+    AliasName="APPLICATION_CORRECTED_FLAG"/>
+  <ViewLinkAccessor
+    Name="viewSeafarerDocsOcVO"
+    ViewLink="com.rmi.tradecompapproval.adfbc.views.links.RmiSeafarerDocsOcLogicalLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="viewSeafarerDocsSqcVO"
+    ViewLink="com.rmi.tradecompapproval.adfbc.views.links.RmiSeafarerDocsLogicalLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="SicdSeafarerVO"
+    ViewLink="com.rmi.tradecompapproval.adfbc.views.links.SicdSeafarerLogicalLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="ViewSeafarerDocsBooksVO"
+    ViewLink="com.rmi.tradecompapproval.adfbc.views.links.RmiSeafarerDocsBooksLogicalLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+  <DeclarativeWhereClause
+    Name="DeclarativeWhereClause">
+    <ViewCriteria
+      Name="viewSeafarerVOWhereCriteria"
+      ViewObjectName="com.rmi.tradecompapproval.adfbc.views.RmiSeafarerView"
+      Conjunction="AND"
+      Mode="3">
+      <ViewCriteriaRow
+        Name="viewSeafarerVOWhereCriteria_row_0"
+        UpperColumns="1">
+        <ViewCriteriaItem
+          Name="EsiBatchId"
+          ViewAttribute="EsiBatchId"
+          Operator="="
+          Conjunction="AND"
+          Value=":pEsiBatchId"
+          GenerateIsNullClauseForBindVars="false"
+          IsBindVarValue="true"
+          Required="Optional"/>
+      </ViewCriteriaRow>
+    </ViewCriteria>
+  </DeclarativeWhereClause>
+  <SortCriteria>
+    <Sort
+      Attribute="EsiId"/>
+  </SortCriteria>
+</ViewObject>

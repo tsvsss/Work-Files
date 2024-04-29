@@ -1,0 +1,2126 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+xmlns:c="http://java.sun.com/jsp/jstl/core" 
+ xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelHeader text="Entity Case" id="ph1">
+    <f:facet name="context">
+      <af:outputText value="#{bindings.CaseId.inputValue}" shortDesc="#{bindings.CaseId.hints.tooltip}" id="ot84"/>
+    </f:facet>
+    <f:facet name="menuBar">
+      <af:menuBar id="mb1">
+        <af:menu text="Tools" id="m1">
+           <af:commandMenuItem text="Statusboard" id="cmsb"  action="stb"/>
+          <!--
+          <af:commandMenuItem text="Individual Request" id="cmi9" action="#{backingBeanScope.RequestBacking.goIndividualRequest}">
+            <af:setPropertyListener type="action" to="#{pageFlowScope.requestType}" from="#{'INDIVIDUAL'}"/>
+			<af:setPropertyListener to="#{pageFlowScope.requestId}" type="action" from="#{''}"/>
+          </af:commandMenuItem>
+          <af:commandMenuItem text="View All Screening Request Changes" id="cmi1"/>
+          <af:commandMenuItem text="Data Privacy Consent" id="cmi2"/>
+          <af:commandMenuItem text="View OFAC List (PDF)" id="cmi3"/>
+          <af:commandMenuItem text="View OFAC List Matches" id="cmi4"/>
+          <af:commandMenuItem text="View Cross References" id="cmi5"/>
+          <af:commandMenuItem text="Synchronize Alias Matches" id="cmi6"/>
+          <af:commandMenuItem text="Synchronize Matches" id="cmi7"/>
+          <af:commandMenuItem text="View History" id="cmi8"/>
+          -->
+        </af:menu>
+      </af:menuBar>
+    </f:facet>
+    <f:facet name="toolbar"/>
+    <f:facet name="legend"/>
+    <f:facet name="info"/>
+    <af:panelSplitter id="ps1" splitterPosition="400" styleClass="CustomizedBorderSplitter">
+      <f:facet name="first">
+        <af:panelGroupLayout id="pgl2" layout="scroll">
+          <af:panelHeader text="Case Details" id="ph8" visible="#{bindings.CaseId.inputValue != null}">
+            <f:facet name="context"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar">
+              <af:toolbar id="t6">
+                <af:button action="#{backingBeanScope.RequestBacking.execSelectForUpdate}" text="Acquire Lock" id="b2"
+                           visible="false"/>
+                <!--af:button actionListener="#{bindings.setLock.execute}" text="Acquire Lock"
+                                 disabled="#{!bindings.setLock.enabled}" id="b2" visible="true"/-->
+                <af:button text="Actions" id="bE1"
+                           actionListener="#{backingBeanScope.RequestBacking.editShowCasePopup}">
+                 <f:attribute name="itrName" value="XwrlResponseEntityColumnsView1Iterator"/>
+                 </af:button>          
+                <af:button text="Case Notes" id="casenotesb6"
+                           destination="/#{sessionScope.pFacesServlet}/CaseNote?requestId=#{bindings.Id.inputValue}&amp;path=#{bindings.Path.inputValue}"
+                           disabled="#{bindings.CaseId.inputValue == null}" targetFrame="_blank"/>
+                <!--af:button text="Case Documents" id="b7" disabled="#{bindings.CaseId.inputValue == null}"
+                                 action="individualDocument">
+                        <af:setPropertyListener from="#{'CASE'}" to="#{pageFlowScope.docType}" type="action"/>
+                      </af:button-->
+                <af:button text="Case Documents" id="b7" disabled="#{bindings.CaseId.inputValue == null}"
+                           targetFrame="_blank"
+                           destination="/#{sessionScope.pFacesServlet}/UploadDocument?requestId=#{bindings.Id.inputValue}&amp;path=#{bindings.Path.inputValue}"/>
+              </af:toolbar>
+            </f:facet>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelGroupLayout id="pgl6" layout="horizontal" halign="center">
+              <af:button action="#{backingBeanScope.RequestBacking.unlockRequestLock}" text="UnLock Record"
+                         rendered="#{pageFlowScope.recordLockUser == 'Y'}" id="bunl"/>
+              <!--T20200602.0032 - Adding new Popup on OWS TradeCompliance Statusboar... (IRI)-->
+              <af:spacer width="10" height="10" id="s3"/>
+              <af:button text="Update Master" id="b10" rendered="false">
+                <af:showPopupBehavior popupId="p3"/>
+              </af:button>
+              <af:spacer width="10" height="10" id="s4"/>
+              <!-- T20200717.0032 - OWS TC - Access 'View History' Information from Re... (IRI) -->
+              <af:button text="View History" id="b6">
+                <af:showPopupBehavior popupId="p5"/>
+              </af:button>
+            </af:panelGroupLayout>
+            <af:panelFormLayout id="pfl4" partialTriggers="bE1" labelWidth="135">
+              <af:inputText value="#{bindings.CaseId.inputValue}" label="#{bindings.CaseId.hints.label}"
+                            required="#{bindings.CaseId.hints.mandatory}" readOnly="true"
+                            columns="#{bindings.CaseId.hints.displayWidth}"
+                            maximumLength="#{bindings.CaseId.hints.precision}"
+                            shortDesc="#{bindings.CaseId.hints.tooltip}" id="it110" rendered="false">
+                <f:validator binding="#{bindings.CaseId.validator}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.BatchId.inputValue}" label="#{bindings.BatchId.hints.label}"
+                            required="#{bindings.BatchId.hints.mandatory}" readOnly="true"
+                            columns="#{bindings.BatchId.hints.displayWidth}"
+                            maximumLength="#{bindings.BatchId.hints.precision}"
+                            shortDesc="#{bindings.BatchId.hints.tooltip}" id="it88">
+                <f:validator binding="#{bindings.BatchId.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.BatchId.format}"/>
+              </af:inputText>
+                <af:panelLabelAndMessage label="Legacy" id="plam-legacy">
+                <af:outputText value="#{backingBeanScope.RequestBacking.legacy}" id="ot-legacy"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="Known Party" id="plam5">
+                <af:outputText value="#{backingBeanScope.RequestBacking.knownPartyFlag}" id="ot112"/>
+              </af:panelLabelAndMessage>
+              <!--T20200629.0034 - OWS TC - Display ESR User Details in Statusboard (IRI)-->
+              <af:panelLabelAndMessage label="#{bindings.EsrUserId.hints.label}" id="plam2"
+                                       rendered="#{bindings.SourceTable.inputValue eq 'ESR_REQUEST_USER_DETAILS'}">
+                <af:outputText value="#{bindings.EsrUserId.inputValue}" shortDesc="#{bindings.EsrUserId.hints.tooltip}"
+                               id="ot37"/>
+              </af:panelLabelAndMessage>
+              <af:panelLabelAndMessage label="#{bindings.EsrUserEmailAddress.hints.label}" id="plam3"
+                                       rendered="#{bindings.SourceTable.inputValue eq 'ESR_REQUEST_USER_DETAILS'}">
+                <af:outputText value="#{bindings.EsrUserEmailAddress.inputValue}"
+                               shortDesc="#{bindings.EsrUserEmailAddress.hints.tooltip}" id="ot61"/>
+              </af:panelLabelAndMessage>
+              <af:inputText value="#{bindings.Corpnumber.inputValue}" label="#{bindings.Corpnumber.hints.label}"
+                            required="#{bindings.Corpnumber.hints.mandatory}" readOnly="true"
+                            columns="#{bindings.Corpnumber.hints.displayWidth}"
+                            maximumLength="#{bindings.Corpnumber.hints.precision}"
+                            shortDesc="#{bindings.Corpnumber.hints.tooltip}" id="it100">
+                <f:validator binding="#{bindings.Corpnumber.validator}"/>
+              </af:inputText>
+              <af:inputText value="#{bindings.NameScreened.inputValue}" label="#{bindings.NameScreened.hints.label}"
+                            required="#{bindings.NameScreened.hints.mandatory}" readOnly="true"
+                            columns="#{bindings.NameScreened.hints.displayWidth}"
+                            maximumLength="#{bindings.NameScreened.hints.precision}"
+                            shortDesc="#{bindings.NameScreened.hints.tooltip}" id="it111">
+                <f:validator binding="#{bindings.NameScreened.validator}"/>
+              </af:inputText>
+              <af:panelLabelAndMessage label="Alias Names" id="plam1">
+                <af:outputText value="#{backingBeanScope.RequestBacking.aliasNames}" id="ot18"
+                               inlineStyle="font-size: 10px; color: black;"/>
+              </af:panelLabelAndMessage>
+              <af:inputText value="#{bindings.DateOfBirth.inputValue}" label="#{bindings.DateOfBirth.hints.label}"
+                            required="#{bindings.DateOfBirth.hints.mandatory}" readOnly="true"
+                            columns="#{bindings.DateOfBirth.hints.displayWidth}"
+                            maximumLength="#{bindings.DateOfBirth.hints.precision}"
+                            shortDesc="#{bindings.DateOfBirth.hints.tooltip}" id="it112" rendered="false">
+                <f:validator binding="#{bindings.DateOfBirth.validator}"/>
+              </af:inputText>
+              <af:selectOneChoice value="#{bindings.CountryOfRegistration.inputValue}"
+                                  label="#{bindings.CountryOfRegistration.label}" readOnly="true"
+                                  required="#{bindings.CountryOfRegistration.hints.mandatory}"
+                                  shortDesc="#{bindings.CountryOfRegistration.hints.tooltip}" id="soc54">
+                <f:selectItems value="#{bindings.CountryOfRegistration.items}" id="si47"/>
+                <f:validator binding="#{bindings.CountryOfRegistration.validator}"/>
+              </af:selectOneChoice>
+              <af:selectOneChoice value="#{bindings.CountryOfResidence1.inputValue}"
+                                  label="#{bindings.CountryOfResidence1.label}"
+                                  required="#{bindings.CountryOfResidence1.hints.mandatory}"
+                                  shortDesc="#{bindings.CountryOfResidence1.hints.tooltip}" readOnly="true" id="soc43"
+                                  rendered="true">
+                <f:selectItems value="#{bindings.CountryOfResidence1.items}" id="si43"/>
+                <f:validator binding="#{bindings.CountryOfResidence1.validator}"/>
+              </af:selectOneChoice>
+              <af:selectOneChoice value="#{bindings.CityOfResidenceId1.inputValue}"
+                                  label="#{bindings.CityOfResidenceId1.label}"
+                                  required="#{bindings.CityOfResidenceId1.hints.mandatory}"
+                                  shortDesc="#{bindings.CityOfResidenceId1.hints.tooltip}" readOnly="true" id="soc44"
+                                  rendered="true">
+                <f:selectItems value="#{bindings.CityOfResidenceId1.items}" id="si44"/>
+                <f:validator binding="#{bindings.CityOfResidenceId1.validator}"/>
+              </af:selectOneChoice>
+              <af:inputText value="#{bindings.SubdivisionCityOfResidence.inputValue}"
+                            label="#{bindings.SubdivisionCityOfResidence.hints.label}"
+                            required="#{bindings.SubdivisionCityOfResidence.hints.mandatory}" readOnly="true"
+                            columns="#{bindings.SubdivisionCityOfResidence.hints.displayWidth}"
+                            maximumLength="#{bindings.SubdivisionCityOfResidence.hints.precision}"
+                            shortDesc="#{bindings.SubdivisionCityOfResidence.hints.tooltip}" id="it115" rendered="true">
+                <f:validator binding="#{bindings.SubdivisionCityOfResidence.validator}"/>
+              </af:inputText>
+              <!-- T20200715.0025 - OWS Trade Compliance - Ukraine/Russia Address (IRI) -->
+              <!-- T20200724.0027 - Permanent address disappears ANDREY BURENKO FIN: 1... (IRI) -->
+              <af:inputText value="#{bindings.PermanentAddress.inputValue}"
+                            label="#{bindings.PermanentAddress.hints.label}"
+                            required="#{bindings.PermanentAddress.hints.mandatory}"
+                            columns="#{bindings.PermanentAddress.hints.displayWidth}"
+                            maximumLength="#{bindings.PermanentAddress.hints.precision}"
+                            shortDesc="#{bindings.PermanentAddress.hints.tooltip}" id="it105" readOnly="true">
+                <f:validator binding="#{bindings.PermanentAddress.validator}"/>
+              </af:inputText>
+              <af:selectOneChoice value="#{bindings.CountryOfOperation.inputValue}"
+                                  label="#{bindings.CountryOfOperation.label}" readOnly="true"
+                                  required="#{bindings.CountryOfOperation.hints.mandatory}"
+                                  shortDesc="#{bindings.CountryOfOperation.hints.tooltip}" id="soc55">
+                <f:selectItems value="#{bindings.CountryOfOperation.items}" id="si48"/>
+                <f:validator binding="#{bindings.CountryOfOperation.validator}"/>
+              </af:selectOneChoice>
+              <af:inputText value="#{bindings.ImoNumber.inputValue}" label="#{bindings.ImoNumber.hints.label}"
+                            required="#{bindings.ImoNumber.hints.mandatory}" readOnly="true"
+                            columns="#{bindings.ImoNumber.hints.displayWidth}"
+                            maximumLength="#{bindings.ImoNumber.hints.precision}"
+                            shortDesc="#{bindings.ImoNumber.hints.tooltip}" id="it113">
+                <f:validator binding="#{bindings.ImoNumber.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.ImoNumber.format}"/>
+              </af:inputText>
+              <af:selectOneChoice value="#{bindings.VesselIndicator.inputValue}"
+                                  label="#{bindings.VesselIndicator.label}"
+                                  required="#{bindings.VesselIndicator.hints.mandatory}"
+                                  shortDesc="#{bindings.VesselIndicator.hints.tooltip}" readOnly="true" id="soc31">
+                <f:selectItems value="#{bindings.VesselIndicator.items}" id="si31"/>
+                <f:validator binding="#{bindings.VesselIndicator.validator}"/>
+              </af:selectOneChoice>
+              <af:selectOneChoice value="#{bindings.CaseState.inputValue}" label="#{bindings.CaseState.label}"
+                                  required="#{bindings.CaseState.hints.mandatory}"
+                                  shortDesc="#{bindings.CaseState.hints.tooltip}" readOnly="true" id="soc33">
+                <f:selectItems value="#{bindings.CaseState.items}" id="si33"/>
+                <f:validator binding="#{bindings.CaseState.validator}"/>
+              </af:selectOneChoice>
+              <af:selectOneChoice value="#{bindings.CaseWorkflow.inputValue}" label="#{bindings.CaseWorkflow.label}"
+                                  required="#{bindings.CaseWorkflow.hints.mandatory}"
+                                  shortDesc="#{bindings.CaseWorkflow.hints.tooltip}" readOnly="true" id="soc34">
+                <f:selectItems value="#{bindings.CaseWorkflow.items}" id="si34"/>
+                <f:validator binding="#{bindings.CaseWorkflow.validator}"/>
+              </af:selectOneChoice>
+              <af:selectOneChoice value="#{bindings.CaseStatus.inputValue}" label="#{bindings.CaseStatus.label}"
+                                  required="#{bindings.CaseStatus.hints.mandatory}"
+                                  shortDesc="#{bindings.CaseStatus.hints.tooltip}" readOnly="true" id="soc35">
+                <f:selectItems value="#{bindings.CaseStatus.items}" id="si35"/>
+                <f:validator binding="#{bindings.CaseStatus.validator}"/>
+              </af:selectOneChoice>
+              <af:selectOneChoice value="#{bindings.RiskLevel.inputValue}" label="#{bindings.RiskLevel.label}"
+                                  required="#{bindings.RiskLevel.hints.mandatory}"
+                                  shortDesc="#{bindings.RiskLevel.hints.tooltip}" readOnly="true" id="soc37">
+                <f:selectItems value="#{bindings.RiskLevel.items}" id="si37"/>
+                <f:validator binding="#{bindings.RiskLevel.validator}"/>
+              </af:selectOneChoice>
+              <af:selectOneChoice value="#{bindings.Department.inputValue}" label="#{bindings.Department.label}"
+                                  required="#{bindings.Department.hints.mandatory}"
+                                  shortDesc="#{bindings.Department.hints.tooltip}" readOnly="true" id="soc39">
+                <f:selectItems value="#{bindings.Department.items}" id="si39"/>
+                <f:validator binding="#{bindings.Department.validator}"/>
+              </af:selectOneChoice>
+              <af:inputText value="#{bindings.ProvisionalRequest.inputValue}"
+                            label="#{bindings.ProvisionalRequest.hints.label}"
+                            required="#{bindings.ProvisionalRequest.hints.mandatory}"
+                            columns="#{bindings.ProvisionalRequest.hints.displayWidth}"
+                            maximumLength="#{bindings.ProvisionalRequest.hints.precision}"
+                            shortDesc="#{bindings.ProvisionalRequest.hints.tooltip}" id="it1" readOnly="true">
+                <f:validator binding="#{bindings.ProvisionalRequest.validator}"/>
+              </af:inputText>
+              <af:selectOneChoice value="#{bindings.Office.inputValue}" label="#{bindings.Office.label}"
+                                  required="#{bindings.Office.hints.mandatory}"
+                                  shortDesc="#{bindings.Office.hints.tooltip}" readOnly="true" id="soc40">
+                <f:selectItems value="#{bindings.Office.items}" id="si40"/>
+                <f:validator binding="#{bindings.Office.validator}"/>
+              </af:selectOneChoice>
+              <af:selectOneChoice value="#{bindings.Priority.inputValue}" label="#{bindings.Priority.label}"
+                                  required="#{bindings.Priority.hints.mandatory}"
+                                  shortDesc="#{bindings.Priority.hints.tooltip}" readOnly="true" id="soc36">
+                <f:selectItems value="#{bindings.Priority.items}" id="si36"/>
+                <f:validator binding="#{bindings.Priority.validator}"/>
+              </af:selectOneChoice>
+              <af:selectOneChoice value="#{bindings.Doctype.inputValue}" label="#{bindings.Doctype.label}"
+                                  required="#{bindings.Doctype.hints.mandatory}"
+                                  shortDesc="#{bindings.Doctype.hints.tooltip}" id="soc62" readOnly="true">
+                <f:selectItems value="#{bindings.Doctype.items}" id="si61"/>
+                <f:validator binding="#{bindings.Doctype.validator}"/>
+              </af:selectOneChoice>
+              <af:selectOneChoice value="#{bindings.DocumentType1.inputValue}" label="#{bindings.DocumentType1.label}"
+                                  required="#{bindings.DocumentType1.hints.mandatory}"
+                                  shortDesc="#{bindings.DocumentType1.hints.tooltip}" readOnly="true" id="soc41"
+                                  rendered="false">
+                <f:selectItems value="#{bindings.DocumentType1.items}" id="si41"/>
+                <f:validator binding="#{bindings.DocumentType1.validator}"/>
+              </af:selectOneChoice>
+              <af:selectOneChoice value="#{bindings.RejectionReason.inputValue}"
+                                  label="#{bindings.RejectionReason.label}"
+                                  visible="#{bindings.RejectionReason.inputValue!='OTHR'}"
+                                  required="#{bindings.RejectionReason.hints.mandatory}"
+                                  shortDesc="#{bindings.RejectionReason.hints.tooltip}" readOnly="true" id="soc38">
+                <f:selectItems value="#{bindings.RejectionReason.items}" id="si38"/>
+                <f:validator binding="#{bindings.RejectionReason.validator}"/>
+              </af:selectOneChoice>
+              <af:inputText value="#{bindings.RejectionReasonOthr.inputValue}" label="#{bindings.RejectionReason.label}"
+                            readOnly="true" visible="#{bindings.RejectionReason.inputValue=='OTHR'}"
+                            shortDesc="#{bindings.RejectionReasonOthr.hints.tooltip}" id="ot71"/>
+              <af:inputText value="#{bindings.Matches.inputValue}" label="#{bindings.Matches.hints.label}"
+                            required="#{bindings.Matches.hints.mandatory}" readOnly="true"
+                            columns="#{bindings.Matches.hints.displayWidth}"
+                            maximumLength="#{bindings.Matches.hints.precision}"
+                            shortDesc="#{bindings.Matches.hints.tooltip}" id="it114">
+                <f:validator binding="#{bindings.Matches.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.Matches.format}"/>
+              </af:inputText>
+              <af:selectOneChoice value="#{bindings.AssignedTo1.inputValue}" label="#{bindings.AssignedTo1.label}"
+                                  required="#{bindings.AssignedTo1.hints.mandatory}"
+                                  shortDesc="#{bindings.AssignedTo1.hints.tooltip}" readOnly="true" id="soc42">
+                <f:selectItems value="#{bindings.AssignedTo1.items}" id="si42"/>
+                <f:validator binding="#{bindings.AssignedTo1.validator}"/>
+              </af:selectOneChoice>
+              <af:inputDate value="#{bindings.ClosedDate.inputValue}" readOnly="true"
+                            label="#{bindings.ClosedDate.hints.label}" required="#{bindings.ClosedDate.hints.mandatory}"
+                            columns="#{bindings.ClosedDate.hints.displayWidth}"
+                            shortDesc="#{bindings.ClosedDate.hints.tooltip}" id="id5">
+                <f:validator binding="#{bindings.ClosedDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.ClosedDate.format}"/>
+              </af:inputDate>
+              <af:inputText value="#{bindings.CreatedBy.inputValue}" label="#{bindings.CreatedBy.label}"
+                            rendered="false" required="#{bindings.CreatedBy.hints.mandatory}"
+                            shortDesc="#{bindings.CreatedBy.hints.tooltip}" id="soc47" readOnly="true">
+                <f:validator binding="#{bindings.CreatedBy.validator}"/>
+              </af:inputText>
+              <af:selectOneChoice value="#{bindings.CreatedBy1.inputValue}" label="#{bindings.CreatedBy1.label}"
+                                  required="#{bindings.CreatedBy1.hints.mandatory}" readOnly="true"
+                                  shortDesc="#{bindings.CreatedBy1.hints.tooltip}" id="soc24">
+                <f:selectItems value="#{bindings.CreatedBy1.items}" id="si24"/>
+                <f:validator binding="#{bindings.CreatedBy1.validator}"/>
+              </af:selectOneChoice>
+              <af:inputDate value="#{bindings.CreationDate.inputValue}" readOnly="true"
+                            label="#{bindings.CreationDate.hints.label}"
+                            required="#{bindings.CreationDate.hints.mandatory}"
+                            columns="#{bindings.CreationDate.hints.displayWidth}"
+                            shortDesc="#{bindings.CreationDate.hints.tooltip}" id="id7">
+                <f:validator binding="#{bindings.CreationDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.CreationDate.format}"/>
+              </af:inputDate>
+              <af:inputText value="#{bindings.LastUpdatedBy.inputValue}" label="#{bindings.LastUpdatedBy.label}"
+                            rendered="false" required="#{bindings.LastUpdatedBy.hints.mandatory}"
+                            shortDesc="#{bindings.LastUpdatedBy.hints.tooltip}" id="soc48" readOnly="true">
+                <f:validator binding="#{bindings.LastUpdatedBy.validator}"/>
+              </af:inputText>
+              <af:selectOneChoice value="#{bindings.LastUpdatedBy1.inputValue}" label="#{bindings.LastUpdatedBy1.label}"
+                                  readOnly="true" required="#{bindings.LastUpdatedBy1.hints.mandatory}"
+                                  shortDesc="#{bindings.LastUpdatedBy1.hints.tooltip}" id="soc56">
+                <f:selectItems value="#{bindings.LastUpdatedBy1.items}" id="si54"/>
+                <f:validator binding="#{bindings.LastUpdatedBy1.validator}"/>
+              </af:selectOneChoice>
+              <af:inputDate value="#{bindings.LastUpdateDate.inputValue}" readOnly="true"
+                            label="#{bindings.LastUpdateDate.hints.label}"
+                            required="#{bindings.LastUpdateDate.hints.mandatory}"
+                            columns="#{bindings.LastUpdateDate.hints.displayWidth}"
+                            shortDesc="#{bindings.LastUpdateDate.hints.tooltip}" id="id6">
+                <f:validator binding="#{bindings.LastUpdateDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.LastUpdateDate.format}"/>
+              </af:inputDate>
+            </af:panelFormLayout>
+          </af:panelHeader>
+        </af:panelGroupLayout>
+      </f:facet>
+      <f:facet name="second">
+        <af:panelGroupLayout id="pgl1" layout="scroll">
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p1" contentDelivery="lazyUncached"
+                    popupFetchListener="#{backingBeanScope.RequestBacking.alertPopupFetchListener}">
+            <af:dialog id="d1" resize="on" contentWidth="800" contentHeight="300"
+                       dialogListener="#{backingBeanScope.RequestBacking.alertDialogListener}"
+                       type="#{(pageFlowScope.varAlertNoteList ne null)?'okCancel' : 'cancel'}">
+              <f:facet name="buttonBar"/>
+              <af:panelHeader text="Clear Alerts" id="ph6">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar">
+                  <af:selectBooleanCheckbox label="Override" id="sbc1" rendered="#{pageFlowScope.superUser == 'Y'}"
+                                            value="#{bindings.selectionOverride1.inputValue}" autoSubmit="true"
+                                            immediate="true"
+                                            valueChangeListener="#{backingBeanScope.RequestBacking.overrideValueChangeListener}"
+                                            visible="#{pageFlowScope.varAlertNoteList ne null}"/>
+                </f:facet>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelGridLayout id="pgl5" rendered="#{pageFlowScope.varAlertNoteList ne null}">
+                  <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr2">
+                    <af:gridCell marginStart="5px" width="30%" id="gc3">
+                      <af:panelGroupLayout id="pgl4" layout="vertical">
+                        <af:forEach var="alertId" items="#{backingBeanScope.RequestBacking.ALERT_REC_LIST}">
+                          <af:outputText value="#{alertId}" id="ot51"/>
+                        </af:forEach>
+                      </af:panelGroupLayout>
+                    </af:gridCell>
+                    <af:gridCell marginStart="5px" width="70%" marginEnd="5px" id="gc4">
+                      <af:panelFormLayout id="pfl2" partialTriggers="sbc1">
+                        <f:facet name="footer"/>
+                        <af:selectManyChoice label="Note" id="socOvr1" autoSubmit="true" contentStyle="width:400.0px"
+                                             partialTriggers="sbc1" required="true"
+                                             valueChangeListener="#{backingBeanScope.RequestBacking.noteValueChangeListener}"
+                                             rendered="#{!bindings.selectionOverride1.inputValue}"
+                                             value="#{backingBeanScope.RequestBacking.entNotesSelectedValues}">
+                          <f:selectItems value="#{backingBeanScope.RequestBacking.entNotesAllValuesList}" id="siOvr1"/>
+                        </af:selectManyChoice>
+                        <af:inputText value="#{bindings.NoteAttr1.inputValue}" label="#{bindings.NoteAttr1.hints.label}"
+                                      columns="#{bindings.NoteAttr1.hints.displayWidth}"
+                                      maximumLength="#{bindings.NoteAttr1.hints.precision}"
+                                      shortDesc="#{bindings.NoteAttr1.hints.tooltip}" id="itOvr1" rows="6"
+                                      contentStyle="width: 400px" partialTriggers="sbc1"
+                                      rendered="#{bindings.selectionOverride1.inputValue}" autoSubmit="true"
+                                      required="#{bindings.selectionOverride1.inputValue}"
+                                      valueChangeListener="#{backingBeanScope.RequestBacking.noteValueChangeListener}">
+                          <f:validator binding="#{bindings.NoteAttr1.validator}"/>
+                        </af:inputText>
+                      </af:panelFormLayout>
+                      <af:spacer width="10" height="10" id="s2"/>
+                      <af:selectOneChoice value="#{bindings.CaseAlertStateAttr.inputValue}"
+                                          label="#{bindings.CaseAlertStateAttr.label}"
+                                          required="#{bindings.CaseAlertStateAttr.hints.mandatory}"
+                                          shortDesc="#{bindings.CaseAlertStateAttr.hints.tooltip}" id="soc53">
+                        <!--T20200623.0013 - OWS Statusboard add 'Open' value to Record State f... (IRI)-->
+                        <!--<f:selectItems value="#{bindings.CaseAlertStateAttr.items}" id="si53"/>-->
+                        <af:forEach items="#{bindings.CaseAlertStateAttr.items}" var="item">
+                          <af:selectItem id="si2" label="#{item.label}"
+                                         rendered="#{(item.value == 'Open')?(pageFlowScope.superUser == 'Y'):true}"
+                                         value="#{item.value}"/>
+                        </af:forEach>
+                        <f:validator binding="#{bindings.CaseAlertStateAttr.validator}"/>
+                      </af:selectOneChoice>
+                    </af:gridCell>
+                  </af:gridRow>
+                </af:panelGridLayout>
+                <af:panelGroupLayout id="pgl3" layout="vertical" halign="center"
+                                     rendered="#{pageFlowScope.varAlertNoteList eq null}">
+                  <af:outputText value="No eligible alerts to clear." id="ot36"
+                                 inlineStyle="color: red; font-size: 20px;"/>
+                </af:panelGroupLayout>
+              </af:panelHeader>
+            </af:dialog>
+          </af:popup>
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p2"
+                    popupCanceledListener="#{backingBeanScope.RequestBacking.popupcancldListnr}"
+                    contentDelivery="lazyUncached">
+            <af:dialog id="d2" dialogListener="#{backingBeanScope.RequestBacking.editCaseDialogListener}" resize="on"
+                       contentWidth="700" contentHeight="500">
+              <f:facet name="buttonBar"/>
+              <af:panelHeader text="Case" id="ph7">
+                <f:facet name="context">
+                  <af:outputText value="#{bindings.CaseId.inputValue}" shortDesc="#{bindings.CaseId.hints.tooltip}"
+                                 id="ot47"/>
+                </f:facet>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelFormLayout id="pfl3">
+                  <!--af:inputText value="#{bindings.VersionId.inputValue}"  readOnly="true" label="Version Number" rendered="false" /-->
+                  <af:inputText value="#{bindings.Id.inputValue}" label="#{bindings.Id.hints.label}"
+                                required="#{bindings.Id.hints.mandatory}" columns="#{bindings.Id.hints.displayWidth}"
+                                maximumLength="#{bindings.Id.hints.precision}" shortDesc="#{bindings.Id.hints.tooltip}"
+                                id="it77" rendered="false">
+                    <f:validator binding="#{bindings.Id.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.Id.format}"/>
+                  </af:inputText>
+                  
+                  <!-- T20221108.0024 - TC Role Based Access Control
+                  <af:selectOneChoice value="#{bindings.CaseState.inputValue}" label="#{bindings.CaseState.label}"
+                                      required="#{bindings.CaseState.hints.mandatory}"
+                                      shortDesc="#{bindings.CaseState.hints.tooltip}" id="soc1">
+                    <f:selectItems value="#{bindings.CaseState.items}" id="si1"/>
+                    <f:validator binding="#{bindings.CaseState.validator}"/>
+                  </af:selectOneChoice>
+                  -->
+                  
+                  <!-- T20210916.0015 - Filing Agent - Workflow Status to Pending -->
+                  <af:inputListOfValues id="caseStateAttr1Id"
+                                        popupTitle="Search and Select: #{bindings.CaseStateAttr1.hints.label}"
+                                        value="#{bindings.CaseStateAttr1.inputValue}"
+                                        label="#{bindings.CaseStateAttr1.hints.label}"
+                                        model="#{bindings.CaseStateAttr1.listOfValuesModel}"
+                                        required="#{bindings.CaseStateAttr1.hints.mandatory}"
+                                        columns="#{bindings.CaseStateAttr1.hints.displayWidth}"
+                                        shortDesc="#{bindings.CaseStateAttr1.hints.tooltip}"
+                                        launchPopupListener="#{backingBeanScope.RequestBacking.caseStateLaunchListener}"
+                                        returnPopupListener="#{backingBeanScope.RequestBacking.caseStateReturnListener}"
+                                        returnPopupDataListener="#{backingBeanScope.RequestBacking.caseStateDataListener}">
+                    <f:validator binding="#{bindings.CaseStateAttr1.validator}"/>
+                  </af:inputListOfValues>
+                  
+                  <!-- T20221108.0024 - TC Role Based Access Control                   
+                  <af:selectOneChoice value="#{bindings.CaseWorkflow.inputValue}" label="#{bindings.CaseWorkflow.label}"
+                                      required="#{bindings.CaseWorkflow.hints.mandatory}"
+                                      shortDesc="#{bindings.CaseWorkflow.hints.tooltip}" id="soc3" autoSubmit="true">
+                    <f:selectItems value="#{bindings.CaseWorkflow.items}" id="si3"/>
+                    T20210401.0016 - pending provisional status 
+                
+                    <af:forEach items="#{bindings.CaseWorkflow.items}" var="row">
+                      <af:selectItem value="#{row.value}" id="si3" label="#{row.label}" rendered="#{(row.value eq 'PP')? false : (row.value eq 'A')? (pageFlowScope.approved eq 'Y') : true}"/>
+                    </af:forEach>                    
+                  </af:selectOneChoice>
+                  -->
+                  
+                  <af:inputListOfValues id="caseWorkFlowAttr1Id"
+                                        popupTitle="Search and Select: #{bindings.CaseWorkFlowAttr1.hints.label}"
+                                        value="#{bindings.CaseWorkFlowAttr1.inputValue}"
+                                        label="#{bindings.CaseWorkFlowAttr1.hints.label}"
+                                        model="#{bindings.CaseWorkFlowAttr1.listOfValuesModel}"
+                                        required="#{bindings.CaseWorkFlowAttr1.hints.mandatory}"
+                                        columns="#{bindings.CaseWorkFlowAttr1.hints.displayWidth}"
+                                        shortDesc="#{bindings.CaseWorkFlowAttr1.hints.tooltip}"
+                                        returnPopupListener="#{backingBeanScope.RequestBacking.caseWorkflowReturnListener}"
+                                        launchPopupListener="#{backingBeanScope.RequestBacking.caseWorkflowLaunchListener}"
+                                        returnPopupDataListener="#{backingBeanScope.RequestBacking.caseWorkflowDataListener}">
+                    <f:validator binding="#{bindings.CaseWorkFlowAttr1.validator}"/>
+                  </af:inputListOfValues>
+                  <af:selectOneChoice value="#{bindings.CaseStatus.inputValue}" label="#{bindings.CaseStatus.label}"
+                                      required="#{bindings.CaseStatus.hints.mandatory}"
+                                      shortDesc="#{bindings.CaseStatus.hints.tooltip}" id="soc2">
+                    <f:selectItems value="#{bindings.CaseStatus.items}" id="si298"/>
+                    <f:validator binding="#{bindings.CaseStatus.validator}"/>
+                  </af:selectOneChoice>
+                  <!--af:selectBooleanCheckbox value="#{bindings.WrkflowStatusLegalNtfd.inputValue}"
+                                                  label="Legal Notified"
+                                                shortDesc="#{bindings.WrkflowStatusLegalNtfd.hints.tooltip}" id="sbc3"/>
+                                                
+                      <af:inputDate value="#{bindings.WrkflowStatusLegalNtfdDt.inputValue}"
+                                   label="Legal Notified Date"    readOnly="true"
+                                    required="#{bindings.WrkflowStatusLegalNtfdDt.hints.mandatory}"
+                                    columns="#{bindings.WrkflowStatusLegalNtfdDt.hints.displayWidth}"
+                                    shortDesc="#{bindings.WrkflowStatusLegalNtfdDt.hints.tooltip}" id="id8">
+                        <f:validator binding="#{bindings.WrkflowStatusLegalNtfdDt.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.WrkflowStatusLegalNtfdDt.format}"/>
+                      </af:inputDate-->
+                  <af:selectOneChoice value="#{bindings.RiskLevel.inputValue}" label="#{bindings.RiskLevel.label}"
+                                      required="#{bindings.RiskLevel.hints.mandatory}"
+                                      shortDesc="#{bindings.RiskLevel.hints.tooltip}" id="soc17" rendered="true">
+                    <f:selectItems value="#{bindings.RiskLevel.items}" id="si17"/>
+                    <f:validator binding="#{bindings.RiskLevel.validator}"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.Department.inputValue}" label="#{bindings.Department.label}"
+                                      required="#{bindings.Department.hints.mandatory}" autoSubmit="true"
+                                      valueChangeListener="#{backingBeanScope.RequestBacking.deptValueChangeListener}"
+                                      shortDesc="#{bindings.Department.hints.tooltip}" id="soc26">
+                    <f:selectItems value="#{bindings.Department.items}" id="si26"/>
+                    <f:validator binding="#{bindings.Department.validator}"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.Office.inputValue}" label="#{bindings.Office.label}"
+                                      required="#{bindings.Office.hints.mandatory}"
+                                      shortDesc="#{bindings.Office.hints.tooltip}" id="soc410">
+                    <f:selectItems value="#{bindings.Office.items}" id="si410"/>
+                    <f:validator binding="#{bindings.Office.validator}"/>
+                  </af:selectOneChoice>
+                  <!-- T20200903.0030 - OWS - Change Priority LOV (IRI) -->
+                  <af:selectOneChoice value="#{bindings.Priority.inputValue}" label="#{bindings.Priority.label}"
+                                      required="#{bindings.Priority.hints.mandatory}" autoSubmit="true"
+                                      valueChangeListener="#{backingBeanScope.RequestBacking.priorityValueChangeListener}"
+                                      shortDesc="#{bindings.Priority.hints.tooltip}" id="soc16" rendered="true">
+                    <!--<f:selectItems value="#{bindings.Priority.items}" id="si16"/>-->
+                    <af:forEach items="#{bindings.Priority.items}" var="item" id="lv1">
+                      <af:selectItem label="#{item.label}"
+                                     rendered="#{(!viewScope.isTempFin and item.value eq 3) or (item.value ne 3)}"
+                                     value="#{item.value}" id="si93"/>
+                    </af:forEach>
+                    <f:validator binding="#{bindings.Priority.validator}"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.DocumentType1.inputValue}"
+                                      label="#{bindings.DocumentType1.label}"
+                                      shortDesc="#{bindings.DocumentType1.hints.tooltip}" id="soc21">
+                    <f:selectItems value="#{bindings.DocumentType1.items}" id="si21"/>
+                    <f:validator binding="#{bindings.DocumentType1.validator}"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.RejectionReason.inputValue}"
+                                      label="#{bindings.RejectionReason.label}" autoSubmit="true"
+                                      shortDesc="#{bindings.RejectionReason.hints.tooltip}" id="soc18">
+                    <f:selectItems value="#{bindings.RejectionReason.items}" id="si18"/>
+                    <f:validator binding="#{bindings.RejectionReason.validator}"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{bindings.RejectionReasonOthr.inputValue}"
+                                required="#{bindings.RejectionReasonOthr.hints.mandatory}" partialTriggers="soc18"
+                                label="Rejected Reason (Other)" visible="#{bindings.RejectionReason.inputValue=='OTHR'}"
+                                columns="#{bindings.RejectionReasonOthr.hints.displayWidth}"
+                                maximumLength="#{bindings.RejectionReasonOthr.hints.precision}"
+                                shortDesc="#{bindings.RejectionReasonOthr.hints.tooltip}" id="it17">
+                    <f:validator binding="#{bindings.RejectionReasonOthr.validator}"/>
+                  </af:inputText>
+                  <af:selectOneChoice value="#{bindings.CountryOfRegistration.inputValue}"
+                                      label="#{bindings.CountryOfRegistration.label}"
+                                      required="#{bindings.CountryOfRegistration.hints.mandatory}"
+                                      shortDesc="#{bindings.CountryOfRegistration.hints.tooltip}" id="soc74">
+                    <f:selectItems value="#{bindings.CountryOfRegistration.items}" id="si74"/>
+                    <f:validator binding="#{bindings.CountryOfRegistration.validator}"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.CountryOfResidence1.inputValue}"
+                                      label="#{bindings.CountryOfResidence1.label}"
+                                      required="#{bindings.CountryOfResidence1.hints.mandatory}"
+                                      valueChangeListener="#{backingBeanScope.RequestBacking.countryValChgListnr}"
+                                      shortDesc="#{bindings.CountryOfResidence1.hints.tooltip}" id="soc19"
+                                      autoSubmit="true">
+                    <f:selectItems value="#{bindings.CountryOfResidence1.items}" id="si19"/>
+                    <f:validator binding="#{bindings.CountryOfResidence1.validator}"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.CityOfResidenceId1.inputValue}"
+                                      label="#{bindings.CityOfResidenceId1.label}"
+                                      required="#{bindings.CityOfResidenceId1.hints.mandatory}"
+                                      shortDesc="#{bindings.CityOfResidenceId1.hints.tooltip}" id="soc20"
+                                      autoSubmit="true" partialTriggers="soc19">
+                    <f:selectItems value="#{bindings.CityOfResidenceId1.items}" id="si20"/>
+                    <f:validator binding="#{bindings.CityOfResidenceId1.validator}"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{bindings.SubdivisionCityOfResidence.inputValue}"
+                                label="#{bindings.SubdivisionCityOfResidence.hints.label}"
+                                required="#{bindings.SubdivisionCityOfResidence.hints.mandatory}"
+                                columns="#{bindings.SubdivisionCityOfResidence.hints.displayWidth}"
+                                maximumLength="#{bindings.SubdivisionCityOfResidence.hints.precision}"
+                                shortDesc="#{bindings.SubdivisionCityOfResidence.hints.tooltip}" id="it86"
+                                readOnly="true" partialTriggers="soc20">
+                    <f:validator binding="#{bindings.SubdivisionCityOfResidence.validator}"/>
+                  </af:inputText>
+                  <af:selectOneChoice value="#{bindings.CountryOfOperation.inputValue}"
+                                      label="#{bindings.CountryOfOperation.label}"
+                                      required="#{bindings.CountryOfOperation.hints.mandatory}"
+                                      shortDesc="#{bindings.CountryOfOperation.hints.tooltip}" id="soc59">
+                    <f:selectItems value="#{bindings.CountryOfOperation.items}" id="si58"/>
+                    <f:validator binding="#{bindings.CountryOfOperation.validator}"/>
+                  </af:selectOneChoice>
+                  <!-- T20220216.0027 - Assigned to accessT20220216.0027 - Assigned to access -->
+                  <af:selectOneChoice value="#{bindings.AssignedTo1.inputValue}" label="#{bindings.AssignedTo1.label}"
+                                      required="#{bindings.AssignedTo1.hints.mandatory}"
+                                      shortDesc="#{bindings.AssignedTo1.hints.tooltip}" id="soc22"
+                                      rendered="#{pageFlowScope.superUser == 'Y'}">
+                    <f:selectItems value="#{bindings.AssignedTo1.items}" id="si22"/>
+                    <f:validator binding="#{bindings.AssignedTo1.validator}"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{bindings.ResubmitId.inputValue}" label="#{bindings.ResubmitId.hints.label}"
+                                required="#{bindings.ResubmitId.hints.mandatory}"
+                                columns="#{bindings.ResubmitId.hints.displayWidth}"
+                                maximumLength="#{bindings.ResubmitId.hints.precision}"
+                                shortDesc="#{bindings.ResubmitId.hints.tooltip}" id="it80" rendered="false">
+                    <f:validator binding="#{bindings.ResubmitId.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.ResubmitId.format}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.SourceTable.inputValue}" label="#{bindings.SourceTable.hints.label}"
+                                required="#{bindings.SourceTable.hints.mandatory}"
+                                columns="#{bindings.SourceTable.hints.displayWidth}"
+                                maximumLength="#{bindings.SourceTable.hints.precision}"
+                                shortDesc="#{bindings.SourceTable.hints.tooltip}" id="it81" rendered="false">
+                    <f:validator binding="#{bindings.SourceTable.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.SourceId.inputValue}" label="#{bindings.SourceId.hints.label}"
+                                required="#{bindings.SourceId.hints.mandatory}"
+                                columns="#{bindings.SourceId.hints.displayWidth}"
+                                maximumLength="#{bindings.SourceId.hints.precision}"
+                                shortDesc="#{bindings.SourceId.hints.tooltip}" id="it82" rendered="false">
+                    <f:validator binding="#{bindings.SourceId.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.SourceId.format}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.WcScreeningRequestId.inputValue}"
+                                label="#{bindings.WcScreeningRequestId.hints.label}"
+                                required="#{bindings.WcScreeningRequestId.hints.mandatory}"
+                                columns="#{bindings.WcScreeningRequestId.hints.displayWidth}"
+                                maximumLength="#{bindings.WcScreeningRequestId.hints.precision}"
+                                shortDesc="#{bindings.WcScreeningRequestId.hints.tooltip}" id="it83" rendered="false">
+                    <f:validator binding="#{bindings.WcScreeningRequestId.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.WcScreeningRequestId.format}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.Server.inputValue}" label="#{bindings.Server.hints.label}"
+                                required="#{bindings.Server.hints.mandatory}"
+                                columns="#{bindings.Server.hints.displayWidth}"
+                                maximumLength="#{bindings.Server.hints.precision}"
+                                shortDesc="#{bindings.Server.hints.tooltip}" id="it84" rendered="false">
+                    <f:validator binding="#{bindings.Server.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.Path.inputValue}" label="#{bindings.Path.hints.label}"
+                                required="#{bindings.Path.hints.mandatory}"
+                                columns="#{bindings.Path.hints.displayWidth}"
+                                maximumLength="#{bindings.Path.hints.precision}"
+                                shortDesc="#{bindings.Path.hints.tooltip}" id="it85" rendered="false">
+                    <f:validator binding="#{bindings.Path.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.JobId.inputValue}" label="#{bindings.JobId.hints.label}"
+                                required="#{bindings.JobId.hints.mandatory}"
+                                columns="#{bindings.JobId.hints.displayWidth}"
+                                maximumLength="#{bindings.JobId.hints.precision}"
+                                shortDesc="#{bindings.JobId.hints.tooltip}" id="it89" rendered="false">
+                    <f:validator binding="#{bindings.JobId.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.Matches.inputValue}" label="#{bindings.Matches.hints.label}"
+                                required="#{bindings.Matches.hints.mandatory}"
+                                columns="#{bindings.Matches.hints.displayWidth}"
+                                maximumLength="#{bindings.Matches.hints.precision}"
+                                shortDesc="#{bindings.Matches.hints.tooltip}" id="it90" rendered="false">
+                    <f:validator binding="#{bindings.Matches.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.Matches.format}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.Status.inputValue}" label="#{bindings.Status.hints.label}"
+                                required="#{bindings.Status.hints.mandatory}"
+                                columns="#{bindings.Status.hints.displayWidth}"
+                                maximumLength="#{bindings.Status.hints.precision}"
+                                shortDesc="#{bindings.Status.hints.tooltip}" id="it91" rendered="false">
+                    <f:validator binding="#{bindings.Status.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.ErrorCode.inputValue}" label="#{bindings.ErrorCode.hints.label}"
+                                required="#{bindings.ErrorCode.hints.mandatory}"
+                                columns="#{bindings.ErrorCode.hints.displayWidth}"
+                                maximumLength="#{bindings.ErrorCode.hints.precision}"
+                                shortDesc="#{bindings.ErrorCode.hints.tooltip}" id="it92" rendered="false">
+                    <f:validator binding="#{bindings.ErrorCode.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.ErrorMessage.inputValue}" label="#{bindings.ErrorMessage.hints.label}"
+                                required="#{bindings.ErrorMessage.hints.mandatory}"
+                                columns="#{bindings.ErrorMessage.hints.displayWidth}"
+                                maximumLength="#{bindings.ErrorMessage.hints.precision}"
+                                shortDesc="#{bindings.ErrorMessage.hints.tooltip}" id="it93" rendered="false">
+                    <f:validator binding="#{bindings.ErrorMessage.validator}"/>
+                  </af:inputText>
+                  <af:inputDate value="#{bindings.LastUpdateDate.inputValue}"
+                                label="#{bindings.LastUpdateDate.hints.label}"
+                                required="#{bindings.LastUpdateDate.hints.mandatory}"
+                                columns="#{bindings.LastUpdateDate.hints.displayWidth}"
+                                shortDesc="#{bindings.LastUpdateDate.hints.tooltip}" id="id1" rendered="false">
+                    <f:validator binding="#{bindings.LastUpdateDate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.LastUpdateDate.format}"/>
+                  </af:inputDate>
+                  <af:inputText value="#{bindings.LastUpdatedBy.inputValue}"
+                                label="#{bindings.LastUpdatedBy.hints.label}"
+                                required="#{bindings.LastUpdatedBy.hints.mandatory}"
+                                columns="#{bindings.LastUpdatedBy.hints.displayWidth}"
+                                maximumLength="#{bindings.LastUpdatedBy.hints.precision}"
+                                shortDesc="#{bindings.LastUpdatedBy.hints.tooltip}" id="it94" rendered="false">
+                    <f:validator binding="#{bindings.LastUpdatedBy.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.LastUpdatedBy.format}"/>
+                  </af:inputText>
+                  <af:inputDate value="#{bindings.CreationDate.inputValue}" label="#{bindings.CreationDate.hints.label}"
+                                required="#{bindings.CreationDate.hints.mandatory}"
+                                columns="#{bindings.CreationDate.hints.displayWidth}"
+                                shortDesc="#{bindings.CreationDate.hints.tooltip}" id="id2" rendered="false">
+                    <f:validator binding="#{bindings.CreationDate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.CreationDate.format}"/>
+                  </af:inputDate>
+                  <af:inputText value="#{bindings.CreatedBy.inputValue}" label="#{bindings.CreatedBy.hints.label}"
+                                required="#{bindings.CreatedBy.hints.mandatory}"
+                                columns="#{bindings.CreatedBy.hints.displayWidth}"
+                                maximumLength="#{bindings.CreatedBy.hints.precision}"
+                                shortDesc="#{bindings.CreatedBy.hints.tooltip}" id="it95" rendered="false">
+                    <f:validator binding="#{bindings.CreatedBy.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.CreatedBy.format}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.LastUpdateLogin.inputValue}"
+                                label="#{bindings.LastUpdateLogin.hints.label}"
+                                required="#{bindings.LastUpdateLogin.hints.mandatory}"
+                                columns="#{bindings.LastUpdateLogin.hints.displayWidth}"
+                                maximumLength="#{bindings.LastUpdateLogin.hints.precision}"
+                                shortDesc="#{bindings.LastUpdateLogin.hints.tooltip}" id="it96" rendered="false">
+                    <f:validator binding="#{bindings.LastUpdateLogin.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.LastUpdateLogin.format}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.CaseId.inputValue}" label="#{bindings.CaseId.hints.label}"
+                                required="#{bindings.CaseId.hints.mandatory}"
+                                columns="#{bindings.CaseId.hints.displayWidth}"
+                                maximumLength="#{bindings.CaseId.hints.precision}"
+                                shortDesc="#{bindings.CaseId.hints.tooltip}" id="it97" rendered="false">
+                    <f:validator binding="#{bindings.CaseId.validator}"/>
+                  </af:inputText>
+                  <af:selectOneChoice value="#{bindings.VesselIndicator.inputValue}"
+                                      label="#{bindings.VesselIndicator.label}"
+                                      required="#{bindings.VesselIndicator.hints.mandatory}"
+                                      shortDesc="#{bindings.VesselIndicator.hints.tooltip}" id="soc15" rendered="false">
+                    <f:selectItems value="#{bindings.VesselIndicator.items}" id="si15"/>
+                    <f:validator binding="#{bindings.VesselIndicator.validator}"/>
+                  </af:selectOneChoice>
+                  <af:inputText value="#{bindings.NameScreened.inputValue}" label="#{bindings.NameScreened.hints.label}"
+                                required="#{bindings.NameScreened.hints.mandatory}"
+                                columns="#{bindings.NameScreened.hints.displayWidth}"
+                                maximumLength="#{bindings.NameScreened.hints.precision}"
+                                shortDesc="#{bindings.NameScreened.hints.tooltip}" id="it98" rendered="false">
+                    <f:validator binding="#{bindings.NameScreened.validator}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.ImoNumber.inputValue}" label="#{bindings.ImoNumber.hints.label}"
+                                required="#{bindings.ImoNumber.hints.mandatory}"
+                                columns="#{bindings.ImoNumber.hints.displayWidth}"
+                                maximumLength="#{bindings.ImoNumber.hints.precision}"
+                                shortDesc="#{bindings.ImoNumber.hints.tooltip}" id="it99" rendered="false">
+                    <f:validator binding="#{bindings.ImoNumber.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.ImoNumber.format}"/>
+                  </af:inputText>
+                  <af:inputDate value="#{bindings.ClosedDate.inputValue}" label="#{bindings.ClosedDate.hints.label}"
+                                required="#{bindings.ClosedDate.hints.mandatory}"
+                                columns="#{bindings.ClosedDate.hints.displayWidth}"
+                                shortDesc="#{bindings.ClosedDate.hints.tooltip}" id="id3" rendered="false">
+                    <f:validator binding="#{bindings.ClosedDate.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.ClosedDate.format}"/>
+                  </af:inputDate>
+                  <af:inputDate value="#{bindings.DateOfBirth.inputValue}" label="#{bindings.DateOfBirth.hints.label}"
+                                required="#{bindings.DateOfBirth.hints.mandatory}"
+                                columns="#{bindings.DateOfBirth.hints.displayWidth}"
+                                shortDesc="#{bindings.DateOfBirth.hints.tooltip}" id="id4" rendered="false">
+                    <f:validator binding="#{bindings.DateOfBirth.validator}"/>
+                    <af:convertDateTime pattern="#{bindings.DateOfBirth.format}"/>
+                  </af:inputDate>
+                </af:panelFormLayout>
+              </af:panelHeader>
+              <!-- T20210803.0004 - OWS - Don't close request if any open alert existed -->
+              <f:attribute name="openCount" value="#{pageFlowScope.EntOpCnt}"/>
+            </af:dialog>
+          </af:popup>
+          <!--T20200602.0032 - Adding new Popup on OWS TradeCompliance Statusboar... (IRI)-->
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p3"
+                    popupFetchListener="#{backingBeanScope.RequestBacking.updateMasterPopupFetchListener}"
+                    contentDelivery="lazyUncached"
+                    popupCanceledListener="#{backingBeanScope.RequestBacking.popupcancldListnr}">
+            <af:dialog id="d3" resize="on" contentWidth="500" contentHeight="420"
+                       dialogListener="#{backingBeanScope.RequestBacking.updateMasterDialogListener}">
+              <f:facet name="buttonBar"/>
+              <af:panelHeader text="Update Master" id="ph9" styleClass="AFStretchWidth">
+                <f:facet name="context">
+                  <af:outputText value="#{bindings.CaseId.inputValue}" shortDesc="#{bindings.CaseId.hints.tooltip}"
+                                 id="ot95"/>
+                </f:facet>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar"/>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelFormLayout id="pfl5">
+                  <f:facet name="footer"/>
+                  <af:inputText value="#{bindings.SourceId.inputValue}" label="Identifier"
+                                required="#{bindings.SourceId.hints.mandatory}"
+                                maximumLength="#{bindings.SourceId.hints.precision}" columns="25"
+                                shortDesc="#{bindings.SourceId.hints.tooltip}" id="it101" readOnly="true">
+                    <f:validator binding="#{bindings.SourceId.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.SourceId.format}"/>
+                  </af:inputText>
+                  <af:inputText value="#{bindings.NameScreened.inputValue}" label="#{bindings.NameScreened.hints.label}"
+                                required="#{bindings.NameScreened.hints.mandatory}" columns="25"
+                                maximumLength="#{bindings.NameScreened.hints.precision}"
+                                shortDesc="#{bindings.NameScreened.hints.tooltip}" id="it102" disabled="true">
+                    <f:validator binding="#{bindings.NameScreened.validator}"/>
+                  </af:inputText>
+                  <af:selectOneChoice label="Gender" id="soc63" value="#{bindings.Gender.inputValue}"
+                                      contentStyle="width: 205px;" autoSubmit="true"
+                                      readOnly="#{pageFlowScope.superUser != 'Y'}">
+                    <af:selectItem label="MALE" value="M" id="si63"/>
+                    <af:selectItem label="FEMALE" value="F" id="si65"/>
+                    <af:selectItem label="UNKNOWN" value="U" id="si66"/>
+                    <af:selectItem label="UNSPECIFIED" value="" id="si60"/>
+                  </af:selectOneChoice>
+                  <af:inputDate value="#{backingBeanScope.RequestBacking.dateOfBirth}" label="Date of Birth"
+                                required="#{bindings.DateOfBirth.hints.mandatory}" columns="25"
+                                valueChangeListener="#{backingBeanScope.RequestBacking.dateOfBirthValueChangeListener}"
+                                shortDesc="#{bindings.DateOfBirth.hints.tooltip}" id="it103" autoSubmit="true"
+                                readOnly="#{bindings.Doctype.inputValue != 'ESR'}">
+                    <af:convertDateTime pattern="yyyy-MM-dd" type="date"/>
+                  </af:inputDate>
+                  <af:inputText value="#{bindings.PassportNumber.inputValue}" label="Passport Number"
+                                required="#{bindings.PassportNumber.hints.mandatory}" columns="25"
+                                maximumLength="#{bindings.PassportNumber.hints.precision}"
+                                shortDesc="#{bindings.PassportNumber.hints.tooltip}" id="it104" autoSubmit="true">
+                    <f:validator binding="#{bindings.PassportNumber.validator}"/>
+                  </af:inputText>
+                  <af:selectOneChoice value="#{bindings.CountryOfAddress.inputValue}" label="Passport Issuing Country"
+                                      contentStyle="width: 205px;"
+                                      required="#{bindings.CountryOfAddress.hints.mandatory}"
+                                      shortDesc="#{bindings.CountryOfAddress.hints.tooltip}" id="soc57"
+                                      autoSubmit="true">
+                    <f:selectItems value="#{bindings.CountryOfAddress.items}" id="si55"/>
+                    <f:validator binding="#{bindings.CountryOfAddress.validator}"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.CountryOfNationality.inputValue}" label="Citizenship"
+                                      contentStyle="width: 205px;"
+                                      required="#{bindings.CountryOfNationality.hints.mandatory}"
+                                      shortDesc="#{bindings.CountryOfNationality.hints.tooltip}" id="soc58"
+                                      autoSubmit="true">
+                    <f:selectItems value="#{bindings.CountryOfNationality.items}" id="si56"/>
+                    <f:validator binding="#{bindings.CountryOfNationality.validator}"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.CountryOfResidence1.inputValue}" label="Country of Residence"
+                                      contentStyle="width: 205px;" autoSubmit="true"
+                                      required="#{bindings.CountryOfResidence1.hints.mandatory}"
+                                      shortDesc="#{bindings.CountryOfResidence1.hints.tooltip}" id="soc60">
+                    <f:selectItems value="#{bindings.CountryOfResidence1.items}" id="si57"/>
+                    <f:validator binding="#{bindings.CountryOfResidence1.validator}"/>
+                  </af:selectOneChoice>
+                  <af:selectOneChoice value="#{bindings.CityOfResidence.inputValue}" label="City"
+                                      contentStyle="width: 205px;" partialTriggers="si57"
+                                      required="#{bindings.CityOfResidence.hints.mandatory}"
+                                      shortDesc="#{bindings.CityOfResidence.hints.tooltip}" id="soc61"
+                                      autoSubmit="true">
+                    <f:selectItems value="#{bindings.CityOfResidence.items}" id="si59"/>
+                    <f:validator binding="#{bindings.CityOfResidence.validator}"/>
+                  </af:selectOneChoice>
+                  <af:inputDate label="Known Party Start Date" id="id8"
+                                value="#{backingBeanScope.RequestBacking.knownPartyStartDate}"
+                                rendered="#{pageFlowScope.superUser == 'Y'}"
+                                autoSubmit="true"/>
+                  <af:inputDate label="Known Party End Date" id="id9"
+                                value="#{backingBeanScope.RequestBacking.knownPartyEndDate}"
+                                rendered="#{pageFlowScope.superUser == 'Y'}"
+                                autoSubmit="true"/>
+                </af:panelFormLayout>
+              </af:panelHeader>
+            </af:dialog>
+          </af:popup>
+          <!-- T20200717.0032 - OWS TC - Access 'View History' Information from Re... (IRI) -->
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p5" contentDelivery="lazyUncached"
+                    popupFetchListener="#{backingBeanScope.RequestBacking.viewHistoryPopupFetchListener}">
+            <af:dialog id="d4" resize="on" type="ok" contentWidth="1120">
+              <f:facet name="buttonBar"/>
+              <af:panelHeader text="Workflow Status History" id="ph10" styleClass="AFStretchWidth">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar">
+                  <af:selectBooleanCheckbox label="Transaction Only" id="sbc2" autoSubmit="true"
+                                            valueChangeListener="#{backingBeanScope.RequestBacking.viewHistoryTransactionOnlyValueChangeListener}"/>
+                </f:facet>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:spacer width="10" height="10" id="s5"/>
+                <af:panelCollection id="pc4" styleClass="AFStretchWidth" partialTriggers="::sbc2">
+                  <f:facet name="menus"/>
+                  <f:facet name="toolbar"/>
+                  <f:facet name="statusbar"/>
+                  <af:table value="#{bindings.XwrlRequestApprovalHistView1.collectionModel}" var="row"
+                            rows="#{bindings.XwrlRequestApprovalHistView1.rangeSize}"
+                            emptyText="#{bindings.XwrlRequestApprovalHistView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                            rowBandingInterval="0" fetchSize="#{bindings.XwrlRequestApprovalHistView1.rangeSize}"
+                            id="t8" columnStretching="column:c111" styleClass="AFStretchWidth">
+                    <af:column headerText="#{bindings.XwrlRequestApprovalHistView1.hints.StatusDisp.label}" id="c111"
+                               width="100">
+                      <af:outputText value="#{row.StatusDisp}"
+                                     shortDesc="#{bindings.XwrlRequestApprovalHistView1.hints.StatusDisp.tooltip}"
+                                     id="ot86"/>
+                    </af:column>
+                    <af:column headerText="#{bindings.XwrlRequestApprovalHistView1.hints.LastUpdateDate.label}"
+                               id="c112" width="200">
+                      <af:outputText value="#{row.LastUpdateDate}"
+                                     shortDesc="#{bindings.XwrlRequestApprovalHistView1.hints.LastUpdateDate.tooltip}"
+                                     id="ot106">
+                        <af:convertDateTime pattern="#{bindings.XwrlRequestApprovalHistView1.hints.LastUpdateDate.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.XwrlRequestApprovalHistView1.hints.BatchId.label}" id="c113">
+                      <af:outputText value="#{row.BatchId}"
+                                     shortDesc="#{bindings.XwrlRequestApprovalHistView1.hints.BatchId.tooltip}"
+                                     id="ot107">
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.XwrlRequestApprovalHistView1.hints.BatchId.format}"/>
+                      </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.XwrlRequestApprovalHistView1.hints.LastUpdatedUser.label}"
+                               id="c114" width="200">
+                      <af:outputText value="#{row.LastUpdatedUser}"
+                                     shortDesc="#{bindings.XwrlRequestApprovalHistView1.hints.LastUpdatedUser.tooltip}"
+                                     id="ot108"/>
+                    </af:column>
+                    <af:column headerText="#{bindings.XwrlRequestApprovalHistView1.hints.CreatedUser.label}" id="c116"
+                               width="200">
+                      <af:outputText value="#{row.CreatedUser}"
+                                     shortDesc="#{bindings.XwrlRequestApprovalHistView1.hints.CreatedUser.tooltip}"
+                                     id="ot110"/>
+                    </af:column>
+                    <af:column headerText="#{bindings.XwrlRequestApprovalHistView1.hints.CreationDate.label}" id="c115"
+                               width="200">
+                      <af:outputText value="#{row.CreationDate}"
+                                     shortDesc="#{bindings.XwrlRequestApprovalHistView1.hints.CreationDate.tooltip}"
+                                     id="ot111">
+                        <af:convertDateTime pattern="#{bindings.XwrlRequestApprovalHistView1.hints.CreationDate.format}"/>
+                      </af:outputText>
+                    </af:column>
+                  </af:table>
+                </af:panelCollection>
+              </af:panelHeader>
+            </af:dialog>
+          </af:popup>
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p6" contentDelivery="lazyUncached"
+                    popupFetchListener="#{backingBeanScope.RequestBacking.alertPopupFetchListener}">
+            <af:dialog id="d5" resize="on" contentWidth="800" contentHeight="250"
+                       dialogListener="#{backingBeanScope.RequestBacking.bulkNotesDialogListener}">
+              <f:facet name="buttonBar"/>
+              <af:panelHeader text="Group Notes" id="ph11">
+                <f:facet name="context"/>
+                <f:facet name="menuBar"/>
+                <f:facet name="toolbar">
+                  <af:selectBooleanCheckbox label="Override" id="sbc4" rendered="#{pageFlowScope.superUser == 'Y'}"
+                                            value="#{bindings.selectionOverride1.inputValue}" autoSubmit="true"
+                                            immediate="true"
+                                            valueChangeListener="#{backingBeanScope.RequestBacking.overrideValueChangeListener}"/>
+                </f:facet>
+                <f:facet name="legend"/>
+                <f:facet name="info"/>
+                <af:panelGridLayout id="pgl7">
+                  <af:gridRow marginTop="5px" height="auto" marginBottom="5px" id="gr5">
+                    <af:gridCell marginStart="5px" width="30%" id="gc6">
+                      <af:panelGroupLayout id="pgl8" layout="vertical">
+                        <af:forEach var="alertId" items="#{backingBeanScope.RequestBacking.ALERT_REC_LIST}">
+                          <af:outputText value="#{alertId}" id="ot109"/>
+                        </af:forEach>
+                      </af:panelGroupLayout>
+                    </af:gridCell>
+                    <af:gridCell marginStart="5px" width="70%" marginEnd="5px" id="gc7">
+                      <af:panelFormLayout id="pfl6" partialTriggers="sbc4">
+                        <f:facet name="footer"/>
+                        <af:selectManyChoice label="Note" id="socOvr2" autoSubmit="true" contentStyle="width:400.0px"
+                                             partialTriggers="sbc4" required="true"
+                                             rendered="#{!bindings.selectionOverride1.inputValue}"
+                                             valueChangeListener="#{backingBeanScope.RequestBacking.noteValueChangeListener}"
+                                             value="#{backingBeanScope.RequestBacking.entNotesSelectedValues}">
+                          <f:selectItems value="#{backingBeanScope.RequestBacking.entNotesAllValuesList}" id="si70"/>
+                        </af:selectManyChoice>
+                        <af:inputText value="#{bindings.NoteAttr1.inputValue}" label="#{bindings.NoteAttr1.hints.label}"
+                                      columns="#{bindings.NoteAttr1.hints.displayWidth}"
+                                      maximumLength="#{bindings.NoteAttr1.hints.precision}"
+                                      shortDesc="#{bindings.NoteAttr1.hints.tooltip}" id="itOvr2" rows="6"
+                                      contentStyle="width: 400px" partialTriggers="sbc4"
+                                      rendered="#{bindings.selectionOverride1.inputValue}"
+                                      required="#{bindings.selectionOverride1.inputValue}" autoSubmit="true"
+                                      valueChangeListener="#{backingBeanScope.RequestBacking.noteValueChangeListener}">
+                          <f:validator binding="#{bindings.NoteAttr1.validator}"/>
+                        </af:inputText>
+                      </af:panelFormLayout>
+                      <af:spacer width="10" height="10" id="s6"/>
+                    </af:gridCell>
+                  </af:gridRow>
+                </af:panelGridLayout>
+              </af:panelHeader>
+            </af:dialog>
+          </af:popup>
+          <af:panelHeader text="Alert Columns" id="ph2">
+            <f:facet name="context">
+              <af:outputText value="#{bindings.Alertid.inputValue}" shortDesc="#{bindings.Alertid.hints.tooltip}"
+                             id="ot46"/>
+            </f:facet>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+              <f:facet name="menus">
+                <af:menu text="Options" id="m2">
+                  <af:commandMenuItem text="Export to Excel" id="cmi10">
+                    <af:exportCollectionActionListener type="excelHTML" exportedId="t1" filename="CaseEntityAlerts.xls"
+                                                       title="Case Alerts"/>
+                  </af:commandMenuItem>
+                  <af:commandMenuItem text="Printable Page" id="cmi11">
+                    <af:showPrintablePageBehavior/>
+                  </af:commandMenuItem>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar">
+                <af:toolbar id="t7">
+                  <af:button text="Clear Alerts" id="b4" partialTriggers="t1"
+                             actionListener="#{backingBeanScope.RequestBacking.alertShowPopup}"
+                             disabled="#{bindings.Alertid.inputValue == null}">
+                    <af:setPropertyListener type="action" from="#{'XwrlResponseEntityColumnsView1'}"
+                                            to="#{pageFlowScope.clearAlertIterator}"/>
+                  </af:button>
+                  <af:button text="Alert Notes" id="b8" action="entityNote" rendered="false"
+                             actionListener="#{backingBeanScope.RequestBacking.execEntAlertNotes}"
+                             disabled="#{bindings.Alertid.inputValue == null}">
+                    <af:setPropertyListener from="#{'ALERT'}" to="#{pageFlowScope.noteType}" type="action"/>
+                  </af:button>
+                  <af:button text="Set Legal Review" id="b42"
+                             actionListener="#{backingBeanScope.RequestBacking.notifyLegal}"
+                             disabled="#{bindings.Alertid.inputValue == null}">
+                    <af:setPropertyListener type="action" from="#{'XwrlResponseEntityColumnsView1'}"
+                                            to="#{pageFlowScope.notifyIterator}"/>
+                  </af:button>
+                  <af:button text="Refresh" id="beref" action="#{backingBeanScope.RequestBacking.refreshEntColumns}"
+                             disabled="#{bindings.Alertid.inputValue == null}"/>
+                  <af:button text="Alert Documents" id="b9" disabled="#{bindings.Alertid.inputValue == null}"
+                             action="entityDocument" rendered="false">
+                    <af:setPropertyListener from="#{'ALERT'}" to="#{pageFlowScope.docType}" type="action"/>
+                  </af:button>
+                  <af:button text="Group Notes" id="b11" partialTriggers="t1"
+                             actionListener="#{backingBeanScope.RequestBacking.bulkNotesShowPopup}"
+                             disabled="#{bindings.Alertid.inputValue == null}">
+                    <af:setPropertyListener type="action" from="#{'XwrlResponseEntityColumnsView1'}"
+                                            to="#{pageFlowScope.clearAlertIterator}"/>
+                  </af:button>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar">
+                <af:toolbar id="t3">
+                  <af:panelFormLayout maxColumns="3" rows="2" id="pfl1">
+                    <af:outputText value="Rows: #{bindings.XwrlResponseEntityColumnsView1Iterator.estimatedRowCount}"
+                                   id="ot41" partialTriggers="::d1 t1 beref"/>
+                    <af:outputText value="Open: #{pageFlowScope.EntOpCnt}" id="otOp" partialTriggers="::d1 t1 beref"/>
+                    <af:outputText value="Positive: #{pageFlowScope.EntPosCnt}" id="otPos"
+                                   partialTriggers="::d1 t1 beref"/>
+                    <af:outputText value="Possible: #{pageFlowScope.EntPossCnt}" id="otPoss"
+                                   partialTriggers="::d1 t1 beref"/>
+                    <af:outputText value="False Positive: #{pageFlowScope.EntFpCnt}" id="otFp"
+                                   partialTriggers="::d1 t1 beref"/>
+                  </af:panelFormLayout>
+                </af:toolbar>
+              </f:facet>
+              <af:table value="#{bindings.XwrlResponseEntityColumnsView1.collectionModel}" var="row"
+                        rows="#{bindings.XwrlResponseEntityColumnsView1.rangeSize}"
+                        emptyText="#{bindings.XwrlResponseEntityColumnsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        autoHeightRows="10" rowBandingInterval="0" displayRow="selected"
+                        filterModel="#{bindings.XwrlResponseEntityColumnsView1Query.queryDescriptor}"
+                        queryListener="#{bindings.XwrlResponseEntityColumnsView1Query.processQuery}"
+                        filterVisible="false"
+                        selectionListener="#{bindings.XwrlResponseEntityColumnsView1.collectionModel.makeCurrent}"
+                        rowSelection="multiple" fetchSize="#{bindings.XwrlResponseEntityColumnsView1.rangeSize}" id="t1"
+                        columnStretching="column:c1n" varStatus="vs">
+                <!-- T20200717.0031 - OWS TC - Display Summary column in Alerts table (IRI) -->
+                <af:column headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Summary.label}" id="c52">
+                  <af:outputText value="Show" id="ot62" rendered="#{!(row.Summary eq null or  row.Summary eq '')}"
+                                 shortDesc="#{row.Summary}" styleClass="outputTextAsLink">
+                    <af:showPopupBehavior popupId="p4" triggerType="click"/>
+                  </af:outputText>
+                  <af:popup childCreation="deferred" autoCancel="disabled" id="p4" contentDelivery="immediate">
+                    <af:noteWindow id="nw1" inlineStyle="background-color:white;">
+                      <af:inputText label="Label 41" id="it106" value="#{row.Summary}" readOnly="true" simple="true"
+                                    rows="10" columns="50" contentStyle="background-color:white;"/>
+                    </af:noteWindow>
+                  </af:popup>
+                </af:column>
+                <af:column headerText="Legal Review" width="50"
+                           sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.LegalReview.name}" id="c200"
+                           filterable="true">
+                  <af:selectBooleanCheckbox value="#{row.bindings.LegalReview.inputValue}"
+                                            label="#{row.bindings.LegalReview.label}" disabled="true"
+                                            shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.LegalReview.tooltip}"
+                                            id="sbc22"/>
+                  <f:facet name="filter">
+                    <!-- T20200803.0011 - Fwd: additional filter features and add notes tab (IRI) -->
+                    <af:selectOneChoice label="Label 2" id="soc64" simple="true"
+                                        value="#{vs.filterCriteria.LegalReviewAttr}" autoSubmit="true">
+                      <af:selectItem label="" value="" id="si53"/>
+                      <af:selectItem label="Checked" value="Y" id="si62"/>
+                      <af:selectItem label="Unchecked" value="N" id="si64"/>
+                    </af:selectOneChoice>
+                  </f:facet>
+                </af:column>
+                <af:column headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.LegalReviewAttr.label}" id="c110"
+                           rendered="false"
+                           sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.LegalReviewAttr.name}"
+                           filterable="true">
+                  <af:outputText value="#{row.LegalReviewAttr}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.LegalReviewAttr.tooltip}"
+                                 id="ot85"/>
+                </af:column>
+                <af:column headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.CorporateReview.label}" id="c1"
+                           width="50" sortable="true" filterable="true"
+                           sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.CorporateReview.name}">
+                  <af:selectBooleanCheckbox value="#{row.bindings.CorporateReview.inputValue}"
+                                            label="#{row.bindings.CorporateReview.label}"
+                                            shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.CorporateReview.tooltip}"
+                                            id="sbc5" disabled="true"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Rec.name}" sortable="true"
+                           width="50" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Rec.label}" id="c60">
+                  <af:outputText value="#{row.Rec}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Rec.tooltip}" id="ot70">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XwrlResponseEntityColumnsView1.hints.Rec.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listentityname.name}"
+                           sortable="true" width="225" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listentityname.label}" id="c1n">
+                  <af:outputText value="#{row.Listentityname}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listentityname.tooltip}"
+                                 id="ot1"/>
+                </af:column>
+                <af:column sortProperty="EBS State" filterable="true" sortable="true" visible="false"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.XState.label}" id="c64">
+                  <af:outputText value="#{row.XState}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.XState.tooltip}" id="ot74"/>
+                </af:column>
+                <af:column headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Stateattr.label}" id="c51"
+                           sortable="true"
+                           sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Stateattr.name}"
+                           filterable="true">
+                  <af:outputText value="#{row.Stateattr}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Stateattr.tooltip}"
+                                 id="ot28"/>
+                </af:column>
+                <af:column headerText="OWS State" filterable="true" id="c201" visible="false" sortable="true"
+                           sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.OwsAlertState.name}">
+                  <af:outputText value="#{row.OwsAlertState}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.OwsAlertState.tooltip}"
+                                 id="ot923"/>
+                </af:column>
+                <!-- T20200803.0011 - Fwd: additional filter features and add notes tab (IRI) : filterable attribute updated to true -->
+                <af:column headerText="Record State Match" id="c193" sortable="true" width="60"
+                           sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Samestate.name}"
+                           filterable="true" visible="#{pageFlowScope.superUser == 'Y'}">
+                  <af:selectBooleanCheckbox value="#{row.bindings.Samestate.inputValue}" disabled="true"
+                                            label="#{row.bindings.Samestate.label}"
+                                            shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Samestate.tooltip}"
+                                            id="sbc3"/>
+                  <f:facet name="filter">
+                    <af:selectOneChoice label="Label 3" id="soc65" autoSubmit="true" simple="true"
+                                        value="#{vs.filterCriteria.Samestate}">
+                      <af:selectItem label="" value="" id="si67"/>
+                      <af:selectItem label="Checked" value="Y" id="si68"/>
+                      <af:selectItem label="Unchecked" value="N" id="si69"/>
+                    </af:selectOneChoice>
+                  </f:facet>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listprimaryname.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listprimaryname.label}" id="c2">
+                  <af:outputText value="#{row.Listprimaryname}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listprimaryname.tooltip}"
+                                 id="ot2"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listnametype.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listnametype.label}" id="c3">
+                  <af:outputText value="#{row.Listnametype}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listnametype.tooltip}"
+                                 id="ot3"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listcountry.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listcountry.label}" id="c4">
+                  <af:outputText value="#{row.Listcountry}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listcountry.tooltip}"
+                                 id="ot4"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listcity.name}" sortable="true"
+                           filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listcity.label}" id="c5">
+                  <af:outputText value="#{row.Listcity}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listcity.tooltip}"
+                                 id="ot5"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listoperatingcountries.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listoperatingcountries.label}"
+                           id="c6">
+                  <af:outputText value="#{row.Listoperatingcountries}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listoperatingcountries.tooltip}"
+                                 id="ot6"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listregistrationcountries.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listregistrationcountries.label}"
+                           id="c7">
+                  <af:outputText value="#{row.Listregistrationcountries}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listregistrationcountries.tooltip}"
+                                 id="ot7"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Externalsources.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Externalsources.label}" id="c8">
+                  <af:outputText value="#{row.Externalsources}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Externalsources.tooltip}"
+                                 id="ot8"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Cachedextsources.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Cachedextsources.label}" id="c9">
+                  <af:outputText value="#{row.Cachedextsources}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Cachedextsources.tooltip}"
+                                 id="ot9"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Category.name}" sortable="true"
+                           width="100" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Category.label}" id="c10">
+                  <af:outputText value="#{row.Category}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Category.tooltip}"
+                                 id="ot10"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnvesselindicator.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnvesselindicator.label}"
+                           id="c11">
+                  <af:outputText value="#{row.Dnvesselindicator}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnvesselindicator.tooltip}"
+                                 id="ot11"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnvesselinfo.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnvesselinfo.label}" id="c12">
+                  <af:outputText value="#{row.Dnvesselinfo}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnvesselinfo.tooltip}"
+                                 id="ot12"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddeddate.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddeddate.label}" id="c13">
+                  <af:outputText value="#{row.Dnaddeddate}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddeddate.tooltip}"
+                                 id="ot13"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnlastupdateddate.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnlastupdateddate.label}"
+                           id="c14">
+                  <af:outputText value="#{row.Dnlastupdateddate}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnlastupdateddate.tooltip}"
+                                 id="ot14"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Matchscore.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Matchscore.label}" id="c15">
+                  <af:outputText value="#{row.Matchscore}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Matchscore.tooltip}"
+                                 id="ot15"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listid.name}" sortable="true"
+                           filterable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listid.label}"
+                           id="c53" visible="true">
+                  <af:outputText value="#{row.Listid}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listid.tooltip}" id="ot63"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listkey.name}" sortable="true"
+                           filterable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listkey.label}"
+                           id="c54" visible="true">
+                  <af:outputText value="#{row.Listkey}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listkey.tooltip}"
+                                 id="ot64"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listsubkey.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listsubkey.label}" id="c58"
+                           visible="false" rendered="false">
+                  <af:outputText value="#{row.Listsubkey}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listsubkey.tooltip}"
+                                 id="ot68"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Alertid.name}" sortable="true"
+                           filterable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Alertid.label}"
+                           id="c16" visible="false" rendered="false">
+                  <af:outputText value="#{row.Alertid}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Alertid.tooltip}"
+                                 id="ot16"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Casekey.name}" sortable="true"
+                           filterable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Casekey.label}"
+                           id="c17" visible="false" rendered="false">
+                  <af:outputText value="#{row.Casekey}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Casekey.tooltip}"
+                                 id="ot17"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddress.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddress.label}" id="c20"
+                           visible="false" rendered="false">
+                  <af:outputText value="#{row.Dnaddress}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddress.tooltip}"
+                                 id="ot20"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddresscountrycode.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddresscountrycode.label}"
+                           id="c21" visible="false" rendered="false">
+                  <af:outputText value="#{row.Dnaddresscountrycode}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddresscountrycode.tooltip}"
+                                 id="ot21"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnallcountrycodes.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnallcountrycodes.label}"
+                           id="c22" visible="false" rendered="false">
+                  <af:outputText value="#{row.Dnallcountrycodes}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnallcountrycodes.tooltip}"
+                                 id="ot22"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dncity.name}" sortable="true"
+                           filterable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dncity.label}"
+                           id="c23" visible="false" rendered="false">
+                  <af:outputText value="#{row.Dncity}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dncity.tooltip}" id="ot23"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnentityname.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnentityname.label}" id="c24"
+                           visible="false" rendered="false">
+                  <af:outputText value="#{row.Dnentityname}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnentityname.tooltip}"
+                                 id="ot24"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dninactiveflag.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dninactiveflag.label}" id="c25"
+                           visible="false" rendered="false">
+                  <af:outputText value="#{row.Dninactiveflag}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dninactiveflag.tooltip}"
+                                 id="ot25"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dninactivesincedate.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dninactivesincedate.label}"
+                           id="c26" visible="false" rendered="false">
+                  <af:outputText value="#{row.Dninactivesincedate}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dninactivesincedate.tooltip}"
+                                 id="ot26"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnnametype.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnnametype.label}" id="c27"
+                           visible="false" rendered="false">
+                  <af:outputText value="#{row.Dnnametype}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnnametype.tooltip}"
+                                 id="ot27"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnnamequality.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnnamequality.label}" id="c35"
+                           visible="false" rendered="false">
+                  <af:outputText value="#{row.Dnnamequality}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnnamequality.tooltip}"
+                                 id="ot49"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnoperatingcountrycodes.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnoperatingcountrycodes.label}"
+                           id="c41" visible="false" rendered="false">
+                  <af:outputText value="#{row.Dnoperatingcountrycodes}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnoperatingcountrycodes.tooltip}"
+                                 id="ot50"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnoriginalentityname.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnoriginalentityname.label}"
+                           id="c42" visible="false" rendered="false">
+                  <af:outputText value="#{row.Dnoriginalentityname}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnoriginalentityname.tooltip}"
+                                 id="ot52"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnpepclassification.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnpepclassification.label}"
+                           id="c43" visible="false" rendered="false">
+                  <af:outputText value="#{row.Dnpepclassification}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnpepclassification.tooltip}"
+                                 id="ot53"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnpostalcode.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnpostalcode.label}" id="c44"
+                           visible="false" rendered="false">
+                  <af:outputText value="#{row.Dnpostalcode}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnpostalcode.tooltip}"
+                                 id="ot54"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnprimaryname.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnprimaryname.label}" id="c45"
+                           visible="false" rendered="false">
+                  <af:outputText value="#{row.Dnprimaryname}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnprimaryname.tooltip}"
+                                 id="ot55"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnregistrationcountrycode.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnregistrationcountrycode.label}"
+                           id="c46" visible="false" rendered="false">
+                  <af:outputText value="#{row.Dnregistrationcountrycode}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnregistrationcountrycode.tooltip}"
+                                 id="ot56"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnregistrationnumber.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnregistrationnumber.label}"
+                           id="c47" visible="false" rendered="false">
+                  <af:outputText value="#{row.Dnregistrationnumber}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnregistrationnumber.tooltip}"
+                                 id="ot57"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnstate.name}" sortable="true"
+                           filterable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnstate.label}"
+                           id="c48" visible="false" rendered="false">
+                  <af:outputText value="#{row.Dnstate}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnstate.tooltip}"
+                                 id="ot58"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Id.name}" sortable="true"
+                           filterable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Id.label}"
+                           id="c49" visible="false" rendered="false">
+                  <af:outputText value="#{row.Id}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Id.tooltip}" id="ot59">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XwrlResponseEntityColumnsView1.hints.Id.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listoriginalscriptname.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listoriginalscriptname.label}"
+                           id="c55" visible="false" rendered="false">
+                  <af:outputText value="#{row.Listoriginalscriptname}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listoriginalscriptname.tooltip}"
+                                 id="ot65"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listrecordorigin.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listrecordorigin.label}" id="c56"
+                           visible="false" rendered="false">
+                  <af:outputText value="#{row.Listrecordorigin}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listrecordorigin.tooltip}"
+                                 id="ot66"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listrecordtype.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listrecordtype.label}" id="c57"
+                           visible="false" rendered="false">
+                  <af:outputText value="#{row.Listrecordtype}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listrecordtype.tooltip}"
+                                 id="ot67"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Matchrule.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Matchrule.label}" id="c59"
+                           visible="false" rendered="false">
+                  <af:outputText value="#{row.Matchrule}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Matchrule.tooltip}"
+                                 id="ot69"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.RequestId.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.RequestId.label}" id="c61"
+                           visible="false" rendered="false">
+                  <af:outputText value="#{row.RequestId}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.RequestId.tooltip}"
+                                 id="ot711">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XwrlResponseEntityColumnsView1.hints.RequestId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Riskscore.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Riskscore.label}" id="c62"
+                           visible="false" rendered="false">
+                  <af:outputText value="#{row.Riskscore}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Riskscore.tooltip}"
+                                 id="ot72"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Riskscorepep.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Riskscorepep.label}" id="c63"
+                           visible="false" rendered="false">
+                  <af:outputText value="#{row.Riskscorepep}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Riskscorepep.tooltip}"
+                                 id="ot73"/>
+                </af:column>
+                <af:column headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.CreatedByAttr.label}" id="c18"
+                           sortable="true" filterable="true"
+                           sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.CreatedByAttr.name}"
+                           visible="false">
+                  <af:selectOneChoice value="#{row.bindings.CreatedByAttr.inputValue}"
+                                      label="#{row.bindings.CreatedByAttr.label}"
+                                      required="#{bindings.XwrlResponseEntityColumnsView1.hints.CreatedByAttr.mandatory}"
+                                      shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.CreatedByAttr.tooltip}"
+                                      readOnly="true" id="soc49">
+                    <f:selectItems value="#{row.bindings.CreatedByAttr.items}" id="si49"/>
+                    <f:validator binding="#{row.bindings.CreatedByAttr.validator}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.CreationDate.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.CreationDate.label}" id="c19"
+                           visible="false">
+                  <f:facet name="filter">
+                    <af:inputDate value="#{bindings.XwrlResponseEntityColumnsView1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.CreationDate.value}"
+                                  id="id1g">
+                      <af:convertDateTime pattern="#{bindings.XwrlResponseEntityColumnsView1.hints.CreationDate.format}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:outputText value="#{row.CreationDate}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.CreationDate.tooltip}"
+                                 id="ot19">
+                    <af:convertDateTime pattern="#{bindings.XwrlResponseEntityColumnsView1.hints.CreationDate.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdatedByAttr.label}"
+                           id="c28" sortable="true" filterable="true"
+                           sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdatedByAttr.name}"
+                           visible="false">
+                  <af:selectOneChoice value="#{row.bindings.LastUpdatedByAttr.inputValue}"
+                                      label="#{row.bindings.LastUpdatedByAttr.label}"
+                                      required="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdatedByAttr.mandatory}"
+                                      shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdatedByAttr.tooltip}"
+                                      readOnly="true" id="soc50">
+                    <f:selectItems value="#{row.bindings.LastUpdatedByAttr.items}" id="si50"/>
+                    <f:validator binding="#{row.bindings.LastUpdatedByAttr.validator}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdateDate.name}"
+                           sortable="true" filterable="true"
+                           headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdateDate.label}" id="c50"
+                           visible="false">
+                  <f:facet name="filter">
+                    <af:inputDate value="#{bindings.XwrlResponseEntityColumnsView1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.LastUpdateDate.value}"
+                                  id="id2n">
+                      <af:convertDateTime pattern="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdateDate.format}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:outputText value="#{row.LastUpdateDate}"
+                                 shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdateDate.tooltip}"
+                                 id="ot60">
+                    <af:convertDateTime pattern="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdateDate.format}"/>
+                  </af:outputText>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelHeader>
+          <af:panelHeader text="Alert Rows" id="ph3">
+            <f:facet name="context">
+              <af:outputText value="#{bindings.Alertid.inputValue}" shortDesc="#{bindings.Alertid.hints.tooltip}"
+                             id="ot45"/>
+            </f:facet>
+            <f:facet name="menuBar"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelCollection id="pc2" styleClass="AFStretchWidth">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar"/>
+              <af:table value="#{bindings.XwrlResponseRowsView2.collectionModel}" var="row"
+                        rows="#{bindings.XwrlResponseRowsView2.rangeSize}"
+                        emptyText="#{bindings.XwrlResponseRowsView2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        autoHeightRows="15" rowBandingInterval="0" styleClass="AFStretchWidth"
+                        selectedRowKeys="#{bindings.XwrlResponseRowsView2.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.XwrlResponseRowsView2.collectionModel.makeCurrent}"
+                        rowSelection="single" fetchSize="#{bindings.XwrlResponseRowsView2.rangeSize}" id="t2"
+                        columnStretching="column:c38v">
+                <af:column sortProperty="#{bindings.XwrlResponseRowsView2.hints.DetRow.name}" sortable="true"
+                           headerText="#{bindings.XwrlResponseRowsView2.hints.DetRow.label}" id="c30" visible="false"
+                           rendered="false">
+                  <af:outputText value="#{row.DetRow}"
+                                 shortDesc="#{bindings.XwrlResponseRowsView2.hints.DetRow.tooltip}" id="ot30">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XwrlResponseRowsView2.hints.DetRow.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseRowsView2.hints.Display.name}" sortable="true"
+                           headerText="#{bindings.XwrlResponseRowsView2.hints.Display.label}" id="c31" visible="false"
+                           rendered="false">
+                  <af:outputText value="#{row.Display}"
+                                 shortDesc="#{bindings.XwrlResponseRowsView2.hints.Display.tooltip}" id="ot31"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseRowsView2.hints.Id.name}" sortable="true"
+                           headerText="#{bindings.XwrlResponseRowsView2.hints.Id.label}" id="c32" visible="false"
+                           rendered="false">
+                  <af:outputText value="#{row.Id}" shortDesc="#{bindings.XwrlResponseRowsView2.hints.Id.tooltip}"
+                                 id="ot32">
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.XwrlResponseRowsView2.hints.Id.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseRowsView2.hints.Key1.name}" sortable="true"
+                           headerText="#{bindings.XwrlResponseRowsView2.hints.Key1.label}" id="c33" visible="false"
+                           rendered="false">
+                  <af:outputText value="#{row.Key1}" shortDesc="#{bindings.XwrlResponseRowsView2.hints.Key1.tooltip}"
+                                 id="ot33"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseRowsView2.hints.OwsId.name}" sortable="true"
+                           headerText="#{bindings.XwrlResponseRowsView2.hints.OwsId.label}" id="c39" visible="false"
+                           rendered="false">
+                  <af:outputText value="#{row.OwsId}" shortDesc="#{bindings.XwrlResponseRowsView2.hints.OwsId.tooltip}"
+                                 id="ot38"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseRowsView2.hints.Path.name}" sortable="true"
+                           headerText="#{bindings.XwrlResponseRowsView2.hints.Path.label}" id="c40" visible="false"
+                           rendered="false">
+                  <af:outputText value="#{row.Path}" shortDesc="#{bindings.XwrlResponseRowsView2.hints.Path.tooltip}"
+                                 id="ot39"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseRowsView2.hints.RecRow.name}" sortable="true"
+                           headerText="#{bindings.XwrlResponseRowsView2.hints.RecRow.label}" id="c65" visible="false"
+                           rendered="false">
+                  <af:outputText value="#{row.RecRow}"
+                                 shortDesc="#{bindings.XwrlResponseRowsView2.hints.RecRow.tooltip}" id="ot40">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XwrlResponseRowsView2.hints.RecRow.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseRowsView2.hints.RequestId.name}" sortable="true"
+                           headerText="#{bindings.XwrlResponseRowsView2.hints.RequestId.label}" id="c66" visible="false"
+                           rendered="false">
+                  <af:outputText value="#{row.RequestId}"
+                                 shortDesc="#{bindings.XwrlResponseRowsView2.hints.RequestId.tooltip}" id="ot75">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XwrlResponseRowsView2.hints.RequestId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseRowsView2.hints.SortId.name}" sortable="true"
+                           headerText="#{bindings.XwrlResponseRowsView2.hints.SortId.label}" id="c67" visible="false"
+                           rendered="false">
+                  <af:outputText value="#{row.SortId}"
+                                 shortDesc="#{bindings.XwrlResponseRowsView2.hints.SortId.tooltip}" id="ot76">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XwrlResponseRowsView2.hints.SortId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseRowsView2.hints.Label.name}" sortable="true"
+                           headerText="#{bindings.XwrlResponseRowsView2.hints.Label.label}" id="c34" width="150">
+                  <af:outputText value="#{row.Label}" shortDesc="#{bindings.XwrlResponseRowsView2.hints.Label.tooltip}"
+                                 id="ot34"/>
+                </af:column>
+                <af:column headerText="#{bindings.XwrlResponseRowsView2.hints.Value.label}" id="c38v" sortable="true"
+                           sortProperty="#{bindings.XwrlResponseRowsView2.hints.Value.name}">
+                  <af:outputText value="#{row.Value}" styleClass="PreWrap"
+                                 visible="#{row.Key1!='CachedExtSources' &amp;&amp; row.Key1!='ExternalSources'}"
+                                 shortDesc="#{bindings.XwrlResponseRowsView2.hints.Value.tooltip}" id="ot318"/>
+                  <af:outputText value="#{row.Value}" id="ot43"
+                                visible="#{(row.Key1=='CachedExtSources' || row.Key1=='ExternalSources') and row.Value == 'Alert: Cached Link details are not complete please login to https://www.world-check.com/frontend/login/ with the current UID in order to proceed'}"/>
+                  <af:panelGroupLayout layout="scroll"
+                                       visible="#{(row.Key1=='CachedExtSources' || row.Key1=='ExternalSources') and row.Value != 'Alert: Cached Link details are not complete please login to https://www.world-check.com/frontend/login/ with the current UID in order to proceed'}"
+                                       id="pgl9">
+                    <c:set var="lnks" value="${fn:split(row.Value, ' ')}"/>
+                    <!--fmt:formatNumber  var="ln"  type= "number"  value="${fn:length(dateParts)}" />
+                                    
+                                    <c:set var="lnVar" value="${ln}" />
+                               
+                               <af:outputText value="#{row.Value}"  id="lnks" styleClass="PreWrap"/-->
+                    <c:catch>
+                      <af:forEach var="i" begin="0" end="200">
+                        <af:link destination="${lnks[i]}" text="${lnks[i]}" targetFrame="_blank" id="l1" styleClass="PreWrap"/>
+                      </af:forEach>
+                    </c:catch>
+                  </af:panelGroupLayout>
+                </af:column>
+                <af:column headerText="#{bindings.XwrlResponseRowsView2.hints.CreatedByAttr.label}" id="c37"
+                           sortable="true" sortProperty="#{bindings.XwrlResponseRowsView2.hints.CreatedByAttr.name}"
+                           visible="false">
+                  <af:selectOneChoice value="#{row.bindings.CreatedByAttr.inputValue}"
+                                      label="#{row.bindings.CreatedByAttr.label}"
+                                      required="#{bindings.XwrlResponseRowsView2.hints.CreatedByAttr.mandatory}"
+                                      shortDesc="#{bindings.XwrlResponseRowsView2.hints.CreatedByAttr.tooltip}"
+                                      readOnly="true" id="soc51">
+                    <f:selectItems value="#{row.bindings.CreatedByAttr.items}" id="si51"/>
+                    <f:validator binding="#{row.bindings.CreatedByAttr.validator}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column headerText="#{bindings.XwrlResponseRowsView2.hints.LastUpdatedByAttr.label}" id="c38"
+                           sortable="true" sortProperty="#{bindings.XwrlResponseRowsView2.hints.LastUpdatedByAttr.name}"
+                           visible="false">
+                  <af:selectOneChoice value="#{row.bindings.LastUpdatedByAttr.inputValue}"
+                                      label="#{row.bindings.LastUpdatedByAttr.label}"
+                                      required="#{bindings.XwrlResponseRowsView2.hints.LastUpdatedByAttr.mandatory}"
+                                      shortDesc="#{bindings.XwrlResponseRowsView2.hints.LastUpdatedByAttr.tooltip}"
+                                      readOnly="true" id="soc52">
+                    <f:selectItems value="#{row.bindings.LastUpdatedByAttr.items}" id="si52"/>
+                    <f:validator binding="#{row.bindings.LastUpdatedByAttr.validator}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlResponseRowsView2.hints.LastUpdateDate.name}" sortable="true"
+                           headerText="#{bindings.XwrlResponseRowsView2.hints.LastUpdateDate.label}" id="c36"
+                           visible="false">
+                  <af:outputText value="#{row.LastUpdateDate}"
+                                 shortDesc="#{bindings.XwrlResponseRowsView2.hints.LastUpdateDate.tooltip}" id="ot35">
+                    <af:convertDateTime pattern="#{bindings.XwrlResponseRowsView2.hints.LastUpdateDate.format}"/>
+                  </af:outputText>
+                  <af:column sortProperty="#{bindings.XwrlResponseRowsView2.hints.CreationDate.name}" sortable="true"
+                             headerText="#{bindings.XwrlResponseRowsView2.hints.CreationDate.label}" id="c29"
+                             visible="false">
+                    <af:outputText value="#{row.CreationDate}"
+                                   shortDesc="#{bindings.XwrlResponseRowsView2.hints.CreationDate.tooltip}" id="ot29">
+                      <af:convertDateTime pattern="#{bindings.XwrlResponseRowsView2.hints.CreationDate.format}"/>
+                    </af:outputText>
+                  </af:column>
+                </af:column>
+              </af:table>
+              <f:facet name="statusbar">
+                <af:toolbar id="t4">
+                  <af:outputText value="Rows: #{bindings.XwrlResponseRowsView2Iterator.estimatedRowCount}" id="ot42"
+                                 partialTriggers="t2"/>
+                </af:toolbar>
+              </f:facet>
+            </af:panelCollection>
+          </af:panelHeader>
+          <!-- Alert Start -->
+          <af:panelHeader text="Alert Notes" id="iamph">
+            <f:facet name="context">
+              <af:outputText value="#{bindings.Alertid.inputValue}" shortDesc="#{bindings.Alertid.hints.tooltip}"
+                             id="iaot11"/>
+            </f:facet>
+            <!--af:panelSplitter id="iaps1" splitterPosition="400" collapsed="true">
+      <f:facet name="first"-->
+            <!--af:panelHeader text="Search" id="iaph"  rendered="false">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="legend"/>
+          <f:facet name="info"/>
+          <af:query id="ainqry" headerText="Search" disclosed="true"
+                    value="#{bindings.XwrlAlertNotesViewCriteriaQuery.queryDescriptor}"
+                    model="#{bindings.XwrlAlertNotesViewCriteriaQuery.queryModel}"
+                    queryListener="#{bindings.XwrlAlertNotesViewCriteriaQuery.processQuery}"
+                    queryOperationListener="#{bindings.XwrlAlertNotesViewCriteriaQuery.processQueryOperation}"
+                    resultComponentId="::iaspc1:iaat" saveQueryMode="hidden" displayMode="compact"
+                    modeChangeVisible="false"/>
+        </af:panelHeader-->
+            <!--/f:facet>
+      <f:facet name="second"-->
+            <!--af:panelHeader text=" " id="iasph">
+          <f:facet name="context"/>
+          <f:facet name="menuBar"/>
+          
+          <f:facet name="legend"/>
+          <f:facet name="info"/-->
+            <af:panelCollection id="iaspc1" styleClass="AFStretchWidth">
+              <f:facet name="menus"/>
+              <f:facet name="toolbar">
+                <af:toolbar id="iatt1">
+                  <af:button text="Add" id="iabadd" actionListener="#{backingBeanScope.RequestBacking.editShowPopup}"
+                             disabled="#{bindings.Alertid.inputValue == null}">
+                    <f:attribute name="iterBinding" value="XwrlAlertNotesView2Iterator"/>
+                    <f:attribute name="dataIterBinding" value="XwrlAlertNotesXrefView2Iterator"/>
+                    <f:attribute name="masterIterBinding" value="XwrlResponseEntityColumnsView1Iterator"/>
+                  </af:button>
+                  <af:button text="Edit" id="iabedt" actionListener="#{backingBeanScope.RequestBacking.editShowPopup}"
+                             disabled="#{!bindings.Delete.enabled}">
+                    <f:attribute name="iterBinding" value="XwrlAlertNotesView2Iterator"/>
+                    <f:attribute name="dataIterBinding" value="XwrlAlertNotesXrefView2Iterator"/>
+                    <f:attribute name="masterIterBinding" value="XwrlResponseEntityColumnsView1Iterator"/>
+                  </af:button>
+                  <af:button actionListener="#{backingBeanScope.RequestBacking.deleteShowPopup}" text="Delete"
+                             disabled="#{!bindings.Delete.enabled}" id="iabdel">
+                    <f:attribute name="iterBinding" value="XwrlAlertNotesView2Iterator"/>
+                    <f:attribute name="dataIterBinding" value="XwrlAlertNotesXrefView2Iterator"/>
+                    <f:attribute name="masterIterBinding" value="XwrlResponseEntityColumnsView1Iterator"/>
+                  </af:button>
+                  <af:button actionListener="#{bindings.Execute.execute}" text="Refresh"
+                             disabled="#{!bindings.Delete.enabled}" id="iabrf"/>
+                  <af:button actionListener="#{bindings.Commit.execute}" text="Commit"
+                             disabled="#{!bindings.Commit.enabled}" id="iabcm" rendered="false"/>
+                  <af:button actionListener="#{bindings.Rollback.execute}" text="Rollback"
+                             disabled="#{!bindings.Rollback.enabled}" immediate="true" id="iabrb" rendered="false">
+                    <af:resetActionListener/>
+                  </af:button>
+                </af:toolbar>
+              </f:facet>
+              <af:table value="#{bindings.XwrlAlertNotesXrefView2.collectionModel}" var="row"
+                        rows="#{bindings.XwrlAlertNotesXrefView2.rangeSize}"
+                        emptyText="#{bindings.XwrlAlertNotesXrefView2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        rowBandingInterval="0"
+                        selectedRowKeys="#{bindings.XwrlAlertNotesXrefView2.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.XwrlAlertNotesXrefView2.collectionModel.makeCurrent}"
+                        rowSelection="single" fetchSize="#{bindings.XwrlAlertNotesXrefView2.rangeSize}" id="iaat"
+                        columnStretching="column:ianc5"
+                        partialTriggers="::iabadd ::iabedt ::iabdel ::iabrf ::iabcm ::iabrb">
+                <af:column sortProperty="#{bindings.XwrlAlertNotesXrefView2.hints.Id.name}" sortable="true"
+                           headerText="#{bindings.XwrlAlertNotesXrefView2.hints.Id.label}" id="ianc1" width="50">
+                  <af:outputText value="#{row.Id}" shortDesc="#{bindings.XwrlAlertNotesXrefView2.hints.Id.tooltip}"
+                                 id="ianot1">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XwrlAlertNotesXrefView2.hints.Id.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlAlertNotesXrefView2.hints.RequestId.name}" sortable="true"
+                           headerText="#{bindings.XwrlAlertNotesXrefView2.hints.RequestId.label}" id="ianc2"
+                           visible="false">
+                  <af:outputText value="#{row.RequestId}"
+                                 shortDesc="#{bindings.XwrlAlertNotesXrefView2.hints.RequestId.tooltip}" id="ianot2">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XwrlAlertNotesXrefView2.hints.RequestId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlAlertNotesXrefView2.hints.AlertId.name}" sortable="true"
+                           headerText="#{bindings.XwrlAlertNotesXrefView2.hints.AlertId.label}" id="ianc3"
+                           visible="false">
+                  <af:outputText value="#{row.AlertId}"
+                                 shortDesc="#{bindings.XwrlAlertNotesXrefView2.hints.AlertId.tooltip}" id="ianot3"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlAlertNotesXrefView2.hints.LineNumber.name}" sortable="true"
+                           headerText="#{bindings.XwrlAlertNotesXrefView2.hints.LineNumber.label}" id="ianc4"
+                           width="50">
+                  <af:outputText value="#{row.LineNumber}"
+                                 shortDesc="#{bindings.XwrlAlertNotesXrefView2.hints.LineNumber.tooltip}" id="ianot4">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.XwrlAlertNotesXrefView2.hints.LineNumber.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlAlertNotesXrefView2.hints.Note.name}" sortable="true"
+                           headerText="#{bindings.XwrlAlertNotesXrefView2.hints.Note.label}" id="ianc5">
+                  <af:outputText value="#{row.Note}" shortDesc="#{bindings.XwrlAlertNotesXrefView2.hints.Note.tooltip}"
+                                 id="ianot5" styleClass="PreWrap"/>
+                </af:column>
+                <af:column headerText="Last Updated By" id="ianc5n" sortable="true" width="200"
+                           sortProperty="#{bindings.XwrlAlertNotesXrefView2.hints.Lastupdatedbyattr.name}">
+                  <af:outputText value="#{row.Lastupdatedbyattr}"
+                                 shortDesc="#{bindings.XwrlAlertNotesXrefView2.hints.Lastupdatedbyattr.tooltip}"
+                                 id="ianot7"/>
+                </af:column>
+                <af:column headerText="Created By" id="iancby" sortable="true" width="200" visible="false"
+                           sortProperty="#{bindings.XwrlAlertNotesXrefView2.hints.Createdbyattr.name}">
+                  <af:outputText value="#{row.Createdbyattr}"
+                                 shortDesc="#{bindings.XwrlAlertNotesXrefView2.hints.Createdbyattr.tooltip}"
+                                 id="ianot9"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlAlertNotesXrefView2.hints.CreationDate.name}" sortable="true"
+                           headerText="#{bindings.XwrlAlertNotesXrefView2.hints.CreationDate.label}" id="ianc8"
+                           width="150" visible="false">
+                  <af:outputText value="#{row.CreationDate}"
+                                 shortDesc="#{bindings.XwrlAlertNotesXrefView2.hints.CreationDate.tooltip}" id="ianot8">
+                    <af:convertDateTime pattern="#{bindings.XwrlAlertNotesXrefView2.hints.CreationDate.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.XwrlAlertNotesXrefView2.hints.LastUpdateDate.name}" sortable="true"
+                           headerText="#{bindings.XwrlAlertNotesXrefView2.hints.LastUpdateDate.label}" id="ianc6"
+                           width="150" visible="false">
+                  <af:outputText value="#{row.LastUpdateDate}"
+                                 shortDesc="#{bindings.XwrlAlertNotesXrefView2.hints.LastUpdateDate.tooltip}"
+                                 id="ianot6">
+                    <af:convertDateTime pattern="#{bindings.XwrlAlertNotesXrefView2.hints.LastUpdateDate.format}"/>
+                  </af:outputText>
+                </af:column>
+              </af:table>
+              <f:facet name="statusbar"/>
+              <af:popup childCreation="deferred" autoCancel="disabled" id="iap1"
+                        popupCanceledListener="#{backingBeanScope.RequestBacking.editPopupCancelListener}"
+                        popupFetchListener="#{backingBeanScope.RequestBacking.editPopFetchListener}"
+                        contentDelivery="lazyUncached">
+                <af:dialog id="iad1" contentWidth="700" contentHeight="400" resize="on"
+                           dialogListener="#{backingBeanScope.RequestBacking.editDialogListener}">
+                  <f:facet name="buttonBar"/>
+                  <af:panelHeader text="Alert Note" id="iaph4">
+                    <f:facet name="context"/>
+                    <f:facet name="menuBar"/>
+                    <f:facet name="toolbar">
+                      <af:button text="Template" id="iab7"
+                                 actionListener="#{backingBeanScope.RequestBacking.templateShowPopup}" immediate="true">
+                        <af:setPropertyListener from="#{'ALERT'}" to="#{pageFlowScope.varNoteType}" type="action"/>
+                        <af:setPropertyListener from="#{'ENTITY'}" to="#{pageFlowScope.varNoteCategory}" type="action"/>
+                      </af:button>
+                    </f:facet>
+                    <f:facet name="legend"/>
+                    <f:facet name="info"/>
+                    <af:panelFormLayout id="iapfl1">
+                      <af:inputText value="#{bindings.AId.inputValue}" label="#{bindings.AId.hints.label}"
+                                    required="#{bindings.AId.hints.mandatory}"
+                                    columns="#{bindings.AId.hints.displayWidth}"
+                                    maximumLength="#{bindings.AId.hints.precision}"
+                                    shortDesc="#{bindings.AId.hints.tooltip}" id="iait1" visible="false">
+                        <f:validator binding="#{bindings.AId.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.AId.format}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.RequestId.inputValue}" label="#{bindings.RequestId.hints.label}"
+                                    required="#{bindings.RequestId.hints.mandatory}"
+                                    columns="#{bindings.RequestId.hints.displayWidth}"
+                                    maximumLength="#{bindings.RequestId.hints.precision}"
+                                    shortDesc="#{bindings.RequestId.hints.tooltip}" id="iait2" visible="false">
+                        <f:validator binding="#{bindings.RequestId.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.RequestId.format}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.AlertId.inputValue}" label="#{bindings.AlertId.hints.label}"
+                                    required="#{bindings.AlertId.hints.mandatory}" readOnly="true"
+                                    columns="#{bindings.AlertId.hints.displayWidth}"
+                                    maximumLength="#{bindings.AlertId.hints.precision}"
+                                    shortDesc="#{bindings.AlertId.hints.tooltip}" id="iait3">
+                        <f:validator binding="#{bindings.AlertId.validator}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.LineNumber.inputValue}" label="#{bindings.LineNumber.hints.label}"
+                                    required="#{bindings.LineNumber.hints.mandatory}" readOnly="true"
+                                    columns="#{bindings.LineNumber.hints.displayWidth}"
+                                    maximumLength="#{bindings.LineNumber.hints.precision}"
+                                    shortDesc="#{bindings.LineNumber.hints.tooltip}" id="iait4">
+                        <f:validator binding="#{bindings.LineNumber.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.LineNumber.format}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.Note.inputValue}" label="#{bindings.Note.hints.label}"
+                                    required="#{bindings.Note.hints.mandatory}"
+                                    columns="#{bindings.Note.hints.displayWidth}"
+                                    maximumLength="#{bindings.Note.hints.precision}"
+                                    shortDesc="#{bindings.Note.hints.tooltip}" id="iait5" contentStyle="width: 375px;"
+                                    rows="20">
+                        <f:validator binding="#{bindings.Note.validator}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.ALastUpdateDate.inputValue}"
+                                    label="#{bindings.ALastUpdateDate.hints.label}"
+                                    required="#{bindings.ALastUpdateDate.hints.mandatory}"
+                                    columns="#{bindings.ALastUpdateDate.hints.displayWidth}"
+                                    shortDesc="#{bindings.ALastUpdateDate.hints.tooltip}" id="iaid1" visible="false">
+                        <f:validator binding="#{bindings.ALastUpdateDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.ALastUpdateDate.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.ALastUpdatedBy.inputValue}"
+                                    label="#{bindings.ALastUpdatedBy.hints.label}"
+                                    required="#{bindings.ALastUpdatedBy.hints.mandatory}"
+                                    columns="#{bindings.ALastUpdatedBy.hints.displayWidth}"
+                                    maximumLength="#{bindings.ALastUpdatedBy.hints.precision}"
+                                    shortDesc="#{bindings.ALastUpdatedBy.hints.tooltip}" id="iait6" visible="false">
+                        <f:validator binding="#{bindings.ALastUpdatedBy.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.ALastUpdatedBy.format}"/>
+                      </af:inputText>
+                      <af:inputDate value="#{bindings.ACreationDate.inputValue}"
+                                    label="#{bindings.ACreationDate.hints.label}"
+                                    required="#{bindings.ACreationDate.hints.mandatory}"
+                                    columns="#{bindings.ACreationDate.hints.displayWidth}"
+                                    shortDesc="#{bindings.ACreationDate.hints.tooltip}" id="iaid2" visible="false">
+                        <f:validator binding="#{bindings.ACreationDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.ACreationDate.format}"/>
+                      </af:inputDate>
+                      <af:inputText value="#{bindings.ACreatedBy.inputValue}" label="#{bindings.ACreatedBy.hints.label}"
+                                    required="#{bindings.ACreatedBy.hints.mandatory}"
+                                    columns="#{bindings.ACreatedBy.hints.displayWidth}"
+                                    maximumLength="#{bindings.ACreatedBy.hints.precision}"
+                                    shortDesc="#{bindings.ACreatedBy.hints.tooltip}" id="iait7" visible="false">
+                        <f:validator binding="#{bindings.ACreatedBy.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.ACreatedBy.format}"/>
+                      </af:inputText>
+                      <af:inputText value="#{bindings.ALastUpdateLogin.inputValue}"
+                                    label="#{bindings.ALastUpdateLogin.hints.label}"
+                                    required="#{bindings.ALastUpdateLogin.hints.mandatory}"
+                                    columns="#{bindings.ALastUpdateLogin.hints.displayWidth}"
+                                    maximumLength="#{bindings.ALastUpdateLogin.hints.precision}"
+                                    shortDesc="#{bindings.ALastUpdateLogin.hints.tooltip}" id="iait8" visible="false">
+                        <f:validator binding="#{bindings.ALastUpdateLogin.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.ALastUpdateLogin.format}"/>
+                      </af:inputText>
+                      <f:facet name="footer">
+                        <af:popup childCreation="deferred" autoCancel="disabled" id="iap2"
+                                  contentDelivery="lazyUncached">
+                          <af:dialog id="iad2" contentWidth="800" contentHeight="400"
+                                     dialogListener="#{backingBeanScope.RequestBacking.templateDialogListener}"
+                                     title="Templates" resize="on" stretchChildren="first">
+                            <f:facet name="buttonBar"/>
+                            <af:panelCollection id="iapc2">
+                              <f:facet name="menus"/>
+                              <f:facet name="toolbar"/>
+                              <f:facet name="statusbar"/>
+                              <af:table value="#{bindings.XwrlNoteTemplatesView1.collectionModel}" var="row"
+                                        rows="#{bindings.XwrlNoteTemplatesView1.rangeSize}"
+                                        emptyText="#{bindings.XwrlNoteTemplatesView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                                        rowBandingInterval="0"
+                                        selectedRowKeys="#{bindings.XwrlNoteTemplatesView1.collectionModel.selectedRow}"
+                                        selectionListener="#{bindings.XwrlNoteTemplatesView1.collectionModel.makeCurrent}"
+                                        rowSelection="single" fetchSize="#{bindings.XwrlNoteTemplatesView1.rangeSize}"
+                                        id="iantt2" columnStretching="column:c5n">
+                                <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.Id.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.XwrlNoteTemplatesView1.hints.Id.label}" id="iantc1"
+                                           visible="false">
+                                  <af:outputText value="#{row.Id}"
+                                                 shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.Id.tooltip}"
+                                                 id="iantot12">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlNoteTemplatesView1.hints.Id.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.SortKey.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.XwrlNoteTemplatesView1.hints.SortKey.label}"
+                                           id="iantc2" width="50">
+                                  <af:outputText value="#{row.SortKey}"
+                                                 shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.SortKey.tooltip}"
+                                                 id="iantot13">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlNoteTemplatesView1.hints.SortKey.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.NoteType.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.XwrlNoteTemplatesView1.hints.NoteType.label}"
+                                           id="iantc3">
+                                  <af:outputText value="#{row.NoteType}"
+                                                 shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.NoteType.tooltip}"
+                                                 id="iantot14"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.NoteCategory.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.XwrlNoteTemplatesView1.hints.NoteCategory.label}"
+                                           id="iantc4">
+                                  <af:outputText value="#{row.NoteCategory}"
+                                                 shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.NoteCategory.tooltip}"
+                                                 id="iantot15"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.Note.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.XwrlNoteTemplatesView1.hints.Note.label}"
+                                           id="iantc5n">
+                                  <af:outputText value="#{row.Note}"
+                                                 shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.Note.tooltip}"
+                                                 id="iantot16"/>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdateDate.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdateDate.label}"
+                                           id="iantc6" visible="false">
+                                  <af:outputText value="#{row.LastUpdateDate}"
+                                                 shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdateDate.tooltip}"
+                                                 id="iantot17">
+                                    <af:convertDateTime pattern="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdateDate.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdatedBy.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdatedBy.label}"
+                                           id="iantc7" visible="false">
+                                  <af:outputText value="#{row.LastUpdatedBy}"
+                                                 shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdatedBy.tooltip}"
+                                                 id="iantot18">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdatedBy.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.CreationDate.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.XwrlNoteTemplatesView1.hints.CreationDate.label}"
+                                           id="iantc8" visible="false">
+                                  <af:outputText value="#{row.CreationDate}"
+                                                 shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.CreationDate.tooltip}"
+                                                 id="iantot19">
+                                    <af:convertDateTime pattern="#{bindings.XwrlNoteTemplatesView1.hints.CreationDate.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.CreatedBy.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.XwrlNoteTemplatesView1.hints.CreatedBy.label}"
+                                           id="iantc9" visible="false">
+                                  <af:outputText value="#{row.CreatedBy}"
+                                                 shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.CreatedBy.tooltip}"
+                                                 id="iantot20">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlNoteTemplatesView1.hints.CreatedBy.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                                <af:column sortProperty="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdateLogin.name}"
+                                           sortable="true"
+                                           headerText="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdateLogin.label}"
+                                           id="iantc10" visible="false">
+                                  <af:outputText value="#{row.LastUpdateLogin}"
+                                                 shortDesc="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdateLogin.tooltip}"
+                                                 id="iantot21">
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.XwrlNoteTemplatesView1.hints.LastUpdateLogin.format}"/>
+                                  </af:outputText>
+                                </af:column>
+                              </af:table>
+                            </af:panelCollection>
+                          </af:dialog>
+                        </af:popup>
+                      </f:facet>
+                    </af:panelFormLayout>
+                  </af:panelHeader>
+                </af:dialog>
+              </af:popup>
+              <af:popup childCreation="deferred" autoCancel="disabled" id="iap3" contentDelivery="lazyUncached">
+                <af:dialog id="iad3" title="Delete" resize="on" contentWidth="300" contentHeight="50"
+                           dialogListener="#{backingBeanScope.RequestBacking.deleteDialogListener}">
+                  <af:panelGridLayout id="iapgl1" dimensionsFrom="auto">
+                    <af:gridRow marginTop="5px" marginBottom="5px" id="iagr1">
+                      <af:gridCell marginStart="5px" width="100%" marginEnd="5px" id="iagc1" valign="middle"
+                                   halign="center">
+                        <af:outputText value="Are you sure you want to delete this record?" id="iaot22"/>
+                      </af:gridCell>
+                    </af:gridRow>
+                  </af:panelGridLayout>
+                  <f:facet name="buttonBar"/>
+                </af:dialog>
+              </af:popup>
+            </af:panelCollection>
+            <!--/af:panelHeader-->
+            <!--/f:facet>
+    </af:panelSplitter-->
+          </af:panelHeader>
+          <!-- Alert End -->
+        </af:panelGroupLayout>
+      </f:facet>
+    </af:panelSplitter>
+  </af:panelHeader>
+</ui:composition>

@@ -1,0 +1,395 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:table value="#{bindings.XwrlResponseEntityColumnsView1.collectionModel}" var="row"
+            rows="#{bindings.XwrlResponseEntityColumnsView1.rangeSize}"
+            emptyText="#{bindings.XwrlResponseEntityColumnsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+            rowBandingInterval="0"
+            selectedRowKeys="#{bindings.XwrlResponseEntityColumnsView1.collectionModel.selectedRow}"
+            rowSelection="multiple" fetchSize="#{bindings.XwrlResponseEntityColumnsView1.rangeSize}"
+            filterModel="#{bindings.XwrlResponseEntityColumnsView1Query.queryDescriptor}"
+            queryListener="#{bindings.XwrlResponseEntityColumnsView1Query.processQuery}" filterVisible="true"
+            varStatus="vs" id="t1">
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listentityname.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listentityname.label}"
+               id="c1">
+      <af:outputText value="#{row.Listentityname}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listentityname.tooltip}" id="ot1"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listprimaryname.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listprimaryname.label}"
+               id="c2">
+      <af:outputText value="#{row.Listprimaryname}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listprimaryname.tooltip}" id="ot2"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listnametype.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listnametype.label}" id="c3">
+      <af:outputText value="#{row.Listnametype}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listnametype.tooltip}" id="ot3"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listcountry.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listcountry.label}" id="c4">
+      <af:outputText value="#{row.Listcountry}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listcountry.tooltip}" id="ot4"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listcity.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listcity.label}" id="c5">
+      <af:outputText value="#{row.Listcity}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listcity.tooltip}" id="ot5"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listoperatingcountries.name}"
+               filterable="true" sortable="true"
+               headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listoperatingcountries.label}" id="c6">
+      <af:outputText value="#{row.Listoperatingcountries}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listoperatingcountries.tooltip}"
+                     id="ot6"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listregistrationcountries.name}"
+               filterable="true" sortable="true"
+               headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listregistrationcountries.label}" id="c7">
+      <af:outputText value="#{row.Listregistrationcountries}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listregistrationcountries.tooltip}"
+                     id="ot7"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Externalsources.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Externalsources.label}"
+               id="c8">
+      <af:outputText value="#{row.Externalsources}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Externalsources.tooltip}" id="ot8"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Cachedextsources.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Cachedextsources.label}"
+               id="c9">
+      <af:outputText value="#{row.Cachedextsources}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Cachedextsources.tooltip}" id="ot9"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Category.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Category.label}" id="c10">
+      <af:outputText value="#{row.Category}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Category.tooltip}" id="ot10"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnvesselindicator.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnvesselindicator.label}"
+               id="c11">
+      <af:outputText value="#{row.Dnvesselindicator}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnvesselindicator.tooltip}" id="ot11"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnvesselinfo.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnvesselinfo.label}"
+               id="c12">
+      <af:outputText value="#{row.Dnvesselinfo}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnvesselinfo.tooltip}" id="ot12"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddeddate.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddeddate.label}" id="c13">
+      <af:outputText value="#{row.Dnaddeddate}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddeddate.tooltip}" id="ot13"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnlastupdateddate.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnlastupdateddate.label}"
+               id="c14">
+      <af:outputText value="#{row.Dnlastupdateddate}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnlastupdateddate.tooltip}" id="ot14"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Matchscore.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Matchscore.label}" id="c15">
+      <af:outputText value="#{row.Matchscore}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Matchscore.tooltip}" id="ot15"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Alertid.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Alertid.label}" id="c16">
+      <af:outputText value="#{row.Alertid}" shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Alertid.tooltip}"
+                     id="ot16"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Casekey.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Casekey.label}" id="c17">
+      <af:outputText value="#{row.Casekey}" shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Casekey.tooltip}"
+                     id="ot17"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.CreatedBy.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.CreatedBy.label}" id="c18">
+      <af:selectOneChoice value="#{row.bindings.CreatedBy.inputValue}" label="#{row.bindings.CreatedBy.label}"
+                          required="#{bindings.XwrlResponseEntityColumnsView1.hints.CreatedBy.mandatory}"
+                          shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.CreatedBy.tooltip}" readOnly="true"
+                          id="soc1">
+        <f:selectItems value="#{row.bindings.CreatedBy.items}" id="si1"/>
+        <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+      </af:selectOneChoice>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.CreationDate.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.CreationDate.label}"
+               id="c19">
+      <f:facet name="filter">
+        <af:inputDate value="#{bindings.XwrlResponseEntityColumnsView1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.CreationDate.value}"
+                      id="id1">
+          <af:convertDateTime pattern="#{bindings.XwrlResponseEntityColumnsView1.hints.CreationDate.format}"/>
+        </af:inputDate>
+      </f:facet>
+      <af:outputText value="#{row.CreationDate}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.CreationDate.tooltip}" id="ot18">
+        <af:convertDateTime pattern="#{bindings.XwrlResponseEntityColumnsView1.hints.CreationDate.format}"/>
+      </af:outputText>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddress.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddress.label}" id="c20">
+      <af:outputText value="#{row.Dnaddress}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddress.tooltip}" id="ot19"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddresscountrycode.name}"
+               filterable="true" sortable="true"
+               headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddresscountrycode.label}" id="c21">
+      <af:outputText value="#{row.Dnaddresscountrycode}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnaddresscountrycode.tooltip}"
+                     id="ot20"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnallcountrycodes.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnallcountrycodes.label}"
+               id="c22">
+      <af:outputText value="#{row.Dnallcountrycodes}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnallcountrycodes.tooltip}" id="ot21"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dncity.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dncity.label}" id="c23">
+      <af:outputText value="#{row.Dncity}" shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dncity.tooltip}"
+                     id="ot22"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnentityname.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnentityname.label}"
+               id="c24">
+      <af:outputText value="#{row.Dnentityname}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnentityname.tooltip}" id="ot23"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dninactiveflag.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dninactiveflag.label}"
+               id="c25">
+      <af:outputText value="#{row.Dninactiveflag}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dninactiveflag.tooltip}" id="ot24"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dninactivesincedate.name}"
+               filterable="true" sortable="true"
+               headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dninactivesincedate.label}" id="c26">
+      <af:outputText value="#{row.Dninactivesincedate}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dninactivesincedate.tooltip}"
+                     id="ot25"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnnametype.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnnametype.label}" id="c27">
+      <af:outputText value="#{row.Dnnametype}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnnametype.tooltip}" id="ot26"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnnamequality.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnnamequality.label}"
+               id="c28">
+      <af:outputText value="#{row.Dnnamequality}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnnamequality.tooltip}" id="ot27"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnoperatingcountrycodes.name}"
+               filterable="true" sortable="true"
+               headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnoperatingcountrycodes.label}" id="c29">
+      <af:outputText value="#{row.Dnoperatingcountrycodes}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnoperatingcountrycodes.tooltip}"
+                     id="ot28"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnoriginalentityname.name}"
+               filterable="true" sortable="true"
+               headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnoriginalentityname.label}" id="c30">
+      <af:outputText value="#{row.Dnoriginalentityname}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnoriginalentityname.tooltip}"
+                     id="ot29"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnpepclassification.name}"
+               filterable="true" sortable="true"
+               headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnpepclassification.label}" id="c31">
+      <af:outputText value="#{row.Dnpepclassification}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnpepclassification.tooltip}"
+                     id="ot30"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnpostalcode.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnpostalcode.label}"
+               id="c32">
+      <af:outputText value="#{row.Dnpostalcode}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnpostalcode.tooltip}" id="ot31"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnprimaryname.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnprimaryname.label}"
+               id="c33">
+      <af:outputText value="#{row.Dnprimaryname}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnprimaryname.tooltip}" id="ot32"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnregistrationcountrycode.name}"
+               filterable="true" sortable="true"
+               headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnregistrationcountrycode.label}" id="c34">
+      <af:outputText value="#{row.Dnregistrationcountrycode}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnregistrationcountrycode.tooltip}"
+                     id="ot33"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnregistrationnumber.name}"
+               filterable="true" sortable="true"
+               headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnregistrationnumber.label}" id="c35">
+      <af:outputText value="#{row.Dnregistrationnumber}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnregistrationnumber.tooltip}"
+                     id="ot34"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnstate.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnstate.label}" id="c36">
+      <af:outputText value="#{row.Dnstate}" shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Dnstate.tooltip}"
+                     id="ot35"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Id.name}" filterable="true" sortable="true"
+               headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Id.label}" id="c37">
+      <af:outputText value="#{row.Id}" shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Id.tooltip}"
+                     id="ot36">
+        <af:convertNumber groupingUsed="false" pattern="#{bindings.XwrlResponseEntityColumnsView1.hints.Id.format}"/>
+      </af:outputText>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdateDate.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdateDate.label}"
+               id="c38">
+      <f:facet name="filter">
+        <af:inputDate value="#{bindings.XwrlResponseEntityColumnsView1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.LastUpdateDate.value}"
+                      id="id2">
+          <af:convertDateTime pattern="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdateDate.format}"/>
+        </af:inputDate>
+      </f:facet>
+      <af:outputText value="#{row.LastUpdateDate}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdateDate.tooltip}" id="ot37">
+        <af:convertDateTime pattern="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdateDate.format}"/>
+      </af:outputText>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdateLogin.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdateLogin.label}"
+               id="c39">
+      <af:outputText value="#{row.LastUpdateLogin}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdateLogin.tooltip}" id="ot38">
+        <af:convertNumber groupingUsed="false"
+                          pattern="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdateLogin.format}"/>
+      </af:outputText>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdatedBy.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdatedBy.label}"
+               id="c40">
+      <af:selectOneChoice value="#{row.bindings.LastUpdatedBy.inputValue}" label="#{row.bindings.LastUpdatedBy.label}"
+                          required="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdatedBy.mandatory}"
+                          shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdatedBy.tooltip}"
+                          readOnly="true" id="soc2">
+        <f:selectItems value="#{row.bindings.LastUpdatedBy.items}" id="si2"/>
+        <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+      </af:selectOneChoice>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listid.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listid.label}" id="c41">
+      <af:outputText value="#{row.Listid}" shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listid.tooltip}"
+                     id="ot39"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listkey.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listkey.label}" id="c42">
+      <af:outputText value="#{row.Listkey}" shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listkey.tooltip}"
+                     id="ot40"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listoriginalscriptname.name}"
+               filterable="true" sortable="true"
+               headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listoriginalscriptname.label}" id="c43">
+      <af:outputText value="#{row.Listoriginalscriptname}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listoriginalscriptname.tooltip}"
+                     id="ot41"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listrecordorigin.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listrecordorigin.label}"
+               id="c44">
+      <af:outputText value="#{row.Listrecordorigin}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listrecordorigin.tooltip}" id="ot42"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listrecordtype.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listrecordtype.label}"
+               id="c45">
+      <af:outputText value="#{row.Listrecordtype}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listrecordtype.tooltip}" id="ot43"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Listsubkey.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Listsubkey.label}" id="c46">
+      <af:outputText value="#{row.Listsubkey}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Listsubkey.tooltip}" id="ot44"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Matchrule.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Matchrule.label}" id="c47">
+      <af:outputText value="#{row.Matchrule}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Matchrule.tooltip}" id="ot45"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Rec.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Rec.label}" id="c48">
+      <af:outputText value="#{row.Rec}" shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Rec.tooltip}"
+                     id="ot46">
+        <af:convertNumber groupingUsed="false" pattern="#{bindings.XwrlResponseEntityColumnsView1.hints.Rec.format}"/>
+      </af:outputText>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.RequestId.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.RequestId.label}" id="c49">
+      <af:outputText value="#{row.RequestId}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.RequestId.tooltip}" id="ot47">
+        <af:convertNumber groupingUsed="false"
+                          pattern="#{bindings.XwrlResponseEntityColumnsView1.hints.RequestId.format}"/>
+      </af:outputText>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Riskscore.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Riskscore.label}" id="c50">
+      <af:outputText value="#{row.Riskscore}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Riskscore.tooltip}" id="ot48"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Riskscorepep.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Riskscorepep.label}"
+               id="c51">
+      <af:outputText value="#{row.Riskscorepep}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Riskscorepep.tooltip}" id="ot49"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.XState.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.XState.label}" id="c52">
+      <af:outputText value="#{row.XState}" shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.XState.tooltip}"
+                     id="ot50"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.LegalReview.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.LegalReview.label}" id="c53">
+      <af:outputText value="#{row.LegalReview}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.LegalReview.tooltip}" id="ot51"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Stateattr.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Stateattr.label}" id="c54">
+      <af:outputText value="#{row.Stateattr}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Stateattr.tooltip}" id="ot52"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.OwsAlertState.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.OwsAlertState.label}"
+               id="c55">
+      <af:outputText value="#{row.OwsAlertState}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.OwsAlertState.tooltip}" id="ot53"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.Samestate.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.Samestate.label}" id="c56">
+      <af:outputText value="#{row.Samestate}"
+                     shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.Samestate.tooltip}" id="ot54"/>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.CreatedByAttr.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.CreatedByAttr.label}"
+               id="c57">
+      <af:selectOneChoice value="#{row.bindings.CreatedByAttr.inputValue}" label="#{row.bindings.CreatedByAttr.label}"
+                          required="#{bindings.XwrlResponseEntityColumnsView1.hints.CreatedByAttr.mandatory}"
+                          shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.CreatedByAttr.tooltip}"
+                          readOnly="true" id="soc3">
+        <f:selectItems value="#{row.bindings.CreatedByAttr.items}" id="si3"/>
+        <f:validator binding="#{row.bindings.CreatedByAttr.validator}"/>
+      </af:selectOneChoice>
+    </af:column>
+    <af:column sortProperty="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdatedByAttr.name}" filterable="true"
+               sortable="true" headerText="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdatedByAttr.label}"
+               id="c58">
+      <af:selectOneChoice value="#{row.bindings.LastUpdatedByAttr.inputValue}"
+                          label="#{row.bindings.LastUpdatedByAttr.label}"
+                          required="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdatedByAttr.mandatory}"
+                          shortDesc="#{bindings.XwrlResponseEntityColumnsView1.hints.LastUpdatedByAttr.tooltip}"
+                          readOnly="true" id="soc4">
+        <f:selectItems value="#{row.bindings.LastUpdatedByAttr.items}" id="si4"/>
+        <f:validator binding="#{row.bindings.LastUpdatedByAttr.validator}"/>
+      </af:selectOneChoice>
+    </af:column>
+  </af:table>
+
+</ui:composition>

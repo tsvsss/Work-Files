@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="shipOrderTF">
+    <default-activity>filterShipOrderByNumber</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__5">
+      <name>OrderNumber</name>
+      <value>#{pageFlowScope.OrderNumber}</value>
+      <class>java.math.BigDecimal</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__4">
+      <name>p_batch_id</name>
+      <value>#{pageFlowScope.p_batch_id}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__6">
+      <name>p_header_id</name>
+      <value>#{pageFlowScope.p_header_id}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__9">
+      <name>param_user_id</name>
+      <value>#{sessionScope.param_user_id}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <managed-bean id="__1">
+      <managed-bean-name>ShipPartialOrderBean</managed-bean-name>
+      <managed-bean-class>com.rmi.shippartialorder.view.shipordertaskflow.ShipPartialOrderBean</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <view id="shipPartialOrder">
+      <page>/WEB-INF/com/rmi/shippartialorder/view/shipordertaskflow/shipPartialOrder.jsff</page>
+    </view>
+    <method-call id="filterShipOrderByNumber">
+      <method>#{bindings.filterShipOrderByNumber.execute}</method>
+      <outcome>
+        <fixed-outcome>filterShipOrderByNumber</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <control-flow-rule id="__2">
+      <from-activity-id>filterShipOrderByNumber</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>filterShipOrderByNumber</from-outcome>
+        <to-activity-id>shipPartialOrder</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>shipPartialOrder</from-activity-id>
+      <control-flow-case id="__8">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

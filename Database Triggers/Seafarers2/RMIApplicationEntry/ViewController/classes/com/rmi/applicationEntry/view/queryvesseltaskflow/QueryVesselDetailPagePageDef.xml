@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="QueryVesselDetailPagePageDef"
+                Package="com.rmi.applicationEntry.view.queryvesseltaskflow">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SearchVesselDetailDualView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="SearchVesselDetailDualViewIterator"/>
+    <iterator Binds="SearchVesselDetailView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="SearchVesselDetailViewIterator"/>
+    <searchRegion Binds="SearchVesselDetailViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="SearchVesselDetailViewQuery"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="SearchVesselDetailDualViewIterator" id="TranImoNumber">
+      <AttrNames>
+        <Item Value="TranImoNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchVesselDetailDualViewIterator" id="TranOfficialNumber">
+      <AttrNames>
+        <Item Value="TranOfficialNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SearchVesselDetailDualViewIterator" id="TranVesselName">
+      <AttrNames>
+        <Item Value="TranVesselName"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="SearchVesselDetailViewIterator" id="SearchVesselDetailView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SearchVesselDetailView"
+                      Name="SearchVesselDetailView0">
+        <AttrNames>
+          <Item Value="VesselPk"/>
+          <Item Value="ImoNumber"/>
+          <Item Value="Name"/>
+          <Item Value="OfficialNumber"/>
+          <Item Value="VsslStatus"/>
+          <Item Value="VsslType"/>
+          <Item Value="GrossTons"/>
+          <Item Value="PropulsionPower"/>
+          <Item Value="EngineType"/>
+          <Item Value="VsslRegDate"/>
+          <Item Value="PropulsionCode"/>
+          <Item Value="CompCode"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="clearVesselSearch" RequiresUpdateModel="true" Action="invokeMethod" MethodName="clearVesselSearch"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.clearVesselSearch_RMIApplicationEntryAppModuleDataControl_dataProvider_clearVesselSearch_result"/>
+    <methodAction id="searchVesselSearch" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="searchVesselSearch" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.searchVesselSearch_RMIApplicationEntryAppModuleDataControl_dataProvider_searchVesselSearch_result"/>
+  </bindings>
+</pageDefinition>

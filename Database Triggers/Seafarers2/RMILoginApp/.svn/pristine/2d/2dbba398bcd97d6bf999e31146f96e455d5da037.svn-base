@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<JLibraryNode nselem="JLibraryNode" class="oracle.jdeveloper.library.JLibraryNode" deployedByDefault="true" xmlns="http://xmlns.oracle.com/jdeveloper/110000jlibrarynode">
+   <classPath>
+      <entries>
+         <Item protocol="jar" path="file:/C:/IRI/Deployments/bcprov-jdk16-1.45.jar!/"/>
+         <Item protocol="jar" path="file:/C:/IRI/Deployments/fndext.jar!/"/>
+         <Item protocol="jar" path="file:/C:/IRI/Deployments/GenericTC.jar!/"/>
+         <Item protocol="jar" path="file:/C:/IRI/Deployments/RMIGradingApp.jar!/"/>
+         <Item protocol="jar" path="file:/C:/IRI/Deployments/ShippingOrders.jar!/"/>
+         <Item path="../../../IRI/Deployments/GenericTC.jar" jar-entry=""/>
+      </entries>
+   </classPath>
+   <docPath/>
+   <locked>true</locked>
+   <name>ADF Library Dependencies</name>
+   <sourcePath/>
+</JLibraryNode>

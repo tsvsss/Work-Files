@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+    <task-flow-definition id="ViewBatchTCTaskFlow">
+        <default-activity>editBatch</default-activity>
+        <data-control-scope>
+            <shared/>
+        </data-control-scope>
+        <input-parameter-definition id="__7">
+            <name>p_batch_id</name>
+            <value>#{pageFlowScope.p_batch_id}</value>
+            <class>java.lang.Integer</class>
+        </input-parameter-definition>
+        <input-parameter-definition id="__16">
+            <name>p_user_id</name>
+            <value>#{pageFlowScope.p_user_id}</value>
+            <class>java.lang.Integer</class>
+        </input-parameter-definition>
+        <input-parameter-definition id="__37">
+            <name>p_calling_tf</name>
+            <value>#{pageFlowScope.p_calling_tf}</value>
+            <class>java.lang.String</class>
+        </input-parameter-definition>
+        <input-parameter-definition id="__52">
+            <name>P_ESI_ID</name>
+            <value>#{pageFlowScope.P_ESI_ID}</value>
+            <class>java.lang.Integer</class>
+        </input-parameter-definition>
+        <managed-bean id="__1">
+            <managed-bean-name>viewBatchBean</managed-bean-name>
+            <managed-bean-class>com.rmi.tradecompapproval.view.viewbatchseafarer.ViewBatch</managed-bean-class>
+            <managed-bean-scope>pageFlow</managed-bean-scope>
+        </managed-bean>
+        <managed-bean id="__4">
+            <managed-bean-name>viewSeafarerDetailsBean</managed-bean-name>
+            <managed-bean-class>com.rmi.tradecompapproval.view.viewbatchseafarer.ViewSeafarerDetails</managed-bean-class>
+            <managed-bean-scope>pageFlow</managed-bean-scope>
+        </managed-bean>
+        <managed-bean id="__8">
+            <managed-bean-name>batchDetailBean</managed-bean-name>
+            <managed-bean-class>com.rmi.tradecompapproval.view.viewbatchseafarer.BatchDetail</managed-bean-class>
+            <managed-bean-scope>pageFlow</managed-bean-scope>
+        </managed-bean>
+        <!--<managed-bean id="__11">
+            <managed-bean-name>validateSeafarerBean</managed-bean-name>
+            <managed-bean-class>com.rmi.tradecompapproval.view.validateseafarer.ValidateSeafarerBean</managed-bean-class>
+            <managed-bean-scope>pageFlow</managed-bean-scope>
+        </managed-bean>-->
+        <managed-bean id="__12">
+            <managed-bean-name>ocVerificationBean</managed-bean-name>
+            <managed-bean-class>com.rmi.tradecompapproval.view.ocverification.OcVerificationBean</managed-bean-class>
+            <managed-bean-scope>pageFlow</managed-bean-scope>
+        </managed-bean>
+        <!--<managed-bean id="__20">
+            <managed-bean-name>searchSeafarerBean</managed-bean-name>
+            <managed-bean-class>com.rmi.tradecompapproval.view.validateseafarer.SearchSeafarerBean</managed-bean-class>
+            <managed-bean-scope>pageFlow</managed-bean-scope>
+        </managed-bean>-->
+        <managed-bean id="__24">
+            <managed-bean-name>enterOrdersBean</managed-bean-name>
+            <managed-bean-class>com.rmi.tradecompapproval.view.enterorders.EnterOrdersBean</managed-bean-class>
+            <managed-bean-scope>pageFlow</managed-bean-scope>
+        </managed-bean>
+        <view id="ViewBatchTC">
+            <page>/WEB-INF/com/rmi/tradecompapproval/view/viewbatchseafarer/ViewBatchTC.jsff</page>
+        </view>
+        <view id="ViewSeafarer">
+            <page>/WEB-INF/com/rmi/tradecompapproval/view/viewbatchseafarer/ViewSeafarer.jsff</page>
+        </view>
+        <method-call id="editBatch">
+            <method>#{bindings.editBatch.execute}</method>
+            <outcome>
+                <fixed-outcome>editBatch</fixed-outcome>
+            </outcome>
+        </method-call>
+        <view id="OCVerification">
+            <page>/WEB-INF/com/rmi/tradecompapproval/view/ocverification/OCVerification.jsff</page>
+        </view>
+        <method-call id="filterOcVerification">
+            <method>#{bindings.filterOcVerification.execute}</method>
+            <outcome>
+                <fixed-outcome>filterOcVerification</fixed-outcome>
+            </outcome>
+        </method-call>
+        <task-flow-call id="EnterOrdersTaskflow">
+            <task-flow-reference>
+                <document>/WEB-INF/com/rmi/tradecompapproval/view/enterorders/EnterOrdersTaskflow.xml</document>
+                <id>EnterOrdersTaskflow</id>
+            </task-flow-reference>
+        </task-flow-call>
+        <task-flow-call id="EditDocumentsTaskflow">
+            <task-flow-reference>
+                <document>/WEB-INF/com/rmi/tradecompapproval/view/editseafarerdocs/EditDocumentsTaskflow.xml</document>
+                <id>EditDocumentsTaskflow</id>
+            </task-flow-reference>
+            <input-parameter id="__41">
+                <name>P_CALLED_FROM_TF</name>
+                <value>VS</value>
+                <pass-by-value/>
+            </input-parameter>
+            <input-parameter id="__39">
+                <name>P_SEAFARER_ID</name>
+                <value>#{data.com_rmi_tradecompapproval_view_ViewSeafarerPageDef.SeafarerId.inputValue}</value>
+            </input-parameter>
+        </task-flow-call>
+        <task-flow-call id="EditSeafarerDocTF">
+            <task-flow-reference>
+                <document>/WEB-INF/com/rmi/tradecompapproval/view/editseafarerdocs/EditSeafarerDocTF.xml</document>
+                <id>EditSeafarerDocTF</id>
+            </task-flow-reference>
+        </task-flow-call>
+        <task-flow-return id="taskFlowReturn1">
+            <outcome>
+                <name>taskFlowReturn1</name>
+            </outcome>
+        </task-flow-return>
+        <task-flow-call id="SeafarerDataVerificationTF">
+            <task-flow-reference>
+                <document>/WEB-INF/com/rmi/tradecompapproval/view/seafarerdataverification/SeafarerDataVerificationTF.xml</document>
+                <id>SeafarerDataVerificationTF</id>
+            </task-flow-reference>
+        </task-flow-call>
+        <task-flow-call id="AssignBookNumberTaskflow">
+            <task-flow-reference>
+                <document>/WEB-INF/com/rmi/tradecompapproval/view/assignbooknumber/AssignBookNumberTaskflow.xml</document>
+                <id>AssignBookNumberTaskflow</id>
+            </task-flow-reference>
+            <input-parameter id="__42">
+                <name>P_HEADER_ID</name>
+                <value>#{data.com_rmi_tradecompapproval_view_ViewBatchTCPageDef.OeHeaderId.inputValue}</value>
+            </input-parameter>
+        </task-flow-call>
+        <task-flow-call id="taskflow_Cra_Processing">
+            <task-flow-reference>
+                <document>/WEB-INF/com/rmi/applicationEntry/view/craprocessingtaskflow/CraProcessingTaskFlow.xml</document>
+                <id>taskflow_Cra_Processing</id>
+            </task-flow-reference>
+            <input-parameter id="__43">
+                <name>param_user_id</name>
+                <value>#{pageFlowScope.p_user_id}</value>
+            </input-parameter>
+            <input-parameter id="__44">
+                <name>param_batch_id</name>
+                <value>#{data.com_rmi_tradecompapproval_view_ViewSeafarerPageDef.EsiBatchId.inputValue}</value>
+            </input-parameter>
+        </task-flow-call>
+        <task-flow-call id="ValidateSeafarerTF">
+            <task-flow-reference>
+                <document>/WEB-INF/com/rmi/tradecompapproval/view/validateseafarer/ValidateSeafarerTF.xml</document>
+                <id>ValidateSeafarerTF</id>
+            </task-flow-reference>
+            <input-parameter id="__11">
+                <name>P_SEAFARER_ID</name>
+                <value>#{data.com_rmi_tradecompapproval_view_ViewSeafarerPageDef.SeafarerId.inputValue}</value>
+            </input-parameter>
+            <input-parameter id="__19">
+                <name>P_CONTROL_FLOW</name>
+                <value>S</value>
+            </input-parameter>
+            <input-parameter id="__48">
+                <name>P_CALLED_FROM_TF</name>
+                <value>VS</value>
+            </input-parameter>
+            <input-parameter id="__51">
+                <name>P_UPDATE_SEAFARER</name>
+                <value>#{pageFlowScope.P_UPDATE_SEAFARER}</value>
+            </input-parameter>
+            <input-parameter id="__53">
+                <name>P_ESI_ID</name>
+                <value>#{data.com_rmi_tradecompapproval_view_ViewSeafarerPageDef.EsiId.inputValue}</value>
+            </input-parameter>
+        </task-flow-call>
+        <task-flow-call id="ValidateSeafarerTF1">
+            <task-flow-reference>
+                <document>/WEB-INF/com/rmi/tradecompapproval/view/validateseafarer/ValidateSeafarerTF.xml</document>
+                <id>ValidateSeafarerTF</id>
+            </task-flow-reference>
+            <input-parameter id="__18">
+                <name>P_CONTROL_FLOW</name>
+                <value>V</value>
+            </input-parameter>
+            <input-parameter id="__20">
+                <name>P_SEAFARER_ID</name>
+                <value>#{data.com_rmi_tradecompapproval_view_ViewSeafarerPageDef.SeafarerId.inputValue}</value>
+            </input-parameter>
+            <input-parameter id="__49">
+                <name>P_CALLED_FROM_TF</name>
+                <value>VS</value>
+            </input-parameter>
+            <input-parameter id="__50">
+                <name>P_UPDATE_SEAFARER</name>
+                <value>#{pageFlowScope.P_UPDATE_SEAFARER}</value>
+            </input-parameter>
+            <input-parameter id="__54">
+                <name>P_ESI_ID</name>
+                <value>#{data.com_rmi_tradecompapproval_view_ViewSeafarerPageDef.EsiId.inputValue}</value>
+            </input-parameter>
+        </task-flow-call>
+        <task-flow-call id="vettingTF">
+            <task-flow-reference>
+                <document>/WEB-INF/com/rmi/manualtradecompliance/view/vetting/vettingTF.xml</document>
+                <id>vettingTF</id>
+            </task-flow-reference>
+            <input-parameter id="__22">
+                <name>P_SOURCE_ID</name>
+                <value>#{data.com_rmi_tradecompapproval_view_ViewSeafarerPageDef.SeafarerId.inputValue}</value>
+            </input-parameter>
+            <input-parameter id="__25">
+                <name>P_ESI_BATCH_ID</name>
+                <value>#{data.com_rmi_tradecompapproval_view_ViewSeafarerPageDef.EsiBatchId.inputValue}</value>
+            </input-parameter>
+            <input-parameter id="__28">
+                <name>P_SOURCE_TABLE_COLUMN</name>
+                <value>SEAFARER_ID</value>
+            </input-parameter>
+            <input-parameter id="__33">
+                <name>P_SOURCE_TABLE</name>
+                <value>SICD_SEAFARERS</value>
+            </input-parameter>
+            <input-parameter id="__34">
+                <name>P_SHOW_BACK_BUTTON</name>
+                <value>true</value>
+            </input-parameter>
+            <input-parameter id="__45">
+                <name>P_OWS_REGION_RENDERED</name>
+                <value>#{sessionScope.UserId ne null}</value>
+            </input-parameter>
+            <input-parameter id="__46">
+                <name>P_FACES_SERVLET</name>
+                <value>seaf</value>
+            </input-parameter>
+            <input-parameter id="__47">
+                <name>P_SOURCE_TYPE</name>
+                <value>INDIVIDUAL</value>
+            </input-parameter>
+        </task-flow-call>
+        <control-flow-rule id="__5">
+            <from-activity-id>editBatch</from-activity-id>
+            <control-flow-case id="__6">
+                <from-outcome>editBatch</from-outcome>
+                <to-activity-id>ViewBatchTC</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <control-flow-rule id="__2">
+            <from-activity-id>ViewBatchTC</from-activity-id>
+            <control-flow-case id="__3">
+                <from-outcome>viewseafarerdtls</from-outcome>
+                <to-activity-id>ViewSeafarer</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__30">
+                <from-outcome>backtotask</from-outcome>
+                <to-activity-id>taskFlowReturn1</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__38">
+                <from-outcome>assignBookNumber</from-outcome>
+                <to-activity-id>AssignBookNumberTaskflow</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <control-flow-rule id="__9">
+            <from-activity-id>ViewSeafarer</from-activity-id>
+            <control-flow-case id="__13">
+                <from-outcome>ocVerification</from-outcome>
+                <to-activity-id>filterOcVerification</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__23">
+                <from-outcome>enterOrders</from-outcome>
+                <to-activity-id>EnterOrdersTaskflow</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__29">
+                <from-outcome>editDocuments</from-outcome>
+                <to-activity-id>EditSeafarerDocTF</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__31">
+                <from-outcome>backtaskflw</from-outcome>
+                <to-activity-id>taskFlowReturn1</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__32">
+                <from-outcome>returnbatchscr</from-outcome>
+                <to-activity-id>ViewBatchTC</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__36">
+                <from-outcome>returnOrderVerification</from-outcome>
+                <to-activity-id>SeafarerDataVerificationTF</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__40">
+                <from-outcome>editDocuments</from-outcome>
+                <to-activity-id>EditDocumentsTaskflow</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__35">
+                <from-outcome>craProcessing</from-outcome>
+                <to-activity-id>taskflow_Cra_Processing</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__10">
+                <from-outcome>searchSeafarer</from-outcome>
+                <to-activity-id>ValidateSeafarerTF</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__17">
+                <from-outcome>validateSeafarer</from-outcome>
+                <to-activity-id>ValidateSeafarerTF1</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__21">
+                <from-outcome>manualTradCo</from-outcome>
+                <to-activity-id>vettingTF</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <control-flow-rule id="__14">
+            <from-activity-id>filterOcVerification</from-activity-id>
+            <control-flow-case id="__15">
+                <from-outcome>filterOcVerification</from-outcome>
+                <to-activity-id>OCVerification</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <control-flow-rule id="__26">
+            <from-activity-id>OCVerification</from-activity-id>
+            <control-flow-case id="__27">
+                <from-outcome>back</from-outcome>
+                <to-activity-id>ViewSeafarer</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <use-page-fragments/>
+    </task-flow-definition>
+</adfc-config>

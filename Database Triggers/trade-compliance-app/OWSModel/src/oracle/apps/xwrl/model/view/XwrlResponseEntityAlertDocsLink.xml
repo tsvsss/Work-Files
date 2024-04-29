@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XwrlResponseEntityAlertDocsLink"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  EntityAssociation="oracle.apps.xwrl.model.entity.XwrlResponseEntityAlertDocsAssoc">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="oracle.apps.xwrl.model.view.XwrlResponseEntityAlertDocsLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="XwrlResponseEntityColumnsView"
+    Cardinality="1"
+    Source="true"
+    Owner="oracle.apps.xwrl.model.view.XwrlResponseEntityColumnsView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XwrlResponseEntityColumnsView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="oracle.apps.xwrl.model.view.XwrlResponseEntityColumnsView.RequestId"/>
+      <Item Value="oracle.apps.xwrl.model.view.XwrlResponseEntityColumnsView.Alertid"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="XwrlAlertDocumentsView"
+    Cardinality="-1"
+    Owner="oracle.apps.xwrl.model.view.XwrlAlertDocumentsView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="XwrlAlertDocumentsView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="oracle.apps.xwrl.model.view.XwrlAlertDocumentsView.RequestId"/>
+      <Item Value="oracle.apps.xwrl.model.view.XwrlAlertDocumentsView.AlertId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="oracle.apps.xwrl.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

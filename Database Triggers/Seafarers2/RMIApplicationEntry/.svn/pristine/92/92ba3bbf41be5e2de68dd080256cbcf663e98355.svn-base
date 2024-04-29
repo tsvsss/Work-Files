@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="QueryOrderPageDef"
+                Package="com.rmi.applicationEntry.view.queryordertaskflow">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="QueryOrderHeaderView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="QueryOrderHeaderViewIterator"/>
+    <iterator Binds="QuerOrderLineStationsView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="QuerOrderLineStationsViewIterator"/>
+    <iterator Binds="QueryOrderLineShipmentsView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="QueryOrderLineShipmentsViewIterator"/>
+    <iterator Binds="QueryOrderLineCancellationsView" RangeSize="25"
+              DataControl="RMIApplicationEntryAppModuleDataControl" id="QueryOrderLineCancellationsViewIterator"/>
+    <iterator Binds="QueryOrderLineHoldsView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="QueryOrderLineHoldsViewIterator"/>
+    <iterator Binds="QueryOrderHoldsView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="QueryOrderHoldsViewIterator"/>
+  </executables>
+  <bindings>
+    <methodAction id="searchQueryOrder" RequiresUpdateModel="true" Action="invokeMethod" MethodName="searchQueryOrder"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.searchQueryOrder_RMIApplicationEntryAppModuleDataControl_dataProvider_searchQueryOrder_result">
+      <NamedData NDName="orderNumber" NDType="java.lang.Integer"/>
+    </methodAction>
+    <attributeValues IterBinding="QueryOrderHeaderViewIterator" id="OrderDate">
+      <AttrNames>
+        <Item Value="OrderDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="QueryOrderHeaderViewIterator" id="OrderStatus">
+      <AttrNames>
+        <Item Value="OrderStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="QueryOrderHeaderViewIterator" id="OrderTotal">
+      <AttrNames>
+        <Item Value="OrderTotal"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="QueryOrderHeaderViewIterator" id="OrderByAcct">
+      <AttrNames>
+        <Item Value="OrderByAcct"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="QueryOrderHeaderViewIterator" id="OrderByCust">
+      <AttrNames>
+        <Item Value="OrderByCust"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="QueryOrderHeaderViewIterator" id="BillToAcct">
+      <AttrNames>
+        <Item Value="BillToAcct"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="QueryOrderHeaderViewIterator" id="BillToCust">
+      <AttrNames>
+        <Item Value="BillToCust"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="QueryOrderHeaderViewIterator" id="ShipToAcct">
+      <AttrNames>
+        <Item Value="ShipToAcct"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="QueryOrderHeaderViewIterator" id="ShipToCust">
+      <AttrNames>
+        <Item Value="ShipToCust"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="QueryOrderHeaderViewIterator" id="OrderSource">
+      <AttrNames>
+        <Item Value="OrderSource"/>
+      </AttrNames>
+    </attributeValues>
+    <button IterBinding="QueryOrderHeaderViewIterator" id="OrderHold" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="OrderHold"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="QuerOrderLineStationsViewIterator" id="QuerOrderLineStationsView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.QuerOrderLineStationsView"
+                      Name="QuerOrderLineStationsView0">
+        <AttrNames>
+          <Item Value="LineNumber"/>
+          <Item Value="LineItem"/>
+          <Item Value="SeafarerId"/>
+          <Item Value="LastName"/>
+          <Item Value="FirstName"/>
+          <Item Value="Cancelled" Binds="Cancelled"/>
+          <Item Value="Hold" Binds="Hold"/>
+          <Item Value="Shipped" Binds="Shipped"/>
+          <Item Value="Status"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="QuerOrderLineStationsViewIterator" id="Cancelled" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Cancelled"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="QuerOrderLineStationsViewIterator" id="Hold" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Hold"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button IterBinding="QuerOrderLineStationsViewIterator" id="Shipped" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="Shipped"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree IterBinding="QueryOrderLineShipmentsViewIterator" id="QueryOrderLineShipmentsView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.QueryOrderLineShipmentsView"
+                      Name="QueryOrderLineShipmentsView0">
+        <AttrNames>
+          <Item Value="LineNumber"/>
+          <Item Value="LineItem"/>
+          <Item Value="SeafarerId"/>
+          <Item Value="LastName"/>
+          <Item Value="FirstName"/>
+          <Item Value="TrackingNumber"/>
+          <Item Value="ShipMethod"/>
+          <Item Value="ShipDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="QueryOrderLineCancellationsViewIterator" id="QueryOrderLineCancellationsView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.QueryOrderLineCancellationsView"
+                      Name="QueryOrderLineCancellationsView0">
+        <AttrNames>
+          <Item Value="LineNumber"/>
+          <Item Value="LineItem"/>
+          <Item Value="SeafarerId"/>
+          <Item Value="LastName"/>
+          <Item Value="FirstName"/>
+          <Item Value="CancelledCode"/>
+          <Item Value="CancelledDate"/>
+          <Item Value="CancelledComments"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="QueryOrderLineHoldsViewIterator" id="QueryOrderLineHoldsView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.QueryOrderLineHoldsView"
+                      Name="QueryOrderLineHoldsView0">
+        <AttrNames>
+          <Item Value="LineNumber"/>
+          <Item Value="LineItem"/>
+          <Item Value="SeafarerId"/>
+          <Item Value="LastName"/>
+          <Item Value="FirstName"/>
+          <Item Value="HoldDate"/>
+          <Item Value="HoldName"/>
+          <Item Value="HoldComment"/>
+          <Item Value="ReleaseDate"/>
+          <Item Value="ReleaseName"/>
+          <Item Value="ReleaseComment"/>
+          <Item Value="HeldBy"/>
+          <Item Value="ReleasedBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="QueryOrderHoldsViewIterator" id="QueryOrderHoldsView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.QueryOrderHoldsView"
+                      Name="QueryOrderHoldsView0">
+        <AttrNames>
+          <Item Value="HoldDate"/>
+          <Item Value="HoldName"/>
+          <Item Value="HoldComment"/>
+          <Item Value="ReleaseDate"/>
+          <Item Value="ReleaseName"/>
+          <Item Value="ReleaseComment"/>
+          <Item Value="HeldBy"/>
+          <Item Value="ReleasedBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="resetQueryOrderDetails" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="resetQueryOrderDetails" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.resetQueryOrderDetails_RMIApplicationEntryAppModuleDataControl_dataProvider_resetQueryOrderDetails_result"/>
+    <tree IterBinding="QueryOrderHoldsViewIterator" id="QueryOrderHoldsView1">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.QueryOrderHoldsView"
+                      Name="QueryOrderHoldsView10">
+        <AttrNames>
+          <Item Value="HoldDate"/>
+          <Item Value="HoldName"/>
+          <Item Value="HoldComment"/>
+          <Item Value="HeldBy"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="queryOrderFound" RequiresUpdateModel="true" Action="invokeMethod" MethodName="queryOrderFound"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.queryOrderFound_RMIApplicationEntryAppModuleDataControl_dataProvider_queryOrderFound_result"/>
+  </bindings>
+</pageDefinition>

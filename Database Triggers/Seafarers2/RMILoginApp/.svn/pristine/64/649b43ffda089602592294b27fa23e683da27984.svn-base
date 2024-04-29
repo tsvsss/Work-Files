@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="OtpTimerView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  FetchMode="FETCH_AS_NEEDED"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.login.adfbc.views.readonly.OtpTimerView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pOtpEndTime"
+    Kind="where"
+    Type="java.lang.String"/>
+  <SQLQuery><![CDATA[select   
+sl_no,   
+passed_time,       
+current_time,       
+time_left,       
+mins,       
+secs        
+from       
+(       
+    select   
+    rownum sl_no,    
+    to_timestamp(:pOtpEndTime, 'yyyy-mm-dd hh24:mi:ss') passed_time,       
+    to_char(sysdate, 'yyyy-mm-dd hh24:mi:ss') current_time,       
+    to_number(extract(minute from (to_timestamp(:pOtpEndTime, 'yyyy-mm-dd hh24:mi:ss')-sysdate))) mins,       
+    trunc(extract(second from (to_timestamp(:pOtpEndTime, 'yyyy-mm-dd hh24:mi:ss')-sysdate))) secs,       
+    ((case when (extract(minute from (to_timestamp(:pOtpEndTime, 'yyyy-mm-dd hh24:mi:ss')-sysdate)) < 0)        
+          then '00'        
+          else       
+            (case when (extract(minute from (to_timestamp(:pOtpEndTime, 'yyyy-mm-dd hh24:mi:ss')-sysdate)) < 10)        
+                  then to_char('0'||extract(minute from (to_timestamp(:pOtpEndTime, 'yyyy-mm-dd hh24:mi:ss')-sysdate)))       
+             else to_char(extract(minute from (to_timestamp(:pOtpEndTime, 'yyyy-mm-dd hh24:mi:ss')-sysdate))) end)       
+      end)       
+     ||':'||       
+     (case when (extract(second from (to_timestamp(:pOtpEndTime, 'yyyy-mm-dd hh24:mi:ss')-sysdate)) < 0)        
+          then '00'        
+          else       
+            (case when (trunc(extract(second from (to_timestamp(:pOtpEndTime, 'yyyy-mm-dd hh24:mi:ss')-sysdate))) < 10)        
+                  then to_char('0'||trunc(extract(second from (to_timestamp(:pOtpEndTime, 'yyyy-mm-dd hh24:mi:ss')-sysdate))))       
+             else to_char(trunc(extract(second from (to_timestamp(:pOtpEndTime, 'yyyy-mm-dd hh24:mi:ss')-sysdate)))) end)       
+          end)            
+     ) time_left       
+    from dual       
+)]]></SQLQuery>
+  <ViewAttribute
+    Name="SlNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SL_NO"
+    Expression="SL_NO"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PassedTime"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="PASSED_TIME"
+    Expression="PASSED_TIME"
+    SQLType="TIMESTAMP"/>
+  <ViewAttribute
+    Name="CurrentTime"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="19"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CURRENT_TIME"
+    Expression="CURRENT_TIME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="19"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TimeLeft"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="83"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TIME_LEFT"
+    Expression="TIME_LEFT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="83"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Mins"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="MINS"
+    Expression="MINS"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Secs"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SECS"
+    Expression="SECS"
+    SQLType="NUMERIC"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="SlNo"/>
+  </AttrArray>
+</ViewObject>

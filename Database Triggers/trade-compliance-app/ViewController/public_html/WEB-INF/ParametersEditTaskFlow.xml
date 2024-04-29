@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="ParametersEditTaskFlow">
+    <default-activity>RouteFlow</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__16">
+      <name>ipParam</name>
+      <value>#{pageFlowScope.ipParam}</value>
+    </input-parameter-definition>
+    <managed-bean id="__17">
+      <managed-bean-name>ParametersAddEdit</managed-bean-name>
+      <managed-bean-class>oracle.apps.xwrl.beans.backing.UpdateParameters</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <router id="RouteFlow">
+      <case id="__8">
+        <expression>#{pageFlowScope.ipParam=='Add'}</expression>
+        <outcome>Add</outcome>
+      </case>
+      <case id="__9">
+        <expression>#{pageFlowScope.ipParam!='Add'}</expression>
+        <outcome>Edit</outcome>
+      </case>
+      <default-outcome>Edit</default-outcome>
+    </router>
+    <method-call id="SetCurrentRowWithKey">
+      <method>#{bindings.setCurrentRowWithKey.execute}</method>
+      <outcome>
+        <fixed-outcome>setCurrentRowWithKey</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="UpdateParameters">
+      <page>/Prototype/UpdateParameters.jsf</page>
+    </view>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <control-flow-rule id="__1">
+      <from-activity-id>RouteFlow</from-activity-id>
+      <control-flow-case id="__3">
+        <from-outcome>Edit</from-outcome>
+        <to-activity-id>SetCurrentRowWithKey</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__4">
+        <from-outcome>Add</from-outcome>
+        <to-activity-id>UpdateParameters</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>UpdateParameters</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>Close</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__14">
+      <from-activity-id>SetCurrentRowWithKey</from-activity-id>
+      <control-flow-case id="__15">
+        <from-outcome>setCurrentRowWithKey</from-outcome>
+        <to-activity-id>UpdateParameters</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+  </task-flow-definition>
+</adfc-config>

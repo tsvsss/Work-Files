@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="BatchIfaceView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  SelectListFlags="1"
+  FromListFlags="1"
+  WhereFlags="1"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  SelectAllAttributes="false"
+  PageIterMode="Full"
+  RowClass="com.rmi.applicationEntry.adfbc.views.BatchIfaceViewRowImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.BatchIfaceView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="CustAccountBilltoLOV1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountBilltoView"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pOrderingCustomerId">
+        <TransientExpression><![CDATA[DeliverToCustAccountId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="CustAccountBillToSuLOV1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountBillToSuView"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pCustAccountId">
+        <TransientExpression><![CDATA[BillToCustAccountId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="CustAccountShipToLOV1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountShipToView"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pOrderingCustomerId">
+        <TransientExpression><![CDATA[DeliverToCustAccountId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="CustAccountShipToSuLOV1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountShipToSuView"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pCustAccountId">
+        <TransientExpression><![CDATA[ShipToCustAccountId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="CustAccountDeliverToLOV1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountDeliverToView"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pUserId">
+        <TransientExpression><![CDATA[CreatedBy]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="CustAccountDeliverToSuLOV1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountDeliverToSuView"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pCustAccountId">
+        <TransientExpression><![CDATA[DeliverToCustAccountId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="GetOrderingAgentEmailIdRO1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.GetOrderingAgentEmailIdView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CustAccountBillToAllLOV1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountBillToAllView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="getCustomerNameByCustAccIdRO1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.getCustomerNameByCustAccIdView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CustAccNameByIdLOV1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.CustAccNameByIdView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CustAccountBillSuRS"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountBillToSuView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CustAccountDeliverToSuRS"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountDeliverToSuView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CustAccountShipToSuRS"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountShipToSuView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CustAccountBilltoRS"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountBilltoView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CustAccountShipToRS"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountShipToView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="OrderingAgentEmailIdLOV1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.OrderingAgentEmailIdView"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pCustomerId">
+        <TransientExpression><![CDATA[DeliverToCustAccountId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="OrderingAgentEmailIdRS"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.OrderingAgentEmailIdView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="InvoiceAgentEmailIdView1"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.InvoiceAgentEmailIdView"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pCustomerId">
+        <TransientExpression
+          trustMode="untrusted"><![CDATA[BillToCustAccountId]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="Billing_Customer"
+    ListVOName="CustAccountBilltoLOV1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="tranCustAccountBillToName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="BillToCustAccountId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="PartyNameAccount"/>
+      <Item Value="CustAccountId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="PartyNameAccount"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="CustAccountBilltoLOVCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="Shipping_Customer"
+    ListVOName="CustAccountShipToLOV1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="tranCustAccountShipToName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ShipToCustAccountId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="PartyNameAccount"/>
+      <Item Value="CustAccountId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="PartyNameAccount"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="CustAccountShipToLOVCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="Ordering_Customer"
+    ListVOName="CustAccountDeliverToLOV1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="tranCustAccountDeliverToName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="DeliverToCustAccountId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="PartyNameAccount"/>
+      <Item Value="CustAccountId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="PartyNameAccount"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="CustAccountDeliverToLOVCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_tranBillToSuAddress"
+    ListVOName="CustAccountBillToSuLOV1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="tranBillToSuAddress"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="BillToSiteUseId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Address"/>
+      <Item Value="SuId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Location"/>
+      <Item Value="CustomerNumber"/>
+      <Item Value="CustomerName"/>
+      <Item Value="Address"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="CustAccountBillToSuLOVCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_tranShipToSuAddress"
+    ListVOName="CustAccountShipToSuLOV1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="tranShipToSuAddress"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="ShipToSiteUseId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Address"/>
+      <Item Value="SuId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Location"/>
+      <Item Value="CustomerNumber"/>
+      <Item Value="CustomerName"/>
+      <Item Value="Address"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="CustAccountShipToSuLOVCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_tranDeliverToSuAddress"
+    ListVOName="CustAccountDeliverToSuLOV1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="tranDeliverToSuAddress"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="DeliverToSiteUseId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Address"/>
+      <Item Value="SuId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Location"/>
+      <Item Value="CustomerNumber"/>
+      <Item Value="CustomerName"/>
+      <Item Value="Address"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="CustAccountDeliverToSuLOVCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_tranEmailOrdering"
+    ListVOName="OrderingAgentEmailIdLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="tranEmailOrdering"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="EmailAddress"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="EmailAddress"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_tranInvoiceEmailId"
+    ListVOName="InvoiceAgentEmailIdView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="tranInvoiceEmailId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="EmailAddress"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="EmailAddress"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_InvoiceAgentEmailId"
+    ListVOName="InvoiceAgentEmailIdView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="InvoiceAgentEmailId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="EmailAddress"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="EmailAddress"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="BatchesEO"
+    Entity="com.rmi.applicationEntry.adfbc.entities.BatchIface"/>
+  <ViewAttribute
+    Name="BatchDate"
+    PrecisionRule="true"
+    EntityAttrName="BatchDate"
+    EntityUsage="BatchesEO"
+    AliasName="BATCH_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="BatchName"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="BatchName"
+    EntityUsage="BatchesEO"
+    AliasName="BATCH_NAME"/>
+  <ViewAttribute
+    Name="BatchResubmittedDate"
+    PrecisionRule="true"
+    EntityAttrName="BatchResubmittedDate"
+    EntityUsage="BatchesEO"
+    AliasName="BATCH_RESUBMITTED_DATE"/>
+  <ViewAttribute
+    Name="BatchReturnedDate"
+    PrecisionRule="true"
+    EntityAttrName="BatchReturnedDate"
+    EntityUsage="BatchesEO"
+    AliasName="BATCH_RETURNED_DATE"/>
+  <ViewAttribute
+    Name="BatchStatus"
+    PrecisionRule="true"
+    EntityAttrName="BatchStatus"
+    EntityUsage="BatchesEO"
+    AliasName="BATCH_STATUS"/>
+  <ViewAttribute
+    Name="BatchSubmittedBy"
+    PrecisionRule="true"
+    EntityAttrName="BatchSubmittedBy"
+    EntityUsage="BatchesEO"
+    AliasName="BATCH_SUBMITTED_BY"/>
+  <ViewAttribute
+    Name="BatchSubmittedDate"
+    PrecisionRule="true"
+    EntityAttrName="BatchSubmittedDate"
+    EntityUsage="BatchesEO"
+    AliasName="BATCH_SUBMITTED_DATE"/>
+  <ViewAttribute
+    Name="BillToCustAccountId"
+    PrecisionRule="true"
+    EntityAttrName="BillToCustAccountId"
+    EntityUsage="BatchesEO"
+    AliasName="BILL_TO_CUST_ACCOUNT_ID"/>
+  <ViewAttribute
+    Name="BillToOrgContactId"
+    PrecisionRule="true"
+    EntityAttrName="BillToOrgContactId"
+    EntityUsage="BatchesEO"
+    AliasName="BILL_TO_ORG_CONTACT_ID"/>
+  <ViewAttribute
+    Name="BillToSiteUseId"
+    PrecisionRule="true"
+    EntityAttrName="BillToSiteUseId"
+    EntityUsage="BatchesEO"
+    AliasName="BILL_TO_SITE_USE_ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="BatchesEO"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="BatchesEO"
+    AliasName="CREATION_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="DeliverToCustAccountId"
+    PrecisionRule="true"
+    EntityAttrName="DeliverToCustAccountId"
+    EntityUsage="BatchesEO"
+    AliasName="DELIVER_TO_CUST_ACCOUNT_ID"/>
+  <ViewAttribute
+    Name="DeliverToSiteUseId"
+    PrecisionRule="true"
+    EntityAttrName="DeliverToSiteUseId"
+    EntityUsage="BatchesEO"
+    AliasName="DELIVER_TO_SITE_USE_ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EsiBatchId"
+    PrecisionRule="true"
+    EntityAttrName="EsiBatchId"
+    EntityUsage="BatchesEO"
+    AliasName="ESI_BATCH_ID"
+    IsUpdateable="while_insert">
+    <TransientExpression><![CDATA[(new oracle.jbo.server.SequenceImpl("RMI_SEAFARER.RMI_ESI_BATCH_ID_SEQ", adf.object.getDBTransaction())).getSequenceNumber()]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ExpeditedProcessing"
+    PrecisionRule="true"
+    EntityAttrName="ExpeditedProcessing"
+    EntityUsage="BatchesEO"
+    AliasName="EXPEDITED_PROCESSING"/>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="BatchesEO"
+    AliasName="LAST_UPDATE_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateLogin"
+    EntityUsage="BatchesEO"
+    AliasName="LAST_UPDATE_LOGIN"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="BatchesEO"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="Notes"
+    PrecisionRule="true"
+    EntityAttrName="Notes"
+    EntityUsage="BatchesEO"
+    AliasName="NOTES">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="60"/>
+        <DISPLAYHEIGHT
+          Value="2"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OeHeaderId"
+    PrecisionRule="true"
+    EntityAttrName="OeHeaderId"
+    EntityUsage="BatchesEO"
+    AliasName="OE_HEADER_ID"/>
+  <ViewAttribute
+    Name="PurchaseOrderNumber"
+    PrecisionRule="true"
+    EntityAttrName="PurchaseOrderNumber"
+    EntityUsage="BatchesEO"
+    AliasName="PURCHASE_ORDER_NUMBER">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipToCustAccountId"
+    PrecisionRule="true"
+    EntityAttrName="ShipToCustAccountId"
+    EntityUsage="BatchesEO"
+    AliasName="SHIP_TO_CUST_ACCOUNT_ID"/>
+  <ViewAttribute
+    Name="ShipToOrgContactId"
+    PrecisionRule="true"
+    EntityAttrName="ShipToOrgContactId"
+    EntityUsage="BatchesEO"
+    AliasName="SHIP_TO_ORG_CONTACT_ID"/>
+  <ViewAttribute
+    Name="ShipToSiteUseId"
+    PrecisionRule="true"
+    EntityAttrName="ShipToSiteUseId"
+    EntityUsage="BatchesEO"
+    AliasName="SHIP_TO_SITE_USE_ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VesselNames"
+    PrecisionRule="true"
+    EntityAttrName="VesselNames"
+    EntityUsage="BatchesEO"
+    AliasName="VESSEL_NAMES">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="60"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranCustAccountBillToName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="Billing_Customer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranBillToSuAddress"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_tranBillToSuAddress">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <DISPLAYHEIGHT
+          Value="5"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranCustAccountShipToName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="Shipping_Customer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranShipToSuAddress"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_tranShipToSuAddress">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <DISPLAYHEIGHT
+          Value="5"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranCustAccountDeliverToName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="Ordering_Customer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranDeliverToSuAddress"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_tranDeliverToSuAddress">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <DISPLAYHEIGHT
+          Value="5"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranEmailOrdering"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_tranEmailOrdering">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranUserType"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.String"
+    ColumnType="$none$"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="BatchAssignedToRegion"
+    PrecisionRule="true"
+    EntityAttrName="BatchAssignedToRegion"
+    EntityUsage="BatchesEO"
+    AliasName="BATCH_ASSIGNED_TO_REGION"/>
+  <ViewAttribute
+    Name="checkBatchRow"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.Integer"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="tranInvoiceEmailId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_tranInvoiceEmailId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InvoiceAgentEmailId"
+    PrecisionRule="true"
+    EntityAttrName="InvoiceAgentEmailId"
+    EntityUsage="BatchesEO"
+    AliasName="INVOICE_AGENT_EMAIL_ID"
+    LOVName="LOV_InvoiceAgentEmailId">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranInvoiceAgentEmailId"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewLinkAccessor
+    Name="SeafarerVO"
+    ViewLink="com.rmi.applicationEntry.adfbc.views.links.BatchSeafarerLogicalLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="WorkOrderDetailsRO"
+    ViewLink="com.rmi.applicationEntry.adfbc.views.links.BatchWorkOrderLogicalLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

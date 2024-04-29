@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RMIRequestView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.lovs.RMIRequestView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[SELECT c.user_concurrent_program_name, c.concurrent_program_name, 
+ 
+       c.concurrent_program_id 
+ 
+  FROM fnd_request_groups a, 
+ 
+       fnd_request_group_units b, 
+ 
+       fnd_concurrent_programs_vl c 
+ 
+WHERE 1 = 1 
+ 
+   AND request_group_name = 'RMI_SEAFARER_REPORTS' 
+ 
+   AND a.request_group_id = b.request_group_id 
+ 
+   AND c.concurrent_program_id = b.request_unit_id]]></SQLQuery>
+  <ViewAttribute
+    Name="UserConcurrentProgramName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="USER_CONCURRENT_PROGRAM_NAME"
+    Expression="USER_CONCURRENT_PROGRAM_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ConcurrentProgramName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONCURRENT_PROGRAM_NAME"
+    Expression="CONCURRENT_PROGRAM_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ConcurrentProgramId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="CONCURRENT_PROGRAM_ID"
+    Expression="CONCURRENT_PROGRAM_ID"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

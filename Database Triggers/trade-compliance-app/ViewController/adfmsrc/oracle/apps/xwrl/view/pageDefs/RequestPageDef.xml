@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="RequestPageDef"
+                Package="oracle.apps.xwrl.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="Prototypetaskflowdefinition1"
+              taskFlowId="/WEB-INF/Prototype-task-flow-definition.xml#Prototype-task-flow-definition"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"
+              activation="deferred" >
+             <!--  activation="conditional" 
+               active="#{sessionScope.UserRespAndSessionInfo.isReadOnly=='Y' ||
+               sessionScope.UserRespAndSessionInfo.isSuperUserOnly == 'Y'}" >
+                 Refresh="ifNeeded"  
+              RefreshCondition="#{sessionScope.requestType}" -->
+      <parameters>
+        <parameter id="requestId" value="#{param.requestType}"/>
+        <parameter id="sourceTable" value="#{param.sourceTable}"/>
+        <parameter id="sourceId" value="#{param.sourceId}"/>
+        <parameter id="requestType" value="#{param.requestType}"/>
+        <parameter id="userId" value="#{sessionScope.UserRespAndSessionInfo.userId}"/>
+        <parameter id="admin" value="#{sessionScope.UserRespAndSessionInfo.isAdminOnly}"/>
+        <parameter id="readOnly" value="#{sessionScope.UserRespAndSessionInfo.isReadOnly}"/>
+        <parameter id="superUser" value="#{(sessionScope.UserRespAndSessionInfo == null)? 'N' : sessionScope.UserRespAndSessionInfo.isSuperUserOnly}"/>
+        <parameter id="recordLockUser" value="#{(sessionScope.UserRespAndSessionInfo == null)? 'N' : sessionScope.UserRespAndSessionInfo.isRecordLockUser}"/>
+      </parameters>
+    </taskFlow>
+    <iterator id="XwrlRequestsView1Iterator" Binds="XwrlRequestsView1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="XwrlResponseIndColumnsView1Iterator" Binds="XwrlResponseIndColumnsView1"
+              DataControl="AppModuleDataControl" RangeSize="25"/>
+    <iterator id="XwrlCaseNotesView1Iterator" Binds="XwrlCaseNotesView1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="XwrlCaseNotesView2Iterator" Binds="XwrlCaseNotesView2" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="XwrlAlertNotesView1Iterator" Binds="XwrlAlertNotesView1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="XwrlAlertNotesView2Iterator" Binds="XwrlAlertNotesView2" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+    <iterator id="XwrlResponseEntityColumnsView1Iterator" Binds="XwrlResponseEntityColumnsView1"
+              DataControl="AppModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="NameScreened">
+      <AttrNames>
+        <Item Value="NameScreened"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

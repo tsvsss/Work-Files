@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="vettingTF_vettingTF_onLoadPageDef" Package="com.rmi.manualtradecompliance.view.vetting"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="onLoad" RequiresUpdateModel="true" Action="invokeMethod" MethodName="onLoad"
+                  IsViewObjectMethod="false" DataControl="RMIManualTradeComplianceAppModuleDataControl"
+                  InstanceName="data.RMIManualTradeComplianceAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIManualTradeComplianceAppModuleDataControl.methodResults.onLoad_RMIManualTradeComplianceAppModuleDataControl_dataProvider_onLoad_result"/>
+  </bindings>
+</pageDefinition>

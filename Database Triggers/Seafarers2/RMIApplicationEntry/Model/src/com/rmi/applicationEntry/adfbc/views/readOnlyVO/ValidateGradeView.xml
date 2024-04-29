@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ValidateGradeView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.readOnlyVO.ValidateGradeView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pBatchid"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[select esi_id esi, grade_id grade,sea_name name_sea, count(*) count_oc   
+from (   
+SELECT docs.ESI_ID , docs.GRADE_ID ,   
+(select first_name||' '||last_name from rmi_seafarer.rmi_seafarers_iface where esi_id = docs.esi_id) sea_name   
+FROM RMI_SEAFARER.RMI_SEAFARER_DOCS_IFACE docs   
+WHERE docs.GRADE_TYPE = 'OC'    
+AND docs.ESI_ID IN (SELECT ESI_ID FROM RMI_SEAFARER.RMI_SEAFARERS_IFACE WHERE ESI_BATCH_ID =:pBatchid))   
+GROUP BY ESI_ID , GRADE_ID ,sea_name  
+having count(*) > 1]]></SQLQuery>
+  <ViewAttribute
+    Name="Esi"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ESI"
+    Expression="ESI"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Grade"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="GRADE"
+    Expression="GRADE"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="NameSea"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="121"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NAME_SEA"
+    Expression="NAME_SEA"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="121"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountOc"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="COUNT_OC"
+    Expression="COUNT_OC"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

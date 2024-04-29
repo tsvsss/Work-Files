@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="DeficientOrdersTaskFlow_DeficientOrdersTaskFlow_onloadDeficientOrderPageDef"
+                Package="com.rmi.applicationEntry.view.batchestaskflow" SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="onloadDeficientOrder" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="onloadDeficientOrder" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.onloadDeficientOrder_RMIApplicationEntryAppModuleDataControl_dataProvider_onloadDeficientOrder_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

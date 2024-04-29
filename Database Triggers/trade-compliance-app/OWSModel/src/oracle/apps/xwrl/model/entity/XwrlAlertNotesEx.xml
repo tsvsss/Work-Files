@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XwrlAlertNotesEx"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  DBObjectType="table"
+  DBObjectName="XWRL_ALERT_NOTES"
+  AliasName="XwrlAlertNotesEx"
+  BindingStyle="OracleName"
+  RowClass="oracle.apps.xwrl.model.entity.XwrlAlertNotesExImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Init|Delete|Access|DML"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="Id"
+    IsNotNull="true"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="XWRL_ALERT_NOTES"
+    PrimaryKey="true"/>
+  <Attribute
+    Name="RequestId"
+    IsNotNull="true"
+    ColumnName="REQUEST_ID"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="XWRL_ALERT_NOTES"/>
+  <Attribute
+    Name="AlertId"
+    IsNotNull="true"
+    Precision="50"
+    ColumnName="ALERT_ID"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XWRL_ALERT_NOTES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LineNumber"
+    IsNotNull="true"
+    ColumnName="LINE_NUMBER"
+    SQLType="NUMERIC"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    TableName="XWRL_ALERT_NOTES"/>
+  <Attribute
+    Name="Note"
+    IsNotNull="true"
+    Precision="4000"
+    ColumnName="NOTE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="XWRL_ALERT_NOTES">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdateDate"
+    ColumnName="LAST_UPDATE_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="XWRL_ALERT_NOTES"/>
+  <Attribute
+    Name="LastUpdatedBy"
+    Precision="15"
+    Scale="0"
+    ColumnName="LAST_UPDATED_BY"
+    SQLType="NUMERIC"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    TableName="XWRL_ALERT_NOTES"/>
+  <Attribute
+    Name="CreationDate"
+    ColumnName="CREATION_DATE"
+    SQLType="DATE"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    TableName="XWRL_ALERT_NOTES"/>
+  <Attribute
+    Name="CreatedBy"
+    Precision="15"
+    Scale="0"
+    ColumnName="CREATED_BY"
+    SQLType="NUMERIC"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    TableName="XWRL_ALERT_NOTES"/>
+  <Attribute
+    Name="LastUpdateLogin"
+    Precision="15"
+    Scale="0"
+    ColumnName="LAST_UPDATE_LOGIN"
+    SQLType="NUMERIC"
+    Type="java.lang.Long"
+    ColumnType="NUMBER"
+    TableName="XWRL_ALERT_NOTES"/>
+  <Key
+    Name="XwrlalertnotesexPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="XWRLALERTNOTESEX_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="oracle.apps.xwrl.model.entity.XwrlAlertNotesEx.Id"/>
+    </AttrArray>
+  </Key>
+</Entity>

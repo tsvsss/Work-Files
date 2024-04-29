@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+        beforePhase="#{pageFlowScope.CustomManagedBean.beforePageLoads}">
+    <af:document title="Edit Documents - INTERNATIONAL REGISTRIES,INC." id="d1">
+        <af:form id="f1">
+            <af:region value="#{bindings.EditDocumentsTaskflow1.regionModel}" id="r1"
+                       rendered="#{sessionScope.UserId ne null}"/>
+        </af:form>
+    </af:document>
+</f:view>

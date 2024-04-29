@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:af="http://xmlns.oracle.com/adf/faces/rich" 
+                xmlns:f="http://java.sun.com/jsf/core">
+  
+  <af:panelSplitter id="pscl" splitterPosition="350" dimensionsFrom="parent" collapsed="true">
+    <f:facet name="first">
+      <af:panelBox text="Search" id="pb2"  showHeader="never">
+        <f:facet name="toolbar">
+        </f:facet>
+            <af:query id="qryId1" headerText="Search" disclosed="true"  saveQueryMode="hidden"
+                        binding="#{backingBeanScope.Citylist.qry}"
+                      value="#{bindings.WcCityListViewCriteriaQuery.queryDescriptor}"
+                      model="#{bindings.WcCityListViewCriteriaQuery.queryModel}"
+                      queryListener="#{bindings.WcCityListViewCriteriaQuery.processQuery}"
+                      queryOperationListener="#{bindings.WcCityListViewCriteriaQuery.processQueryOperation}"
+                      resultComponentId="::pc1:t1"/>
+         
+      </af:panelBox>
+    </f:facet>
+    <f:facet name="second">
+      <af:panelBox text="PanelBox1" id="pb1" type="stretch" showHeader="never">
+     
+        <f:facet name="toolbar">
+        </f:facet>
+        
+        <af:panelCollection id="pc1" featuresOff="detach" >
+          <f:facet name="menus">
+            <af:menu text="Options" id="m1">
+              <af:commandMenuItem text="Export to Excel" id="cmi1">
+                <af:exportCollectionActionListener type="excelHTML"  exportedId="t1"  filename="Citylist.xls" title="CityList"/>
+              </af:commandMenuItem>
+              <af:commandMenuItem text="Printable Page" id="cmi2">
+                <af:showPrintablePageBehavior/>
+              </af:commandMenuItem>
+            </af:menu>
+          </f:facet>
+          
+         
+           <f:facet name="toolbar">
+           
+            <af:toolbar id="t12">
+            <af:button text="Search" id="srch"   action="#{backingBeanScope.Citylist.search}"/>
+             <af:button text="Reset" id="reset"  action="#{backingBeanScope.Citylist.reset}"/>
+            </af:toolbar>
+          
+          <af:toolbar id="t21">
+               <af:button  text="Add"
+                         id="b1"   action="#{backingBeanScope.Citylist.add}" />
+             
+              <af:button  text="Save"   action="#{backingBeanScope.Citylist.save}"
+                          id="save"/>
+              <af:button  text="Cancel" action="#{backingBeanScope.Citylist.cancel}"
+                          immediate="true" id="cancel"  >
+              </af:button>
+            </af:toolbar>
+        </f:facet>
+          <af:table value="#{bindings.WcCityListView11.collectionModel}" var="row"
+                    rows="#{bindings.WcCityListView11.rangeSize}"   editingMode="clickToEdit"
+                     binding="#{backingBeanScope.Citylist.table}"   contentDelivery="lazy"
+                    emptyText="#{bindings.WcCityListView11.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0" selectedRowKeys="#{bindings.WcCityListView11.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.WcCityListView11.collectionModel.makeCurrent}" rowSelection="single"
+                    fetchSize="#{bindings.WcCityListView11.rangeSize}"
+                    filterModel="#{bindings.WcCityListViewCriteriaQuery.queryDescriptor}"
+                    queryListener="#{bindings.WcCityListViewCriteriaQuery.processQuery}" filterVisible="false"
+                    varStatus="vs" id="t1" >
+            <af:column sortProperty="#{bindings.WcCityListView11.hints.WcCityListId.name}" filterable="true" visible="false"
+                       sortable="true" headerText="#{bindings.WcCityListView11.hints.WcCityListId.label}" id="c1">
+              <af:inputText value="#{row.bindings.WcCityListId.inputValue}"
+                            label="#{bindings.WcCityListView11.hints.WcCityListId.label}"
+                            required="#{bindings.WcCityListView11.hints.WcCityListId.mandatory}"
+                            columns="#{bindings.WcCityListView11.hints.WcCityListId.displayWidth}"
+                            maximumLength="#{bindings.WcCityListView11.hints.WcCityListId.precision}"
+                            shortDesc="#{bindings.WcCityListView11.hints.WcCityListId.tooltip}" id="it1">
+                <f:validator binding="#{row.bindings.WcCityListId.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.WcCityListView11.hints.WcCityListId.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.WcCityListView11.hints.CityName.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.WcCityListView11.hints.CityName.label}" id="c2"    width="200">
+              <af:inputText value="#{row.bindings.CityName.inputValue}"
+                            label="#{bindings.WcCityListView11.hints.CityName.label}"
+                            required="#{bindings.WcCityListView11.hints.CityName.mandatory}"
+                            columns="#{bindings.WcCityListView11.hints.CityName.displayWidth}"
+                            maximumLength="#{bindings.WcCityListView11.hints.CityName.precision}"
+                            shortDesc="#{bindings.WcCityListView11.hints.CityName.tooltip}" id="it2">
+                <f:validator binding="#{row.bindings.CityName.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.WcCityListView11.hints.Subdivision.name}" filterable="true" width="200"
+                       sortable="true" headerText="#{bindings.WcCityListView11.hints.Subdivision.label}" id="c3">
+              <af:inputText value="#{row.bindings.Subdivision.inputValue}"
+                            label="#{bindings.WcCityListView11.hints.Subdivision.label}"
+                            required="#{bindings.WcCityListView11.hints.Subdivision.mandatory}"
+                            columns="#{bindings.WcCityListView11.hints.Subdivision.displayWidth}"
+                            maximumLength="#{bindings.WcCityListView11.hints.Subdivision.precision}"
+                            shortDesc="#{bindings.WcCityListView11.hints.Subdivision.tooltip}" id="it3">
+                <f:validator binding="#{row.bindings.Subdivision.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.WcCityListView11.hints.CountryCode.name}" filterable="true" width="200"
+                       sortable="true" headerText="#{bindings.WcCityListView11.hints.CountryCode.label}" id="c4">
+              <af:selectOneChoice value="#{row.bindings.CountryCode.inputValue}"
+                                  label="#{row.bindings.CountryCode.label}"
+                                  required="#{bindings.WcCityListView11.hints.CountryCode.mandatory}"
+                                  shortDesc="#{bindings.WcCityListView11.hints.CountryCode.tooltip}" id="soc1">
+                <f:selectItems value="#{row.bindings.CountryCode.items}" id="si1"/>
+                <f:validator binding="#{row.bindings.CountryCode.validator}"/>
+              </af:selectOneChoice>
+            </af:column>
+            <af:column sortProperty="#{bindings.WcCityListView11.hints.Status.name}" filterable="true" sortable="true"
+                       headerText="#{bindings.WcCityListView11.hints.Status.label}" id="c5" width="150">
+              <af:inputText value="#{row.bindings.Status.inputValue}"
+                            label="#{bindings.WcCityListView11.hints.Status.label}"
+                            required="#{bindings.WcCityListView11.hints.Status.mandatory}"
+                            columns="#{bindings.WcCityListView11.hints.Status.displayWidth}"
+                            maximumLength="#{bindings.WcCityListView11.hints.Status.precision}"
+                            shortDesc="#{bindings.WcCityListView11.hints.Status.tooltip}" id="it4">
+                <f:validator binding="#{row.bindings.Status.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.WcCityListView11.hints.SortOrder.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.WcCityListView11.hints.SortOrder.label}" id="c6">
+              <af:inputText value="#{row.bindings.SortOrder.inputValue}"
+                            label="#{bindings.WcCityListView11.hints.SortOrder.label}"
+                            required="#{bindings.WcCityListView11.hints.SortOrder.mandatory}"
+                            columns="#{bindings.WcCityListView11.hints.SortOrder.displayWidth}"
+                            maximumLength="#{bindings.WcCityListView11.hints.SortOrder.precision}"
+                            shortDesc="#{bindings.WcCityListView11.hints.SortOrder.tooltip}" id="it5">
+                <f:validator binding="#{row.bindings.SortOrder.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.WcCityListView11.hints.SortOrder.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.WcCityListView11.hints.InternalUseOnly.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.WcCityListView11.hints.InternalUseOnly.label}" id="c12">
+              <af:inputText value="#{row.bindings.InternalUseOnly.inputValue}"
+                            label="#{bindings.WcCityListView11.hints.InternalUseOnly.label}"
+                            required="#{bindings.WcCityListView11.hints.InternalUseOnly.mandatory}"
+                            columns="#{bindings.WcCityListView11.hints.InternalUseOnly.displayWidth}"
+                            maximumLength="#{bindings.WcCityListView11.hints.InternalUseOnly.precision}"
+                            shortDesc="#{bindings.WcCityListView11.hints.InternalUseOnly.tooltip}" id="it9">
+                <f:validator binding="#{row.bindings.InternalUseOnly.validator}"/>
+              </af:inputText>
+            </af:column>
+            <!--af:column sortProperty="#{bindings.WcCityListView11.hints.CreatedBy.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.WcCityListView11.hints.CreatedBy.label}" id="c7">
+              <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                            label="#{bindings.WcCityListView11.hints.CreatedBy.label}"
+                            required="#{bindings.WcCityListView11.hints.CreatedBy.mandatory}"
+                            columns="#{bindings.WcCityListView11.hints.CreatedBy.displayWidth}"
+                            maximumLength="#{bindings.WcCityListView11.hints.CreatedBy.precision}"
+                            shortDesc="#{bindings.WcCityListView11.hints.CreatedBy.tooltip}" id="it6">
+                <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.WcCityListView11.hints.CreatedBy.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.WcCityListView11.hints.CreationDate.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.WcCityListView11.hints.CreationDate.label}" id="c8">
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.WcCityListViewCriteriaQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.CreationDate.value}"
+                              id="id1">
+                  <af:convertDateTime pattern="#{bindings.WcCityListView11.hints.CreationDate.format}"/>
+                </af:inputDate>
+              </f:facet>
+              <af:inputDate value="#{row.bindings.CreationDate.inputValue}"
+                            label="#{bindings.WcCityListView11.hints.CreationDate.label}"
+                            required="#{bindings.WcCityListView11.hints.CreationDate.mandatory}"
+                            columns="#{bindings.WcCityListView11.hints.CreationDate.displayWidth}"
+                            shortDesc="#{bindings.WcCityListView11.hints.CreationDate.tooltip}" id="id2">
+                <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.WcCityListView11.hints.CreationDate.format}"/>
+              </af:inputDate>
+            </af:column>
+            <af:column sortProperty="#{bindings.WcCityListView11.hints.LastUpdatedBy.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.WcCityListView11.hints.LastUpdatedBy.label}" id="c9">
+              <af:inputText value="#{row.bindings.LastUpdatedBy.inputValue}"
+                            label="#{bindings.WcCityListView11.hints.LastUpdatedBy.label}"
+                            required="#{bindings.WcCityListView11.hints.LastUpdatedBy.mandatory}"
+                            columns="#{bindings.WcCityListView11.hints.LastUpdatedBy.displayWidth}"
+                            maximumLength="#{bindings.WcCityListView11.hints.LastUpdatedBy.precision}"
+                            shortDesc="#{bindings.WcCityListView11.hints.LastUpdatedBy.tooltip}" id="it7">
+                <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.WcCityListView11.hints.LastUpdatedBy.format}"/>
+              </af:inputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.WcCityListView11.hints.LastUpdateDate.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.WcCityListView11.hints.LastUpdateDate.label}" id="c10">
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.WcCityListViewCriteriaQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.LastUpdateDate.value}"
+                              id="id3">
+                  <af:convertDateTime pattern="#{bindings.WcCityListView11.hints.LastUpdateDate.format}"/>
+                </af:inputDate>
+              </f:facet>
+              <af:inputDate value="#{row.bindings.LastUpdateDate.inputValue}"
+                            label="#{bindings.WcCityListView11.hints.LastUpdateDate.label}"
+                            required="#{bindings.WcCityListView11.hints.LastUpdateDate.mandatory}"
+                            columns="#{bindings.WcCityListView11.hints.LastUpdateDate.displayWidth}"
+                            shortDesc="#{bindings.WcCityListView11.hints.LastUpdateDate.tooltip}" id="id4">
+                <f:validator binding="#{row.bindings.LastUpdateDate.validator}"/>
+                <af:convertDateTime pattern="#{bindings.WcCityListView11.hints.LastUpdateDate.format}"/>
+              </af:inputDate>
+            </af:column>
+            <af:column sortProperty="#{bindings.WcCityListView11.hints.LastUpdateLogin.name}" filterable="true"
+                       sortable="true" headerText="#{bindings.WcCityListView11.hints.LastUpdateLogin.label}" id="c11">
+              <af:inputText value="#{row.bindings.LastUpdateLogin.inputValue}"
+                            label="#{bindings.WcCityListView11.hints.LastUpdateLogin.label}"
+                            required="#{bindings.WcCityListView11.hints.LastUpdateLogin.mandatory}"
+                            columns="#{bindings.WcCityListView11.hints.LastUpdateLogin.displayWidth}"
+                            maximumLength="#{bindings.WcCityListView11.hints.LastUpdateLogin.precision}"
+                            shortDesc="#{bindings.WcCityListView11.hints.LastUpdateLogin.tooltip}" id="it8">
+                <f:validator binding="#{row.bindings.LastUpdateLogin.validator}"/>
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.WcCityListView11.hints.LastUpdateLogin.format}"/>
+              </af:inputText-->
+           
+          </af:table>
+          <f:facet name="statusbar"/>
+         
+        </af:panelCollection>
+      </af:panelBox>
+    </f:facet>
+  </af:panelSplitter>
+</ui:composition>

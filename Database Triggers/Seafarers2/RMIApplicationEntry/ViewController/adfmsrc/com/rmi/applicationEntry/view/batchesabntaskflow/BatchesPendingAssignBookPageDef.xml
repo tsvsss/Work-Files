@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="BatchesPendingAssignBookPageDef" Package="com.rmi.applicationEntry.view.batchesabntaskflow">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BatchesPendingAsbView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="BatchesPendingAsbViewIterator"/>
+    <searchRegion Binds="BatchesPendingAsbViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="BatchesPendingAsbViewQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="BatchesPendingAsbViewIterator" id="BatchesPendingAsbView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.BatchesPendingAsbView"
+                      Name="BatchesPendingAsbView0">
+        <AttrNames>
+          <Item Value="BatchDate"/>
+          <Item Value="BatchName"/>
+          <Item Value="NoOfSeafarer"/>
+          <Item Value="Region"/>
+          <Item Value="WorkOrderNo"/>
+          <Item Value="OrderType"/>
+          <Item Value="ExpeditedProcessing" Binds="ExpeditedProcessing"/>
+          <Item Value="CraCount"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="BatchesPendingAsbViewIterator" id="ExpeditedProcessing" DTSupportsMRU="false"
+            StaticList="true">
+      <AttrNames>
+        <Item Value="ExpeditedProcessing"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <methodAction id="assignTaskToUserABN" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="assignTaskToUserABN" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.assignTaskToUserABN_RMIApplicationEntryAppModuleDataControl_dataProvider_assignTaskToUserABN_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

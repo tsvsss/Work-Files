@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="vertical" halign="center">
+    <af:spacer width="10" height="100" id="s1"/>
+    <af:panelBox text="Quick Access" id="pb1" inlineStyle="width: 400px;">
+      <f:facet name="toolbar"/>
+      <af:panelFormLayout id="pfl1">
+        <f:facet name="footer">
+          <af:panelGroupLayout id="pgl2" layout="vertical" halign="center">
+            <af:link text="Submit" id="l1" actionListener="#{viewScope.QuickAccessBean.submitActionListener}"
+                     action="reload" partialSubmit="true"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <af:inputText label="Source Id" id="it1" value="#{viewScope.QuickAccessBean.sourceId}" autoSubmit="true"/>
+        <af:selectOneChoice label="Source Form" id="soc1" autoSubmit="true"
+                            valueChangeListener="#{viewScope.QuickAccessBean.sourceFormValueChangeListener}">
+          <f:selectItems value="#{viewScope.QuickAccessBean.sourceForm}" id="si1"/>
+        </af:selectOneChoice>
+      </af:panelFormLayout>
+    </af:panelBox>
+    <af:spacer width="10" height="100" id="s2"/>
+  </af:panelGroupLayout>
+</ui:composition>

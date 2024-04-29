@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="ValidateSeafarerPageDef"
+                Package="com.rmi.tradecompapproval.view.validateseafarer">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SicdSeafarerView1" RangeSize="25" DataControl="RMITradeCompApprovalAppModuleDataControl"
+              id="SicdSeafarerVO1Iterator"/>
+    <iterator Binds="OfficerCertificatesView1" RangeSize="25" DataControl="RMITradeCompApprovalAppModuleDataControl"
+              id="OfficerCertificatesVO1Iterator"/>
+    <iterator Binds="OcDetailsCapacitiesView1" RangeSize="25" DataControl="RMITradeCompApprovalAppModuleDataControl"
+              id="OcDetailsCapacitiesVO1Iterator"/>
+    <iterator Binds="OcDetailsFunctionsView1" RangeSize="25" DataControl="RMITradeCompApprovalAppModuleDataControl"
+              id="OcDetailsFunctionsVO1Iterator"/>
+    <iterator Binds="BooksView1" RangeSize="25" DataControl="RMITradeCompApprovalAppModuleDataControl" id="BooksVO1Iterator"/>
+    <iterator Binds="SpecialQualificationsView1" RangeSize="25" DataControl="RMITradeCompApprovalAppModuleDataControl"
+              id="SpecialQualificationsVO1Iterator"/>
+    <iterator Binds="SqcDetailsCapacitiesView1" RangeSize="25" DataControl="RMITradeCompApprovalAppModuleDataControl"
+              id="SqcDetailsCapacitiesVO1Iterator"/>
+    <iterator Binds="SqcDetailsFunctionsView1" RangeSize="25" DataControl="RMITradeCompApprovalAppModuleDataControl"
+              id="SqcDetailsFunctionsVO1Iterator"/>
+  </executables>
+  <bindings>
+    <listOfValues IterBinding="SicdSeafarerVO1Iterator" StaticList="false" Uses="LOV_TransCountryName"
+                  id="TransCountryName"/>
+    <attributeValues IterBinding="SicdSeafarerVO1Iterator" id="BirthDate">
+      <AttrNames>
+        <Item Value="BirthDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SicdSeafarerVO1Iterator" id="BirthPlace">
+      <AttrNames>
+        <Item Value="BirthPlace"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SicdSeafarerVO1Iterator" id="FirstName">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SicdSeafarerVO1Iterator" id="Gender">
+      <AttrNames>
+        <Item Value="Gender"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SicdSeafarerVO1Iterator" id="LastName">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SicdSeafarerVO1Iterator" id="MiddleInitial">
+      <AttrNames>
+        <Item Value="MiddleInitial"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SicdSeafarerVO1Iterator" id="SeafarerId">
+      <AttrNames>
+        <Item Value="SeafarerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SicdSeafarerVO1Iterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <action id="Rollback" DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="false"
+            Action="rollbackTransaction"/>
+    <listOfValues IterBinding="OfficerCertificatesVO1Iterator" StaticList="false" Uses="LOV_TransCntryName"
+                  id="TransCountryName1"/>
+    <listOfValues IterBinding="OfficerCertificatesVO1Iterator" StaticList="false" Uses="LOV_TransGrade"
+                  id="TransGrade"/>
+    <listOfValues IterBinding="OfficerCertificatesVO1Iterator" StaticList="false" Uses="LOV_TransPreviousOC"
+                  id="TransPreviousOC"/>
+    <attributeValues IterBinding="OfficerCertificatesVO1Iterator" id="CertificateNumber">
+      <AttrNames>
+        <Item Value="CertificateNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="OfficerCertificatesVO1Iterator" StaticList="false" Uses="LOV_CertificateType"
+          id="CertificateType" DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="OfficerCertificatesVO1Iterator" id="EndorsementExpirationDate">
+      <AttrNames>
+        <Item Value="EndorsementExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OfficerCertificatesVO1Iterator" id="EndorsementIssueDate">
+      <AttrNames>
+        <Item Value="EndorsementIssueDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OfficerCertificatesVO1Iterator" id="EndorsementNumber">
+      <AttrNames>
+        <Item Value="EndorsementNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OfficerCertificatesVO1Iterator" id="ExamNumber">
+      <AttrNames>
+        <Item Value="ExamNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OfficerCertificatesVO1Iterator" id="ExamYear">
+      <AttrNames>
+        <Item Value="ExamYear"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OfficerCertificatesVO1Iterator" id="ExpirationDate">
+      <AttrNames>
+        <Item Value="ExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OfficerCertificatesVO1Iterator" id="IssueDate">
+      <AttrNames>
+        <Item Value="IssueDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="OfficerCertificatesVO1Iterator" StaticList="false" Uses="LOV_IssueType" id="IssueType"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <list IterBinding="OfficerCertificatesVO1Iterator" StaticList="false" Uses="LOV_Status" id="Status1"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <tree IterBinding="OfficerCertificatesVO1Iterator" id="OfficerCertificatesVO1">
+      <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.OfficerCertificatesView"
+                      Name="OfficerCertificatesVO10">
+        <AttrNames>
+          <Item Value="CertificateNumber"/>
+          <Item Value="CertificateType"/>
+          <Item Value="EndorsementExpirationDate"/>
+          <Item Value="EndorsementIssueDate"/>
+          <Item Value="EndorsementNumber"/>
+          <Item Value="EsdiId"/>
+          <Item Value="ExamNumber"/>
+          <Item Value="ExamYear"/>
+          <Item Value="ExpirationDate"/>
+          <Item Value="IssueDate"/>
+          <Item Value="IssueType"/>
+          <Item Value="Status"/>
+          <Item Value="TransCountryName"/>
+          <Item Value="TransGrade"/>
+          <Item Value="TransPreviousOC"/>
+          <Item Value="TransOCWorkOrderNo"/>
+          <Item Value="TransOcAllGrades"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <listOfValues IterBinding="OcDetailsCapacitiesVO1Iterator" StaticList="false" Uses="LOV_TransLimitationDesc"
+                  id="TransLimitationDesc"/>
+    <attributeValues IterBinding="OcDetailsCapacitiesVO1Iterator" id="TransCapacityDesc">
+      <AttrNames>
+        <Item Value="TransCapacityDesc"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="OcDetailsCapacitiesVO1Iterator" id="OcDetailsCapacitiesVO1">
+      <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.OcDetailsCapacitiesView"
+                      Name="OcDetailsCapacitiesVO10">
+        <AttrNames>
+          <Item Value="TransCapacityDesc"/>
+          <Item Value="TransLimitationDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <listOfValues IterBinding="OcDetailsFunctionsVO1Iterator" StaticList="false" Uses="LOV_TransLimitationsName"
+                  id="TransLimitationsName"/>
+    <attributeValues IterBinding="OcDetailsFunctionsVO1Iterator" id="TransLevel">
+      <AttrNames>
+        <Item Value="TransLevel"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="OcDetailsFunctionsVO1Iterator" id="TransFunctionName">
+      <AttrNames>
+        <Item Value="TransFunctionName"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="BooksVO1Iterator" StaticList="false" Uses="LOV_TransPreviousBooks"
+                  id="TransPreviousBooks"/>
+    <attributeValues IterBinding="BooksVO1Iterator" id="BookNumber">
+      <AttrNames>
+        <Item Value="BookNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="BooksVO1Iterator" StaticList="false" Uses="LOV_BookType" id="BookType" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="BooksVO1Iterator" id="ExpirationDate1">
+      <AttrNames>
+        <Item Value="ExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BooksVO1Iterator" id="IssueDate1">
+      <AttrNames>
+        <Item Value="IssueDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="BooksVO1Iterator" StaticList="false" Uses="LOV_IssueType" id="IssueType1" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <list IterBinding="BooksVO1Iterator" StaticList="false" Uses="LOV_Status" id="Status2" DTSupportsMRU="false"
+          SelectItemValueMode="ListObject"/>
+    <tree IterBinding="BooksVO1Iterator" id="BooksVO1">
+      <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.BooksView" Name="BooksVO10">
+        <AttrNames>
+          <Item Value="BookNumber"/>
+          <Item Value="BookType"/>
+          <Item Value="EsdiId"/>
+          <Item Value="ExpirationDate"/>
+          <Item Value="IssueDate"/>
+          <Item Value="IssueType"/>
+          <Item Value="Status"/>
+          <Item Value="TransPreviousBooks"/>
+          <Item Value="TransBooksWorkOrderNo"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <listOfValues IterBinding="SpecialQualificationsVO1Iterator" StaticList="false" Uses="LOV_TransPreviousSQC"
+                  id="TransPreviousSQC"/>
+    <listOfValues IterBinding="SpecialQualificationsVO1Iterator" StaticList="false" Uses="LOV_TransGradeSqc"
+                  id="TransGradeSqc"/>
+    <listOfValues IterBinding="SpecialQualificationsVO1Iterator" StaticList="false" Uses="LOV_TransEndorsCntry"
+                  id="TransEndorsCntry"/>
+    <attributeValues IterBinding="SpecialQualificationsVO1Iterator" id="EndorsementExpirationDate1">
+      <AttrNames>
+        <Item Value="EndorsementExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SpecialQualificationsVO1Iterator" id="EndorsementIssueDate1">
+      <AttrNames>
+        <Item Value="EndorsementIssueDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SpecialQualificationsVO1Iterator" id="EndorsementNumber1">
+      <AttrNames>
+        <Item Value="EndorsementNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SpecialQualificationsVO1Iterator" id="ExpirationDate2">
+      <AttrNames>
+        <Item Value="ExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SpecialQualificationsVO1Iterator" id="IssueDate2">
+      <AttrNames>
+        <Item Value="IssueDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="SpecialQualificationsVO1Iterator" StaticList="false" Uses="LOV_IssueType" id="IssueType2"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <attributeValues IterBinding="SpecialQualificationsVO1Iterator" id="SqcNumber">
+      <AttrNames>
+        <Item Value="SqcNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="SpecialQualificationsVO1Iterator" StaticList="false" Uses="LOV_Status" id="Status3"
+          DTSupportsMRU="false" SelectItemValueMode="ListObject"/>
+    <tree IterBinding="SpecialQualificationsVO1Iterator" id="SpecialQualificationsVO1">
+      <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.SpecialQualificationsView"
+                      Name="SpecialQualificationsVO10">
+        <AttrNames>
+          <Item Value="BookNumber"/>
+          <Item Value="EndorsementExpirationDate"/>
+          <Item Value="EndorsementIssueDate"/>
+          <Item Value="EndorsementNumber"/>
+          <Item Value="EsdiId"/>
+          <Item Value="ExpirationDate"/>
+          <Item Value="IssueDate"/>
+          <Item Value="IssueType"/>
+          <Item Value="SqcNumber"/>
+          <Item Value="Status"/>
+          <Item Value="TransPreviousSQC"/>
+          <Item Value="TransGradeSqc"/>
+          <Item Value="TransEndorsCntry"/>
+          <Item Value="TransSQCWorkOrderNo"/>
+          <Item Value="TransSqcAllGrades"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <listOfValues IterBinding="SqcDetailsCapacitiesVO1Iterator" StaticList="false" Uses="LOV_TransSqcLimitations"
+                  id="TransSqcLimitations"/>
+    <attributeValues IterBinding="SqcDetailsCapacitiesVO1Iterator" id="TransSqcCapacities">
+      <AttrNames>
+        <Item Value="TransSqcCapacities"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues IterBinding="SqcDetailsFunctionsVO1Iterator" StaticList="false" Uses="LOV_TransSqcLimitationDesc"
+                  id="TransSqcLimitationDesc"/>
+    <attributeValues IterBinding="SqcDetailsFunctionsVO1Iterator" id="TransSqcFunctions">
+      <AttrNames>
+        <Item Value="TransSqcFunctions"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SqcDetailsFunctionsVO1Iterator" id="TransSqcLevel">
+      <AttrNames>
+        <Item Value="TransSqcLevel"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="validateSeafarerFromProc" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="validateSeafarerFromProc" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.validateSeafarerFromProc_RMITradeCompApprovalAMDataControl_dataProvider_validateSeafarerFromProc_result"/>
+    <attributeValues IterBinding="OfficerCertificatesVO1Iterator" id="TransOCWorkOrderNo">
+      <AttrNames>
+        <Item Value="TransOCWorkOrderNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="SpecialQualificationsVO1Iterator" id="TransSQCWorkOrderNo">
+      <AttrNames>
+        <Item Value="TransSQCWorkOrderNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BooksVO1Iterator" id="TransBooksWorkOrderNo">
+      <AttrNames>
+        <Item Value="TransBooksWorkOrderNo"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="filterValidateSeafarerVO" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="filterValidateSeafarerVO" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.filterValidateSeafarerVO_RMITradeCompApprovalAMDataControl_dataProvider_filterValidateSeafarerVO_result"/>
+    <tree IterBinding="OcDetailsCapacitiesVO1Iterator" id="OcDetailsCapacitiesVO11">
+      <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.OcDetailsCapacitiesView"
+                      Name="OcDetailsCapacitiesVO110">
+        <AttrNames>
+          <Item Value="TransCapacityDesc"/>
+          <Item Value="TransLimitationDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="OfficerCertificatesVO1Iterator" id="CreateInsertOc"
+            InstanceName="RMITradeCompApprovalAppModuleDataControl.OfficerCertificatesView1"
+            DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="BooksVO1Iterator" id="CreateInsertBooks"
+            InstanceName="RMITradeCompApprovalAppModuleDataControl.BooksView1"
+            DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="SpecialQualificationsVO1Iterator" id="CreateInsertSqc"
+            InstanceName="RMITradeCompApprovalAppModuleDataControl.SpecialQualificationsView1"
+            DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="true" Action="createInsertRow"/>
+    <tree IterBinding="OcDetailsFunctionsVO1Iterator" id="OcDetailsFunctionsVO1">
+      <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.OcDetailsFunctionsView"
+                      Name="OcDetailsFunctionsVO10">
+        <AttrNames>
+          <Item Value="TransLimitationsName"/>
+          <Item Value="TransLevel"/>
+          <Item Value="TransFunctionName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="OfficerCertificatesVO1Iterator" id="DeleteOc"
+            InstanceName="RMITradeCompApprovalAppModuleDataControl.OfficerCertificatesView1"
+            DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="BooksVO1Iterator" id="DeleteBooks"
+            InstanceName="RMITradeCompApprovalAppModuleDataControl.BooksView1"
+            DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action IterBinding="SpecialQualificationsVO1Iterator" id="DeleteSqc"
+            InstanceName="RMITradeCompApprovalAppModuleDataControl.SpecialQualificationsView1"
+            DataControl="RMITradeCompApprovalAppModuleDataControl" RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <tree IterBinding="SqcDetailsCapacitiesVO1Iterator" id="SqcDetailsCapacitiesVO1">
+      <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.SqcDetailsCapacitiesView"
+                      Name="SqcDetailsCapacitiesVO10">
+        <AttrNames>
+          <Item Value="TransSqcCapacities"/>
+          <Item Value="TransSqcLimitations"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="SqcDetailsFunctionsVO1Iterator" id="SqcDetailsFunctionsVO1">
+      <nodeDefinition DefName="com.rmi.tradecompapproval.adfbc.views.SqcDetailsFunctionsView"
+                      Name="SqcDetailsFunctionsVO10">
+        <AttrNames>
+          <Item Value="TransSqcFunctions"/>
+          <Item Value="TransSqcLevel"/>
+          <Item Value="TransSqcLimitationDesc"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction id="setDefaultValuesOnCreate" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="setDefaultValuesOnCreate" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.setDefaultValuesOnCreate_RMITradeCompApprovalAMDataControl_dataProvider_setDefaultValuesOnCreate_result">
+      <NamedData NDName="documentType" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="genMergedSupportingDocs" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="genMergedSupportingDocs" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.genMergedSupportingDocs_RMITradeCompApprovalAMDataControl_dataProvider_genMergedSupportingDocs_result"/>
+    <methodAction id="getMergedFileName" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getMergedFileName"
+                  IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.getMergedFileName_RMITradeCompApprovalAMDataControl_dataProvider_getMergedFileName_result"/>
+    <methodAction id="validateExpDate" RequiresUpdateModel="true" Action="invokeMethod" MethodName="validateExpDate"
+                  IsViewObjectMethod="false" DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.validateExpDate_RMITradeCompApprovalAppModuleDataControl_dataProvider_validateExpDate_result">
+      <NamedData NDName="endDate" NDType="oracle.jbo.domain.Date"/>
+    </methodAction>
+    <methodAction id="refreshSicdOcSqcViews" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="refreshSicdOcSqcViews" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.refreshSicdOcSqcViews_RMITradeCompApprovalAppModuleDataControl_dataProvider_refreshSicdOcSqcViews_result"/>
+    <methodAction id="validateDuplicateOcCapacity" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="validateDuplicateOcCapacity" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.validateDuplicateOcCapacity_RMITradeCompApprovalAppModuleDataControl_dataProvider_validateDuplicateOcCapacity_result">
+      <NamedData NDName="capacityName" NDType="java.lang.String"/>
+    </methodAction>
+    <methodAction id="validateDuplicateOcFunction" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="validateDuplicateOcFunction" IsViewObjectMethod="false"
+                  DataControl="RMITradeCompApprovalAppModuleDataControl"
+                  InstanceName="data.RMITradeCompApprovalAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMITradeCompApprovalAppModuleDataControl.methodResults.validateDuplicateOcFunction_RMITradeCompApprovalAppModuleDataControl_dataProvider_validateDuplicateOcFunction_result">
+      <NamedData NDName="functionName" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

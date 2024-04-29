@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Dashboard - INTERNATIONAL REGISTRIES,INC." id="d1">
+        <af:form id="f1" usesUpload="true">
+            <af:pageTemplate viewId="/WEB-INF/com/rmi/login/view/pagetemplates/RmiTemplate.jsf" id="pt1">
+                <f:facet name="content">
+                    <af:decorativeBox id="db1" topHeight="s" dimensionsFrom="parent">
+                        <f:facet name="center">
+                            <af:panelGridLayout id="pgl1" dimensionsFrom="parent">
+                                <af:gridRow id="gr1" height="55px">
+                                    <af:gridCell marginStart="5px" width="40%" id="gc1">
+                                        <af:panelGroupLayout id="pgl5" styleClass="AFStretchWidth" layout="vertical"></af:panelGroupLayout>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="20%" id="gc2"></af:gridCell>
+                                    <af:gridCell marginStart="5px" width="20%" id="gc3"></af:gridCell>
+                                    <af:gridCell marginStart="5px" width="2%" marginEnd="5px" id="gc31" valign="middle"></af:gridCell>
+                                    <af:gridCell marginStart="7px" width="18%" marginEnd="5px" id="gc71" valign="middle"
+                                                 halign="end">
+                                        <af:inputText label="Logged In As " id="it1"
+                                                      styleClass="sfxInputLableTop sfxInputLoginTxt2"
+                                                      value="#{pageFlowScope.mainBean.userName}" readOnly="true"
+                                                      inlineStyle="margin-top:5px;"/>
+                                    </af:gridCell>
+                                </af:gridRow>
+                                <af:gridRow marginTop="1px" marginBottom="2px" id="gr2" height="100%">
+                                    <af:gridCell columnSpan="6" marginEnd="4px" id="gc4" width="90%" halign="stretch"
+                                                 valign="stretch">
+                                        <af:panelSplitter id="ps1" inlineStyle="background-color:White; background-image:none;"
+                                                          splitterPosition="240">
+                                            <f:facet name="second">
+                                                <af:region value="#{bindings.dynamicRegion.regionModel}" id="r2"
+                                                           binding="#{pageFlowScope.mainBean.regionBinding}"
+                                                           clientComponent="true"/>
+                                            </f:facet>
+                                        </af:panelSplitter>
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                        </f:facet>
+                    </af:decorativeBox>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+        <f:facet name="metaContainer">
+            <af:outputText value="&lt;link rel='SHORTCUT ICON' href='#{facesContext.externalContext.requestContextPath}/images/favicon.ico'/>" id="ot1"
+                           escape="false"/>
+        </f:facet>
+    </af:document>
+</f:view>

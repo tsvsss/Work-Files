@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:pageTemplate viewId="/WEB-INF/view/com/rmi/login/iritemplate/view/IRITemplate.jsf" id="pt1">
+        <f:facet name="content">
+            <!--<af:button text="button 1" id="b1"/>-->
+        </f:facet>
+    </af:pageTemplate>
+</ui:composition>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <view id="Login">
+    <display-name>Login - INTERNATIONAL REGISTRIES,INC.</display-name>
+    <icon/>
+    <page>/WEB-INF/com/rmi/login/view/login/Login.jsf</page>
+  </view>
+  <view id="Main">
+    <display-name>Dashboard - INTERNATIONAL REGISTRIES,INC.</display-name>
+    <icon/>
+    <page>/WEB-INF/com/rmi/login/view/main/Main.jsf</page>
+  </view>
+  <control-flow-rule id="__1">
+    <from-activity-id>Login</from-activity-id>
+    <control-flow-case id="__2">
+      <from-outcome>success</from-outcome>
+      <to-activity-id>Main</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <managed-bean id="__3">
+    <managed-bean-name>loginBean</managed-bean-name>
+    <managed-bean-class>com.rmi.login.view.login.LoginBean</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__4">
+    <managed-bean-name>mainBean</managed-bean-name>
+    <managed-bean-class>com.rmi.login.view.main.MainBean</managed-bean-class>
+    <managed-bean-scope>pageFlow</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

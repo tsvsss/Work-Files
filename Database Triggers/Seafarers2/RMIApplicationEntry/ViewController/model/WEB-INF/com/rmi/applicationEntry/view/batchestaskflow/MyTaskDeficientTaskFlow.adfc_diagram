@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <View
+      id="View2">
+      <property
+         name="activityId">MyTaskDeficientOrders</property>
+      <property
+         name="page">/WEB-INF/com/rmi/applicationEntry/view/batchestaskflow/MyTaskDeficientOrders.jsff</property>
+      <property
+         name="start">false</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>MyTaskDeficientOrders&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">159.19531</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">242.0</property>
+   </View>
+   <MethodCall
+      id="MethodCall3">
+      <property
+         name="activityId">onloadMyTaskDeficientOrder</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>onloadMyTaskDeficientOrder&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">156.44824</property>
+      <property
+         name="x">-26.22168</property>
+   </MethodCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase4"
+      from="MethodCall3"
+      to="View2">
+      <property
+         name="fromOutcome">onloadMyTaskDeficientOrder</property>
+      <property
+         name="sdm:polyPoints">R50,14.77832,156.09766,201.0,158.84473,L50</property>
+   </ControlFlowCase>
+   <TaskFlowCall
+      id="TaskFlowCall5">
+      <property
+         name="taskFlowId">taskflow_Batch_CreateEdit</property>
+      <property
+         name="activityId">taskflow_Batch_CreateEdit</property>
+      <property
+         name="documentReference">/WEB-INF/com/rmi/applicationEntry/view/batchcreateedittaskflow/BatchCreateEditTaskFlow.xml</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>taskflow_Batch_CreateEdit&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Call&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">137.14941</property>
+      <property
+         name="x">481.0381</property>
+   </TaskFlowCall>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="View2"
+      to="TaskFlowCall5">
+      <property
+         name="fromOutcome">editBatch</property>
+      <property
+         name="sdm:polyPoints">R50,283.0,158.84473,440.0381,136.79883,L50</property>
+   </ControlFlowCase>
+</SDM>

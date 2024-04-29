@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="MyTaskTaskFlow_taskflow_myTasks_iniPageDef" Package="com.rmi.applicationEntry.view.mytasktaskflow">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator id="GetOperatorFlagVOIterator" Binds="GetOperatorFlagView"
+              DataControl="RMIApplicationEntryAppModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings/>
+</pageDefinition>

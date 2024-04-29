@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.8" id="TaskAssignmentPageDef"
+                Package="com.rmi.applicationEntry.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="taskflow_taskAssignment1"
+              taskFlowId="/WEB-INF/com/rmi/applicationEntry/view/taskassignmenttaskflow/TaskAssignmentTaskFlow.xml#taskflow_taskAssignment"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="param_user_id" value="10245"/>
+      </parameters>
+    </taskFlow>
+    <taskFlow id="taskflow_taskAssignment2"
+              taskFlowId="/WEB-INF/com/rmi/applicationEntry/view/taskassignmenttaskflow/TaskAssignmentTaskFlow.xml#taskflow_taskAssignment"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding">
+      <parameters>
+        <parameter id="param_user_id" value="10245"/>
+      </parameters>
+    </taskFlow>
+  </executables>
+  <bindings/>
+</pageDefinition>

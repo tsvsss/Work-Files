@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="GetBatchCountByPurchaseNumberView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.readOnlyVO.GetBatchCountByPurchaseNumberView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pPurchaseNumber"
+    Kind="where"
+    Type="java.lang.String"/>
+  <Variable
+    Name="pCustAccountId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pEsiBatchId"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[select count(esi_batch_id) batch_count from rmi_seafarer.rmi_batch_iface where purchase_order_number = :pPurchaseNumber  
+and Deliver_To_Cust_Account_Id = :pCustAccountId and esi_batch_id != :pEsiBatchId]]></SQLQuery>
+  <ViewAttribute
+    Name="BatchCount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="BATCH_COUNT"
+    Expression="BATCH_COUNT"
+    SQLType="INTEGER"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

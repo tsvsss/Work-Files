@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="CustAccountBillToAllView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountBillToAllView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pPartyName"
+    Kind="viewcriteria"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountBillToAllView.pPartyName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT hca.cust_account_id, hca.account_number customer_number,   
+       hp_ship.party_name customer_name, hp_ship.party_id,   
+       hca_ship.cust_acct_site_id, hcs_ship.site_use_id,   
+          hl_ship.address1   
+       || DECODE (hl_ship.address2, NULL, '', CHR (10))   
+       || hl_ship.address2   
+       || DECODE (hl_ship.address3, NULL, '', CHR (10))   
+       || hl_ship.address3   
+       || DECODE (hl_ship.address4, NULL, '', CHR (10))   
+       || hl_ship.address4   
+       || DECODE (hl_ship.city, NULL, '', CHR (10))   
+       || hl_ship.city   
+       || DECODE (hl_ship.state, NULL, '', ',')   
+       || hl_ship.state   
+       || DECODE (hl_ship.postal_code, '', ',')   
+       || hl_ship.postal_code ship_to_address,   
+       hcs_ship.site_use_id ship_to_location, hcs_ship.site_use_code   
+  --hcs_bill.site_use_id bill_to_location   
+FROM   hz_cust_site_uses_all hcs_ship,   
+       hz_cust_acct_sites_all hca_ship,   
+       hz_party_sites hps_ship,   
+       hz_parties hp_ship,   
+       hz_locations hl_ship,   
+       hz_cust_accounts hca   
+WHERE 1 = 1   
+   AND hcs_ship.cust_acct_site_id = hca_ship.cust_acct_site_id   
+   AND hca_ship.party_site_id = hps_ship.party_site_id   
+   AND hps_ship.party_id = hp_ship.party_id   
+   AND hps_ship.location_id = hl_ship.location_id   
+   AND hca.cust_account_id = hca_ship.cust_account_id   
+   AND hcs_ship.site_use_code = 'BILL_TO'  
+   and hp_ship.party_name = 'V. SHIPS UK LTD.']]></SQLQuery>
+  <ViewAttribute
+    Name="CustAccountId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="LONGINT"
+    AliasName="CUST_ACCOUNT_ID"
+    Expression="CUST_ACCOUNT_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CustomerNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUSTOMER_NUMBER"
+    Expression="CUSTOMER_NUMBER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CustomerName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="360"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CUSTOMER_NAME"
+    Expression="CUSTOMER_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="360"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PartyId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="PARTY_ID"
+    Expression="PARTY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CustAcctSiteId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="CUST_ACCT_SITE_ID"
+    Expression="CUST_ACCT_SITE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SiteUseId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SITE_USE_ID"
+    Expression="SITE_USE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ShipToAddress"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1146"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SHIP_TO_ADDRESS"
+    Expression="SHIP_TO_ADDRESS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1146"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipToLocation"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="15"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="SHIP_TO_LOCATION"
+    Expression="SHIP_TO_LOCATION"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SiteUseCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="30"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SITE_USE_CODE"
+    Expression="SITE_USE_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="CustAccountBillToAllLOVCriteria"
+    ViewObjectName="com.rmi.applicationEntry.adfbc.views.lovs.CustAccountBillToAllView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="CustAccountBillToAllLOVCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="CustomerName"
+        ViewAttribute="CustomerName"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Value=":pPartyName"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

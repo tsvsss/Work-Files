@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="CRAProcessingPageDef"
+                Package="com.rmi.applicationEntry.view.craprocessingtaskflow">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BatchesProcessingCraView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="BatchesProcessingCraROIterator" ChangeEventPolicy="none"/>
+    <iterator Binds="CraMailDualView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="CraMailDualROIterator"/>
+    <searchRegion Binds="BatchesProcessingCraROIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="BatchesProcessingCraViewQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="createcrabatch" RequiresUpdateModel="true" Action="invokeMethod" MethodName="createcrabatch"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.createcrabatch_RMIApplicationEntryAppModuleDataControl_dataProvider_createcrabatch_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <attributeValues IterBinding="CraMailDualROIterator" id="sender_mail">
+      <AttrNames>
+        <Item Value="sender_mail"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CraMailDualROIterator" id="dest_mail">
+      <AttrNames>
+        <Item Value="dest_mail"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CraMailDualROIterator" id="dest_cc">
+      <AttrNames>
+        <Item Value="dest_cc"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CraMailDualROIterator" id="regrading">
+      <AttrNames>
+        <Item Value="regrading"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="CraMailDualROIterator" id="message">
+      <AttrNames>
+        <Item Value="message"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="batchEmailCra" RequiresUpdateModel="true" Action="invokeMethod" MethodName="batchEmailCra"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.batchEmailCra_RMIApplicationEntryAppModuleDataControl_dataProvider_batchEmailCra_result">
+      <NamedData NDName="p_user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="sendCRAMailButton" RequiresUpdateModel="true" Action="invokeMethod" MethodName="sendCRAMailButton"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.sendCRAMailButton_RMIApplicationEntryAppModuleDataControl_dataProvider_sendCRAMailButton_result"/>
+    <attributeValues IterBinding="CraMailDualROIterator" id="tranUrlCRA">
+      <AttrNames>
+        <Item Value="tranUrlCRA"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="validateSendCra" RequiresUpdateModel="true" Action="invokeMethod" MethodName="validateSendCra"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.validateSendCra_RMIApplicationEntryAppModuleDataControl_dataProvider_validateSendCra_result"/>
+    <attributeValues IterBinding="BatchesProcessingCraROIterator" id="EsiBatchId">
+      <AttrNames>
+        <Item Value="EsiBatchId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="BatchesProcessingCraROIterator" id="SeafarerId">
+      <AttrNames>
+        <Item Value="SeafarerId"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="cpyCraFile" RequiresUpdateModel="true" Action="invokeMethod" MethodName="cpyCraFile"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.cpyCraFile_RMIApplicationEntryAppModuleDataControl_dataProvider_cpyCraFile_result"/>
+    <methodAction id="deselectCraProcessing" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="deselectCraProcessing" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.deselectCraProcessing_RMIApplicationEntryAppModuleDataControl_dataProvider_deselectCraProcessing_result"/>
+    <methodAction id="validateCraLines" RequiresUpdateModel="true" Action="invokeMethod" MethodName="validateCraLines"
+                  IsViewObjectMethod="false" DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.validateCraLines_RMIApplicationEntryAppModuleDataControl_dataProvider_validateCraLines_result"/>
+    <tree IterBinding="BatchesProcessingCraROIterator" id="BatchesProcessingCraView" ChangeEventPolicy="none">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.BatchesProcessingCraView"
+                      Name="BatchesProcessingCraView0">
+        <AttrNames>
+          <Item Value="BatchName"/>
+          <Item Value="SeafarerId"/>
+          <Item Value="CreatedByUser"/>
+          <Item Value="CraApprovedDate"/>
+          <Item Value="CertificateType"/>
+          <Item Value="CustomerName"/>
+          <Item Value="SeafarerName"/>
+          <Item Value="GradeName"/>
+          <Item Value="TcStatus"/>
+          <Item Value="batchSelect" Binds="batchSelect"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <button IterBinding="BatchesProcessingCraROIterator" id="batchSelect" DTSupportsMRU="false" StaticList="true">
+      <AttrNames>
+        <Item Value="batchSelect"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+  </bindings>
+</pageDefinition>
+

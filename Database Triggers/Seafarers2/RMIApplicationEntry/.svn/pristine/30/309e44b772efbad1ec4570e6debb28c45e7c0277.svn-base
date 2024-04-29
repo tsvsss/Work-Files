@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE JboProject SYSTEM "jbo_03_01.dtd">
+<!---->
+<JboProject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="Model"
+  Version="12.1.3.10.8"
+  SeparateXMLFiles="true"
+  PackageName="com.rmi.applicationEntry.adfbc">
+  <DesignTime>
+    <Attr Name="_jprName" Value="../../../../../Model.jpr"/>
+    <Attr Name="_jbo.TypeMapEntries" Value="OracleApps"/>
+    <Attr Name="_appModuleNames0" Value="com.rmi.applicationEntry.adfbc.services.RMIApplicationEntryAppModule"/>
+    <Attr Name="_domainNames0" Value="com.rmi.applicationEntry.adfbc.views.readOnlyVO.Type"/>
+    <Attr Name="_NamedConnection" Value="DRDS"/>
+    <Attr Name="_domainNames1" Value="com.rmi.applicationEntry.adfbc.views.readOnlyVO.Type1"/>
+  </DesignTime>
+  <Containee
+    Name="entities"
+    PackageName="com.rmi.applicationEntry.adfbc.entities"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_EO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="services"
+    PackageName="com.rmi.applicationEntry.adfbc.services"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_AM" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="links"
+    PackageName="com.rmi.applicationEntry.adfbc.views.links"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VL" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="lovs"
+    PackageName="com.rmi.applicationEntry.adfbc.views.lovs"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="readOnlyVO"
+    PackageName="com.rmi.applicationEntry.adfbc.views.readOnlyVO"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+      <Attr Name="_DO" Value="true"/>
+    </DesignTime>
+  </Containee>
+  <Containee
+    Name="views"
+    PackageName="com.rmi.applicationEntry.adfbc.views"
+    ObjectType="JboPackage">
+    <DesignTime>
+      <Attr Name="_VO" Value="true"/>
+    </DesignTime>
+  </Containee>
+</JboProject>

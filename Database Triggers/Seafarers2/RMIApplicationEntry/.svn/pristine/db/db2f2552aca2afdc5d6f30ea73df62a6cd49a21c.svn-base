@@ -1,0 +1,588 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" styleClass="AFStretchWidth">
+    <af:panelTabbed position="above" id="pt1" binding="#{pageFlowScope.BatchesTCBean.tabbedBind}">
+      <af:showDetailItem id="tab1" text="Orders To Grade"
+                         disclosureListener="#{pageFlowScope.BatchesTCBean.ordersToGradeDisclosureListener}"
+                         binding="#{pageFlowScope.BatchesTCBean.tab1Bind}">
+        <af:panelFormLayout id="pfl3" partialTriggers="pc1:t1" visible="false">
+          <af:inputText value="#{bindings.EsiBatchId1.inputValue}" label="#{bindings.EsiBatchId1.hints.label}"
+                        required="#{bindings.EsiBatchId1.hints.mandatory}" readOnly="true"
+                        columns="#{bindings.EsiBatchId1.hints.displayWidth}"
+                        maximumLength="#{bindings.EsiBatchId1.hints.precision}"
+                        shortDesc="#{bindings.EsiBatchId1.hints.tooltip}" id="it6">
+            <f:validator binding="#{bindings.EsiBatchId1.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.EsiBatchId1.format}"/>
+          </af:inputText>
+        </af:panelFormLayout>
+        <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar">
+            <af:toolbar id="t6">
+              <af:button text="Refresh" id="b7" action="#{pageFlowScope.BatchesTCBean.actionRefreshOrdersToGrade}"
+                         immediate="true"/>
+            </af:toolbar>
+          </f:facet>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.BatchesPendingTcRO.collectionModel}" var="row"
+                    rows="#{bindings.BatchesPendingTcRO.rangeSize}"
+                    emptyText="#{bindings.BatchesPendingTcRO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0" selectedRowKeys="#{bindings.BatchesPendingTcRO.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.BatchesPendingTcRO.collectionModel.makeCurrent}" rowSelection="single"
+                    fetchSize="#{bindings.BatchesPendingTcRO.rangeSize}" id="t1" styleClass="AFStretchWidth"
+                    contentDelivery="immediate" autoHeightRows="14"
+                    columnStretching="column:c3" filterModel="#{bindings.BatchesPendingTcROQuery.queryDescriptor}"
+                    queryListener="#{bindings.BatchesPendingTcROQuery.processQuery}" filterVisible="true"
+                    varStatus="vs" partialTriggers="::b7 ::t6">
+            <af:column headerText="Batch Name" id="c3" width="150"
+                       sortProperty="#{bindings.BatchesPendingTcRO.hints.BatchName.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.BatchName}" shortDesc="#{bindings.BatchesPendingTcRO.hints.BatchName.tooltip}"
+                             id="ot3" inlineStyle="color:#{row.CraCount == 0 ? '' : 'Red'}; "/>
+              <f:facet name="filter"/>
+            </af:column>
+            <af:column headerText="Batch Submitted Date" id="c2"
+                       sortProperty="#{bindings.BatchesPendingTcRO.hints.BatchDate.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.BatchDate}" shortDesc="#{bindings.BatchesPendingTcRO.hints.BatchDate.tooltip}"
+                             id="ot2" inlineStyle="color:#{row.CraCount == 0 ? '' : 'Red'};text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.BatchesPendingTcROQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                              id="id1" contentStyle="text-transform:uppercase;">
+                  <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                </af:inputDate>
+              </f:facet>
+            </af:column>
+            <af:column headerText="Batch Status" id="c1"
+                       sortProperty="#{bindings.BatchesPendingTcRO.hints.BatchStatus.name}" filterable="true"
+                       sortable="true" visible="false">
+              <af:outputText value="#{row.BatchStatus}"
+                             shortDesc="#{bindings.BatchesPendingTcRO.hints.BatchStatus.tooltip}" id="ot1"
+                             inlineStyle="color:#{row.CraCount == 0 ? '' : 'Red'}; "/>
+            </af:column>
+            <af:column headerText="Number Of Seafarers" id="c4"
+                       sortProperty="#{bindings.BatchesPendingTcRO.hints.NoOfSeafarer.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.NoOfSeafarer}"
+                             shortDesc="#{bindings.BatchesPendingTcRO.hints.NoOfSeafarer.tooltip}" id="ot4"
+                             inlineStyle="color:#{row.CraCount == 0 ? '' : 'Red'}; " visible="false">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesPendingTcRO.hints.NoOfSeafarer.format}"/>
+              </af:outputText>
+              <af:link text="#{row.NoOfSeafarer}" id="l1" action="seafarerlist" useWindow="true" windowHeight="200"
+                       windowWidth="850" windowEmbedStyle="window"/>
+            </af:column>
+            <af:column headerText="Region" id="c5" sortProperty="#{bindings.BatchesPendingTcRO.hints.Region.name}"
+                       filterable="true" sortable="true">
+              <af:outputText value="#{row.Region}" shortDesc="#{bindings.BatchesPendingTcRO.hints.Region.tooltip}"
+                             id="ot5" inlineStyle="color:#{row.CraCount == 0 ? '' : 'Red'}; "/>
+            </af:column>
+            <af:column headerText="Work Order Number" id="c33"
+                       sortProperty="#{bindings.BatchesPendingTcRO.hints.WorkOrderNo.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.WorkOrderNo}"
+                             shortDesc="#{bindings.BatchesPendingTcRO.hints.WorkOrderNo.tooltip}" id="ot27"
+                             inlineStyle="color:#{row.CraCount == 0 ? '' : 'Red'}; ">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesPendingTcRO.hints.WorkOrderNo.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Order Type" id="c34"
+                       sortProperty="#{bindings.BatchesPendingTcRO.hints.OrderType.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.OrderType}" shortDesc="#{bindings.BatchesPendingTcRO.hints.OrderType.tooltip}"
+                             id="ot28" inlineStyle="color:#{row.CraCount == 0 ? '' : 'Red'}; "/>
+            </af:column>
+            <af:column headerText="Expedited Processing" id="c7"
+                       sortProperty="#{bindings.BatchesPendingTcRO.hints.ExpeditedProcessing.name}" filterable="false"
+                       sortable="false">
+              <af:selectBooleanCheckbox value="#{row.bindings.ExpeditedProcessingTc.inputValue}"
+                                        label="#{row.bindings.ExpeditedProcessingTc.label}"
+                                        shortDesc="#{bindings.BatchesPendingTcRO.hints.ExpeditedProcessingTc.tooltip}"
+                                        id="sbc3" disabled="true"/>
+            </af:column>
+            <af:column id="c6" sortable="false" filterable="false" width="80">
+              <af:button text="Assign" id="b1" actionListener="#{pageFlowScope.BatchesTCBean.assignSingleButton}"/>
+            </af:column>
+            <af:column id="c38" width="80">
+              <af:button text="TC Status" id="b6" action="seafarerlisttc" useWindow="true" windowEmbedStyle="window"
+                         windowHeight="250" windowWidth="750"/>
+            </af:column>
+            <af:column headerText="#{bindings.BatchesPendingTcRO.hints.CraCount.label}" id="c8" visible="false"
+                       sortProperty="#{bindings.BatchesPendingTcRO.hints.CraCount.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.CraCount}" shortDesc="#{bindings.BatchesPendingTcRO.hints.CraCount.tooltip}"
+                             id="ot6">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.BatchesPendingTcRO.hints.CraCount.format}"/>
+              </af:outputText>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:showDetailItem>
+      <af:showDetailItem text="Orders Pending CRA's" id="sdi1"
+                         disclosureListener="#{pageFlowScope.BatchesTCBean.craDisclosureListener}">
+        <af:panelCollection id="pc3" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.BatchesPendingTcCraRO.collectionModel}" var="row"
+                    rows="#{bindings.BatchesPendingTcCraRO.rangeSize}"
+                    emptyText="#{bindings.BatchesPendingTcCraRO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.BatchesPendingTcCraRO.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.BatchesPendingTcCraRO.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.BatchesPendingTcCraRO.rangeSize}" id="t3"
+                    styleClass="AFStretchWidth" contentDelivery="immediate" autoHeightRows="14"
+                    columnStretching="column:c16" filterModel="#{bindings.BatchesPendingTcCraROQuery.queryDescriptor}"
+                    queryListener="#{bindings.BatchesPendingTcCraROQuery.processQuery}" filterVisible="true"
+                    varStatus="vs">
+            <af:column headerText="Batch Name" id="c16" width="150"
+                       sortProperty="#{bindings.BatchesPendingTcCraRO.hints.BatchName.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.BatchName}"
+                             shortDesc="#{bindings.BatchesPendingTcCraRO.hints.BatchName.tooltip}" id="ot14"
+                             inlineStyle="color:Red;"/>
+            </af:column>
+            <af:column headerText="Batch Submitted Date" id="c15"
+                       sortProperty="#{bindings.BatchesPendingTcCraRO.hints.BatchDate.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.BatchDate}"
+                             shortDesc="#{bindings.BatchesPendingTcCraRO.hints.BatchDate.tooltip}" id="ot13"
+                             inlineStyle="color:Red;text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.BatchesPendingTcCraROQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                              id="id2" contentStyle="text-transform:uppercase;">
+                  <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                </af:inputDate>
+              </f:facet>
+            </af:column>
+            <af:column headerText="Batch Status" id="c14"
+                       sortProperty="#{bindings.BatchesPendingTcCraRO.hints.BatchStatus.name}" filterable="true"
+                       sortable="true" visible="false">
+              <af:outputText value="#{row.BatchStatus}"
+                             shortDesc="#{bindings.BatchesPendingTcCraRO.hints.BatchStatus.tooltip}" id="ot12"
+                             inlineStyle="color:Red;"/>
+            </af:column>
+            <af:column headerText="Number Of Seafarers" id="c17"
+                       sortProperty="#{bindings.BatchesPendingTcCraRO.hints.NoOfSeafarer.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.NoOfSeafarer}"
+                             shortDesc="#{bindings.BatchesPendingTcCraRO.hints.NoOfSeafarer.tooltip}" id="ot15"
+                             inlineStyle="color:Red;">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesPendingTcCraRO.hints.NoOfSeafarer.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Work Order Number" id="c36"
+                       sortProperty="#{bindings.BatchesPendingTcCraRO.hints.WorkOrderNo.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.WorkOrderNo}"
+                             shortDesc="#{bindings.BatchesPendingTcCraRO.hints.WorkOrderNo.tooltip}" id="ot30"
+                             inlineStyle="color:Red;">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesPendingTcCraRO.hints.WorkOrderNo.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.BatchesPendingTcCraRO.hints.Region.label}" id="c18"
+                       sortProperty="#{bindings.BatchesPendingTcCraRO.hints.Region.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.Region}" shortDesc="#{bindings.BatchesPendingTcCraRO.hints.Region.tooltip}"
+                             id="ot16" inlineStyle="color:Red;"/>
+            </af:column>
+            <af:column headerText="Expedited Processing" id="c37">
+              <af:selectBooleanCheckbox value="#{row.bindings.ExpeditedProcessing.inputValue}"
+                                        label="#{row.bindings.ExpeditedProcessing.label}"
+                                        shortDesc="#{bindings.BatchesPendingTcCraRO.hints.ExpeditedProcessing.tooltip}"
+                                        id="sbc4"/>
+            </af:column>
+            <af:column id="c20" sortable="false" filterable="false">
+              <af:button text="Assign" id="b3" actionListener="#{pageFlowScope.BatchesTCBean.assignButtonCra}"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:showDetailItem>
+      <!--<af:showDetailItem text="Resubmitted Batches" id="sdi5">
+        <af:panelCollection id="pc6" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.BatchesPendingTcResubmittedRO.collectionModel}" var="row"
+                    rows="#{bindings.BatchesPendingTcResubmittedRO.rangeSize}"
+                    emptyText="#{bindings.BatchesPendingTcResubmittedRO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.BatchesPendingTcResubmittedRO.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.BatchesPendingTcResubmittedRO.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.BatchesPendingTcResubmittedRO.rangeSize}" id="t6"
+                    styleClass="AFStretchWidth" autoHeightRows="10" contentDelivery="immediate"
+                    columnStretching="column:c37" partialTriggers="b6"
+                    filterModel="#{bindings.BatchesPendingTcResubmittedROQuery.queryDescriptor}"
+                    queryListener="#{bindings.BatchesPendingTcResubmittedROQuery.processQuery}" filterVisible="true"
+                    varStatus="vs">
+            <af:column headerText="Batch Name" id="c37" width="150"
+                       sortProperty="#{bindings.BatchesPendingTcResubmittedRO.hints.BatchName.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.BatchName}"
+                             shortDesc="#{bindings.BatchesPendingTcResubmittedRO.hints.BatchName.tooltip}" id="ot31"/>
+            </af:column>
+            <af:column headerText="Batch Status" id="c35"
+                       sortProperty="#{bindings.BatchesPendingTcResubmittedRO.hints.BatchStatus.name}" filterable="true"
+                       sortable="true" visible="false">
+              <af:outputText value="#{row.BatchStatus}"
+                             shortDesc="#{bindings.BatchesPendingTcResubmittedRO.hints.BatchStatus.tooltip}" id="ot29"/>
+            </af:column>
+            <af:column headerText="Resubmitted Date" id="c44"
+                       sortProperty="#{bindings.BatchesPendingTcResubmittedRO.hints.BatchResubmittedDate.name}"
+                       filterable="true" sortable="true">
+              <af:outputText value="#{row.BatchResubmittedDate}"
+                             shortDesc="#{bindings.BatchesPendingTcResubmittedRO.hints.BatchResubmittedDate.tooltip}"
+                             id="ot36" inlineStyle="text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.BatchesPendingTcResubmittedROQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchResubmittedDate.value}"
+                              id="id3" contentStyle="text-transform:uppercase;">
+                  <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                </af:inputDate>
+              </f:facet>
+            </af:column>
+            <af:column headerText="Number Of Seafarers" id="c38"
+                       sortProperty="#{bindings.BatchesPendingTcResubmittedRO.hints.NoOfSeafarer.name}"
+                       filterable="true" sortable="true">
+              <af:outputText value="#{row.NoOfSeafarer}"
+                             shortDesc="#{bindings.BatchesPendingTcResubmittedRO.hints.NoOfSeafarer.tooltip}" id="ot32">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesPendingTcResubmittedRO.hints.NoOfSeafarer.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Region" id="c39"
+                       sortProperty="#{bindings.BatchesPendingTcResubmittedRO.hints.Region.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.Region}"
+                             shortDesc="#{bindings.BatchesPendingTcResubmittedRO.hints.Region.tooltip}" id="ot33"/>
+            </af:column>
+            <af:column headerText="Work Order Number" id="c40"
+                       sortProperty="#{bindings.BatchesPendingTcResubmittedRO.hints.WorkOrderNo.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.WorkOrderNo}"
+                             shortDesc="#{bindings.BatchesPendingTcResubmittedRO.hints.WorkOrderNo.tooltip}" id="ot34">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesPendingTcResubmittedRO.hints.WorkOrderNo.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Order Type" id="c41"
+                       sortProperty="#{bindings.BatchesPendingTcResubmittedRO.hints.OrderType.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.OrderType}"
+                             shortDesc="#{bindings.BatchesPendingTcResubmittedRO.hints.OrderType.tooltip}" id="ot35"/>
+            </af:column>
+            <af:column headerText="Expedited Processing" id="c42"
+                       sortProperty="#{bindings.BatchesPendingTcResubmittedRO.hints.ExpeditedProcessing.name}"
+                       filterable="false" sortable="false">
+              <af:selectBooleanCheckbox value="#{row.bindings.ExpeditedProcessing.inputValue}"
+                                        label="#{row.bindings.ExpeditedProcessing.label}"
+                                        shortDesc="#{bindings.BatchesPendingTcResubmittedRO.hints.ExpeditedProcessing.tooltip}"
+                                        id="sbc3"/>
+              <af:outputText value="#{row.ExpeditedProcessing}"
+                             shortDesc="#{bindings.BatchesPendingTcResubmittedRO.hints.ExpeditedProcessing.tooltip}"
+                             id="ot39" visible="false"/>
+            </af:column>
+            <af:column id="c43" sortable="false" filterable="false">
+              <af:button text="Assign" id="b6"
+                         actionListener="#{pageFlowScope.BatchesTCBean.assignResubmittedBatches}"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:showDetailItem>-->
+      <af:showDetailItem text="Orders Pending Acknowledgement" id="sdi2"
+                         binding="#{pageFlowScope.BatchesTCBean.tab4Bind}">
+        <af:panelCollection id="pc4" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.BatchesPendingTcPendingAckRO.collectionModel}" var="row"
+                    rows="#{bindings.BatchesPendingTcPendingAckRO.rangeSize}"
+                    emptyText="#{bindings.BatchesPendingTcPendingAckRO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.BatchesPendingTcPendingAckRO.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.BatchesPendingTcPendingAckRO.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.BatchesPendingTcPendingAckRO.rangeSize}" id="t4"
+                    styleClass="AFStretchWidth" autoHeightRows="12" contentDelivery="immediate"
+                    columnStretching="column:c23"
+                    filterModel="#{bindings.BatchesPendingTcPendingAckROQuery.queryDescriptor}"
+                    queryListener="#{bindings.BatchesPendingTcPendingAckROQuery.processQuery}" filterVisible="true"
+                    varStatus="vs">
+            <af:column headerText="Batch Name" id="c23" width="150"
+                       sortProperty="#{bindings.BatchesPendingTcPendingAckRO.hints.BatchName.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.BatchName}"
+                             shortDesc="#{bindings.BatchesPendingTcPendingAckRO.hints.BatchName.tooltip}" id="ot19"
+                             inlineStyle="color:#{row.CraCount == 0 ? '' : 'Red'}; "/>
+            </af:column>
+            <af:column headerText="Batch Submitted Date" id="c22"
+                       sortProperty="#{bindings.BatchesPendingTcPendingAckRO.hints.BatchDate.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.BatchDate}"
+                             shortDesc="#{bindings.BatchesPendingTcPendingAckRO.hints.BatchDate.tooltip}" id="ot18"
+                             inlineStyle="color:#{row.CraCount == 0 ? '' : 'Red'};text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.BatchesPendingTcPendingAckROQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                              id="id4" contentStyle="text-transform:uppercase;">
+                  <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                </af:inputDate>
+              </f:facet>
+            </af:column>
+            <af:column headerText="Batch Status" id="c21"
+                       sortProperty="#{bindings.BatchesPendingTcPendingAckRO.hints.BatchStatus.name}" filterable="true"
+                       sortable="true" visible="false">
+              <af:outputText value="#{row.BatchStatus}"
+                             shortDesc="#{bindings.BatchesPendingTcPendingAckRO.hints.BatchStatus.tooltip}" id="ot17"
+                             inlineStyle="color:#{row.CraCount == 0 ? '' : 'Red'}; "/>
+            </af:column>
+            <af:column headerText="Number Of Seafarers" id="c24"
+                       sortProperty="#{bindings.BatchesPendingTcPendingAckRO.hints.NoOfSeafarer.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.NoOfSeafarer}"
+                             shortDesc="#{bindings.BatchesPendingTcPendingAckRO.hints.NoOfSeafarer.tooltip}" id="ot20"
+                             inlineStyle="color:#{row.CraCount == 0 ? '' : 'Red'}; ">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesPendingTcPendingAckRO.hints.NoOfSeafarer.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Work Order Number" id="c45"
+                       sortProperty="#{bindings.BatchesPendingTcPendingAckRO.hints.WorkOrderNo.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.WorkOrderNo}"
+                             shortDesc="#{bindings.BatchesPendingTcPendingAckRO.hints.WorkOrderNo.tooltip}" id="ot37"
+                             inlineStyle="color:#{row.CraCount == 0 ? '' : 'Red'}; ">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesPendingTcPendingAckRO.hints.WorkOrderNo.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Region" id="c25"
+                       sortProperty="#{bindings.BatchesPendingTcPendingAckRO.hints.Region.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.Region}"
+                             shortDesc="#{bindings.BatchesPendingTcPendingAckRO.hints.Region.tooltip}" id="ot21"
+                             inlineStyle="color:#{row.CraCount == 0 ? '' : 'Red'}; "/>
+            </af:column>
+            <af:column headerText="Expedited Processing" id="c35"
+                       width="70">
+              <af:selectBooleanCheckbox value="#{row.bindings.ExpeditedProcessingAck.inputValue}"
+                                        label="#{row.bindings.ExpeditedProcessingAck.label}"
+                                        shortDesc="#{bindings.BatchesPendingTcPendingAckRO.hints.ExpeditedProcessingAck.tooltip}"
+                                        id="sbc1"/>
+            </af:column>
+            <af:column id="c71" sortable="false" filterable="false">
+              <af:button text="View" id="b71" action="tc"
+                         actionListener="#{pageFlowScope.BatchesTCBean.viewButtonActionListener}">
+                <f:setPropertyActionListener value="t4" target="#{pageFlowScope.BatchesTCBean.currentTab}"/>
+              </af:button>
+            </af:column>
+            <af:column id="c26" sortable="false" filterable="false">
+              <af:button text="Send Ack" id="b4" disabled="#{row.AckEnabled ne 'Y'}">
+                <af:showPopupBehavior popupId="sendAckConfirmpopup"/>
+              </af:button>
+              <af:popup childCreation="deferred" autoCancel="disabled" id="sendAckConfirmpopup">
+                <af:dialog id="d1" type="yesNo" dialogListener="#{pageFlowScope.BatchesTCBean.sendAckConfirmationDL}">
+                  <f:facet name="buttonBar"/>
+                  <af:message id="m1" messageType="confirmation"
+                              message="Are you sure you want to Send Acknowledgement ?"/>
+                </af:dialog>
+              </af:popup>
+            </af:column>
+            <af:column headerText="#{bindings.BatchesPendingTcPendingAckRO.hints.CraCount.label}" id="c72"
+                       visible="false" sortProperty="#{bindings.BatchesPendingTcPendingAckRO.hints.CraCount.name}"
+                       filterable="true" sortable="true">
+              <af:outputText value="#{row.CraCount}"
+                             shortDesc="#{bindings.BatchesPendingTcPendingAckRO.hints.CraCount.tooltip}" id="ot71">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesPendingTcPendingAckRO.hints.CraCount.format}"/>
+              </af:outputText>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+        <af:panelFormLayout id="pfl2" partialTriggers="pc4:t4" visible="false">
+          <af:inputText value="#{bindings.EsiBatchId.inputValue}" label="#{bindings.EsiBatchId.hints.label}"
+                        required="#{bindings.EsiBatchId.hints.mandatory}" readOnly="true"
+                        columns="#{bindings.EsiBatchId.hints.displayWidth}"
+                        maximumLength="#{bindings.EsiBatchId.hints.precision}"
+                        shortDesc="#{bindings.EsiBatchId.hints.tooltip}" id="it3">
+            <f:validator binding="#{bindings.EsiBatchId.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.EsiBatchId.format}"/>
+          </af:inputText>
+        </af:panelFormLayout>
+      </af:showDetailItem>
+      <af:showDetailItem text="Expedited Orders" id="sdi3"
+                         disclosureListener="#{pageFlowScope.BatchesTCBean.expeditedDisclosureListener}">
+        <af:panelCollection id="pc2" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.BatchesPendingTcExpeditedProcessingRO.collectionModel}" var="row"
+                    rows="#{bindings.BatchesPendingTcExpeditedProcessingRO.rangeSize}"
+                    emptyText="#{bindings.BatchesPendingTcExpeditedProcessingRO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.BatchesPendingTcExpeditedProcessingRO.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.BatchesPendingTcExpeditedProcessingRO.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.BatchesPendingTcExpeditedProcessingRO.rangeSize}"
+                    id="t2" contentDelivery="immediate" autoHeightRows="14" styleClass="AFStretchWidth"
+                    columnStretching="column:c11"
+                    filterModel="#{bindings.BatchesPendingTcExpeditedProcessingROQuery.queryDescriptor}"
+                    queryListener="#{bindings.BatchesPendingTcExpeditedProcessingROQuery.processQuery}"
+                    filterVisible="true" varStatus="vs">
+            <af:column headerText="Batch Name" id="c11" width="150"
+                       sortProperty="#{bindings.BatchesPendingTcExpeditedProcessingRO.hints.BatchName.name}"
+                       filterable="true" sortable="true">
+              <af:outputText value="#{row.BatchName}"
+                             shortDesc="#{bindings.BatchesPendingTcExpeditedProcessingRO.hints.BatchName.tooltip}"
+                             id="ot9"/>
+            </af:column>
+            <af:column headerText="Batch Submitted Date" id="c10"
+                       sortProperty="#{bindings.BatchesPendingTcExpeditedProcessingRO.hints.BatchDate.name}"
+                       filterable="true" sortable="true">
+              <af:outputText value="#{row.BatchDate}"
+                             shortDesc="#{bindings.BatchesPendingTcExpeditedProcessingRO.hints.BatchDate.tooltip}"
+                             id="ot8" inlineStyle="text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.BatchesPendingTcExpeditedProcessingROQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                              id="id5" contentStyle="text-transform:uppercase;">
+                  <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                </af:inputDate>
+              </f:facet>
+            </af:column>
+            <af:column headerText="Batch Status" id="c9"
+                       sortProperty="#{bindings.BatchesPendingTcExpeditedProcessingRO.hints.BatchStatus.name}"
+                       filterable="true" sortable="true" visible="false">
+              <af:outputText value="#{row.BatchStatus}"
+                             shortDesc="#{bindings.BatchesPendingTcExpeditedProcessingRO.hints.BatchStatus.tooltip}"
+                             id="ot7"/>
+            </af:column>
+            <af:column headerText="Number Of Seafarers" id="c12"
+                       sortProperty="#{bindings.BatchesPendingTcExpeditedProcessingRO.hints.NoOfSeafarer.name}"
+                       filterable="true" sortable="true">
+              <af:outputText value="#{row.NoOfSeafarer}"
+                             shortDesc="#{bindings.BatchesPendingTcExpeditedProcessingRO.hints.NoOfSeafarer.tooltip}"
+                             id="ot10">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesPendingTcExpeditedProcessingRO.hints.NoOfSeafarer.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Work Order Number" id="c46"
+                       sortProperty="#{bindings.BatchesPendingTcExpeditedProcessingRO.hints.WorkOrderNo.name}"
+                       filterable="true" sortable="true">
+              <af:outputText value="#{row.WorkOrderNo}"
+                             shortDesc="#{bindings.BatchesPendingTcExpeditedProcessingRO.hints.WorkOrderNo.tooltip}"
+                             id="ot38">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesPendingTcExpeditedProcessingRO.hints.WorkOrderNo.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.BatchesPendingTcExpeditedProcessingRO.hints.Region.label}" id="c13"
+                       sortProperty="#{bindings.BatchesPendingTcExpeditedProcessingRO.hints.Region.name}"
+                       filterable="true" sortable="true">
+              <af:outputText value="#{row.Region}"
+                             shortDesc="#{bindings.BatchesPendingTcExpeditedProcessingRO.hints.Region.tooltip}"
+                             id="ot11"/>
+            </af:column>
+            <af:column id="c19" sortable="false" filterable="false">
+              <af:button text="Assign" id="b2" actionListener="#{pageFlowScope.BatchesTCBean.assignTaskExpedited}"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:showDetailItem>
+      <af:showDetailItem text="Find Seafarers" id="sdi4"
+                         disclosureListener="#{pageFlowScope.BatchesTCBean.findSeafarerDisclosureListener}"
+                         visible="false">
+        <af:panelFormLayout id="pfl1" rows="1" labelWidth="100">
+          <f:facet name="footer"/>
+          <af:inputText label="Seafarer ID" id="it1" autoSubmit="true"
+                        binding="#{pageFlowScope.BatchesTCBean.seafarerIdBinding}" partialTriggers="sdi4"/>
+          <af:inputText label="Seafarer Name" id="it2" wrap="off" autoSubmit="true"
+                        binding="#{pageFlowScope.BatchesTCBean.seafarerNameBinding}" partialTriggers="sdi4"/>
+          <af:button text="Find" id="b5" actionListener="#{pageFlowScope.BatchesTCBean.findButtonActionListener}"/>
+        </af:panelFormLayout>
+        <af:panelCollection id="pc5" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.FindSeafarerRO.collectionModel}" var="row"
+                    rows="#{bindings.FindSeafarerRO.rangeSize}"
+                    emptyText="#{bindings.FindSeafarerRO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0" selectedRowKeys="#{bindings.FindSeafarerRO.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.FindSeafarerRO.collectionModel.makeCurrent}" rowSelection="single"
+                    fetchSize="#{bindings.FindSeafarerRO.rangeSize}" id="t5" autoHeightRows="10"
+                    contentDelivery="immediate" partialTriggers=":::b5 :::sdi4"
+                    columnStretching="column:c29" filterModel="#{bindings.FindSeafarerROQuery.queryDescriptor}"
+                    queryListener="#{bindings.FindSeafarerROQuery.processQuery}" filterVisible="true" varStatus="vs">
+            <af:column headerText="Batch Name" id="c29" width="200"
+                       sortProperty="#{bindings.FindSeafarerRO.hints.BatchName.name}" filterable="true" sortable="true">
+              <af:outputText value="#{row.BatchName}" shortDesc="#{bindings.FindSeafarerRO.hints.BatchName.tooltip}"
+                             id="ot24"/>
+            </af:column>
+            <af:column headerText="Batch Date" id="c27" sortProperty="#{bindings.FindSeafarerRO.hints.BatchDate.name}"
+                       filterable="true" sortable="true">
+              <af:outputText value="#{row.BatchDate}" shortDesc="#{bindings.FindSeafarerRO.hints.BatchDate.tooltip}"
+                             id="ot22" inlineStyle="text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.FindSeafarerROQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                              id="id6" contentStyle="text-transform:uppercase;">
+                  <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                </af:inputDate>
+              </f:facet>
+            </af:column>
+            <af:column headerText="Purchase Order Number" id="c28" width="120"
+                       sortProperty="#{bindings.FindSeafarerRO.hints.PurchaseOrderNumber.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.PurchaseOrderNumber}"
+                             shortDesc="#{bindings.FindSeafarerRO.hints.PurchaseOrderNumber.tooltip}" id="ot23"/>
+            </af:column>
+            <af:column headerText="Region" id="c30" sortProperty="#{bindings.FindSeafarerRO.hints.Region.name}"
+                       filterable="true" sortable="true">
+              <af:outputText value="#{row.Region}" shortDesc="#{bindings.FindSeafarerRO.hints.Region.tooltip}"
+                             id="ot25"/>
+            </af:column>
+            <af:column headerText="Work Order Number" id="c31"
+                       sortProperty="#{bindings.FindSeafarerRO.hints.WorkOrderNo.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.WorkOrderNo}" shortDesc="#{bindings.FindSeafarerRO.hints.WorkOrderNo.tooltip}"
+                             id="ot26">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.FindSeafarerRO.hints.WorkOrderNo.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Expedited Processing" id="c32"
+                       sortProperty="#{bindings.FindSeafarerRO.hints.Processing.name}" filterable="false"
+                       sortable="false">
+              <af:selectBooleanCheckbox value="#{row.bindings.Processing.inputValue}"
+                                        label="#{row.bindings.Processing.label}"
+                                        shortDesc="#{bindings.FindSeafarerRO.hints.Processing.tooltip}" id="sbc2"
+                                        disabled="true"/>
+              <af:inputText value="#{row.bindings.Processing.inputValue}"
+                            label="#{bindings.FindSeafarerRO.hints.Processing.label}"
+                            required="#{bindings.FindSeafarerRO.hints.Processing.mandatory}"
+                            columns="#{bindings.FindSeafarerRO.hints.Processing.displayWidth}"
+                            maximumLength="#{bindings.FindSeafarerRO.hints.Processing.precision}"
+                            shortDesc="#{bindings.FindSeafarerRO.hints.Processing.tooltip}" id="it5" visible="false">
+                <f:validator binding="#{row.bindings.Processing.validator}"/>
+              </af:inputText>
+            </af:column>
+            <af:column headerText="Batch Status" id="c47">
+              <af:outputText value="#{row.WorkflowStatus}"
+                             shortDesc="#{bindings.FindSeafarerRO.hints.WorkflowStatus.tooltip}" id="ot40"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+      </af:showDetailItem>
+    </af:panelTabbed>
+  </af:panelGroupLayout>
+</jsp:root>

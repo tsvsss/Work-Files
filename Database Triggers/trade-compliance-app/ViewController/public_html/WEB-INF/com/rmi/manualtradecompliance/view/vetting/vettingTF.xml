@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="vettingTF">
+    <default-activity>onLoad</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__5">
+      <name>P_SOURCE_ID</name>
+      <value>#{pageFlowScope.P_SOURCE_ID}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__8">
+      <name>P_ESI_BATCH_ID</name>
+      <value>#{pageFlowScope.P_ESI_BATCH_ID}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__13">
+      <name>P_FORM_CALLED</name>
+      <value>#{pageFlowScope.P_FORM_CALLED}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__19">
+      <name>P_SOURCE_TABLE_COLUMN</name>
+      <value>#{pageFlowScope.P_SOURCE_TABLE_COLUMN}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__20">
+      <name>P_SOURCE_TABLE</name>
+      <value>#{pageFlowScope.P_SOURCE_TABLE}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__22">
+      <name>P_SHOW_BACK_BUTTON</name>
+      <value>#{pageFlowScope.P_SHOW_BACK_BUTTON}</value>
+      <class>java.lang.Boolean</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__23">
+      <name>P_SOURCE_TYPE</name>
+      <value>#{pageFlowScope.P_SOURCE_TYPE}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__24">
+      <name>P_OWS_REGION_RENDERED</name>
+      <value>#{pageFlowScope.P_OWS_REGION_RENDERED}</value>
+      <class>java.lang.Boolean</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__25">
+      <name>P_FACES_SERVLET</name>
+      <value>#{pageFlowScope.P_FACES_SERVLET}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__11">
+      <managed-bean-name>VettingBean</managed-bean-name>
+      <managed-bean-class>com.rmi.manualtradecompliance.view.vetting.Vetting</managed-bean-class>
+      <managed-bean-scope>pageFlow</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__6">
+      <managed-bean-name>InitStatusboard</managed-bean-name>
+      <managed-bean-class>com.rmi.manualtradecompliance.view.vetting.InitialiseStatusboard</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__26">
+      <managed-bean-name>QuickAccessBean</managed-bean-name>
+      <managed-bean-class>com.rmi.manualtradecompliance.view.vetting.QuickAccess</managed-bean-class>
+      <managed-bean-scope>view</managed-bean-scope>
+    </managed-bean>
+    <initializer>#{backingBeanScope.InitStatusboard.onLoad}</initializer>
+    <exception-handler>exceptionHandler</exception-handler>
+    <view id="vetting">
+      <page>/WEB-INF/com/rmi/manualtradecompliance/view/vetting/vetting.jsff</page>
+    </view>
+    <task-flow-call id="tradecomplaince">
+      <task-flow-reference>
+        <document>/WEB-INF/com/rmi/manualtradecompliance/view/tradecompliance/tradecomplainceTF.xml</document>
+        <id>task-flow-definition</id>
+      </task-flow-reference>
+      <input-parameter id="__7">
+        <name>P_SOURCE_ID</name>
+        <value>#{pageFlowScope.P_SOURCE_ID}</value>
+      </input-parameter>
+      <!--<input-parameter id="__9">
+        <name>P_ESI_BATCH_ID</name>
+        <value>#{pageFlowScope.P_ESI_BATCH_ID}</value>
+      </input-parameter>-->
+      <input-parameter id="__10">
+        <name>P_ESI_BATCH_ID_TC</name>
+        <value>#{pageFlowScope.P_ESI_BATCH_ID}</value>
+      </input-parameter>
+      <run-as-dialog>
+        <display-type>
+          <inline-popup/>
+        </display-type>
+      </run-as-dialog>
+    </task-flow-call>
+    <method-call id="exceptionHandler">
+      <method>#{pageFlowScope.VettingBean.exceptionHandler}</method>
+      <outcome>
+        <fixed-outcome>true</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-call id="Prototype-task-flow-definition">
+      <task-flow-reference>
+        <document>/WEB-INF/Prototype-task-flow-definition.xml</document>
+        <id>Prototype-task-flow-definition</id>
+      </task-flow-reference>
+      <input-parameter id="__4">
+        <name>sourceId</name>
+        <value>#{pageFlowScope.P_SOURCE_ID}</value>
+      </input-parameter>
+      <input-parameter id="__12">
+        <name>userId</name>
+        <value>#{sessionScope.UserId}</value>
+      </input-parameter>
+    </task-flow-call>
+    <view id="displayEmptyMsg">
+      <page>/WEB-INF/com/rmi/manualtradecompliance/view/vetting/displayEmptyMsg.jsff</page>
+    </view>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <method-call id="initializeViewContextAGetData">
+      <method>#{bindings.initializeViewContextAGetData.execute}</method>
+      <outcome>
+        <fixed-outcome>initializeViewContextAGetData</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="QuickAccess">
+      <page>/WEB-INF/com/rmi/manualtradecompliance/view/vetting/QuickAccess.jsff</page>
+    </view>
+    <method-call id="callXwrlPartyMaster">
+      <method>#{bindings.callXwrlPartyMaster.execute}</method>
+      <outcome>
+        <fixed-outcome>callXwrlPartyMaster</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="onLoad">
+      <method>#{bindings.onLoad.execute}</method>
+      <outcome>
+        <fixed-outcome>onLoad</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__1">
+      <from-activity-id>vetting</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>mtc</from-outcome>
+        <to-activity-id>tradecomplaince</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__3">
+        <from-outcome>tcOws</from-outcome>
+        <to-activity-id>Prototype-task-flow-definition</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__21">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__14">
+      <from-activity-id>initializeViewContextAGetData</from-activity-id>
+      <control-flow-case id="__15">
+        <from-outcome>initializeViewContextAGetData</from-outcome>
+        <to-activity-id>vetting</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__31">
+      <from-activity-id>displayEmptyMsg</from-activity-id>
+      <control-flow-case id="__32">
+        <from-outcome>quick</from-outcome>
+        <to-activity-id>QuickAccess</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__27">
+      <from-activity-id>callXwrlPartyMaster</from-activity-id>
+      <control-flow-case id="__28">
+        <from-outcome>callXwrlPartyMaster</from-outcome>
+        <to-activity-id>initializeViewContextAGetData</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__9">
+      <from-activity-id>onLoad</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome>onLoad</from-outcome>
+        <to-activity-id>callXwrlPartyMaster</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

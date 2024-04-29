@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1">
+  <af:resource type="javascript">             
+            function openWindowEditDoc(evt)             
+            {                 
+                // var str1 = "http://iri025.coresys.com:7007/RMILoginApp1/faces/EditDocument.jsf?seafarerId="; 
+                // var str1 = "http://localhost:7101/RMIApplicationEntry-ViewController-context-root/faces/EditDocument.jsf?seafarerId="
+                // var str2 = str1.concat(evt.getSource().getProperty("seafarerId"));
+                var str2 = evt.getSource().getProperty("seafarerId");
+                var str3 = str2.concat(",");
+                var str4 = str3.concat(evt.getSource().getProperty("batchId")); 
+                window.open(str4,'newwindow',                                       
+                                    'width=1080,height=650');                            
+                                return false;             
+            }         
+         </af:resource>
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar"/>
+      <f:facet name="statusbar"/>
+      <af:table value="#{bindings.BatchesProcessingCraView.collectionModel}" var="row"
+                rows="#{bindings.BatchesProcessingCraView.rangeSize}"
+                emptyText="#{bindings.BatchesProcessingCraView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0"
+                selectedRowKeys="#{bindings.BatchesProcessingCraView.collectionModel.selectedRow}"
+                selectionListener="#{bindings.BatchesProcessingCraView.collectionModel.makeCurrent}"
+                rowSelection="single" fetchSize="#{bindings.BatchesProcessingCraView.rangeSize}"
+                filterModel="#{bindings.BatchesProcessingCraViewQuery.queryDescriptor}"
+                queryListener="#{bindings.BatchesProcessingCraViewQuery.processQuery}" filterVisible="true"
+                varStatus="vs" id="t1" columnStretching="column:c1" autoHeightRows="12" contentDelivery="immediate"
+                partialTriggers=":::p1 :::d1 ::t1 :::b4 :::b3">
+        <af:column sortProperty="#{bindings.BatchesProcessingCraView.hints.CustomerName.name}" filterable="true"
+                   sortable="true" headerText="Customer Name" id="c6">
+          <af:outputText value="#{row.CustomerName}"
+                         shortDesc="#{bindings.BatchesProcessingCraView.hints.CustomerName.tooltip}" id="ot6"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesProcessingCraView.hints.BatchName.name}" filterable="true"
+                   sortable="true" headerText="Batch Name" id="c1">
+          <af:outputText value="#{row.BatchName}"
+                         shortDesc="#{bindings.BatchesProcessingCraView.hints.BatchName.tooltip}" id="ot1"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesProcessingCraView.hints.SeafarerId.name}" filterable="true"
+                   sortable="true" headerText="Seafarer ID" id="c2">
+          <af:outputText value="#{row.SeafarerId}"
+                         shortDesc="#{bindings.BatchesProcessingCraView.hints.SeafarerId.tooltip}" id="ot2">
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.BatchesProcessingCraView.hints.SeafarerId.format}"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesProcessingCraView.hints.SeafarerName.name}" filterable="true"
+                   sortable="true" headerText="Seafarer Name" id="c7">
+          <af:outputText value="#{row.SeafarerName}"
+                         shortDesc="#{bindings.BatchesProcessingCraView.hints.SeafarerName.tooltip}" id="ot7"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesProcessingCraView.hints.TcStatus.name}" filterable="true"
+                   sortable="true" headerText="Trade Compliance Status" id="c9">
+          <af:outputText value="#{row.TcStatus}" shortDesc="#{bindings.BatchesProcessingCraView.hints.TcStatus.tooltip}"
+                         id="ot9"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesProcessingCraView.hints.GradeName.name}" filterable="true"
+                   sortable="true" headerText="Grade" id="c8">
+          <af:outputText value="#{row.GradeName}"
+                         shortDesc="#{bindings.BatchesProcessingCraView.hints.GradeName.tooltip}" id="ot8"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesProcessingCraView.hints.CraApprovedDate.name}" filterable="true"
+                   sortable="true" headerText="CRA Approved Date"
+                   id="c4">
+          <f:facet name="filter">
+            <af:inputDate value="#{bindings.BatchesProcessingCraViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.CraApprovedDate.value}"
+                          id="id1">
+              <af:convertDateTime pattern="#{bindings.BatchesProcessingCraView.hints.CraApprovedDate.format}"/>
+            </af:inputDate>
+          </f:facet>
+          <af:outputText value="#{row.CraApprovedDate}"
+                         shortDesc="#{bindings.BatchesProcessingCraView.hints.CraApprovedDate.tooltip}" id="ot4"
+                         inlineStyle="text-transform:uppercase;">
+            <af:convertDateTime pattern="dd-MMM-yyyy"/>
+          </af:outputText>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesProcessingCraView.hints.CertificateType.name}" filterable="true"
+                   sortable="true" headerText="Type"
+                   id="c5">
+          <af:outputText value="#{row.CertificateType}"
+                         shortDesc="#{bindings.BatchesProcessingCraView.hints.CertificateType.tooltip}" id="ot5"/>
+        </af:column>
+        <af:column sortProperty="#{bindings.BatchesProcessingCraView.hints.CreatedByUser.name}" filterable="true"
+                   sortable="true" headerText="Created By" id="c3">
+          <af:outputText value="#{row.CreatedByUser}"
+                         shortDesc="#{bindings.BatchesProcessingCraView.hints.CreatedByUser.tooltip}" id="ot3"/>
+        </af:column>
+        <af:column headerText="Batch Select" id="c10">
+          <af:selectBooleanCheckbox value="#{row.bindings.batchSelect.inputValue}"
+                                    label="#{row.bindings.batchSelect.label}"
+                                    shortDesc="#{bindings.BatchesProcessingCraView.hints.batchSelect.tooltip}"
+                                    id="sbc1" autoSubmit="true"
+                                    valueChangeListener="#{pageFlowScope.CraProcessingBean.selectValueChangeListener}"/>
+        </af:column>
+      </af:table>
+    </af:panelCollection>
+    <af:panelFormLayout id="pfl2" partialTriggers="pc1:t1" visible="false">
+      <af:inputText value="#{bindings.EsiBatchId.inputValue}" label="#{bindings.EsiBatchId.hints.label}"
+                    required="#{bindings.EsiBatchId.hints.mandatory}"
+                    columns="#{bindings.EsiBatchId.hints.displayWidth}"
+                    maximumLength="#{bindings.EsiBatchId.hints.precision}"
+                    shortDesc="#{bindings.EsiBatchId.hints.tooltip}" id="it7">
+        <f:validator binding="#{bindings.EsiBatchId.validator}"/>
+        <af:convertNumber groupingUsed="false" pattern="#{bindings.EsiBatchId.format}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.SeafarerId.inputValue}" label="#{bindings.SeafarerId.hints.label}"
+                    required="#{bindings.SeafarerId.hints.mandatory}"
+                    columns="#{bindings.SeafarerId.hints.displayWidth}"
+                    maximumLength="#{bindings.SeafarerId.hints.precision}"
+                    shortDesc="#{bindings.SeafarerId.hints.tooltip}" id="it8">
+        <f:validator binding="#{bindings.SeafarerId.validator}"/>
+        <af:convertNumber groupingUsed="false" pattern="#{bindings.SeafarerId.format}"/>
+      </af:inputText>
+    </af:panelFormLayout>
+    <af:toolbar id="t2">
+      <af:button text=" Create CRA Batch" id="b1"
+                 actionListener="#{pageFlowScope.CraProcessingBean.createCraBatchButton}"/>
+      <af:button text="Batch Email CRA" id="b2"
+                 actionListener="#{pageFlowScope.CraProcessingBean.batchEmailCraButton}"
+                 inlineStyle="margin-left:8px;"/>
+      <af:button text="Back" id="b6" inlineStyle="margin-left:8px;" action="return"
+                 visible="#{pageFlowScope.param_batch_id != null}"/>
+      <af:button text="Edit Documents" id="b7" inlineStyle="margin-left:8px;" clientComponent="true"
+                 partialTriggers="pfl2 it7 it8 pc1:t1">
+      <af:clientAttribute name="seafarerId"
+                          value="#{applicationScope.ApplicationUrl}/faces/EditDocument.jsf?seafarerId=#{bindings.SeafarerId.inputValue}"/>
+                    <af:clientAttribute name="batchId" value="#{bindings.EsiBatchId.inputValue}"/>
+                    <af:clientListener method="openWindowEditDoc" type="action"/>
+      </af:button>
+      <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                binding="#{pageFlowScope.CraProcessingBean.emailPopup}" contentDelivery="lazyUncached"
+                partialTriggers="b3">
+        <af:dialog id="d1" type="none">
+          <f:facet name="buttonBar">
+            <af:toolbar id="t3">
+              <af:button text="View" id="b5"
+                         actionListener="#{pageFlowScope.CraProcessingBean.viewCraButton}"/>
+              <af:button text="Send" id="b4" actionListener="#{pageFlowScope.CraProcessingBean.sendButtonOnPopup}"/>
+              <af:button text="Cancel" id="b3"
+                         actionListener="#{pageFlowScope.CraProcessingBean.cancelButtonOnEmailPopup}"/>
+              <af:inputText value="#{bindings.tranUrlCRA.inputValue}" label="#{bindings.tranUrlCRA.hints.label}"
+                            required="#{bindings.tranUrlCRA.hints.mandatory}"
+                            columns="#{bindings.tranUrlCRA.hints.displayWidth}"
+                            maximumLength="#{bindings.tranUrlCRA.hints.precision}"
+                            shortDesc="#{bindings.tranUrlCRA.hints.tooltip}" id="it6" visible="false">
+                <f:validator binding="#{bindings.tranUrlCRA.validator}"/>
+              </af:inputText>
+            </af:toolbar>
+          </f:facet>
+          <af:panelFormLayout id="pfl1" labelWidth="100" inlineStyle="padding:10px;" styleClass="panelFormLayoutClass">
+            <af:inputText value="#{bindings.sender_mail.inputValue}" label="From"
+                          required="#{bindings.sender_mail.hints.mandatory}"
+                          columns="#{bindings.sender_mail.hints.displayWidth}"
+                          maximumLength="#{bindings.sender_mail.hints.precision}"
+                          shortDesc="#{bindings.sender_mail.hints.tooltip}" id="it1"
+                          contentStyle="width:400px; padding:3px;">
+              <f:validator binding="#{bindings.sender_mail.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.dest_mail.inputValue}" label="To"
+                          required="#{bindings.dest_mail.hints.mandatory}"
+                          columns="#{bindings.dest_mail.hints.displayWidth}"
+                          maximumLength="#{bindings.dest_mail.hints.precision}"
+                          shortDesc="#{bindings.dest_mail.hints.tooltip}" id="it2"
+                          contentStyle="width:400px; padding:3px;" autoSubmit="true">
+              <f:validator binding="#{bindings.dest_mail.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.dest_cc.inputValue}" label="CC"
+                          required="#{bindings.dest_cc.hints.mandatory}"
+                          columns="#{bindings.dest_cc.hints.displayWidth}"
+                          maximumLength="#{bindings.dest_cc.hints.precision}"
+                          shortDesc="#{bindings.dest_cc.hints.tooltip}" id="it3"
+                          contentStyle="width:400px; padding:3px;" autoSubmit="true">
+              <f:validator binding="#{bindings.dest_cc.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.regrading.inputValue}" label="Regarding"
+                          required="#{bindings.regrading.hints.mandatory}"
+                          columns="#{bindings.regrading.hints.displayWidth}"
+                          maximumLength="#{bindings.regrading.hints.precision}"
+                          shortDesc="#{bindings.regrading.hints.tooltip}" id="it4"
+                          contentStyle="width:400px; padding:3px;">
+              <f:validator binding="#{bindings.regrading.validator}"/>
+            </af:inputText>
+            <af:inputText value="#{bindings.message.inputValue}" label="Message"
+                          required="#{bindings.message.hints.mandatory}"
+                          columns="#{bindings.message.hints.displayWidth}"
+                          maximumLength="#{bindings.message.hints.precision}"
+                          shortDesc="#{bindings.message.hints.tooltip}" id="it5"
+                          contentStyle="width:500px; padding:3px;" rows="15" autoSubmit="true" dimensionsFrom="parent">
+              <f:validator binding="#{bindings.message.validator}"/>
+            </af:inputText>
+          </af:panelFormLayout>
+        </af:dialog>
+      </af:popup>
+    </af:toolbar>
+  </af:panelGroupLayout>
+</jsp:root>

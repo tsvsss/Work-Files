@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DefaultOcVerificationDocsView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.readonly.DefaultOcVerificationDocsView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pEsdiId"
+    Kind="where"
+    Type="java.lang.Integer">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[SELECT                  
+DISTINCT                  
+--COUNT(*) DOC_COUNT             
+EDI.ESDI_ID,          
+OL.LINE_ID,          
+SD.DOCUMENT_ID,          
+SD.VERIFIED,          
+EDI.ADDED_BY_ROLE,          
+SD.GRADE_ID                 
+FROM                   
+RMI_SEAFARER.RMI_SEAFARER_DOCS_IFACE EDI,                  
+ONT.OE_ORDER_LINES_ALL OL,                  
+SICD.SICD_DOCUMENTS SD,                  
+--APPS.RMI_SICD_DOCUMENT_UNVERIFIED_V SDU            
+(            
+  SELECT    ss.last_name||', '||ss.first_name||            
+            ' (FIN '||TO_CHAR (ss.seafarer_id)||')'seafarer_name,            
+            ss.birth_date, oe.order_number, sg.grade_code, sg.verification_reqd,            
+            sc.country_name, sd.endorsement_number, sd.endorsement_issue_date,            
+            sd.endorsement_expiration_date, sd.document_id,            
+            sc.verification_method, sc.verification_url, sc.verification_email,            
+            sc.verification_username, sc.verification_password,            
+            sd.grading_status, sd.grade_id, 'OC' certificate_type,            
+            sd.document_type, sd.verified, sd.endorsement_country, sd.header_id header_id,            
+            ss.seafarer_id,            
+             sd.verification_edoc_id,            
+            DECODE (NVL (oe.attribute9, 'N'), 'N', 'N', 'Y') external_order,            
+            TO_CHAR (oe.salesrep_id) salesrep_id, sd.created_by,            
+            sd.creation_date, sd.last_updated_by, sd.last_update_date,            
+            sd.last_update_login            
+       FROM sicd_documents sd,            
+            sicd_seafarers ss,            
+            sicd_grades sg,            
+            sicd_countries sc,            
+            oe_order_headers_all oe            
+      WHERE ss.seafarer_id = sd.seafarer_id            
+        AND sg.grade_id = sd.grade_id            
+        AND sc.country_code = sd.ENDORSEMENT_COUNTRY            
+        AND oe.header_id = sd.header_id            
+--        AND NVL (sd.verified, 'P') = 'P'            
+        AND sd.document_type = 'OC'            
+        AND sd.certificate_type = 'OC'            
+        AND (sg.verification_reqd = 'Y' OR NVL (sd.grading_status, 'xx') = 'V')            
+        AND oe.attribute9 = 'Pending C.O.C. Verification'            
+) SDU            
+WHERE                   
+SDU.DOCUMENT_ID = SD.DOCUMENT_ID                  
+AND SD.LINE_ID = OL.LINE_ID                  
+AND TO_NUMBER(OL.ATTRIBUTE12) = EDI.ESDI_ID                  
+AND EDI.ESDI_ID = :pEsdiId]]></SQLQuery>
+  <ViewAttribute
+    Name="EsdiId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="ESDI_ID"
+    Expression="ESDI_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="LineId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="LINE_ID"
+    Expression="LINE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="DocumentId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="DOCUMENT_ID"
+    Expression="DOCUMENT_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Verified"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VERIFIED"
+    Expression="VERIFIED"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AddedByRole"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ADDED_BY_ROLE"
+    Expression="ADDED_BY_ROLE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GradeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="GRADE_ID"
+    Expression="GRADE_ID"
+    SQLType="NUMERIC"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

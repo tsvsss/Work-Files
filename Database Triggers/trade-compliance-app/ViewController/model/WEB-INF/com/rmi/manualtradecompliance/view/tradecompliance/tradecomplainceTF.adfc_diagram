@@ -1,0 +1,69 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1">
+      <property
+         name="y">434.20117</property>
+      <property
+         name="x">91.5</property>
+   </OverallProperties>
+   <TaskFlowReturn
+      id="TaskFlowReturn2">
+      <property
+         name="activityId">taskFlowReturn1</property>
+      <property
+         name="finish">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>taskFlowReturn1&lt;/b>&lt;/p>&lt;p>Activity Type:  Task Flow Return&lt;/p>&lt;p>Outcome:  taskFlowReturn1&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">266.5</property>
+      <property
+         name="x">274.5</property>
+   </TaskFlowReturn>
+   <MethodCall
+      id="MethodCall3">
+      <property
+         name="activityId">exceptionHandler</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>exceptionHandler&lt;/b>&lt;/p>&lt;p>Activity Type:  Method Call&lt;/p></property>
+      <property
+         name="exceptionHandler">true</property>
+      <property
+         name="y">83.5</property>
+      <property
+         name="x">91.5</property>
+   </MethodCall>
+   <View
+      id="View4">
+      <property
+         name="activityId">tradecomplaince</property>
+      <property
+         name="page">/WEB-INF/com/rmi/manualtradecompliance/view/tradecompliance/tradecomplaince.jsf</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>tradecomplaince&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="exceptionHandler">false</property>
+      <property
+         name="y">266.5</property>
+      <property
+         name="x">91.5</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase5"
+      from="View4"
+      to="TaskFlowReturn2">
+      <property
+         name="fromOutcome">Close</property>
+      <property
+         name="tosrcid">__5</property>
+      <property
+         name="fromsrcid">__4</property>
+      <property
+         name="sdm:polyPoints">R50,132.5,266.1494,233.5,266.1494,L50</property>
+   </ControlFlowCase>
+</SDM>

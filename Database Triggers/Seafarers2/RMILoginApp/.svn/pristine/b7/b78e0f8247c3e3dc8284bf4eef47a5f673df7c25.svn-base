@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="Dashboard - INTERNATIONAL REGISTRIES,INC." id="d1">
+        <af:form id="f1" usesUpload="true">
+        <af:resource type="javascript">
+            window.history.pushState(null, "", window.location.href);
+            window.onpopstate = function () {
+                window.history.pushState(null, "", window.location.href);
+            };
+          </af:resource>
+        
+            <af:pageTemplate viewId="/WEB-INF/com/rmi/login/view/pagetemplates/RmiTemplate.jsf" id="pt1"
+                             rendered="#{(sessionScope.UserId ne null) and (sessionScope.UserId ne '')}">
+                <f:facet name="content">
+                    <af:decorativeBox id="db1" topHeight="s" dimensionsFrom="parent">
+                        <f:facet name="center">
+                            <af:panelGridLayout id="pgl1" dimensionsFrom="parent">
+                                <af:gridRow id="gr1" height="55px">
+                                    <af:gridCell marginStart="5px" width="40%" id="gc1">
+                                        <af:panelGroupLayout id="pgl5" styleClass="AFStretchWidth" layout="vertical"></af:panelGroupLayout>
+                                    </af:gridCell>
+                                    <af:gridCell marginStart="5px" width="20%" id="gc2"></af:gridCell>
+                                    <af:gridCell marginStart="5px" width="20%" id="gc3"></af:gridCell>
+                                    <af:gridCell marginStart="5px" width="2%" marginEnd="5px" id="gc31" valign="middle"></af:gridCell>
+                                    <af:gridCell marginStart="7px" width="18%" marginEnd="5px" id="gc71" valign="middle"
+                                                 halign="end">
+                                        <af:inputText label="Logged In As " id="it1"
+                                                      styleClass="sfxInputLableTop sfxInputLoginTxt2"
+                                                      value="#{pageFlowScope.mainBean.userName}" readOnly="true"
+                                                      inlineStyle="margin-top:5px;"/>
+                                        <af:panelGroupLayout id="pgl3" layout="horizontal">
+                                            <af:button text="Home Page" id="b27" immediate="true"
+                                                       inlineStyle="margin:3px;" rendered="false"/>
+                                            <af:button text="Logout" id="b2" immediate="true"
+                                                       actionListener="#{pageFlowScope.mainBean.logout}"
+                                                       inlineStyle="margin-left:100px;"/>
+                                            <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+                                                      binding="#{pageFlowScope.mainBean.homeButtonPopupBinding}">
+                                                <af:dialog id="d2" contentWidth="300" type="ok">
+                                                    <f:facet name="buttonBar"/>
+                                                    <af:message id="m1" messageType="info"
+                                                                message="Application URL : #{applicationScope.ApplicationUrl}"/>
+                                                    <af:message id="m2"
+                                                                message="External Context URL : #{applicationScope.ExternalContextUrl}"
+                                                                inlineStyle="padding-left: 12px !important;"/>
+                                                    <af:message id="m3"
+                                                                message="Http URL : #{applicationScope.HttpUrl}"
+                                                                inlineStyle="padding-left: 12px !important;"/>
+                                                    <af:message id="m4"
+                                                                message="URL : #{applicationScope.Url}"
+                                                                inlineStyle="padding-left: 12px !important;"/>
+                                                </af:dialog>
+                                            </af:popup>
+                                        </af:panelGroupLayout>
+                                    </af:gridCell>
+                                </af:gridRow>
+                                <af:gridRow marginTop="1px" marginBottom="2px" id="gr2" height="100%">
+                                    <af:gridCell columnSpan="6" marginEnd="4px" id="gc4" width="90%" halign="stretch"
+                                                 valign="stretch">
+                                        <af:panelSplitter id="ps1" inlineStyle="background-color:White; background-image:none;"
+                                                          splitterPosition="240"
+                                                          binding="#{pageFlowScope.mainBean.menuCollapseBinding}">
+                                            <f:facet name="first">
+                                                <af:panelAccordion id="pa1" dimensionsFrom="children" discloseMany="false">
+                                                    <af:iterator id="i1" value="#{bindings.UserMenuView.collectionModel}" var="M">
+                                                        <af:showDetailItem id="pane1" text="#{M.MenuTitle}"
+                                                                           disclosed="false"
+                                                                           inlineStyle="background-clip:border-box;"
+                                                                            disclosureListener="#{pageFlowScope.mainBean.roleTabDisclosureListener}">
+                                                            <af:iterator id="i2" value="#{M.UserSubMenuView}" var="S">
+                                                                <af:spacer height="10" id="s1"/>
+                                                                <af:link text="#{S.MenuItemTitle}" id="l1"
+                                                                         inlineStyle="color:Navy; font-weight:bold; background-attachment:scroll; margin-left:5px;"
+                                                                         partialSubmit="true"
+                                                                         actionListener="#{pageFlowScope.mainBean.fetchTaskflowUrl}"
+                                                                         action="#{pageFlowScope.mainBean.getDynamicTaskFlowId}"
+                                                                         clientComponent="true">
+                                                                    <f:attribute name="taskflowId" value="#{S.TaskflowId}"/>
+                                                                    <f:attribute name="roleId" value="#{M.RoleId}"/>
+                                                                </af:link>
+                                                                <af:spacer height="10" id="s2"/>
+                                                            </af:iterator>
+                                                            <f:attribute name="roleId" value="#{M.RoleId}"/>
+                                                        </af:showDetailItem>
+                                                    </af:iterator>
+                                                </af:panelAccordion>
+                                            </f:facet>
+                                            <f:facet name="second">
+                                                <af:region value="#{bindings.dynamicRegion.regionModel}" id="r2"
+                                                           binding="#{pageFlowScope.mainBean.regionBinding}"
+                                                           clientComponent="true"/>
+                                            </f:facet>
+                                        </af:panelSplitter>
+                                    </af:gridCell>
+                                </af:gridRow>
+                            </af:panelGridLayout>
+                        </f:facet>
+                    </af:decorativeBox>
+                </f:facet>
+            </af:pageTemplate>
+            <af:button text="Click Here To Login" id="b1"
+                       rendered="#{(sessionScope.UserId eq null) or (sessionScope.UserId eq '')}"
+                       inlineStyle="margin:20px !important;" actionListener="#{pageFlowScope.mainBean.logout}"/>
+        </af:form>
+        <f:facet name="metaContainer">
+            <af:outputText value="&lt;link rel='SHORTCUT ICON' href='#{facesContext.externalContext.requestContextPath}/images/favicon.ico'/>" id="ot1"
+                           escape="false"/>
+        </f:facet>
+    </af:document>
+</f:view>

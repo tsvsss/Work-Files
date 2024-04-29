@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.1.3.10.47" id="DataBindings_RMIShipPartialOrder"
+             SeparateXMLFiles="false" Package="com.rmi.shippartialorder.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/WEB-INF/com/rmi/shippartialorder/view/shipordertaskflow/shipOrderTF.xml#shipOrderTF@filterShipOrderByNumber"
+          usageId="com_rmi_shippartialorder_view_shipOrderTF_shipOrderTF_filterShipOrderByNumberPageDef"/>
+    <page path="/WEB-INF/com/rmi/shippartialorder/view/shipordertaskflow/shipPartialOrder.jsff"
+          usageId="com_rmi_shippartialorder_view_shipPartialOrderPageDef"/>
+    <page path="/untitled1.jspx" usageId="com_rmi_shippartialorder_view_untitled1PageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="com_rmi_shippartialorder_view_shipOrderTF_shipOrderTF_filterShipOrderByNumberPageDef"
+          path="com.rmi.shippartialorder.view.shipordertaskflow.shipOrderTF_shipOrderTF_filterShipOrderByNumberPageDef"/>
+    <page id="com_rmi_shippartialorder_view_shipPartialOrderPageDef"
+          path="com.rmi.shippartialorder.view.shipordertaskflow.shipPartialOrderPageDef"/>
+    <page id="com_rmi_shippartialorder_view_untitled1PageDef"
+          path="com.rmi.shippartialorder.view.pageDefs.untitled1PageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="ShipPartialOrderAppModuleDataControl" Package="com.rmi.shippartialorder.adfbc.services"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="ShipPartialOrderAppModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

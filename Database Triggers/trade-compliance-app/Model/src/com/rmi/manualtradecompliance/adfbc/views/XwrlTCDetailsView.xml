@@ -1,0 +1,1071 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="XwrlTCDetailsView"
+  Version="12.1.3.10.47"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.manualtradecompliance.adfbc.views.XwrlTCDetailsView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <!-- T20220119.0029 - TC 2.0 - Sort Order: Order by clause updated -->
+  <SQLQuery><![CDATA[SELECT  ROWNUM,        
+    XWRL_TC_DETAILS_VW.TREE_ID TREE_ID,          
+    XWRL_TC_DETAILS_VW.LVL LVL,          
+    XWRL_TC_DETAILS_VW.IS_LEAF IS_LEAF,          
+    XWRL_TC_DETAILS_VW.CURSOR CURSOR,          
+    XWRL_TC_DETAILS_VW.MASTER_ID MASTER_ID,          
+    XWRL_TC_DETAILS_VW.ALIAS_ID ALIAS_ID,          
+    XWRL_TC_DETAILS_VW.XREF_ID XREF_ID,          
+    XWRL_TC_DETAILS_VW.XREF_MASTER_ID XREF_MASTER_ID,          
+    XWRL_TC_DETAILS_VW.XREF_RELATIONSHIP_MASTER_ID XREF_RELATIONSHIP_MASTER_ID,          
+    XWRL_TC_DETAILS_VW.SOURCE_TABLE_COLUMN SOURCE_TABLE_COLUMN,       
+    XWRL_TC_DETAILS_VW.SOURCE_TABLE SOURCE_TABLE,          
+    XWRL_TC_DETAILS_VW.SOURCE_ID SOURCE_ID,          
+    XWRL_TC_DETAILS_VW.ENTITY_TYPE ENTITY_TYPE,          
+    XWRL_TC_DETAILS_VW.SCRIPT_NAME SCRIPT_NAME,          
+    XWRL_TC_DETAILS_VW.DISPLAY_NAME DISPLAY_NAME,          
+    XWRL_TC_DETAILS_VW.FULL_NAME FULL_NAME,          
+    XWRL_TC_DETAILS_VW.MASTER_NAME MASTER_NAME,          
+    XWRL_TC_DETAILS_VW.DATE_OF_BIRTH DATE_OF_BIRTH,          
+    XWRL_TC_DETAILS_VW.RELATIONSHIP_TYPE RELATIONSHIP_TYPE,          
+    XWRL_TC_DETAILS_VW.TC_EXCLUDED TC_EXCLUDED,          
+    XWRL_TC_DETAILS_VW.IDENTIFIER IDENTIFIER,          
+    XWRL_TC_DETAILS_VW.START_DATE START_DATE,          
+    XWRL_TC_DETAILS_VW.END_DATE END_DATE,          
+    XWRL_TC_DETAILS_VW.CONSENT_ID CONSENT_ID,          
+    XWRL_TC_DETAILS_VW.EDOC_ID EDOC_ID,          
+    XWRL_TC_DETAILS_VW.AFFIDAVIT_SINGLE_NAME AFFIDAVIT_SINGLE_NAME,          
+    XWRL_TC_DETAILS_VW.KNOWN_PARTY KNOWN_PARTY,          
+    XWRL_TC_DETAILS_VW.BATCH_ID BATCH_ID,          
+    XWRL_TC_DETAILS_VW.REQUEST_ID REQUEST_ID,          
+    XWRL_TC_DETAILS_VW.CONC_REQUEST_ID CONC_REQUEST_ID,          
+    XWRL_TC_DETAILS_VW.CONC_PHASE_CODE CONC_PHASE_CODE,          
+    XWRL_TC_DETAILS_VW.CONC_STATUS_CODE CONC_STATUS_CODE,          
+    XWRL_TC_DETAILS_VW.CONC_REQUEST_STATUS CONC_REQUEST_STATUS,          
+    XWRL_TC_DETAILS_VW.COUNTRY_OF_RESIDENCE_CODE COUNTRY_OF_RESIDENCE_CODE,          
+    XWRL_TC_DETAILS_VW.COUNTRY_OF_RESIDENCE COUNTRY_OF_RESIDENCE,          
+    XWRL_TC_DETAILS_VW.COUNTRY_OF_RESIDENCE_CITY COUNTRY_OF_RESIDENCE_CITY,          
+    XWRL_TC_DETAILS_VW.SUBDIVISION_CITY_OF_RESIDENCE SUBDIVISION_CITY_OF_RESIDENCE,          
+    XWRL_TC_DETAILS_VW.WC_SCREENING_REQUEST_ID WC_SCREENING_REQUEST_ID,          
+    XWRL_TC_DETAILS_VW.RESIDENCE_COUNTRY RESIDENCE_COUNTRY,          
+    XWRL_TC_DETAILS_VW.RESIDENCE_COUNTRY_CODE RESIDENCE_COUNTRY_CODE,          
+    XWRL_TC_DETAILS_VW.RESIDENCE_ISO_ALPHA2_CODE RESIDENCE_ISO_ALPHA2_CODE,          
+    XWRL_TC_DETAILS_VW.RESIDENCE_CITY_ID RESIDENCE_CITY_ID,          
+    XWRL_TC_DETAILS_VW.DEPARTMENT DEPARTMENT,          
+    XWRL_TC_DETAILS_VW.DEPARTMENT_EXT DEPARTMENT_EXT,          
+    XWRL_TC_DETAILS_VW.OFFICE OFFICE,          
+    XWRL_TC_DETAILS_VW.DOCUMENT_TYPE DOCUMENT_TYPE,          
+    XWRL_TC_DETAILS_VW.CASE_WORKFLOW CASE_WORKFLOW,          
+    XWRL_TC_DETAILS_VW.CASE_STATE CASE_STATE,          
+    XWRL_TC_DETAILS_VW.CASE_STATUS CASE_STATUS,          
+    XWRL_TC_DETAILS_VW.EXPIRATION_DATE EXPIRATION_DATE,          
+    XWRL_TC_DETAILS_VW.CASE_ID CASE_ID,          
+    XWRL_TC_DETAILS_VW.VESSEL_INDICATOR VESSEL_INDICATOR,          
+    XWRL_TC_DETAILS_VW.IMO_NUMBER IMO_NUMBER,          
+    XWRL_TC_DETAILS_VW.CREATION_DATE CREATION_DATE,          
+    XWRL_TC_DETAILS_VW.CREATED_USER CREATED_USER,          
+    XWRL_TC_DETAILS_VW.LAST_UPDATE_DATE LAST_UPDATE_DATE,          
+    (select description from fnd_user where user_name=XWRL_TC_DETAILS_VW.UPDATE_USER) UPDATE_USER,          
+    XWRL_TC_DETAILS_VW.ASSIGNED_TO ASSIGNED_TO,        
+    DECODE(XWRL_TC_DETAILS_VW.RELATIONSHIP_TYPE, 'Primary', 1, 'Alias', 3 , 2) RELATIONSHIP_ORDER,    
+    XWRL_TC_DETAILS_VW.PRIMARY_NAME,    
+XWRL_TC_DETAILS_VW.XREF_NAME,    
+XWRL_TC_DETAILS_VW.SORT_XREF_ID,   
+XWRL_TC_DETAILS_VW.INDENT_BY,  
+XWRL_TC_DETAILS_VW.EAST_ASIAN_ORIGIN_NAME, 
+XWRL_TC_DETAILS_VW.PRIMARY_MASTER_ID,
+XWRL_TC_DETAILS_VW.PROVISIONAL_REQUEST
+FROM          
+    XWRL_TC_DETAILS_VW   
+order by XWRL_TC_DETAILS_VW.primary_name,    
+XWRL_TC_DETAILS_VW.xref_name nulls first,    
+decode(XWRL_TC_DETAILS_VW.cursor,'c_1',1,'c_2',2,'c_3',3,4),    
+full_name]]></SQLQuery>
+  <ViewAttribute
+    Name="Rownum1"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName='"ROWNUM"'
+    Expression='"ROWNUM"'
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TreeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TREE_ID"
+    Expression="TREE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Lvl"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="LVL"
+    Expression="LVL"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="IsLeaf"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="IS_LEAF"
+    Expression="IS_LEAF"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Cursor"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="CURSOR"
+    Expression="CURSOR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MasterId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="MASTER_ID"
+    Expression="MASTER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="AliasId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ALIAS_ID"
+    Expression="ALIAS_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="XrefId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="XREF_ID"
+    Expression="XREF_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="XrefMasterId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="XREF_MASTER_ID"
+    Expression="XREF_MASTER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="XrefRelationshipMasterId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="XREF_RELATIONSHIP_MASTER_ID"
+    Expression="XREF_RELATIONSHIP_MASTER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="SourceTableColumn"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SOURCE_TABLE_COLUMN"
+    Expression="SOURCE_TABLE_COLUMN"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SourceTable"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SOURCE_TABLE"
+    Expression="SOURCE_TABLE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SourceId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SOURCE_ID"
+    Expression="SOURCE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EntityType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ENTITY_TYPE"
+    Expression="ENTITY_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ScriptName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SCRIPT_NAME"
+    Expression="SCRIPT_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DisplayName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DISPLAY_NAME"
+    Expression="DISPLAY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FullName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2700"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FULL_NAME"
+    Expression="FULL_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2700"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="25"/>
+        <LABEL
+          ResId="com.rmi.manualtradecompliance.adfbc.views.XwrlTCDetailsView.FullName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="MasterName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2700"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="MASTER_NAME"
+    Expression="MASTER_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2700"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DateOfBirth"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2700"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DATE_OF_BIRTH"
+    Expression="DATE_OF_BIRTH"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2700"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RelationshipType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RELATIONSHIP_TYPE"
+    Expression="RELATIONSHIP_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TcExcluded"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TC_EXCLUDED"
+    Expression="TC_EXCLUDED"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Identifier"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="300"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="IDENTIFIER"
+    Expression="IDENTIFIER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="300"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="StartDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="START_DATE"
+    Expression="START_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="EndDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="END_DATE"
+    Expression="END_DATE"
+    SQLType="DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.rmi.manualtradecompliance.adfbc.views.XwrlTCDetailsView.EndDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ConsentId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CONSENT_ID"
+    Expression="CONSENT_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EdocId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="EDOC_ID"
+    Expression="EDOC_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="AffidavitSingleName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="AFFIDAVIT_SINGLE_NAME"
+    Expression="AFFIDAVIT_SINGLE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="KnownParty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="KNOWN_PARTY"
+    Expression="KNOWN_PARTY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="BatchId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="BATCH_ID"
+    Expression="BATCH_ID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="25"/>
+        <LABEL
+          ResId="com.rmi.manualtradecompliance.adfbc.views.XwrlTCDetailsView.BatchId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RequestId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="REQUEST_ID"
+    Expression="REQUEST_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ConcRequestId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CONC_REQUEST_ID"
+    Expression="CONC_REQUEST_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ConcPhaseCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONC_PHASE_CODE"
+    Expression="CONC_PHASE_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ConcStatusCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONC_STATUS_CODE"
+    Expression="CONC_STATUS_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ConcRequestStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="80"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CONC_REQUEST_STATUS"
+    Expression="CONC_REQUEST_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountryOfResidenceCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COUNTRY_OF_RESIDENCE_CODE"
+    Expression="COUNTRY_OF_RESIDENCE_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountryOfResidence"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="80"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COUNTRY_OF_RESIDENCE"
+    Expression="COUNTRY_OF_RESIDENCE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CountryOfResidenceCity"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="COUNTRY_OF_RESIDENCE_CITY"
+    Expression="COUNTRY_OF_RESIDENCE_CITY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SubdivisionCityOfResidence"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2700"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SUBDIVISION_CITY_OF_RESIDENCE"
+    Expression="SUBDIVISION_CITY_OF_RESIDENCE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2700"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="WcScreeningRequestId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="WC_SCREENING_REQUEST_ID"
+    Expression="WC_SCREENING_REQUEST_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ResidenceCountry"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="80"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RESIDENCE_COUNTRY"
+    Expression="RESIDENCE_COUNTRY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="25"/>
+        <LABEL
+          ResId="com.rmi.manualtradecompliance.adfbc.views.XwrlTCDetailsView.ResidenceCountry_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ResidenceCountryCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RESIDENCE_COUNTRY_CODE"
+    Expression="RESIDENCE_COUNTRY_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ResidenceIsoAlpha2Code"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="RESIDENCE_ISO_ALPHA2_CODE"
+    Expression="RESIDENCE_ISO_ALPHA2_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ResidenceCityId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="RESIDENCE_CITY_ID"
+    Expression="RESIDENCE_CITY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Department"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEPARTMENT"
+    Expression="DEPARTMENT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DepartmentExt"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="300"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DEPARTMENT_EXT"
+    Expression="DEPARTMENT_EXT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="300"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Office"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="OFFICE"
+    Expression="OFFICE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="25"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DocumentType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DOCUMENT_TYPE"
+    Expression="DOCUMENT_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseWorkflow"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CASE_WORKFLOW"
+    Expression="CASE_WORKFLOW"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseState"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CASE_STATE"
+    Expression="CASE_STATE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CaseStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CASE_STATUS"
+    Expression="CASE_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ExpirationDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="EXPIRATION_DATE"
+    Expression="EXPIRATION_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="CaseId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2700"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CASE_ID"
+    Expression="CASE_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2700"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="VesselIndicator"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VESSEL_INDICATOR"
+    Expression="VESSEL_INDICATOR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ImoNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.math.BigInteger"
+    ColumnType="NUMBER"
+    AliasName="IMO_NUMBER"
+    Expression="IMO_NUMBER"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="CreationDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CREATION_DATE"
+    Expression="CREATION_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="CreatedUser"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="CREATED_USER"
+    Expression="CREATED_USER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="LAST_UPDATE_DATE"
+    Expression="LAST_UPDATE_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="UpdateUser"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="UPDATE_USER"
+    Expression="UPDATE_USER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AssignedTo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ASSIGNED_TO"
+    Expression="ASSIGNED_TO"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RelationshipOrder"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="RELATIONSHIP_ORDER"
+    Expression="RELATIONSHIP_ORDER"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="XrefName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2700"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="XREF_NAME"
+    Expression="XREF_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2700"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PrimaryName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="2700"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PRIMARY_NAME"
+    Expression="PRIMARY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2700"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SortXrefId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SORT_XREF_ID"
+    Expression="SORT_XREF_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="IndentBy"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="INDENT_BY"
+    Expression="INDENT_BY"
+    SQLType="NUMERIC"/>
+    <ViewAttribute
+    Name="EastAsianOriginName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EAST_ASIAN_ORIGIN_NAME"
+    Expression="EAST_ASIAN_ORIGIN_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>  
+  <ViewAttribute
+    Name="PrimaryMasterId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="PRIMARY_MASTER_ID"
+    Expression="PRIMARY_MASTER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ProvisionalRequest"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PROVISIONAL_REQUEST"
+    Expression="PROVISIONAL_REQUEST"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>     
+  <ViewCriteria
+    Name="XwrlTCDetailsSearch"
+    ViewObjectName="com.rmi.manualtradecompliance.adfbc.views.XwrlTCDetailsView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="Always"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="false"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="XwrlTCDetailsViewCriteria1_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="FullName"
+        ViewAttribute="FullName"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="EndDate"
+        ViewAttribute="EndDate"
+        Operator="ISBLANK"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="BatchId"
+        ViewAttribute="BatchId"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="ResidenceCountry"
+        ViewAttribute="ResidenceCountry"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Office"
+        ViewAttribute="Office"
+        Operator="CONTAINS"
+        Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Rownum1"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.manualtradecompliance.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

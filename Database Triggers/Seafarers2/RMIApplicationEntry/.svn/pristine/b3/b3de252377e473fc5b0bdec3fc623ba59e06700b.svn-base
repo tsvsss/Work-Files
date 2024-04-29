@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VesselView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.applicationEntry.adfbc.views.readOnlyVO.VesselView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="pVesselPk"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pImoNumber"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <Variable
+    Name="pOfficialNumber"
+    Kind="where"
+    Type="java.lang.Integer"/>
+  <SQLQuery><![CDATA[select vessel_pk, name,imo_number,official_number,     
+(name||'  (ON '||official_number||')') full_name from vssl_vessels              
+where vessel_pk = nvl(:pVesselPk,vessel_pk)          
+and nvl(imo_number,-1) = nvl(:pImoNumber, nvl(imo_number,-1))           
+and official_number = nvl(:pOfficialNumber,official_number)       
+and official_number is not null           
+and status in ('A','P')]]></SQLQuery>
+  <ViewAttribute
+    Name="VesselPk"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="VESSEL_PK"
+    Expression="VESSEL_PK"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="Name"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="50"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NAME"
+    Expression="NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ImoNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="IMO_NUMBER"
+    Expression="IMO_NUMBER"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="OfficialNumber"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="OFFICIAL_NUMBER"
+    Expression="OFFICIAL_NUMBER"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="FullName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="91"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FULL_NAME"
+    Expression="FULL_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="91"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="OfficialNumber"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.applicationEntry.adfbc.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

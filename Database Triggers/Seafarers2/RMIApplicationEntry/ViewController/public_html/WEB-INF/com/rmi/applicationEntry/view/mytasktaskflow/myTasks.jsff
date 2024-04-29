@@ -1,0 +1,350 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1">
+    <af:panelFormLayout id="pfl1" partialTriggers="pc1:t1" visible="false">
+      <af:inputText value="#{bindings.EsiBatchId.inputValue}" label="#{bindings.EsiBatchId.hints.label}"
+                    required="#{bindings.EsiBatchId.hints.mandatory}"
+                    columns="#{bindings.EsiBatchId.hints.displayWidth}"
+                    maximumLength="#{bindings.EsiBatchId.hints.precision}"
+                    shortDesc="#{bindings.EsiBatchId.hints.tooltip}" id="it1">
+        <f:validator binding="#{bindings.EsiBatchId.validator}"/>
+        <af:convertNumber groupingUsed="false" pattern="#{bindings.EsiBatchId.format}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.WfStatus.inputValue}" label="#{bindings.WfStatus.hints.label}"
+                    required="#{bindings.WfStatus.hints.mandatory}" columns="#{bindings.WfStatus.hints.displayWidth}"
+                    maximumLength="#{bindings.WfStatus.hints.precision}" shortDesc="#{bindings.WfStatus.hints.tooltip}"
+                    id="it3">
+        <f:validator binding="#{bindings.WfStatus.validator}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.OeHeaderId.inputValue}" label="#{bindings.OeHeaderId.hints.label}"
+                    required="#{bindings.OeHeaderId.hints.mandatory}"
+                    columns="#{bindings.OeHeaderId.hints.displayWidth}"
+                    maximumLength="#{bindings.OeHeaderId.hints.precision}"
+                    shortDesc="#{bindings.OeHeaderId.hints.tooltip}" id="it4">
+        <f:validator binding="#{bindings.OeHeaderId.validator}"/>
+        <af:convertNumber groupingUsed="false" pattern="#{bindings.OeHeaderId.format}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.WorkOrderNo.inputValue}" label="#{bindings.WorkOrderNo.hints.label}"
+                    required="#{bindings.WorkOrderNo.hints.mandatory}"
+                    columns="#{bindings.WorkOrderNo.hints.displayWidth}"
+                    maximumLength="#{bindings.WorkOrderNo.hints.precision}"
+                    shortDesc="#{bindings.WorkOrderNo.hints.tooltip}" id="it5">
+        <f:validator binding="#{bindings.WorkOrderNo.validator}"/>
+        <af:convertNumber groupingUsed="false" pattern="#{bindings.WorkOrderNo.format}"/>
+      </af:inputText>
+    </af:panelFormLayout>
+    <af:panelTabbed position="above" id="pt1">
+      <af:showDetailItem id="tab1" text="My Task">
+        <af:panelCollection id="pc1" styleClass="AFStretchWidth" featuresOff="detach">
+          <f:facet name="toolbar">
+            <af:toolbar id="t2">
+              <af:button text="#{backingBeanScope.MytaskRequestBean.ot}" id="b6"
+                         actionListener="#{pageFlowScope.MyTasksBean.refreshQueue}"/>
+              <af:button text="CRA Batches" id="b10" actionListener="#{pageFlowScope.MyTasksBean.filterCra}"/>
+              <af:button text="Expedited Orders" id="b11"
+                         actionListener="#{pageFlowScope.MyTasksBean.filterExpedited}"/>
+              <af:button text="Resubmitted Batches" id="b12"
+                         actionListener="#{pageFlowScope.MyTasksBean.filterResubmit}"/>
+              <af:button text="All" id="b13" actionListener="#{pageFlowScope.MyTasksBean.filterAll}"/>
+            </af:toolbar>
+          </f:facet>
+          <af:table value="#{bindings.MyTasksRO.collectionModel}" var="row" rows="#{bindings.MyTasksRO.rangeSize}"
+                    emptyText="#{bindings.MyTasksRO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0" selectedRowKeys="#{bindings.MyTasksRO.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.MyTasksRO.collectionModel.makeCurrent}" rowSelection="single"
+                    fetchSize="#{bindings.MyTasksRO.rangeSize}" id="t1" contentDelivery="immediate" autoHeightRows="14"
+                    columnStretching="column:c3" styleClass="AFStretchWidth"
+                    partialTriggers="::b6 b3 ::d2 ::d3 ::b10 ::b11 ::b12 ::b13"
+                    filterModel="#{bindings.MyTasksROQuery.queryDescriptor}"
+                    queryListener="#{bindings.MyTasksROQuery.processQuery}" filterVisible="true" varStatus="vs">
+            <af:column headerText="Work Order Number" id="c12"
+                       sortProperty="#{bindings.MyTasksRO.hints.WorkOrderNo.name}" filterable="true" sortable="true">
+              <af:outputText value="#{row.WorkOrderNo}" shortDesc="#{bindings.MyTasksRO.hints.WorkOrderNo.tooltip}"
+                             id="ot11"
+                             inlineStyle="color:#{row.finalCra == -1 ? 'Red' : row.finalCra == 1 ? 'Green' : ''}; ">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.MyTasksRO.hints.WorkOrderNo.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Batch Name" id="c3" width="100"
+                       sortProperty="#{bindings.MyTasksRO.hints.BatchName.name}" filterable="true" sortable="true">
+              <af:outputText value="#{row.BatchName}" shortDesc="#{bindings.MyTasksRO.hints.BatchName.tooltip}" id="ot3"
+                             inlineStyle="color:#{row.finalCra == -1 ? 'Red' : row.finalCra == 1 ? 'Green' : ''}; "/>
+            </af:column>
+            <af:column headerText="Batch Status" id="c1" width="15%"
+                       sortProperty="#{bindings.MyTasksRO.hints.BatchStatus.name}" filterable="true" sortable="true"
+                       visible="false">
+              <af:outputText value="#{row.BatchStatus}" shortDesc="#{bindings.MyTasksRO.hints.BatchStatus.tooltip}"
+                             id="ot1"
+                             inlineStyle="color:#{row.finalCra == -1 ? 'Red' : row.finalCra == 1 ? 'Green' : ''}; "/>
+            </af:column>
+            <af:column headerText="#{sessionScope.RoleName != 'INTERNAL AGENT - II' ? 'Batch Submitted Date' : 'Batch Date'}"
+                       id="c2" width="100" sortProperty="#{bindings.MyTasksRO.hints.BatchDate.name}" filterable="true"
+                       sortable="true">
+              <af:outputText value="#{row.BatchDate}" shortDesc="#{bindings.MyTasksRO.hints.BatchDate.tooltip}" id="ot2"
+                             inlineStyle="color:#{row.finalCra == -1 ? 'Red' : row.finalCra == 1 ? 'Green' : ''};text-transform:uppercase; ">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.MyTasksROQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                              id="id1" contentStyle="text-transform:uppercase;">
+                  <af:convertDateTime pattern="dd-MMM-yyyy" secondaryPattern="ddMMMyyyy"/>
+                </af:inputDate>
+              </f:facet>
+            </af:column>
+            <af:column headerText="Number Of Seafarers" id="c4" width="100"
+                       sortProperty="#{bindings.MyTasksRO.hints.NoOfSeafarer.name}" filterable="true" sortable="true">
+              <af:outputText value="#{row.NoOfSeafarer}" shortDesc="#{bindings.MyTasksRO.hints.NoOfSeafarer.tooltip}"
+                             id="ot4"
+                             inlineStyle="color:#{row.finalCra == -1 ? 'Red' : row.finalCra == 1 ? 'Green' : ''}; "
+                             visible="false">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.MyTasksRO.hints.NoOfSeafarer.format}"/>
+              </af:outputText>
+              <af:link text="#{row.NoOfSeafarer}" id="l1" action="seafarerList" useWindow="true"
+                       windowEmbedStyle="window" windowHeight="200" windowWidth="850"/>
+            </af:column>
+            <af:column headerText="Order Type" id="c11" sortProperty="#{bindings.MyTasksRO.hints.OrderSource.name}"
+                       filterable="true" sortable="true" rendered="#{sessionScope.RoleName != 'INTERNAL AGENT - II'}">
+              <af:outputText value="#{row.OrderSource}" shortDesc="#{bindings.MyTasksRO.hints.OrderSource.tooltip}"
+                             id="ot10"
+                             inlineStyle="color:#{row.finalCra == -1 ? 'Red' : row.finalCra == 1 ? 'Green' : ''}; "/>
+            </af:column>
+            <af:column headerText="Expedited Processing" id="c27" width="70">
+              <af:selectBooleanCheckbox value="#{row.bindings.ExpeditedProcessingMytask.inputValue}"
+                                        label="#{row.bindings.ExpeditedProcessingMytask.label}"
+                                        shortDesc="#{bindings.MyTasksRO.hints.ExpeditedProcessingMytask.tooltip}"
+                                        id="sbc1" disabled="true"/>
+            </af:column>
+            <af:column headerText="Region" id="c5" width="100" sortProperty="#{bindings.MyTasksRO.hints.Region.name}"
+                       filterable="true" sortable="true">
+              <af:outputText value="#{row.Region}" shortDesc="#{bindings.MyTasksRO.hints.Region.tooltip}" id="ot5"
+                             inlineStyle="color:#{row.finalCra == -1 ? 'Red' : row.finalCra == 1 ? 'Green' : ''}; "/>
+            </af:column>
+            <af:column id="c7" width="80" sortable="false" filterable="false">
+              <af:button text="View" id="b2" action="tc" visible="#{row.BatchStatus != 'Pending_upload_document'}"/>
+              <af:button text="Edit" id="b5" action="edit" visible="#{row.BatchStatus == 'Pending_upload_document'}"/>
+            </af:column>
+            <af:column id="c6" width="100" sortable="false" filterable="false">
+              <af:button text="Return Batch" id="b1" actionListener="#{pageFlowScope.MyTasksBean.returnBatchButton}"
+                         visible="#{pageFlowScope.usertype != 'operator'}">
+                <af:showPopupBehavior popupId="::p1"/>
+              </af:button>
+              <af:button text="Not Accept" id="b4" visible="#{pageFlowScope.usertype == 'operator'}">
+                <af:showPopupBehavior popupId="::p2"/>
+              </af:button>
+            </af:column>
+            <af:column id="c38" width="80">
+              <af:button text="TC Status" id="b14" action="seafarerlisttc" useWindow="true" windowEmbedStyle="window"
+                         windowHeight="250" windowWidth="750"/>
+            </af:column>
+            <af:column id="c8" visible="#{pageFlowScope.usertype == 'operator'}" sortable="false" filterable="false">
+              <af:button text="Accept" id="b3" actionListener="#{backingBeanScope.MytaskRequestBean.testingBean}"/>
+            </af:column>
+            <af:column headerText="#{bindings.MyTasksRO.hints.CraCount.label}" id="c9" visible="false"
+                       sortProperty="#{bindings.MyTasksRO.hints.CraCount.name}" filterable="true" sortable="true">
+              <af:outputText value="#{row.CraCount}" shortDesc="#{bindings.MyTasksRO.hints.CraCount.tooltip}" id="ot8">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.MyTasksRO.hints.CraCount.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.MyTasksRO.hints.finalCra.label}" id="c10" visible="false"
+                       sortProperty="#{bindings.MyTasksRO.hints.finalCra.name}" filterable="true" sortable="true">
+              <af:outputText value="#{row.finalCra}" shortDesc="#{bindings.MyTasksRO.hints.finalCra.tooltip}" id="ot9">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.MyTasksRO.hints.finalCra.format}"/>
+              </af:outputText>
+            </af:column>
+          </af:table>
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p1">
+            <af:dialog id="d1" dialogListener="#{pageFlowScope.MyTasksBean.confirmationPopupDialogListener}"
+                       type="yesNo">
+              <f:facet name="buttonBar"/>
+              <af:outputText value="This action will return the Batch back to Main queue. Are you sure you want to continue?"
+                             id="ot6"/>
+            </af:dialog>
+          </af:popup>
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p2">
+            <af:dialog id="d2" dialogListener="#{pageFlowScope.MyTasksBean.returnBatchToAgent}">
+              <f:facet name="buttonBar"/>
+              <af:outputText value="Do you want to continue?" id="ot7"/>
+            </af:dialog>
+          </af:popup>
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p3"
+                    binding="#{pageFlowScope.MyTasksBean.reasonOfReturnPopup}" contentDelivery="lazyUncached">
+            <af:dialog id="d3" dialogListener="#{pageFlowScope.MyTasksBean.returnOfReasonDialogListener}">
+              <f:facet name="buttonBar"/>
+              <af:inputText label="Reason Of Not acceptance" id="it2" rows="10" contentStyle="width:300px;"
+                            autoSubmit="true" value="#{pageFlowScope.MyTasksBean.reasonText}"/>
+            </af:dialog>
+          </af:popup>
+        </af:panelCollection>
+      </af:showDetailItem>
+      <af:showDetailItem text="Legal Review Pending" id="sdi1"
+                         visible="#{sessionScope.RoleName == 'TRADE COMPLIANCE PROCESSOR'}">
+        <af:panelCollection id="pc2" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.MyTasksLegalView.collectionModel}" var="row"
+                    rows="#{bindings.MyTasksLegalView.rangeSize}"
+                    emptyText="#{bindings.MyTasksLegalView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0" selectedRowKeys="#{bindings.MyTasksLegalView.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.MyTasksLegalView.collectionModel.makeCurrent}" rowSelection="single"
+                    fetchSize="#{bindings.MyTasksLegalView.rangeSize}"
+                    filterModel="#{bindings.MyTasksLegalViewQuery.queryDescriptor}"
+                    queryListener="#{bindings.MyTasksLegalViewQuery.processQuery}" filterVisible="true" varStatus="vs"
+                    id="t3" styleClass="AFStretchWidth" columnStretching="column:c15" contentDelivery="immediate"
+                    autoHeightRows="14">
+            <af:column sortProperty="#{bindings.MyTasksLegalView.hints.BatchName.name}" filterable="true"
+                       sortable="true" headerText="Batch Name" id="c15">
+              <af:outputText value="#{row.BatchName}" shortDesc="#{bindings.MyTasksLegalView.hints.BatchName.tooltip}"
+                             id="ot14"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''}; "/>
+            </af:column>
+            <af:column sortProperty="#{bindings.MyTasksLegalView.hints.BatchDate.name}" filterable="true"
+                       sortable="true" headerText="Batch Date" id="c14">
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.MyTasksLegalViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                              id="id2">
+                  <af:convertDateTime pattern="#{bindings.MyTasksLegalView.hints.BatchDate.format}"/>
+                </af:inputDate>
+              </f:facet>
+              <af:outputText value="#{row.BatchDate}" shortDesc="#{bindings.MyTasksLegalView.hints.BatchDate.tooltip}"
+                             id="ot13"
+                             inlineStyle="text-transform:uppercase;color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''}; ">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.MyTasksLegalView.hints.NoOfSeafarer.name}" filterable="true"
+                       sortable="true" headerText="Number Of Seafarers" id="c16">
+              <af:outputText value="#{row.NoOfSeafarer}"
+                             shortDesc="#{bindings.MyTasksLegalView.hints.NoOfSeafarer.tooltip}" id="ot15"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''}; ">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.MyTasksLegalView.hints.NoOfSeafarer.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.MyTasksLegalView.hints.Region.name}" filterable="true" sortable="true"
+                       headerText="Region" id="c17">
+              <af:outputText value="#{row.Region}" shortDesc="#{bindings.MyTasksLegalView.hints.Region.tooltip}"
+                             id="ot16"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''}; "/>
+            </af:column>
+            <af:column sortProperty="#{bindings.MyTasksLegalView.hints.OrderSource.name}" filterable="true"
+                       sortable="true" headerText="Order Type" id="c18">
+              <af:outputText value="#{row.OrderSource}"
+                             shortDesc="#{bindings.MyTasksLegalView.hints.OrderSource.tooltip}" id="ot17"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''}; "/>
+            </af:column>
+            <af:column sortProperty="#{bindings.MyTasksLegalView.hints.WorkOrderNo.name}" filterable="true"
+                       sortable="true" headerText="Work Order Number" id="c19">
+              <af:outputText value="#{row.WorkOrderNo}"
+                             shortDesc="#{bindings.MyTasksLegalView.hints.WorkOrderNo.tooltip}" id="ot18"
+                             inlineStyle="color:#{row.tranFinalCra == -1 ? 'Red' : row.tranFinalCra == 1 ? 'Green' : ''}; ">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.MyTasksLegalView.hints.WorkOrderNo.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column id="c20">
+              <af:button text="View" id="b7" action="legal"/>
+            </af:column>
+            <af:column id="c13">
+              <af:button text="Return Batch" id="b8" actionListener="#{pageFlowScope.MyTasksBean.returnBatchLegal}"/>
+            </af:column>
+            <af:column headerText="#{bindings.MyTasksLegalView.hints.tranFinalCra.label}" id="c21" visible="false">
+              <af:outputText value="#{row.tranFinalCra}"
+                             shortDesc="#{bindings.MyTasksLegalView.hints.tranFinalCra.tooltip}" id="ot12">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.MyTasksLegalView.hints.tranFinalCra.format}"/>
+              </af:outputText>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+        <af:panelFormLayout id="pfl2" partialTriggers="pc2:t3" visible="false">
+          <af:inputText value="#{bindings.EsiBatchId1.inputValue}" label="#{bindings.EsiBatchId1.hints.label}"
+                        required="#{bindings.EsiBatchId1.hints.mandatory}" readOnly="true"
+                        columns="#{bindings.EsiBatchId1.hints.displayWidth}"
+                        maximumLength="#{bindings.EsiBatchId1.hints.precision}"
+                        shortDesc="#{bindings.EsiBatchId1.hints.tooltip}" id="it6">
+            <f:validator binding="#{bindings.EsiBatchId1.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.EsiBatchId1.format}"/>
+          </af:inputText>
+        </af:panelFormLayout>
+      </af:showDetailItem>
+      <af:showDetailItem text="Closed Orders" id="sdi2" visible="#{sessionScope.RoleName == 'SHIPPING USER'}">
+        <af:panelCollection id="pc3" styleClass="AFStretchWidth">
+          <f:facet name="menus"/>
+          <f:facet name="toolbar"/>
+          <f:facet name="statusbar"/>
+          <af:table value="#{bindings.BatchesClosedView.collectionModel}" var="row"
+                    rows="#{bindings.BatchesClosedView.rangeSize}"
+                    emptyText="#{bindings.BatchesClosedView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0" selectedRowKeys="#{bindings.BatchesClosedView.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.BatchesClosedView.collectionModel.makeCurrent}" rowSelection="single"
+                    fetchSize="#{bindings.BatchesClosedView.rangeSize}"
+                    filterModel="#{bindings.BatchesClosedViewQuery.queryDescriptor}"
+                    queryListener="#{bindings.BatchesClosedViewQuery.processQuery}" filterVisible="true" varStatus="vs"
+                    id="t4" contentDelivery="immediate" columnStretching="column:c23" autoHeightRows="14">
+            <af:column sortProperty="#{bindings.BatchesClosedView.hints.BatchName.name}" filterable="true"
+                       sortable="true" headerText="Batch Name" id="c23">
+              <af:outputText value="#{row.BatchName}" shortDesc="#{bindings.BatchesClosedView.hints.BatchName.tooltip}"
+                             id="ot20"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesClosedView.hints.BatchDate.name}" filterable="true"
+                       sortable="true" headerText="Batch Date" id="c22">
+              <f:facet name="filter">
+                <af:inputDate value="#{bindings.BatchesClosedViewQuery.queryDescriptor.filterConjunctionCriterion.criterionMap.BatchDate.value}"
+                              id="id3">
+                  <af:convertDateTime pattern="#{bindings.BatchesClosedView.hints.BatchDate.format}"/>
+                </af:inputDate>
+              </f:facet>
+              <af:outputText value="#{row.BatchDate}" shortDesc="#{bindings.BatchesClosedView.hints.BatchDate.tooltip}"
+                             id="ot19" inlineStyle="text-transform:uppercase;">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesClosedView.hints.NoOfSeafarer.name}" filterable="true"
+                       sortable="true" headerText="Number Of Seafarers" id="c24">
+              <af:outputText value="#{row.NoOfSeafarer}"
+                             shortDesc="#{bindings.BatchesClosedView.hints.NoOfSeafarer.tooltip}" id="ot21">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesClosedView.hints.NoOfSeafarer.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesClosedView.hints.Region.name}" filterable="true" sortable="true"
+                       headerText="Region" id="c25">
+              <af:outputText value="#{row.Region}" shortDesc="#{bindings.BatchesClosedView.hints.Region.tooltip}"
+                             id="ot22"/>
+            </af:column>
+            <af:column sortProperty="#{bindings.BatchesClosedView.hints.WorkOrderNo.name}" filterable="true"
+                       sortable="true" headerText="Work Order Number" id="c26">
+              <af:outputText value="#{row.WorkOrderNo}"
+                             shortDesc="#{bindings.BatchesClosedView.hints.WorkOrderNo.tooltip}" id="ot23">
+                <af:convertNumber groupingUsed="false"
+                                  pattern="#{bindings.BatchesClosedView.hints.WorkOrderNo.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column id="c28">
+              <af:button text="View" id="b9" action="closed"/>
+            </af:column>
+          </af:table>
+        </af:panelCollection>
+        <af:panelFormLayout id="pfl3" partialTriggers="pc3:t4" visible="false">
+          <af:inputText value="#{bindings.EsiBatchId2.inputValue}" label="#{bindings.EsiBatchId2.hints.label}"
+                        required="#{bindings.EsiBatchId2.hints.mandatory}" readOnly="true"
+                        columns="#{bindings.EsiBatchId2.hints.displayWidth}"
+                        maximumLength="#{bindings.EsiBatchId2.hints.precision}"
+                        shortDesc="#{bindings.EsiBatchId2.hints.tooltip}" id="it7">
+            <f:validator binding="#{bindings.EsiBatchId2.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.EsiBatchId2.format}"/>
+          </af:inputText>
+          <af:inputText value="#{bindings.OeHeaderId1.inputValue}" label="#{bindings.OeHeaderId1.hints.label}"
+                        required="#{bindings.OeHeaderId1.hints.mandatory}" readOnly="true"
+                        columns="#{bindings.OeHeaderId1.hints.displayWidth}"
+                        maximumLength="#{bindings.OeHeaderId1.hints.precision}"
+                        shortDesc="#{bindings.OeHeaderId1.hints.tooltip}" id="it8">
+            <f:validator binding="#{bindings.OeHeaderId1.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.OeHeaderId1.format}"/>
+          </af:inputText>
+        </af:panelFormLayout>
+      </af:showDetailItem>
+    </af:panelTabbed>
+  </af:panelGroupLayout>
+</jsp:root>

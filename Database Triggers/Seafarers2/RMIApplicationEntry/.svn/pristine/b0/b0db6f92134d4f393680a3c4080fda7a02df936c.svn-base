@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47" id="SeafarerListTcPageDef"
+                Package="com.rmi.applicationEntry.view.batchestaskflow">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="SeafarerListTcView" RangeSize="25" DataControl="RMIApplicationEntryAppModuleDataControl"
+              id="SeafarerListTcViewIterator"/>
+    <searchRegion Binds="SeafarerListTcViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="SeafarerListTcViewQuery"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="SeafarerListTcViewIterator" id="SeafarerListTcView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.SeafarerListTcView"
+                      Name="SeafarerListTcView0">
+        <AttrNames>
+          <Item Value="FirstName"/>
+          <Item Value="LastName"/>
+          <Item Value="BirthDate"/>
+          <Item Value="TcStatus"/>
+          <Item Value="TcStatusDate"/>
+          <Item Value="tranFinalCra"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

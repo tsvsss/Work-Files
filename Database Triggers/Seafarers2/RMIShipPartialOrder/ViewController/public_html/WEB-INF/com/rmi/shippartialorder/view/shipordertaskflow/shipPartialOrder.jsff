@@ -1,0 +1,457 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="scroll">
+    <af:panelBox text="Orders" id="pb1" showDisclosure="false" styleClass="AFStretchWidth">
+      <f:facet name="toolbar">
+        <af:toolbar id="t3">
+          <af:button text="Save" id="b6" actionListener="#{pageFlowScope.ShipPartialOrderBean.saveButton}"/>
+          <af:button text="Back" id="b2" action="back"/>
+        </af:toolbar>
+      </f:facet>
+      <af:panelFormLayout id="pfl2" rows="1" maxColumns="5" styleClass="panelFormLayoutClass">
+        <f:facet name="footer"/>
+        <af:inputText value="#{bindings.OrderNumber.inputValue}" label="Order Number"
+                      required="#{bindings.OrderNumber.hints.mandatory}"
+                      columns="#{bindings.OrderNumber.hints.displayWidth}"
+                      maximumLength="#{bindings.OrderNumber.hints.precision}"
+                      shortDesc="#{bindings.OrderNumber.hints.tooltip}" id="it1" contentStyle="width:100px;"
+                      disabled="true">
+          <f:validator binding="#{bindings.OrderNumber.validator}"/>
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.OrderNumber.format}"/>
+        </af:inputText>
+        <af:panelLabelAndMessage label="Order Hold" id="plam2">
+          <af:panelGroupLayout id="pgl6" layout="horizontal">
+            <af:selectBooleanCheckbox value="#{bindings.OrderHold.inputValue}"
+                                      shortDesc="#{bindings.OrderHold.hints.tooltip}" id="sbc1" disabled="true"/>
+            <af:link text="Details" id="l2" inlineStyle="margin-left:30px !important;" styleClass="AdditionalLink"
+                     visible="#{bindings.OrderHold.inputValue eq true}">
+              <af:showPopupBehavior popupId="p6" triggerType="action"/>
+            </af:link>
+            <af:popup childCreation="deferred" autoCancel="disabled" id="p6">
+              <af:dialog id="d6" title="Order Hold Details" type="ok">
+                <f:facet name="buttonBar"/>
+                <af:table value="#{bindings.OrderHoldView.collectionModel}" var="row"
+                          rows="#{bindings.OrderHoldView.rangeSize}"
+                          emptyText="#{bindings.OrderHoldView.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0" selectedRowKeys="#{bindings.OrderHoldView.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.OrderHoldView.collectionModel.makeCurrent}"
+                          rowSelection="single" fetchSize="#{bindings.OrderHoldView.rangeSize}" id="t5"
+                          contentDelivery="immediate" autoHeightRows="5" styleClass="AFStretchWidth"
+                          columnStretching="column:c21">
+                  <af:column headerText="Hold Name" id="c20" width="150">
+                    <af:outputText value="#{row.HoldName}" shortDesc="#{bindings.OrderHoldView.hints.HoldName.tooltip}"
+                                   id="ot19"/>
+                  </af:column>
+                  <af:column headerText="Hold Date" id="c19">
+                    <af:outputText value="#{row.HoldDate}" shortDesc="#{bindings.OrderHoldView.hints.HoldDate.tooltip}"
+                                   id="ot17" inlineStyle="text-transform:uppercase;">
+                      <af:convertDateTime pattern="dd-MMM-yyyy"/>
+                    </af:outputText>
+                  </af:column>
+                  <af:column headerText="Hold Comment" id="c21"
+                             inlineStyle="padding:3px; white-space: normal !important; -webkit-white-space: normal !important;"
+                             width="250">
+                    <af:outputText value="#{row.HoldComment}"
+                                   shortDesc="#{bindings.OrderHoldView.hints.HoldComment.tooltip}" id="ot20"/>
+                  </af:column>
+                  <af:column headerText="Held By" id="c22" width="150">
+                    <af:outputText value="#{row.HeldBy}" shortDesc="#{bindings.OrderHoldView.hints.HeldBy.tooltip}"
+                                   id="ot21"/>
+                  </af:column>
+                </af:table>
+              </af:dialog>
+            </af:popup>
+          </af:panelGroupLayout>
+        </af:panelLabelAndMessage>
+        <af:inputDate value="#{bindings.OrderDate.inputValue}" label="Order Date"
+                      required="#{bindings.OrderDate.hints.mandatory}"
+                      columns="#{bindings.OrderDate.hints.displayWidth}" shortDesc="#{bindings.OrderDate.hints.tooltip}"
+                      id="id1" contentStyle="width:100px;text-transform:uppercase;" disabled="true">
+          <f:validator binding="#{bindings.OrderDate.validator}"/>
+          <af:convertDateTime pattern="dd-MMM-yyyy"/>
+        </af:inputDate>
+        <af:inputText value="#{bindings.OrderStatus.inputValue}" label="Order Status"
+                      required="#{bindings.OrderStatus.hints.mandatory}"
+                      columns="#{bindings.OrderStatus.hints.displayWidth}"
+                      maximumLength="#{bindings.OrderStatus.hints.precision}"
+                      shortDesc="#{bindings.OrderStatus.hints.tooltip}" id="it3" contentStyle="width:100px;"
+                      disabled="true">
+          <f:validator binding="#{bindings.OrderStatus.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.OrderTotal.inputValue}" label="Order Total"
+                      required="#{bindings.OrderTotal.hints.mandatory}"
+                      columns="#{bindings.OrderTotal.hints.displayWidth}"
+                      maximumLength="#{bindings.OrderTotal.hints.precision}"
+                      shortDesc="#{bindings.OrderTotal.hints.tooltip}" id="it13" contentStyle="width:100px;"
+                      disabled="true">
+          <f:validator binding="#{bindings.OrderTotal.validator}"/>
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.OrderTotal.format}"/>
+        </af:inputText>
+      </af:panelFormLayout>
+      <af:panelBox text="Customer" id="pb2" showDisclosure="false">
+        <f:facet name="toolbar"/>
+        <af:panelFormLayout id="pfl4" rows="3" styleClass="panelFormLayoutClass" labelWidth="200">
+          <af:inputListOfValues id="tranDeliverToCustAccountNameId"
+                                popupTitle="Search and Select:Order By Account"
+                                value="#{bindings.tranDeliverToCustAccountName.inputValue}"
+                                label="Ordering Agent"
+                                model="#{bindings.tranDeliverToCustAccountName.listOfValuesModel}"
+                                required="#{bindings.tranDeliverToCustAccountName.hints.mandatory}"
+                                columns="#{bindings.tranDeliverToCustAccountName.hints.displayWidth}"
+                                shortDesc="#{bindings.tranDeliverToCustAccountName.hints.tooltip}"
+                                contentStyle="width:300px;" autoSubmit="true"
+                                disabled="#{sessionScope.RoleName eq 'ASSIGN TRACKING NUMBER'}">
+            <f:validator binding="#{bindings.tranDeliverToCustAccountName.validator}"/>
+            <af:autoSuggestBehavior suggestedItems="#{bindings.tranDeliverToCustAccountName.suggestedItems}"/>
+          </af:inputListOfValues>
+          <af:inputListOfValues id="tranBillToCustAccountNameId"
+                                popupTitle="Search and Select: Bill To Account"
+                                value="#{bindings.tranBillToCustAccountName.inputValue}"
+                                label="Paying Customer"
+                                model="#{bindings.tranBillToCustAccountName.listOfValuesModel}"
+                                required="#{bindings.tranBillToCustAccountName.hints.mandatory}"
+                                columns="#{bindings.tranBillToCustAccountName.hints.displayWidth}"
+                                shortDesc="#{bindings.tranBillToCustAccountName.hints.tooltip}"
+                                contentStyle="width:300px;" autoSubmit="true"
+                                partialTriggers="tranDeliverToCustAccountNameId"
+                                disabled="#{sessionScope.RoleName eq 'ASSIGN TRACKING NUMBER'}">
+            <f:validator binding="#{bindings.tranBillToCustAccountName.validator}"/>
+            <af:autoSuggestBehavior suggestedItems="#{bindings.tranBillToCustAccountName.suggestedItems}"/>
+          </af:inputListOfValues>
+          <af:inputListOfValues id="tranShipToCustAccountNameId"
+                                popupTitle="Search and Select: Deliver To Account"
+                                value="#{bindings.tranShipToCustAccountName.inputValue}"
+                                label="Ship Documents"
+                                model="#{bindings.tranShipToCustAccountName.listOfValuesModel}"
+                                required="#{bindings.tranShipToCustAccountName.hints.mandatory}"
+                                columns="#{bindings.tranShipToCustAccountName.hints.displayWidth}"
+                                shortDesc="#{bindings.tranShipToCustAccountName.hints.tooltip}"
+                                contentStyle="width:300px;" autoSubmit="true"
+                                partialTriggers="tranDeliverToCustAccountNameId"
+                                disabled="#{sessionScope.RoleName eq 'ASSIGN TRACKING NUMBER'}">
+            <f:validator binding="#{bindings.tranShipToCustAccountName.validator}"/>
+            <af:autoSuggestBehavior suggestedItems="#{bindings.tranShipToCustAccountName.suggestedItems}"/>
+          </af:inputListOfValues>
+          <af:inputListOfValues id="tranDeliverToSuAddressId"
+                                popupTitle="Search and Select: Order By Customer"
+                                value="#{bindings.tranDeliverToSuAddress.inputValue}"
+                                label="Ordering Location"
+                                model="#{bindings.tranDeliverToSuAddress.listOfValuesModel}"
+                                required="#{bindings.tranDeliverToSuAddress.hints.mandatory}"
+                                columns="#{bindings.tranDeliverToSuAddress.hints.displayWidth}"
+                                shortDesc="#{bindings.tranDeliverToSuAddress.hints.tooltip}"
+                                contentStyle="width:300px;" autoSubmit="true"
+                                partialTriggers="tranDeliverToCustAccountNameId"
+                                disabled="#{sessionScope.RoleName eq 'ASSIGN TRACKING NUMBER'}">
+            <f:validator binding="#{bindings.tranDeliverToSuAddress.validator}"/>
+            <af:autoSuggestBehavior suggestedItems="#{bindings.tranDeliverToSuAddress.suggestedItems}"/>
+          </af:inputListOfValues>
+          <af:inputListOfValues id="tranBillToSuAddressId"
+                                popupTitle="Search and Select: Bill To Customer"
+                                value="#{bindings.tranBillToSuAddress.inputValue}"
+                                label="Paying Location"
+                                model="#{bindings.tranBillToSuAddress.listOfValuesModel}"
+                                required="#{bindings.tranBillToSuAddress.hints.mandatory}"
+                                columns="#{bindings.tranBillToSuAddress.hints.displayWidth}"
+                                shortDesc="#{bindings.tranBillToSuAddress.hints.tooltip}" contentStyle="width:300px;"
+                                autoSubmit="true" partialTriggers="tranBillToCustAccountNameId"
+                                disabled="#{sessionScope.RoleName eq 'ASSIGN TRACKING NUMBER'}">
+            <f:validator binding="#{bindings.tranBillToSuAddress.validator}"/>
+            <af:autoSuggestBehavior suggestedItems="#{bindings.tranBillToSuAddress.suggestedItems}"/>
+          </af:inputListOfValues>
+          <af:panelLabelAndMessage label="Ship Location" id="plam1">
+            <af:panelGroupLayout id="pgl5" layout="horizontal">
+              <af:inputListOfValues id="tranShipToSuAddressId" popupTitle="Search and Select: Deliver To Customer"
+                                    value="#{bindings.tranShipToSuAddress.inputValue}" label="Ship Location"
+                                    model="#{bindings.tranShipToSuAddress.listOfValuesModel}"
+                                    required="#{bindings.tranShipToSuAddress.hints.mandatory}"
+                                    columns="#{bindings.tranShipToSuAddress.hints.displayWidth}"
+                                    shortDesc="#{bindings.tranShipToSuAddress.hints.tooltip}"
+                                    contentStyle="width:300px;" autoSubmit="true"
+                                    partialTriggers="tranShipToCustAccountNameId"
+                                    disabled="#{sessionScope.RoleName eq 'ASSIGN TRACKING NUMBER'}" simple="true">
+                <f:validator binding="#{bindings.tranShipToSuAddress.validator}"/>
+                <af:autoSuggestBehavior suggestedItems="#{bindings.tranShipToSuAddress.suggestedItems}"/>
+              </af:inputListOfValues>
+              <af:link text="Additional Order Details" id="l1" inlineStyle="margin-left:10px;" styleClass="AdditionalLink">
+                <af:showPopupBehavior popupId="p5" triggerType="action"/>
+              </af:link>
+            </af:panelGroupLayout>
+          </af:panelLabelAndMessage>
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p5" contentDelivery="lazyUncached">
+            <af:dialog id="d5" type="okCancel" affirmativeTextAndAccessKey="Save" title="Additional Order Details"
+                       dialogListener="#{pageFlowScope.ShipPartialOrderBean.addtionalOrderDialogListener}">
+              <f:facet name="buttonBar"/>
+              <af:panelFormLayout id="pfl6" labelAlignment="start">
+                <af:inputText value="#{bindings.OrderingAgentEmailId.inputValue}"
+                              label="Agent Email ID"
+                              required="#{bindings.OrderingAgentEmailId.hints.mandatory}"
+                              columns="#{bindings.OrderingAgentEmailId.hints.displayWidth}"
+                              maximumLength="#{bindings.OrderingAgentEmailId.hints.precision}"
+                              shortDesc="#{bindings.OrderingAgentEmailId.hints.tooltip}" id="it8"
+                              contentStyle="width:300px; white-space: normal !important; -webkit-white-space: normal !important;"
+                              rows="2" disabled="true">
+                  <f:validator binding="#{bindings.OrderingAgentEmailId.validator}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.InvoiceAgentEmailId.inputValue}"
+                              label="Invoice Agent Email ID"
+                              required="#{bindings.InvoiceAgentEmailId.hints.mandatory}"
+                              columns="#{bindings.InvoiceAgentEmailId.hints.displayWidth}"
+                              maximumLength="#{bindings.InvoiceAgentEmailId.hints.precision}"
+                              shortDesc="#{bindings.InvoiceAgentEmailId.hints.tooltip}" id="it7" rows="2"
+                              contentStyle="width:300px; white-space: normal !important; -webkit-white-space: normal !important;"
+                              disabled="true">
+                  <f:validator binding="#{bindings.InvoiceAgentEmailId.validator}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.VesselNames.inputValue}" label="Vessel Name(s)"
+                              required="#{bindings.VesselNames.hints.mandatory}"
+                              columns="#{bindings.VesselNames.hints.displayWidth}"
+                              maximumLength="#{bindings.VesselNames.hints.precision}"
+                              shortDesc="#{bindings.VesselNames.hints.tooltip}" id="it6"
+                              contentStyle="width:300px; white-space: normal !important; -webkit-white-space: normal !important;"
+                              rows="2" disabled="true">
+                  <f:validator binding="#{bindings.VesselNames.validator}"/>
+                </af:inputText>
+                <af:inputText value="#{bindings.Notes.inputValue}" label="Notes"
+                              required="#{bindings.Notes.hints.mandatory}"
+                              columns="#{bindings.Notes.hints.displayWidth}"
+                              maximumLength="#{bindings.Notes.hints.precision}"
+                              shortDesc="#{bindings.Notes.hints.tooltip}" id="it5" rows="2"
+                              contentStyle="width:300px; white-space: normal !important; -webkit-white-space: normal !important;"
+                              autoSubmit="true">
+                  <f:validator binding="#{bindings.Notes.validator}"/>
+                </af:inputText>
+              </af:panelFormLayout>
+            </af:dialog>
+          </af:popup>
+        </af:panelFormLayout>
+        <af:panelGroupLayout id="pgl2" layout="horizontal" inlineStyle="margin-top:10px; margin-bottom:10px;">
+          <af:panelFormLayout id="pfl3" styleClass="panelFormLayoutClass">
+            <af:inputText value="#{bindings.tranTrackingNumber.inputValue}"
+                          label="Tracking Number"
+                          required="#{bindings.tranTrackingNumber.hints.mandatory}"
+                          columns="#{bindings.tranTrackingNumber.hints.displayWidth}"
+                          maximumLength="#{bindings.tranTrackingNumber.hints.precision}" id="it2" contentStyle="width:200px;"
+                          autoSubmit="true">
+              <f:validator binding="#{bindings.tranTrackingNumber.validator}"/>
+            </af:inputText>
+          </af:panelFormLayout>
+          <af:spacer width="10" height="10" id="s3"/>
+          <af:panelFormLayout id="pfl1" styleClass="panelFormLayoutClass">
+            <af:selectOneChoice value="#{bindings.TransShippingMethod.inputValue}" label="Shipping Method"
+                                required="#{bindings.TransShippingMethod.hints.mandatory}" id="soc1"
+                                contentStyle="width:200px;" autoSubmit="true">
+              <f:selectItems value="#{bindings.TransShippingMethod.items}" id="si1"/>
+              <f:validator binding="#{bindings.TransShippingMethod.validator}"/>
+            </af:selectOneChoice>
+          </af:panelFormLayout>
+          <af:spacer width="10" height="10" id="s1"/>
+          <af:panelFormLayout id="pfl5" styleClass="panelFormLayoutClass">
+            <af:inputText value="#{bindings.Description.inputValue}" label="Description"
+                          required="#{bindings.Description.hints.mandatory}"
+                          columns="#{bindings.Description.hints.displayWidth}"
+                          maximumLength="#{bindings.Description.hints.precision}" id="it4" autoSubmit="true"
+                          partialTriggers="soc1"
+                          rows="1" contentStyle="width:200px;"
+                          visible="#{bindings.TransShippingMethod.inputValue eq 'OTHERS'}">
+              <f:validator binding="#{bindings.Description.validator}"/>
+            </af:inputText>
+          </af:panelFormLayout>
+          <af:spacer width="10" height="10" id="s5"/>
+          <af:button text="Ship" id="b3"
+                     actionListener="#{pageFlowScope.ShipPartialOrderBean.shipOrderActionListener}"
+                     visible="#{(sessionScope.RoleName ne 'ASSIGN TRACKING NUMBER')}"/>
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p3"
+                    binding="#{pageFlowScope.ShipPartialOrderBean.trackingPopup}">
+            <af:dialog id="d2"
+                       dialogListener="#{pageFlowScope.ShipPartialOrderBean.trackingConfirmationDialogListener}"
+                       type="yesNo">
+              <f:facet name="buttonBar"/>
+              <af:outputText value="No Tracking Number. Do you want to continue?" id="ot1"/>
+            </af:dialog>
+          </af:popup>
+          <af:spacer width="25" height="10" id="s2"/>
+          <af:button text="Update" id="b5" actionListener="#{pageFlowScope.ShipPartialOrderBean.updateButton}"/>
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p4"
+                    binding="#{pageFlowScope.ShipPartialOrderBean.errorPopup}" contentDelivery="lazyUncached">
+            <af:dialog id="d4" title="Error Details" type="ok">
+              <f:facet name="buttonBar"/>
+              <af:table value="#{bindings.ShippingErrorRO.collectionModel}" var="row"
+                        rows="#{bindings.ShippingErrorRO.rangeSize}"
+                        emptyText="#{bindings.ShippingErrorRO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                        rowBandingInterval="0" selectedRowKeys="#{bindings.ShippingErrorRO.collectionModel.selectedRow}"
+                        selectionListener="#{bindings.ShippingErrorRO.collectionModel.makeCurrent}"
+                        rowSelection="single" fetchSize="#{bindings.ShippingErrorRO.rangeSize}" id="t4"
+                        contentDelivery="immediate" autoHeightRows="4" styleClass="AFStretchWidth">
+                <af:column headerText="Delivery Detail Id" id="c13">
+                  <af:outputText value="#{row.DetailDeliveryId}"
+                                 shortDesc="#{bindings.ShippingErrorRO.hints.DetailDeliveryId.tooltip}" id="ot14">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ShippingErrorRO.hints.DetailDeliveryId.format}"/>
+                  </af:outputText>
+                </af:column>
+                <af:column headerText="Tracking Number" id="c14">
+                  <af:outputText value="#{row.TrackingNumber}"
+                                 shortDesc="#{bindings.ShippingErrorRO.hints.TrackingNumber.tooltip}" id="ot15"/>
+                </af:column>
+                <af:column headerText="Error Message" id="c15" width="600">
+                  <af:outputText value="#{row.MsgData}" shortDesc="#{bindings.ShippingErrorRO.hints.MsgData.tooltip}"
+                                 id="ot16"/>
+                </af:column>
+              </af:table>
+            </af:dialog>
+          </af:popup>
+          <af:inputText label="Progress" id="it12" rendered="false"/>
+          <af:spacer width="10" height="10" id="s4"/>
+          <af:popup childCreation="deferred" autoCancel="disabled" id="p7" contentDelivery="lazyUncached">
+            <af:dialog id="d7" title="Additional Order Information" modal="true" affirmativeTextAndAccessKey="Save">
+              <f:facet name="buttonBar"/>
+            </af:dialog>
+          </af:popup>
+          <af:button text="Update" id="b4" rendered="false"/>
+        </af:panelGroupLayout>
+      </af:panelBox>
+    </af:panelBox>
+    <af:panelBox text="Line Items" id="pb3" showDisclosure="false">
+      <f:facet name="toolbar"/>
+      <af:panelCollection id="pc1" styleClass="AFStretchWidth" partialTriggers="::p3 ::d2 ::b3">
+        <f:facet name="menus"/>
+        <f:facet name="toolbar">
+          <af:toolbar id="t2">
+            <af:button text="Refresh" id="b1" actionListener="#{pageFlowScope.ShipPartialOrderBean.refreshButton}"/>
+          </af:toolbar>
+        </f:facet>
+        <f:facet name="statusbar"/>
+        <af:table value="#{bindings.OrderShippingPartialRO.collectionModel}" var="row"
+                  rows="#{bindings.OrderShippingPartialRO.rangeSize}"
+                  emptyText="#{bindings.OrderShippingPartialRO.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0"
+                  selectedRowKeys="#{bindings.OrderShippingPartialRO.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.OrderShippingPartialRO.collectionModel.makeCurrent}"
+                  rowSelection="single" fetchSize="#{bindings.OrderShippingPartialRO.rangeSize}" id="t1"
+                  contentDelivery="immediate" styleClass="AFStretchWidth" autoHeightRows="5"
+                  partialTriggers=":::b3 :::p3 :::d2 ::b1 :::b5" columnStretching="column:c11">
+          <af:column headerText="Line Number" id="c3">
+            <af:outputText value="#{row.LineNumber}"
+                           shortDesc="#{bindings.OrderShippingPartialRO.hints.LineNumber.tooltip}" id="ot5">
+              <af:convertNumber groupingUsed="false"
+                                pattern="#{bindings.OrderShippingPartialRO.hints.LineNumber.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column id="c1" headerText="Line Hold" width="60">
+            <af:selectBooleanCheckbox value="#{bindings.LineHold1.inputValue}" label="#{row.bindings.LineHold.label}"
+                                      shortDesc="#{bindings.OrderShippingPartialRO.hints.LineHold.tooltip}" id="sbc3"
+                                      disabled="true"/>
+          </af:column>
+          <af:column id="c2" width="80">
+            <af:selectBooleanCheckbox value="#{row.bindings.tranShipLine.inputValue}"
+                                      label="#{row.bindings.tranShipLine.label}"
+                                      shortDesc="#{bindings.OrderShippingPartialRO.hints.tranShipLine.tooltip}"
+                                      id="sbc4" autoSubmit="true"
+                                      disabled="#{row.tranDeliveryStat == 'disable'}"/>
+            <f:facet name="header">
+              <af:panelGroupLayout id="pgl4" layout="vertical">
+                <af:outputText value="Ship Line" id="ot4" inlineStyle="color:White;"/>
+                <af:selectBooleanCheckbox id="sbc5" simple="true"
+                                          valueChangeListener="#{pageFlowScope.ShipPartialOrderBean.shipLineCheckValueChangeListener}"
+                                          autoSubmit="true"/>
+              </af:panelGroupLayout>
+            </f:facet>
+          </af:column>
+          <af:column headerText="Interfaced Flag" id="c12" partialTriggers=":::b3 :::p3 :::d2">
+            <af:selectBooleanCheckbox value="#{row.bindings.InterfacedFlag.inputValue}"
+                                      label="#{row.bindings.InterfacedFlag.label}"
+                                      shortDesc="#{bindings.OrderShippingPartialRO.hints.InterfacedFlag.tooltip}"
+                                      id="sbc2" partialTriggers=":::b3 :::p3 :::d2"/>
+          </af:column>
+          <af:column headerText="Doc. Print Status" id="c16" width="80" align="center">
+            <af:selectBooleanCheckbox value="#{row.bindings.DocPrintStatus.inputValue}"
+                                      label="#{row.bindings.DocPrintStatus.label}"
+                                      shortDesc="#{bindings.OrderShippingPartialRO.hints.DocPrintStatus.tooltip}"
+                                      id="sbc6" disabled="true" autoSubmit="true"/>
+          </af:column>
+          <af:column headerText="Ordered Item" id="c4">
+            <af:outputText value="#{row.OrderedItem}"
+                           shortDesc="#{bindings.OrderShippingPartialRO.hints.OrderedItem.tooltip}" id="ot6"/>
+          </af:column>
+          <af:column headerText="Delivery Date" id="c10">
+            <af:outputText value="#{row.DeliveryDate}"
+                           shortDesc="#{bindings.OrderShippingPartialRO.hints.DeliveryDate.tooltip}" id="ot12"
+                           inlineStyle="text-transform:uppercase;">
+              <af:convertDateTime pattern="dd-MMM-yyyy"/>
+            </af:outputText>
+          </af:column>
+          <af:column headerText="Delivery Status" id="c11">
+            <af:outputText value="#{row.DeliveryStatus}"
+                           shortDesc="#{bindings.OrderShippingPartialRO.hints.DeliveryStatus.tooltip}" id="ot13"/>
+          </af:column>
+          <af:column headerText="#{bindings.OrderShippingPartialRO.hints.tranDeliveryStat.label}" id="c23"
+                     visible="false">
+            <af:outputText value="#{row.tranDeliveryStat}"
+                           shortDesc="#{bindings.OrderShippingPartialRO.hints.tranDeliveryStat.tooltip}" id="ot22"/>
+          </af:column>
+          <af:column headerText="Tracking Number" id="c9">
+            <af:outputText value="#{row.TrackingNumber}"
+                           shortDesc="#{bindings.OrderShippingPartialRO.hints.TrackingNumber.tooltip}" id="ot11"/>
+          </af:column>
+          <af:column headerText="Shipping Method" id="c18" width="150"
+                     inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;">
+            <af:selectOneChoice value="#{row.bindings.ShippingMethodCode.inputValue}"
+                                label="#{row.bindings.ShippingMethodCode.label}"
+                                required="#{bindings.OrderShippingPartialRO.hints.ShippingMethodCode.mandatory}"
+                                shortDesc="#{bindings.OrderShippingPartialRO.hints.ShippingMethodCode.tooltip}"
+                                id="soc2" autoSubmit="true" readOnly="true"
+                                contentStyle="white-space: normal !important; -webkit-white-space: normal !important;">
+              <f:selectItems value="#{row.bindings.ShippingMethodCode.items}" id="si2"/>
+              <f:validator binding="#{row.bindings.ShippingMethodCode.validator}"/>
+            </af:selectOneChoice>
+          </af:column>
+          <af:column id="c17" width="150" headerText="Description"
+                     inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;">
+            <af:outputText value="#{row.Description}" id="ot18"/>
+          </af:column>
+          <af:column headerText="Seafarer ID" id="c6" width="80">
+            <af:outputText value="#{row.SeafarerId}"
+                           shortDesc="#{bindings.OrderShippingPartialRO.hints.SeafarerId.tooltip}" id="ot8">
+              <af:convertNumber groupingUsed="false"
+                                pattern="#{bindings.OrderShippingPartialRO.hints.SeafarerId.format}"/>
+            </af:outputText>
+          </af:column>
+          <af:column headerText="Surname" id="c7">
+            <af:outputText value="#{row.LastName}" shortDesc="#{bindings.OrderShippingPartialRO.hints.LastName.tooltip}"
+                           id="ot9"/>
+          </af:column>
+          <af:column headerText="Given Names" id="c8">
+            <af:outputText value="#{row.FirstName}"
+                           shortDesc="#{bindings.OrderShippingPartialRO.hints.FirstName.tooltip}" id="ot10"/>
+          </af:column>
+          <af:column headerText="Document Number" id="c5">
+            <af:outputText value="#{row.DocumentNumber}"
+                           shortDesc="#{bindings.OrderShippingPartialRO.hints.DocumentNumber.tooltip}" id="ot7">
+              <af:convertNumber groupingUsed="false"
+                                pattern="#{bindings.OrderShippingPartialRO.hints.DocumentNumber.format}"/>
+            </af:outputText>
+          </af:column>
+        </af:table>
+      </af:panelCollection>
+    </af:panelBox>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="p1"
+              binding="#{pageFlowScope.ShipPartialOrderBean.popUpBind}">
+      <af:dialog id="d1" type="yesNo" dialogListener="#{pageFlowScope.ShipPartialOrderBean.shipYesNoDL}">
+        <f:facet name="buttonBar"/>
+        <af:panelGroupLayout id="pgl3" layout="vertical">
+          <af:outputText id="ot2" value="#{pageFlowScope.ShipPartialOrderBean.exp_msg}"/>
+        </af:panelGroupLayout>
+      </af:dialog>
+    </af:popup>
+    <af:popup childCreation="deferred" id="p2" contentDelivery="immediate" autoCancel="disabled"
+              binding="#{pageFlowScope.ShipPartialOrderBean.progrssPopupBiind}">
+      <af:dialog id="d3" type="none" title="Progress...">
+        <f:facet name="buttonBar"/>
+        <af:outputText value="#{pageFlowScope.ShipPartialOrderBean.prc_indicator}" id="ot3"
+                       inlineStyle="color:Navy; font-weight:bold;"/>
+      </af:dialog>
+    </af:popup>
+  </af:panelGroupLayout>
+</jsp:root>

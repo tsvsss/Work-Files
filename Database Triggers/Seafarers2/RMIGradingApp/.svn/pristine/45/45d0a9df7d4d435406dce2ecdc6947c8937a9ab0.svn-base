@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="ValidateSeafarerTF">
+    <default-activity>router1</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <input-parameter-definition id="__6">
+      <name>P_SEAFARER_ID</name>
+      <value>#{pageFlowScope.P_SEAFARER_ID}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__14">
+      <name>P_CONTROL_FLOW</name>
+      <value>#{pageFlowScope.P_CONTROL_FLOW}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__9">
+      <name>P_CALLED_FROM_TF</name>
+      <value>#{pageFlowScope.P_CALLED_FROM_TF}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__17">
+      <name>P_UPDATE_SEAFARER</name>
+      <value>#{pageFlowScope.P_UPDATE_SEAFARER}</value>
+      <class>java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__18">
+      <name>P_ESI_ID</name>
+      <value>#{pageFlowScope.P_ESI_ID}</value>
+      <class>java.lang.Integer</class>
+    </input-parameter-definition>
+    <managed-bean id="__7">
+            <managed-bean-name>ValidateSeafarerBean</managed-bean-name>
+            <managed-bean-class>com.rmi.tradecompapproval.view.validateseafarer.ValidateSeafarerBean</managed-bean-class>
+            <managed-bean-scope>pageFlow</managed-bean-scope>
+        </managed-bean>
+        <managed-bean id="__8">
+            <managed-bean-name>searchSeafarerBean</managed-bean-name>
+            <managed-bean-class>com.rmi.tradecompapproval.view.validateseafarer.SearchSeafarerBean</managed-bean-class>
+            <managed-bean-scope>pageFlow</managed-bean-scope>
+        </managed-bean>
+    <view id="SearchSeafarer">
+      <page>/WEB-INF/com/rmi/tradecompapproval/view/validateseafarer/SearchSeafarer.jsff</page>
+    </view>
+    <view id="ValidateSeafarer">
+      <page>/WEB-INF/com/rmi/tradecompapproval/view/validateseafarer/ValidateSeafarer.jsff</page>
+    </view>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <router id="router1">
+      <case id="__4">
+        <expression>#{pageFlowScope.P_CONTROL_FLOW eq 'S'}</expression>
+        <outcome>searchSeafarer</outcome>
+      </case>
+      <case id="__5">
+        <expression>#{pageFlowScope.P_CONTROL_FLOW eq 'V'}</expression>
+        <outcome>validateSeafarer</outcome>
+      </case>
+      <default-outcome>searchSeafarer</default-outcome>
+    </router>
+    <task-flow-call id="EditDocumentsTaskflow">
+      <task-flow-reference>
+        <document>/WEB-INF/com/rmi/tradecompapproval/view/editseafarerdocs/EditDocumentsTaskflow.xml</document>
+        <id>EditDocumentsTaskflow</id>
+      </task-flow-reference>
+      <input-parameter id="__15">
+        <name>P_CALLED_FROM_TF</name>
+        <value>VS</value>
+      </input-parameter>
+    </task-flow-call>
+    <view id="EditDocumentsPage">
+      <page>/WEB-INF/com/rmi/tradecompapproval/view/editseafarerdocs/EditDocumentsPage.jsff</page>
+    </view>
+    <control-flow-rule id="__1">
+      <from-activity-id>SearchSeafarer</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>useSeafarer</from-outcome>
+        <to-activity-id>EditDocumentsPage</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__3">
+        <from-outcome>cancelSeafarerNotFound</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__11">
+      <from-activity-id>router1</from-activity-id>
+      <control-flow-case id="__12">
+        <from-outcome>searchSeafarer</from-outcome>
+        <to-activity-id>SearchSeafarer</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__13">
+        <from-outcome>validateSeafarer</from-outcome>
+        <to-activity-id>EditDocumentsPage</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>EditDocumentsPage</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

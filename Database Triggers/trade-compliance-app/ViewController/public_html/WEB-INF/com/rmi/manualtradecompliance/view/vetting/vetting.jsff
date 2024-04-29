@@ -1,0 +1,1287 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+  <af:panelGroupLayout id="pgl1" styleClass="AFStretchWidth" layout="vertical">
+    <af:resource type="javascript">
+            
+              function selectRows(event) {
+                
+              var checkbox=event.getSource(); 
+               
+              var checkboxLocator=checkbox.getProperty("checkboxLocator");
+              var tableLocator=checkbox.getProperty("tableLocator");
+               
+              var table=checkbox.findComponent(tableLocator);
+               
+              var nbRows=parseInt(table.getRows());
+              var tableAbsLocator=table.getAbsoluteLocator();
+               
+              while(nbRows--){
+                var rowCheckbox=AdfPage.PAGE.findComponentByAbsoluteLocator(tableAbsLocator+"["+nbRows+"]"+checkboxLocator);
+                if(checkbox.getValue()!=rowCheckbox.getValue()){
+                  rowCheckbox.setValue(checkbox.getValue());
+                }
+              }
+              
+              AdfCustomEvent.queue(checkbox, "checkRows", 
+               {
+                 checkBoxValue : checkbox.getValue()
+               }, false);
+                event.cancel();
+            }
+            
+        </af:resource>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="p1" contentDelivery="lazyUncached"
+              binding="#{pageFlowScope.VettingBean.createVettingPopup}">
+      <af:dialog id="d1" type="none"
+                 title="#{(pageFlowScope.P_FORM_CALLED == 'vetting') ?  (bindings.TransOperationType.inputValue eq 'C') ? 'Create Vetting' : 'Update Vetting' : (bindings.TransOperationType.inputValue eq 'C') ? 'Create Alias Vetting' : 'Update Alias Vetting'}">
+        <af:panelGroupLayout id="pgl13" layout="vertical" inlineStyle="margin:5px !important;"
+                             partialTriggers="sor1">
+          <af:panelFormLayout id="pfl4" labelWidth="150" styleClass="AFStretchWidth panelFormLayoutClass">
+            <af:panelLabelAndMessage label="Name Screened" id="plam1"
+                                     visible="#{pageFlowScope.P_FORM_CALLED == 'vetting'}">
+              <af:panelGroupLayout id="pgl8" layout="horizontal">
+                <af:inputText value="#{bindings.TransNameScreenedUpdatable.inputValue}" label="Name Screened"
+                              required="#{bindings.TransNameScreenedUpdatable.hints.mandatory}"
+                              columns="#{bindings.TransNameScreenedUpdatable.hints.displayWidth}"
+                              maximumLength="#{bindings.TransNameScreenedUpdatable.hints.precision}" id="it17"
+                              simple="true"
+                              styleClass="AFInputTextTab" contentStyle="width:600px !important;"
+                              valueChangeListener="#{pageFlowScope.VettingBean.nameScreenedTextVCL}" autoSubmit="true">
+                  <f:validator binding="#{bindings.TransNameScreenedUpdatable.validator}"/>
+                </af:inputText>
+                <af:link shortDesc="Search" id="i1"
+                           icon="/resources/images/lov_ena.png" inlineStyle="margin-left:5px;" partialSubmit="true"
+                         rendered="false">
+                  <af:showPopupBehavior popupId="nameScreenedTxtSearchPopup"/>
+                </af:link>
+                <af:button id="b34"
+                           rendered="#{bindings.TransOperationType.inputValue == 'C'}"
+                           actionListener="#{pageFlowScope.VettingBean.nameScreenedButtonAL}"
+                           icon="/resources/images/lov_ena.png"/>
+                <af:inputListOfValues id="transNameScreened1Id" popupTitle="Search and Select: Name Screened"
+                                      value="#{bindings.TransNameScreened1.inputValue}" label="Name Screened"
+                                      required="#{bindings.TransNameScreened1.hints.mandatory}"
+                                      model="#{bindings.TransNameScreened1.listOfValuesModel}"
+                                      columns="#{bindings.TransNameScreened1.hints.displayWidth}"
+                                      contentStyle="width:0px; border:none; padding:0px;" autoSubmit="true"
+                                       rendered="false"
+                                      autoComplete="on" simple="true"  
+                                      clientComponent="true">
+                  <f:validator binding="#{bindings.TransNameScreened1.validator}"/>
+                </af:inputListOfValues>
+              </af:panelGroupLayout>
+            </af:panelLabelAndMessage>
+            <af:panelLabelAndMessage label="Name Screened" id="plam2"
+                                     visible="#{pageFlowScope.P_FORM_CALLED == 'alias'}">
+              <af:panelGroupLayout id="pgl9" layout="horizontal">
+                <af:inputText value="#{bindings.TransNameScreenedUpdatable1.inputValue}"
+                              required="#{bindings.TransNameScreenedUpdatable1.hints.mandatory}"
+                              columns="#{bindings.TransNameScreenedUpdatable1.hints.displayWidth}"
+                              maximumLength="#{bindings.TransNameScreenedUpdatable1.hints.precision}" id="it2"
+                              simple="true" autoSubmit="true" partialTriggers="transAliasNameScreened1Id"
+                              styleClass="AFInputTextTab" contentStyle="width:600px !important;">
+                  <f:validator binding="#{bindings.TransNameScreenedUpdatable.validator}"/>
+                </af:inputText>
+                <af:inputListOfValues id="transAliasNameScreened1Id" popupTitle="Search and Select: Name Screened"
+                                      value="#{bindings.TransAliasNameScreened1.inputValue}" label="Name Screened"
+                                      model="#{bindings.TransAliasNameScreened1.listOfValuesModel}"
+                                       rendered="false"
+                                      required="#{bindings.TransAliasNameScreened1.hints.mandatory}"
+                                      columns="#{bindings.TransAliasNameScreened1.hints.displayWidth}" autoSubmit="true"
+                                      contentStyle="width:0px; border:none; padding:0px;" simple="true">
+                  <f:validator binding="#{bindings.TransAliasNameScreened1.validator}"/>
+                
+                </af:inputListOfValues>
+              </af:panelGroupLayout>
+            </af:panelLabelAndMessage>
+          </af:panelFormLayout>
+          <af:separator id="s4"/>
+          <af:panelFormLayout id="pfl1" maxColumns="2" rows="2" styleClass="AFStretchWidth panelFormLayoutClass" labelWidth="150"
+                              fieldWidth="285">
+            <af:inputText value="#{bindings.TransSeafarerId.inputValue}" label="Identifier" required="false"
+                          columns="#{bindings.TransSeafarerId.hints.displayWidth}"
+                          maximumLength="#{bindings.TransSeafarerId.hints.precision}" id="it5"
+                          styleClass="AFInputTextTab"
+                          partialTriggers="it17 it2 transAliasNameScreened1Id transNameScreened1Id" disabled="true">
+              <f:validator binding="#{bindings.TransSeafarerId.validator}"/>
+            </af:inputText>
+            <!-- T20211215.0029 - Create Vetting Popup changes -->
+            <af:selectOneRadio value="#{bindings.TransEntityType.inputValue}" label="Entity Type"
+                               required="#{bindings.TransEntityType.hints.mandatory}" id="sor1"
+                               partialTriggers="transNameScreened1Id transAliasNameScreened1Id it17 it2"
+                               autoSubmit="true" layout="horizontal"
+                               disabled="#{pageFlowScope.P_FORM_CALLED == 'alias' or pageFlowScope.VettingBean.isVettingInfoValid}">
+              <f:selectItems value="#{bindings.TransEntityType.items}" id="si1"/>
+              <f:validator binding="#{bindings.TransEntityType.validator}"/>
+            </af:selectOneRadio>
+            <af:selectOneRadio value="#{bindings.TransGender.inputValue}" label="Sex"
+                               required="#{bindings.TransGender.hints.mandatory}" id="sor2" autoSubmit="true"
+                               partialTriggers="transNameScreened1Id transAliasNameScreened1Id" layout="horizontal"
+                               visible="#{bindings.TransEntityType.inputValue eq 'INDIVIDUAL'}"
+                               disabled="#{pageFlowScope.P_FORM_CALLED == 'alias' or pageFlowScope.VettingBean.isVettingInfoValid}">
+              <f:selectItems value="#{bindings.TransGender.items}" id="si2"/>
+              <f:validator binding="#{bindings.TransGender.validator}"/>
+            </af:selectOneRadio>
+            <af:inputDate value="#{bindings.TransDateOfBirth.inputValue}" label="Date of Birth"
+                          required="#{bindings.TransDateOfBirth.hints.mandatory}"
+                          columns="#{bindings.TransDateOfBirth.hints.displayWidth}"
+                          shortDesc="#{bindings.TransDateOfBirth.hints.tooltip}" id="id1" autoSubmit="true"
+                          styleClass="AFInputTextTab"
+                          partialTriggers="transNameScreened1Id transAliasNameScreened1Id it17 it2"
+                          visible="#{bindings.TransEntityType.inputValue eq 'INDIVIDUAL'}"
+                          disabled="#{pageFlowScope.P_FORM_CALLED == 'alias' or pageFlowScope.VettingBean.isVettingInfoValid}"
+                          minValue="1820-01-01">
+              <f:validator binding="#{bindings.TransDateOfBirth.validator}"/>
+              <af:convertDateTime pattern="dd-MMM-yyyy" type="date" secondaryPattern="ddMMMyyyy"/>
+            </af:inputDate>
+          </af:panelFormLayout>
+          <af:separator id="s12" rendered="#{bindings.TransEntityType.inputValue eq 'INDIVIDUAL'}"/>
+          <af:panelFormLayout id="pfl15" styleClass="AFStretchWidth panelFormLayoutClass" rows="1" maxColumns="2"
+                              labelWidth="150" fieldWidth="285"
+                              rendered="#{bindings.TransEntityType.inputValue eq 'INDIVIDUAL'}">
+            <af:selectOneChoice value="#{bindings.TransIdType.inputValue}" label="ID Type"
+                                required="#{bindings.TransIdType.hints.mandatory}"
+                                shortDesc="#{bindings.TransIdType.hints.tooltip}" id="soc1" autoSubmit="true"
+                                styleClass="AFInputTextTab"
+                                partialTriggers="transNameScreened1Id transAliasNameScreened1Id it17 it2"
+                                disabled="#{pageFlowScope.P_FORM_CALLED == 'alias' or pageFlowScope.VettingBean.isVettingInfoValid}">
+              <f:selectItems value="#{bindings.TransIdType.items}" id="si3"/>
+              <f:validator binding="#{bindings.TransIdType.validator}"/>
+            </af:selectOneChoice>
+            <af:inputText value="#{bindings.TransIdNumber.inputValue}" label="Number"
+                          required="#{bindings.TransIdNumber.hints.mandatory}"
+                          columns="#{bindings.TransIdNumber.hints.displayWidth}"
+                          maximumLength="#{bindings.TransIdNumber.hints.precision}"
+                          shortDesc="#{bindings.TransIdNumber.hints.tooltip}" id="it1" autoSubmit="true"
+                          styleClass="AFInputTextTab"
+                          partialTriggers="transNameScreened1Id transAliasNameScreened1Id it17 it2"
+                          disabled="#{pageFlowScope.P_FORM_CALLED == 'alias' or pageFlowScope.VettingBean.isVettingInfoValid}">
+              <f:validator binding="#{bindings.TransIdNumber.validator}"/>
+            </af:inputText>
+          </af:panelFormLayout>
+          <af:separator id="s10"/>
+          <af:panelFormLayout id="pfl16" styleClass="AFStretchWidth panelFormLayoutClass" labelWidth="150"
+                              maxColumns="2" rows="#{(bindings.TransEntityType.inputValue eq 'INDIVIDUAL')? 2 : 1}" fieldWidth="285">
+            <af:inputListOfValues id="transPassIssuCntryNameId" popupTitle="Search and Select: Issuing Country"
+                                  value="#{bindings.TransPassIssuCntryName.inputValue}" label="Issuing Country"
+                                  model="#{bindings.TransPassIssuCntryName.listOfValuesModel}"
+                                  required="#{bindings.TransPassIssuCntryName.hints.mandatory}"
+                                  columns="#{bindings.TransPassIssuCntryName.hints.displayWidth}"
+                                  shortDesc="#{bindings.TransPassIssuCntryName.hints.tooltip}" autoSubmit="true"
+                                  styleClass="AFInputTextTab"
+                                  partialTriggers="transNameScreened1Id transAliasNameScreened1Id it17 it2"
+                                  disabled="#{pageFlowScope.P_FORM_CALLED == 'alias' or pageFlowScope.VettingBean.isVettingInfoValid}"
+                                  rendered="#{bindings.TransEntityType.inputValue eq 'INDIVIDUAL'}">
+              <f:validator binding="#{bindings.TransPassIssuCntryName.validator}"/>
+              <af:autoSuggestBehavior suggestedItems="#{bindings.TransPassIssuCntryName.suggestedItems}"/>
+            </af:inputListOfValues>
+            <af:inputListOfValues id="transCtznshpCntryNameId" popupTitle="Search and Select: Citizenship"
+                                  value="#{bindings.TransCtznshpCntryName.inputValue}" label="Citizenship"
+                                  model="#{bindings.TransCtznshpCntryName.listOfValuesModel}"
+                                  required="#{bindings.TransCtznshpCntryName.hints.mandatory}"
+                                  columns="#{bindings.TransCtznshpCntryName.hints.displayWidth}"
+                                  shortDesc="#{bindings.TransCtznshpCntryName.hints.tooltip}" autoSubmit="true"
+                                  styleClass="AFInputTextTab"
+                                  partialTriggers="transNameScreened1Id transAliasNameScreened1Id it17 it2"
+                                  disabled="#{pageFlowScope.P_FORM_CALLED == 'alias' or pageFlowScope.VettingBean.isVettingInfoValid}"
+                                  rendered="#{bindings.TransEntityType.inputValue eq 'INDIVIDUAL'}">
+              <f:validator binding="#{bindings.TransCtznshpCntryName.validator}"/>
+              <af:autoSuggestBehavior suggestedItems="#{bindings.TransCtznshpCntryName.suggestedItems}"/>
+            </af:inputListOfValues>
+            <af:inputListOfValues id="transResdnceCntryNameId" popupTitle="Search and Select: Residence Country"
+                                  value="#{bindings.TransResdnceCntryName.inputValue}"
+                                  label="#{(bindings.TransEntityType.inputValue eq 'ORGANISATION')?'Country of Domicile':'Residence Country'}"
+                                  model="#{bindings.TransResdnceCntryName.listOfValuesModel}"
+                                  required="#{bindings.TransResdnceCntryName.hints.mandatory}"
+                                  columns="#{bindings.TransResdnceCntryName.hints.displayWidth}"
+                                  shortDesc="#{bindings.TransResdnceCntryName.hints.tooltip}" autoSubmit="true"
+                                  styleClass="AFInputTextTab"
+                                  partialTriggers="transNameScreened1Id transAliasNameScreened1Id it17 it2"
+                                  rendered="#{bindings.TransEntityType.inputValue eq 'INDIVIDUAL' or bindings.TransEntityType.inputValue eq 'ORGANISATION'}"
+                                  disabled="#{pageFlowScope.P_FORM_CALLED == 'alias' or pageFlowScope.VettingBean.isVettingInfoValid}">
+              <f:validator binding="#{bindings.TransResdnceCntryName.validator}"/>
+              <af:autoSuggestBehavior suggestedItems="#{bindings.TransResdnceCntryName.suggestedItems}"/>
+            </af:inputListOfValues>
+            <af:inputText value="#{bindings.TransIMONumber.inputValue}" label="IMO Number"
+                          required="#{bindings.TransIMONumber.hints.mandatory}"
+                          columns="#{bindings.TransIMONumber.hints.displayWidth}"
+                          maximumLength="7"
+                          shortDesc="#{bindings.TransIMONumber.hints.tooltip}" id="it4" styleClass="AFInputTextTab"
+                          autoSubmit="true" rendered="#{bindings.TransEntityType.inputValue eq 'VESSEL'}"
+                          disabled="#{(pageFlowScope.P_FORM_CALLED == 'alias' and bindings.TransOperationType.inputValue == 'U') or pageFlowScope.VettingBean.isVettingInfoValid}">
+              <f:validator binding="#{bindings.TransIMONumber.validator}"/>
+            </af:inputText>
+            <af:inputListOfValues id="transCityNameId" popupTitle="Search and Select: Residence City"
+                                  value="#{bindings.TransCityName.inputValue}" label="Residence City"
+                                  model="#{bindings.TransCityName.listOfValuesModel}" required="false"
+                                  columns="#{bindings.TransCityName.hints.displayWidth}" styleClass="AFInputTextTab"
+                                  autoSubmit="true" autoComplete="on"
+                                  partialTriggers="it17 transNameScreened1Id it2 transAliasNameScreened1Id transResdnceCntryNameId"
+                                  disabled="#{pageFlowScope.P_FORM_CALLED == 'alias' or pageFlowScope.VettingBean.isVettingInfoValid}"
+                                  visible="#{((bindings.TransResdnceCntryCode.inputValue eq 'UKRA') or (bindings.TransResdnceCntryCode.inputValue eq 'RUSS')) and bindings.TransEntityType.inputValue eq 'INDIVIDUAL'}">
+              <f:validator binding="#{bindings.TransCityName.validator}"/>
+              <af:autoSuggestBehavior suggestedItems="#{bindings.TransCityName.suggestedItems}"/>
+            </af:inputListOfValues>
+            <af:selectBooleanCheckbox value="#{bindings.TransLegacyVettingFlag.inputValue}" label="Legacy Vetting"
+                                      shortDesc="#{bindings.TransLegacyVettingFlag.hints.tooltip}" id="sbc2"
+                                      disabled="#{pageFlowScope.P_FORM_CALLED == 'alias' or pageFlowScope.VettingBean.isVettingInfoValid}"/>
+            <af:selectBooleanCheckbox label="East Asian Origin Name" id="sbc7"
+                                      disabled="#{(pageFlowScope.P_FORM_CALLED == 'alias') or pageFlowScope.VettingBean.isVettingInfoValid}"
+                                      value="#{bindings.TransEastAsianOriginName.inputValue}"/>
+          </af:panelFormLayout>
+        </af:panelGroupLayout>
+        <f:facet name="buttonBar">
+          <af:panelGroupLayout id="pgl15" layout="vertical">
+            <af:separator id="s1"/>
+            <af:panelBorderLayout id="pbl2" partialTriggers="transNameScreened1Id transAliasNameScreened1Id">
+              <f:facet name="start">
+                <af:panelGroupLayout id="pgl14" layout="horizontal"
+                                     rendered="#{bindings.TransOperationType.inputValue eq 'U'}">
+                  <af:outputText value="#{bindings.TransRelationshipType.inputValue}" id="ot9"
+                                 inlineStyle="color:grey;font-weight: bold;text-transform: uppercase;"/>
+                </af:panelGroupLayout>
+              </f:facet>
+              <f:facet name="end">
+                <af:panelGroupLayout id="pgl2" inlineStyle="float:right;"
+                                     visible="#{!pageFlowScope.VettingBean.isVettingInfoValid}">
+                  <af:button text="Cancel" id="b22"
+                             actionListener="#{pageFlowScope.VettingBean.cancelVettingActionListener}"/>
+                  <af:spacer width="10" height="10" id="s17"/>
+                  <af:button text="#{(bindings.TransOperationType.inputValue eq 'C') ? 'Save' : 'Update'}"
+                             id="b2" action="#{pageFlowScope.VettingBean.createNewVettingPopupAction}"
+                             inlineStyle="margin-right:5px;" visible="#{pageFlowScope.P_FORM_CALLED == 'vetting'}"/>
+                  <af:button text="#{(bindings.TransOperationType.inputValue eq 'C') ? 'Save' : 'Update'}"
+                             id="b10" visible="#{pageFlowScope.P_FORM_CALLED == 'alias'}"
+                             action="#{pageFlowScope.VettingBean.createAliasAction}"/>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:panelBorderLayout>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:dialog>
+    </af:popup>
+    <af:popup childCreation="deferred"  id="nameScreenedTxtSearchPopup"  autoCancel="disabled"
+              popupCanceledListener="#{pageFlowScope.VettingBean.namescreenedTxtSearchPopupCancelListener}">
+      <af:dialog id="d10" title="Search and Select: NameScreened"  type="okCancel"
+                 dialogListener="#{pageFlowScope.VettingBean.nameScreenedTxtSearchDialogListener}"
+                 styleClass="AFStretchWidth">
+        <f:facet name="buttonBar"/>
+        <af:panelGroupLayout id="pgl5" layout="vertical">
+          <af:subform id="s13" defaultCommand="b20">
+            <af:panelGroupLayout id="pgl19" layout="horizontal" halign="center">
+            <!-- T20220218.0020 - FW: "Advanced" Search function -->
+              <af:panelLabelAndMessage label="Name Screened" id="plam4">
+                <af:selectOneChoice label="Label 2" id="soc6" simple="true"
+                                    value="#{pageFlowScope.VettingBean.selectedAdvFilter}" autoSubmit="true"
+                                    partialTriggers="b20">
+                  <f:selectItems value="#{pageFlowScope.VettingBean.advFilterList}" id="si19"/>
+                </af:selectOneChoice>
+                <af:inputText label="Name Screened" id="it3" columns="80"
+                              value="#{pageFlowScope.VettingBean.nameScreenedSearchStr}" autoSubmit="true"
+                              styleClass="AFInputTextTab" simple="true"
+                              valueChangeListener="#{pageFlowScope.VettingBean.nameScreenContainVCL}"
+                              partialTriggers="b20 soc6"/>
+              </af:panelLabelAndMessage>
+              <af:spacer width="10" height="10" id="s14"/>
+              <af:button text="Search" id="b20"
+                         actionListener="#{pageFlowScope.VettingBean.nameScreenedCustomSearchActionListener}"/>
+            </af:panelGroupLayout>
+          </af:subform>
+          <af:panelCollection id="pc3" inlineStyle="width:850px" partialTriggers="::s13:b20">
+            <f:facet name="menus"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="statusbar"/>
+            <af:table value="#{bindings.LovVettingsNameScreenedView1.collectionModel}" var="row"
+                      rows="#{bindings.LovVettingsNameScreenedView1.rangeSize}"
+                      emptyText="#{bindings.LovVettingsNameScreenedView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.LovVettingsNameScreenedView1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.LovVettingsNameScreenedView1.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.LovVettingsNameScreenedView1.rangeSize}"
+                      varStatus="vs" id="t4" columnStretching="column:c19" styleClass="AFStretchWidth">
+              <af:column sortProperty="#{bindings.LovVettingsNameScreenedView1.hints.FullName.name}" filterable="true"
+                         sortable="true" headerText="#{bindings.LovVettingsNameScreenedView1.hints.FullName.label}"
+                         id="c19" width="300">
+                <af:outputText value="#{row.FullName}"
+                               shortDesc="#{bindings.LovVettingsNameScreenedView1.hints.FullName.tooltip}" id="ot8"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.LovVettingsNameScreenedView1.hints.Identifier.name}" filterable="true"
+                         sortable="true" headerText="#{bindings.LovVettingsNameScreenedView1.hints.Identifier.label}"
+                         id="c20">
+                <af:outputText value="#{row.Identifier}"
+                               shortDesc="#{bindings.LovVettingsNameScreenedView1.hints.Identifier.tooltip}" id="ot19"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.LovVettingsNameScreenedView1.hints.EntityType.name}" filterable="true"
+                         sortable="true" headerText="#{bindings.LovVettingsNameScreenedView1.hints.EntityType.label}"
+                         id="c28">
+                <af:outputText value="#{row.EntityType}"
+                               shortDesc="#{bindings.LovVettingsNameScreenedView1.hints.EntityType.tooltip}" id="ot33"/>
+              </af:column>
+              <af:column headerText="DOB" id="c64" sortProperty="#{bindings.LovVettingsNameScreenedView1.hints.Dob.name}" 
+              filterable="true"  sortable="true">
+                <af:outputText value="#{row.Dob}" shortDesc="#{bindings.LovVettingsNameScreenedView1.hints.Dob.tooltip}"
+                               id="ot60">
+                 <af:convertDateTime pattern="dd-MMM-yyyy" type="date" secondaryPattern="ddMMMyyyy"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="Passport Number" id="c65" sortProperty="#{bindings.LovVettingsNameScreenedView1.hints.PassportNumber.name}" 
+              filterable="true"  sortable="true">
+                <af:outputText value="#{row.PassportNumber}"
+                               shortDesc="#{bindings.LovVettingsNameScreenedView1.hints.PassportNumber.tooltip}"
+                               id="ot61"/>
+              </af:column>
+              <!-- T20211221.0033 - TC 2.0 - Update LOV for Create Vetting function -->
+              <af:column headerText="#{bindings.LovVettingsNameScreenedView1.hints.TcBatchCreationDate.label}" id="c67">
+                <af:outputText value="#{row.TcBatchCreationDate}"
+                               shortDesc="#{bindings.LovVettingsNameScreenedView1.hints.TcBatchCreationDate.tooltip}"
+                               id="ot62">
+                  <af:convertDateTime pattern="#{bindings.LovVettingsNameScreenedView1.hints.TcBatchCreationDate.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column headerText="#{bindings.LovVettingsNameScreenedView1.hints.TcBatch.label}" id="c66">
+                <af:outputText value="#{row.TcBatch}"
+                               shortDesc="#{bindings.LovVettingsNameScreenedView1.hints.TcBatch.tooltip}" id="ot31">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.LovVettingsNameScreenedView1.hints.TcBatch.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.LovVettingsNameScreenedView1.hints.SourceId.name}" filterable="true"
+                         sortable="true" headerText="#{bindings.LovVettingsNameScreenedView1.hints.SourceId.label}"
+                         id="c25">
+                <af:outputText value="#{row.SourceId}"
+                               shortDesc="#{bindings.LovVettingsNameScreenedView1.hints.SourceId.tooltip}" id="ot21">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.LovVettingsNameScreenedView1.hints.SourceId.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.LovVettingsNameScreenedView1.hints.SourceTable.name}"
+                         filterable="true" sortable="true"
+                         headerText="#{bindings.LovVettingsNameScreenedView1.hints.SourceTable.label}" id="c21">
+                <af:outputText value="#{row.SourceTable}"
+                               shortDesc="#{bindings.LovVettingsNameScreenedView1.hints.SourceTable.tooltip}"
+                               id="ot20"/>
+              </af:column>
+            </af:table>
+          </af:panelCollection>
+        </af:panelGroupLayout>
+      </af:dialog>
+    </af:popup>
+    
+    <af:popup childCreation="deferred" autoCancel="disabled" id="nschpup"
+              contentDelivery="lazyUncached">
+      <af:dialog id="dn10" title="Confirm...!" type="none">
+        <f:facet name="buttonBar">
+          <af:panelGroupLayout id="pgl23" layout="vertical" halign="right">
+            <af:panelGroupLayout id="pgno9" layout="horizontal" halign="right">
+              <af:button text="New" id="bn020" action="#{pageFlowScope.VettingBean.noSave}"/>
+              <af:spacer width="10" height="10" id="sn014"/>
+              <af:button text="Cancel" id="bo20" action="#{pageFlowScope.VettingBean.noclose}"/>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </f:facet>
+        <af:panelGroupLayout id="pgn5" layout="vertical">
+        
+          <af:outputText value="No name matched your search criteria. Please press the New button to enter this new name."/>
+        </af:panelGroupLayout>
+	  </af:dialog>
+    </af:popup>
+	
+	<af:popup childCreation="deferred" autoCancel="disabled" id="onschpup"
+              contentDelivery="lazyUncached">
+      <af:dialog id="don10" title="Confirm...!" type="none">
+        <f:facet name="buttonBar">
+          <af:panelGroupLayout id="pgl22" layout="vertical" halign="right">
+            <af:panelGroupLayout id="pgon9" layout="horizontal" halign="right">
+              <af:button text="Yes" id="bon20" action="#{pageFlowScope.VettingBean.oneSave}"/>
+              <af:spacer width="10" height="10" id="son14"/>
+              <af:button text="No" id="bn20" action="#{pageFlowScope.VettingBean.oneClose}"/>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </f:facet>
+        <af:panelGroupLayout id="pgon5" layout="vertical">
+          <af:outputText value="Would you like to use this name #{pageFlowScope.VettingBean.oneSrchResltMsg}"/>
+		  </af:panelGroupLayout>
+	  </af:dialog>
+    </af:popup>
+    
+    <af:popup childCreation="deferred" autoCancel="disabled" id="nameScreenedAliasTxtSearchPopup"
+              contentDelivery="lazyUncached">
+      <af:dialog id="d11" dialogListener="#{pageFlowScope.VettingBean.nameScreenedAliasTxtSearchDialogListener}"
+                 title="Search and Select:Alias NameScreened">
+        <f:facet name="buttonBar"/>
+        <af:panelGroupLayout id="pgl20" layout="vertical">
+          <af:subform id="s15" defaultCommand="b21">
+            <af:panelGroupLayout id="pgl21" layout="horizontal" halign="center">
+              <af:panelFormLayout id="pfl17">
+                <f:facet name="footer"/>
+                <af:inputText label="Name Screened" id="it8" styleClass="AFInputTextTab" columns="80"
+                              value="#{pageFlowScope.VettingBean.nameScreenedAliasSearchStr}" autoSubmit="true"/>
+              </af:panelFormLayout>
+              <af:spacer width="10" height="10" id="s16"/>
+              <af:button text="Search" id="b21"
+                         actionListener="#{pageFlowScope.VettingBean.nameScreenedAliasCustomSearchActionListener}"/>
+            </af:panelGroupLayout>
+          </af:subform>
+          <af:panelCollection id="pc4" inlineStyle="width:800px">
+            <f:facet name="menus"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="statusbar"/>
+            <af:table value="#{bindings.LovAliasNameScreenedView1.collectionModel}" var="row"
+                      rows="#{bindings.LovAliasNameScreenedView1.rangeSize}"
+                      emptyText="#{bindings.LovAliasNameScreenedView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.LovAliasNameScreenedView1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.LovAliasNameScreenedView1.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.LovAliasNameScreenedView1.rangeSize}" id="t5"
+                      styleClass="AFStretchWidth" columnStretching="column:c38">
+              <af:column sortProperty="#{bindings.LovAliasNameScreenedView1.hints.FullName.name}" sortable="true"
+                         headerText="#{bindings.LovAliasNameScreenedView1.hints.FullName.label}" id="c38" width="300">
+                <af:outputText value="#{row.FullName}"
+                               shortDesc="#{bindings.LovAliasNameScreenedView1.hints.FullName.tooltip}" id="ot34"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.LovAliasNameScreenedView1.hints.Identifier.name}" sortable="true"
+                         headerText="#{bindings.LovAliasNameScreenedView1.hints.Identifier.label}" id="c59">
+                <af:outputText value="#{row.Identifier}"
+                               shortDesc="#{bindings.LovAliasNameScreenedView1.hints.Identifier.tooltip}" id="ot35"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.LovAliasNameScreenedView1.hints.SourceId.name}" sortable="true"
+                         headerText="#{bindings.LovAliasNameScreenedView1.hints.SourceId.label}" id="c60">
+                <af:outputText value="#{row.SourceId}"
+                               shortDesc="#{bindings.LovAliasNameScreenedView1.hints.SourceId.tooltip}" id="ot36">
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.LovAliasNameScreenedView1.hints.SourceId.format}"/>
+                </af:outputText>
+              </af:column>
+              <af:column sortProperty="#{bindings.LovAliasNameScreenedView1.hints.SourceTable.name}" sortable="true"
+                         headerText="#{bindings.LovAliasNameScreenedView1.hints.SourceTable.label}" id="c61">
+                <af:outputText value="#{row.SourceTable}"
+                               shortDesc="#{bindings.LovAliasNameScreenedView1.hints.SourceTable.tooltip}" id="ot50"/>
+              </af:column>
+              <af:column sortProperty="#{bindings.LovAliasNameScreenedView1.hints.EntityType.name}" sortable="true"
+                         headerText="#{bindings.LovAliasNameScreenedView1.hints.EntityType.label}" id="c62">
+                <af:outputText value="#{row.EntityType}"
+                               shortDesc="#{bindings.LovAliasNameScreenedView1.hints.EntityType.tooltip}" id="ot57"/>
+              </af:column>
+            </af:table>
+          </af:panelCollection>
+        </af:panelGroupLayout>
+      </af:dialog>
+    </af:popup>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="viewStatusPopup" contentDelivery="lazyUncached"
+              popupFetchListener="#{pageFlowScope.VettingBean.viewStatusPopupFetchListener}">
+      <af:dialog id="d3" contentWidth="700" type="ok" title="Status History">
+        <af:panelBox text="#{null}" id="pb1" styleClass="AFStretchWidth" showDisclosure="false">
+          <f:facet name="toolbar">
+            <af:selectBooleanCheckbox label="Transaction Only" id="sbc4" autoSubmit="true"
+                                      valueChangeListener="#{pageFlowScope.VettingBean.viewHistoryTransactionOnlyValueChangeListener}"
+                                      rendered="#{pageFlowScope.VettingBean.hasRequestId}"
+                                      inlineStyle=" margin: 5px 20px;"/>
+          </f:facet>
+          <af:table value="#{bindings.ViewHistoryOwsView1.collectionModel}" var="row"
+                    rows="#{bindings.ViewHistoryOwsView1.rangeSize}"
+                    emptyText="#{bindings.ViewHistoryOwsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0" selectedRowKeys="#{bindings.ViewHistoryOwsView1.collectionModel.selectedRow}"
+                    rowSelection="multiple" fetchSize="#{bindings.ViewHistoryOwsView1.rangeSize}" id="t7"
+                    autoHeightRows="5" columnStretching="last" styleClass="AFStretchWidth" contentDelivery="immediate"
+                    partialTriggers="::sbc4">
+            <af:column headerText="Status" id="c22" width="150">
+              <af:outputText value="#{row.StatusDisp}"
+                             shortDesc="#{bindings.ViewHistoryOwsView1.hints.StatusDisp.tooltip}" id="ot22"/>
+            </af:column>
+            <af:column headerText="Status Date" id="c24" width="200">
+              <af:outputText value="#{row.LastUpdateDate}"
+                             shortDesc="#{bindings.ViewHistoryOwsView1.hints.LastUpdateDate.tooltip}" id="ot24">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column id="c58" headerText="Batch Id">
+              <af:outputText value="#{row.BatchId}" id="ot56"/>
+            </af:column>
+            <af:column headerText="Status Updated By" id="c23" width="200">
+              <af:outputText value="#{row.UserName}" shortDesc="#{bindings.ViewHistoryOwsView1.hints.UserName.tooltip}"
+                             id="ot23"/>
+            </af:column>
+          </af:table>
+        </af:panelBox>
+        <f:facet name="buttonBar"/>
+      </af:dialog>
+    </af:popup>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="dataPrivacyConsent" contentDelivery="lazyUncached"
+              popupFetchListener="#{pageFlowScope.VettingBean.dataPrivacyConsentPopupFetchListener}"
+              binding="#{pageFlowScope.VettingBean.dataPrivacyConsentPopup}">
+      <af:dialog id="d9" type="ok" title="Data Privacy Consent"
+                 dialogListener="#{pageFlowScope.VettingBean.dataPrivacyConsentDL}" affirmativeTextAndAccessKey="Save">
+        <af:panelGroupLayout id="pgl11" layout="vertical" styleClass="AFStretchWidth">
+          <af:panelBox id="pb5" showDisclosure="false" showHeader="never">
+            <f:facet name="toolbar"/>
+            <af:panelGroupLayout id="pgl10" layout="vertical" halign="center">
+              <af:panelFormLayout id="pfl3" styleClass="AFStretchWidth panelFormLayoutClass"
+                                  inlineStyle="padding:10px 0px 10px 0px;">
+                <af:selectOneChoice value="#{bindings.TransConsentEntityType.inputValue}" label="Entity Type"
+                                     id="soc2"
+                                    styleClass="AFInputTextHead" autoSubmit="true">
+                  <af:selectItem label="CORPORATION" value="CORPORATION" id="si6"/>
+                  <af:selectItem label="SEAFARERS" value="SEAFARERS" id="si7"/>
+                  <af:selectItem label="FILING AGENT" value="FILING AGENT" id="si8"/>
+                  <af:selectItem label="GENERAL" value="GENERAL" id="si9"/>
+                  <af:selectItem label="NAUTICAL INSPECTOR" value="NAUTICAL INSPECTOR" id="si5"/>
+                  <af:selectItem label="MARKETING" value="MARKETING" id="si11"/>
+                  <af:selectItem label="ESR" id="si12" value="ESR"/>
+                </af:selectOneChoice>
+              </af:panelFormLayout>
+            </af:panelGroupLayout>
+          </af:panelBox>
+          <af:panelBox text="Online Consent Acknowledgement Details" id="pb6" showDisclosure="false">
+            <af:panelFormLayout id="pfl6" inlineStyle="padding:10px;" styleClass="AFStretchWidth">
+            <!-- T20211118.0028 - TC 2.0 - Online Consent -->
+              <af:inputText value="#{bindings.TransOnlineConfirmationNumber.inputValue}"
+                            label="Seafarer Online Consent Acknowledgement Number"
+                            columns="#{bindings.TransOnlineConfirmationNumber.hints.displayWidth}"
+                            maximumLength="#{bindings.TransOnlineConfirmationNumber.hints.precision}" id="it48"
+                            autoSubmit="true" contentStyle="width:120px;"
+                            valueChangeListener="#{pageFlowScope.VettingBean.onlineConsentAckNumberVCL}">
+                <f:validator binding="#{bindings.TransOnlineConfirmationNumber.validator}"/>
+              </af:inputText>
+              <af:inputDate value="#{bindings.TransOnlineConsentStartDate.inputValue}" label="Consent Date"
+                            columns="#{bindings.TransOnlineConsentStartDate.hints.displayWidth}" id="id4" disabled="true" contentStyle="width:120px;">
+                <f:validator binding="#{bindings.TransOnlineConsentStartDate.validator}"/>
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:inputDate>
+              <af:inputDate value="#{bindings.TransOnlineConsentEndDate.inputValue}" label="Consent Expiration Date	"
+                            columns="#{bindings.TransOnlineConsentEndDate.hints.displayWidth}" id="id8" disabled="true" contentStyle="width:120px;">
+                <f:validator binding="#{bindings.TransOnlineConsentEndDate.validator}"/>
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:inputDate>
+              <af:button text="Download" id="b23"
+                         visible="#{pageFlowScope.VettingBean.viewOnlineConsentButtonVisible == 'Y'}">
+                <af:fileDownloadActionListener filename="#{pageFlowScope.VettingBean.onlineConsentDocFileName}"
+                                               method="#{pageFlowScope.VettingBean.onlineConsentDownloadListener}"/>
+              </af:button>
+            </af:panelFormLayout>
+          </af:panelBox>
+          <af:panelBox text="Consent Details As Per Application" id="pb7" showDisclosure="false">
+            <af:panelGroupLayout id="pgl3" layout="vertical" halign="center">
+              <af:inputFile label="Upload File" id="if2" autoSubmit="true" partialTriggers="dataPrivacyConsent"
+                            visible="#{pageFlowScope.VettingBean.uploadConsentDocVisible == 'Y'}"
+                            valueChangeListener="#{pageFlowScope.VettingBean.consentUploadFileVCL}" rows="1"/>
+              <af:button text="Download Consent" id="b12" targetFrame="_blank"
+                         visible="#{pageFlowScope.VettingBean.viewConsentButtonVisible == 'Y'}" partialTriggers="if2">
+                <af:fileDownloadActionListener
+                                               filename="#{pageFlowScope.VettingBean.consentDocFileName}"
+                                               method="#{pageFlowScope.VettingBean.consentDownloadListener}"/>
+              </af:button>
+            </af:panelGroupLayout>
+            <af:inputText value="#{bindings.TransUploadedConsentEdocId.inputValue}"
+                          label="#{bindings.TransUploadedConsentEdocId.hints.label}"
+                          required="#{bindings.TransUploadedConsentEdocId.hints.mandatory}"
+                          columns="#{bindings.TransUploadedConsentEdocId.hints.displayWidth}"
+                          maximumLength="#{bindings.TransUploadedConsentEdocId.hints.precision}"
+                          shortDesc="#{bindings.TransUploadedConsentEdocId.hints.tooltip}" id="it37" visible="false">
+              <f:validator binding="#{bindings.TransUploadedConsentEdocId.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.TransUploadedConsentEdocId.format}"/>
+            </af:inputText>
+            <af:selectBooleanCheckbox value="#{bindings.TransMarketingCommFlag.inputValue}"
+                                      label="#{bindings.TransMarketingCommFlag.label}"
+                                      shortDesc="#{bindings.TransMarketingCommFlag.hints.tooltip}" id="sbc1"
+                                      simple="true"
+                                      text="Used for marketing purposes such as mailings, including electronic invitations, news updates, and other related communication."
+                                      autoSubmit="true"/>
+            <af:panelFormLayout id="pfl7" inlineStyle="padding:10px;" styleClass="AFStretchWidth"
+                                maxColumns="2" rows="1">
+              <af:inputDate value="#{bindings.TransUploadedConsentStartDate.inputValue}" label="Consent Start Date"
+                            columns="#{bindings.TransUploadedConsentStartDate.hints.displayWidth}" id="id9"
+                            contentStyle="width:120px;" autoSubmit="true"
+                            validator="#{pageFlowScope.VettingBean.consentStartDateValidator}">
+                <f:validator binding="#{bindings.TransUploadedConsentStartDate.validator}"/>
+                <af:convertDateTime pattern="dd-MMM-yyyy" type="date" secondaryPattern="ddMMMyyyy"/>
+              </af:inputDate>
+              <af:inputDate value="#{bindings.TransUploadedConsentEndDate.inputValue}" label="Consent Expiration Date"
+                            columns="#{bindings.TransUploadedConsentEndDate.hints.displayWidth}" id="id10"
+                            contentStyle="width:120px;" autoSubmit="true" partialTriggers="id9">
+                <f:validator binding="#{bindings.TransUploadedConsentEndDate.validator}"/>
+                <af:convertDateTime pattern="dd-MMM-yyyy" type="date" secondaryPattern="ddMMMyyyy"/>
+              </af:inputDate>
+            </af:panelFormLayout>
+          </af:panelBox>
+        </af:panelGroupLayout>
+        <f:facet name="buttonBar"/>
+      </af:dialog>
+    </af:popup>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="crossReferences" contentDelivery="lazyUncached"
+              popupFetchListener="#{pageFlowScope.VettingBean.crossReferencesPopupFetchListener}">
+      <af:dialog id="d4" type="ok" contentWidth="450" title="Cross References">
+        <f:facet name="buttonBar"/>
+        <af:panelBox text="Cross References" id="pb2" styleClass="AFStretchWidth" showHeader="never"
+                     showDisclosure="false">
+          <f:facet name="toolbar"/>
+          <af:table value="#{bindings.CrossReferencesOwsView1.collectionModel}" var="row"
+                    rows="#{bindings.CrossReferencesOwsView1.rangeSize}"
+                    emptyText="#{bindings.CrossReferencesOwsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0"
+                    selectedRowKeys="#{bindings.CrossReferencesOwsView1.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.CrossReferencesOwsView1.collectionModel.makeCurrent}"
+                    rowSelection="single" fetchSize="#{bindings.CrossReferencesOwsView1.rangeSize}" id="t8"
+                    styleClass="AFStretchWidth" columnStretching="last" autoHeightRows="10" contentDelivery="immediate">
+            <af:column headerText="References" id="c1"
+                       inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;"
+                       width="400">
+              <af:outputText value="#{row.ReferenceDesc}"
+                             shortDesc="#{bindings.CrossReferencesOwsView1.hints.ReferenceDesc.tooltip}" id="ot1"/>
+            </af:column>
+          </af:table>
+        </af:panelBox>
+      </af:dialog>
+    </af:popup>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="caseNotesPopup" contentDelivery="lazyUncached"
+              popupFetchListener="#{pageFlowScope.VettingBean.caseNotesPopupFetchListener}">
+      <af:dialog id="d5" contentWidth="1000" type="ok" title="Case Notes">
+        <af:panelBox text="Case Notes" id="pb3" showHeader="never" showDisclosure="false" styleClass="AFStretchWidth">
+          <f:facet name="toolbar"/>
+          <af:table value="#{bindings.CaseNotesView1.collectionModel}" var="row"
+                    rows="#{bindings.CaseNotesView1.rangeSize}"
+                    emptyText="#{bindings.CaseNotesView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0" selectedRowKeys="#{bindings.CaseNotesView1.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.CaseNotesView1.collectionModel.makeCurrent}" rowSelection="single"
+                    fetchSize="#{bindings.CaseNotesView1.rangeSize}" id="t10" columnStretching="column:c44"
+                    contentDelivery="immediate" autoHeightRows="15" styleClass="AFStretchWidth">
+            <af:column headerText="Line #" id="c43" width="70">
+              <af:outputText value="#{row.LineNumber}" shortDesc="#{bindings.CaseNotesView1.hints.LineNumber.tooltip}"
+                             id="ot41">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.CaseNotesView1.hints.LineNumber.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Batch ID" id="c39" width="70">
+              <af:outputText value="#{row.BatchId}" shortDesc="#{bindings.CaseNotesView1.hints.BatchId.tooltip}"
+                             id="ot37">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.CaseNotesView1.hints.BatchId.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Request ID" id="c42" width="70">
+              <af:outputText value="#{row.RequestId}" shortDesc="#{bindings.CaseNotesView1.hints.RequestId.tooltip}"
+                             id="ot40">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.CaseNotesView1.hints.RequestId.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Notes" id="c44" width="300">
+              <af:outputText value="#{row.Note}" shortDesc="#{bindings.CaseNotesView1.hints.Note.tooltip}" id="ot42"
+                             inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;"/>
+            </af:column>
+            <af:column headerText="Creation Date" id="c46" width="80">
+              <af:outputText value="#{row.CreationDate}"
+                             shortDesc="#{bindings.CaseNotesView1.hints.CreationDate.tooltip}" id="ot44">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Created By" id="c40" width="150">
+              <af:outputText value="#{row.CreatedByUser}"
+                             shortDesc="#{bindings.CaseNotesView1.hints.CreatedByUser.tooltip}" id="ot38"/>
+            </af:column>
+            <af:column headerText="Last Update Date" id="c45" width="80">
+              <af:outputText value="#{row.LastUpdateDate}"
+                             shortDesc="#{bindings.CaseNotesView1.hints.LastUpdateDate.tooltip}" id="ot43">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Updated By" id="c41" width="150">
+              <af:outputText value="#{row.UpdatedByUser}"
+                             shortDesc="#{bindings.CaseNotesView1.hints.UpdatedByUser.tooltip}" id="ot39"/>
+            </af:column>
+          </af:table>
+        </af:panelBox>
+        <f:facet name="buttonBar"/>
+      </af:dialog>
+    </af:popup>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="caseDocumentsPopup" contentDelivery="lazyUncached"
+              popupFetchListener="#{pageFlowScope.VettingBean.caseDocumentsPopupFetchListener}">
+      <af:dialog id="d6" contentWidth="1100" type="ok" title="Case Documents">
+        <af:panelBox text="Case Documents" id="pb4" styleClass="AFStretchWidth" showDisclosure="false"
+                     showHeader="never">
+          <f:facet name="toolbar"/>
+          <af:table value="#{bindings.CaseDocumentsView1.collectionModel}" var="row"
+                    rows="#{bindings.CaseDocumentsView1.rangeSize}"
+                    emptyText="#{bindings.CaseDocumentsView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                    rowBandingInterval="0" selectedRowKeys="#{bindings.CaseDocumentsView1.collectionModel.selectedRow}"
+                    selectionListener="#{bindings.CaseDocumentsView1.collectionModel.makeCurrent}" rowSelection="single"
+                    fetchSize="#{bindings.CaseDocumentsView1.rangeSize}" id="t11" styleClass="AFStretchWidth"
+                    columnStretching="column:c52" contentDelivery="immediate" autoHeightRows="15">
+            <af:column headerText="Batch ID" id="c47" width="70">
+              <af:outputText value="#{row.BatchId}" shortDesc="#{bindings.CaseDocumentsView1.hints.BatchId.tooltip}"
+                             id="ot45">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.CaseDocumentsView1.hints.BatchId.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Request ID" id="c50" width="70">
+              <af:outputText value="#{row.RequestId}" shortDesc="#{bindings.CaseDocumentsView1.hints.RequestId.tooltip}"
+                             id="ot48">
+                <af:convertNumber groupingUsed="false" pattern="#{bindings.CaseDocumentsView1.hints.RequestId.format}"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Document Type" id="c51" width="200">
+              <af:outputText value="#{row.DocumentType}"
+                             shortDesc="#{bindings.CaseDocumentsView1.hints.DocumentType.tooltip}" id="ot49"/>
+            </af:column>
+            <af:column headerText="File Name" id="c52" width="300">
+              <af:link text="#{row.FileName}" id="l1" partialSubmit="true">
+                <af:fileDownloadActionListener filename="#{row.FileName}"
+                                               method="#{pageFlowScope.VettingBean.caseDocDownloadListener}"/>
+              </af:link>
+            </af:column>
+            <af:column headerText="Submission Date" id="c54" width="100">
+              <af:outputText value="#{row.CreationDate}"
+                             shortDesc="#{bindings.CaseDocumentsView1.hints.CreationDate.tooltip}" id="ot52">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Created By" id="c48" width="150">
+              <af:outputText value="#{row.CreatedByUser}"
+                             shortDesc="#{bindings.CaseDocumentsView1.hints.CreatedByUser.tooltip}" id="ot46"/>
+            </af:column>
+            <af:column headerText="Last Update Date" id="c53" width="100">
+              <af:outputText value="#{row.LastUpdateDate}"
+                             shortDesc="#{bindings.CaseDocumentsView1.hints.LastUpdateDate.tooltip}" id="ot51">
+                <af:convertDateTime pattern="dd-MMM-yyyy"/>
+              </af:outputText>
+            </af:column>
+            <af:column headerText="Updated By" id="c49" width="150">
+              <af:outputText value="#{row.UpdatedByUser}"
+                             shortDesc="#{bindings.CaseDocumentsView1.hints.UpdatedByUser.tooltip}" id="ot47"/>
+            </af:column>
+          </af:table>
+        </af:panelBox>
+        <f:facet name="buttonBar"/>
+      </af:dialog>
+    </af:popup>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="updateCityCountryPopup" contentDelivery="lazyUncached"
+              binding="#{pageFlowScope.VettingBean.updateCityCountryPopup}">
+      <af:dialog id="d7" title="Update City/Country" affirmativeTextAndAccessKey="Update"
+                 dialogListener="#{pageFlowScope.VettingBean.updateCityCountryDL}">
+        <af:panelFormLayout id="pfl2" styleClass="AFStretchWidth panelFormLayoutClass" inlineStyle="padding:10px;">
+          <af:inputListOfValues id="transUpdateCountryNameId" popupTitle="Search and Select: Country"
+                                value="#{bindings.TransUpdateCountryName.inputValue}" label="Country"
+                                model="#{bindings.TransUpdateCountryName.listOfValuesModel}"
+                                columns="#{bindings.TransUpdateCountryName.hints.displayWidth}"
+                                styleClass="AFInputTextHead" required="false" autoSubmit="true" autoComplete="on">
+            <f:validator binding="#{bindings.TransUpdateCountryName.validator}"/>
+            <af:autoSuggestBehavior suggestedItems="#{bindings.TransUpdateCountryName.suggestedItems}"/>
+          </af:inputListOfValues>
+          <af:inputListOfValues id="transUpdateCityNameId" popupTitle="Search and Select: City"
+                                value="#{bindings.TransUpdateCityName.inputValue}" label="City"
+                                model="#{bindings.TransUpdateCityName.listOfValuesModel}" required="false"
+                                columns="#{bindings.TransUpdateCityName.hints.displayWidth}"
+                                styleClass="AFInputTextHead" autoSubmit="true" autoComplete="on"
+                                partialTriggers="transUpdateCountryNameId">
+            <f:validator binding="#{bindings.TransUpdateCityName.validator}"/>
+            <af:autoSuggestBehavior suggestedItems="#{bindings.TransUpdateCityName.suggestedItems}"/>
+          </af:inputListOfValues>
+        </af:panelFormLayout>
+        <f:facet name="buttonBar"/>
+      </af:dialog>
+    </af:popup>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="p3" contentDelivery="lazyUncached"
+              binding="#{pageFlowScope.VettingBean.runTcConfirmationPopupBinding}">
+      <af:dialog id="d8" title="Confirmation" type="yesNo"
+                 dialogListener="#{pageFlowScope.VettingBean.runTcDialogListener}">
+        <f:facet name="buttonBar"/>
+        <af:message id="m1" messageType="confirmation"
+                    message="Case Status for #{viewScope.P_NAME_SCREENED} is Open. Do you still want to continue ?"/>
+      </af:dialog>
+    </af:popup>
+    <!-- T20201117.0028 - Single Name Vettings -->
+    <af:popup childCreation="deferred" autoCancel="disabled" id="p2" contentDelivery="lazyUncached">
+      <af:dialog id="d2" title="Affidavit Details" type="ok" affirmativeTextAndAccessKey="Save"
+                 dialogListener="#{pageFlowScope.VettingBean.saveAffidavitDailogListener}">
+        <f:facet name="buttonBar"/>
+        <af:panelBox text="#{null}" id="pb8" showDisclosure="false" showHeader="never">
+          <f:facet name="toolbar"/>
+          <af:panelFormLayout id="pfl8">
+            <af:inputDate label="Affidavit Start Date" id="id2"
+                          value="#{pageFlowScope.VettingBean.affidavitStartDate}">
+              <af:convertDateTime type="date" pattern="dd-MMM-yyyy"/>
+            </af:inputDate>
+            <af:inputDate label="Affidavit Expire Date" id="id3"
+                          value="#{pageFlowScope.VettingBean.affidavitEndDate}">
+              <af:convertDateTime type="date" pattern="dd-MMM-yyyy"/>
+            </af:inputDate>
+            <af:inputFile label="Upload Affidavit" id="if1" autoSubmit="true"
+                          valueChangeListener="#{pageFlowScope.VettingBean.uploadAffidavitValueChangeListener}"/>
+            <af:button text="Download" id="b4" rendered="#{pageFlowScope.VettingBean.affidavitFileName ne null}">
+              <af:fileDownloadActionListener contentType="application/pdf"
+                                             filename="#{pageFlowScope.VettingBean.affidavitFileName}"
+                                             method="#{pageFlowScope.VettingBean.affidavitDownloadListener}"/>
+            </af:button>
+          </af:panelFormLayout>
+        </af:panelBox>
+      </af:dialog>
+    </af:popup>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="msgPopup">
+      <af:dialog id="d12" title="Information" type="ok"
+                 dialogListener="#{pageFlowScope.VettingBean.showMsgDialogListener}">
+        <f:facet name="buttonBar"/>
+        <af:outputText value="#{pageFlowScope.VettingBean.showMsg}" id="ot58"
+                       inlineStyle="color: red;font-weight:bold;"/>
+      </af:dialog>
+    </af:popup>
+    <af:popup childCreation="deferred" id="columnsOrderSavePopup" contentDelivery="lazyUncached"
+              popupFetchListener="#{pageFlowScope.VettingBean.columnsOrderSavePopupFetchListener}">
+    <!-- T20220309.0027 - FW: before and after column rearranging for Filing Agent TC -->
+      <af:dialog id="d13" type="none" title="Save Table Columns Order" contentWidth="340">
+        <f:facet name="buttonBar"/>
+        <af:panelFormLayout id="pfl18">
+          <f:facet name="footer">
+            <af:panelGroupLayout id="pgl24" layout="horizontal" halign="center" inlineStyle="margin-top:10px;">
+              <af:button text="Cancel" id="b25" immediate="true"
+                         actionListener="#{pageFlowScope.VettingBean.cancelColumnsOrderActionListener}"/>
+              <af:spacer width="50" height="10" id="s19"/>
+              <af:button text="Save" id="b24"
+                         actionListener="#{pageFlowScope.VettingBean.saveColumnsOrderActionListener}"
+                         partialSubmit="true"/>
+            </af:panelGroupLayout>
+          </f:facet>
+          <af:inputText label="Columns Order Name" id="it9" autoSubmit="true" value="#{pageFlowScope.VettingBean.columnsOrderName}"
+                        required="true" requiredMessageDetail="Please Enter Columns Order Name"/>
+          <af:selectBooleanCheckbox text="Make Default" label="#{null}" id="sbc8" autoSubmit="true"
+                                    value="#{pageFlowScope.VettingBean.isOrderDefault}"/>
+        </af:panelFormLayout>
+      </af:dialog>
+    </af:popup>
+    <af:panelTabbed position="above" id="pt1">
+      <af:showDetailItem id="tab1" text="TC References" partialTriggers="b1" immediate="true">
+        <af:panelGroupLayout id="pgl4" layout="vertical" halign="center">
+          <af:panelAccordion discloseMany="false" id="pa1" discloseNone="true"
+                             rendered="#{pageFlowScope.VettingBean.uiConfigMap['SEARCH_VISIBLE']}"
+                             styleClass="CustomAccordion">
+            <af:showDetailItem id="searchPane" text="Search"
+                               disclosed="#{pageFlowScope.VettingBean.uiConfigMap['SEARCH_EXPAND']}">
+              <af:panelGroupLayout id="pgl17" layout="vertical" halign="center"
+                                   inlineStyle="margin-bottom:5px;margin-top:5px;">
+                <af:panelGroupLayout id="pgl16" layout="horizontal">
+                  <af:inputText label="Name Screened" id="it6" value="#{pageFlowScope.VettingBean.searchNameScreened}"
+                                autoSubmit="true" labelStyle="font-weight: bold;"/>
+                  <af:spacer width="10" height="10" id="s7"/>
+                  <af:inputText label="Batch Id" id="it7" value="#{pageFlowScope.VettingBean.searchBatchId}"
+                                autoSubmit="true" labelStyle="font-weight: bold;"/>
+                  <af:spacer width="10" height="10" id="s8"/>
+                  <af:selectOneChoice label="Workflow Status" required="#{bindings.CaseWorkflowLOV1.hints.mandatory}"
+                                      shortDesc="#{bindings.CaseWorkflowLOV1.hints.tooltip}" id="soc7" autoSubmit="true"
+                                      value="#{pageFlowScope.VettingBean.searchStatus}" labelStyle="font-weight: bold;">
+                    <af:selectItem label="-" id="si18" value="All"/>
+                    <f:selectItems value="#{bindings.CaseWorkflowLOV1.items}" id="si23"/>
+                  </af:selectOneChoice>
+                  <af:spacer width="10" height="10" id="s6"/>
+                  <af:selectOneChoice label="End Date" id="soc5" value="#{pageFlowScope.VettingBean.searchEndDate}"
+                                      autoSubmit="true" contentStyle="width: 100px;" labelStyle="font-weight: bold;">
+                    <af:selectItem label="-" value="All" id="si4"/>
+                    <af:selectItem label="Is blank" value="is null" id="si16"/>
+                    <af:selectItem label="Is not blank" value="is not null" id="si17"/>
+                  </af:selectOneChoice>
+                  <af:spacer width="10" height="10" id="s9"/>
+                  <af:panelGroupLayout id="pgl18" layout="horizontal">
+                    <af:button text="Search" id="b19" immediate="true"
+                               actionListener="#{pageFlowScope.VettingBean.searchActionListener}"/>
+                    <af:spacer width="10" height="10" id="s5"/>
+                    <af:button text="Reset" id="b18" immediate="true"
+                               actionListener="#{pageFlowScope.VettingBean.resetActionListener}">
+                      <af:resetActionListener/>
+                    </af:button>
+                  </af:panelGroupLayout>
+                </af:panelGroupLayout>
+              </af:panelGroupLayout>
+              <f:facet name="toolbar">
+                <af:toolbar id="t12">
+                  <af:selectOneRadio label="Label 1" id="sor3" layout="horizontal" simple="true" autoSubmit="true"
+                                     value="#{pageFlowScope.VettingBean.filterConjection}">
+                    <af:selectItem label="Select All" value="and" id="si21"/>
+                    <af:selectItem label="Select Any" value="or" id="si22"/>
+                  </af:selectOneRadio>
+                </af:toolbar>
+              </f:facet>
+            </af:showDetailItem>
+          </af:panelAccordion>
+          <af:separator id="s2"/>
+          <af:panelGroupLayout id="pgl6" layout="horizontal" styleClass="AFStretchWidth CustomBackgroundGroupLayout" halign="center">
+            <af:panelFormLayout id="pfl5">
+              <af:button text="Back" id="b3" inlineStyle="margin-right:5px;width:140px;" action="back"
+                         visible="#{pageFlowScope.P_SHOW_BACK_BUTTON}"/>
+              <af:button text="View History" id="b9" inlineStyle="margin-right:5px;width:140px;">
+                <af:showPopupBehavior popupId="viewStatusPopup"/>
+              </af:button>
+            </af:panelFormLayout>
+            <af:panelFormLayout id="pfl9">
+              <af:button text="Case Notes" id="b13" inlineStyle="margin-right:5px;width:140px;">
+                <af:showPopupBehavior popupId="caseNotesPopup"/>
+              </af:button>
+              <af:button text="Case Documents" id="b14" inlineStyle="margin-right:5px;width:140px;">
+                <af:showPopupBehavior popupId="caseDocumentsPopup"/>
+              </af:button>
+            </af:panelFormLayout>
+            <af:panelFormLayout id="pfl10">
+              <af:button text="View Cross References" id="b11" inlineStyle="margin-right:5px;width:180px;">
+                <af:showPopupBehavior popupId="crossReferences"/>
+              </af:button>
+              <af:button text="Data Privacy Consent" id="b7" inlineStyle="margin-right:5px;width:180px;">
+                <af:showPopupBehavior popupId="dataPrivacyConsent"/>
+              </af:button>
+            </af:panelFormLayout>
+            <af:panelFormLayout id="pfl11">
+              <af:button text="Create Vetting" id="b"
+                         action="#{pageFlowScope.VettingBean.createNewVettingAction}"
+                         inlineStyle="margin-right:5px;width:180px;" partialSubmit="true" immediate="true"/>
+              <af:button text="Create Alias" id="b6" inlineStyle="margin-right:5px;width:180px;"
+                         action="#{pageFlowScope.VettingBean.createAliasVettingAction}" partialSubmit="true"
+                         immediate="true"/>
+            </af:panelFormLayout>
+            <af:panelFormLayout id="pfl12">
+              <af:button text="Update City/Country" id="b15"
+                         action="#{pageFlowScope.VettingBean.actionUpdateCityCountry}"
+                         inlineStyle="margin-right:5px;width:140px;" immediate="true"/>
+              <af:button text="Refresh" id="b1" actionListener="#{pageFlowScope.VettingBean.refreshActionListener}"
+                         partialSubmit="true" immediate="true" inlineStyle="margin-right:5px;width:140px;"/>
+            </af:panelFormLayout>
+            <af:panelFormLayout id="pfl13">
+              <af:button text="Statusboard" id="b16" action="#{pageFlowScope.VettingBean.actionOpenStatusBoard}"
+                         inlineStyle="margin-right:5px;width:140px;" immediate="true"/>
+              <af:button text="Run TC" id="b5" inlineStyle="margin-right:5px;width:140px;"
+                         action="#{pageFlowScope.VettingBean.actionRunTc}" immediate="true"/>
+            </af:panelFormLayout>
+            <!-- T20201117.0028 - Single Name Vettings -->
+            <af:panelFormLayout id="pfl14">
+              <af:button text="Single Name Affidavit" id="b8" inlineStyle="margin-right:5px;width:140px;"
+                         actionListener="#{pageFlowScope.VettingBean.singleNameVettingActionListener}"
+                         rendered="#{pageFlowScope.P_SOURCE_TABLE eq 'SICD_SEAFARERS'}"/>
+            </af:panelFormLayout>
+          </af:panelGroupLayout>
+          <af:separator id="s3"/>
+          <af:panelCollection id="pc1" styleClass="AFStretchWidth" partialTriggers="soc9 b30 b26 b27 b31">
+            <f:facet name="statusbar">
+              <af:toolbar id="t1" rendered="#{pageFlowScope.P_ESI_BATCH_ID ne null}">
+                <af:outputText value="Version: #{sessionScope.Version}" id="ot2" noWrap="true"/>
+              </af:toolbar>
+            </f:facet>
+            <af:table value="#{bindings.TcReferencesView1.collectionModel}" var="row"
+                      rows="#{bindings.TcReferencesView1.rangeSize}"
+                      emptyText="#{bindings.TcReferencesView1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0" selectedRowKeys="#{bindings.TcReferencesView1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.TcReferencesView1.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.TcReferencesView1.rangeSize}" id="t9"
+                      styleClass="AFStretchWidth" autoHeightRows="10" partialTriggers=":::b1"
+                      binding="#{pageFlowScope.VettingBean.tcReferencesTableBind}" contentDelivery="immediate"
+                      immediate="true">
+              <af:column id="c69" width="25" inlineStyle="text-align:center !important;"
+                         displayIndex="#{pageFlowScope.VettingBean.reOrderMap['CHECKBOX']}" shortDesc="CHECKBOX"
+                         visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['CHECKBOX'] eq 1}">                
+                <af:selectBooleanCheckbox value="#{row.bindings.SelectRow.inputValue}"
+                                          label="#{row.bindings.SelectRow.label}"
+                                          shortDesc="#{bindings.TcReferencesView1.hints.SelectRow.tooltip}" id="sbc9"
+                                          autoSubmit="true"
+                                          valueChangeListener="#{pageFlowScope.VettingBean.selectRowCheckBoxVCL}"/>
+              </af:column>
+              <af:column headerText="#{bindings.TcReferencesView1.hints.NameScreened.label}" width="300" id="c6" inlineStyle="#{row.ColorCode}"
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['NAME_SCREENED']}" shortDesc="NAME_SCREENED"
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['NAME_SCREENED'] eq 1}">
+                <af:link text="#{row.NameScreened}" id="l4" partialSubmit="true"
+                         actionListener="#{pageFlowScope.VettingBean.nameScreenedActionListener}"
+                         inlineStyle="margin-left:#{row.IndentBy}px;"/>
+              </af:column>
+              <af:column id="c9" headerText="Relationship"  displayIndex="#{pageFlowScope.VettingBean.reOrderMap['RELATION_SHIP']}"
+                         inlineStyle="#{row.ColorCode}" shortDesc="RELATION_SHIP"
+                         visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['RELATION_SHIP'] eq null || pageFlowScope.VettingBean.columnsOrderVisibleMap['RELATION_SHIP'] eq 1}">
+                <af:outputText value="#{row.Alias}" id="ot10"/>
+              </af:column>
+              <af:column headerText="Alias" id="c8" width="35" inlineStyle="#{row.ColorCode}"
+                         rendered="#{pageFlowScope.VettingBean.uiConfigMap['ALIAS_COLUMN_VISIBLE']}"
+                         visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['ALIAS'] eq 1}"
+                         displayIndex="#{pageFlowScope.VettingBean.reOrderMap['ALIAS']}" shortDesc="ALIAS">
+                <af:outputText value="#{row.Alias eq 'Alias' ? 'Yes' : 'No'}" id="ot6" shortDesc="#{row.Alias}"/>
+              </af:column>
+              <af:column headerText="East Asian Origin Name" id="c68" width="80"
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['EAST_ASIAN_ORIGIN_NAME']}" 
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['EAST_ASIAN_ORIGIN_NAME'] eq 1}"
+              shortDesc="EAST_ASIAN_ORIGIN_NAME"
+                         inlineStyle="#{row.ColorCode}">
+                <af:outputText value="#{row.EastAsianOriginName}"
+                               shortDesc="#{bindings.TcReferencesView1.hints.EastAsianOriginName.tooltip}" id="ot63"/>
+              </af:column>
+              <af:column headerText="Consent Received" id="c26" width="60" inlineStyle="#{row.ColorCode}" shortDesc="CONSENT_RECEIVED"
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['CONSENT_RECEIVED']}"
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['CONSENT_RECEIVED'] eq 1}">
+                <af:outputText value="#{row.Consent}" id="ot25"/>
+              </af:column>
+              <af:column headerText="Affidavit Received" id="c4" inlineStyle="#{row.ColorCode}" width="60" shortDesc="AFFIDAVIT_RECEIVED"
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['AFFIDAVIT_RECEIVED']}"
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['AFFIDAVIT_RECEIVED'] eq 1}">
+                <af:outputText value="#{row.AffidavitFlag}"
+                               shortDesc="#{bindings.TcReferencesView1.hints.AffidavitFlag.tooltip}" id="ot4"/>
+              </af:column>
+              <af:column id="c5" headerText="Known Party" width="50" inlineStyle="#{row.ColorCode}" shortDesc="KNOWN_PARTY"
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['KNOWN_PARTY']}"
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['KNOWN_PARTY'] eq 1}">
+                <af:outputText value="#{row.KnownPartyFlag}" id="ot5"/>
+              </af:column>
+              <af:column headerText="#{bindings.TcReferencesView1.hints.ProvisionalRequest.label}" id="c34"
+                         displayIndex="#{pageFlowScope.VettingBean.reOrderMap['PROVISIONAL_REQUEST']}" width="70"
+                         visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['PROVISIONAL_REQUEST'] eq 1}"
+                         inlineStyle="#{row.ColorCode}">
+                <af:outputText value="#{row.ProvisionalRequest}"
+                               shortDesc="#{bindings.TcReferencesView1.hints.ProvisionalRequest.tooltip}" id="ot64"/>
+              </af:column>
+              <af:column headerText="#{bindings.TcReferencesView1.hints.Office.label}" id="c7" width="200" inlineStyle="#{row.ColorCode}" 
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['OFFICE']}" shortDesc="OFFICE"
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['OFFICE'] eq 1}">
+                <af:outputText value="#{row.Office}" shortDesc="#{bindings.TcReferencesView1.hints.Office.tooltip}"
+                               id="ot7"/>
+              </af:column>
+              <af:column id="c36" headerText="Residence Country" width="200" shortDesc="RESIDENCE_COUNTRY"
+                         inlineStyle="white-space: normal !important; -webkit-white-space: normal !important;#{row.ColorCode}"
+                         displayIndex="#{pageFlowScope.VettingBean.reOrderMap['RESIDENCE_COUNTRY']}"
+                         visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['RESIDENCE_COUNTRY'] eq 1}">
+                <af:inputListOfValues label="Label 1" popupTitle="Search and Select: Residence Country" id="ilov1"
+                                      value="#{row.ResidenceCountry}"
+                                      model="#{bindings.ResidenceCountry.listOfValuesModel}" autoSubmit="true"
+                                      columns="#{bindings.ResidenceCountry.hints.displayWidth}"
+                                      readOnly="#{!(row.ResidenceCountryCode eq 'UKRA' or row.ResidenceCountryCode eq 'RUSS') or row.Alias eq 'Alias'}"
+                                      valueChangeListener="#{pageFlowScope.VettingBean.residenceCountryValueChangeListener}">
+                  <af:setPropertyListener from="#{null}" to="#{row.ResidenceCity}" type="valueChange"/>
+                  <af:autoSuggestBehavior suggestedItems="#{bindings.ResidenceCountry.suggestedItems}"/>
+                </af:inputListOfValues>
+              </af:column>
+              <af:column id="c35" headerText="City" width="150" inlineStyle="#{row.ColorCode}"
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['CITY']}" shortDesc="CITY"
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['CITY'] eq 1}">
+                <af:inputListOfValues label="Label 2" popupTitle="Search and Result Dialog" id="ilov2"
+                                      model="#{bindings.ResidenceCity.listOfValuesModel}" value="#{row.ResidenceCity}"
+                                      autoSubmit="true" columns="#{bindings.ResidenceCity.hints.displayWidth}"
+                                      readOnly="#{!(row.ResidenceCountryCode eq 'UKRA' or row.ResidenceCountryCode eq 'RUSS') or row.Alias eq 'Alias'}"
+                                      partialTriggers="ilov1"
+                                      valueChangeListener="#{pageFlowScope.VettingBean.cityValueChangeListener}">
+                  <af:autoSuggestBehavior suggestedItems="#{bindings.ResidenceCity.suggestedItems}"/>
+                </af:inputListOfValues>
+              </af:column>
+              <af:column headerText="Batch ID" id="c37" width="60" inlineStyle="#{row.ColorCode}"
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['BATCH_ID']}" shortDesc="BATCH_ID"
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['BATCH_ID'] eq 1}">
+                <af:link text="#{row.BatchId}" id="l2"
+                         destination="/#{sessionScope.pFacesServlet}/Statusboard?BatchId=#{row.BatchId}"
+                         targetFrame="_blank" partialSubmit="true"/>
+              </af:column>
+              <af:column headerText="Workflow Status" id="c27" width="120" shortDesc="WORKFLOW_STATUS"
+                         inlineStyle="#{(row.ColorCode ne '')? row.ColorCode : (row.Status eq 'Processor Review' or row.Status eq 'Legal Pending')? 'background:#f8f856 !important;color:black;' : ''}"
+                         displayIndex="#{pageFlowScope.VettingBean.reOrderMap['WORKFLOW_STATUS']}"
+                         visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['WORKFLOW_STATUS'] eq 1}">
+                <af:outputText value="#{row.Status}" id="ot26"/>
+              </af:column>
+              <af:column id="c55" headerText="Status" inlineStyle="#{row.ColorCode}" width="50" shortDesc="STATUS"
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['STATUS']}"
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['STATUS'] eq 1}">
+                <af:outputText value="#{row.CaseStatus}" id="ot53"/>
+              </af:column>
+              <af:column headerText="Expiration Date" id="c29" width="80" inlineStyle="#{row.ColorCode}"
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['EXPIRATION_DATE'] eq 1}"
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['EXPIRATION_DATE']}" shortDesc="EXPIRATION_DATE">
+                <af:outputText value="#{row.ExpDate}" id="ot27"/>
+              </af:column>
+              <af:column headerText="Status Date" id="c30" width="100" inlineStyle="#{row.ColorCode}"
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['STATUS_DATE']}" shortDesc="STATUS_DATE"
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['STATUS_DATE'] eq 1}">
+                <af:outputText value="#{row.StatusDate}" id="ot28"/>
+              </af:column>
+              <af:column headerText="Status Updated By" id="c31" width="120" inlineStyle="#{row.ColorCode}"
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['STATUS_UPDATED_BY']}" shortDesc="STATUS_UPDATED_BY"
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['STATUS_UPDATED_BY'] eq 1}">
+                <af:outputText id="ot29" value="#{row.StatusUpdatedBy}"/>
+              </af:column>
+              <af:column headerText="Start Date" id="c32" width="100" inlineStyle="#{row.ColorCode}"
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['START_DATE']}" shortDesc="START_DATE"
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['START_DATE'] eq 1}">
+                <af:outputText value="#{row.StartDate}" id="ot30"/>
+              </af:column>
+              <af:column headerText="#{bindings.TcReferencesView1.hints.EndDate.label}" id="c33"
+                         displayIndex="#{pageFlowScope.VettingBean.reOrderMap['END_DATE']}" shortDesc="END_DATE"
+                         visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['END_DATE'] eq 1}"
+                         inlineStyle="#{row.ColorCode}">
+                <af:inputDate value="#{row.bindings.EndDate.inputValue}"
+                              label="#{bindings.TcReferencesView1.hints.EndDate.label}"
+                              required="#{bindings.TcReferencesView1.hints.EndDate.mandatory}"
+                              shortDesc="#{bindings.TcReferencesView1.hints.EndDate.tooltip}" id="id6"
+                              autoSubmit="true"
+                              valueChangeListener="#{pageFlowScope.VettingBean.updateEndDateValueChangeListener}">
+                  <f:validator binding="#{row.bindings.EndDate.validator}"/>
+                  <af:convertDateTime pattern="#{bindings.TcReferencesView1.hints.EndDate.format}"/>
+                  <f:attribute name="masterId" value="#{row.bindings.MasterId.inputValue}"/>
+                  <f:attribute name="aliasId" value="#{row.bindings.AliasId.inputValue}"/>
+                  <f:attribute name="xrefId" value="#{row.bindings.XrefId.inputValue}"/>
+                  <f:attribute name="cursor" value="#{row.bindings.Cursor.inputValue}"/>
+                </af:inputDate>
+              </af:column>
+              <af:column headerText="Entity Type" id="c10" inlineStyle="#{row.ColorCode}"
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['ENTITY_TYPE']}" shortDesc="ENTITY_TYPE"
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['ENTITY_TYPE'] eq 1}">
+                <af:outputText value="#{row.EntityType}" id="ot32"/>
+              </af:column>
+              <af:column id="c57" headerText="Conc. Request ID" width="80" inlineStyle="#{row.ColorCode}"
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['CONC_REQUEST_ID']}" shortDesc="CONC_REQUEST_ID"
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['CONC_REQUEST_ID'] eq 1}">
+                <af:outputText value="#{row.ConcRequestId}" id="ot55" visible="#{row.ConcRequestId ne -1}"/>
+              </af:column>
+              <af:column id="c56" headerText="Request Status" inlineStyle="#{row.ColorCode}" width="60"
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['REQUEST_STATUS']}" shortDesc="REQUEST_STATUS"
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['REQUEST_STATUS'] eq 1}">
+                <af:outputText value="#{row.RequestStatus}" id="ot54"/>
+              </af:column>
+              <af:column id="c2" headerText="OWS Request Id" inlineStyle="#{row.ColorCode}" width="70"
+              displayIndex="#{pageFlowScope.VettingBean.reOrderMap['OWS_REQUEST_ID']}" shortDesc="OWS_REQUEST_ID"
+              visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['OWS_REQUEST_ID'] eq 1}">
+                <af:link id="ot3" text="#{row.RequestId}" targetFrame="_blank"
+                         destination="/#{sessionScope.pFacesServlet}/Request?requestId=#{row.RequestId}" partialSubmit="true"
+                         visible="#{row.RequestId ne -1}"/>
+              </af:column>
+              <af:column headerText="#{bindings.TcReferencesView1.hints.DocumentType.label}" id="c63" 
+                         inlineStyle="#{row.ColorCode}"
+                         visible="#{pageFlowScope.VettingBean.columnsOrderVisibleMap['DOCUMENT_TYPE'] eq 1}"
+                         displayIndex="#{pageFlowScope.VettingBean.reOrderMap['DOCUMENT_TYPE']}" shortDesc="DOCUMENT_TYPE">
+                <af:outputText value="#{row.DocumentType}"
+                               shortDesc="#{bindings.TcReferencesView1.hints.DocumentType.tooltip}" id="ot59"/>
+              </af:column>
+            </af:table>
+            <f:facet name="secondaryToolbar">
+              <af:toolbar id="t3" rendered="#{pageFlowScope.VettingBean.uiConfigMap['SORT_VISIBLE']}"
+                          styleClass="AFStretchWidth">
+                <af:panelLabelAndMessage label="Sort By" id="plam3" labelStyle="color:#F25D13;font-weight:bold;">
+                  <af:panelGroupLayout id="pgl12" layout="horizontal" valign="middle">
+                    <af:selectOneChoice label="Sort By" id="soc3" autoSubmit="true"
+                                        valueChangeListener="#{pageFlowScope.VettingBean.sortByValueChangeListener}"
+                                        value="#{pageFlowScope.VettingBean.sortByColumnName}" simple="true">
+                      <af:selectItem label="-----------" id="si15" value="none"/>
+                      <f:selectItems value="#{pageFlowScope.VettingBean.sortList}" id="si10"/>
+                    </af:selectOneChoice>
+                    <af:selectOneChoice label="Label 1" id="soc4" simple="true"
+                                        value="#{pageFlowScope.VettingBean.sortByType}" autoSubmit="true"
+                                        valueChangeListener="#{pageFlowScope.VettingBean.sortByTypeValueChangeListener}"
+                                        visible="#{pageFlowScope.VettingBean.sortByColumnName ne 'none'}"
+                                        partialTriggers="soc3">
+                      <af:selectItem label="desc" value="desc" id="si13"/>
+                      <af:selectItem label="asc" value="asc" id="si14"/>
+                    </af:selectOneChoice>
+                  </af:panelGroupLayout>
+                </af:panelLabelAndMessage>
+                <af:spacer width="200" height="10" id="s11"/>
+                <!-- T20211019.0002 - Fwd: TC 2.0 - Provisional for Full Term Documents -->
+                <af:selectBooleanCheckbox id="sbc5" value="#{pageFlowScope.VettingBean.PRVFT}" label="Eligible for Provisional Approval"
+                                          labelStyle="color:#F25D13;font-weight:bold;"
+                                          rendered="#{pageFlowScope.Provisional eq 'Y'}" autoSubmit="true"
+                                          valueChangeListener="#{pageFlowScope.VettingBean.selectProvisionalVCL}"/>
+              </af:toolbar>
+            </f:facet>
+            <f:facet name="viewMenu"/>
+            <f:facet name="afterToolbar">
+            <!-- T20220309.0027 - FW: before and after column rearranging for Filing Agent TC -->
+              <af:toolbar id="t15">
+                <af:button text="Select All" id="b32" shortDesc="Click to Select all checkbox(s)"
+                           action="#{pageFlowScope.VettingBean.selectAllCheckBoxAction}"/>
+                <af:separator id="s20"/>
+                <af:button text="Deselect All" id="b33" shortDesc="Click to Deselect all checkbox(s)"
+                           action="#{pageFlowScope.VettingBean.deselectAllCheckBoxAction}"/>
+                <af:separator id="s21"/>
+                <af:selectOneChoice label="Select Order" id="soc9" valueChangeListener="#{pageFlowScope.VettingBean.selectColumnsOrderValueChangeListener}"
+                                    autoSubmit="true"
+                                    labelStyle="color:#F25D13;font-weight:bold;"
+                                    value="#{pageFlowScope.VettingBean.selectedOrderId}"
+                                    disabled="#{pageFlowScope.VettingBean.columnsOrderList.size() eq 0 }"
+                                    contentStyle="min-width:100px;">
+                  <f:selectItems value="#{pageFlowScope.VettingBean.columnsOrderList}" id="si20"/>
+                </af:selectOneChoice>
+                <af:panelGroupLayout id="pgl25" layout="horizontal">
+                  <af:button text="Save" id="b30">
+                    <af:showPopupBehavior popupId="::columnsOrderSavePopup" triggerType="action"/>
+                  </af:button>
+                  <af:button text="Set Default" id="b31"
+                             actionListener="#{pageFlowScope.VettingBean.setDefaultColumnsOrderActionListener}"
+                             disabled="#{pageFlowScope.VettingBean.isOrderDefault}"/>
+                  <af:button text="Delete" id="b26"
+                             actionListener="#{pageFlowScope.VettingBean.deleteColumnsOrderActionListener}"/>
+                  <af:button text="Reset" id="b27"
+                             actionListener="#{pageFlowScope.VettingBean.resetColumnsOrderActionListener}">
+                    <af:resetActionListener/>
+                  </af:button>
+                </af:panelGroupLayout>
+              </af:toolbar>
+            </f:facet>
+          </af:panelCollection>
+        </af:panelGroupLayout>
+      </af:showDetailItem>
+      <af:showDetailItem text="Legacy Vettings" id="sdi1" partialTriggers="b1" immediate="true"
+                         rendered="#{pageFlowScope.VettingBean.seafarerVettingList.size() gt 0}">
+        <af:panelCollection id="pc2" styleClass="AFStretchWidth">
+          <af:table var="row" rowBandingInterval="0" id="t6" 
+          value="#{pageFlowScope.VettingBean.seafarerVettingList}"
+                    rowSelection="single" 
+                    styleClass="AFStretchWidth" autoHeightRows="10" contentDelivery="immediate"
+                    partialTriggers=":::b1 ::b17"
+                    columnStretching="last" immediate="true">
+            <af:column id="c3" width="50" align="center">
+              <af:link text="View" id="l3" action="mtc"
+                       actionListener="#{pageFlowScope.VettingBean.actionListnerViewButton}" useWindow="true"
+                       windowHeight="550" windowWidth="1250"
+                       returnListener="#{pageFlowScope.VettingBean.viewTcReturnListener}" immediate="true"
+                       partialSubmit="true">
+                <f:attribute name="screeningId" value="#{row.screeningID}"/>
+              </af:link>
+            </af:column>
+            <af:column sortable="false" visible="false" headerText="Screening Request ID" id="c12">
+              <af:outputText value="#{row.screeningID}" id="ot11"/>
+            </af:column>
+            <af:column sortable="false" headerText="Name Screened" id="c11" width="307">
+              <af:outputText value="#{row.nameScreened}" id="ot12"/>
+            </af:column>
+            <af:column id="c13" headerText="Consent Received" align="center" width="70">
+              <af:outputText value="#{row.consentRcvd eq 'Y' ? 'Yes' : 'No'}" id="ot13"/>
+            </af:column>
+            <af:column sortable="false" headerText="Entity Type" id="c14" width="120">
+              <af:outputText value="#{row.entityType}" id="ot14"/>
+            </af:column>
+            <af:column sortable="false" headerText="Status" id="c15" width="120">
+              <af:outputText value="#{row.status}" id="ot15"/>
+            </af:column>
+            <af:column sortable="false" headerText="OFAC List" id="c16" width="70" align="center">
+              <af:outputText value="#{row.ofacList eq 'N' ? 'No':'Yes'}" id="ot16"/>
+            </af:column>
+            <af:column sortable="false" headerText="Status Date" id="c17" width="120">
+              <af:outputText value="#{row.statusDate}" id="ot17"/>
+            </af:column>
+            <af:column sortable="false" headerText="Status Updated By" id="c18" width="120">
+              <af:outputText value="#{row.statusUpdatedBy}" id="ot18"/>
+            </af:column>
+          </af:table>
+          <f:facet name="toolbar">
+            <af:toolbar id="t2">
+              <af:button text="Refresh" id="b17"
+                         actionListener="#{pageFlowScope.VettingBean.refreshLegacyVettingActionListener}"/>
+            </af:toolbar>
+          </f:facet>
+        </af:panelCollection>
+      </af:showDetailItem>
+    </af:panelTabbed>
+    <af:popup childCreation="deferred" autoCancel="disabled" id="runTCSummaryPopup"
+              popupFetchListener="#{pageFlowScope.VettingBean.runTcSummaryPopupFetchLis}"
+              contentDelivery="lazyUncached" binding="#{pageFlowScope.VettingBean.runTCSummaryPopup}">
+      <af:dialog id="d14" title="Run TC Summary" type="none" closeIconVisible="false">
+        <f:facet name="buttonBar">
+        <af:panelGroupLayout id="pgl27" layout="vertical" halign="right">
+            <af:panelGroupLayout id="pgl28" layout="horizontal" halign="right">
+              <af:button text="Confirm" id="b28" action="#{pageFlowScope.VettingBean.callRunTc}"/>
+              <af:spacer width="10" height="10" id="s18"/>
+              <af:button text="Cancel" id="b29" action="#{pageFlowScope.VettingBean.runTCPopupClose}"/>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>        
+        </f:facet>
+        <af:panelGroupLayout id="pgl26" layout="vertical">
+          <af:forEach items="#{pageFlowScope.VettingBean.runTcSummaryList}" var="names">
+            <af:outputText value="#{names}" id="ot65" styleClass="PreWrap"/>
+          </af:forEach>
+        </af:panelGroupLayout>
+      </af:dialog>
+    </af:popup>
+  </af:panelGroupLayout>
+    
+
+</ui:composition>

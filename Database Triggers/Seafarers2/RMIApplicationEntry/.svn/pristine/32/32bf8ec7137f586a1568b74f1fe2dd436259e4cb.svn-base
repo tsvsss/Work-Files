@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="BatchesPendingUploadDocumentPageDef"
+                Package="com.rmi.applicationEntry.view.batchesuploaddocumenttaskflow">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="BatchesPendingUploadDocumentView" RangeSize="25"
+              DataControl="RMIApplicationEntryAppModuleDataControl" id="BatchesPendingUploadDocumentViewIterator"/>
+    <searchRegion Binds="BatchesPendingUploadDocumentViewIterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="BatchesPendingUploadDocumentViewQuery"/>
+  </executables>
+  <bindings>
+    <methodAction id="assignTaskToUseruploadDoc" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="assignTaskToUseruploadDoc" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.assignTaskToUseruploadDoc_RMIApplicationEntryAppModuleDataControl_dataProvider_assignTaskToUseruploadDoc_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <methodAction id="onLoadBatchPendingUploadDocument" RequiresUpdateModel="true" Action="invokeMethod"
+                  MethodName="onLoadBatchPendingUploadDocument" IsViewObjectMethod="false"
+                  DataControl="RMIApplicationEntryAppModuleDataControl"
+                  InstanceName="data.RMIApplicationEntryAppModuleDataControl.dataProvider"
+                  ReturnName="data.RMIApplicationEntryAppModuleDataControl.methodResults.onLoadBatchPendingUploadDocument_RMIApplicationEntryAppModuleDataControl_dataProvider_onLoadBatchPendingUploadDocument_result">
+      <NamedData NDName="user_id" NDValue="#{sessionScope.param_user_id}" NDType="java.lang.Integer"/>
+    </methodAction>
+    <tree IterBinding="BatchesPendingUploadDocumentViewIterator" id="BatchesPendingUploadDocumentView">
+      <nodeDefinition DefName="com.rmi.applicationEntry.adfbc.views.readOnlyVO.BatchesPendingUploadDocumentView"
+                      Name="BatchesPendingUploadDocumentView0">
+        <AttrNames>
+          <Item Value="BatchDate"/>
+          <Item Value="BatchName"/>
+          <Item Value="NoOfSeafarer"/>
+          <Item Value="Region"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

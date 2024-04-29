@@ -1,0 +1,800 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="RmiSeafarerDocsOcView"
+  Version="12.1.3.10.8"
+  InheritPersonalization="merge"
+  SelectListFlags="1"
+  FromListFlags="1"
+  WhereFlags="1"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  SelectAllAttributes="false"
+  PageIterMode="Full"
+  RowClass="com.rmi.tradecompapproval.adfbc.views.RmiSeafarerDocsOcViewRowImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.rmi.tradecompapproval.adfbc.views.RmiSeafarerDocsOcView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="countriesLOV1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.CountriesView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="viewGradeOcLOV1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.GradeOcView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="viewRestrictionLOV1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.RestrictionsView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="ViewGetDocumentLinkRO1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.readonly.DocumentLinkView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="IssueTypeLOV1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.IssueTypeView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="YesNoLOV1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.YesNoView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="PreviousExsicdOcLOV1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.PreviousOcView"
+    RowLevelBinds="true">
+    <ParameterMap>
+      <PIMap Variable="pSeafarerId">
+        <TransientExpression
+          trustMode="untrusted"><![CDATA[TransSeafarerIdOc]]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="HoldReasonView1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.HoldReasonView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="YesNoCancelView1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.YesNoCancelView"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="LovReplacementUomView1"
+    ViewObjectName="com.rmi.tradecompapproval.adfbc.views.lovs.LovReplacementUomView"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_tranCountryName"
+    ListVOName="countriesLOV1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="tranCountryName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="CocCountry"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CountryName"/>
+      <Item Value="CountryCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CountryName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="countriesLOVCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_tranGradeCode"
+    ListVOName="viewGradeOcLOV1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="tranGradeCode"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="tranGradeName"/>
+      <Item Value="GradeId"/>
+      <Item Value="InventoryItemId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="GradeCode"/>
+      <Item Value="GradeName"/>
+      <Item Value="GradeId"/>
+      <Item Value="InventoryItemId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="GradeCode"/>
+      <Item Value="GradeName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="viewGradeOcLOVCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_tranRestrictionName"
+    ListVOName="viewRestrictionLOV1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="tranRestrictionName"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Restriction"/>
+      <Item Value="RestrictionNameOc"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="RestrictionName"/>
+      <Item Value="RestrictionId"/>
+      <Item Value="RestrictionName"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="RestrictionName"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="viewRestrictionLOVCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_IssueType"
+    ListVOName="IssueTypeLOV1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="IssueType2"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="IssueCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="IssueType"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TransPreviousOc"
+    ListVOName="PreviousExsicdOcLOV1"
+    ListRangeSize="-1"
+    ComboRowCountHint="10"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TransPreviousOc"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="PreviousDocumentId"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="CertificateNumber"/>
+      <Item Value="DocumentId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="CertificateNumber"/>
+      <Item Value="GradeName"/>
+      <Item Value="ExpirationDate"/>
+      <Item Value="Status"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="PreviousExsicdOcLOVCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_OcDocGrdHoldReason"
+    ListVOName="HoldReasonView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="OcDocGrdHoldReason"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="OcGradingComments"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="DisplayValue"/>
+      <Item Value="Description"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_DataVerified"
+    ListVOName="YesNoCancelView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="DataVerified"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="AttCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="AttDesc"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ReplacementIssueTypeOc"
+    ListVOName="LovReplacementUomView1"
+    ListRangeSize="-1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ReplacementIssueTypeOc"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="UomCode"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Description"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="viewSeafarerDocsEO"
+    Entity="com.rmi.tradecompapproval.adfbc.entities.RmiSeafarerDocs"/>
+  <ViewAttribute
+    Name="CocCountry"
+    PrecisionRule="true"
+    EntityAttrName="CocCountry"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="COC_COUNTRY"/>
+  <ViewAttribute
+    Name="CocExpirationDate"
+    PrecisionRule="true"
+    EntityAttrName="CocExpirationDate"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="COC_EXPIRATION_DATE"/>
+  <ViewAttribute
+    Name="CocIdentifier"
+    PrecisionRule="true"
+    EntityAttrName="CocIdentifier"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="COC_IDENTIFIER"/>
+  <ViewAttribute
+    Name="CocIssueDate"
+    PrecisionRule="true"
+    EntityAttrName="CocIssueDate"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="COC_ISSUE_DATE"/>
+  <ViewAttribute
+    Name="CraApprovedBy"
+    PrecisionRule="true"
+    EntityAttrName="CraApprovedBy"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="CRA_APPROVED_BY"/>
+  <ViewAttribute
+    Name="CraApprovedDate"
+    PrecisionRule="true"
+    EntityAttrName="CraApprovedDate"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="CRA_APPROVED_DATE"/>
+  <ViewAttribute
+    Name="CraRequired"
+    PrecisionRule="true"
+    EntityAttrName="CraRequired"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="CRA_REQUIRED"/>
+  <ViewAttribute
+    Name="CraSentBy"
+    PrecisionRule="true"
+    EntityAttrName="CraSentBy"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="CRA_SENT_BY"/>
+  <ViewAttribute
+    Name="CraSentDate"
+    PrecisionRule="true"
+    EntityAttrName="CraSentDate"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="CRA_SENT_DATE"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="CREATION_DATE"/>
+  <ViewAttribute
+    Name="DocIdentifier"
+    PrecisionRule="true"
+    EntityAttrName="DocIdentifier"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="DOC_IDENTIFIER"/>
+  <ViewAttribute
+    Name="DocOrder"
+    PrecisionRule="true"
+    EntityAttrName="DocOrder"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="DOC_ORDER"/>
+  <ViewAttribute
+    Name="DocumentApprovedBy"
+    PrecisionRule="true"
+    EntityAttrName="DocumentApprovedBy"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="DOCUMENT_APPROVED_BY"/>
+  <ViewAttribute
+    Name="DocumentApprovedDate"
+    PrecisionRule="true"
+    EntityAttrName="DocumentApprovedDate"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="DOCUMENT_APPROVED_DATE"/>
+  <ViewAttribute
+    Name="DocumentId"
+    PrecisionRule="true"
+    EntityAttrName="DocumentId"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="DOCUMENT_ID"/>
+  <ViewAttribute
+    Name="EdocId"
+    PrecisionRule="true"
+    EntityAttrName="EdocId"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="EDOC_ID"/>
+  <ViewAttribute
+    Name="EsdiId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="EsdiId"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="ESDI_ID">
+    <TransientExpression
+      trustMode="untrusted"><![CDATA[(new oracle.jbo.server.SequenceImpl("RMI_SEAFARER.RMI_ESDI_ID_SEQ", adf.object.getDBTransaction())).getSequenceNumber()]]></TransientExpression>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EsiId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="EsiId"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="ESI_ID"/>
+  <ViewAttribute
+    Name="GradeId"
+    PrecisionRule="true"
+    EntityAttrName="GradeId"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="GRADE_ID"/>
+  <ViewAttribute
+    Name="GradeType"
+    PrecisionRule="true"
+    EntityAttrName="GradeType"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="GRADE_TYPE"/>
+  <ViewAttribute
+    Name="OcGradingComments"
+    PrecisionRule="true"
+    EntityAttrName="GradingComments"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="GRADING_COMMENTS"/>
+  <ViewAttribute
+    Name="GradingInstructions"
+    PrecisionRule="true"
+    EntityAttrName="GradingInstructions"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="GRADING_INSTRUCTIONS"/>
+  <ViewAttribute
+    Name="GradingStatus"
+    PrecisionRule="true"
+    EntityAttrName="GradingStatus"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="GRADING_STATUS"/>
+  <ViewAttribute
+    Name="InventoryItemId"
+    PrecisionRule="true"
+    EntityAttrName="InventoryItemId"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="INVENTORY_ITEM_ID"/>
+  <ViewAttribute
+    Name="IssueType2"
+    PrecisionRule="true"
+    EntityAttrName="IssueType"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="ISSUE_TYPE"
+    LOVName="LOV_IssueType">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdateDate"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateDate"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="LAST_UPDATE_DATE"/>
+  <ViewAttribute
+    Name="LastUpdateLogin"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdateLogin"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="LAST_UPDATE_LOGIN"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="Limitation"
+    PrecisionRule="true"
+    EntityAttrName="Limitation"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="LIMITATION"/>
+  <ViewAttribute
+    Name="LineId"
+    PrecisionRule="true"
+    EntityAttrName="LineId"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="LINE_ID"/>
+  <ViewAttribute
+    Name="PreviousDocumentId"
+    PrecisionRule="true"
+    EntityAttrName="PreviousDocumentId"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="PREVIOUS_DOCUMENT_ID"/>
+  <ViewAttribute
+    Name="Restriction"
+    PrecisionRule="true"
+    EntityAttrName="Restriction"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="RESTRICTION"/>
+  <ViewAttribute
+    Name="SupportEdocId"
+    PrecisionRule="true"
+    EntityAttrName="SupportEdocId"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="SUPPORT_EDOC_ID"/>
+  <ViewAttribute
+    Name="VerificationBy"
+    PrecisionRule="true"
+    EntityAttrName="VerificationBy"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="VERIFICATION_BY"/>
+  <ViewAttribute
+    Name="VerificationRequestDate"
+    PrecisionRule="true"
+    EntityAttrName="VerificationRequestDate"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="VERIFICATION_REQUEST_DATE"/>
+  <ViewAttribute
+    Name="tranCountryName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_tranCountryName">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+        <LABEL
+          ResId="com.rmi.tradecompapproval.adfbc.views.RmiSeafarerDocsOcView.tranCountryName_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranGradeCode"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_tranGradeCode">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+        <LABEL
+          ResId="com.rmi.tradecompapproval.adfbc.views.RmiSeafarerDocsOcView.tranGradeCode_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranGradeName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="tranRestrictionName"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_tranRestrictionName">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="50"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="tranUrl"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="coc_status"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="cra_approve"
+    IsUpdateable="false"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="SendForVerificationFlg"
+    PrecisionRule="true"
+    EntityAttrName="SendForVerificationFlg"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="SEND_FOR_VERIFICATION_FLG"/>
+  <ViewAttribute
+    Name="TransSendToOcVIsible"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="AddedByRole"
+    PrecisionRule="true"
+    EntityAttrName="AddedByRole"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="ADDED_BY_ROLE"/>
+  <ViewAttribute
+    Name="DataVerified"
+    PrecisionRule="true"
+    EntityAttrName="DataVerified"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="DATA_VERIFIED"
+    LOVName="LOV_DataVerified">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="radio"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransPreviousOc"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.Integer"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"
+    LOVName="LOV_TransPreviousOc">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.rmi.tradecompapproval.adfbc.views.RmiSeafarerDocsOcView.TransPreviousOc_LABEL"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TransSeafarerIdOc"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.lang.Integer"
+    ColumnType="INTEGER"
+    AliasName="VIEW_ATTR"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="OcDocGrdHoldReason"
+    PrecisionRule="true"
+    EntityAttrName="DocGrdHoldReason"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="DOC_GRD_HOLD_REASON"
+    LOVName="LOV_OcDocGrdHoldReason">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DataVerifiedComntOc"
+    PrecisionRule="true"
+    EntityAttrName="DataVerifiedComnt"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="DATA_VERIFIED_COMNT"/>
+  <ViewAttribute
+    Name="CraApprovedFlag"
+    PrecisionRule="true"
+    EntityAttrName="CraApprovedFlag"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="CRA_APPROVED_FLAG"/>
+  <ViewAttribute
+    Name="tranDisableDeleteLine"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="TransCocOcInputFile"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="ReplacementIssueTypeOc"
+    PrecisionRule="true"
+    EntityAttrName="ReplacementIssueType"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="REPLACEMENT_ISSUE_TYPE"
+    LOVName="LOV_ReplacementIssueTypeOc">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RestrictionNameOc"
+    PrecisionRule="true"
+    EntityAttrName="RestrictionName"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="RESTRICTION_NAME"/>
+  <ViewAttribute
+    Name="OcDocIssueTypeUpd"
+    PrecisionRule="true"
+    EntityAttrName="DocIssueTypeUpd"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="DOC_ISSUE_TYPE_UPD"/>
+  <ViewAttribute
+    Name="OcDocIssueTypeUpdDt"
+    PrecisionRule="true"
+    EntityAttrName="DocIssueTypeUpdDt"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="DOC_ISSUE_TYPE_UPD_DT"/>
+  <ViewAttribute
+    Name="OcDocChargeable"
+    PrecisionRule="true"
+    EntityAttrName="DocChargeable"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="DOC_CHARGEABLE"/>
+  <ViewAttribute
+    Name="DocLimitationUpdOc"
+    PrecisionRule="true"
+    EntityAttrName="DocLimitationUpd"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="DOC_LIMITATION_UPD"/>
+  <ViewAttribute
+    Name="LineProcessedOc"
+    PrecisionRule="true"
+    EntityAttrName="LineProcessed"
+    EntityUsage="viewSeafarerDocsEO"
+    AliasName="LINE_PROCESSED"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.rmi.tradecompapproval.adfbc.ModelBundle"/>
+  </ResourceBundle>
+  <DeclarativeWhereClause
+    Name="DeclarativeWhereClause">
+    <ViewCriteria
+      Name="viewSeafarerDocsOcVOWhereCriteria"
+      ViewObjectName="com.rmi.tradecompapproval.adfbc.views.RmiSeafarerDocsOcView"
+      Conjunction="AND"
+      Mode="3">
+      <ViewCriteriaRow
+        Name="viewSeafarerDocsOcVOWhereCriteria_row_0"
+        UpperColumns="1">
+        <ViewCriteriaItem
+          Name="GradeType"
+          ViewAttribute="GradeType"
+          Operator="="
+          Conjunction="AND"
+          Value="OC"
+          Required="Optional"/>
+      </ViewCriteriaRow>
+    </ViewCriteria>
+  </DeclarativeWhereClause>
+  <SortCriteria>
+    <Sort
+      Attribute="EsdiId"/>
+  </SortCriteria>
+  <SortCriteria>
+    <Sort
+      Attribute="EsdiId"/>
+  </SortCriteria>
+  <SortCriteria>
+    <Sort
+      Attribute="EsdiId"/>
+  </SortCriteria>
+  <SortCriteria>
+    <Sort
+      Attribute="EsdiId"/>
+  </SortCriteria>
+  <SortCriteria>
+    <Sort
+      Attribute="EsdiId"/>
+  </SortCriteria>
+</ViewObject>

@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'windows-1252'?>
+<weblogic-web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://www.bea.com/ns/weblogic/weblogic-web-app http://www.bea.com/ns/weblogic/weblogic-web-app/1.0/weblogic-web-app.xsd"
+                  xmlns="http://www.bea.com/ns/weblogic/weblogic-web-app">
+       <session-descriptor>
+              <url-rewriting-enabled>true</url-rewriting-enabled>
+       </session-descriptor>
+       <wl-dispatch-policy>SeafWM</wl-dispatch-policy>
+       <work-manager>
+              <name>SeafWM</name>
+       </work-manager>
+       <session-descriptor>
+            <persistent-store-type>replicated_if_clustered</persistent-store-type>
+       </session-descriptor> 
+</weblogic-web-app>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.10.47"
+                id="UploadEntityCaseDocumentPageDef" Package="oracle.apps.xwrl.view.pageDefs.Prototype">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="XwrlResponseEntityColumnsView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlResponseEntityColumnsView1Iterator" ChangeEventPolicy="none"/>
+    <iterator Binds="XwrlCaseDocumentsView2" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlCaseDocumentsView2Iterator" ChangeEventPolicy="none"/>
+    <iterator id="XwrlRequestsView1Iterator" Binds="XwrlRequestsView1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+    <taskFlow id="DataPrivacyConsentTaskFlow1"
+              taskFlowId="/WEB-INF/DataPrivacyConsentTaskFlow.xml#DataPrivacyConsentTaskFlow" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <iterator id="GetAliasNamesRVO1Iterator" Binds="GetAliasNamesRVO1" DataControl="AppModuleDataControl"
+              RangeSize="25"/>
+    <iterator Binds="XwrlCaseDocumentsSumView1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="XwrlCaseDocumentsSumView1Iterator"/>
+    <searchRegion Criteria="XwrlCaseDocumentsSumViewCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="XwrlCaseDocumentsSumView1Iterator" id="XwrlCaseDocumentsSumViewCriteriaQuery"/>
+    <iterator id="XwrlResponseIndColumnsView1Iterator" Binds="XwrlResponseIndColumnsView1"
+              DataControl="AppModuleDataControl" RangeSize="25"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="XwrlResponseEntityColumnsView1Iterator" id="Alertid">
+      <AttrNames>
+        <Item Value="Alertid"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="XwrlCaseDocumentsView2Iterator" id="Delete" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <action id="Commit" DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <action id="Rollback" DataControl="AppModuleDataControl" RequiresUpdateModel="false" Action="rollbackTransaction"/>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="Id">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="RequestId">
+      <AttrNames>
+        <Item Value="RequestId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="CaseId1">
+      <AttrNames>
+        <Item Value="CaseId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="EdocId">
+      <AttrNames>
+        <Item Value="EdocId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="DocumentName">
+      <AttrNames>
+        <Item Value="DocumentName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="DocumentCategory">
+      <AttrNames>
+        <Item Value="DocumentCategory"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="DocumentType">
+      <AttrNames>
+        <Item Value="DocumentType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="FileName">
+      <AttrNames>
+        <Item Value="FileName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="FilePath">
+      <AttrNames>
+        <Item Value="FilePath"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="ContentType">
+      <AttrNames>
+        <Item Value="ContentType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="UrlPath">
+      <AttrNames>
+        <Item Value="UrlPath"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="Comment">
+      <AttrNames>
+        <Item Value="Comment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="LastUpdateDate">
+      <AttrNames>
+        <Item Value="LastUpdateDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="LastUpdatedBy">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="CreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="LastUpdateLogin">
+      <AttrNames>
+        <Item Value="LastUpdateLogin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="XwrlCaseDocumentsView2Iterator" id="ImageFile">
+      <AttrNames>
+        <Item Value="ImageFile"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="XwrlCaseDocumentsView2Iterator" id="Execute" RequiresUpdateModel="true"
+            Action="iteratorExecute"/>
+    <attributeValues IterBinding="XwrlRequestsView1Iterator" id="CaseId">
+      <AttrNames>
+        <Item Value="CaseId"/>
+      </AttrNames>
+    </attributeValues>
+	 <attributeValues IterBinding="XwrlRequestsView1Iterator" id="ReqId">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="XwrlCaseDocumentsSumView1Iterator" id="XwrlCaseDocumentsSumView1">
+      <nodeDefinition DefName="oracle.apps.xwrl.model.view.XwrlCaseDocumentsSumView" Name="XwrlCaseDocumentsSumView10">
+        <AttrNames>
+          <Item Value="CaseDocId"/>
+          <Item Value="DocumentType"/>
+          <Item Value="FileName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="XwrlCaseDocumentsSumView1Iterator" id="Execute1"
+            InstanceName="AppModuleDataControl.XwrlCaseDocumentsSumView1" DataControl="AppModuleDataControl"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+  </bindings>
+</pageDefinition>

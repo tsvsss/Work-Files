@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <view id="Submit">
+    <page>/mtc.jsf</page>
+  </view>
+  <view id="Statusboard">
+    <page>/Statusboard.jsf</page>
+  </view>
+  <view id="Request">
+    <page>/Request.jsf</page>
+  </view>
+  <view id="UploadDocument">
+    <page>/UploadDocument.jsf</page>
+  </view>
+  <view id="Error">
+    <page>/Error.jsf</page>
+  </view>
+  <view id="CaseNote">
+    <page>/CaseNote.jsf</page>
+  </view>
+  <view id="Admin">
+    <page>/WEB-INF/com/rmi/manualtradecompliance/view/Admin.jsf</page>
+  </view>
+  <control-flow-rule id="__10">
+    <from-activity-id>*</from-activity-id>
+    <control-flow-case id="__11">
+      <from-outcome>adfMenu_Statusboard</from-outcome>
+      <to-activity-id>Submit</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__12">
+      <from-outcome>adfMenu_Admin</from-outcome>
+      <to-activity-id>Admin</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__9">
+      <from-outcome>adfMenu_Statusboard_0</from-outcome>
+      <to-activity-id>Statusboard</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__13">
+      <from-outcome>adfMenu_Request</from-outcome>
+      <to-activity-id>Request</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__14">
+      <from-outcome>adfMenu_UploadDocument</from-outcome>
+      <to-activity-id>UploadDocument</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__15">
+      <from-outcome>adfMenu_Error</from-outcome>
+      <to-activity-id>Error</to-activity-id>
+    </control-flow-case>
+    <control-flow-case id="__16">
+      <from-outcome>adfMenu_CaseNote</from-outcome>
+      <to-activity-id>CaseNote</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <managed-bean id="__1">
+    <managed-bean-name>CustomManagedBeanOws</managed-bean-name>
+    <managed-bean-class>com.rmi.manualtradecompliance.view.vetting.CustomManagedBeanOws</managed-bean-class>
+    <managed-bean-scope>pageFlow</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__2">
+    <managed-bean-name>logoutBean</managed-bean-name>
+    <managed-bean-class>com.rmi.manualtradecompliance.utils.LogoutBean</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__3">
+    <managed-bean-name>RequestBacking</managed-bean-name>
+    <managed-bean-class>oracle.apps.xwrl.beans.backing.RequestBacking</managed-bean-class>
+    <managed-bean-scope>backingBean</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__4">
+    <managed-bean-name>UploadServlet</managed-bean-name>
+    <managed-bean-class>oracle.apps.xwrl.beans.servlet.UploadServlet</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__5">
+    <managed-bean-name>UploadedFilesBean</managed-bean-name>
+    <managed-bean-class>oracle.apps.xwrl.beans.utils.UploadedFiles</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__6">
+    <managed-bean-name>UploadBacking</managed-bean-name>
+    <managed-bean-class>oracle.apps.xwrl.beans.backing.UploadBacking</managed-bean-class>
+    <managed-bean-scope>backingBean</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__7">
+    <managed-bean-name>UserRespAndSessionInfo</managed-bean-name>
+    <managed-bean-class>oracle.apps.xwrl.beans.session.UserRespAndSessionInfo</managed-bean-class>
+    <managed-bean-scope>session</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__8">
+    <managed-bean-name>AppView</managed-bean-name>
+    <managed-bean-class>oracle.apps.xwrl.beans.view.AppView</managed-bean-class>
+    <managed-bean-scope>view</managed-bean-scope>
+  </managed-bean>
+  <managed-bean id="__17">
+    <description>Menu Model Managed Bean</description>
+    <managed-bean-name>root_menu</managed-bean-name>
+    <managed-bean-class>oracle.adf.view.rich.model.MDSMenuModel</managed-bean-class>
+    <managed-bean-scope>request</managed-bean-scope>
+    <managed-property id="__18">
+      <property-name>createHiddenNodes</property-name>
+      <value>false</value>
+    </managed-property>
+    <managed-property id="__19">
+      <property-name>source</property-name>
+      <property-class>java.lang.String</property-class>
+      <value>/WEB-INF/root_menu.xml</value>
+    </managed-property>
+  </managed-bean>
+</adfc-config>
