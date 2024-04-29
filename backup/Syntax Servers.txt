@@ -1,0 +1,20 @@
+Syntax Server
+User : tsuazo
+Passwd : SwirEpwaj1
+
+Note: sshsu to user
+
+OWS Weblogic User
+User : appiridrows
+
+OWS Database User
+User : orairidrows
+
+OWS Weblogic User
+User : appiripows
+
+OWS Database User
+User : orairipows
+
+
+lsof -t -i:8001

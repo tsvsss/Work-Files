@@ -1,0 +1,12 @@
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "XWRL"."XWRL_ALERT_NOTES_TRG" BEFORE
+   INSERT ON xwrl_alert_notes
+   FOR EACH ROW
+BEGIN
+   IF (:new.id IS NULL) THEN
+      :new.id := xwrl_alert_notes_seq.nextval;
+   END IF;
+END;
+/
+ALTER TRIGGER "XWRL"."XWRL_ALERT_NOTES_TRG" ENABLE
+;

@@ -1,0 +1,14 @@
+echo $DISPLAY
+
+xauth list | cut -f1 -d\  | xargs -i xauth remove {}
+
+xauth list
+
+xauth add iripsp01/unix:10  MIT-MAGIC-COOKIE-1  8f46434c660e55032e8671981a59d295
+xauth add iripsp02/unix:11  MIT-MAGIC-COOKIE-1  a6bbb80e5c6c84a1c06e9c429fdc7891
+
+xauth add iripsd01/unix:11  MIT-MAGIC-COOKIE-1  90afb0a23a0954a8010ab15878e1a093
+xauth add iripsd02/unix:11  MIT-MAGIC-COOKIE-1  546c1d18885431aefc3400a977827944
+
+export DISPLAY=localhost:10.0
+export DISPLAY=localhost:11.0

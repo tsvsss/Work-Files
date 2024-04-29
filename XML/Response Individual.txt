@@ -1,0 +1,31 @@
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:dn="http://www.datanomic.com/ws">
+  <env:Header/>
+  <env:Body>
+    <dn:response>
+      <dn:record>
+        <dn:ListKey>?</dn:ListKey>
+        <dn:ListSubKey>?</dn:ListSubKey>
+        <dn:ListRecordType>?</dn:ListRecordType>
+        <dn:ListRecordOrigin>?</dn:ListRecordOrigin>
+        <dn:ListId>?</dn:ListId>
+        <dn:ListGivenNames>?</dn:ListGivenNames>
+        <dn:ListFamilyName>?</dn:ListFamilyName>
+        <dn:ListFullName>?</dn:ListFullName>
+        <dn:ListNameType>?</dn:ListNameType>
+        <dn:ListPrimaryName>?</dn:ListPrimaryName>
+        <dn:ListOriginalScriptName>?</dn:ListOriginalScriptName>
+        <dn:ListDOB>?</dn:ListDOB>
+        <dn:ListCity>?</dn:ListCity>
+        <dn:ListCountry>?</dn:ListCountry>
+        <dn:ListCountryOfBirth>?</dn:ListCountryOfBirth>
+        <dn:ListNationality>?</dn:ListNationality>
+        <dn:MatchRule>?</dn:MatchRule>
+        <dn:MatchScore>?</dn:MatchScore>
+        <dn:CaseKey>?</dn:CaseKey>
+        <dn:AlertId>?</dn:AlertId>
+        <dn:RiskScore>?</dn:RiskScore>
+        <dn:RiskScorePEP>?</dn:RiskScorePEP>
+      </dn:record>
+    </dn:response>
+  </env:Body>
+</env:Envelope>

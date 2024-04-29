@@ -1,0 +1,12 @@
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "XWRL"."XWRL_REQUEST_IND_COL_TRG" BEFORE
+   INSERT ON xwrl_request_ind_columns
+   FOR EACH ROW
+BEGIN
+   IF (:new.id IS NULL) THEN
+      :new.id := xwrl_requests1_seq.nextval;
+   END IF;
+END;
+/
+ALTER TRIGGER "XWRL"."XWRL_REQUEST_IND_COL_TRG" ENABLE
+;

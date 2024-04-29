@@ -1,0 +1,12 @@
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "XWRL"."XWRL_PARTY_ALIAS" BEFORE
+   INSERT ON xwrl_party_alias
+   FOR EACH ROW
+BEGIN
+   IF (:new.id IS NULL) THEN
+      :new.id := xwrl_party_alias_seq.nextval;
+   END IF;
+END;
+/
+ALTER TRIGGER "XWRL"."XWRL_PARTY_ALIAS" ENABLE
+;

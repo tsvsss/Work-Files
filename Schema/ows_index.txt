@@ -1,0 +1,8 @@
+Create OWS Interface for EBS
+
+1) XOWS.sql
+2) XOWS_GRANTS.sql
+3) XOWS_SEQUENCE.sql
+4) XOWS_TABLE.sql
+5) XXIRI_CM_PROCESS_PKG.PKS.sql
+5) XXIRI_CM_PROCESS_PKG.PKB.sql

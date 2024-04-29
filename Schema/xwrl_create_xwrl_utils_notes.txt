@@ -1,0 +1,9 @@
+The following procedures need to be kept in sync with their respective XML stored in the database:
+
+OWS_INDIVIDUAL_SCREENING
+OWS_ENTITY_SCREENING
+
+The following programs need to be kept in sync with their respective XML stored in the database:
+
+OWS_INDIVIDUAL_SCREENING_PRG
+OWS_ENTITY_SCREENING_PRG

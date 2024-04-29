@@ -1,0 +1,12 @@
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "XWRL"."XWRL_DOC_REFERENCE_TRG" BEFORE
+   INSERT ON xwrl_document_reference
+   FOR EACH ROW
+BEGIN
+   IF (:new.id IS NULL) THEN
+      :new.id := xwrl_doc_reference_seq.nextval;
+   END IF;
+END;
+/
+ALTER TRIGGER "XWRL"."XWRL_DOC_REFERENCE_TRG" ENABLE
+;

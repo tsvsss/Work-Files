@@ -1,0 +1,12 @@
+select trigger_name, description
+from all_triggers
+where trigger_name IN ( 
+'XWRL_CATEGORY_RESTRICTION'
+,'XWRL_ENT_IND_AFTER_IUD_TRG'
+,'XWRL_ENT_RESPONSE_LEGAL_REVIEW'
+--,'XWRL_IND_RESPONSE_LEGAL_REVIEW'
+--, 'XWRL_RES_IND_AFTER_IUD_TRG'
+,'XWRL_VESSEL_INDICATOR'
+)
+order by 1
+;

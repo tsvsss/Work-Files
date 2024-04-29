@@ -1,0 +1,12 @@
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "XWRL"."XWRL_NOTE_TEMPLATES_TRG" BEFORE
+   INSERT ON xwrl_note_templates
+   FOR EACH ROW
+BEGIN
+   IF (:new.id IS NULL) THEN
+      :new.id := xwrl_note_templates_seq.nextval;
+   END IF;
+END;
+/
+ALTER TRIGGER "XWRL"."XWRL_NOTE_TEMPLATES_TRG" ENABLE
+;

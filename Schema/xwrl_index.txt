@@ -1,0 +1,18 @@
+Create EBS environment for OWS
+
+Note: Step 1 has been run on IRIPROD, IRIDR, IRITEST, IRIDEV
+Note: Step 7 requires DB link to either IRIPOWS or IRIDROWS
+Note: Need to create DB links to OWS Prod on IRIDROWS and Test on IRITEST 
+
+1) apps_create_user_and_privileges.sql
+2) xwrl_create_schema_objects.sql
+3) apps_create_synonyms.sql
+4) apps_create_schema_objects.sql
+5) apps_insert_parameters.sql
+6) apps_insert_note_templates.sql
+7) apps_create_xwrl_ows_utils.sql
+8) apps_create_xwrl_utils.sql
+9) apps_create_xwrl_data_processing.sql
+10) apps_create_programs.sql
+11) apps_create_jobs.sql
+12) apps_populate_xref_table.sql

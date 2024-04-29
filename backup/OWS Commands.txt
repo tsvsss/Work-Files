@@ -1,0 +1,22 @@
+sqlplus / as sysdba
+lsnrctl start IRIPOWS
+lsnrctl status IRIPOWS
+
+lsnrctl start IRIDROWS
+lsnrctl status IRIDROWS
+
+
+cd /iripows/app01/oracle/middleware/oracle_home/user_projects/domains/edqp_domain/bin
+
+cd /iridrows/app01/oracle/middleware/oracle_home/user_projects/domains/edqdr_domain/bin
+
+nohup ./startNodeManager.sh > nm.out&
+nohup ./startWebLogic.sh > wl.out&
+
+tail -f nm.out
+tail -f wl.out
+
+./stopWebLogic.sh
+./stopNodeManager.sh
+
+echo 3 > /proc/sys/vm/drop_caches

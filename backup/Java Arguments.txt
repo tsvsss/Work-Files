@@ -1,0 +1,55 @@
+Primary
+
+if [ "${SERVER_NAME}" = "AdminServer" ]; then
+   USER_MEM_ARGS="-Xms1g -Xmx3g -XX:MetaspaceSize=128M -XX:MaxMetaspaceExpansion=64M -XX:+AlwaysPreTouch -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+DisableExplicitGC -XX:+UnlockExperimentalVMOptions -XX:G1NewSizePercent=20"
+else
+   USER_MEM_ARGS="-Xms25G -Xmx30G -XX:MetaspaceSize=128M -XX:MaxMetaspaceExpansion=64M -XX:+AlwaysPreTouch -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+DisableExplicitGC -XX:+UnlockExperimentalVMOptions -XX:G1NewSizePercent=20 -XX:ReservedCodeCacheSize=128m -Doracle.jdbc.maxCachedBufferSize=0 -XX:SoftRefLRUPolicyMSPerMB=1 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.port=8090 -Dcom.sun.management.jmxremote.rmi.port=8090"
+fi
+export USER_MEM_ARGS
+
+Secondary
+
+if [ "${SERVER_NAME}" = "AdminServer" ]; then
+   USER_MEM_ARGS="-Xms1g -Xmx3g -XX:MetaspaceSize=128M -XX:MaxMetaspaceExpansion=64M -XX:+AlwaysPreTouch -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+DisableExplicitGC -XX:+UnlockExperimentalVMOptions -XX:G1NewSizePercent=20"
+else
+   USER_MEM_ARGS="-Xms6G -Xmx9G -XX:MetaspaceSize=128M -XX:MaxMetaspaceExpansion=64M -XX:+AlwaysPreTouch -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+DisableExplicitGC -XX:+UnlockExperimentalVMOptions -XX:G1NewSizePercent=20 -XX:ReservedCodeCacheSize=128m -Doracle.jdbc.maxCachedBufferSize=0 -XX:SoftRefLRUPolicyMSPerMB=1 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.port=8090 -Dcom.sun.management.jmxremote.rmi.port=8090"
+fi
+export USER_MEM_ARGS
+
+
+https://gist.github.com/svanoort/66a766ea68781140b108f465be45ff00
+
+
+
+LARGE PAGES
+
+-XX:+UseLargePages
+
+Huge Page Calculator
+https://www.peuss.de/node/67
+
+26 Gexi
+26624  MB
+vm.nr_hugepages=13312
+
+sys / sys11495jav
+
+7 G
+7168  MB
+vm.nr_hugepages=3584
+
+Domain Directory
+
+cd /iripows/app01/oracle/middleware/oracle_home/user_projects/domains/edqp_domain/bin
+
+cd /iridrows/app01/oracle/middleware/oracle_home/user_projects/domains/edqdr_domain/bin
+
+
+Director Properties
+cd /iripows/app01/oracle/middleware/oracle_home/user_projects/domains/edqp_domain/config/fmwconfig/edq/oedq.local.home
+
+cd /iridrows/app01/oracle/middleware/oracle_home/user_projects/domains/edqdr_domain/config/fmwconfig/edq/oedq.local.home
+
+management.port = 8090
+management.jndiname = java:comp/env/jmx/runtime
+ps -ef
